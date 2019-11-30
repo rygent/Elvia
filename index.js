@@ -6,7 +6,7 @@ config({
     path: __dirname + '/.env'
 });
 
-bot.prefix = '/';
+bot.prefix = '!';
 ['aliases', 'commands'].forEach(x => bot[x] = new Collection());
 ['console', 'command', 'event'].forEach(x => require(`./handlers/${x}`)(bot));
 
