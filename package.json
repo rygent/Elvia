@@ -1,0 +1,28 @@
+{
+  "name": "evira",
+  "version": "1.4.7",
+  "description": "Management Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RzkyX/Evira-Bot.git"
+  },
+  "author": "Rygent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RzkyX/Evira-Bot/issues"
+  },
+  "homepage": "https://github.com/RzkyX/Evira-Bot#readme",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "mathjs": "^6.2.5",
+    "moment": "^2.24.0"
+  }
+}
