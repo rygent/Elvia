@@ -6,8 +6,8 @@ module.exports = {
         name: 'unban',
         aliases: ['uban'],
         category: 'moderation',
-        description: 'Unbans a user from guild!',
-        usage: '<@user> <reason>',
+        description: 'Unbans the specified user!',
+        usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

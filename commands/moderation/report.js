@@ -7,8 +7,8 @@ module.exports = {
     config: {
         name: 'report',
         category: 'moderation',
-        description: 'Report a user of the guild',
-        usage: '<mention | id> <reason>',
+        description: 'Report the specified user!',
+        usage: '<user | id> <reason>',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

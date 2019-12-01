@@ -6,8 +6,8 @@ module.exports = {
         name: 'mute',
         aliases: ['m', 'nospeak'],
         category: 'moderation',
-        description: 'Mutes a member in the discord!',
-        usage: '<@user> <reason>',
+        description: 'Mutes the specified user!!',
+        usage: '<mention> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

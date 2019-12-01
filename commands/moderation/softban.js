@@ -6,8 +6,8 @@ module.exports = {
         name: 'softban',
         aliases: ['sban', 'sremove'],
         category: 'moderation',
-        description: 'Softbans a user from guild!',
-        usage: '<@user> <reason>',
+        description: 'Softbans the specified user!',
+        usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

@@ -6,8 +6,8 @@ module.exports = {
         name: 'unmute',
         aliases: ['unm', 'speak'],
         category: 'moderation',
-        description: 'Unmutes a member in the discord!',
-        usage: '<@user> <reason>',
+        description: 'Unmutes the specified user!',
+        usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

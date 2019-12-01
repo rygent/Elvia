@@ -6,8 +6,8 @@ module.exports = {
         name: 'ban',
         aliases: ['fban', 'remove'],
         category: 'moderation',
-        description: 'Bans a user from guild!',
-        usage: '<@user> <reason>',
+        description: 'Bans the mentioned user.',
+        usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

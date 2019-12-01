@@ -3,9 +3,9 @@ const { RichEmbed } = require('discord.js')
 module.exports = {
     config: {
         name: '8ball',
-        aliases: [],
+        aliases: ["8b"],
         category: 'fun',
-        description: '',
+        description: 'Retrieves an answer from the almighty 8ball.',
         usage: '<question>',
         accessableby: 'Members'
     },

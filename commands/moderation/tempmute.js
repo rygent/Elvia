@@ -7,8 +7,8 @@ module.exports = {
         name: 'tempmute',
         aliases: ['tmute'],
         category: 'moderation',
-        description: 'Mutes a member in the discord!',
-        usage: '<@user> <reason>',
+        description: 'Temporarily mutes the specified user!',
+        usage: '<mention> <duration> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

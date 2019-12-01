@@ -6,8 +6,8 @@ module.exports = {
         name: 'kick',
         aliases: ['kek'],
         category: 'moderation',
-        description: 'Kick a user from guild!',
-        usage: '<@user> <reason>',
+        description: 'Kicks the mentioned user.',
+        usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

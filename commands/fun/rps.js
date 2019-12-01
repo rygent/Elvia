@@ -6,7 +6,7 @@ const chooseArr = ['🗻', '📰', '✂']
 module.exports = {
     config: {
 	name: 'rps',
-	aliases: [],
+	aliases: [""],
 	category: 'fun',
 	description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
 	usage: '[rps]',

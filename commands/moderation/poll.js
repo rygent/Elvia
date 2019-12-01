@@ -28,9 +28,9 @@ module.exports = {
         
         message.channel.send({embed: newPollEmbed})
         .then(message => {
-            message.react('🤷')
-            message.react('❌')
             message.react('✅')
+            message.react('❌')
+            message.react('🤷')
         })
     }    
 }
