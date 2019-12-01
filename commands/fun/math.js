@@ -19,9 +19,11 @@ module.exports = {
         } catch (e) {
             return message.channel.send('Sorry, please input a valid calculation.');
         }
+
+        const roleColor = message.guild.me.highestRole.hexColor
         
         const embed = new Discord.RichEmbed()
-        .setColor(0xffffff)
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setTitle('Math Calculation')
         .addField('Input', `\`\`\`js\n${args.join('')}\`\`\``)
         .addField('Output', `\`\`\`js\n${resp}\`\`\``);

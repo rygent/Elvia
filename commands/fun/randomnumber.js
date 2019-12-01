@@ -12,8 +12,11 @@ module.exports = {
     run: async (bot, message, args) => {
         let number = Math.ceil(Math.random()*100);
         // message.channel.send(`The number is **${number}**`)
+
+        const roleColor = message.guild.me.highestRole.hexColor
+
         let randembed = new RichEmbed()
-        .setColor('GREEN')
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setDescription(`Random picked number is\n**${number}**`)
         message.channel.send(randembed);
   }

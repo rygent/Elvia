@@ -1,5 +1,4 @@
 const { RichEmbed } = require('discord.js')
-const { purple_medium } = require('../../colours.json')
 
 module.exports = {
     config: {
@@ -15,12 +14,14 @@ module.exports = {
         let target = message.mentions.users.first() || message.author
         
         msg.delete()
+
+        const roleColor = message.guild.me.highestRole.hexColor
         
         let embed = new RichEmbed()
         
         .setAuthor(target.tag, target.displayAvatarURL)
         .setTitle('Avatar')
-        .setColor(purple_medium)
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setImage(target.displayAvatarURL)
         .setTimestamp()
 

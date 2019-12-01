@@ -13,8 +13,10 @@ module.exports = {
 	accessableby: 'Members'
     },
     run: async (bot, message, args) => {
+        const roleColor = message.guild.me.highestRole.hexColor
+        
         const embed = new RichEmbed()
-        .setColor('#ffffff')
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setFooter(message.guild.me.displayName, bot.user.displayAvatarURL)
         .setDescription('Add a reaction to one of these emojis to play the game!')
         .setTimestamp()

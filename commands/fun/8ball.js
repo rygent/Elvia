@@ -62,10 +62,12 @@ module.exports = {
         
         let result = Math.floor(Math.random() * replies.length);
         let question = args.slice(0).join(' ');
+
+        const roleColor = message.guild.me.highestRole.hexColor
         
         let ballembed = new RichEmbed()
         .setAuthor(message.author.tag)
-        .setColor('#03f4fc')
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .addField('Question', question)
         .addField('Answer', replies[result]);
         

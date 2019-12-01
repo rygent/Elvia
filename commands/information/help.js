@@ -1,7 +1,6 @@
 const { RichEmbed } = require('discord.js')
 const { readdirSync } = require('fs')
 const { prefix } = require('../../botconfig.json')
-const { purple_medium } = require('../../colours.json')
 const { stripIndents } = require('common-tags')
 
 module.exports = {
@@ -14,8 +13,10 @@ module.exports = {
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
+        const roleColor = message.guild.me.highestRole.hexColor
+        
         const embed = new RichEmbed()
-            .setColor(purple_medium)
+            .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
             .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL)
             .setThumbnail(bot.user.displayAvatarURL)
 

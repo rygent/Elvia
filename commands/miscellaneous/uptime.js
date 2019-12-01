@@ -1,5 +1,4 @@
 const { RichEmbed } = require('discord.js')
-const { purple_medium } = require('../../colours.json')
 const moment = require('moment')
 
 module.exports = {
@@ -19,13 +18,15 @@ module.exports = {
             const days = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString()
             return `${days.padStart(1, '0')} days, ${hrs.padStart(1, '0')} hrs, ${min.padStart(1, '0')} mins, ${sec.padStart(1, '0')} secs`
         }
+
+        const roleColor = message.guild.me.highestRole.hexColor
     
         const embed = new RichEmbed()
 
-        .setColor(purple_medium)
+        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setAuthor('Uptime')
         .setDescription(`${duration(bot.uptime)}`)
-        .setFooter(`Last started on ${moment(bot.readyAt).format('ddd, DD MMMM YYYY HH:mm UTCZ')}`)
+        .setFooter(`Last started on ${moment(bot.readyAt).format('ddd, DD MMMM YYYY HH:mm')}`)
 
         message.channel.send(embed)
     }
