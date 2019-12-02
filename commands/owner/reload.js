@@ -1,3 +1,7 @@
+const { readdirSync } = require('fs') 
+const { join } = require('path')
+const { OwnerID } = require('../../botconfig.json')
+
 module.exports = {
     config: {
         name: 'reload',
@@ -8,21 +12,25 @@ module.exports = {
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != '427560082142920707') return message.channel.send('You are the bot the owner!')
-
-        if(!args[0]) return message.channel.send('Please provide a command to reload!')
-    
-        let commandName = args[0].toLowerCase()
-    
-        try {
-            delete require.cache[require.resolve(`./${commandName}.js`)] // usage !reload <name>
-            bot.commands.delete(commandName)
-            const pull = require(`./${commandName}.js`)
-            bot.commands.set(commandName, pull)
-        } catch(e) {
-            return message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``)
-        }
-    
-        message.channel.send(`The command \`${args[0].toUpperCase()}\` has been reloaded!`)
+        if(message.author.id !== OwnerID) return message.channel.send("You're not the bot the owner!")
+        if(!args[0]) return message.channel.send("Please provide a command to reload!")
+        
+        const commandName = args[0].toLowerCase()
+        if(!bot.commands.get(commandName)) return message.channel.send("That command doesn't exist. Try again.")
+        
+        readdirSync(join(__dirname, '..')).forEach(f => {
+            let files = readdirSync(join(__dirname,'..',f));
+            if(files.includes(commandName + '.js')) {
+                try {
+                    delete require.cache[require.resolve(`../${f}/${commandName}.js`)] // usage !reload <name>
+                    bot.commands.delete(commandName)
+                    const pull = require(`../${f}/${commandName}.js`)
+                    bot.commands.set(commandName, pull)
+                    return message.channel.send(`Successfully reloaded ${commandName}.js!`)
+                } catch(e) {
+                    return message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``)
+                }
+            }
+        });
     }
 }
