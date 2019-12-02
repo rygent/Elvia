@@ -25,9 +25,10 @@ module.exports = {
             .setThumbnail(member.user.displayAvatarURL)
             .setColor(member.displayHexColor === '#000000' ? '#ffffff' : member.displayHexColor)
 
-            .addField('**❯ Joined**', `${moment(member.joinedAt).format('ddd, DD MMMM YYYY HH:mm UTCZ')}`, true)
+            .addField('**❯ Joined**', `${moment(member.joinedAt).format('ddd, MMMM DD, YYYY HH:mm')}`, true)
             .addField('**❯ Nickname**', `${member.nickname || 'None'}`, true)
-            .addField('**❯ Registered**', `${moment(member.user.createdAt).format('ddd, DD MMMM YYYY HH:mm UTCZ')}`, true)
+            .addField("**❯ Status**", member.user.presence.status, true)
+            .addField('**❯ Registered**', `${moment(member.user.createdAt).format('ddd, MMMM DD, YYYY HH:mm')}`, true)
             .addField(`**❯ Roles [${member.roles.filter(f => f.name !== '@everyone').size}]**`, `${roles}`)
             
             .setTimestamp()

@@ -31,9 +31,9 @@ module.exports = {
         .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
 
         .addField('**❯ Version**', Version, true)
-        .addField('**❯ Language**', 'JavaScript - Discord.Js', true)
+        .addField('**❯ Library**', 'JavaScript - Discord.Js', true)
         .addField('**❯ Creator**', Owner.tag, true)
-        .addField('**❯ Registered**', `${moment(bot.user.createdAt).format('ddd, DD MMMM YYYY HH:mm')}`, true)
+        .addField('**❯ Registered**', `${moment(bot.user.createdAt).format('ddd, MMMM DD, YYYY HH:mm')}`, true)
         .addField('**❯ Servers**', bot.guilds.size, true)
         .addField('**❯ Users**', bot.users.size, true)
 

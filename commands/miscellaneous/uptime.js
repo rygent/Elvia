@@ -26,7 +26,7 @@ module.exports = {
         .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
         .setAuthor('Uptime')
         .setDescription(`${duration(bot.uptime)}`)
-        .setFooter(`Last started on ${moment(bot.readyAt).format('ddd, DD MMMM YYYY HH:mm')}`)
+        .setFooter(`Last started on ${moment(bot.readyAt).format('ddd, MMMM DD, YYYY HH:mm')}`)
 
         message.channel.send(embed)
     }
