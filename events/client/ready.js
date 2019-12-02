@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 module.exports = bot => {
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`)
-    bot.user.setStatus('online') // dnd, idle, online, invisible
+    // bot.user.setStatus('online') // dnd, idle, online, invisible
 
     let activities = [
         `Cores of pull power.`, `I love my creator`,
