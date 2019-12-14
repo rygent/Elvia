@@ -1,5 +1,5 @@
-const { RichEmbed } = require('discord.js')
-const { getMember } = require('../../functions.js')
+const { RichEmbed } = require('discord.js');
+const { getMember } = require('../../functions.js');
 
 module.exports = {
     config: {
@@ -17,7 +17,7 @@ module.exports = {
             person = message.guild.members
                 .filter(m => m.id !== message.author.id)
                 .random();
-        }
+        };
 
         const love = Math.random() * 100;
         const loveIndex = Math.floor(love / 10);

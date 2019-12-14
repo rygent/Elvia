@@ -1,3 +1,5 @@
+const { OwnerID } = require('../../botconfig.json');
+
 module.exports = {
     config: {
         name: 'shutdown',
@@ -8,13 +10,13 @@ module.exports = {
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != '427560082142920707') return message.channel.send('You are not my owner!')
+        if(message.author.id != OwnerID) return message.channel.send('You are not my owner!');
 
         try{
-            await message.channel.send('Bot is shutting down...')
-            process.exit()
+            await message.channel.send('Bot is shutting down...');
+            process.exit();
         } catch(e) {
-            message.channel.send(`ERROR: ${e.message}`)
-        }
+            message.channel.send(`ERROR: ${e.message}`);
+        };
     }
 }

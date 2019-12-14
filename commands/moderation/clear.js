@@ -17,11 +17,11 @@ module.exports = {
         }
 
         if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
-            return message.reply('Yeah.... Thats not a numer? I also cant delete 0 messages by the way.').then(m => m.delete(5000))
+            return message.reply('Yeah.... Thats not a number? I also cant delete 0 messages by the way.').then(m => m.delete(5000))
         }
 
         if (!message.guild.me.hasPermission('MANAGE_MESSAGES')) {
-            return message.reply('Sorryy... I cant delete messages.').then(m => m.delete(5000))
+            return message.reply('Sorry... I cant delete messages.').then(m => m.delete(5000))
         }
 
         let deleteAmount
@@ -33,7 +33,7 @@ module.exports = {
         }
 
         message.channel.bulkDelete(deleteAmount, true)
-            .then(deleted => message.channel.send(`I deleted \`${deleted.size}\` messages.`))
+            .then(deleted => message.channel.send(`I deleted \`${deleted.size}\` messages.`)).then(m => m.delete(5000))
             .catch(err => message.reply(`Something went wrong... ${err}`))
     }
 }

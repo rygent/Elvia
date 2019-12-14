@@ -1,54 +1,54 @@
-const { RichEmbed } = require('discord.js')
-const { promptMessage } = require('../../functions.js')
+const { RichEmbed } = require('discord.js');
+const { promptMessage } = require('../../functions.js');
 
-const chooseArr = ['🗻', '📰', '✂']
+const chooseArr = ['🗻', '📰', '✂'];
 
 module.exports = {
     config: {
-	name: 'rps',
-	aliases: [""],
-	category: 'fun',
-	description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
-	usage: '[rps]',
-	accessableby: 'Members'
+        name: 'rps',
+        aliases: [''],
+        category: 'fun',
+        description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
+        usage: '[rps]',
+        accessableby: 'Members'
     },
     run: async (bot, message, args) => {
-        const roleColor = message.guild.me.highestRole.hexColor
+        const roleColor = message.guild.me.highestRole.hexColor;
         
         const embed = new RichEmbed()
-        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
+        .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
         .setFooter(message.guild.me.displayName, bot.user.displayAvatarURL)
         .setDescription('Add a reaction to one of these emojis to play the game!')
-        .setTimestamp()
+        .setTimestamp();
 
-        const m = await message.channel.send(embed)
+        const m = await message.channel.send(embed);
 
-        const reacted = await promptMessage(m, message.author, 30, chooseArr)
-
-
-        const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)]
+        const reacted = await promptMessage(m, message.author, 30, chooseArr);
 
 
-        const result = await getResult(reacted, botChoice)
+        const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
 
-        await m.clearReactions()
+
+        const result = await getResult(reacted, botChoice);
+
+        await m.clearReactions();
 
         embed
             .setDescription('')
-            .addField(result, `${reacted} vs ${botChoice}`)
+            .addField(result, `${reacted} vs ${botChoice}`);
 
-        m.edit(embed)
+        m.edit(embed);
 
         function getResult(me, clientChosen) {
             if ((me === '🗻' && clientChosen === '✂') ||
                 (me === '📰' && clientChosen === '🗻') ||
                 (me === '✂' && clientChosen === '📰')) {
-                    return 'You won!'
+                    return 'You won!';
             } else if (me === clientChosen) {
-                return 'Its a tie!'
+                return 'Its a tie!';
             } else {
-                return 'You lost!'
-            }
-        }
+                return 'You lost!';
+            };
+        };
     }
 }

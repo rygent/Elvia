@@ -1,7 +1,5 @@
-const Discord = require('discord.js')
-
 module.exports = bot => {
-    console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`)
+    console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
     // bot.user.setStatus('online') // dnd, idle, online, invisible
 
     let activities = [
@@ -18,5 +16,5 @@ module.exports = bot => {
     ], i = 0;
 
     setInterval(() => bot.user.setActivity(`${bot.prefix}help | ${activities[i++ % activities.length]} | [${bot.users.size}]`, 
-    { type: 'PLAYING' }), 600000) //PLAYING, LISTENING, WATCHING, STREAMING
+    { type: 'PLAYING' }), 600000); //PLAYING, LISTENING, WATCHING, STREAMING
 }

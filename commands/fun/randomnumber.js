@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js')
+const { RichEmbed } = require('discord.js');
 
 module.exports = {
     config: {
@@ -11,13 +11,13 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         let number = Math.ceil(Math.random()*100);
-        // message.channel.send(`The number is **${number}**`)
 
-        const roleColor = message.guild.me.highestRole.hexColor
+        const roleColor = message.guild.me.highestRole.hexColor;
 
         let randembed = new RichEmbed()
-        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
-        .setDescription(`Random picked number is\n**${number}**`)
+        .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
+        .setDescription(`Random picked number is\n**${number}**`);
+
         message.channel.send(randembed);
   }
 }

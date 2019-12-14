@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js')
+const { RichEmbed } = require('discord.js');
 
 module.exports = {
     config: {
@@ -10,16 +10,16 @@ module.exports = {
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        message.delete()
+        message.delete();
 
-        if (!message.member.hasPermission("MANAGE_MESSAGES"))
-            return message.reply("You don't have the required permissions to use this command.").then(m => m.delete(5000))
+        if (!message.member.hasPermission('MANAGE_MESSAGES'))
+            return message.reply(`You don't have the required permissions to use this command.`).then(m => m.delete(5000));
 
-        const roleColor = message.guild.me.highestRole.hexColor
+        const roleColor = message.guild.me.highestRole.hexColor;
 
         const embed = new RichEmbed()
-        .setDescription(args.join(" "))
-        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
+        .setDescription(args.join(' '))
+        .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
 
         message.channel.send(embed)
     }

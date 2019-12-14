@@ -1,9 +1,9 @@
-const { RichEmbed } = require('discord.js')
+const { RichEmbed } = require('discord.js');
 
 module.exports = {
     config: {
         name: '8ball',
-        aliases: ["8b"],
+        aliases: ['8b'],
         category: 'fun',
         description: 'Retrieves an answer from the almighty 8ball.',
         usage: '<question>',
@@ -12,9 +12,9 @@ module.exports = {
     run: async (bot, message, args) => {
         if (!args[1]) return message.reply('Plase ask a full question!');
         let replies = [
-            `It is certain.`,
-            `It is decidedly so.`,
-            `Without a doubt.`,
+            'It is certain.',
+            'It is decidedly so.',
+            'Without a doubt.',
             'Yes - definitely.',
             'You may rely on it.',
             'As I see it, yes.',
@@ -63,11 +63,11 @@ module.exports = {
         let result = Math.floor(Math.random() * replies.length);
         let question = args.slice(0).join(' ');
 
-        const roleColor = message.guild.me.highestRole.hexColor
+        const roleColor = message.guild.me.highestRole.hexColor;
         
         let ballembed = new RichEmbed()
         .setAuthor(message.author.tag)
-        .setColor(roleColor === "#000000" ? "#ffffff" : roleColor)
+        .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
         .addField('Question', question)
         .addField('Answer', replies[result]);
         
