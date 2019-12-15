@@ -1,6 +1,6 @@
 const { readdirSync } = require('fs');
 const { join } = require('path');
-const { OwnerID } = require('../../botconfig.json');
+const { Access } = require('../../settings');
 
 module.exports = {
     config: {
@@ -12,7 +12,7 @@ module.exports = {
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id !== OwnerID) return message.channel.send(`You're not the bot the owner!`);
+        if(message.author.id !== Access.OWNERS) return message.channel.send(`You're not the bot the owner!`);
         if(!args[0]) return message.channel.send('Please provide a command to reload!');
         
         const commandName = args[0].toLowerCase();
