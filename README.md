@@ -1,12 +1,13 @@
-# Evira Discord Bot
 <div align="center">
 <br>
+<strong><h4>EviraBot Discord</h4></strong>
 <strong><i>Open-source Evira Discord bot project</i></strong>
 <br>
 <hr>
 
 <br>
-<a href="https://discord.gg/GG69j8w"> <img src="https://img.shields.io/discord/439323863139090434.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support">
+<a href="https://app.codacy.com/manual/xrzky/Evira-Bot/dashboard">
+    <img src="https://img.shields.io/codacy/grade/d526887638ec494fa1f90078abd8e3e9?logo=codacy&style=for-the-badge">
 </a>
 
 <a href="https://travis-ci.com/xrzky/Evira-Bot">
@@ -29,6 +30,10 @@
 
 <a href="https://github.com/xrzky/Evira-Bot/pulls">
     <img src="https://img.shields.io/github/issues-pr/xrzky/Evira-Bot.svg?style=for-the-badge&colorB=37f149" alt="Pull Request">
+</a>
+
+<a href="https://discord.gg/GG69j8w"> 
+    <img src="https://img.shields.io/discord/439323863139090434.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support">
 </a>
 
 </div>
