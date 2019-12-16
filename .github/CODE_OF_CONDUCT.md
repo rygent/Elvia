@@ -73,8 +73,4 @@ available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.ht
 [homepage]: https://www.contributor-covenant.org
 
 For answers to common questions about this code of conduct, see
-<<<<<<< HEAD
 https://www.contributor-covenant.org/faq
-=======
-https://www.contributor-covenant.org/faq
->>>>>>> 95a25b976a73897444a7efe6cf4f0d26824ec297
