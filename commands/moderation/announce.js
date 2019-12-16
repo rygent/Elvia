@@ -14,7 +14,7 @@ module.exports = {
     run: async (bot, message, args) => {
         if (message.deletable) {
             message.delete()
-        }
+        };
 
         if(!message.member.hasPermission(['MANAGE_MESSAGES', 'ADMINISTRATOR'])) 
             return message.channel.send('You dont have the required permissions to use this command.').then(m => m.delete(5000));

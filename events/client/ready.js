@@ -1,6 +1,5 @@
 module.exports = bot => {
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-    // bot.user.setStatus('online') // dnd, idle, online, invisible
 
     let activities = [
         `Cores of pull power.`, `I love my creator`,
@@ -12,9 +11,17 @@ module.exports = bot => {
         `Having fun with ya!`, `Maximum explosion for maximum justice!`,
         `Now singing along you.`, `Damn! I should've finished my backlog before formatting Windows.`,
         `On a new home... I mean datacenter.`, `Hold my hand tight, we'll make it another night.`,
-        `Last minute studying, huh?`, `Shounen surely has a lot of ripples.`
-    ], i = 0;
+        `Last minute studying, huh?`, `Shounen surely has a lot of ripples.`,
+        `an instance of Game.`, `More features than ever!`,
+        `Bill Nye the science guy! *plays chinese theme*`, `Feels good to be at home with you <3`,
+        `Hey, let's get this going!`, ` Isn't it colorful out there?`,
+        `Your king is on fire!`, `in theaters near you!`,
+        `Let's hope I finish my assignment on time.`, `Lets go and stick those protest signs somewhere less visible.`
+    ];
 
-    setInterval(() => bot.user.setActivity(`${bot.prefix}help | ${activities[i++ % activities.length]} | [${bot.users.size}]`, 
-    { type: 'PLAYING' }), 600000); //PLAYING, LISTENING, WATCHING, STREAMING
+    setInterval(function() {
+        let activity = `${bot.prefix}help | ${activities[Math.floor(Math.random() * activities.length)]}`;
+        bot.user.setActivity(activity, {type: 'PLAYING'}); //PLAYING, LISTENING, WATCHING, STREAMING
+
+    }, 600000);
 }

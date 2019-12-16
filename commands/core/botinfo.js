@@ -3,7 +3,6 @@ const { OwnerID, prefix } = require('../../botconfig.json');
 const { version } = require('../../package.json');
 const { stripIndents } = require("common-tags");
 const ostb = require('os-toolbox');
-const moment = require('moment');
 
 module.exports = {
     config: {
@@ -21,7 +20,7 @@ module.exports = {
             const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString();
             const days = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString();
             return `${days.padStart(1, '0')} days, ${hrs.padStart(1, '0')} hrs, ${min.padStart(1, '0')} mins, ${sec.padStart(1, '0')} secs`;
-        };
+        }
 
         const Owner = bot.users.get(OwnerID) || await bot.fetchUser(OwnerID);
 

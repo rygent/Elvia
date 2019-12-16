@@ -17,7 +17,7 @@ module.exports = {
             person = message.guild.members
                 .filter(m => m.id !== message.author.id)
                 .random();
-        };
+        }
 
         const love = Math.random() * 100;
         const loveIndex = Math.floor(love / 10);

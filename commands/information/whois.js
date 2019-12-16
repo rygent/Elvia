@@ -16,6 +16,7 @@ module.exports = {
 
         // Member variables
         const roles = member.roles
+            .sort((a, b) => b.position - a.position)
             .filter(r => r.id !== message.guild.id)
             .map(r => r).join(', ') || 'None';
 

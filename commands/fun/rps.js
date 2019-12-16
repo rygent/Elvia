@@ -49,6 +49,6 @@ module.exports = {
             } else {
                 return 'You lost!';
             };
-        };
+        }
     }
 }

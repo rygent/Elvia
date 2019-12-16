@@ -7,7 +7,7 @@ module.exports = (bot) => {
             const evt = require(`../events/${dirs}/${file}`);
             let eName = file.split('.')[0];
             bot.on(eName, evt.bind(null, bot));
-        };
+        }
     };
     ['client', 'guild'].forEach(x => load(x));
 }

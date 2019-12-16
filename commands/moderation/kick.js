@@ -1,41 +1,50 @@
-const { RichEmbed } = require('discord.js')
-const { red_light } = require('../../colours.json')
+const { RichEmbed } = require('discord.js');
+const { stripIndents } = require("common-tags");
+const { Colors } = require('../../settings');
+const moment = require('moment');
 
 module.exports = {
     config: {
         name: 'kick',
         aliases: ['kek'],
         category: 'moderation',
-        description: 'Kicks the mentioned user.',
+        description: 'Kick a user from the discord server with a certain reason',
         usage: '<user> <reason>',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) return message.channel.send('You dont have permission to perform this command!')
+        if (message.deletable) {
+            message.delete()
+        };
+        
+        if(!message.member.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) 
+            return message.channel.send('You dont have permission to perform this command!');
 
-        let kickMember = message.mentions.members.first() || message.guild.members.get(args[0])
-        if(!kickMember) return message.channel.send('Please provide a user to kick!')
+        let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
+        if(!kickMember) return message.channel.send('Please provide a user to kick!');
     
-        let reason = args.slice(1).join(' ')
-        if(!reason) reason = 'No reason given!'
+        let reason = args.slice(1).join(' ');
+        if(!reason) reason = 'You must specify a reason for the kick!';
     
-        if(!message.guild.me.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) return message.channel.send('I dont have permission to perform this command!')
+        if(!message.guild.me.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) 
+            return message.channel.send('I dont have permission to perform this command!');
     
         kickMember.send(`Hello, you have been kicked from ${message.guild.name} for: ${reason}`).then(() => 
-        kickMember.kick()).catch(err => console.log(err))
+        kickMember.kick()).catch(err => console.log(err));
     
-        message.channel.send(`${kickMember.user.tag} has been kicked`).then(m => m.delete(5000))
+        message.channel.send(`${kickMember.user.tag} has been kicked`).then(m => m.delete(5000));
     
         let embed = new RichEmbed()
-        .setColor(red_light)
-        .setAuthor(`${message.guild.name} | Moderation logs`, message.guild.iconURL)
-        .addField('Moderation:', 'Kick')
-        .addField('Kicked:', kickMember.user.username)
-        .addField('Moderator:', message.author.username)
-        .addField('Reason:', reason)
-        .addField('Date:', message.createdAt.toLocaleString())
+            .setColor(Colors.ORANGE)
+            .setAuthor('Kicked Member', kickMember.user.displayAvatarURL)
+            .setDescription(stripIndents`**Kicked By:** ${message.author.tag} (${message.author.id})
+            **Kicked User:** ${kickMember.user.tag} (${kickMember.user.id})
+            **Reason:** ${reason}
+            **Date & Time:** ${moment(message.createdAt).format('ddd, MMMM DD, YYYY HH:mm')}`)
+            .setFooter(message.guild.me.displayName, bot.user.displayAvatarURL)
+            .setTimestamp();
     
-        let sChannel = message.guild.channels.find(c => c.name === 'modlogs')
-        sChannel.send(embed)
+        let sChannel = message.guild.channels.find(c => c.name === 'incident-log');
+        sChannel.send(embed);
     }
 }

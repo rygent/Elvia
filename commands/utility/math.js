@@ -19,7 +19,7 @@ module.exports = {
             answer = math.evaluate(mathEquation);
         } catch (e) {
             return message.channel.send('Invalid mathematical calculation!');
-        };
+        }
 
         const roleColor = message.guild.me.highestRole.hexColor;
         

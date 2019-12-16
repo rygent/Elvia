@@ -15,7 +15,7 @@ module.exports = {
     
         if (ping <= 0) {
             return msg.edit('Please try again...');
-        };
+        }
     
         return msg.edit(
             stripIndents`

@@ -17,6 +17,6 @@ module.exports = {
             process.exit();
         } catch(e) {
             message.channel.send(`ERROR: ${e.message}`);
-        };
+        }
     }
 }

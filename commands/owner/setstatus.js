@@ -39,6 +39,6 @@ module.exports = {
         if(args[0] === 'offline') {
             bot.user.setStatus('invisible');
             message.channel.send(` Successfully changed the bots status to **invisible**`);
-        };
+        }
     }
 }

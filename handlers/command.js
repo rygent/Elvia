@@ -7,7 +7,7 @@ module.exports = (bot) => {
             const pull = require(`../commands/${dirs}/${file}`);
             bot.commands.set(pull.config.name, pull);
             if(pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
-        };
+        }
     };
     ['core', 'fun', 'information', 'moderation', 'owner', 'utility'].forEach(x => load(x));
 }

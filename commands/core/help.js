@@ -51,6 +51,6 @@ module.exports = {
             embed.setFooter(`Syntax: <> = required, [] = optional`);
 
             return message.channel.send(embed);
-        };
+        }
     }
 }

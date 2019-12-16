@@ -17,7 +17,7 @@ module.exports = {
             const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString();
             const days = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString();
             return `${days.padStart(1, '0')} days, ${hrs.padStart(1, '0')} hrs, ${min.padStart(1, '0')} mins, ${sec.padStart(1, '0')} secs`;
-        };
+        }
 
         const roleColor = message.guild.me.highestRole.hexColor;
     

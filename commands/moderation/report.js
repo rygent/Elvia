@@ -1,7 +1,7 @@
-const { RichEmbed } = require("discord.js");
+const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
-const { orange } = require('../../colours.json')
-const moment = require('moment')
+const { Colors } = require('../../settings');
+const moment = require('moment');
 
 module.exports = {
     config: {
@@ -25,21 +25,21 @@ module.exports = {
         if (!args[1])
             return message.channel.send("Please provide a reason for the report").then(m => m.delete(5000));
         
-        const channel = message.guild.channels.find(c => c.name === "reports")
+        const channel = message.guild.channels.find(c => c.name === "reports");
             
         if (!channel)
             return message.channel.send("Couldn't find a `#reports` channel").then(m => m.delete(5000));
 
         const embed = new RichEmbed()
-            .setColor(orange)
-            .setTimestamp()
-            .setFooter(message.guild.name, message.guild.iconURL)
-            .setAuthor("Reported member", rMember.user.displayAvatarURL)
-            .setDescription(stripIndents`**❯ User:** ${rMember.user.tag} (${rMember.user.id})
-            **❯ Reported by:** ${message.member.user.tag}
-            **❯ Reported in:** ${message.channel}
-            **❯ Reported at:** ${moment(message.createdAt).format('ddd, DD MMMM YYYY HH:mm')}
-            **❯ Reason:** ${args.slice(1).join(" ")}`);
+            .setColor(Colors.ORANGE)
+            .setAuthor('Reported Member', rMember.user.displayAvatarURL)
+            .setDescription(stripIndents`**Reported By:** ${message.author.tag} (${message.author.id})
+            **Reported User:** ${rMember.user.tag} (${rMember.user.id})
+            **Reported In:** ${message.channel}
+            **Reason:** ${args.slice(1).join(" ")}
+            **Date & Time:** ${moment(message.createdAt).format('ddd, MMMM DD, YYYY HH:mm')}`)
+            .setFooter(message.guild.me.displayName, bot.user.displayAvatarURL)
+            .setTimestamp();
 
         return channel.send(embed);
     }

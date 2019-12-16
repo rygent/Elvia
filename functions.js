@@ -12,7 +12,7 @@ module.exports = {
                 return member.displayName.toLowerCase().includes(toFind) ||
                 member.user.tag.toLowerCase().includes(toFind)
             });
-        };
+        }
             
         if (!target) 
             target = message.member;

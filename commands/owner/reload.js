@@ -30,7 +30,7 @@ module.exports = {
                 } catch(e) {
                     return message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``);
                 };
-            };
+            }
         });
     }
 }
