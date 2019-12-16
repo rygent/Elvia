@@ -1,9 +1,9 @@
 ---
-Name: Bug report
-About: Create a report to help us improve
-Title: ''
-Labels: 'Type: Bug'
-Assignees: ''
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: 'Type: Bug'
+assignees: ''
 
 ---
 

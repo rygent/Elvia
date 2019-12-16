@@ -1,9 +1,9 @@
 ---
-Name: Support
-About: Ask questions on our Discord Server please - https://discord.gg/GG69j8w
-Title: ''
-Labels: 'Type: Help'
-Assignees: ''
+name: Support
+about: Ask questions on our Discord Server please - https://discord.gg/GG69j8w
+title: ''
+labels: 'Type: Help'
+assignees: ''
 
 ---
 
