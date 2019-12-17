@@ -18,6 +18,10 @@
     <img src="https://img.shields.io/github/languages/top/xrzky/Evira-Bot.svg?colorB=f0db4f&style=for-the-badge" alt="Languages">
 </a>
 
+<a href="https://github.com/xrzky/Evira-Bot/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/XRzky/Evira-Bot?color=blue&style=for-the-badge" alt="License">
+</a>
+
 <br>
 
 <a href="https://github.com/xrzky/Evira-Bot">
@@ -33,7 +37,7 @@
 </a>
 
 <a href="https://discord.gg/GG69j8w"> 
-    <img src="https://img.shields.io/discord/439323863139090434.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge" alt="Support">
+    <img src="https://img.shields.io/discord/439323863139090434.svg?colorB=Blue&logo=discord&logoColor=white&label=Support&style=for-the-badge" alt="Support">
 </a>
 
 </div>
