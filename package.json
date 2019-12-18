@@ -9,25 +9,24 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/RzkyX/Evira-Bot.git"
+        "url": "git+https://github.com/XRzky/Evira-Bot.git"
     },
     "author": "Rygent",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/RzkyX/Evira-Bot/issues"
+        "url": "https://github.com/XRzky/Evira-Bot/issues"
     },
-    "homepage": "https://github.com/RzkyX/Evira-Bot#readme",
+    "homepage": "https://github.com/XRzky/Evira-Bot#readme",
     "dependencies": {
         "common-tags": "^1.8.0",
         "discord.js": "^11.5.1",
         "dotenv": "^8.2.0",
         "fs": "0.0.1-security",
-        "google-translate-api": "^2.3.0",
         "mathjs": "^6.2.5",
         "moment": "^2.24.0",
         "ms": "^2.1.2",
         "node-fetch": "^2.6.0",
         "os-toolbox": "^0.2.10",
-        "snekfetch": "^4.0.4"
+        "weather-js": "^2.0.0"
     }
 }
