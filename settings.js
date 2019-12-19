@@ -36,4 +36,7 @@ module.exports ={
         'LUMINOUS_VIVID_PINK': 'fd0061',
         'DARK_VIVID_PINK': 'bc0057',
     },
+    Guild: {
+        'PREFIX': '!',
+    },
 };
