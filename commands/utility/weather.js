@@ -29,10 +29,12 @@ module.exports = {
                 location
             } = result[0];
 
+            const roleColor = message.guild.me.highestRole.hexColor;
+
             const embed = new RichEmbed()
             .setAuthor(`Weather for ${current.observationpoint}`)
             .setDescription(`**${current.skytext}**`)
-            .setColor(0x00AE86)
+            .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
             .addField('Timezone', `UTC${location.timezone}`, true)
             .addField('Degree Type', location.degreetype, true)
             .addField('Temperature', `${current.temperature} Degrees`, true)
