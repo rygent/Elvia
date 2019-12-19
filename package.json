@@ -27,6 +27,7 @@
         "ms": "^2.1.2",
         "node-fetch": "^2.6.0",
         "os-toolbox": "^0.2.10",
+        "request": "^2.88.0",
         "weather-js": "^2.0.0"
     }
 }
