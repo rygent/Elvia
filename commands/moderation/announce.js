@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { prefix } = require('../../botconfig.json');
+const { Client } = require('../../settings');
 const { Colors } = require('../../settings');
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
         const title = data[0];
         const desc = data[2];
         const annchannel = message.guild.channels.find(channel => channel.name === data[4]);
-        if (!title || !desc || !annchannel) return m.edit(new RichEmbed().setTitle("Attention!").setColor(Colors.ORANGE).setDescription(`Incorrect usage. Run \`${prefix}help announce\` for usage.`).setFooter(message.author.tag, message.author.displayAvatarURL));
+        if (!title || !desc || !annchannel) return m.edit(new RichEmbed().setTitle("Attention!").setColor(Colors.ORANGE).setDescription(`Incorrect usage. Run \`${Client.PREFIX}help announce\` for usage.`).setFooter(message.author.tag, message.author.displayAvatarURL));
     
         const ann = new RichEmbed()
             .setTitle(title)

@@ -6,7 +6,7 @@ module.exports = {
         aliases: ['pong'],
         category: 'core',
         description: 'Get the ping of the bot',
-        usage: '[ping]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

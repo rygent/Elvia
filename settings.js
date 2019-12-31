@@ -1,15 +1,10 @@
-module.exports ={
-    Info: {
-        'NAME': '',
-    },
-    Logging: {
-        'LOG_CHANNEL': '',
-        'RESTART_CHANNEL': '',
-        'SUPPORT': '',
-    },
+module.exports = {
     Access: {
         'OWNERS': '427560082142920707',
         'DEVELOPERS': [''],
+    },
+    Client: {
+        'PREFIX': '!',
     },
     Colors: {
         'DEFAULT': '0',
@@ -36,7 +31,9 @@ module.exports ={
         'LUMINOUS_VIVID_PINK': 'fd0061',
         'DARK_VIVID_PINK': 'bc0057',
     },
-    Guild: {
-        'PREFIX': '!',
+    Logging: {
+        'LOG_CHANNEL': '',
+        'RESTART_CHANNEL': '',
+        'SUPPORT': '',
     },
 };

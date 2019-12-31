@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Access, Guild } = require('../../settings');
+const { Access, Client } = require('../../settings');
 const { version } = require('../../package.json');
 const { stripIndents } = require("common-tags");
 const ostb = require('os-toolbox');
@@ -10,7 +10,7 @@ module.exports = {
         aliases: ['stats', 'botstats'],
         category: 'core',
         description: 'Shows some information about the running instance!',
-        usage: '[info]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
@@ -31,13 +31,13 @@ module.exports = {
 
         const embed = new RichEmbed()
         .setAuthor('About me')
-        .setDescription(`Hello, my name is ${message.guild.me.displayName}! I'm a bot moderation & settings discord.  If you wish to check out the commands I have please do \`${Guild.PREFIX}help\`. You'll find any and all information about me below!`)
+        .setDescription(`Hello, my name is ${message.guild.me.displayName}! I'm a bot moderation & settings discord.  If you wish to check out the commands I have please do \`${Client.PREFIX}help\`. You'll find any and all information about me below!`)
         .setThumbnail(bot.user.displayAvatarURL)
         .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
         .addField('General Information', stripIndents`**❯ Username:** ${bot.user.tag}
         **❯ ID:** ${bot.user.id}
         **❯ Creator:** ${Owner.tag}
-        **❯ Guild Prefix:** ${Guild.PREFIX}
+        **❯ Guild Prefix:** ${Client.PREFIX}
         **❯ Status:** ${bot.user.presence.status}
         **❯ Version:** ${version}
         **❯ Language:** JavaScript (discord.js)`)

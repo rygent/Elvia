@@ -7,7 +7,7 @@ module.exports = {
         aliases: ['awake', 'ut'],
         category: 'core',
         description: 'Displays the bots current uptime!',
-        usage: '[uptime]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

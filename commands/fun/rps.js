@@ -9,7 +9,7 @@ module.exports = {
         aliases: [''],
         category: 'fun',
         description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
-        usage: '[rps]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

@@ -6,7 +6,7 @@ module.exports = {
         aliases: ['rn', 'rnum'],
         category: 'fun',
         description: 'Gives a random number between 1-100',
-        usage: '[random]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

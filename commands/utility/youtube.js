@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const request = require('request');
-const { Colors, Guild } = require('../../settings');
+const { Colors, Client } = require('../../settings');
 const ytkey = (process.env.YOUTUBEKEY);
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         if (!args[0]) {
-            const noinput = `You must include a query. Alternatively, you can check usage via \`${Guild.PREFIX}help youtube\``;
+            const noinput = `You must include a query. Alternatively, you can check usage via \`${Client.PREFIX}help youtube\``;
             return message.channel.send(noinput);
           }
           const url = `https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=${args}&maxResults=1&type=video&key=${ytkey}`;

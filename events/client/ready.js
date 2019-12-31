@@ -1,3 +1,5 @@
+const { Client } = require('../../settings');
+
 module.exports = bot => {
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
 
@@ -20,7 +22,7 @@ module.exports = bot => {
     ];
 
     setInterval(function() {
-        let activity = `${bot.prefix}help | ${activities[Math.floor(Math.random() * activities.length)]}`;
+        let activity = `${Client.PREFIX}help | ${activities[Math.floor(Math.random() * activities.length)]}`;
         bot.user.setActivity(activity, {type: 'PLAYING'}); //PLAYING, LISTENING, WATCHING, STREAMING
 
     }, 600000);

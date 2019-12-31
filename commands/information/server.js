@@ -7,7 +7,7 @@ module.exports = {
         aliases: ['sinfo', 'guild'],
         category: 'information',
         description: 'Get server info/stats.',
-        usage: '[server]',
+        usage: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

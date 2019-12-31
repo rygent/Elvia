@@ -1,4 +1,4 @@
-const { OwnerID } = require('../../botconfig.json');
+const { Access } = require('../../settings');
 
 module.exports = {
     config: {
@@ -6,11 +6,11 @@ module.exports = {
         aliases: ['botstop', 'turnoff'],
         category: 'owner',
         description: 'Shuts down the bot!',
-        usage: '[shutdown]',
+        usage: '',
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != OwnerID) return message.channel.send('You are not my owner!');
+        if(message.author.id != Access.OWNERS) return message.channel.send('You are not my owner!');
 
         try{
             await message.channel.send('Bot is shutting down...');

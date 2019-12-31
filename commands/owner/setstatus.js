@@ -1,4 +1,4 @@
-const { OwnerID } = require('../../botconfig.json');
+const { Access } = require('../../settings');
 
 module.exports = {
     config: {
@@ -10,7 +10,7 @@ module.exports = {
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != OwnerID) return message.channel.send(`You're not the bot the owner!`);
+        if(message.author.id != Access.OWNERS) return message.channel.send(`You're not the bot the owner!`);
 
         if(args == "") {
             message.channel.send(`Make sure it is either **dnd**, **online**, **idle**, **invisible**`);

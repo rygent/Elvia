@@ -1,6 +1,6 @@
 {
     "name": "evira",
-    "version": "1.5.8",
+    "version": "1.6.4",
     "description": "Management Server",
     "main": "index.js",
     "scripts": {
