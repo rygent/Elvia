@@ -26,6 +26,7 @@ module.exports = {
             .setColor(Colors.GOLD)
             .setAuthor(`${message.author.tag}'s Poll.`, message.author.displayAvatarURL)
             .setDescription(`${pollQuestion}`)
+            .setFooter('React to vote')
             .setTimestamp();
         
         message.channel.send({embed: newPollEmbed})

@@ -36,7 +36,6 @@ module.exports = {
         const ann = new RichEmbed()
             .setTitle(title)
             .setDescription(desc)
-            .setFooter(`Announced by ${message.author.tag}`)
             .setColor(roleColor === '#000000' ? '#ffffff' : roleColor);
     
         const done = new RichEmbed()
