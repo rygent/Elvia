@@ -1,4 +1,5 @@
 const { RichEmbed } = require('discord.js');
+const { stripIndents } = require("common-tags");
 const fetch = require('node-fetch');
 const moment = require("moment");
 
@@ -23,18 +24,18 @@ module.exports = {
         let userFollowing = await fetch(url + "/following").then(res => res.json());
   
         let embed = new RichEmbed()
-        .setAuthor("GitHub search result", user.avatar_url)
+        .setAuthor("GitHub search result", 'https://i.imgur.com/e4HunUm.png', 'https://github.com/')
         .setTitle(user.login)
         .setURL(user.html_url)
         .setThumbnail(user.avatar_url)
-        .setDescription(`**Name:** ${user.name || "Not Public."}
-        **ID**: ${user.id || 'Unknown'}
-        **Bio:** ${user.bio || "No Bio."}
-        **Location:** ${user.location || "Invisible."}
-        **Followers:** ${userFollowers.length}
-        **Following:** ${userFollowing.length}
-        **Repositories:** ${userRepos.length}
-        **Created At: **${moment(user.created_at).format("llll")}`);
+        .setDescription(stripIndents`**Name:** ${user.name || "Not Public."}
+            **ID:** ${user.id || 'Unknown'}
+            **Bio:** ${user.bio || "No Bio."}
+            **Location:** ${user.location || "Invisible."}
+            **Followers:** ${userFollowers.length}
+            **Following:** ${userFollowing.length}
+            **Repositories:** ${userRepos.length}
+            **Created At: **${moment(user.created_at).format("llll")}`)
           
         message.channel.send(embed);
     }
