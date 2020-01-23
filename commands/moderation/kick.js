@@ -2,6 +2,7 @@ const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
 const moment = require('moment');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
@@ -18,8 +19,8 @@ module.exports = {
             message.delete()
         };
         
-        if(!message.member.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('You dont have permission to perform this command!');
+        if(!message.member.hasPermission(['KICK_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'KICK_MEMBERS');
 
         let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
         if(!kickMember) return message.channel.send('Please provide a user to kick!');
@@ -27,8 +28,8 @@ module.exports = {
         let reason = args.slice(1).join(' ');
         if(!reason) reason = 'You must specify a reason for the kick!';
     
-        if(!message.guild.me.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('I dont have permission to perform this command!');
+        if(!message.guild.me.hasPermission(['KICK_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'KICK_MEMBERS');
     
         kickMember.send(`Hello, you have been kicked from ${message.guild.name} for: ${reason}`).then(() => 
         kickMember.kick()).catch(err => console.log(err));

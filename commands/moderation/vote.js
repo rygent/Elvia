@@ -1,22 +1,27 @@
 const { RichEmbed } = require('discord.js');
 const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
-        name: 'poll',
-        aliases: ['p', 'question'],
+        name: 'vote',
+        aliases: ['v', 'question'],
         category: 'moderation',
-        description: 'Allows people to make polls',
+        description: 'Allows people to make votes',
         usage: '<question>',
-        example: 'Is this bot stable?',
+        example: 'Create new feature',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['ADD_REACTIONS', 'ADMINISTRATOR'])) 
-            return message.channel.send('⛔ *You cannot execute that command due to invaild permissions.*');
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(!message.member.hasPermission('ADD_REACTIONS')) 
+            return Errors.noPerms(message, 'ADD_REACTIONS');
         
-        if(!message.guild.me.hasPermission(['ADD_REACTIONS', 'ADMINISTRATOR'])) 
-            return message.channel.send('⛔ *I cannot execute the command due to invaild permissions.*');
+        if(!message.guild.me.hasPermission('ADD_REACTIONS')) 
+            return Errors.botPerms(message, 'ADD_REACTIONS');
         
         let pollQuestion = args.slice(0).join(' ');
         if(!pollQuestion) return message.channel.send('You need a question to ask.');

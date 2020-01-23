@@ -2,6 +2,7 @@ const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
 const moment = require('moment');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
@@ -14,11 +15,11 @@ module.exports = {
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission('MANAGE_ROLES') || !message.guild.owner) 
-            return message.channel.send('You dont have permission to use this command.');
+        if(!message.member.hasPermission(['MANAGE_ROLES' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'MANAGE_ROLES');
 
-        if(!message.guild.me.hasPermission(['MANAGE_ROLES', 'ADMINISTRATOR'])) 
-            return message.channel.send('I dont have permission to add roles!');
+        if(!message.guild.me.hasPermission(['MANAGE_ROLES' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'MANAGE_ROLES');
     
         let mutee = message.mentions.members.first() || message.guild.members.get(args[0]);
         if(!mutee) return message.channel.send('Please supply a user to be muted!');

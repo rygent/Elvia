@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 const fs = require("fs");
 const moment = require('moment');
 let warns = JSON.parse(fs.readFileSync("./warns.json", "utf8"));
@@ -16,8 +17,12 @@ module.exports = {
         accessableby: "Moderators"
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES'])) 
-            return message.channel.send('You do not have permission to perform this command!')
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(!message.member.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'MANAGE_ROLES, MANAGE_MESSAGES')
         
         let wuser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[1])
         if(!wuser) return message.reply("This user was not found on this Discord server!")
@@ -25,8 +30,8 @@ module.exports = {
         let reason = args.slice(1).join(" ");
         if(!reason) reason = 'You must supply a reason for the warn!'
 
-        if(!message.guild.me.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES'])) 
-            return message.channel.send('I dont have permission to perform this command!')
+        if(!message.guild.me.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'MANAGE_ROLES, MANAGE_MESSAGES')
         
         warns[wuser.id].warns--;
         

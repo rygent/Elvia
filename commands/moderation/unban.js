@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 const moment = require('moment');
 
 module.exports = {
@@ -14,8 +15,12 @@ module.exports = {
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('You dont have permission to perform this command!');
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(!message.member.hasPermission(['ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'ADMINISTRATOR');
 
         let bannedMember = await bot.fetchUser(args[0]);
         if(!bannedMember) return message.channel.send('Please provide a user id to unban someone!');
@@ -23,8 +28,8 @@ module.exports = {
         let reason = args.slice(1).join(' ');
         if(!reason) reason = 'You must specify a reason for the ban!';
     
-        if(!message.guild.me.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('I dont have permission to perform this command!');
+        if(!message.guild.me.hasPermission(['ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'ADMINISTRATOR');
     
         message.delete();
         try {

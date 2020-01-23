@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 const moment = require('moment');
 
 module.exports = {
@@ -14,8 +15,12 @@ module.exports = {
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('You do not have permission to perform this command!');
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(!message.member.hasPermission(['BAN_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'BAN_MEMBERS');
 
         let banMember = message.mentions.members.first() || message.guild.members.get(args[0]);
         if(!banMember) return message.channel.send('Please provide a user to ban!');
@@ -23,8 +28,8 @@ module.exports = {
         let reason = args.slice(1).join(' ');
         if(!reason) reason = 'You must specify a reason for the softban!';
     
-        if(!message.guild.me.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('I dont have permission to perform this command!');
+        if(!message.guild.me.hasPermission(['BAN_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'BAN_MEMBERS');
     
         message.delete();
     

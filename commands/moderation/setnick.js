@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
@@ -12,8 +12,15 @@ module.exports = {
         accessableby: 'Moderations'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['MANAGE_NICKNAMES'])) 
-            return message.channel.send('⛔ *You cannot execute that command due to invaild permissions.*');
+        if (message.deletable) {
+            message.delete()
+        };
+        
+        if(!message.member.hasPermission(['MANAGE_NICKNAMES' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'MANAGE_NICKNAMES');
+        
+        if(!message.guild.me.hasPermission(['MANAGE_NICKNAMES' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'MANAGE_NICKNAMES');
         
         let nUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if(!nUser) return message.channel.send(`**${message.author.username}**, Please specify a user that is on this server.`);

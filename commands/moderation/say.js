@@ -1,16 +1,22 @@
+const Errors = require('../../utils/errors');
+
 module.exports = {
     config: {
         name: 'say',
         aliases: ['talk'],
         category: 'moderation',
         description: 'Says your input via the bot',
-        usage: '<input>',
-        example: 'Hello World',
+        usage: '<channelname> <input>',
+        example: '#general Hello World',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {
-        if(!message.member.hasPermission(['MANAGE_MESSAGES', 'ADMINISTRATOR'])) 
-            return message.channel.send('You dont have the required permissions to use this command.').then(m => m.delete(5000))
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(!message.member.hasPermission(['MANAGE_MESSAGES' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'MANAGE_MESSAGES')
     
         let argsresult
         let mChannel = message.mentions.channels.first()

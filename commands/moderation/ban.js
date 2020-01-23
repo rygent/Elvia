@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { Colors } = require('../../utils/settings');
+const Errors = require('../../utils/errors');
 const moment = require('moment');
 
 module.exports = {
@@ -18,8 +19,8 @@ module.exports = {
             message.delete()
         };
         
-        if(!message.member.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('You do not have permission to perform this command!');
+        if(!message.member.hasPermission(['BAN_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.noPerms(message, 'BAN_MEMBERS');
 
         let banMember = message.mentions.members.first() || message.guild.members.get(args[0]);
         if(!banMember) return message.channel.send('Please provide a user to ban!');
@@ -27,8 +28,8 @@ module.exports = {
         let reason = args.slice(1).join(' ');
         if(!reason) reason = 'You must specify a reason for the ban!';
     
-        if(!message.guild.me.hasPermission(['BAN_MEMBERS', 'ADMINISTRATOR'])) 
-            return message.channel.send('I dont have permission to perform this command!');
+        if(!message.guild.me.hasPermission(['BAN_MEMBERS' || 'ADMINISTRATOR'])) 
+            return Errors.botPerms(message, 'BAN_MEMBERS');
     
         banMember.send(`Hello, you have been banned from **${message.guild.name}** for: ${reason}`).then(() => 
         message.guild.ban(banMember, { days: 1, reason: reason})).catch(err => console.log(err));

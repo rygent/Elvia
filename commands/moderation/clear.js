@@ -1,3 +1,5 @@
+const Errors = require('../../utils/errors');
+
 module.exports = {
     config: {
         name: 'clear',
@@ -14,7 +16,7 @@ module.exports = {
         };
     
         if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-            return message.reply('You cant delete messages....').then(m => m.delete(5000))
+            return Errors.noPerms(message, 'MANAGE_MESSAGES')
         };
 
         if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
@@ -22,7 +24,7 @@ module.exports = {
         };
 
         if (!message.guild.me.hasPermission('MANAGE_MESSAGES')) {
-            return message.reply('Sorry... I cant delete messages.').then(m => m.delete(5000))
+            return Errors.botPerms(message, 'MANAGE_MESSAGES')
         };
 
         let deleteAmount;

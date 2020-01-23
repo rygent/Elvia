@@ -46,6 +46,7 @@ module.exports = {
             embed.setDescription(stripIndents`**Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
             **Aliases:** ${command.aliases ? command.aliases.join(', ') : 'None.'}
             **Description:** ${command.description || 'No Description provided.'}
+            **Category:** ${command.category.slice(0, 1).toUpperCase() + command.category.slice(1)}
             **Usage:** ${command.usage ? `\`${Client.PREFIX}${command.name} ${command.usage}\`` : `\`${Client.PREFIX}${command.name}\``}
             **Example:** ${command.example ? `\`${Client.PREFIX}${command.name} ${command.example}\`` : 'None.'}
             **Accessible by:** ${command.accessableby || 'Members'}`);
