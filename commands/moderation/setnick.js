@@ -29,8 +29,6 @@ module.exports = {
         if(!nick) return message.reply("Please specify a name.");
         
         if(nUser.hasPermission('MANAGE_NICKNAMES')) return message.channel.send("That person can't have their name changed.");
-            
-        message.delete();
         
         await(nUser.setNickname(nick));
 
