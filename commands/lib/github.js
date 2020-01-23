@@ -7,7 +7,7 @@ module.exports = {
     config: {
         name: 'github',
         aliases: ['git'],
-        category: 'utility',
+        category: 'lib',
         description: 'Searches github for a user or organisation',
         usage: '<user>',
         accessableby: 'Members'
