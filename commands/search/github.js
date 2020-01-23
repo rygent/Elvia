@@ -25,7 +25,7 @@ module.exports = {
         let userFollowing = await fetch(url + "/following").then(res => res.json());
   
         let embed = new RichEmbed()
-        .setAuthor("GitHub search result", 'https://i.imgur.com/e4HunUm.png', 'https://github.com/')
+        .setAuthor("GitHub Search Engine", 'https://i.imgur.com/e4HunUm.png', 'https://github.com/')
         .setTitle(user.login)
         .setURL(user.html_url)
         .setThumbnail(user.avatar_url)
