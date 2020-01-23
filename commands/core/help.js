@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { Client } = require('../../settings');
+const { Client } = require('../../utils/settings');
 const { stripIndents } = require('common-tags');
 
 module.exports = {

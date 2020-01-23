@@ -1,6 +1,6 @@
 const { readdirSync } = require('fs');
 const { join } = require('path');
-const { Access } = require('../../settings');
+const { Access } = require('../../utils/settings');
 const Errors = require('../../utils/errors');
 
 module.exports = {

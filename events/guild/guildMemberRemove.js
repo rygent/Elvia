@@ -1,5 +1,5 @@
 const { RichEmbed } = require("discord.js");
-const { Colors } = require('../../settings');
+const { Colors } = require('../../utils/settings');
 
 module.exports = async (bot, member) => {
     let sChannel = member.guild.channels.find(x => x.name === 'join-leave')

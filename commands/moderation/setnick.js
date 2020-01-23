@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Colors } = require('../../settings');
+const { Colors } = require('../../utils/settings');
 
 module.exports = {
     config: {

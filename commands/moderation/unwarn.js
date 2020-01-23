@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
-const { Colors } = require('../../settings');
+const { Colors } = require('../../utils/settings');
 const fs = require("fs");
 const moment = require('moment');
 let warns = JSON.parse(fs.readFileSync("./warns.json", "utf8"));

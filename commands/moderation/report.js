@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
-const { Colors } = require('../../settings');
+const { Colors } = require('../../utils/settings');
 const moment = require('moment');
 
 module.exports = {

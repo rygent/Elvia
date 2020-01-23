@@ -1,4 +1,4 @@
-const { Client } = require('../../settings');
+const { Client } = require('../../utils/settings');
 
 module.exports = bot => {
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);

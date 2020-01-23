@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Access } = require('../../settings');
+const { Access } = require('../../utils/settings');
 const Errors = require('../../utils/errors');
 
 module.exports = {

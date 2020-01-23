@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Access, Client } = require('../../settings');
+const { Access, Client } = require('../../utils/settings');
 const { version } = require('../../package.json');
 const { stripIndents } = require("common-tags");
 const ostb = require('os-toolbox');

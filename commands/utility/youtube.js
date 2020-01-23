@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const request = require('request');
-const { Colors, Client } = require('../../settings');
+const { Colors, Client } = require('../../utils/settings');
 const ytkey = (process.env.YOUTUBEKEY);
 
 module.exports = {
