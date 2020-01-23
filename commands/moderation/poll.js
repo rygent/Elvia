@@ -8,6 +8,7 @@ module.exports = {
         category: 'moderation',
         description: 'Allows people to make polls',
         usage: '<question>',
+        example: 'Is this bot stable?',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

@@ -7,6 +7,7 @@ module.exports = {
         category: 'moderation',
         description: 'Creates an embed for you with any text.',
         usage: '<text>',
+        example: 'Hello World',
         accessableby: 'Moderations'
     },
     run: async (bot, message, args) => {

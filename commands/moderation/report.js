@@ -9,6 +9,7 @@ module.exports = {
         category: 'moderation',
         description: 'Report the specified user!',
         usage: '<user | id> <reason>',
+        example: '@Ryevi Break the rules',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

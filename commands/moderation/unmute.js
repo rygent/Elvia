@@ -10,6 +10,7 @@ module.exports = {
         category: 'moderation',
         description: 'Unmutes the specified user!',
         usage: '<user> <reason>',
+        example: '@Ryevi This account can send anything',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

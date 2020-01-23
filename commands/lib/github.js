@@ -10,6 +10,7 @@ module.exports = {
         category: 'lib',
         description: 'Searches github for a user or organisation',
         usage: '<user>',
+        example: 'XRzky',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

@@ -7,6 +7,7 @@ module.exports = {
         category: 'fun',
         description: 'Gives a random number between 1-100',
         usage: '',
+        example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

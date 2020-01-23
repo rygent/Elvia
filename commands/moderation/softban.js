@@ -10,6 +10,7 @@ module.exports = {
         category: 'moderation',
         description: 'Softbans the specified user!',
         usage: '<user> <reason>',
+        example: '@Ryevi Break the rules',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

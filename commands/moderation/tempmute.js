@@ -11,6 +11,7 @@ module.exports = {
         category: 'moderation',
         description: 'Temporarily mutes the specified user!',
         usage: '<mention> <duration> <reason>',
+        example: '@Ryevi 10h Break the rules',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

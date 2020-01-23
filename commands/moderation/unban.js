@@ -10,6 +10,7 @@ module.exports = {
         category: 'moderation',
         description: 'Unbans the specified user!',
         usage: '<user> <reason>',
+        example: '@Ryevi This account can join',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

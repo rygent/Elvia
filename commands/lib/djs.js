@@ -7,6 +7,7 @@ module.exports = {
         category: 'lib',
         description: 'Searches the DJS docs for whatever you\'d like',
         usage: '<query> (branch)',
+        example: 'embed setAuthor',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

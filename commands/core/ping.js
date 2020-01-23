@@ -7,6 +7,7 @@ module.exports = {
         category: 'core',
         description: 'Get the ping of the bot',
         usage: '',
+        example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

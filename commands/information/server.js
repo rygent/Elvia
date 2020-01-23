@@ -8,6 +8,7 @@ module.exports = {
         category: 'information',
         description: 'Get server info/stats.',
         usage: '',
+        example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

@@ -5,6 +5,7 @@ module.exports = {
         category: 'moderation',
         description: 'Says your input via the bot',
         usage: '<input>',
+        example: 'Hello World',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

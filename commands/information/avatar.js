@@ -7,6 +7,7 @@ module.exports = {
         category: 'information',
         description: 'Get a users avatar.',
         usage: '[user | mention]',
+        example: '@Ryevi',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

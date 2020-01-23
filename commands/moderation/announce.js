@@ -1,6 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { Client } = require('../../settings');
-const { Colors } = require('../../settings');
+const { Client, Colors } = require('../../settings');
 
 module.exports = {
     config: {
@@ -9,6 +8,7 @@ module.exports = {
         category: 'moderation',
         description: 'Send an announcement using the bot.',
         usage: '<title> | <description> | <channelname>',
+        example: 'Maintenance | Tomorrow maintenance server | generals',
         accessableby: 'Moderators'
     },
     run: async (bot, message, args) => {

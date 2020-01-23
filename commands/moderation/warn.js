@@ -12,6 +12,7 @@ module.exports = {
         category: "moderation",
         description: "Warn a user on the discord server with a certain reason",
         usage: "<user> <reason>",
+        example: '@Ryevi Break the rules',
         accessableby: "Moderators"
     },
     run: async (bot, message, args) => {

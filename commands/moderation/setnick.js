@@ -8,6 +8,7 @@ module.exports = {
         category: 'moderation',
         description: 'Set a user or bot\'s nickname',
         usage: '<@user> <nickname>',
+        example: '@Ryevi Ryu',
         accessableby: 'Moderations'
     },
     run: async (bot, message, args) => {

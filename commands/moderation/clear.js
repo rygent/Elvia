@@ -5,6 +5,7 @@ module.exports = {
         category: 'moderation',
         description: 'Clears the chat',
         usage: '<number deleted>',
+        example: '100',
         accessableby: 'Moderators'
 	},
     run: async (bot, message, args) => {

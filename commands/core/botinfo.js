@@ -11,6 +11,7 @@ module.exports = {
         category: 'core',
         description: 'Shows some information about the running instance!',
         usage: '',
+        example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
@@ -48,7 +49,7 @@ module.exports = {
         .addField('System', stripIndents`**❯ CPU Usage:** ${cpuLoad}%
         **❯ Memory Usage:** ${memoryUsage}%
         **❯ Heap:** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`)
-        .setFooter(`© ${message.guild.me.displayName} | Powered by Heroku`, bot.user.displayAvatarURL)
+        .setFooter(`©2020 ${message.guild.me.displayName} | Powered by Heroku`, bot.user.displayAvatarURL)
         .setTimestamp();
 
         message.channel.send(embed);

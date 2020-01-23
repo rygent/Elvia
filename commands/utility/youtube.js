@@ -10,6 +10,7 @@ module.exports = {
         category: 'utility',
         description: 'Searches for a video on youtube',
         usage: '<input>',
+        example: 'Fortnite',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

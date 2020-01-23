@@ -1,5 +1,6 @@
 const { RichEmbed } = require('discord.js');
 const { Access } = require('../../settings');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
@@ -8,10 +9,15 @@ module.exports = {
         category: 'owner',
         description: 'Sets the avatar of the Bots Account',
         usage: '<attachment image>',
+        example: 'send image',
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != Access.OWNERS) return message.channel.send(`You're not the bot the owner!`);
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(message.author.id != Access.OWNERS) return Errors.OWNER(message);
 
         let image = message.attachments.first().url;
         bot.user.setAvatar(image);
@@ -20,9 +26,8 @@ module.exports = {
 
         let embed = new RichEmbed()
             .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
-            .setDescription(`Profile Photo Changed!\n\n **Old Profile Photo --->**\n\n**New Profile Photo**`)
+            .setDescription(`Profile Photo Changed!`)
             .setImage(image)
-            .setThumbnail(bot.user.avatarURL)
         
         let sChannel = message.guild.channels.find(c => c.name === "log-channels")
         sChannel.send(embed)

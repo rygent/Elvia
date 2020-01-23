@@ -8,6 +8,7 @@ module.exports = {
         category: 'utility',
         description: 'Shows the weather for a specified location!',
         usage: '<location>',
+        example: 'Bandung',
         accessableby: 'member'
     },
     run: async (bot, message, args) => {

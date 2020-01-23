@@ -8,6 +8,7 @@ module.exports = {
         category: 'fun',
         description: 'Retrieves an answer from the almighty 8ball.',
         usage: '<question>',
+        example: 'Do you love me?',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

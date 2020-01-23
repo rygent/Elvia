@@ -8,6 +8,7 @@ module.exports = {
         category: 'core',
         description: 'Displays the bots current uptime!',
         usage: '',
+        example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

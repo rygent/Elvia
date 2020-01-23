@@ -8,6 +8,7 @@ module.exports = {
         category: 'utility',
         description: 'I\'ll do your math homework!',
         usage: '<equation>',
+        example: '10+7',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

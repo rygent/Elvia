@@ -8,7 +8,8 @@ module.exports = {
         aliases: ['who', 'user', 'info'],
         category: 'information',
         description: 'Get user information.',
-        usage: '[username | id | mention]',
+        usage: '[mention | id]',
+        example: '@Ryevi',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {

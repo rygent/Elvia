@@ -1,4 +1,5 @@
 const { RichEmbed } = require('discord.js');
+const { stripIndents } = require("common-tags");
 const { getMember } = require('../../functions.js');
 
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
         aliases: ['affinity'],
         category: 'fun',
         description: 'Calculates the love affinity you have for another person.',
-        usage: '[mention | id | username]',
+        usage: '[mention | id]',
+        example: '@Ryevi',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
@@ -25,8 +27,9 @@ module.exports = {
 
         const embed = new RichEmbed()
             .setColor('#ffb6c1')
-            .addField(`☁ **${person.displayName}** loves **${message.member.displayName}** this much:`,
-            `💟 ${Math.floor(love)}%\n\n${loveLevel}`);
+            .setTitle(`☁ **${person.displayName}** loves **${message.member.displayName}** this much:`)
+            .setDescription(stripIndents`💟 ${Math.floor(love)}%
+            ${loveLevel}`)
 
         message.channel.send(embed);
     }

@@ -1,4 +1,5 @@
 const { Access } = require('../../settings');
+const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
@@ -7,14 +8,19 @@ module.exports = {
         category: 'owner',
         description: 'Shuts down the bot!',
         usage: '',
+        example: '',
         accessableby: 'Owner'
     },
     run: async (bot, message, args) => {
-        if(message.author.id != Access.OWNERS) return message.channel.send('You are not my owner!');
+        if (message.deletable) {
+            message.delete()
+        };
+
+        if(message.author.id !== Access.OWNERS) return Errors.OWNER(message);
 
         try{
             await message.channel.send('Bot is shutting down...');
-            process.exit();
+            process.exit(0);
         } catch(e) {
             message.channel.send(`ERROR: ${e.message}`);
         }
