@@ -4,7 +4,7 @@ module.exports = {
     config: {
         name: 'djs',
         aliases: ['discord-js'],
-        category: 'lib',
+        category: 'search',
         description: 'Searches the DJS docs for whatever you\'d like',
         usage: '<query> (branch)',
         example: 'embed setAuthor',

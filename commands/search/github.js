@@ -7,7 +7,7 @@ module.exports = {
     config: {
         name: 'github',
         aliases: ['git'],
-        category: 'lib',
+        category: 'search',
         description: 'Searches github for a user or organisation',
         usage: '<user>',
         example: 'XRzky',
@@ -37,6 +37,8 @@ module.exports = {
             **Following:** ${userFollowing.length}
             **Repositories:** ${userRepos.length}
             **Created At: **${moment(user.created_at).format("llll")}`)
+        .setFooter('Powered by GitHub')
+        .setTimestamp();
           
         message.channel.send(embed);
     }

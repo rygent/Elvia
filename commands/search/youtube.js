@@ -7,7 +7,7 @@ module.exports = {
     config: {
         name: 'youtube',
         aliases: ['yt'],
-        category: 'utility',
+        category: 'search',
         description: 'Searches for a video on youtube',
         usage: '<input>',
         example: 'Fortnite',
@@ -31,12 +31,14 @@ module.exports = {
               const { description } = search.items[0].snippet;
               const newUrl = `https://www.youtube.com/watch?v=${search.items[0].id.videoId}`;
               const embed = new Discord.RichEmbed()
-                .setImage(thumbnail)
-                .setAuthor(title)
-                .setDescription(description)
+                .setColor(Colors.RED)  
+                .setAuthor("YouTube Search Engine", 'https://i.imgur.com/MaV8orh.png', 'https://youtube.com/')
+                .setTitle(title)
                 .setURL(newUrl)
-                .setColor(Colors.RED)
-                .setFooter(newUrl);
+                .setDescription(description)
+                .setImage(thumbnail)
+                .setFooter('Powered by YouTube')
+                .setTimestamp();
               return message.channel.send({ embed });
             }
             catch (error) {

@@ -19,7 +19,7 @@ module.exports = (bot) => {
             if(pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
         }
     };
-    ['anime', 'core', 'fun', 'information', 'lib', 'moderation', 'owner', 'utility'].forEach(x => load(x));
+    ['anime', 'core', 'fun', 'information', 'moderation', 'owner', 'search', 'utility'].forEach(x => load(x));
 
     console.log(table.toString());
 }
