@@ -1,7 +1,6 @@
 const { RichEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const fetch = require('node-fetch');
-const moment = require("moment");
 
 module.exports = {
     config: {
@@ -42,11 +41,11 @@ module.exports = {
             .setThumbnail(account.profile_pic_url_hd)
             .setDescription(stripIndents`**Username:** @${account.username}
             **Full name:** ${account.full_name}
-            **Biography:** ${account.biography.length == 0 ? "none" : account.biography}
+            **Biography:** ${account.biography.length == 0 ? "None" : account.biography}
             **Posts:** ${account.edge_owner_to_timeline_media.count}
             **Followers:** ${account.edge_followed_by.count}
             **Following:** ${account.edge_follow.count}
-            **Private account:** ${account.is_private ? "Yes 🔐" : "Nope 🔓"}`)
+            **Private account:** ${account.is_private ? "Yes 🔐" : "No 🔓"}`)
             .setFooter('Powered by Instagram')
             .setTimestamp();
 
