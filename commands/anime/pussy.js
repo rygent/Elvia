@@ -5,10 +5,10 @@ const neko = new client();
 
 module.exports = {
     config: {
-        name: 'boobs',
+        name: 'pussy',
         aliases: [''],
         category: 'anime',
-        description: 'Posts a random boobs picture. Warning this commands for 18+',
+        description: 'Posts a random pussy picture. Warning this commands for 18+',
         usage: '',
         example: '',
         accessableby: 'Members'
@@ -16,10 +16,10 @@ module.exports = {
     run: async (bot, message, args) => {
         if (!message.channel.nsfw) return Errors.NSFW(message);
         
-        neko.nsfw.boobs().then(boobs => {
+        neko.nsfw.pussy().then(pussy => {
             const embed = new RichEmbed()
                 .setColor(message.guild.me.displayColor)
-                .setImage(boobs.url)
+                .setImage(pussy.url)
                 .setFooter('Powered by nekos.life')
                 .setTimestamp();
             message.channel.send(embed);

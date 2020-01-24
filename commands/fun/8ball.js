@@ -20,7 +20,7 @@ module.exports = {
         const roleColor = message.guild.me.highestRole.hexColor;
         
         let ballembed = new RichEmbed()
-        .setAuthor(message.author.tag)
+        .setAuthor(message.author.tag, message.author.avatarURL)
         .setColor(roleColor === '#000000' ? '#ffffff' : roleColor)
         .addField('Question', question)
         .addField('Answer', replies[result]);

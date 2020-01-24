@@ -1,5 +1,5 @@
 const { RichEmbed } = require("discord.js");
-const { Colors } = require('../utils/settings');
+const { Colors, Client } = require('../utils/settings');
 
 module.exports.OWNER = (message) => {
     let embed = new RichEmbed()
@@ -13,7 +13,7 @@ module.exports.OWNER = (message) => {
         embed.setFooter(message.author.tag, message.author.avatarURL)   
     }
 
-    message.channel.send(embed).then(m => m.delete(30000));
+    message.channel.send(embed).then(m => m.delete(20000));
 }
 
 module.exports.NSFW = (message) => {
@@ -28,7 +28,7 @@ module.exports.NSFW = (message) => {
         embed.setFooter(message.author.tag, message.author.avatarURL)   
     }
 
-    message.channel.send(embed).then(m => m.delete(30000));
+    message.channel.send(embed).then(m => m.delete(20000));
 }
 
 module.exports.noPerms = (message, perm) => {
@@ -43,7 +43,7 @@ module.exports.noPerms = (message, perm) => {
         embed.setFooter(message.author.tag, message.author.avatarURL)   
     }
 
-    message.channel.send(embed).then(m => m.delete(30000));
+    message.channel.send(embed).then(m => m.delete(20000));
 }
 
 module.exports.botPerms = (message, perm) => {
@@ -58,5 +58,65 @@ module.exports.botPerms = (message, perm) => {
         embed.setFooter(message.author.tag, message.author.avatarURL)   
     }
 
-    message.channel.send(embed).then(m => m.delete(30000));
+    message.channel.send(embed).then(m => m.delete(20000));
+}
+
+module.exports.noUser = (message, cmd) => {
+    let embed = new RichEmbed()
+        .setColor(Colors.RED)
+        .setTitle('Couldn\'t find a user.')
+        .setDescription(`💢 **${message.author.tag}** Please mention a user to ${cmd}`)
+        .setFooter(message.author.tag)
+        .setTimestamp();
+
+    if (message.author.avatarURL != null) {
+        embed.setFooter(message.author.tag, message.author.avatarURL)   
+    }
+
+    message.channel.send(embed).then(m => m.delete(20000));
+}
+
+module.exports.noUser2 = (message, cmd) => {
+    let embed = new RichEmbed()
+        .setColor(Colors.RED)
+        .setTitle(`Cant't ${cmd}`)
+        .setDescription(`💢 **${message.author.tag}** You can't ${cmd} yourself.`)
+        .setFooter(message.author.tag)
+        .setTimestamp();
+
+    if (message.author.avatarURL != null) {
+        embed.setFooter(message.author.tag, message.author.avatarURL)   
+    }
+
+    message.channel.send(embed).then(m => m.delete(20000));
+}
+
+module.exports.resBody = (message, res, cmd) => {
+    let embed = new RichEmbed()
+        .setColor(Colors.RED)
+        .setTitle(`${res} not found.`)
+        .setDescription(`💢 **${message.author.tag}** Use \`${Client.PREFIX}help ${cmd}\` for more details`)
+        .setFooter(message.author.tag)
+        .setTimestamp();
+
+    if (message.author.avatarURL != null) {
+        embed.setFooter(message.author.tag, message.author.avatarURL)   
+    }
+
+    message.channel.send(embed).then(m => m.delete(20000));
+}
+
+module.exports.resStatus = (message, code) => {
+    let embed = new RichEmbed()
+        .setColor(Colors.RED)
+        .setTitle(`Error code ${code}`)
+        .setDescription(`💢 **${message.author.tag}** Your request cannot be found.`)
+        .setFooter(message.author.tag)
+        .setTimestamp();
+
+    if (message.author.avatarURL != null) {
+        embed.setFooter(message.author.tag, message.author.avatarURL)   
+    }
+
+    message.channel.send(embed).then(m => m.delete(20000));
 }

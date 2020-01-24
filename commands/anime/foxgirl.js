@@ -1,25 +1,22 @@
 const { RichEmbed } = require("discord.js");
-const Errors = require('../../utils/errors');
 const client = require('nekos.life');
 const neko = new client();
 
 module.exports = {
     config: {
-        name: 'boobs',
+        name: 'foxgirl',
         aliases: [''],
         category: 'anime',
-        description: 'Posts a random boobs picture. Warning this commands for 18+',
+        description: 'Posts a random foxgirl picture..',
         usage: '',
         example: '',
         accessableby: 'Members'
     },
     run: async (bot, message, args) => {
-        if (!message.channel.nsfw) return Errors.NSFW(message);
-        
-        neko.nsfw.boobs().then(boobs => {
-            const embed = new RichEmbed()
+        neko.sfw.foxGirl().then(foxGirl => {
+            let embed = new RichEmbed()
                 .setColor(message.guild.me.displayColor)
-                .setImage(boobs.url)
+                .setImage(foxGirl.url)
                 .setFooter('Powered by nekos.life')
                 .setTimestamp();
             message.channel.send(embed);
