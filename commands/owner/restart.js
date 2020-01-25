@@ -3,10 +3,10 @@ const Errors = require('../../utils/errors');
 
 module.exports = {
     config: {
-        name: 'shutdown',
-        aliases: ['botstop', 'turnoff'],
+        name: 'restart',
+        aliases: ['reboot'],
         category: 'owner',
-        description: 'Shuts down the bot!',
+        description: 'Restart the bot!',
         usage: '',
         example: '',
         accessableby: 'Owner'
@@ -19,8 +19,8 @@ module.exports = {
         if(message.author.id !== Access.OWNERS) return Errors.OWNER(message);
 
         try{
-            await message.channel.send('Bot is shutting down...');
-            process.exit(0);
+            await message.channel.send('Restarting...');
+            process.exit(42);
         } catch(e) {
             message.channel.send(`ERROR: ${e.message}`);
         }
