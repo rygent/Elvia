@@ -61,6 +61,36 @@ module.exports.botPerms = (message, perm) => {
     message.channel.send(embed).then(m => m.delete(20000));
 }
 
+module.exports.noText = (message, cmd) => {
+    let embed = new RichEmbed()
+        .setColor(Colors.RED)
+        .setTitle('Can\`t read that.')
+        .setDescription(`💢 **${message.author.tag}** Please enter something or read on \`${Client.PREFIX}help ${cmd}\``)
+        .setFooter(message.author.tag)
+        .setTimestamp();
+
+    if (message.author.avatarURL != null) {
+        embed.setFooter(message.author.tag, message.author.avatarURL)   
+    }
+
+    message.channel.send(embed).then(m => m.delete(20000));
+}
+
+// module.exports.noText2 = (message, cmd) => {
+//     let embed = new RichEmbed()
+//         .setColor(Colors.RED)
+//         .setTitle(`${res} not found.`)
+//         .setDescription(`💢 **${message.author.tag}** Use \`${Client.PREFIX}help ${cmd}\` for more details`)
+//         .setFooter(message.author.tag)
+//         .setTimestamp();
+
+//     if (message.author.avatarURL != null) {
+//         embed.setFooter(message.author.tag, message.author.avatarURL)   
+//     }
+
+//     message.channel.send(embed).then(m => m.delete(20000));
+// }
+
 module.exports.noUser = (message, cmd) => {
     let embed = new RichEmbed()
         .setColor(Colors.RED)
