@@ -3,7 +3,7 @@ module.exports = {
         'OWNERS': '427560082142920707'
     },
     Client: {
-        'PREFIX': '!'
+        'PREFIX': '$'
     },
     Colors: {
         'DEFAULT': '0',
