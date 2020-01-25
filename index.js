@@ -9,4 +9,4 @@ config({
 ['aliases', 'commands'].forEach(x => bot[x] = new Collection());
 ['command', 'event'].forEach(x => require(`./handlers/${x}`)(bot));
 
-bot.login(process.env.TOKEN);v
+bot.login(process.env.TOKEN);
