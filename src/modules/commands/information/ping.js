@@ -14,8 +14,7 @@ module.exports = class extends Command {
 		});
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	async run(message, args) {
+	async run(message) {
 		const msg = await message.channel.send('Pinging...');
 		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
 		const roleColor = message.guild.me.roles.highest.hexColor;
@@ -23,16 +22,19 @@ module.exports = class extends Command {
 		if (latency <= 0) {
 			const embed = new MessageEmbed()
 				.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
-				.setDescription('Please try again later');
+				.setDescription('Please try again later')
+				.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }))
+				.setTimestamp();
 
 			return msg.edit('', embed);
 		}
 
 		const pingEmbed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+			.setTitle('Bot Response Time')
 			.setDescription(stripIndents`
-				🏓 Pong: \`${latency}ms\`
-				💓 Heartbeat: \`${Math.round(this.client.ws.ping)}ms\``)
+				🤖 Bot Latency: \`${latency}ms\`
+				🌐 API Latency: \`${Math.round(this.client.ws.ping)}ms\``)
 			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }))
 			.setTimestamp();
 
