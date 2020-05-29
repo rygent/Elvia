@@ -11,7 +11,8 @@ module.exports = class RivenClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.utils = new Util(this);
-		this.functions = require('./Functions');
+		this.embed = require('./Embeds.js');
+		this.functions = require('./Functions.js');
 
 		this.once('ready', () => {
 			console.log(`Logged in as ${this.user.username}!`);
@@ -24,7 +25,7 @@ module.exports = class RivenClient extends Client {
 			if (!message.guild || message.author.bot) return;
 
 			if (message.content.match(mentionRegex)) {
-				message.channel.send(`My prefix for ${message.guild.name} is \`${this.PREFIX}\`.`);
+				this.embed.generals('', message, `the prefix of **${message.guild.name}** is \`${this.PREFIX}\`.`);
 			}
 
 			const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.PREFIX;
