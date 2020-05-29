@@ -6,4 +6,4 @@ const config = process.env;
 
 const client = new RivenClient(config);
 
-client.login();
+client.start();

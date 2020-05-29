@@ -1,4 +1,5 @@
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
+const Util = require('./Util.js');
 
 module.exports = class RivenClient extends Client {
 
@@ -7,6 +8,9 @@ module.exports = class RivenClient extends Client {
 			disableMentions: 'everyone'
 		});
 		this.validate(options);
+		this.commands = new Collection();
+		this.aliases = new Collection();
+		this.utils = new Util(this);
 
 		this.once('ready', () => {
 			console.log(`Logged in as ${this.user.username}!`);
@@ -24,11 +28,11 @@ module.exports = class RivenClient extends Client {
 
 			const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.PREFIX;
 
-			// eslint-disable-next-line no-unused-vars
 			const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
 
-			if (cmd.toLowerCase() === 'hello') {
-				message.channel.send('Hello!');
+			const command = this.commands.get(cmd.toLowerCase()) || this.commands.get(this.aliases.get(cmd.toLowerCase()));
+			if (command) {
+				command.run(message, args);
 			}
 		});
 	}
@@ -44,7 +48,8 @@ module.exports = class RivenClient extends Client {
 		this.PREFIX = options.prefix;
 	}
 
-	async login(token = this.TOKEN) {
+	async start(token = this.TOKEN) {
+		this.utils.loadCommands();
 		super.login(token);
 	}
 

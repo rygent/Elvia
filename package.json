@@ -22,7 +22,10 @@
   "homepage": "https://github.com/XRzky/RivenBot#readme",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "path": "^0.12.7",
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
