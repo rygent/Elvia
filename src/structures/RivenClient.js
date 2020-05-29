@@ -39,6 +39,29 @@ module.exports = class RivenClient extends Client {
 		});
 	}
 
+	async resolveUser(search) {
+		let user = null;
+		if (!search || typeof search !== 'string') return;
+		if (search.match(/^<@!?(\d+)>$/)) {
+			const id = search.match(/^<@!?(\d+)>$/)[1];
+			// eslint-disable-next-line no-empty-function
+			user = this.users.fetch(id).catch(() => {});
+			// eslint-disable-next-line consistent-return
+			if (user) return user;
+		}
+		if (search.match(/^!?(\w+)#(\d+)$/)) {
+			const username = search.match(/^!?(\w+)#(\d+)$/)[0];
+			const discriminator = search.match(/^!?(\w+)#(\d+)$/)[1];
+			user = this.users.find((us) => us.username === username && us.discriminator === discriminator);
+			// eslint-disable-next-line consistent-return
+			if (user) return user;
+		}
+		// eslint-disable-next-line no-empty-function
+		user = await this.users.fetch(search).catch(() => {});
+		// eslint-disable-next-line consistent-return
+		return user;
+	}
+
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
