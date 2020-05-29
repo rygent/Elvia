@@ -11,6 +11,7 @@ module.exports = class RivenClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.utils = new Util(this);
+		this.functions = require('./Functions');
 
 		this.once('ready', () => {
 			console.log(`Logged in as ${this.user.username}!`);
