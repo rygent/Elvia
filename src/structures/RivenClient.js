@@ -17,8 +17,8 @@ module.exports = class RivenClient extends Client {
 		});
 
 		this.on('message', async (message) => {
-			const mentionRegex = RegExp(`^<@!${this.user.id}>$`);
-			const mentionRegexPrefix = RegExp(`^<@!${this.user.id}> `);
+			const mentionRegex = RegExp(`^<@!?${this.user.id}>$`);
+			const mentionRegexPrefix = RegExp(`^<@!?${this.user.id}> `);
 
 			if (!message.guild || message.author.bot) return;
 
