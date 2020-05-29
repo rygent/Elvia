@@ -1,0 +1,31 @@
+{
+  "name": "riven",
+  "version": "2.4.0-alpha",
+  "description": "A multipurpose discord bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "test --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XRzky/RivenBot.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "Rygent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XRzky/RivenBot/issues"
+  },
+  "homepage": "https://github.com/XRzky/RivenBot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.1.0",
+    "eslint-config-tesseract": "^0.0.2"
+  }
+}
