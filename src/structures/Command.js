@@ -6,7 +6,7 @@ module.exports = class Command {
 		this.aliases = options.aliases || [];
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Miscellaneous';
-		this.usage = options.usage || 'No usage provided.';
+		this.usage = options.usage || '';
 	}
 
 	// eslint-disable-next-line no-unused-vars

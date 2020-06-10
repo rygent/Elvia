@@ -13,6 +13,11 @@ module.exports = class RivenClient extends Client {
 		this.utils = new Util(this);
 		this.embed = require('./Embeds.js');
 		this.functions = require('./Functions.js');
+
+		// eslint-disable-next-line func-names
+		String.prototype.toProperCase = function () {
+			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+		};
 	}
 
 	async resolveUser(search) {

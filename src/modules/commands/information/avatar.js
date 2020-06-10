@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			name: 'avatar',
 			aliases: ['av'],
 			description: 'Displays bot latency and API response times.',
-			category: 'Information'
+			category: 'information'
 		});
 	}
 
