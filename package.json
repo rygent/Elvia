@@ -29,7 +29,7 @@
     "util": "^0.12.3"
   },
   "devDependencies": {
-    "eslint": "^7.1.0",
+    "eslint": "^7.2.0",
     "eslint-config-tesseract": "^0.0.2"
   }
 }
