@@ -1,6 +1,7 @@
 const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
+const { readdir } = require('fs');
 const Command = require('./Command.js');
 
 module.exports = class Util {
@@ -35,6 +36,19 @@ module.exports = class Util {
 					}
 				}
 			}
+		});
+	}
+
+	async loadEvents() {
+		// eslint-disable-next-line consistent-return
+		return readdir('./src/modules/events/', (err, files) => {
+			if (err) return console.error(err);
+			files.forEach(file => {
+				const eventName = file.split('.')[0];
+				const event = new (require(`../modules/events/${file}`))(this.client);
+				this.client.on(eventName, (...args) => event.run(...args));
+				delete require.cache[require.resolve(`../modules/events/${file}`)];
+			});
 		});
 	}
 
