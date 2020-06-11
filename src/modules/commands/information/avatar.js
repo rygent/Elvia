@@ -9,8 +9,9 @@ module.exports = class extends Command {
 		super(...args, {
 			name: 'avatar',
 			aliases: ['av'],
-			description: 'Displays bot latency and API response times.',
-			category: 'information'
+			description: 'Sends the mentioned user\'s avatar.',
+			category: 'information',
+			usage: '[mention | ID]'
 		});
 	}
 
