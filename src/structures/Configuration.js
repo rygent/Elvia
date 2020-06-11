@@ -32,7 +32,7 @@ module.exports = {
 		DARK_VIVID_PINK: 'bc0057',
 		CUSTOM: 'ff4654'
 	},
-	Emotes: {
+	Emojis: {
 		ONLINE: '<:online:712397262256472075>',
 		IDLE: '<:idle:712397201955094708>',
 		DND: '<:dnd:712397154836283392>',
