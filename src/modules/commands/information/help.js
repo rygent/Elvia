@@ -9,9 +9,10 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			name: 'help',
-			aliases: ['halp'],
-			description: 'Displays bot latency and API response times.',
-			category: 'information'
+			aliases: ['halp', 'commands'],
+			description: 'Displays all commands that the bot has.',
+			category: 'information',
+			usage: '[command | alias]'
 		});
 	}
 
