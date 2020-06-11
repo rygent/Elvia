@@ -7,6 +7,7 @@ module.exports = class Command {
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Miscellaneous';
 		this.usage = options.usage || '';
+		this.guildOnly = options.guildOnly || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars
