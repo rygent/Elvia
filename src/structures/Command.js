@@ -8,6 +8,8 @@ module.exports = class Command {
 		this.category = options.category || 'Miscellaneous';
 		this.usage = options.usage || '';
 		this.guildOnly = options.guildOnly || false;
+		this.memberPerms = options.memberPerms || [];
+		this.clientPerms = options.clientPerms || [];
 	}
 
 	// eslint-disable-next-line no-unused-vars

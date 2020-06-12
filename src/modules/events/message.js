@@ -30,6 +30,32 @@ module.exports = class {
 			return;
 		}
 
+		if (message.guild) {
+			let neededPermission = [];
+			if (!command.clientPerms.includes('EMBED_LINKS')) {
+				command.clientPerms.push('EMBED_LINKS');
+			}
+			command.clientPerms.forEach((perm) => {
+				if (!message.channel.permissionsFor(message.guild.me).has(perm)) {
+					neededPermission.push(perm);
+				}
+			});
+			if (neededPermission.length > 0) {
+				message.channel.send(`I need the following permissions to perform this command: \`${neededPermission.map(pe => `\`${pe}\``).join(', ')}\``);
+				return;
+			}
+			neededPermission = [];
+			command.memberPerms.forEach((perm) => {
+				if (!message.channel.permissionsFor(message.member).has(perm)) {
+					neededPermission.push(perm);
+				}
+			});
+			if (neededPermission.length > 0) {
+				message.channel.send(`You do not have the necessary permissions to perform this command (\`${neededPermission.map(pe => `\`${pe}\``).join(', ')}\`)`);
+				return;
+			}
+		}
+
 		try {
 			command.run(message, args);
 		} catch (err) {
