@@ -62,7 +62,8 @@ module.exports = class extends Command {
                     ***Aliases:*** ${command.aliases.length > 0 ? command.aliases.join(', ') : 'No aliases.'}
                     ***Description:*** ${command.description}
                     ***Category:*** ${command.category.toProperCase()}
-					***Usage:*** ${command.usage ? `\`${this.client.PREFIX}${command.name} ${command.usage}\`` : `\`${this.client.PREFIX}${command.name}\``}`);
+					***Usage:*** ${command.usage ? `\`${this.client.PREFIX}${command.name} ${command.usage}\`` : `\`${this.client.PREFIX}${command.name}\``}
+					***Permissions:*** \`${command.ownerOnly ? 'OWNER' : command.memberPerms.length > 0 ? command.memberPerms.map(arr => arr).join(', ') : 'EVERYONE'}\``);
 				embed.setFooter('Syntax: <> = required, [] = optional', message.author.avatarURL({ dynamic: true }));
 
 				message.channel.send(embed);
