@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			aliases: ['halp', 'commands'],
 			description: 'Displays all commands that the bot has.',
 			category: 'information',
-			usage: '[command | alias]'
+			usage: '[command | alias]',
+			guildOnly: true
 		});
 	}
 

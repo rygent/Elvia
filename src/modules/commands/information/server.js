@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			name: 'server',
 			aliases: ['serverinfo', 'guild'],
 			description: 'Displays information about the current server.',
-			category: 'information'
+			category: 'information',
+			guildOnly: true
 		});
 	}
 

@@ -8,7 +8,8 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Add an emoji to the server!',
 			category: 'administrator',
-			usage: '<URL> <name>'
+			usage: '<URL> <name>',
+			guildOnly: true
 		});
 	}
 
