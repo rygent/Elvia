@@ -56,6 +56,12 @@ module.exports = class {
 			}
 		}
 
+		// eslint-disable-next-line no-process-env
+		if (command.ownerOnly && message.author.id !== process.env.OWNER) {
+			message.channel.send('Only owners can do these commands!');
+			return;
+		}
+
 		try {
 			command.run(message, args);
 		} catch (err) {

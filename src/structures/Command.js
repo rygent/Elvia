@@ -10,6 +10,7 @@ module.exports = class Command {
 		this.guildOnly = options.guildOnly || false;
 		this.memberPerms = options.memberPerms || [];
 		this.clientPerms = options.clientPerms || [];
+		this.ownerOnly = options.ownerOnly || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars
