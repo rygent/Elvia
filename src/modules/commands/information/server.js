@@ -50,7 +50,7 @@ module.exports = class extends Command {
 		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setAuthor(`Server Information for ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
 			.setThumbnail(message.guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
 			.addField('Details', stripIndents`
