@@ -26,10 +26,15 @@ module.exports = class extends Command {
 			invisible: `${Emojis.OFFLINE} Offline`
 		};
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
+		let roleColor;
+		if (!message.guild) {
+			roleColor = Colors.DEFAULT;
+		} else {
+			roleColor = message.guild.me.roles.highest.hexColor;
+		}
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle(`__Information About ${this.client.user.username}__`)
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
 			.setDescription(`Hiya, I'm ${this.client.user.username}... I'll be your server assistant & multipurpose bot!\nYou can use \`${this.client.PREFIX}help\` to get all my commands.`)

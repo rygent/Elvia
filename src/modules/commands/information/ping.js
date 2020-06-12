@@ -17,11 +17,16 @@ module.exports = class extends Command {
 	async run(message) {
 		const msg = await message.channel.send('Pinging...');
 		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
-		const roleColor = message.guild.me.roles.highest.hexColor;
+		let roleColor;
+		if (!message.guild) {
+			roleColor = Colors.DEFAULT;
+		} else {
+			roleColor = message.guild.me.roles.highest.hexColor;
+		}
 
 		if (latency <= 0) {
 			const embed = new MessageEmbed()
-				.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 				.setDescription('Please try again later')
 				.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }))
 				.setTimestamp();

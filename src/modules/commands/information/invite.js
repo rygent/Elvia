@@ -15,10 +15,15 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const roleColor = message.guild.me.roles.highest.hexColor;
+		let roleColor;
+		if (!message.guild) {
+			roleColor = Colors.DEFAULT;
+		} else {
+			roleColor = message.guild.me.roles.highest.hexColor;
+		}
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle('__Invitation Link__')
 			.setDescription(stripIndents`
                 Here is the bot invite link and support server invite link!
