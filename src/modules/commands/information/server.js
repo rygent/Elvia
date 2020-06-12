@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			aliases: ['serverinfo', 'guild'],
 			description: 'Displays information about the current server.',
 			category: 'information',
-			guildOnly: true
+			guildOnly: true,
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 

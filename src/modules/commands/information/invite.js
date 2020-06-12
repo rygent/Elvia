@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			name: 'invite',
 			aliases: [],
 			description: 'Gives you the invite link!',
-			category: 'information'
+			category: 'information',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 

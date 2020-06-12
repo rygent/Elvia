@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			name: 'ping',
 			aliases: ['pong'],
 			description: 'Displays bot latency and API response times.',
-			category: 'information'
+			category: 'information',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 

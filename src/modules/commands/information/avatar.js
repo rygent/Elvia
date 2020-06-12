@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['av'],
 			description: 'Sends the mentioned user\'s avatar.',
 			category: 'information',
-			usage: '[mention | ID]'
+			usage: '[mention | ID]',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 

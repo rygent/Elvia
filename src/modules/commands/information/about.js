@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			name: 'about',
 			aliases: ['botinfo', 'info'],
 			description: 'Shows some information about the running instance!',
-			category: 'information'
+			category: 'information',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 

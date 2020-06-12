@@ -9,7 +9,9 @@ module.exports = class extends Command {
 			description: 'Add an emoji to the server!',
 			category: 'administrator',
 			usage: '<URL> <name>',
-			guildOnly: true
+			guildOnly: true,
+			memberPerms: ['ADMINISTRATOR'],
+			clientPerms: ['SEND_MESSAGES', 'MANAGE_EMOJIS']
 		});
 	}
 

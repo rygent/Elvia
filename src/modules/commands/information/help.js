@@ -13,7 +13,8 @@ module.exports = class extends Command {
 			description: 'Displays all commands that the bot has.',
 			category: 'information',
 			usage: '[command | alias]',
-			guildOnly: true
+			guildOnly: true,
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
 
