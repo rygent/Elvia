@@ -29,8 +29,7 @@ module.exports = {
 		LIGHT_GREY: 'bcc0c0',
 		DARK_NAVY: '2c3e50',
 		LUMINOUS_VIVID_PINK: 'fd0061',
-		DARK_VIVID_PINK: 'bc0057',
-		CUSTOM: 'ff4654'
+		DARK_VIVID_PINK: 'bc0057'
 	},
 	Emojis: {
 		ONLINE: '<:online:712397262256472075>',
