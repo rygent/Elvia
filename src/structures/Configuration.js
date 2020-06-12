@@ -7,7 +7,7 @@ module.exports = {
 		PREFIX: `${process.env.PREFIX}`
 	},
 	Colors: {
-		DEFAULT: '0',
+		DEFAULT: 'ff4654',
 		AQUA: '1abc9c',
 		GREEN: '2ecc71',
 		BLUE: '3498db',
