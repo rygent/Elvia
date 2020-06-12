@@ -24,15 +24,14 @@ module.exports = class extends Command {
 
 			const embed = new MessageEmbed()
 				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-				.setAuthor(`${this.client.user.username} Help`, message.guild.iconURL({ dynamic: true }))
+				.setAuthor(`${this.client.user.username} | Commands`, 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png')
 				.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }));
 
 			if (!args[0]) {
 				const categories = readdirSync('./src/modules/commands/');
 
 				embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${this.client.PREFIX}**`);
-				embed.setFooter(`Based on ${this.client.user.username} | Total Commands: ${this.client.commands.size}`, this.client.user.displayAvatarURL({ dynamic: true }));
-				embed.setTimestamp();
+				embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
 				categories.forEach(cat => {
 					const dir = this.client.commands.filter(cmd => cmd.category === cat);
@@ -57,14 +56,14 @@ module.exports = class extends Command {
 					message.channel.send(embed.setTitle('Invalid Command.').setDescription(`Do \`${this.client.PREFIX}help\` for the list of the commands.`));
 				}
 
+				embed.setAuthor(`Commands | ${command.name.toProperCase()}`, 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png');
 				embed.setDescription(stripIndents` The bot's prefix is: \`${this.client.PREFIX}\`\n
-                    _Command:_ **${command.name.toProperCase()}**
-                    _Aliases:_ **${command.aliases ? command.aliases.join(', ') : 'None'}**
-                    _Description:_ **${command.description}**
-                    _Category:_ **${command.category.toProperCase()}**
-                    _Usage:_ ${command.usage ? `\`${this.client.PREFIX}${command.name} ${command.usage}\`` : `\`${this.client.PREFIX}${command.name}\``}`);
-				embed.setFooter('Syntax: <> = required, [] = optional');
-				embed.setTimestamp();
+                    ***Command:*** ${command.name}
+                    ***Aliases:*** ${command.aliases.length > 0 ? command.aliases.join(', ') : 'No aliases.'}
+                    ***Description:*** ${command.description}
+                    ***Category:*** ${command.category.toProperCase()}
+					***Usage:*** ${command.usage ? `\`${this.client.PREFIX}${command.name} ${command.usage}\`` : `\`${this.client.PREFIX}${command.name}\``}`);
+				embed.setFooter('Syntax: <> = required, [] = optional', message.author.avatarURL({ dynamic: true }));
 
 				message.channel.send(embed);
 			}
