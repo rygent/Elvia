@@ -8,6 +8,7 @@ module.exports = class extends Command {
 			aliases: ['reboot'],
 			description: 'If running under PM2, the bot will restart.',
 			category: 'owner',
+			clientPerms: ['SEND_MESSAGES'],
 			ownerOnly: true
 		});
 	}
