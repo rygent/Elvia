@@ -24,7 +24,7 @@ module.exports = class extends Command {
 
 			const embed = new MessageEmbed()
 				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-				.setAuthor(`${this.client.user.username} | Commands`, 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png')
+				.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
 				.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }));
 
 			if (!args[0]) {
@@ -42,12 +42,12 @@ module.exports = class extends Command {
 					}
 				});
 
-				const diduknow = [
+				const hint = [
 					`commands usually have aliases? Just execute the command \`${this.client.PREFIX}help <command>\` to check them!`,
 					"most of the people don't read the helpful tricks that are here?"
 				];
 
-				embed.addField('Did you know that', diduknow[Math.floor(Math.random() * diduknow.length)]);
+				embed.addField('__**Hint**__', hint[Math.floor(Math.random() * hint.length)]);
 
 				message.channel.send(embed);
 			} else {
@@ -56,7 +56,7 @@ module.exports = class extends Command {
 					message.channel.send(embed.setTitle('Invalid Command.').setDescription(`Do \`${this.client.PREFIX}help\` for the list of the commands.`));
 				}
 
-				embed.setAuthor(`Commands | ${command.name.toProperCase()}`, 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png');
+				embed.setAuthor(`Commands | ${command.name.toProperCase()}`, 'https://i.imgur.com/YxoUvH8.png');
 				embed.setDescription(stripIndents` The bot's prefix is: \`${this.client.PREFIX}\`\n
                     ***Command:*** ${command.name}
                     ***Aliases:*** ${command.aliases.length > 0 ? command.aliases.join(', ') : 'No aliases.'}
