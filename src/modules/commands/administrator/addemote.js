@@ -17,16 +17,22 @@ module.exports = class extends Command {
 
 	async run(message, args) {
 		const url = args[0];
-		if (!url) message.channel.send('Please indicate the url of the emoji!');
+		if (!url) {
+			message.channel.send('Please indicate the url of the emoji!');
+			return;
+		}
 
 		const name = args[1];
-		if (!name) message.channel.send('Please indicate the name of the emoji!');
+		if (!name) {
+			message.channel.send('Please indicate the name of the emoji!');
+			return;
+		}
 
 		message.guild.emojis.create(url, name).then(emote => {
 			message.channel.send(`Emoji **${emote.name}** added to the server! String: \`${emote.toString()}\``);
-		// eslint-disable-next-line arrow-body-style
 		}).catch(() => {
-			return message.channel.send('The URL to the image is invalid or you have no more space on your Discord!');
+			message.channel.send('The URL to the image is invalid or you have no more space on your Discord!');
+			return;
 		});
 	}
 
