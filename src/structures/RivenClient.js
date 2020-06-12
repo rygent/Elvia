@@ -18,6 +18,11 @@ module.exports = class RivenClient extends Client {
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		};
+
+		// eslint-disable-next-line func-names
+		Number.prototype.formatNumber = function () {
+			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+		};
 	}
 
 	async resolveUser(search) {
