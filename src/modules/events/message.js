@@ -64,6 +64,9 @@ module.exports = class {
 
 		try {
 			command.run(message, args);
+			if (command.category === 'owner') {
+				message.delete();
+			}
 		} catch (err) {
 			console.log(err);
 			message.channel.send('An error has occurred, please try again in a few minutes.');
