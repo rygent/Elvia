@@ -22,6 +22,10 @@ module.exports = class RivenClient extends Client {
 		Number.prototype.formatNumber = function () {
 			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		};
+
+		Array.prototype.random = function () {
+			return this[Math.floor(Math.random() * this.length)];
+		};
 	}
 
 	/* eslint-disable no-empty-function */
