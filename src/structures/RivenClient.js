@@ -3,6 +3,7 @@ const Util = require('./Util.js');
 
 module.exports = class RivenClient extends Client {
 
+	/* eslint-disable func-names */
 	constructor(options = {}) {
 		super({
 			ws: { intents: Intents.ALL }
@@ -14,37 +15,32 @@ module.exports = class RivenClient extends Client {
 		this.embed = require('./Embeds.js');
 		this.functions = require('./Functions.js');
 
-		// eslint-disable-next-line func-names
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		};
 
-		// eslint-disable-next-line func-names
 		Number.prototype.formatNumber = function () {
 			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		};
 	}
 
+	/* eslint-disable no-empty-function */
+	/* eslint-disable consistent-return */
 	async resolveUser(search) {
 		let user = null;
 		if (!search || typeof search !== 'string') return;
 		if (search.match(/^<@!?(\d+)>$/)) {
 			const id = search.match(/^<@!?(\d+)>$/)[1];
-			// eslint-disable-next-line no-empty-function
 			user = this.users.fetch(id).catch(() => {});
-			// eslint-disable-next-line consistent-return
 			if (user) return user;
 		}
 		if (search.match(/^!?(\w+)#(\d+)$/)) {
 			const username = search.match(/^!?(\w+)#(\d+)$/)[0];
 			const discriminator = search.match(/^!?(\w+)#(\d+)$/)[1];
 			user = this.users.find((us) => us.username === username && us.discriminator === discriminator);
-			// eslint-disable-next-line consistent-return
 			if (user) return user;
 		}
-		// eslint-disable-next-line no-empty-function
 		user = await this.users.fetch(search).catch(() => {});
-		// eslint-disable-next-line consistent-return
 		return user;
 	}
 
