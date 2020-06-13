@@ -10,6 +10,7 @@ module.exports = class Command {
 		this.guildOnly = options.guildOnly || false;
 		this.memberPerms = options.memberPerms || [];
 		this.clientPerms = options.clientPerms || [];
+		this.nsfw = options.nsfw || false;
 		this.ownerOnly = options.ownerOnly || false;
 	}
 

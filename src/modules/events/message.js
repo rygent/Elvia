@@ -54,6 +54,11 @@ module.exports = class {
 				this.client.embed.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 				return;
 			}
+
+			if (!message.channel.nsfw && command.nsfw) {
+				this.client.embed.errors('nsfwOnly', message);
+				return;
+			}
 		}
 
 		// eslint-disable-next-line no-process-env

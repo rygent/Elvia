@@ -33,6 +33,11 @@ module.exports = {
 				embed.setDescription(`💢 **${message.author.tag}**, Only my master can do these **Command**.`);
 				break;
 			}
+			case 'nsfwOnly': {
+				embed.setTitle('NSFW!');
+				embed.setDescription(`💢 **${message.author.tag}**, You must go to in a channel that allows the NSFW to type this command!`);
+				break;
+			}
 			case 'memberPerms': {
 				embed.setTitle('Insufficient Permission!');
 				embed.setDescription(`💢 **${message.author.tag}**, You don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
