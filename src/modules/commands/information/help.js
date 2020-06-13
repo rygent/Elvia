@@ -41,12 +41,12 @@ module.exports = class extends Command {
 					}
 				});
 
-				const hint = [
+				const diduknow = [
 					`commands usually have aliases? Just execute the command \`${this.client.PREFIX}help <command>\` to check them!`,
 					"most of the people don't read the helpful tricks that are here?"
 				];
 
-				embed.addField('__**Hint**__', hint[Math.floor(Math.random() * hint.length)]);
+				embed.addField('__**Did you know that**__', diduknow.random());
 
 				message.channel.send(embed);
 			} else {
