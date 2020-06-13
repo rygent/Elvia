@@ -2,6 +2,7 @@ const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
 const { Colors } = require('../../../structures/Configuration.js');
+const { categoryCheck, checkOwner } = require('../../../utils/HelpHandling.js');
 const { stripIndents } = require('common-tags');
 
 module.exports = class extends Command {
@@ -27,7 +28,7 @@ module.exports = class extends Command {
 				.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
 				.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }));
 
-			if (!args[0]) {
+			if (!args[0] || (checkOwner(message.author.id) && args[0] === 'all')) {
 				const categories = readdirSync('./src/modules/commands/');
 
 				embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${this.client.PREFIX}**`);
@@ -35,10 +36,8 @@ module.exports = class extends Command {
 
 				categories.forEach(cat => {
 					const dir = this.client.commands.filter(cmd => cmd.category === cat);
-					try {
+					if (args[0] === 'all' || categoryCheck(cat, message, this.client)) {
 						embed.addField(`⟐ __**${cat.toProperCase()} [${dir.size}]:**__`, dir.map(cmd => `\`${cmd.name}\``).join(', '));
-					} catch (err) {
-						console.log(err);
 					}
 				});
 
