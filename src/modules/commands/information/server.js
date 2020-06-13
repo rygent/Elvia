@@ -54,27 +54,27 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setAuthor(`Server Information for ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
 			.setThumbnail(message.guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
-			.addField('Details', stripIndents`
-                _Name:_ **${message.guild.name}**
-                _ID:_ **${message.guild.id}**
-                _Owner:_ **${message.guild.owner.user.tag}**
-                _Region:_ **${region[message.guild.region]}**
-                _Boost Tier:_ **${message.guild.premiumTier ? `Tier: ${message.guild.premiumTier}` : 'None'}**
-                _Explicit filter:_ **${contentFilterLevels[message.guild.explicitContentFilter]}**
-                _Verification:_ **${verificationLevels[message.guild.verificationLevel]}**
-                _Created:_ **${moment(message.guild.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(message.guild.createdTimestamp).fromNow()})**`)
-			.addField('Channels', stripIndents`
-                _Categories:_ **${message.guild.channels.cache.filter(ch => ch.type === 'category').size}**
-                _Text:_ **${message.guild.channels.cache.filter(ch => ch.type === 'text').size}**
-                _Voice:_ **${message.guild.channels.cache.filter(ch => ch.type === 'voice').size}**
-                _AFK:_ **${message.guild.afkChannel ? message.guild.afkChannel.name : 'None'}**`, true)
-			.addField('Users', stripIndents`
-                _Humans:_ **${message.guild.memberCount - message.guild.members.cache.filter(mbr => mbr.user.bot).size}**
-                _Bots:_ **${message.guild.members.cache.filter(mbr => mbr.user.bot).size}**
-                _Members:_ **${message.guild.memberCount}**`, true)
-			.addField('Others', stripIndents`
-                _Booster:_ **${message.guild.premiumSubscriptionCount}**`)
-			.addField(`__**Roles [${message.guild.roles.cache.filter(fil => fil.name !== '@everyone').size}]**__`, stripIndents`
+			.addField('__Details__', stripIndents`
+                ***Name:*** ${message.guild.name}
+                ***ID:*** ${message.guild.id}
+                ***Owner:*** ${message.guild.owner.user.tag}
+                ***Region:*** ${region[message.guild.region]}
+                ***Boost Tier:*** ${message.guild.premiumTier ? `Tier: ${message.guild.premiumTier}` : 'None'}
+                ***Explicit filter:*** ${contentFilterLevels[message.guild.explicitContentFilter]}
+                ***Verification:*** ${verificationLevels[message.guild.verificationLevel]}
+                ***Created:*** ${moment(message.guild.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(message.guild.createdTimestamp).fromNow()})`)
+			.addField('__Channels__', stripIndents`
+                ***Categories:*** ${message.guild.channels.cache.filter(ch => ch.type === 'category').size}
+                ***Text:*** ${message.guild.channels.cache.filter(ch => ch.type === 'text').size}
+                ***Voice:*** ${message.guild.channels.cache.filter(ch => ch.type === 'voice').size}
+                ***AFK:*** ${message.guild.afkChannel ? message.guild.afkChannel.name : 'None'}`, true)
+			.addField('__Users__', stripIndents`
+                ***Humans:*** ${message.guild.memberCount - message.guild.members.cache.filter(mbr => mbr.user.bot).size}
+                ***Bots:*** ${message.guild.members.cache.filter(mbr => mbr.user.bot).size}
+                ***Members:*** ${message.guild.memberCount}`, true)
+			.addField('__Others__', stripIndents`
+                ***Booster:*** ${message.guild.premiumSubscriptionCount}`, true)
+			.addField(`__Roles [${message.guild.roles.cache.filter(fil => fil.name !== '@everyone').size}]__`, stripIndents`
                 ${message.guild.roles.cache.sort((a, b) => b.position - a.position).filter(fil => fil.name !== '@everyone').map(re => re.name).join(', ')}`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }))
 			.setTimestamp();
