@@ -11,7 +11,7 @@ module.exports = class {
 		if (message.author.bot) return;
 
 		if (message.content.match(mentionRegex)) {
-			this.client.embed.generals('', message, `My prefix for **${message.guild.name}** is \`${this.client.PREFIX}\`.`);
+			message.channel.send(`My prefix for **${message.guild.name}** is \`${this.client.PREFIX}\`.`);
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.PREFIX;
@@ -26,7 +26,7 @@ module.exports = class {
 		}
 
 		if (command.guildOnly && !message.guild) {
-			message.channel.send('This command is only available on a server!');
+			this.client.embed.errors('guildOnly', message);
 			return;
 		}
 
@@ -41,7 +41,7 @@ module.exports = class {
 				}
 			});
 			if (neededPermission.length > 0) {
-				message.channel.send(`I need the following permissions to perform this command: \`${neededPermission.map(pe => `\`${pe}\``).join(', ')}\``);
+				this.client.embed.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 				return;
 			}
 			neededPermission = [];
@@ -51,14 +51,14 @@ module.exports = class {
 				}
 			});
 			if (neededPermission.length > 0) {
-				message.channel.send(`You do not have the necessary permissions to perform this command (\`${neededPermission.map(pe => `\`${pe}\``).join(', ')}\`)`);
+				this.client.embed.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 				return;
 			}
 		}
 
 		// eslint-disable-next-line no-process-env
 		if (command.ownerOnly && message.author.id !== process.env.OWNER) {
-			message.channel.send('Only owners can do these commands!');
+			this.client.embed.errors('ownerOnly', message);
 			return;
 		}
 
@@ -69,7 +69,7 @@ module.exports = class {
 			}
 		} catch (err) {
 			console.log(err);
-			message.channel.send('An error has occurred, please try again in a few minutes.');
+			this.client.embed.errors(null, message, 'An error has occurred, please try again in a few minutes.');
 			return;
 		}
 	}
