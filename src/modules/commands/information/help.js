@@ -1,7 +1,7 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { Colors } = require('../../../structures/Configuration.js');
+const { Colors, Emojis } = require('../../../structures/Configuration.js');
 const { categoryCheck, checkOwner } = require('../../../utils/HelpHandling.js');
 const { stripIndents } = require('common-tags');
 
@@ -37,7 +37,7 @@ module.exports = class extends Command {
 				categories.forEach(cat => {
 					const dir = this.client.commands.filter(cmd => cmd.category === cat);
 					if (args[0] === 'all' || categoryCheck(cat, message, this.client)) {
-						embed.addField(`⟐ __**${cat.toProperCase()} [${dir.size}]:**__`, dir.map(cmd => `\`${cmd.name}\``).join(', '));
+						embed.addField(`${Emojis.Categories[cat.toUpperCase()] || null}  __${cat.toProperCase()} [${dir.size}]__`, dir.map(cmd => `\`${cmd.name}\``).join(', '));
 					}
 				});
 
@@ -46,7 +46,7 @@ module.exports = class extends Command {
 					"most of the people don't read the helpful tricks that are here?"
 				];
 
-				embed.addField('__**Did you know that**__', diduknow.random());
+				embed.addField('__Did you know that__', diduknow.random());
 
 				message.channel.send(embed);
 			} else {
