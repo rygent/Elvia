@@ -24,7 +24,7 @@ module.exports = class extends Command {
 
 		message.channel.startTyping(true);
 		// eslint-disable-next-line no-sequences
-		nsfw['bJ', 'blowJob']().then(async res => {
+		nsfw[['bJ', 'blowJob'].random()]().then(async res => {
 			const embed = new MessageEmbed()
 				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 				.setImage(res.url)
