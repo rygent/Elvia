@@ -74,7 +74,7 @@ module.exports = class {
 			}
 		} catch (err) {
 			console.log(err);
-			this.client.embed.errors(null, message, 'An error has occurred, please try again in a few minutes.');
+			this.client.embed.errors(null, message);
 			return;
 		}
 	}
