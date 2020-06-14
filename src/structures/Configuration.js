@@ -32,6 +32,7 @@ module.exports = {
 		DARK_VIVID_PINK: 'bc0057',
 		INSTAGRAM: 'e1306c',
 		MAL: '2e51a2',
+		NPM: 'cc3534',
 		STEAM: '2a475e',
 		WIKIPEDIA: '6b6b6b'
 	},
