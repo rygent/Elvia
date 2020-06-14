@@ -31,7 +31,8 @@ module.exports = {
 		LUMINOUS_VIVID_PINK: 'fd0061',
 		DARK_VIVID_PINK: 'bc0057',
 		INSTAGRAM: 'e1306c',
-		MAL: '2e51a2'
+		MAL: '2e51a2',
+		WIKIPEDIA: '6b6b6b'
 	},
 	Emojis: {
 		SUCCESS: '<:success:721207406431830056>',
