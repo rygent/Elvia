@@ -39,11 +39,11 @@ module.exports = class extends Command {
                     ${account.external_url || ''}`)
 				.addField('__Details__', stripIndents`
                     ***Username:*** @${account.username}
-                    ***Verified:*** ${account.is_verified ? 'Yes' : 'No'}
-                    ***Private:*** ${account.is_private ? 'Yes' : 'No'}
                     ***Posts:*** ${account.edge_owner_to_timeline_media.count.formatNumber()}
                     ***Followers:*** ${account.edge_followed_by.count.formatNumber()}
-                    ***Following:*** ${account.edge_follow.count.formatNumber()}`)
+					***Following:*** ${account.edge_follow.count.formatNumber()}
+					***Verified:*** ${account.is_verified ? 'Yes' : 'No'}
+                    ***Private:*** ${account.is_private ? 'Yes' : 'No'}`)
 				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Instagram`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
