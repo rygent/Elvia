@@ -34,8 +34,12 @@ module.exports = {
 				embed.setDescription(`💢 **${message.author.tag}**, I don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
 				break;
 			}
-			default: {
+			case 'commonError': {
 				embed.setDescription(`💢 **${message.author.tag}**, ${args}`);
+				break;
+			}
+			default: {
+				embed.setDescription(`💢 **${message.author.tag}**, An error has occurred, please try again in a few minutes.`);
 			}
 		}
 		if (message.author.avatarURL !== null) {
