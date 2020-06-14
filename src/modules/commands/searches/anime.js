@@ -21,6 +21,7 @@ module.exports = class extends Command {
 		const query = args.join(' ').trim();
 		if (!query) {
 			message.channel.send('Please specify an anime to search!');
+			return;
 		}
 
 		malScraper.getInfoFromName(query).then(data => {
