@@ -24,7 +24,8 @@ module.exports = class extends Command {
 			return;
 		}
 
-		axios.get(`https://instagram.com/${target}/?__a=1`).then(res => {
+		const headers = { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36' };
+		axios.get(`https://instagram.com/${target}/?__a=1`, { headers }).then(res => {
 			const account = res.data.graphql.user;
 
 			const embed = new MessageEmbed()
