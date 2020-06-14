@@ -9,7 +9,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			name: 'feed',
-			aliases: [],
+			aliases: ['eat'],
 			description: 'Gives you a feed!',
 			category: 'action',
 			usage: '[Mention]',
