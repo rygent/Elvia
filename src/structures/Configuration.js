@@ -6,6 +6,9 @@ module.exports = {
 	Default: {
 		PREFIX: `${process.env.PREFIX}`
 	},
+	Access: {
+		YOUTUBE: `${process.env.YOUTUBE_API_KEY}`
+	},
 	Colors: {
 		DEFAULT: 'ff4654',
 		AQUA: '1abc9c',
@@ -34,6 +37,7 @@ module.exports = {
 		MAL: '2e51a2',
 		NPM: 'cc3534',
 		STEAM: '2a475e',
+		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
 	},
 	Emojis: {
