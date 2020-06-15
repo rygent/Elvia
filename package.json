@@ -1,6 +1,6 @@
 {
   "name": "riven",
-  "version": "2.4.0-alpha",
+  "version": "2.4.0",
   "description": "A multipurpose discord bot",
   "main": "src/index.js",
   "scripts": {
