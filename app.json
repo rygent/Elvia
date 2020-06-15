@@ -14,7 +14,7 @@
         "description": "Get this value from developer.discordapp.com.",
         "required": true
       },
-      "OWNER_ID": {
+      "OWNER": {
         "description": "Input here your ID as the bot owner.",
         "required": true
       },
