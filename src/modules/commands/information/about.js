@@ -40,16 +40,15 @@ module.exports = class extends Command {
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
 			.setDescription(`Hiya, I'm ${this.client.user.username}... I'll be your server assistant & multipurpose bot!\nYou can use \`${this.client.PREFIX}help\` to get all my commands.`)
 			.addField('__Details__', stripIndents`
-                _Username:_ **${this.client.user.tag}**
-                _ID:_ **${this.client.user.id}**
-                _Creator:_ **${Owner.tag}** ${Emojis.DEVELOPER}
-                _Status:_ **${status[this.client.user.presence.status]}**
-                _Version:_ **v${version}**
-                _Node:_ **[${process.version}](https://nodejs.org/)**
-                _Library:_ **[Discord.js v${discordVersion}](https://discord.js.org/)**
-                _Created at:_ **${moment(this.client.user.createdAt).format('MMMM D, YYYY HH:mm')}**`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }))
-			.setTimestamp();
+                ***Username:*** ${this.client.user.tag}
+                ***ID:*** ${this.client.user.id}
+                ***Creator:*** ${Owner.tag} ${Emojis.DEVELOPER}
+                ***Status:*** ${status[this.client.user.presence.status]}
+                ***Version:*** v${version}
+                ***Node:*** [${process.version}](https://nodejs.org/)
+                ***Library:*** [Discord.js v${discordVersion}](https://discord.js.org/)
+                ***Created at:*** ${moment(this.client.user.createdAt).format('MMMM D, YYYY HH:mm')} (${moment(this.client.user.createdAt, 'YYYYMMDDHHmmss').fromNow()})`)
+			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}
