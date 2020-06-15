@@ -1,3 +1,5 @@
+const { Default } = require('../../structures/Configuration.js');
+
 module.exports = class {
 
 	constructor(client) {
@@ -11,10 +13,10 @@ module.exports = class {
 		if (message.author.bot) return;
 
 		if (message.content.match(mentionRegex)) {
-			message.channel.send(`My prefix for **${message.guild.name}** is \`${this.client.PREFIX}\`.`);
+			message.channel.send(`My prefix for **${message.guild.name}** is \`${Default.PREFIX}\`.`);
 		}
 
-		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.PREFIX;
+		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : Default.PREFIX;
 
 		if (!message.content.startsWith(prefix)) return;
 

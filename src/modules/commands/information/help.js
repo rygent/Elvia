@@ -1,7 +1,7 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { Colors } = require('../../../structures/Configuration.js');
+const { Colors, Default } = require('../../../structures/Configuration.js');
 const { categoryCheck, checkOwner } = require('../../../utils/HelpHandling.js');
 const { stripIndents } = require('common-tags');
 
@@ -31,7 +31,7 @@ module.exports = class extends Command {
 			if (!args[0] || (checkOwner(message.author.id) && args[0] === 'all')) {
 				const categories = readdirSync('./src/modules/commands/');
 
-				embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${this.client.PREFIX}**`);
+				embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${Default.PREFIX}**`);
 				embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
 				categories.forEach(cat => {
@@ -42,7 +42,7 @@ module.exports = class extends Command {
 				});
 
 				const diduknow = [
-					`commands usually have aliases? Just execute the command \`${this.client.PREFIX}help <command>\` to check them!`,
+					`commands usually have aliases? Just execute the command \`${Default.PREFIX}help <command>\` to check them!`,
 					"most of the people don't read the helpful tricks that are here?"
 				];
 
@@ -52,16 +52,16 @@ module.exports = class extends Command {
 			} else {
 				const command = this.client.commands.get(this.client.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase());
 				if (!command) {
-					message.channel.send(embed.setTitle('Invalid Command.').setDescription(`Do \`${this.client.PREFIX}help\` for the list of the commands.`));
+					message.channel.send(embed.setTitle('Invalid Command.').setDescription(`Do \`${Default.PREFIX}help\` for the list of the commands.`));
 				}
 
 				embed.setAuthor(`Commands | ${command.name.toProperCase()}`, 'https://i.imgur.com/YxoUvH8.png');
-				embed.setDescription(stripIndents` The bot's prefix is: \`${this.client.PREFIX}\`\n
+				embed.setDescription(stripIndents` The bot's prefix is: \`${Default.PREFIX}\`\n
                     ***Command:*** ${command.name}
                     ***Aliases:*** ${command.aliases.length > 0 ? command.aliases.join(', ') : 'No aliases.'}
                     ***Description:*** ${command.description}
                     ***Category:*** ${command.category.toProperCase()}
-					***Usage:*** ${command.usage ? `\`${this.client.PREFIX}${command.name} ${command.usage}\`` : `\`${this.client.PREFIX}${command.name}\``}
+					***Usage:*** ${command.usage ? `\`${Default.PREFIX}${command.name} ${command.usage}\`` : `\`${Default.PREFIX}${command.name}\``}
 					***Permissions:*** \`${command.ownerOnly ? 'OWNER' : command.memberPerms.length > 0 ? command.memberPerms.map(arr => arr).join(', ') : 'EVERYONE'}\``);
 				embed.setFooter('Syntax: <> = required, [] = optional', message.author.avatarURL({ dynamic: true }));
 
