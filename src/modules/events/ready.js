@@ -14,7 +14,7 @@ module.exports = class {
 		const commands = [`${Default.PREFIX}help`, `${Default.PREFIX}invite`];
 		setInterval(() => {
 			const activity = `${commands[Math.floor(Math.random() * commands.length)]} | ${activities[Math.floor(Math.random() * activities.length)]}`;
-			this.client.user.setPresence({ activity: { name: activity, type: 'LISTENING' }, status: 'dnd' });
+			this.client.user.setActivity(activity, { type: 'PLAYING' });
 		}, 20000);
 	}
 
