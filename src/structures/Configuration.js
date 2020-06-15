@@ -7,6 +7,7 @@ module.exports = {
 		PREFIX: `${process.env.PREFIX}`
 	},
 	Access: {
+		IMDB: `${process.env.IMDB_API_KEY}`,
 		YOUTUBE: `${process.env.YOUTUBE_API_KEY}`
 	},
 	Colors: {
@@ -33,6 +34,7 @@ module.exports = {
 		DARK_NAVY: '2c3e50',
 		LUMINOUS_VIVID_PINK: 'fd0061',
 		DARK_VIVID_PINK: 'bc0057',
+		IMDB: 'f3ce13',
 		INSTAGRAM: 'e1306c',
 		MAL: '2e51a2',
 		NPM: 'cc3534',
