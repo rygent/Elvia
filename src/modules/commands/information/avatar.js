@@ -33,8 +33,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle('🖼️ Avatars')
 			.setImage(user.displayAvatarURL({ format: 'png', dynamic: true, size: 512 }))
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }))
-			.setTimestamp();
+			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (message.content.includes('-hd')) {
 			avatarEmbed.addField(`${user.tag}`, stripIndents`
