@@ -36,7 +36,7 @@ module.exports = class extends Command {
 				.setTimestamp(new Date(res[0].publishedAt));
 
 			message.channel.send(embed);
-		});
+		}).catch(() => message.channel.send('No results were found!'));
 	}
 
 };
