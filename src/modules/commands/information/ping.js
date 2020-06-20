@@ -1,4 +1,6 @@
 const Command = require('../../../structures/Command.js');
+const { MessageEmbed } = require('discord.js');
+const { Colors } = require('../../../structures/Configuration.js');
 const { stripIndents } = require('common-tags');
 
 module.exports = class extends Command {
@@ -14,19 +16,35 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		message.channel.startTyping(true);
 		const msg = await message.channel.send('Pinging...');
 		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
+		let roleColor;
+		if (!message.guild) {
+			roleColor = Colors.DEFAULT;
+		} else {
+			roleColor = message.guild.me.roles.highest.hexColor;
+		}
 
 		if (latency <= 0) {
-			msg.edit('Please try again...');
-		} else {
-			msg.edit(stripIndents`
-				Latency: \`${latency}ms\`
-				Respond: \`${Date.now() - msg.createdTimestamp}ms\`
-				API: \`${Math.round(this.client.ws.ping)}ms\``);
+			const embed = new MessageEmbed()
+				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+				.setDescription('Please try again later')
+				.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }))
+				.setTimestamp();
+
+			return msg.edit('', embed);
 		}
-		message.channel.stopTyping(true);
+
+		const pingEmbed = new MessageEmbed()
+			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
+			.setTitle('Bot Response Time')
+			.setDescription(stripIndents`
+				🤖 Bot Latency: \`${latency}ms\`
+				🌐 API Latency: \`${Math.round(this.client.ws.ping)}ms\``)
+			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }))
+			.setTimestamp();
+
+		return msg.edit('', pingEmbed);
 	}
 
 };
