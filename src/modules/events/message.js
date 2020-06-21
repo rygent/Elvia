@@ -1,4 +1,5 @@
 const { Default } = require('../../structures/Configuration.js');
+const cmdCooldown = {};
 
 module.exports = class {
 
@@ -6,6 +7,7 @@ module.exports = class {
 		this.client = client;
 	}
 
+	/* eslint-disable complexity */
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
@@ -68,6 +70,18 @@ module.exports = class {
 			this.client.embed.errors('ownerOnly', message);
 			return;
 		}
+
+		let uCooldown = cmdCooldown[message.author.id];
+		if (!uCooldown) {
+			cmdCooldown[message.author.id] = {};
+			uCooldown = cmdCooldown[message.author.id];
+		}
+		const time = uCooldown[command.name] || 0;
+		if (time && (time > Date.now())) {
+			message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`);
+			return;
+		}
+		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
 
 		try {
 			command.run(message, args);
