@@ -1,6 +1,5 @@
 /* eslint-disable func-names */
 module.exports = {
-
 	categoryCheck: function (category, message) {
 		category = category.toLowerCase();
 
@@ -21,10 +20,5 @@ module.exports = {
 			// eslint-disable-next-line no-process-env
 			return process.env.OWNER.includes(id);
 		}
-	},
-
-	checkOwner: function (id) {
-		// eslint-disable-next-line no-process-env
-		return process.env.OWNER.includes(id);
 	}
 };
