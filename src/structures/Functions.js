@@ -1,5 +1,8 @@
 /* eslint-disable func-names */
 module.exports = {
+	removeDuplicates(arr) {
+		return [...new Set(arr)];
+	},
 	getMember: function (message, toFind = '') {
 		toFind = toFind.toLowerCase();
 
