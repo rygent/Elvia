@@ -1,5 +1,7 @@
 /* eslint-disable no-process-env */
 module.exports = {
+	token: process.env.TOKEN,
+	prefix: process.env.PREFIX,
 	Owners: `${process.env.OWNER}`,
 	Developers: [],
 	Support: [],

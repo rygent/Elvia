@@ -4,10 +4,11 @@ const Util = require('./Util.js');
 module.exports = class RivenClient extends Client {
 
 	/* eslint-disable func-names */
-	constructor(options) {
-		super(options, {
+	constructor(options = {}) {
+		super({
 			ws: { intents: Intents.ALL }
 		});
+		this.validate(options);
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.utils = new Util(this);
@@ -47,8 +48,18 @@ module.exports = class RivenClient extends Client {
 		return user;
 	}
 
-	// eslint-disable-next-line no-process-env
-	async start(token = process.env.TOKEN) {
+	validate(options) {
+		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
+
+		if (!options.token) throw new Error('You must pass the token for the client.');
+		this.token = options.token;
+
+		if (!options.prefix) throw new Error('You must pass a prefix for the client.');
+		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
+		this.prefix = options.prefix;
+	}
+
+	async start(token = this.token) {
 		this.utils.loadCommands();
 		this.utils.loadEvents();
 		super.login(token);
