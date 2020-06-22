@@ -1,6 +1,6 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Colors, Default } = require('../../../structures/Configuration.js');
+const { Colors } = require('../../../structures/Configuration.js');
 const { categoryCheck } = require('../../../utils/HelpHandling.js');
 const { stripIndents } = require('common-tags');
 
@@ -40,13 +40,13 @@ module.exports = class extends Command {
 				***Description:*** ${cmd.description}
 				***Category:*** ${cmd.category.toProperCase()}
 				***Permissions:*** \`${cmd.ownerOnly ? 'OWNER' : cmd.memberPerms.length > 0 ? cmd.memberPerms.map(arr => arr).join(', ') : 'EVERYONE'}\`
-				***Usage:*** ${cmd.usage ? `\`${Default.PREFIX}${cmd.name} ${cmd.usage}\`` : `\`${Default.PREFIX}${cmd.name}\``}
+				***Usage:*** ${cmd.usage ? `\`${this.client.prefix}${cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix}${cmd.name}\``}
 				***Cooldown:*** ${cmd.cooldown / 1000} seconds`
 			);
 
 			return message.channel.send(embed);
 		} else {
-			embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${Default.PREFIX}**`);
+			embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${this.client.prefix}**`);
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
 			const categories = this.client.functions.removeDuplicates(this.client.commands.map(cmd => cmd.category));
@@ -59,7 +59,7 @@ module.exports = class extends Command {
 			}
 
 			const diduknow = [
-				`commands usually have aliases? Just execute the command \`${Default.PREFIX}help <command>\` to check them!`,
+				`commands usually have aliases? Just execute the command \`${this.client.prefix}help <command>\` to check them!`,
 				"most of the people don't read the helpful tricks that are here?"
 			];
 
