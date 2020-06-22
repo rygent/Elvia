@@ -40,7 +40,7 @@ module.exports = class extends Command {
 				***Description:*** ${cmd.description}
 				***Category:*** ${cmd.category.toProperCase()}
 				***Permissions:*** \`${cmd.ownerOnly ? 'OWNER' : cmd.memberPerms.length > 0 ? cmd.memberPerms.map(arr => arr).join(', ') : 'EVERYONE'}\`
-				***Usage:*** ${cmd.usage ? `\`${this.client.prefix}${cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix}${cmd.name}\``}
+				***Usage:*** \`${cmd.usage}\`
 				***Cooldown:*** ${cmd.cooldown / 1000} seconds`
 			);
 
