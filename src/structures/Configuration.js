@@ -2,15 +2,10 @@
 module.exports = {
 	token: process.env.TOKEN,
 	prefix: process.env.PREFIX,
-	Owners: `${process.env.OWNER}`,
-	Developers: [],
-	Support: [],
-	Default: {
-		PREFIX: `${process.env.PREFIX}`
-	},
+	Owners: process.env.OWNER,
 	Access: {
-		IMDB: `${process.env.IMDB_API_KEY}`,
-		YOUTUBE: `${process.env.YOUTUBE_API_KEY}`
+		IMDB: process.env.IMDB_API_KEY,
+		YOUTUBE: process.env.YOUTUBE_API_KEY
 	},
 	Colors: {
 		DEFAULT: 'ff4654',
