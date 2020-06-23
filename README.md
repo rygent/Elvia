@@ -29,7 +29,7 @@
 
 <i>Riven is a Multipurpose Discord bot that is intended to be able to perform various tasks, ranging from simple server
 moderation (ban, kick, etc.) to other functions such as the ability to search, weather forecasts, and many more in 
-upcoming updates. [             ](https://heroku.com/deploy?template=https://github.com/XRzky/RivenBot/tree/alpha)
+upcoming updates.
 
 this bot was made in
 [Node.JS](https://nodejs.org),
@@ -41,21 +41,22 @@ using the [Discord.js](https://discord.js.org/#/) library.
 ## Features
 - Search for anime on MyAnimeList.
 - Search for YouTube videos.
+- Weather forecast.
 - And many more...
 
 ## Installation
 ```dosini
 # Clone this repository
-$ git clone -b alpha https://github.com/XRzky/RivenBot.git
+$ git clone -b stable https://github.com/XRzky/RivenBot.git
 
 # Install Node dependencies
-$ npm install
+$ yarn install
 
 # Copy example.env to .env and replace it with your value
 $ cp example.env .env
 
 # Run the bot!
-$ node src/index.js
+$ node src/index
 ```
 
 ## Configuration
@@ -65,4 +66,14 @@ You can find all the settings in the **Configuration.js** file, without filling 
 TOKEN=Input here your Discord bot token
 PREFIX=Input here the prefix for your bot. To use before the command is carried out. Example: ?
 OWNER=Input here your ID as the bot owner
+YOUTUBE_API_KEY=Input here your YouTube API. Otherwise the youtube command does not work
+IMDB_API_KEY=Input here your IMDb API. Otherwise the imdb command does not work
+OPEN_WEATHER_APPID=Input here your OpenWeather AppID. Otherwise the weather command does not work
 ```
+
+## Credits
+* [MenuDocs](https://github.com/MenuDocs) - Discord.js-v12-Tutorials
+* [t41y0u](https://github.com/t41y0u) - Amaterasu
+* [Androz2091](https://github.com/Androz2091) - AtlantaBot
+
+and many more.
