@@ -5,7 +5,8 @@ module.exports = {
 	Owners: process.env.OWNER,
 	Access: {
 		IMDB: process.env.IMDB_API_KEY,
-		YOUTUBE: process.env.YOUTUBE_API_KEY
+		YOUTUBE: process.env.YOUTUBE_API_KEY,
+		OPENWEATHER: process.env.OPEN_WEATHER_APPID
 	},
 	Colors: {
 		DEFAULT: 'ff4654',
