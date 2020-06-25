@@ -22,12 +22,7 @@ module.exports = class extends Command {
 		if (!user) user = message.author;
 		msg.delete();
 
-		let roleColor;
-		if (!message.guild) {
-			roleColor = Colors.DEFAULT;
-		} else {
-			roleColor = message.guild.me.roles.highest.hexColor;
-		}
+		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const avatarEmbed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)

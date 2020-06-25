@@ -13,7 +13,6 @@ module.exports = class extends Command {
 			description: 'Gives you a hug!',
 			category: 'action',
 			usage: '[Mention]',
-			guildOnly: true,
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}

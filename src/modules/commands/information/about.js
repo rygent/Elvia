@@ -27,12 +27,7 @@ module.exports = class extends Command {
 			invisible: `${Emojis.OFFLINE} Offline`
 		};
 
-		let roleColor;
-		if (!message.guild) {
-			roleColor = Colors.DEFAULT;
-		} else {
-			roleColor = message.guild.me.roles.highest.hexColor;
-		}
+		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)

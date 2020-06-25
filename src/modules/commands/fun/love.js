@@ -12,7 +12,6 @@ module.exports = class extends Command {
 			description: 'Shows how in love you are with a user.',
 			category: 'fun',
 			usage: '<Mention | ID>',
-			guildOnly: true,
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}

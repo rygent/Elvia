@@ -18,12 +18,8 @@ module.exports = class extends Command {
 
 	async run(message, args) {
 		const country = args.join(' ').toLowerCase();
-		let roleColor;
-		if (!message.guild) {
-			roleColor = Colors.DEFAULT;
-		} else {
-			roleColor = message.guild.me.roles.highest.hexColor;
-		}
+
+		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		let stats;
 		if (country) {

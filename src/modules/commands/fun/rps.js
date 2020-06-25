@@ -12,7 +12,6 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
 			category: 'fun',
-			guildOnly: true,
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}

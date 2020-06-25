@@ -13,7 +13,6 @@ module.exports = class extends Command {
 			aliases: ['fem'],
 			description: 'Posts a random femdom picture. Warning this commands for 18+',
 			category: 'nsfw',
-			guildOnly: true,
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			nsfw: true
 		});

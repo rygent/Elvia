@@ -14,7 +14,6 @@ module.exports = class extends Command {
 			description: 'Displays information about the mentioned user.',
 			category: 'information',
 			usage: '[mention | id]',
-			guildOnly: true,
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
 	}
