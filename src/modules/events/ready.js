@@ -1,4 +1,5 @@
 const { version } = require('../../../package.json');
+const moment = require('moment');
 
 module.exports = class {
 
@@ -7,13 +8,17 @@ module.exports = class {
 	}
 
 	async run() {
-		console.log(`${this.client.user.tag}, ready to serve ${this.client.users.cache.size} users in ${this.client.guilds.cache.size} servers!`);
+		const timestamp = `${moment().format('ddd, MMM D, YYYY HH:mm:ss')} ->`;
+		const logString = `${timestamp} Logged in as ${this.client.user.tag}!`;
+		const readyString = `${timestamp} Ready in ${this.client.guilds.cache.size} guilds on ${this.client.channels.cache.size} channels, for a total of ${this.client.users.cache.size} users.`;
+		console.log(logString);
+		console.log(readyString);
 
-		const activities = [`v${version}`, `${this.client.guilds.cache.size} servers`];
+		const activities = [`v${version}`, `${this.client.guilds.cache.size.formatNumber()} servers`];
 		const commands = [`help`, `invite`];
 		setInterval(() => {
-			const activity = `${this.client.prefix}${commands[Math.floor(Math.random() * commands.length)]} | ${activities[Math.floor(Math.random() * activities.length)]}`;
-			this.client.user.setActivity(activity, { type: 'PLAYING' });
+			const activity = `${this.client.prefix}${commands.random()} | ${activities.random()}`;
+			this.client.user.setPresence({ activity: { type: 'PLAYING', name: activity } });
 		}, 20000);
 	}
 
