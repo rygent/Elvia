@@ -11,7 +11,7 @@ module.exports = class {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
-		if (message.author.bot) return;
+		if (!message.guild || message.author.bot) return;
 
 		if (message.content.match(mentionRegex)) {
 			message.channel.send(`My prefix for **${message.guild.name}** is \`${this.client.prefix}\`.`);
@@ -25,11 +25,6 @@ module.exports = class {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (!command) {
-			return;
-		}
-
-		if (command.guildOnly && !message.guild) {
-			this.client.embed.errors('guildOnly', message);
 			return;
 		}
 
