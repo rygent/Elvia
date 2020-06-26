@@ -72,7 +72,7 @@ module.exports = class {
 		}
 		const time = uCooldown[command.name] || 0;
 		if (time && (time > Date.now())) {
-			message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`);
+			this.client.embed.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
 			return;
 		}
 		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;

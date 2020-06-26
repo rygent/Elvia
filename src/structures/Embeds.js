@@ -7,11 +7,11 @@ module.exports = {
 	errors: async function (type, message, args) {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
-			.setTitle('Error!')
+			.setTitle('ERROR!')
 			.setFooter(`Responded in ${responseTime(message)}`);
 		switch (type) {
-			case 'guildOnly': {
-				embed.setDescription(`💢 **${message.author.tag}**, This command is only available on a server!`);
+			case 'cooldownTime': {
+				embed.setDescription(`💢 **${message.author.tag}**, You must wait **${args}** second(s) to be able to run this command again!`);
 				break;
 			}
 			case 'ownerOnly': {
