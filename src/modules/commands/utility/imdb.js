@@ -9,10 +9,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'imdb',
 			aliases: ['movie', 'series'],
 			description: 'Searches IMDd for your query, getting movie/TV series results.',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

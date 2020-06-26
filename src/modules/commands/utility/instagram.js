@@ -8,10 +8,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'instagram',
 			aliases: ['ig', 'insta'],
 			description: 'Find out some nice instagram statistics',
-			category: 'searches',
+			category: 'utility',
 			usage: '<username>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

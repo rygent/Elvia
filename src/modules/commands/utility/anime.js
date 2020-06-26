@@ -8,10 +8,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'anime',
 			aliases: ['mal', 'myanimelist'],
 			description: 'Searches information from my anime list.',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

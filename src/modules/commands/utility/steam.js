@@ -8,10 +8,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'steam',
 			aliases: [],
 			description: 'Searches game from steam store.',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

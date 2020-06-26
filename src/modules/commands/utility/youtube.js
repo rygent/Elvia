@@ -8,10 +8,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'youtube',
 			aliases: ['yt'],
 			description: 'Searches for a video on youtube',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

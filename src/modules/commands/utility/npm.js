@@ -9,10 +9,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'npm',
 			aliases: [],
 			description: 'Searches for packages on the npm registry.',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

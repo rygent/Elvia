@@ -7,10 +7,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'wikipedia',
 			aliases: ['wiki'],
 			description: 'Searches Wikipedia Article use title',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});

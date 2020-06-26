@@ -5,10 +5,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'discordjs',
 			aliases: ['djs', 'docs'],
 			description: 'Searches the DJS docs for whatever you\'d like',
-			category: 'searches',
+			category: 'utility',
 			usage: '<query> (branch)',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
 		});
