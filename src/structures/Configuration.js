@@ -6,7 +6,11 @@ module.exports = {
 	Access: {
 		IMDB: process.env.IMDB_API_KEY,
 		YOUTUBE: process.env.YOUTUBE_API_KEY,
-		OPENWEATHER: process.env.OPEN_WEATHER_APPID
+		OPENWEATHER: process.env.OPEN_WEATHER_APPID,
+		Spotify: {
+			CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+			CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET
+		}
 	},
 	Colors: {
 		DEFAULT: 'ff4654',
@@ -36,6 +40,7 @@ module.exports = {
 		INSTAGRAM: 'e1306c',
 		MAL: '2e51a2',
 		NPM: 'cc3534',
+		SPOTIFY: '1db954',
 		STEAM: '2a475e',
 		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
