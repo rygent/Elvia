@@ -69,6 +69,8 @@ OWNER=Input here your ID as the bot owner
 YOUTUBE_API_KEY=Input here your YouTube API. Otherwise the youtube command does not work
 IMDB_API_KEY=Input here your IMDb API. Otherwise the imdb command does not work
 OPEN_WEATHER_APPID=Input here your OpenWeather AppID. Otherwise the weather command does not work
+SPOTIFY_CLIENT_ID=Input here your Spotify Client ID. Otherwise the spotify command does not work
+SPOTIFY_CLIENT_SECRET=Input here your Spotify Client Secret. Otherwise the spotify command does not work
 ```
 
 ## Credits
