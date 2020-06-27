@@ -10,6 +10,9 @@ module.exports = {
 			case 'administrator':
 				return message.member.permissions.toArray().join(' ').includes('ADMINISTRATOR');
 
+			case 'moderation':
+				return message.member.permissions.toArray().join(' ').includes('MANAGE_');
+
 			case 'nsfw':
 				return message.channel.nsfw;
 
