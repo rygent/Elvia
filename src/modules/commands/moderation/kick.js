@@ -8,7 +8,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['boot'],
-			description: 'Kicks the mentioned user from the server.',
+			description: 'Kicks the given user and DMs them the reason!',
 			category: 'moderation',
 			usage: '<mention|id> <reason>',
 			memberPerms: ['KICK_MEMBERS'],
@@ -21,32 +21,37 @@ module.exports = class extends Command {
 	async run(message, [target, ...args]) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
 		if (!member) return message.channel.send('Please mention a valid member!');
-		if (member.id === message.author.id) return message.channel.send('You can\'t sanction yourself!');
+		if (member.id === this.client.user.id) return message.channel.send('Please don\'t kick me...!');
+		if (member.id === message.author.id) return message.channel.send('You can\'t kick yourself!');
 		// eslint-disable-next-line no-process-env
-		if (member.id === process.env.OWNER) return message.channel.send('I can\'t sanction my master');
+		if (member.id === process.env.OWNER) return message.channel.send('I can\'t kick my master');
 		if (message.guild.member(message.author).roles.highest.position <= message.guild.member(member).roles.highest.position) {
-			return message.channel.send('You can\'t sanction this user as they have a higher role than you.');
+			return message.channel.send(`You can't kick **${member.user.username}**! Their position is higher than you!`);
 		}
 
 		let reason = args.join(' ');
 		if (!reason) {
-			message.channel.send('Please enter a reason for the kick...\nThis text-entry period will time-out in 60 seconds. Reply with `cancel` to exit.');
+			const msg = await message.channel.send('Please enter a reason for the kick...\nThis text-entry period will time-out in 60 seconds. Reply with `cancel` to exit.');
+			// eslint-disable-next-line no-shadow
 			await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { errors: ['time'], max: 1, time: 60000 }).then(resp => {
 				// eslint-disable-next-line prefer-destructuring
 				resp = resp.array()[0];
-				if (resp.content.toLowerCase() === 'cancel') return message.channel.send('Cancelled. The user has not been kicked.');
+				if (resp.content.toLowerCase() === 'cancel') return msg.edit('Cancelled. The user has not been kicked.');
 				reason = resp.content;
-				resp.delete();
+				if (reason) {
+					msg.delete();
+				}
 			}).catch(() => {
-				message.channel.send('Timed out. The user has not been kicked.');
+				msg.edit('Timed out. The user has not been kicked.');
 			});
-		} else {
-			if (!message.guild.member(member).kickable) {
-				return message.channel.send('I cannot kick that user from this server!\nThis may be because I do not have the required permissions to do so, or they may be the server owner.');
-			}
-			if (member.id === message.author.id) return message.channel.send('You can\'t sanction yourself!');
+		}
 
-			member.kick();
+		if (reason) {
+			if (!message.guild.member(member).kickable) {
+				return message.channel.send(`I can't kick **${member.user.username}**! Their role is higher than mine!`);
+			}
+
+			member.kick(`${message.author.tag}: ${reason}`);
 
 			if (!member.user.bot) {
 				const embed = new MessageEmbed()
