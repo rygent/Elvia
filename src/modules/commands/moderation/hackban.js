@@ -17,20 +17,36 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
 		if (isNaN(parseInt(target)) || target.length !== 18) return message.channel.send('Please input a valid user ID!');
-		if (target === message.author.id) return message.channel.send('You can\'t hackban yourself!');
-		if (target === this.client.user.id) return message.channel.send('Please don\'t hackban me...!');
+		if (target === this.client.user.id) return message.channel.send('Please don\'t banned me...!');
+		if (target === message.author.id) return message.channel.send('You can\'t banned yourself!');
 		// eslint-disable-next-line no-process-env
-		if (target === process.env.OWNER) return message.channel.send('I can\'t hackban my master');
+		if (target === process.env.OWNER) return message.channel.send('I can\'t banned my master');
 
 		if (message.guild.members.cache.get(target)) {
 			return message.channel.send('That user is in the server, hackban is meant to ban people who isn\'t in the server to prevent them from (re)joining in the future.');
 		}
 
-		const reason = args.join(' ');
-		if (!reason) return message.channel.send('Please provide a reason for the punishment.');
+		let reason = args.join(' ');
+		if (!reason) {
+			const msg = await message.channel.send('Please enter a reason for the ban...\nThis text-entry period will time-out in 60 seconds. Reply with `cancel` to exit.');
+			// eslint-disable-next-line no-shadow
+			await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { errors: ['time'], max: 1, time: 60000 }).then(resp => {
+				// eslint-disable-next-line prefer-destructuring
+				resp = resp.array()[0];
+				if (resp.content.toLowerCase() === 'cancel') return msg.edit('Cancelled. The user has not been banned.');
+				reason = resp.content;
+				if (reason) {
+					msg.delete();
+				}
+			}).catch(() => {
+				msg.edit('Timed out. The user has not been banned.');
+			});
+		}
 
-		message.guild.members.ban(target, { reason: `${message.author.tag}: ${reason}` });
-		message.channel.send(`Successfully banned the user with the ID \`${target}\`.`);
+		if (reason) {
+			message.guild.members.ban(target, { reason: `${message.author.tag}: ${reason}` });
+			message.channel.send(`Successfully banned the user with the ID \`${target}\`.`);
+		}
 	}
 
 };
