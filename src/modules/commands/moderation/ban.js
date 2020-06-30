@@ -48,7 +48,7 @@ module.exports = class extends Command {
 
 		if (reason) {
 			if (!message.guild.member(member).bannable) {
-				return message.channel.send('I cannot ban that user from this server!\nThis may be because I do not have the required permissions to do so, or they may be the server owner.');
+				return message.channel.send(`I can't banned **${member.user.username}**! Their role is higher than mine!`);
 			}
 
 			message.guild.members.ban(member, { days: 1, reason: `${message.author.tag}: ${reason}` });
