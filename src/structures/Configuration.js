@@ -12,6 +12,9 @@ module.exports = {
 			CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET
 		}
 	},
+	Clients: {
+		GUILD_LOGS: process.env.GUILD_LOGS
+	},
 	Colors: {
 		DEFAULT: 'ff4654',
 		AQUA: '1abc9c',
