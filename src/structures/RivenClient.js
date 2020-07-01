@@ -1,5 +1,6 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Util = require('./Util.js');
+const Embed = require('./Embed.js');
 
 module.exports = class RivenClient extends Client {
 
@@ -12,7 +13,7 @@ module.exports = class RivenClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.utils = new Util(this);
-		this.embed = require('./Embeds.js');
+		this.embeds = new Embed(this);
 		this.functions = require('./Functions.js');
 
 		String.prototype.toProperCase = function () {
