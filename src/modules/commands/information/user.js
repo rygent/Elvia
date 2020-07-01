@@ -2,7 +2,7 @@ const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors, Emojis } = require('../../../structures/Configuration.js');
 const { stripIndents } = require('common-tags');
-const perms = require('../../../assets/json/permissions.json');
+const perms = require('../../../../assets/json/permissions.json');
 const moment = require('moment');
 
 module.exports = class extends Command {

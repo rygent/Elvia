@@ -1,7 +1,7 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../structures/Configuration.js');
-const eightBall = require('../../../assets/json/8ball.json');
+const eightBall = require('../../../../assets/json/8ball.json');
 
 module.exports = class extends Command {
 
