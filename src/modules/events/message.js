@@ -39,7 +39,7 @@ module.exports = class {
 				}
 			});
 			if (neededPermission.length > 0) {
-				this.client.embed.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
+				this.client.embeds.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 				return;
 			}
 			neededPermission = [];
@@ -49,19 +49,19 @@ module.exports = class {
 				}
 			});
 			if (neededPermission.length > 0) {
-				this.client.embed.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
+				this.client.embeds.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 				return;
 			}
 
 			if (!message.channel.nsfw && command.nsfw) {
-				this.client.embed.errors('nsfwOnly', message);
+				this.client.embeds.errors('nsfwOnly', message);
 				return;
 			}
 		}
 
 		// eslint-disable-next-line no-process-env
 		if (command.ownerOnly && message.author.id !== process.env.OWNER) {
-			this.client.embed.errors('ownerOnly', message);
+			this.client.embeds.errors('ownerOnly', message);
 			return;
 		}
 
@@ -72,7 +72,7 @@ module.exports = class {
 		}
 		const time = uCooldown[command.name] || 0;
 		if (time && (time > Date.now())) {
-			this.client.embed.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
+			this.client.embeds.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
 			return;
 		}
 		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
@@ -84,7 +84,7 @@ module.exports = class {
 			}
 		} catch (err) {
 			console.log(err);
-			this.client.embed.errors(null, message);
+			this.client.embeds.errors(null, message);
 			return;
 		}
 	}
