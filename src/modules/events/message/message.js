@@ -1,10 +1,7 @@
+const Event = require('../../../structures/Event.js');
 const cmdCooldown = {};
 
-module.exports = class {
-
-	constructor(client) {
-		this.client = client;
-	}
+module.exports = class extends Event {
 
 	/* eslint-disable complexity */
 	async run(message) {

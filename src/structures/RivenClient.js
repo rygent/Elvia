@@ -12,6 +12,7 @@ module.exports = class RivenClient extends Client {
 		this.validate(options);
 		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.events = new Collection();
 		this.utils = new Util(this);
 		this.embeds = new Embed(this);
 		this.functions = require('./Functions.js');

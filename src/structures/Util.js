@@ -1,8 +1,8 @@
 const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
-const { readdir } = require('fs');
 const Command = require('./Command.js');
+const Event = require('./Event.js');
 
 module.exports = class Util {
 
@@ -40,15 +40,17 @@ module.exports = class Util {
 	}
 
 	async loadEvents() {
-		// eslint-disable-next-line consistent-return
-		return readdir('./src/modules/events/', (err, files) => {
-			if (err) return console.error(err);
-			files.forEach(file => {
-				const eventName = file.split('.')[0];
-				const event = new (require(`../modules/events/${file}`))(this.client);
-				this.client.on(eventName, (...args) => event.run(...args));
-				delete require.cache[require.resolve(`../modules/events/${file}`)];
-			});
+		return glob(`${this.directory}modules/events/**/*.js`).then(events => {
+			for (const eventFile of events) {
+				delete require.cache[eventFile];
+				const { name } = path.parse(eventFile);
+				const File = require(eventFile);
+				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
+				const event = new File(this.client, name.toLowerCase());
+				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Event directory.`);
+				this.client.events.set(event.name, event);
+				event.emitter[event.type](name, (...args) => event.run(...args));
+			}
 		});
 	}
 
