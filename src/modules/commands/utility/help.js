@@ -44,7 +44,11 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} else {
-			embed.setDescription(`These are the avaliable commands for ${this.client.user.username}.\nThe bot prefix is: **${this.client.prefix}**`);
+			embed.setDescription(`
+				These are the available commands for ${this.client.user.username}.
+				The bot prefix is: **${this.client.prefix}**
+				Need more help? Come join our [guild](https://discord.gg/nW6x9EN)
+			`);
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
 			const categories = this.client.functions.removeDuplicates(this.client.commands.map(cmd => cmd.category));
@@ -52,7 +56,7 @@ module.exports = class extends Command {
 			for (const category of categories) {
 				const dir = this.client.commands.filter(cmd => cmd.category === category);
 				if (categoryCheck(category, message)) {
-					embed.addField(`⟐ __${category.toProperCase()} | ${dir.size}__`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
+					embed.addField(`⟐ __${category.toProperCase()} [${dir.size}]__`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
 				}
 			}
 
