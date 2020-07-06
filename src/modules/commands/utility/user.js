@@ -9,18 +9,18 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'user',
 			aliases: ['uinfo', 'userinfo', 'whois'],
 			description: 'Displays information about the mentioned user.',
-			category: 'information',
-			usage: '[mention | id]',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			category: 'utility',
+			usage: '[mention|id]',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 
 	async run(message, [target]) {
 		const member = this.client.functions.getMember(message, target);
-		const roles = member.roles.cache.sort((a, b) => b.position - a.position).filter(role => role.id !== message.guild.id).map(role => role.toString()).join(', ') || 'None';
+		const roles = member.roles.cache.sort((a, b) => b.position - a.position).filter(role => role.id !== message.guild.id).map(role => role.toString()).join(' ') || 'None';
 
 		const status = {
 			online: `${Emojis.ONLINE} Online`,
@@ -50,21 +50,33 @@ module.exports = class extends Command {
 
 		const userFlags = member.user.flags.toArray();
 
+		let platforms;
+		const plat = member.user.presence.clientStatus;
+		if (plat === null) {
+			platforms = '';
+		} else if (plat.mobile) {
+			platforms = '(Mobile)';
+		} else if (plat.desktop) {
+			platforms = '(Desktop)';
+		} else if (plat.web) {
+			platforms = '(Web)';
+		}
+
 		const embed = new MessageEmbed()
 			.setColor(member.displayHexColor === '#000000' ? Colors.DEFAULT : member.displayHexColor)
 			.setAuthor(`User Information for ${member.nickname || member.user.username}`, member.user.avatarURL({ dynamic: true }))
 			.setThumbnail(member.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
 			.setDescription(stripIndents`
-                ***Username:*** ${member.user.tag}
+                ***Username:*** ${member.user.tag} ${member.user.bot ? Emojis.BOT : ''}
                 ***ID:*** ${member.id}
                 ***Nickname:*** ${member.nickname || 'None.'}
                 ***Flags:*** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None.'}
                 ***Avatar:*** [Link to Avatar](${member.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })})
-                ***Status:*** ${status[member.user.presence.status]}
-                ***Activity:*** ${member.user.presence.activities.length > 0 ? member.user.presence.activities.join(', ') : 'No Activity.'}`)
-			.addField('__Join Dates__', stripIndents`
-                ***Server:*** ${moment(member.joinedAt).format('MMMM D, YYYY HH:mm')} (${moment(member.joinedAt).fromNow()})
-                ***Discord:*** ${moment(member.user.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(member.user.createdTimestamp).fromNow()})`)
+				***Status:*** ${status[member.user.presence.status]} ${platforms}
+				***Activity:*** ${member.user.presence.activities.length > 0 ? member.user.presence.activities.join(', ') : 'No Activity.'}
+				***Created:*** ${moment(member.user.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(member.user.createdTimestamp).fromNow()})
+				***Joined:*** ${moment(member.joinedAt).format('MMMM D, YYYY HH:mm')} (${moment(member.joinedAt).fromNow()})
+			`)
 			.addField(`__Roles [${member.roles.cache.filter(role => role.name !== '@everyone').size}]__`, stripIndents`
                 ***Highest:*** ${member.roles.highest ? member.roles.highest : 'None'}
                 ***List:*** ${roles}`)
