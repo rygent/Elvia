@@ -26,6 +26,7 @@
     "common-tags": "^1.8.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "figlet": "^1.4.0",
     "geo-tz": "^6.0.0",
     "glob": "^7.1.6",
     "imdb-api": "^4.1.1",
