@@ -11,9 +11,10 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: [],
 			description: 'Searches for packages on the npm registry.',
-			category: 'utility',
+			category: 'miscellaneous',
 			usage: '<query>',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 

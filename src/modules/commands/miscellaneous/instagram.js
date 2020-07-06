@@ -10,7 +10,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['ig', 'insta'],
 			description: 'Find out some nice instagram statistics',
-			category: 'utility',
+			category: 'miscellaneous',
 			usage: '<username>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000
