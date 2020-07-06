@@ -7,12 +7,12 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'avatar',
 			aliases: ['av'],
 			description: 'Sends the mentioned user\'s avatar.',
-			category: 'information',
+			category: 'image',
 			usage: '[mention | ID]',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 
