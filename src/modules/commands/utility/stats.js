@@ -11,11 +11,11 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'stats',
 			aliases: ['specs'],
 			description: 'Displays the bots statistics!',
-			category: 'information',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			category: 'utility',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 

@@ -8,11 +8,11 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'server',
 			aliases: ['serverinfo', 'guild'],
 			description: 'Displays information about the current server.',
-			category: 'information',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			category: 'utility',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 

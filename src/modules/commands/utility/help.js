@@ -8,13 +8,12 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'help',
 			aliases: ['halp', 'commands'],
 			description: 'Displays all commands that the bot has.',
-			category: 'information',
+			category: 'utility',
 			usage: '[command | alias]',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
-			cooldown: 3000
+			cooldown: 5000
 		});
 	}
 

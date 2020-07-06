@@ -7,11 +7,11 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'ping',
 			aliases: ['pong'],
 			description: 'Displays bot latency and API response times.',
-			category: 'information',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			category: 'utility',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 

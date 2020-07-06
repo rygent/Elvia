@@ -9,11 +9,11 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'about',
 			aliases: ['botinfo', 'info'],
 			description: 'Shows some information about the running instance!',
-			category: 'information',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			category: 'utility',
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 5000
 		});
 	}
 
