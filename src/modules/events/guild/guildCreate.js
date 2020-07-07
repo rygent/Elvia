@@ -1,6 +1,6 @@
-const Event = require('../../structures/Event.js');
+const Event = require('../../../structures/Event.js');
 const { MessageEmbed } = require('discord.js');
-const { Colors, Clients } = require('../../structures/Configuration.js');
+const { Colors, Clients } = require('../../../structures/Configuration.js');
 const { stripIndents } = require('common-tags');
 
 module.exports = class extends Event {
