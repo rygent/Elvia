@@ -7,7 +7,7 @@ module.exports = class extends Command {
 			name: 'addemote',
 			aliases: [],
 			description: 'Add an emoji to the server!',
-			category: 'administrator',
+			category: 'administration',
 			usage: '<URL> <name>',
 			memberPerms: ['ADMINISTRATOR'],
 			clientPerms: ['SEND_MESSAGES', 'MANAGE_EMOJIS']
