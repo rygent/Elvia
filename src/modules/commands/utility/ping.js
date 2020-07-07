@@ -16,7 +16,6 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		message.channel.startTyping();
 		const msg = await message.channel.send('Pinging...');
 		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
 
@@ -24,19 +23,18 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle('Bot Response Time')
+			.setTitle('🏓 Pong!')
 			.setDescription(stripIndents`
-				🤖 Bot Latency: \`${latency}ms\`
-				🌐 API Latency: \`${Math.round(this.client.ws.ping)}ms\``)
+				***Latency:*** \`${latency.formatNumber()}ms\`
+				***API Latency:*** \`${Math.round(this.client.ws.ping).formatNumber()}ms\`
+			`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (latency <= 0) {
 			embed.setDescription('Please try again later');
 		}
 
-
 		msg.edit('\u200B', embed);
-		message.channel.stopTyping();
 	}
 
 };
