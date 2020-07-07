@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('./Configuration.js');
 
-module.exports = class Embed {
+module.exports = class Embeds {
 
 	constructor(client) {
 		this.client = client;

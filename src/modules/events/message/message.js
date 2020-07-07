@@ -3,7 +3,7 @@ const cmdCooldown = {};
 
 module.exports = class extends Event {
 
-	/* eslint-disable complexity */
+	/* eslint-disable consistent-return */ /* eslint-disable complexity */
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
@@ -36,8 +36,7 @@ module.exports = class extends Event {
 				}
 			});
 			if (neededPermission.length > 0) {
-				this.client.embeds.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
-				return;
+				return this.client.embeds.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
 			neededPermission = [];
 			command.memberPerms.forEach((perm) => {
@@ -46,20 +45,17 @@ module.exports = class extends Event {
 				}
 			});
 			if (neededPermission.length > 0) {
-				this.client.embeds.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
-				return;
+				return this.client.embeds.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
 
 			if (!message.channel.nsfw && command.nsfw) {
-				this.client.embeds.errors('nsfwOnly', message);
-				return;
+				return this.client.embeds.errors('nsfwOnly', message);
 			}
 		}
 
 		// eslint-disable-next-line no-process-env
 		if (command.ownerOnly && message.author.id !== process.env.OWNER) {
-			this.client.embeds.errors('ownerOnly', message);
-			return;
+			return this.client.embeds.errors('ownerOnly', message);
 		}
 
 		let uCooldown = cmdCooldown[message.author.id];
@@ -69,8 +65,7 @@ module.exports = class extends Event {
 		}
 		const time = uCooldown[command.name] || 0;
 		if (time && (time > Date.now())) {
-			this.client.embeds.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
-			return;
+			return this.client.embeds.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
 		}
 		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
 
@@ -81,8 +76,7 @@ module.exports = class extends Event {
 			}
 		} catch (err) {
 			console.log(err);
-			this.client.embeds.errors(null, message);
-			return;
+			return this.client.embeds.errors(null, message);
 		}
 	}
 

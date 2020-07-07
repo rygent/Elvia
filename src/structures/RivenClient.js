@@ -1,6 +1,5 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Util = require('./Util.js');
-const Embed = require('./Embed.js');
 
 module.exports = class RivenClient extends Client {
 
@@ -14,7 +13,7 @@ module.exports = class RivenClient extends Client {
 		this.aliases = new Collection();
 		this.events = new Collection();
 		this.utils = new Util(this);
-		this.embeds = new Embed(this);
+		this.embeds = new (require('./Embeds.js'))(this);
 		this.functions = require('./Functions.js');
 
 		String.prototype.toProperCase = function () {
@@ -30,8 +29,7 @@ module.exports = class RivenClient extends Client {
 		};
 	}
 
-	/* eslint-disable no-empty-function */
-	/* eslint-disable consistent-return */
+	/* eslint-disable no-empty-function */ /* eslint-disable consistent-return */
 	async resolveUser(search) {
 		let user = null;
 		if (!search || typeof search !== 'string') return;
