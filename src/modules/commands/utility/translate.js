@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
 		if (target === 'langs') {
 			embed.setTitle('Available Languages');
-			embed.setDescription(`\`\`\`JSON\n${JSON.stringify(langs).split(',').join(',\n')}\`\`\``);
+			embed.setDescription(`\`\`\`JSON\n${JSON.stringify(langs).replace(/[{}]/g, '').split(',').join(',\n')}\`\`\``);
 
 			return message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 }));
 		}
