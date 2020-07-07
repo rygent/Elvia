@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			.setTitle('__Invitation Link__')
 			.setDescription(stripIndents`
                 Here is the bot invite link and support server invite link!
-                [Invite ${this.client.user.username}](https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1043721303)
+                [Invite Link](https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1584786551)
                 [Support Server](https://discord.gg/nW6x9EN)`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
