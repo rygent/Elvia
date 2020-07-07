@@ -44,7 +44,7 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} else {
-			embed.setDescription(`
+			embed.setDescription(stripIndents`
 				These are the available commands for ${this.client.user.username}.
 				The bot prefix is: **${this.client.prefix}**
 				Need more help? Come join our [guild](https://discord.gg/nW6x9EN)
