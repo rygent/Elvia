@@ -1,7 +1,7 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed, version: discordVersion } = require('discord.js');
 const { version } = require('../../../../package.json');
-const { Colors, Emojis, Owners } = require('../../../structures/Configuration.js');
+const { Colors, Emojis } = require('../../../structures/Configuration.js');
 const { stripIndents } = require('common-tags');
 const moment = require('moment');
 
@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const Owner = this.client.users.cache.get(Owners) || await this.client.fetchUser(Owners);
+		const Owner = this.client.users.cache.get(this.client.owner);
 
 		const status = {
 			online: `${Emojis.ONLINE} Online`,
