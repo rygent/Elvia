@@ -57,6 +57,9 @@ module.exports = class RivenClient extends Client {
 		if (!options.prefix) throw new Error('You must pass a prefix for the client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
+
+		if (!options.owner) throw new Error('You must pass a owner id for the client.');
+		this.owner = options.owner;
 	}
 
 	async start(token = this.token) {

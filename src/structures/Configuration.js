@@ -2,7 +2,7 @@
 module.exports = {
 	token: process.env.TOKEN,
 	prefix: process.env.PREFIX,
-	Owners: process.env.OWNER,
+	owner: process.env.OWNER,
 	Access: {
 		IMDB: process.env.IMDB_API_KEY,
 		YOUTUBE: process.env.YOUTUBE_API_KEY,
