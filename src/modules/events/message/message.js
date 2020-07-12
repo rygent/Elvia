@@ -53,8 +53,7 @@ module.exports = class extends Event {
 			}
 		}
 
-		// eslint-disable-next-line no-process-env
-		if (command.ownerOnly && message.author.id !== process.env.OWNER) {
+		if (command.ownerOnly && message.author.id !== this.client.owner) {
 			return this.client.embeds.errors('ownerOnly', message);
 		}
 
