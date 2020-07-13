@@ -16,11 +16,13 @@ module.exports = class extends Event {
 			data.guild = guild;
 		}
 
+		const prefixes = data.guild ? data.guild.prefix : this.client.prefix;
+
 		if (message.content.match(mentionRegex)) {
-			message.channel.send(`My prefix for **${message.guild.name}** is \`${this.client.prefix}\`.`);
+			message.channel.send(`Hello, my prefix for this guild is "**${prefixes}**". Use \`${prefixes}help\` to see the list of commands!`);
 		}
 
-		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
+		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : prefixes;
 
 		if (!message.content.startsWith(prefix)) return;
 
