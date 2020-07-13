@@ -18,10 +18,9 @@ module.exports = class extends Event {
 			`${timestamp} Ready in ${this.client.guilds.cache.size} guilds on ${this.client.channels.cache.size} channels, for a total of ${this.client.users.cache.size} users.`
 		].join('\n'));
 
-		const activities = [`v${version}`, `${this.client.guilds.cache.size.formatNumber()} servers`];
-		const commands = [`help`, `invite`];
+		const activities = [`${this.client.prefix}help`, `${this.client.prefix}invite`, `${this.client.guilds.cache.size.formatNumber()} servers`];
 		setInterval(() => {
-			const activity = `${this.client.prefix}${commands.random()} | ${activities.random()}`;
+			const activity = `${activities.random()} | v${version}`;
 			this.client.user.setPresence({ activity: { type: 'PLAYING', name: activity } });
 		}, 20000);
 	}
