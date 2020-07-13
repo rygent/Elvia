@@ -18,9 +18,12 @@ module.exports = class extends Command {
 	}
 
 	/* eslint-disable consistent-return */
-	async run(message, [target, ...args]) {
+	async run(message, [target, ...args], data) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
 		if (!member) return message.channel.send('Please mention a valid member!');
+
+		const memberData = message.guild.members.cache.get(member.id) ? await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id }) : null;
+
 		if (member.id === this.client.user.id) return message.channel.send('Please don\'t banned me...!');
 		if (member.id === message.author.id) return message.channel.send('You can\'t banned yourself!');
 		// eslint-disable-next-line no-process-env
@@ -51,9 +54,6 @@ module.exports = class extends Command {
 				return message.channel.send(`I can't banned **${member.user.username}**! Their role is higher than mine!`);
 			}
 
-			message.guild.members.ban(member, { days: 7, reason: `${message.author.tag}: ${reason} (Softban)` });
-			message.guild.members.unban(member, { reason: '(Softban)' });
-
 			if (!member.user.bot) {
 				const embed = new MessageEmbed()
 					.setColor(Colors.RED)
@@ -67,7 +67,47 @@ module.exports = class extends Command {
 
 				member.send(embed);
 			}
-			message.channel.send(`✅ **${member}**, has been successfully banned.`);
+
+			message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason} (Softban)` }).then(() => {
+				message.channel.send(`✅ **${member}**, has been successfully banned.`);
+
+				const caseInfo = {
+					channel: message.channel.id,
+					moderator: message.author.id,
+					date: Date.now(),
+					type: 'softban',
+					case: data.guild.casesCount,
+					reason
+				};
+
+				if (memberData) {
+					memberData.sanctions.push(caseInfo);
+					memberData.save();
+				}
+
+				data.guild.casesCount++;
+				data.guild.save();
+
+				if (data.guild.plugins.modlogs) {
+					const sendChannel = message.guild.channels.cache.get(data.guild.plugins.modlogs);
+					if (!sendChannel) return;
+
+					const roleColor = message.guild.me.roles.highest.hexColor;
+
+					const embed = new MessageEmbed()
+						.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+						.setAuthor(`Moderation: Softban | Case #${data.guild.casesCount}`, member.user.avatarURL({ dynamic: true }))
+						.setDescription(stripIndents`
+							***User:*** ${member.user.tag} (${member.user.id})
+							***Moderator:*** ${message.author.tag} (${message.author.id})
+							***Reason:*** ${reason}
+						`)
+						.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+
+					sendChannel.send(embed);
+				}
+			});
+			message.guild.members.unban(member, { reason: '(Softban)' });
 		}
 	}
 
