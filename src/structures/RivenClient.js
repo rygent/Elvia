@@ -15,6 +15,12 @@ module.exports = class RivenClient extends Client {
 		this.utils = new Util(this);
 		this.embeds = new (require('./Embeds.js'))(this);
 		this.functions = require('./Functions.js');
+		this.database = require('./database/mongodb.js');
+
+		this.guildsData = require('./database/models/Guild.js');
+
+		this.databaseCache = {};
+		this.databaseCache.guilds = new Collection();
 
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -27,6 +33,24 @@ module.exports = class RivenClient extends Client {
 		Array.prototype.random = function () {
 			return this[Math.floor(Math.random() * this.length)];
 		};
+	}
+
+	async findOrCreateGuild({ id: guildID, isLean }) { // eslint-disable-next-line no-async-promise-executor
+		return new Promise(async (resolve) => {
+			if (this.databaseCache.guilds.get(guildID)) {
+				resolve(isLean ? this.databaseCache.guilds.get(guildID).toJSON() : this.databaseCache.guilds.get(guildID));
+			} else {
+				let guildData = isLean ? await this.guildsData.findOne({ id: guildID }).populate('members').lean() : await this.guildsData.findOne({ id: guildID }).populate('members');
+				if (guildData) {
+					resolve(guildData);
+				} else { // eslint-disable-next-line new-cap
+					guildData = new this.guildsData({ id: guildID });
+					await guildData.save();
+					resolve(isLean ? guildData.toJSON() : guildData);
+				}
+				this.databaseCache.guilds.set(guildID, guildData);
+			}
+		});
 	}
 
 	/* eslint-disable no-empty-function */ /* eslint-disable consistent-return */
@@ -65,6 +89,7 @@ module.exports = class RivenClient extends Client {
 	async start(token = this.token) {
 		this.utils.loadCommands();
 		this.utils.loadEvents();
+		this.database.init();
 		super.login(token);
 	}
 

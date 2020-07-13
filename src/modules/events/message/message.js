@@ -10,6 +10,12 @@ module.exports = class extends Event {
 
 		if (!message.guild || message.author.bot) return;
 
+		const data = {};
+		if (message.guild) {
+			const guild = await this.client.findOrCreateGuild({ id: message.guild.id });
+			data.guild = guild;
+		}
+
 		if (message.content.match(mentionRegex)) {
 			message.channel.send(`My prefix for **${message.guild.name}** is \`${this.client.prefix}\`.`);
 		}
@@ -69,7 +75,7 @@ module.exports = class extends Event {
 		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
 
 		try {
-			command.run(message, args);
+			command.run(message, args, data);
 			if (command.category === 'owner') {
 				message.delete();
 			}
