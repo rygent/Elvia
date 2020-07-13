@@ -17,10 +17,12 @@ module.exports = class RivenClient extends Client {
 		this.functions = require('./Functions.js');
 		this.database = require('./database/mongodb.js');
 
+		this.usersData = require('./database/models/User.js');
 		this.guildsData = require('./database/models/Guild.js');
 		this.membersData = require('./database/models/Member.js');
 
 		this.databaseCache = {};
+		this.databaseCache.users = new Collection();
 		this.databaseCache.guilds = new Collection();
 		this.databaseCache.members = new Collection();
 
@@ -35,6 +37,24 @@ module.exports = class RivenClient extends Client {
 		Array.prototype.random = function () {
 			return this[Math.floor(Math.random() * this.length)];
 		};
+	}
+
+	async findOrCreateUser({ id: userID }, isLean) { // eslint-disable-next-line no-async-promise-executor
+		return new Promise(async (resolve) => {
+			if (this.databaseCache.users.get(userID)) {
+				resolve(isLean ? this.databaseCache.users.get(userID).toJSON() : this.databaseCache.users.get(userID));
+			} else {
+				let userData = isLean ? await this.usersData.findOne({ id: userID }).lean() : await this.usersData.findOne({ id: userID });
+				if (userData) {
+					resolve(userData);
+				} else { // eslint-disable-next-line new-cap
+					userData = new this.usersData({ id: userID });
+					await userData.save();
+					resolve(isLean ? userData.toJSON() : userData);
+				}
+				this.databaseCache.users.set(userID, userData);
+			}
+		});
 	}
 
 	async findOrCreateGuild({ id: guildID, isLean }) { // eslint-disable-next-line no-async-promise-executor
