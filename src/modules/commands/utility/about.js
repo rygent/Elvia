@@ -17,8 +17,9 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message) {
+	async run(message, _args, data) {
 		const Owner = this.client.users.cache.get(this.client.owner);
+		const prefixes = data.guild ? data.guild.prefix : this.client.prefix;
 
 		const status = {
 			online: `${Emojis.ONLINE} Online`,
@@ -33,7 +34,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle(`__Information About ${this.client.user.username}__`)
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
-			.setDescription(`Hiya, I'm ${this.client.user.username}... I'll be your server assistant & multipurpose bot!\nYou can use \`${this.client.prefix}help\` to get all my commands.`)
+			.setDescription(`Hiya, I'm ${this.client.user.username}... I'll be your server assistant & multipurpose bot!\nYou can use \`${prefixes}help\` to get all my commands.`)
 			.addField('__Details__', stripIndents`
                 ***Username:*** ${this.client.user.tag}
                 ***ID:*** ${this.client.user.id}

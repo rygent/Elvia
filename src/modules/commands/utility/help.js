@@ -17,8 +17,9 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [command]) {
+	async run(message, [command], data) {
 		const roleColor = message.guild.me.roles.highest.hexColor;
+		const prefixes = data.guild ? data.guild.prefix : this.client.prefix;
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
@@ -38,7 +39,7 @@ module.exports = class extends Command {
 				***Description:*** ${cmd.description}
 				***Category:*** ${cmd.category.toProperCase()}
 				***Permissions:*** \`${cmd.ownerOnly ? 'OWNER' : cmd.memberPerms.length > 0 ? cmd.memberPerms.map(arr => arr).join(', ') : 'EVERYONE'}\`
-				***Usage:*** \`${cmd.usage}\`
+				***Usage:*** ${cmd.usage ? `\`${prefixes}${cmd.name} ${cmd.usage}\`` : `\`${prefixes}${cmd.name}\``}
 				***Cooldown:*** ${cmd.cooldown / 1000} seconds`
 			);
 
@@ -46,7 +47,7 @@ module.exports = class extends Command {
 		} else {
 			embed.setDescription(stripIndents`
 				These are the available commands for ${this.client.user.username}.
-				The bot prefix is: **${this.client.prefix}**
+				The bot prefix is: **${prefixes}**
 				Need more help? Come join our [guild](https://discord.gg/nW6x9EN)
 			`);
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
@@ -61,7 +62,7 @@ module.exports = class extends Command {
 			}
 
 			const diduknow = [
-				`commands usually have aliases? Just execute the command \`${this.client.prefix}help <command>\` to check them!`,
+				`commands usually have aliases? Just execute the command \`${prefixes}help <command>\` to check them!`,
 				"most of the people don't read the helpful tricks that are here?"
 			];
 
