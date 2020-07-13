@@ -18,9 +18,11 @@ module.exports = class RivenClient extends Client {
 		this.database = require('./database/mongodb.js');
 
 		this.guildsData = require('./database/models/Guild.js');
+		this.membersData = require('./database/models/Member.js');
 
 		this.databaseCache = {};
 		this.databaseCache.guilds = new Collection();
+		this.databaseCache.members = new Collection();
 
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -49,6 +51,29 @@ module.exports = class RivenClient extends Client {
 					resolve(isLean ? guildData.toJSON() : guildData);
 				}
 				this.databaseCache.guilds.set(guildID, guildData);
+			}
+		});
+	}
+
+	async findOrCreateMember({ id: memberID, guildID }, isLean) { // eslint-disable-next-line no-async-promise-executor
+		return new Promise(async (resolve) => {
+			if (this.databaseCache.members.get()) {
+				resolve(isLean ? this.databaseCache.members.get(`${memberID}${guildID}`).toJSON() : this.databaseCache.members.get(`${memberID}${guildID}`));
+			} else {
+				let memberData = isLean ? await this.membersData.findOne({ id: memberID, guildID }).lean() : await this.membersData.findOne({ id: memberID, guildID });
+				if (memberData) {
+					resolve(memberData);
+				} else { // eslint-disable-next-line new-cap
+					memberData = new this.membersData({ id: memberID, guildID: guildID });
+					await memberData.save();
+					const guild = await this.findOrCreateGuild({ id: guildID });
+					if (guild) {
+						guild.members.push(memberData._id);
+						await guild.save();
+					}
+					resolve(isLean ? memberData.toJSON() : memberData);
+				}
+				this.databaseCache.members.set(`${memberID}${guildID}`, memberData);
 			}
 		});
 	}
