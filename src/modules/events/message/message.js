@@ -22,6 +22,26 @@ module.exports = class extends Event {
 			message.channel.send(`Hello, my prefix for this guild is **${prefixes}**`);
 		}
 
+		const userData = await this.client.findOrCreateUser({ id: message.author.id });
+		data.userData = userData;
+
+		if (message.guild) {
+			const afkReason = data.userData.afk;
+			if (afkReason) {
+				data.userData.afk = null;
+				await data.userData.save();
+				message.channel.send('Your AFK has just been deleted!');
+			}
+
+			message.mentions.users.forEach(async (user) => {
+				// eslint-disable-next-line no-shadow
+				const userData = await this.client.findOrCreateUser({ id: user.id });
+				if (userData.afk) {
+					message.channel.send(`**${user.tag}** is currently AFK for:\n${userData.afk}`);
+				}
+			});
+		}
+
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : prefixes;
 
 		if (!message.content.startsWith(prefix)) return;
