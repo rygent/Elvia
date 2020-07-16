@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const { prefix } = require('../../Configuration.js');
+const { prefix } = require('../../src/structures/Configuration.js');
 
 module.exports = mongoose.model('Guild', new Schema({
 	id: { type: String },

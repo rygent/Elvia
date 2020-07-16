@@ -15,11 +15,11 @@ module.exports = class RivenClient extends Client {
 		this.utils = new Util(this);
 		this.embeds = new (require('./Embeds.js'))(this);
 		this.functions = require('./Functions.js');
-		this.database = require('./database/mongodb.js');
+		this.database = require('../../database/mongodb.js');
 
-		this.usersData = require('./database/models/User.js');
-		this.guildsData = require('./database/models/Guild.js');
-		this.membersData = require('./database/models/Member.js');
+		this.usersData = require('../../database/models/User.js');
+		this.guildsData = require('../../database/models/Guild.js');
+		this.membersData = require('../../database/models/Member.js');
 
 		this.databaseCache = {};
 		this.databaseCache.users = new Collection();
