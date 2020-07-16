@@ -30,14 +30,14 @@ module.exports = class extends Event {
 			if (afkReason) {
 				data.userData.afk = null;
 				await data.userData.save();
-				message.channel.send('Your AFK has just been deleted!');
+				this.client.embeds.afk('delete', message);
 			}
 
 			message.mentions.users.forEach(async (user) => {
 				// eslint-disable-next-line no-shadow
 				const userData = await this.client.findOrCreateUser({ id: user.id });
 				if (userData.afk) {
-					message.channel.send(`**${user.tag}** is currently AFK for:\n${userData.afk}`);
+					this.client.embeds.afk('current', message, user.tag, userData.afk);
 				}
 			});
 		}

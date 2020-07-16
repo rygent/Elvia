@@ -1,4 +1,6 @@
 const Command = require('../../../structures/Command.js');
+const { MessageEmbed } = require('discord.js');
+const { Colors } = require('../../../structures/Configuration.js');
 
 module.exports = class extends Command {
 
@@ -15,12 +17,16 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, args, data) {
 		const reason = args.join(' ');
-		if (!reason) {
-			return message.channel.send('Please specify the reason for your afk!');
-		}
+		if (!reason) return message.channel.send('Please specify the reason for your afk!');
 
-		// Send success message
-		message.channel.send(`You passed afk (reason: ${reason})`);
+		const roleColor = message.guild.me.roles.highest.hexColor;
+
+		const embed = new MessageEmbed()
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setDescription(`You're going AFK!\nReason: ${reason}`)
+			.setFooter(`AFK system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+
+		message.channel.send(embed);
 
 		data.userData.afk = reason;
 		data.userData.save();

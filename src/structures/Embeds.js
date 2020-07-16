@@ -54,4 +54,23 @@ module.exports = class Embeds {
 		message.channel.send(embed).then(msg => msg.delete({ timeout: 20000 }));
 	}
 
+	async afk(type, message, target, args) {
+		const roleColor = message.guild.me.roles.highest.hexColor;
+
+		const embed = new MessageEmbed()
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setFooter(`AFK system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+		switch (type) {
+			case 'delete': {
+				embed.setDescription(`You're no longer AFK!`);
+				break;
+			}
+			case 'current': {
+				embed.setDescription(`**${target}** is currently AFK!\nReason: ${args}`);
+				break;
+			}
+		}
+		message.channel.send(embed);
+	}
+
 };
