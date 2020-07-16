@@ -13,10 +13,6 @@ module.exports = class Embeds {
 			.setTitle('ERROR!')
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`);
 		switch (type) {
-			case 'cooldownTime': {
-				embed.setDescription(`You must wait **${args}** second(s) to be able to run this command again!`);
-				break;
-			}
 			case 'ownerOnly': {
 				embed.setTitle('You\'re not my master!');
 				embed.setDescription('Only my master can do these **Command**.');

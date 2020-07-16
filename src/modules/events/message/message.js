@@ -72,7 +72,8 @@ module.exports = class extends Event {
 		}
 		const time = uCooldown[command.name] || 0;
 		if (time && (time > Date.now())) {
-			return this.client.embeds.errors('cooldownTime', message, Math.ceil((time - Date.now()) / 1000));
+			return message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`)
+				.then(msg => msg.delete({ timeout: time - Date.now() }));
 		}
 		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
 
