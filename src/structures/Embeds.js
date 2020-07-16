@@ -14,23 +14,24 @@ module.exports = class Embeds {
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`);
 		switch (type) {
 			case 'ownerOnly': {
-				embed.setTitle(`${Emojis.ERROR} | You're not my master!`);
-				embed.setDescription('Only my master can do these **Command**.');
+				embed.setTitle(`${Emojis.ERROR} | You're not a developer!`);
+				embed.setDescription('Only developers can use this command.');
 				break;
 			}
 			case 'nsfwOnly': {
 				embed.setTitle(`${Emojis.ERROR} | NSFW!`);
-				embed.setDescription('You must go to in a channel that allows the NSFW to type this command!');
+				embed.setDescription('This command can only be used on the NSFW channel, make sure the NSFW option is enabled');
+				embed.setImage('https://i.imgur.com/oe4iK5i.gif');
 				break;
 			}
 			case 'memberPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`You don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
+				embed.setDescription(`You don't have the required permission. Permissions required: \`${args}\``);
 				break;
 			}
 			case 'clientPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`I don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
+				embed.setDescription(`I don't have the required permission. Permissions required: \`${args}\``);
 				break;
 			}
 			case 'commonError': {
