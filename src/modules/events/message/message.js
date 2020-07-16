@@ -19,7 +19,7 @@ module.exports = class extends Event {
 		const prefixes = data.guild ? data.guild.prefix : this.client.prefix;
 
 		if (message.content.match(mentionRegex)) {
-			message.channel.send(`Hello, my prefix for this guild is "**${prefixes}**". Use \`${prefixes}help\` to see the list of commands!`);
+			message.channel.send(`Hello, my prefix for this guild is **${prefixes}**`);
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : prefixes;
