@@ -24,12 +24,12 @@ module.exports = class Embeds {
 				break;
 			}
 			case 'memberPerms': {
-				embed.setTitle(`${Emojis.ERROR} | Access Denided!`);
+				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
 				embed.setDescription(`You don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
 				break;
 			}
 			case 'clientPerms': {
-				embed.setTitle(`${Emojis.ERROR} | Access Denided!`);
+				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
 				embed.setDescription(`I don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
 				break;
 			}
