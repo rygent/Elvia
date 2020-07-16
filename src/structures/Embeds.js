@@ -26,12 +26,12 @@ module.exports = class Embeds {
 			}
 			case 'memberPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`You don't have the required permission. Permissions required: \`${args}\``);
+				embed.setDescription(`You don't have the required permission. Permissions required: ${args}`);
 				break;
 			}
 			case 'clientPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`I don't have the required permission. Permissions required: \`${args}\``);
+				embed.setDescription(`I don't have the required permission. Permissions required: ${args}`);
 				break;
 			}
 			case 'commonError': {
