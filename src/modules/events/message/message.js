@@ -44,7 +44,7 @@ module.exports = class extends Event {
 				}
 			});
 			if (neededPermission.length > 0) {
-				return this.client.embeds.errors('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
+				return this.client.embeds.common('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
 			neededPermission = [];
 			command.memberPerms.forEach((perm) => {
@@ -53,16 +53,16 @@ module.exports = class extends Event {
 				}
 			});
 			if (neededPermission.length > 0) {
-				return this.client.embeds.errors('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
+				return this.client.embeds.common('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
 
 			if (!message.channel.nsfw && command.nsfw) {
-				return this.client.embeds.errors('nsfwOnly', message);
+				return this.client.embeds.common('nsfwOnly', message);
 			}
 		}
 
 		if (command.ownerOnly && message.author.id !== this.client.owner) {
-			return this.client.embeds.errors('ownerOnly', message);
+			return this.client.embeds.common('ownerOnly', message);
 		}
 
 		let uCooldown = cmdCooldown[message.author.id];
@@ -84,7 +84,7 @@ module.exports = class extends Event {
 			}
 		} catch (err) {
 			console.log(err);
-			return this.client.embeds.errors(null, message);
+			return this.client.embeds.common(null, message);
 		}
 	}
 

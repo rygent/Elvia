@@ -7,7 +7,7 @@ module.exports = class Embeds {
 		this.client = client;
 	}
 
-	async errors(type, message, args) {
+	async common(type, message, args) {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
 			.setTitle(`${Emojis.ERROR} | ERROR!`)
