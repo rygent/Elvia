@@ -7,8 +7,8 @@ module.exports = {
 			case 'owner':
 				return checkOwner(message.author.id);
 
-			case 'administrator':
-				return message.member.permissions.toArray().join(' ').includes('ADMINISTRATOR');
+			case 'administration':
+				return message.member.permissions.toArray().join(' ').includes('MANAGE_GUILD');
 
 			case 'moderation':
 				return message.member.permissions.toArray().join(' ').includes('MANAGE_');
