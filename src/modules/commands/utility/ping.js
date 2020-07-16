@@ -11,7 +11,7 @@ module.exports = class extends Command {
 			description: 'Displays bot latency and API response times.',
 			category: 'utility',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
-			cooldown: 5000
+			cooldown: 3000
 		});
 	}
 
@@ -23,10 +23,9 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle('🏓 Pong!')
 			.setDescription(stripIndents`
-				***Latency:*** \`${latency.formatNumber()}ms\`
-				***API Latency:*** \`${Math.round(this.client.ws.ping).formatNumber()}ms\`
+				💓 ***Heartbeat:*** \`${Math.round(this.client.ws.ping).formatNumber()}ms\`
+				⏱️ ***Latency:*** \`${latency.formatNumber()}ms\`
 			`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
 
