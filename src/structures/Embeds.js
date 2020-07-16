@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { Colors } = require('./Configuration.js');
+const { Colors, Emojis } = require('./Configuration.js');
 
 module.exports = class Embeds {
 
@@ -10,26 +10,26 @@ module.exports = class Embeds {
 	async errors(type, message, args) {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
-			.setTitle('ERROR!')
+			.setTitle(`${Emojis.ERROR} | ERROR!`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`);
 		switch (type) {
 			case 'ownerOnly': {
-				embed.setTitle('You\'re not my master!');
+				embed.setTitle(`${Emojis.ERROR} | You're not my master!`);
 				embed.setDescription('Only my master can do these **Command**.');
 				break;
 			}
 			case 'nsfwOnly': {
-				embed.setTitle('NSFW!');
+				embed.setTitle(`${Emojis.ERROR} | NSFW!`);
 				embed.setDescription('You must go to in a channel that allows the NSFW to type this command!');
 				break;
 			}
 			case 'memberPerms': {
-				embed.setTitle('Insufficient Permission!');
+				embed.setTitle(`${Emojis.ERROR} | Access Denided!`);
 				embed.setDescription(`You don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
 				break;
 			}
 			case 'clientPerms': {
-				embed.setTitle('Insufficient Permission!');
+				embed.setTitle(`${Emojis.ERROR} | Access Denided!`);
 				embed.setDescription(`I don't have the necessary permissions to perform this command. Required permission: \`${args}\``);
 				break;
 			}
@@ -44,7 +44,7 @@ module.exports = class Embeds {
 		if (message.author.avatarURL !== null) {
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 		}
-		message.channel.send(embed);
+		message.channel.send(embed).then(msg => msg.delete({ timeout: 20000 }));
 	}
 
 };
