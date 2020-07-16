@@ -38,6 +38,12 @@ module.exports = class Embeds {
 				embed.setDescription(args);
 				break;
 			}
+			case 'commonSuccess': {
+				embed.setColor(Colors.GREEN);
+				embed.setTitle(`${Emojis.SUCCESS} | SUCCESS!`);
+				embed.setDescription(args);
+				break;
+			}
 			default: {
 				embed.setDescription('An error has occurred, please try again in a few minutes.');
 			}
