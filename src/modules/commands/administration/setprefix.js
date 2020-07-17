@@ -5,7 +5,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['pfx', 'prefixes', 'guildprefix'],
-			description: 'Displays prefix or set the server\'s prefix.',
+			description: 'Changes the server prefix',
 			category: 'administration',
 			usage: '<prefix>',
 			memberPerms: ['MANAGE_GUILD'],
