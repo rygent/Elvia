@@ -47,8 +47,8 @@ module.exports = class extends Command {
 		} else {
 			embed.setDescription(stripIndents`
 				These are the available commands for ${this.client.user.username}.
-				The bot prefix is: **${prefixes}**
 				Need more help? Come join our [guild](https://discord.gg/nW6x9EN)
+				The bot prefix is: **${prefixes}**
 			`);
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
@@ -57,16 +57,9 @@ module.exports = class extends Command {
 			for (const category of categories) {
 				const dir = this.client.commands.filter(cmd => cmd.category === category);
 				if (categoryCheck(category, message)) {
-					embed.addField(`⟐ __${category.toProperCase()} [${dir.size}]__`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
+					embed.addField(`⦿ __${category.toProperCase()} [${dir.size}]__`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
 				}
 			}
-
-			const diduknow = [
-				`commands usually have aliases? Just execute the command \`${prefixes}help <command>\` to check them!`,
-				"most of the people don't read the helpful tricks that are here?"
-			];
-
-			embed.addField('__Did you know that__', diduknow.random());
 
 			return message.channel.send(embed);
 		}
