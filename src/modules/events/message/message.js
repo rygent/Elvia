@@ -8,7 +8,7 @@ module.exports = class extends Event {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
-		if (!message.guild || message.author.bot) return;
+		if (message.author.bot) return;
 
 		const data = {};
 		if (message.guild) {
@@ -51,6 +51,10 @@ module.exports = class extends Event {
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (!command) {
 			return;
+		}
+
+		if (command.guildOnly && !message.guild) {
+			return this.client.embeds.common('guildOnly', message);
 		}
 
 		if (message.guild) {

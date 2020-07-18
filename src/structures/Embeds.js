@@ -13,6 +13,11 @@ module.exports = class Embeds {
 			.setTitle(`${Emojis.ERROR} | ERROR!`)
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`);
 		switch (type) {
+			case 'guildOnly': {
+				embed.setTitle(`${Emojis.ERROR} | You're not in the server!`);
+				embed.setDescription('This command is only available on a server!');
+				break;
+			}
 			case 'ownerOnly': {
 				embed.setTitle(`${Emojis.ERROR} | You're not a developer!`);
 				embed.setDescription('Only developers can use this command.');

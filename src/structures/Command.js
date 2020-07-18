@@ -7,6 +7,7 @@ module.exports = class Command {
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Miscellaneous';
 		this.usage = options.usage || '';
+		this.guildOnly = options.guildOnly || false;
 		this.memberPerms = options.memberPerms || [];
 		this.clientPerms = options.clientPerms || [];
 		this.nsfw = options.nsfw || false;
