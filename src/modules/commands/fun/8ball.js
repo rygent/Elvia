@@ -7,19 +7,20 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: '8ball',
 			aliases: ['8-ball', 'eightball', 'fortune'],
 			description: 'Returns an answer to any question!',
 			category: 'fun',
 			usage: '<question>',
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS']
+			memberPerms: [],
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			cooldown: 3000
 		});
 	}
 
+	/* eslint-disable consistent-return */
 	async run(message, args) {
 		if (!args[1]) {
-			message.channel.send('Please provide a question for me to answer.');
-			return;
+			return this.client.embeds.common('commonError', message, 'Please provide a question for me to answer.');
 		}
 
 		const roleColor = message.guild.me.roles.highest.hexColor;
