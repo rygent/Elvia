@@ -13,8 +13,9 @@ module.exports = class extends Command {
 			description: 'Translates your text into the desired language!',
 			category: 'utility',
 			usage: '<language> <message>',
+			memberPerms: [],
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
-			cooldown: 5000
+			cooldown: 8000
 		});
 	}
 
@@ -22,7 +23,7 @@ module.exports = class extends Command {
 	async run(message, [target, ...args]) {
 		const embed = new MessageEmbed()
 			.setColor(Colors.G_TRANSLATE)
-			.setAuthor('Google Translate Engine', 'https://i.imgur.com/1JS81kv.png', 'https://translate.google.com/')
+			.setAuthor('Google Translate', 'https://i.imgur.com/1JS81kv.png', 'https://translate.google.com/')
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Google Translate`, message.author.avatarURL({ dynamic: true }));
 
 		if (target === 'langs') {
@@ -32,25 +33,23 @@ module.exports = class extends Command {
 			return message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 }));
 		}
 
+		if (!target) return this.client.embeds.common('commonError', message, `Please enter a language! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
+
 		const language = target.toLowerCase();
-		if (!language) return message.channel.send(`Please enter a language! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
 
 		const toTranslate = args.join(' ');
-		if (!toTranslate) return message.channel.send('Please enter a text to be translated!');
-		if (toTranslate.length > 2800) return message.channel.send('Unfortunately, the specified text is too long. Please try again with something a little shorter.');
+		if (!toTranslate) return this.client.embeds.common('commonError', message, 'Please enter a text to be translated!');
+		if (toTranslate.length > 2800) return this.client.embeds.common('commonError', message, 'Unfortunately, the specified text is too long. Please try again with something a little shorter.');
 
 		if (!JSON.stringify(langs).includes(language)) {
-			return message.channel.send(`The language \`${language}\` does not exist! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
+			return this.client.embeds.common('commonError', message, `The language \`${language}\` does not exist! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
 		}
 
 		const translated = await translate(toTranslate, { to: language });
 
-		embed.setTitle('Translator');
 		embed.setDescription(stripIndents`
-			From ***${langs[translated.from.language.iso]}:***
-			${toTranslate}\n
-			To ***${langs[language]}:***
 			${translated.text}
+			\nTranslation from ***${langs[translated.from.language.iso]}*** to ***${langs[language]}***
 		`);
 
 		message.channel.send(embed);
