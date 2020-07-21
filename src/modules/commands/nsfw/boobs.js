@@ -1,7 +1,9 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../structures/Configuration.js');
-const axios = require('axios');
+const { handleValidation } = require('../../../utils/NsfwHandling.js');
+const Client = require('nekos.life');
+const { nsfw } = new Client();
 
 module.exports = class extends Command {
 
@@ -19,17 +21,17 @@ module.exports = class extends Command {
 	async run(message) {
 		const roleColor = message.guild.me.roles.highest.hexColor;
 
-		const id = [Math.floor(Math.random() * 10930)];
-		const headers = { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36' };
-		const result = await axios.get(`http://api.oboobs.ru/boobs/${id}`, { headers });
-		const { preview } = result.data[0];
+		message.channel.startTyping(true);
+		// eslint-disable-next-line no-sequences
+		nsfw[['tits', 'boobs'].random()]().then(async res => {
+			const embed = new MessageEmbed()
+				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+				.setImage(res.url)
+				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by nekos.life`, message.author.avatarURL({ dynamic: true }));
 
-		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setImage(`http://media.oboobs.ru/${preview}`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
-
-		message.channel.send(embed);
+			handleValidation(embed, message);
+		});
+		message.channel.stopTyping(true);
 	}
 
 };
