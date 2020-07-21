@@ -34,6 +34,11 @@ module.exports = class Embeds {
 				embed.setDescription(`I don't have the required permission. Permissions required: ${args}`);
 				break;
 			}
+			case 'APIError': {
+				embed.setTitle(`${Emojis.ERROR} | ERROR 404!`);
+				embed.setDescription('Sorry, an API error has occured. Please try again later.');
+				break;
+			}
 			case 'commonError': {
 				embed.setDescription(args);
 				break;
