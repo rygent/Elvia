@@ -82,8 +82,8 @@ module.exports = class extends Command {
 					.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
 
 				message.channel.send(embed);
-			});
-		}).catch(() => message.channel.send('Can\'t search, make sure the anime title is correct'));
+			}).catch(() => this.client.embeds.common('APIError', message));
+		}).catch(() => this.client.embeds.common('APIError', message));
 	}
 
 };
