@@ -2,7 +2,8 @@ const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../structures/Configuration.js');
 const { stripIndents } = require('common-tags');
-const malScraper = require('mal-scraper');
+const Jikan = require('jikan-node');
+const mal = new Jikan();
 
 module.exports = class extends Command {
 
@@ -17,37 +18,71 @@ module.exports = class extends Command {
 		});
 	}
 
+	/* eslint-disable consistent-return */
 	async run(message, args) {
 		const query = args.join(' ').trim();
-		if (!query) {
-			message.channel.send('Please specify an anime to search!');
-			return;
+		if (!query) return this.client.embeds.common('commonError', message, 'Please specify an anime to search!');
+
+		function output(a) {
+			// eslint-disable-next-line id-length
+			var s = a[0].name;
+			for (var i = 1; i < a.length; i++) {
+				s += `, ${a[i].name}`;
+			}
+			return s;
+		}
+		// eslint-disable-next-line id-length
+		function andanotheroutput(s) {
+			let i = s.lastIndexOf(' ', 2047);
+			if (i > 2044) {
+				i = s.lastIndexOf(' ', i - 1);
+			}
+			console.log(i);
+			return `${s.substring(0, i + 1)}...`;
 		}
 
-		malScraper.getInfoFromName(query).then(data => {
-			const embed = new MessageEmbed()
-				.setColor(Colors.MAL)
-				.setAuthor('MyAnimeList Search Engine', 'https://i.imgur.com/QABhOrL.png', 'https://myanimelist.net/')
-				.setTitle(data.title)
-				.setURL(data.url)
-				.setThumbnail(data.picture)
-				.setDescription(data.synopsis)
-				.addField('__Details__', stripIndents`
-                    ***English title:*** ${data.englishTitle || 'Unknown'}
-                    ***Japanese title:*** ${data.japaneseTitle}
-                    ***Synonyms:*** ${data.synonyms || 'Unknown'}
-                    ***Score:*** ${data.score} (${data.scoreStats})
-                    ***Genres:*** ${data.genres.join(', ').toString()}
-                    ***Rating:*** ${data.rating}
-                    ***Source:*** ${data.source}
-                    ***Type:*** ${data.type}
-                    ***Episodes:*** ${data.episodes}
-                    ***Duration:*** ${data.duration}
-                    ***Aired:*** ${data.aired}
-                    ***Status:*** ${data.status}`)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+		mal.search('anime', query).then(data => {
+			const id = data.results[0].mal_id;
+			// eslint-disable-next-line complexity
+			mal.findAnime(id).then(result => {
+				if (result.length === 0) return this.client.embeds.common('commonError', message, 'Can\'t search, make sure the anime title is correct');
 
-			message.channel.send(embed);
+				const embed = new MessageEmbed()
+					.setColor(Colors.MAL)
+					.setAuthor('MyAnimeList', 'https://i.imgur.com/QABhOrL.png', 'https://myanimelist.net/')
+					.setTitle(result.title)
+					.setURL(result.url)
+					.setThumbnail(result.image_url)
+					.setDescription(result.synopsis ? result.synopsis.length <= 2048 ? result.synopsis.replace(/<[^>]*>/g, '') : andanotheroutput(result.synopsis.replace(/<[^>]*>/g, '')) : '`N/A`')
+					.addField('__Details__', stripIndents`
+						***English:*** ${result.title_english ? result.title_english : result.title}
+						***Synonyms:*** ${result.title_synonyms[0] ? result.title_synonyms.join(', ').toString() : '`N/A`'}
+						***Japanese:*** ${result.title_japanese}
+						***Score:*** ${result.score ? result.score : '`N/A`'} (${result.scored_by ? `${result.scored_by.formatNumber()} users` : '`N/A`'})
+						***Genres:*** ${result.genres[0] ? output(result.genres) : '`N/A`'}
+						***Rating:*** ${result.rating ? result.rating : '`N/A`'}
+						***Source:*** ${result.source}
+						***Type:*** ${result.type ? result.type : '`N/A`'}
+						***Premiered:*** ${result.premiered ? result.premiered : '`N/A`'}
+						***Broadcast:*** ${result.broadcast}
+						***Episodes:*** ${result.episodes ? result.episodes : '`N/A`'}
+						***Duration:*** ${result.duration ? result.duration : '`N/A`'}
+						***Status:*** ${result.status}
+						***Aired:*** ${result.aired.string}`)
+					.addField('\u200B', stripIndents`
+						***Producers:*** ${result.producers[0] ? output(result.producers) : '`N/A`'}
+						***Licensors:*** ${result.licensors[0] ? output(result.licensors) : '`N/A`'}
+						***Studios:*** ${result.studios[0] ? output(result.studios) : '`N/A`'}
+						***Opening:*** ${result.opening_themes[0] ? result.opening_themes.join(', ').toString() : '`N/A`'}
+						***Ending:*** ${result.ending_themes[0] ? result.ending_themes.join(', ').toString() : '`N/A`'}
+						***Ranked:*** #${result.rank ? result.rank.formatNumber() : '`N/A`'}
+						***Popularity:*** #${result.popularity ? result.popularity.formatNumber() : '`N/A`'}
+						***Members:*** ${result.members ? result.members.formatNumber() : '`N/A`'}
+						***Favorites:*** ${result.favorites ? result.favorites.formatNumber() : '`N/A`'}`)
+					.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+
+				message.channel.send(embed);
+			});
 		}).catch(() => message.channel.send('Can\'t search, make sure the anime title is correct'));
 	}
 

@@ -30,6 +30,7 @@
     "geo-tz": "^6.0.0",
     "glob": "^7.1.6",
     "imdb-api": "^4.1.1",
+    "jikan-node": "^1.2.1",
     "libnpmsearch": "^3.0.0",
     "mal-scraper": "^2.7.1",
     "mathjs": "^7.1.0",
