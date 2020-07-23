@@ -1,11 +1,12 @@
 {
-  "name": "riven",
-  "version": "2.5.1",
+  "name": "kirasaka",
+  "version": "2.5.7",
   "description": "A multipurpose discord bot",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "test --passWithNoTests"
+    "test": "npm run lint",
+    "lint": "eslint \"./**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,6 @@
     "imdb-api": "^4.1.1",
     "jikan-node": "^1.2.1",
     "libnpmsearch": "^3.0.0",
-    "mal-scraper": "^2.7.1",
     "mathjs": "^7.1.0",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
