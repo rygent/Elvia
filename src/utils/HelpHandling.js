@@ -13,9 +13,6 @@ module.exports = {
 			case 'moderation':
 				return message.member.permissions.toArray().join(' ').includes('MANAGE_');
 
-			case 'nsfw':
-				return message.channel.nsfw;
-
 			default:
 				return true;
 		}
