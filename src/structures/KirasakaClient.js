@@ -1,7 +1,7 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Util = require('./Util.js');
 
-module.exports = class RivenClient extends Client {
+module.exports = class KirasakaClient extends Client {
 
 	/* eslint-disable func-names */
 	constructor(options = {}) {
