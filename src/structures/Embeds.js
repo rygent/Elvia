@@ -56,7 +56,7 @@ module.exports = class Embeds {
 		if (message.author.avatarURL !== null) {
 			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 		}
-		message.channel.send(embed).then(msg => msg.delete({ timeout: 20000 }));
+		message.channel.send(embed);
 	}
 
 	async afk(type, message, target, args) {
