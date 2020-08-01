@@ -99,9 +99,6 @@ module.exports = class extends Event {
 
 		try {
 			command.run(message, args, data);
-			if (command.category === 'owner') {
-				message.delete();
-			}
 		} catch (err) {
 			console.log(err);
 			return this.client.embeds.common(null, message);
