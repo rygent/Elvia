@@ -10,7 +10,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: [],
 			description: 'Searches game from steam store.',
-			category: 'miscellaneous',
+			category: 'searches',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000

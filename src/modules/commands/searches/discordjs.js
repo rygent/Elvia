@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['djs', 'docs'],
 			description: 'Searches the DJS docs for whatever you\'d like',
-			category: 'miscellaneous',
+			category: 'searches',
 			usage: '<query> (branch)',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000

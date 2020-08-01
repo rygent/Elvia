@@ -11,7 +11,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['movie', 'series'],
 			description: 'Searches IMDd for your query, getting movie/TV series results.',
-			category: 'miscellaneous',
+			category: 'searches',
 			usage: '<query>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000
