@@ -8,8 +8,8 @@ module.exports = class extends Command {
 			description: 'Enables or disables the auto deletion of moderation commands!',
 			category: 'administration',
 			usage: '<on/off>',
-			memberPerms: ['MANAGE_MESSAGES'],
-			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+			memberPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES'],
+			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_GUILD', 'MANAGE_MESSAGES'],
 			cooldown: 3000
 		});
 	}
