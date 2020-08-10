@@ -35,7 +35,7 @@ module.exports = class extends Command {
 
 		let amount = args[0];
 		if (!amount || isNaN(amount) || parseInt(amount) < 1) {
-			return message.channel.send('You must specify a number of messages to delete!');
+			return this.client.embeds.common('commonError', message, 'You must specify a number of messages to delete!');
 		}
 
 		await message.delete();
@@ -57,9 +57,9 @@ module.exports = class extends Command {
 		let toDelete = null;
 
 		if (member) {
-			toDelete = await message.channel.send(`**${--amount}** messages of **${member.user.tag}** deleted!`);
+			toDelete = await message.channel.send(`🗑️ **${--amount}** messages of **${member.user.tag}** deleted!`);
 		} else {
-			toDelete = await message.channel.send(`**${--amount}** messages deleted!`);
+			toDelete = await message.channel.send(`🗑️ **${--amount}** messages deleted!`);
 		}
 
 		setTimeout(() => {
