@@ -22,7 +22,7 @@ module.exports = class extends Command {
 	async run(message, [time]) {
 		if (!this.client.lockit) this.client.lockit = [];
 		if (!time) {
-			return message.channel.send('A duration for the lockdown must be set. This can be in hours, minutes or seconds.');
+			return this.client.embeds.common('commonError', message, 'A duration for the lockdown must be set. This can be in hours, minutes or seconds.');
 		}
 
 		const roleColor = message.guild.me.roles.highest.hexColor;
