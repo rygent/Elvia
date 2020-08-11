@@ -9,7 +9,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['av'],
 			description: 'Sends the mentioned user\'s avatar.',
-			category: 'image',
+			category: 'utility',
 			usage: '[mention | ID]',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000
