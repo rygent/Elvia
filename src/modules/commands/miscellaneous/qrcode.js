@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['qr'],
 			description: 'Generates a QR Code with your text!',
-			category: 'image',
+			category: 'miscellaneous',
 			usage: '<text>',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000
