@@ -1,5 +1,6 @@
 const Event = require('../../structures/Event.js');
 const { version } = require('../../../package.json');
+const chalk = require('chalk');
 const moment = require('moment');
 
 module.exports = class extends Event {
@@ -11,16 +12,25 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		const timestamp = `${moment().format('ddd, MMM D, YYYY HH:mm:ss')} ->`;
+		const timestamp = `${moment().format('MMM D, YYYY HH:mm:ss')}`;
 		console.log([
-			`${timestamp} Logged in as ${this.client.user.tag}!`,
-			`${timestamp} Loaded ${this.client.commands.size} commands & ${this.client.events.size} events!`,
-			`${timestamp} Ready in ${this.client.guilds.cache.size} guilds on ${this.client.channels.cache.size} channels, for a total of ${this.client.users.cache.size} users.`
+			`Logged in as ${chalk.redBright(`${this.client.user.tag}`)}`,
+			`Loaded ${this.client.commands.size.formatNumber()} commands & ${this.client.events.size.formatNumber()} events!`,
+			// eslint-disable-next-line max-len
+			`Ready in ${this.client.guilds.cache.size.formatNumber()} guilds on ${this.client.channels.cache.size.formatNumber()} channels, for a total of ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users.`
 		].join('\n'));
+		process.stdout.write(`[${chalk.greenBright('BOOT')}] Connected to Discord API!\n`);
+		process.stdout.write(`[${chalk.greenBright('BOOT')}] Booted up in ${chalk.blueBright(`${(Date.now() - global.startTime) / 1000}s`)} on ${chalk.blueBright(`${timestamp}`)}\n`);
 
-		const activities = [`${this.client.prefix}help`, `${this.client.prefix}invite`, `${this.client.guilds.cache.size.formatNumber()} servers`];
+		const activities = [
+			`${this.client.guilds.cache.size.formatNumber()} servers`,
+			`${this.client.channels.cache.size.formatNumber()} channels`,
+			`${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`
+		];
+
+		let i = 0;
 		setInterval(() => {
-			const activity = `${activities.random()} | v${version}`;
+			const activity = `${this.client.prefix}help | ${activities[i++ % activities.length]} | v${version}`;
 			this.client.user.setPresence({ activity: { type: 'PLAYING', name: activity } });
 		}, 20000);
 	}
