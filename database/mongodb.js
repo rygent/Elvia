@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const chalk = require('chalk');
 
 module.exports = {
 	init: () => {
@@ -6,11 +7,11 @@ module.exports = {
 		mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 		mongoose.connection.on('connected', () => {
-			console.log('Connected to the MongoDB database.');
+			process.stdout.write(`[${chalk.greenBright('BOOT')}] Connected to MongoDB!\n`);
 		});
 
 		mongoose.connection.on('err', err => {
-			console.error(`Unable to connect to the MongoDB database. Error:\n${err}`);
+			process.stdout.write(`[${chalk.redBright('ERROR')}] Unable to connect to the MongoDB database. Error:\n${err}\n`);
 		});
 
 		mongoose.connection.on('disconnected', () => {
