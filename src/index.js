@@ -1,8 +1,8 @@
 require('dotenv').config();
 
-const KirasakaClient = require('./structures/KirasakaClient.js');
+const RivenClient = require('./structures/RivenClient.js');
 const config = require('./structures/Configuration.js');
 
-const client = new KirasakaClient(config);
+const client = new RivenClient(config);
 
 client.start();
