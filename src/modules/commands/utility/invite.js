@@ -1,14 +1,13 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../structures/Configuration.js');
-const { stripIndents } = require('common-tags');
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Gives you the invite link!',
+			description: 'Gives you the bot invite link!',
 			category: 'utility',
 			clientPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
 			cooldown: 5000
@@ -20,11 +19,8 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle('__Invitation Link__')
-			.setDescription(stripIndents`
-                Here is the bot invite link and support server invite link!
-                [Invite Link](https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1584786551)
-                [Support Server](https://discord.gg/nW6x9EN)`)
+			.setTitle('Click Here to add me to your Server!')
+			.setURL('https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1584786551')
 			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
