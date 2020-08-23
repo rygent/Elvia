@@ -19,17 +19,16 @@ module.exports = class extends Event {
 			`[${chalk.grey('INFO')}] Ready in ${this.client.guilds.cache.size.formatNumber()} guilds on ${this.client.channels.cache.size.formatNumber()} channels, for a total of ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users.`
 		].join('\n'));
 		process.stdout.write(`[${chalk.greenBright('BOOT')}] Connected to Discord API!\n`);
-		process.stdout.write(`[${chalk.greenBright('BOOT')}] Booted up on ${chalk.blueBright(`${moment().format('MMM D, YYYY HH:mm:ss')}`)}\n`);
+		process.stdout.write(`[${chalk.greenBright('BOOT')}] Booted up on ${chalk.blueBright(`${moment().format('MMM D, YYYY HH:mm:ss')} ICT`)}\n`);
 
 		const activities = [
-			`${this.client.guilds.cache.size.formatNumber()} servers`,
-			`${this.client.channels.cache.size.formatNumber()} channels`,
-			`${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`
+			`${this.client.prefix}help`,
+			`@${this.client.user.username} help`
 		];
 
 		let i = 0;
 		setInterval(() => {
-			const activity = `${this.client.prefix}help | ${activities[i++ % activities.length]} | v${version}`;
+			const activity = `${activities[i++ % activities.length]} | v${version}`;
 			this.client.user.setPresence({ activity: { type: 'PLAYING', name: activity } });
 		}, 20000);
 	}
