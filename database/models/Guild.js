@@ -34,6 +34,7 @@ module.exports = mongoose.model('Guild', new Schema({
 		},
 		suggestions: false,
 		modlogs: false,
+		msglogs: false,
 		reports: false,
 		logs: false
 	} },

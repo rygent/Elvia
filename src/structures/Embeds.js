@@ -1,17 +1,56 @@
 const { MessageEmbed } = require('discord.js');
 const { Colors, Emojis } = require('./Configuration.js');
+const { responseTime } = require('./Functions.js');
 
-module.exports = class Embeds {
+const ZWS = '\u200B';
 
-	constructor(client) {
-		this.client = client;
+module.exports = class Embeds extends MessageEmbed {
+
+	splitFields(contentOrTitle, rawContent) {
+		if (typeof contentOrTitle === 'undefined') return this;
+
+		let title;
+		let content;
+		if (typeof rawContent === 'undefined') {
+			title = ZWS;
+			content = contentOrTitle;
+		} else {
+			title = contentOrTitle;
+			content = rawContent;
+		}
+
+		if (Array.isArray(content)) content = content.join('\n');
+		if (title === ZWS && !this.description && content.length < 2048) {
+			this.description = content;
+			return this;
+		}
+
+		// eslint-disable-next-line id-length
+		let x;
+		let slice;
+		while (content.length) {
+			if (content.length < 1024) {
+				this.fields.push({ name: title, value: content, inline: false });
+				return this;
+			}
+
+			slice = content.slice(0, 1024);
+			x = slice.lastIndexOf('\n');
+			if (x === -1) x = slice.lastIndexOf('');
+			if (x === -1) x = 1024;
+
+			this.fields.push({ name: title, value: content.trim().slice(0, x), inline: false });
+			content = content.slice(x + 1);
+			title = ZWS;
+		}
+		return this;
 	}
 
 	async common(type, message, args) {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
 			.setTitle(`${Emojis.ERROR} | ERROR!`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`);
+			.setFooter(`Responded in ${responseTime(message)}`);
 		switch (type) {
 			case 'ownerOnly': {
 				embed.setTitle(`${Emojis.ERROR} | You're not a developer!`);
@@ -54,7 +93,7 @@ module.exports = class Embeds {
 			}
 		}
 		if (message.author.avatarURL !== null) {
-			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Responded in ${responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 		}
 		message.channel.send(embed);
 	}
@@ -63,8 +102,7 @@ module.exports = class Embeds {
 		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setFooter(`AFK system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor);
 		switch (type) {
 			case 'delete': {
 				embed.setDescription(`You're no longer AFK!`);
