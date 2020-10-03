@@ -1,8 +1,8 @@
 require('dotenv').config();
 
-const RivenClient = require('./structures/RivenClient.js');
+const EvoraClient = require('./structures/EvoraClient.js');
 const config = require('./structures/Configuration.js');
 
-const client = new RivenClient(config);
+const client = new EvoraClient(config);
 
 client.start();

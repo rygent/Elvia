@@ -1,11 +1,12 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Util = require('./Util.js');
 
-module.exports = class RivenClient extends Client {
+module.exports = class EvoraClient extends Client {
 
 	/* eslint-disable func-names */
 	constructor(options = {}) {
 		super({
+			disableMentions: 'everyone',
 			ws: { intents: Intents.ALL }
 		});
 		this.validate(options);
