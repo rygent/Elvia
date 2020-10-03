@@ -8,7 +8,6 @@
 [![License](https://img.shields.io/github/license/XRzky/Evora?style=for-the-badge)](https://github.com/XRzky/Evora/blob/stable/LICENSE)
 [![Version](https://img.shields.io/github/package-json/v/XRzky/Evora/stable?label=version&style=for-the-badge)](https://github.com/XRzky/Evora/blob/stable/package.json)
 [![Issues](https://img.shields.io/github/issues/XRzky/Evora.svg?color=37f149&style=for-the-badge)](https://github.com/XRzky/Evora/issues)
-[![Pull Request](https://img.shields.io/github/issues-pr/XRzky/Evora.svg?color=37f149&style=for-the-badge)](https://github.com/XRzky/Evora/pulls)
 
 <p align="center">
   <a href="#features">Features</a>
