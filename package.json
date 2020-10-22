@@ -1,6 +1,6 @@
 {
   "name": "evora",
-  "version": "2.9.17",
+  "version": "2.10.22",
   "description": "A multipurpose discord bot",
   "main": "src/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "diff": "^4.0.2",
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.4.0",
     "dotenv": "^8.2.0",
     "figlet": "^1.5.0",
     "geo-tz": "^6.0.0",
