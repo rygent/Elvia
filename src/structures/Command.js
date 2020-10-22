@@ -1,3 +1,5 @@
+const { Permissions } = require('discord.js');
+
 module.exports = class Command {
 
 	constructor(client, name, options = {}) {
@@ -5,10 +7,10 @@ module.exports = class Command {
 		this.name = options.name || name;
 		this.aliases = options.aliases || [];
 		this.description = options.description || 'No description provided.';
-		this.category = options.category || 'Miscellaneous';
+		this.category = options.category || 'miscellaneous';
 		this.usage = options.usage || '';
-		this.memberPerms = options.memberPerms || [];
-		this.clientPerms = options.clientPerms || [];
+		this.memberPerms = new Permissions(options.memberPerms).freeze();
+		this.clientPerms = new Permissions(options.clientPerms).freeze();
 		this.nsfw = options.nsfw || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.cooldown = options.cooldown || 3000;

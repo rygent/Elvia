@@ -65,12 +65,12 @@ module.exports = class Embeds extends MessageEmbed {
 			}
 			case 'memberPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`You don't have the required permission. Permissions required: ${args}`);
+				embed.setDescription(`You're missing ${args} permissions, you need them to use this command.`);
 				break;
 			}
 			case 'clientPerms': {
 				embed.setTitle(`${Emojis.ERROR} | Access Denied!`);
-				embed.setDescription(`I don't have the required permission. Permissions required: ${args}`);
+				embed.setDescription(`I'm missing ${args} permissions, I need them to use this command.`);
 				break;
 			}
 			case 'APIError': {

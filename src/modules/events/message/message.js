@@ -1,4 +1,5 @@
 const Event = require('../../../structures/Event.js');
+const Function = require('../../../structures/Functions.js');
 const cmdCooldown = {};
 
 module.exports = class extends Event {
@@ -54,26 +55,20 @@ module.exports = class extends Event {
 		}
 
 		if (message.guild) {
-			let neededPermission = [];
-			if (!command.clientPerms.includes('EMBED_LINKS')) {
-				command.clientPerms.push('EMBED_LINKS');
-			}
-			command.clientPerms.forEach((perm) => {
-				if (!message.channel.permissionsFor(message.guild.me).has(perm)) {
-					neededPermission.push(perm);
+			const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
+			if (memberPermCheck) {
+				const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
+				if (missing.length) {
+					return this.client.embeds.common('memberPerms', message, Function.formatArray(missing.map(Function.formatPerms)));
 				}
-			});
-			if (neededPermission.length > 0) {
-				return this.client.embeds.common('clientPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
-			neededPermission = [];
-			command.memberPerms.forEach((perm) => {
-				if (!message.channel.permissionsFor(message.member).has(perm)) {
-					neededPermission.push(perm);
+
+			const clientPermCheck = command.clientPerms ? this.client.defaultPerms.add(command.clientPerms) : this.client.defaultPerms;
+			if (clientPermCheck) {
+				const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
+				if (missing.length) {
+					return this.client.embeds.common('clientPerms', message, Function.formatArray(missing.map(Function.formatPerms)));
 				}
-			});
-			if (neededPermission.length > 0) {
-				return this.client.embeds.common('memberPerms', message, neededPermission.map(perm => `\`${perm}\``).join(', '));
 			}
 
 			if (!message.channel.nsfw && command.nsfw) {
