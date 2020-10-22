@@ -40,16 +40,6 @@ module.exports = class EvoraClient extends Client {
 		};
 	}
 
-	async clean(text) {
-		if (text && text.constructor.name === 'Promise') text = await text;
-		if (typeof text !== 'string') text = require('util').inspect(text, { depth: 1 });
-		text = text
-			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
-			.replace(/@/g, `@${String.fromCharCode(8203)}`)
-			.replace(this.token, 'mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0');
-		return text;
-	}
-
 	async findOrCreateUser({ id: userID }, isLean) { // eslint-disable-next-line no-async-promise-executor
 		return new Promise(async (resolve) => {
 			if (this.databaseCache.users.get(userID)) {
