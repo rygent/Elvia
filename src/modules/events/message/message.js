@@ -1,5 +1,4 @@
 const Event = require('../../../structures/Event.js');
-const Function = require('../../../structures/Functions.js');
 const cmdCooldown = {};
 
 module.exports = class extends Event {
@@ -59,7 +58,7 @@ module.exports = class extends Event {
 			if (memberPermCheck) {
 				const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 				if (missing.length) {
-					return this.client.embeds.common('memberPerms', message, Function.formatArray(missing.map(Function.formatPerms)));
+					return this.client.embeds.common('memberPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
 				}
 			}
 
@@ -67,7 +66,7 @@ module.exports = class extends Event {
 			if (clientPermCheck) {
 				const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
 				if (missing.length) {
-					return this.client.embeds.common('clientPerms', message, Function.formatArray(missing.map(Function.formatPerms)));
+					return this.client.embeds.common('clientPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
 				}
 			}
 
