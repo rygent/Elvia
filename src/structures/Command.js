@@ -11,8 +11,8 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.memberPerms = new Permissions(options.memberPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
-		this.nsfw = options.nsfw || false;
 		this.ownerOnly = options.ownerOnly || false;
+		this.nsfw = options.nsfw || false;
 		this.cooldown = options.cooldown || 3000;
 	}
 

@@ -49,56 +49,54 @@ module.exports = class extends Event {
 		const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
-		if (!command) {
-			return;
-		}
+		if (command) {
+			if (message.guild) {
+				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
+				if (memberPermCheck) {
+					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
+					if (missing.length) {
+						return this.client.embeds.common('memberPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
+					}
+				}
 
-		if (message.guild) {
-			const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
-			if (memberPermCheck) {
-				const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
-				if (missing.length) {
-					return this.client.embeds.common('memberPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
+				const clientPermCheck = command.clientPerms ? this.client.defaultPerms.add(command.clientPerms) : this.client.defaultPerms;
+				if (clientPermCheck) {
+					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
+					if (missing.length) {
+						return this.client.embeds.common('clientPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
+					}
+				}
+
+				if (command.nsfw && !message.channel.nsfw) {
+					return this.client.embeds.common('nsfwOnly', message);
 				}
 			}
 
-			const clientPermCheck = command.clientPerms ? this.client.defaultPerms.add(command.clientPerms) : this.client.defaultPerms;
-			if (clientPermCheck) {
-				const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
-				if (missing.length) {
-					return this.client.embeds.common('clientPerms', message, this.client.functions.formatArray(missing.map(this.client.functions.formatPerms)));
+			if (command.ownerOnly && message.author.id !== this.client.owner) {
+				return this.client.embeds.common('ownerOnly', message);
+			}
+
+			let uCooldown = cmdCooldown[message.author.id];
+			if (!uCooldown) {
+				cmdCooldown[message.author.id] = {};
+				uCooldown = cmdCooldown[message.author.id];
+			}
+			const time = uCooldown[command.name] || 0;
+			if (time && (time > Date.now())) {
+				return message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`)
+					.then(msg => msg.delete({ timeout: time - Date.now() }));
+			}
+			cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
+
+			try {
+				command.run(message, args, data);
+				if (command.category === 'moderation' && data.guild.autoDeleteModCommands) {
+					message.delete();
 				}
+			} catch (err) {
+				console.log(err);
+				return this.client.embeds.common(null, message);
 			}
-
-			if (!message.channel.nsfw && command.nsfw) {
-				return this.client.embeds.common('nsfwOnly', message);
-			}
-		}
-
-		if (command.ownerOnly && message.author.id !== this.client.owner) {
-			return this.client.embeds.common('ownerOnly', message);
-		}
-
-		let uCooldown = cmdCooldown[message.author.id];
-		if (!uCooldown) {
-			cmdCooldown[message.author.id] = {};
-			uCooldown = cmdCooldown[message.author.id];
-		}
-		const time = uCooldown[command.name] || 0;
-		if (time && (time > Date.now())) {
-			return message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`)
-				.then(msg => msg.delete({ timeout: time - Date.now() }));
-		}
-		cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
-
-		try {
-			command.run(message, args, data);
-			if (command.category === 'moderation' && data.guild.autoDeleteModCommands) {
-				message.delete();
-			}
-		} catch (err) {
-			console.log(err);
-			return this.client.embeds.common(null, message);
 		}
 	}
 
