@@ -5,6 +5,11 @@ const ZWS = '\u200B';
 
 module.exports = class Embeds extends MessageEmbed {
 
+	constructor(client) {
+		super();
+		this.client = client;
+	}
+
 	splitFields(contentOrTitle, rawContent) {
 		if (typeof contentOrTitle === 'undefined') return this;
 
