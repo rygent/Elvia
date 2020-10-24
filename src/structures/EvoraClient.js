@@ -1,5 +1,6 @@
 const { Client, Collection, Permissions, Intents } = require('discord.js');
 const Util = require('./Util.js');
+const Embed = require('./Embeds.js');
 
 module.exports = class EvoraClient extends Client {
 
@@ -14,8 +15,7 @@ module.exports = class EvoraClient extends Client {
 		this.aliases = new Collection();
 		this.events = new Collection();
 		this.utils = new Util(this);
-		this.embeds = new (require('./Embeds.js'))(this);
-		this.functions = require('./Functions.js');
+		this.embeds = new Embed(this);
 		this.database = require('../../database/mongodb.js');
 
 		this.usersData = require('../../database/models/User.js');

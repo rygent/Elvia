@@ -16,8 +16,8 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, args) {
-		let person = this.client.functions.getMember(message, args[0]);
+	async run(message, [target]) {
+		let person = message.mentions.members.last() || message.guild.members.cache.get(target);
 
 		if (!person || message.author.id === person.id) {
 			person = message.guild.members.cache.filter(msg => msg.id !== message.author.id).random();

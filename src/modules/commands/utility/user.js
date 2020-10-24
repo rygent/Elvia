@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [target]) {
-		const member = this.client.functions.getMember(message, target);
+		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
 		const roles = member.roles.cache.sort((a, b) => b.position - a.position).filter(role => role.id !== message.guild.id).map(role => role.toString()).join(' ') || 'None';
 
 		const status = {
