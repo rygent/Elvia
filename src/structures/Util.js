@@ -29,6 +29,10 @@ module.exports = class Util {
 		return `${time.formatNumber() || 0}ms`;
 	}
 
+	checkOwner(target) {
+		return this.client.owner.includes(target);
+	}
+
 	formatPerms(perm) {
 		return perm
 			.toLowerCase()

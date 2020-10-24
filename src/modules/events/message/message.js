@@ -72,7 +72,7 @@ module.exports = class extends Event {
 				}
 			}
 
-			if (command.ownerOnly && message.author.id !== this.client.owner) {
+			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
 				return this.client.embeds.common('ownerOnly', message);
 			}
 
