@@ -14,6 +14,7 @@ module.exports = class EvoraClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.events = new Collection();
+		this.cooldowns = new Collection();
 		this.utils = new Util(this);
 		this.embeds = new Embed(this);
 		this.database = require('../../database/mongodb.js');

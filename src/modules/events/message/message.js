@@ -1,5 +1,5 @@
+const { Collection } = require('discord.js');
 const Event = require('../../../structures/Event.js');
-const cmdCooldown = {};
 
 module.exports = class extends Event {
 
@@ -76,17 +76,25 @@ module.exports = class extends Event {
 				return this.client.embeds.common('ownerOnly', message);
 			}
 
-			let uCooldown = cmdCooldown[message.author.id];
-			if (!uCooldown) {
-				cmdCooldown[message.author.id] = {};
-				uCooldown = cmdCooldown[message.author.id];
+			if (!this.client.cooldowns.has(command.name)) {
+				this.client.cooldowns.set(command.name, new Collection());
 			}
-			const time = uCooldown[command.name] || 0;
-			if (time && (time > Date.now())) {
-				return message.channel.send(`You must wait **${Math.ceil((time - Date.now()) / 1000)}** second(s) to be able to run this command again!`)
-					.then(msg => msg.delete({ timeout: time - Date.now() }));
+
+			const now = Date.now();
+			const timestamps = this.client.cooldowns.get(command.name);
+			const cooldownAmount = command.cooldown;
+
+			if (timestamps.has(message.author.id)) {
+				const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+				if (now < expirationTime) {
+					const timeLeft = (expirationTime - now) / 1000;
+					return message.channel.send(`You must wait **${timeLeft.toFixed(1)}** second(s) to be able to run the \`${command.name}\` command again!`)
+						.then(msg => msg.delete({ timeout: expirationTime - now }));
+				}
 			}
-			cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
+			timestamps.set(message.author.id, now);
+			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 			try {
 				command.run(message, args, data);
