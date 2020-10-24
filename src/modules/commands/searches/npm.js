@@ -39,7 +39,7 @@ module.exports = class extends Command {
                     ***Date:*** ${moment(res[0].date).format('MMMM D, YYYY')}
                     ***Repository:*** ${res[0].links.repository ? res[0].links.repository : 'None'}
                     ***Keywords:*** ${res[0].keywords ? res[0].keywords.join(', ') : 'None'}`)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by NPM`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by NPM`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		}).catch(() => message.channel.send('No results were found!'));

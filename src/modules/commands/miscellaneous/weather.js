@@ -105,7 +105,7 @@ module.exports = class extends Command {
 				.addField('🌅 Sunrise', `${moment(res.sys.sunrise * 1000).tz(`${city_tz}`).format('HH:mm z')}`, true)
 				.addField('🌇 Sunset', `${moment(res.sys.sunset * 1000).tz(`${city_tz}`).format('HH:mm z')}`, true)
 				.addField('⌚ Current Time', `${moment().tz(`${city_tz}`).format('ddd, MMMM DD, YYYY HH:mm z')}`, false)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by OpenWeatherMap`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by OpenWeatherMap`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		});

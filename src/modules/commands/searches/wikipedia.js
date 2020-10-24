@@ -34,7 +34,7 @@ module.exports = class extends Command {
 				.setURL(article.content_urls.desktop.page)
 				.setThumbnail(article.originalimage ? article.originalimage.source : null)
 				.setDescription(article.extract)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		}).catch(() => message.channel.send('I couldn\'t find a wikipedia article with that title!'));

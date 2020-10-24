@@ -79,7 +79,7 @@ module.exports = class extends Command {
 						***Popularity:*** #${result.popularity ? result.popularity.formatNumber() : '`N/A`'}
 						***Members:*** ${result.members ? result.members.formatNumber() : '`N/A`'}
 						***Favorites:*** ${result.favorites ? result.favorites.formatNumber() : '`N/A`'}`)
-					.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+					.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
 
 				message.channel.send(embed);
 			}).catch(() => this.client.embeds.common('APIError', message));

@@ -28,7 +28,7 @@ module.exports = class extends Command {
 		const embed = new MessageEmbed()
 			.setColor(Colors.SPOTIFY)
 			.setAuthor('Spotify Search Engine', 'https://i.imgur.com/9xO7toS.png', 'https://www.spotify.com/')
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
 
 		if (type === 'artist') {
 			if (!query) {

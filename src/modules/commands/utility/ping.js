@@ -27,7 +27,7 @@ module.exports = class extends Command {
 				💓 ***Heartbeat:*** \`${Math.round(this.client.ws.ping).formatNumber()}ms\`
 				⏱️ ***Latency:*** \`${latency.formatNumber()}ms\`
 			`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (latency <= 0) {
 			embed.setDescription('Please try again later');

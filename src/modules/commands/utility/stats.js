@@ -61,7 +61,7 @@ module.exports = class extends Command {
 			.addField('__Bot Uptime__', moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]'), true)
 			.addField('__Host Uptime__', moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]'), true)
 			.addField('__Last Started__', moment(this.client.readyAt).format('MMMM DD, YYYY HH:mm'))
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

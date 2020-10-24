@@ -32,7 +32,7 @@ module.exports = class extends Command {
 				.setURL(res[0].shortURL)
 				.setImage(res[0].thumbnails.high.url)
 				.addField(res[0].channel.title, res[0].description)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by YouTube`, message.author.avatarURL({ dynamic: true }))
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by YouTube`, message.author.avatarURL({ dynamic: true }))
 				.setTimestamp(new Date(res[0].publishedAt));
 
 			message.channel.send(embed);

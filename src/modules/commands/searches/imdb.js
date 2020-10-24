@@ -33,7 +33,7 @@ module.exports = class extends Command {
 				.setURL(res.imdburl)
 				.setThumbnail(res.poster)
 				.setDescription(res.plot)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by IMDb`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by IMDb`, message.author.avatarURL({ dynamic: true }));
 
 			if (res.series !== true) {
 				embed.addField('__Details__', stripIndents`

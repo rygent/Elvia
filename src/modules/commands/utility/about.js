@@ -44,7 +44,7 @@ module.exports = class extends Command {
                 ***Node:*** [${process.version}](https://nodejs.org/)
                 ***Library:*** [Discord.js v${discordVersion}](https://discord.js.org/)
                 ***Created at:*** ${moment(this.client.user.createdAt).format('MMMM D, YYYY HH:mm')} (${moment(this.client.user.createdAt, 'YYYYMMDDHHmmss').fromNow()})`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

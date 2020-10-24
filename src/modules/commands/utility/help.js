@@ -25,7 +25,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (command) {
 			const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
@@ -50,9 +50,9 @@ module.exports = class extends Command {
 				Need more help? Come join our [guild](https://discord.gg/nW6x9EN)
 				The bot prefix is: **${prefixes}**
 			`);
-			embed.setFooter(`Responded in ${this.client.functions.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
-			const categories = this.client.functions.removeDuplicates(this.client.commands.map(cmd => cmd.category));
+			const categories = this.client.utils.removeDuplicates(this.client.commands.map(cmd => cmd.category));
 
 			for (const category of categories) {
 				const dir = this.client.commands.filter(cmd => cmd.category === category);

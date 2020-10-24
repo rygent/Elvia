@@ -81,7 +81,7 @@ module.exports = class extends Command {
                 ***Highest:*** ${member.roles.highest ? member.roles.highest : 'None'}
                 ***List:*** ${roles}`)
 			.addField('__Permissions__', allowed || 'None')
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

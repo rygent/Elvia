@@ -20,6 +20,29 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename)}${path.sep}`;
 	}
 
+	removeDuplicates(arr) {
+		return [...new Set(arr)];
+	}
+
+	responseTime(message) {
+		const time = Date.now() - message.createdTimestamp;
+		return `${time.formatNumber() || 0}ms`;
+	}
+
+	formatPerms(perm) {
+		return perm
+			.toLowerCase()
+			// eslint-disable-next-line id-length
+			.replace(/(^|"|_)(\S)/g, (s) => s.toUpperCase())
+			.replace(/_/g, ' ')
+			.replace(/Guild/g, 'Server')
+			.replace(/Use Vad/g, 'Use Voice Acitvity');
+	}
+
+	formatArray(array, type = 'conjunction') {
+		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
+	}
+
 	async loadCommands() {
 		return glob(`${this.directory}modules/commands/**/*.js`).then(commands => {
 			for (const commandFile of commands) {

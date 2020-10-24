@@ -36,7 +36,7 @@ module.exports = class extends Command {
                     ***Timezone:*** \`${moment().tz(`${timezone}`).format('[GMT] Z')}\`
                     ***Date:*** \`${moment().tz(`${timezone}`).format('dddd, MMMM D, YYYY')}\`
                     ***Current Time:*** \`${moment().tz(`${timezone}`).format('HH:mm:ss')}\``)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		} catch {

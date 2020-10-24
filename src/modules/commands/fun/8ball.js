@@ -30,7 +30,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle(`🎱 ${args.slice(0).join(' ')}`)
 			.setDescription(`❯  ${Choice.Message}`)
-			.setFooter(`Rate: ${RatingArray[Choice.Rating]} | Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Rate: ${RatingArray[Choice.Rating]} | Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

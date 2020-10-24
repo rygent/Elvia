@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const { Colors, Emojis } = require('./Configuration.js');
-const { responseTime } = require('./Functions.js');
 
 const ZWS = '\u200B';
 
@@ -50,7 +49,7 @@ module.exports = class Embeds extends MessageEmbed {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
 			.setTitle(`${Emojis.ERROR} | ERROR!`)
-			.setFooter(`Responded in ${responseTime(message)}`);
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`);
 		switch (type) {
 			case 'ownerOnly': {
 				embed.setTitle(`${Emojis.ERROR} | You're not a developer!`);
@@ -93,7 +92,7 @@ module.exports = class Embeds extends MessageEmbed {
 			}
 		}
 		if (message.author.avatarURL !== null) {
-			embed.setFooter(`Responded in ${responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 		}
 		message.channel.send(embed);
 	}

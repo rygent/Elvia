@@ -34,7 +34,7 @@ module.exports = class extends Command {
 			.setDescription(stripIndents`
                 **${message.member.displayName}** is ${Math.floor(love)}% in love with **${person.displayName}**
                 ${loveLevel}`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

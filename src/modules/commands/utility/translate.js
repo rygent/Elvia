@@ -24,7 +24,7 @@ module.exports = class extends Command {
 		const embed = new MessageEmbed()
 			.setColor(Colors.G_TRANSLATE)
 			.setAuthor('Google Translate', 'https://i.imgur.com/1JS81kv.png', 'https://translate.google.com/')
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Google Translate`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Google Translate`, message.author.avatarURL({ dynamic: true }));
 
 		if (target === 'langs') {
 			embed.setTitle('Available Languages');

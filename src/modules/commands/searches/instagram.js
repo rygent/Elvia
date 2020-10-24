@@ -39,7 +39,7 @@ module.exports = class extends Command {
 					***Following:*** ${account.following.count.formatNumber()}
 					***Verified:*** ${account.is_verified ? 'Yes' : 'No'}
 					***Private:*** ${account.is_private ? 'Yes' : 'No'}`)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Instagram`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Instagram`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		}).catch(() => {

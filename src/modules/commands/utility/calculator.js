@@ -31,7 +31,7 @@ module.exports = class extends Command {
 				.setDescription(stripIndents`
                     ***Calculation:*** \`${equation}\`
                     ***Result:*** \`${answer}\``)
-				.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 			message.channel.send(embed);
 		} catch {

@@ -25,7 +25,7 @@ module.exports = class extends Command {
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setImage(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${text.join(' ').replace(new RegExp(' ', 'g'), '%20')}`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(msg)}`, message.author.avatarURL({ dynamic: true }));
 
 		msg.edit('\u200B', embed);
 	}

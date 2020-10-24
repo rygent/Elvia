@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.CUSTOM : roleColor)
 			.setTitle('Rock Paper Scissors')
 			.setDescription('Choose emojis to start the game!')
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		const msg = await message.channel.send(embed);
 		const reacted = await this.promptMessage(msg, message.author, 30, chooseArr);

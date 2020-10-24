@@ -61,7 +61,7 @@ module.exports = class extends Command {
                 ***Developers:*** ${details.developers.join(', ')}
                 ***Website:*** ${details.website ? details.website : 'None'}
                 ***Support:*** ${details.support_info ? details.support_info.url : details.support_info.email || 'None'}`)
-			.setFooter(`Responded in ${this.client.functions.responseTime(message)} | Powered by Steam`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Steam`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}
