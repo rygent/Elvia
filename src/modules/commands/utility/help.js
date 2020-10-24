@@ -1,7 +1,6 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../structures/Configuration.js');
-const { categoryCheck } = require('../../../utils/HelpHandling.js');
 const { stripIndents } = require('common-tags');
 
 module.exports = class extends Command {
@@ -56,7 +55,7 @@ module.exports = class extends Command {
 
 			for (const category of categories) {
 				const dir = this.client.commands.filter(cmd => cmd.category === category);
-				if (categoryCheck(category, message)) {
+				if (this.client.utils.categoryCheck(category, message)) {
 					embed.addField(`⦿ __${category.toProperCase()} [${dir.size}]__`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
 				}
 			}

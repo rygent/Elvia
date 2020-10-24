@@ -47,6 +47,20 @@ module.exports = class Util {
 		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
 	}
 
+	categoryCheck(category, message) {
+		category = category.toLowerCase();
+		switch (category) {
+			case 'owner':
+				return this.checkOwner(message.author.id);
+			case 'administration':
+				return message.member.permissions.toArray().join(' ').includes('MANAGE_GUILD');
+			case 'moderation':
+				return message.member.permissions.toArray().join(' ').includes('MANAGE_');
+			default:
+				return true;
+		}
+	}
+
 	async loadCommands() {
 		return glob(`${this.directory}modules/commands/**/*.js`).then(commands => {
 			for (const commandFile of commands) {
