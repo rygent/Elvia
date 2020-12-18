@@ -1,4 +1,5 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
+const Util = require('./Util.js');
 
 module.exports = class ElainaClient extends Client {
 
@@ -8,6 +9,10 @@ module.exports = class ElainaClient extends Client {
 			ws: { intents: Intents.ALL }
 		});
 		this.validate(options);
+
+		this.commands = new Collection();
+		this.aliases = new Collection();
+		this.utils = new Util(this);
 
 		this.once('ready', () => {
 			console.log(`Logged in as ${this.user.username}!`);
@@ -25,11 +30,11 @@ module.exports = class ElainaClient extends Client {
 
 			if (!message.content.startsWith(prefix)) return;
 
-			// eslint-disable-next-line no-unused-vars
 			const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
 
-			if (cmd.toLowerCase() === 'hello') {
-				message.channel.send('Hello!');
+			const command = this.commands.get(cmd.toLowerCase()) || this.commands.get(this.aliases.get(cmd.toLowerCase()));
+			if (command) {
+				command.run(message, args);
 			}
 		});
 	}
@@ -46,6 +51,7 @@ module.exports = class ElainaClient extends Client {
 	}
 
 	async start(token = this.token) {
+		this.utils.loadCommands();
 		super.login(token);
 	}
 
