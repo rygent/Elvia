@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(message, args) {
 		const text = args.join(' ');
-		if (!text || text.length > 20) return message.reply('Please enter a valid text (less than 20 characters)!');
+		if (!text || text.length > 20) return message.quote('Please enter a valid text (less than 20 characters)!');
 
 		return message.channel.send(await figlet(text), { code: true });
 	}

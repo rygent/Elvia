@@ -13,13 +13,13 @@ module.exports = class extends Command {
 
 	async run(message) {
 		try {
-			message.reply(`Rebooting ${this.client.user.username} bot ...\n__*Please wait a few minutes*__`);
+			message.quote(`Rebooting ${this.client.user.username} bot ...\n__*Please wait a few minutes*__`);
 
 			setTimeout(() => {
 				process.exit(1);
 			}, 5000);
 		} catch (err) {
-			message.reply(err.message);
+			message.quote(err.message);
 		}
 	}
 
