@@ -1,0 +1,8 @@
+const { Schema, model } = require('mongoose');
+
+module.exports = model('User', new Schema({
+	id: { type: String },
+	registeredAt: { type: Number, default: Date.now() },
+	afk: { type: String, default: null },
+	reminds: { type: Array, default: [] }
+}));

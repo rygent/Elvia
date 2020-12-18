@@ -16,6 +16,17 @@ module.exports = class ElainaClient extends Client {
 		this.events = new Collection();
 		this.utils = new Util(this);
 
+		this.database = new (require('./ElainaDatabase.js'));
+
+		this.usersData = require('../Schemas/UserData.js');
+		this.guildsData = require('../Schemas/GuildData.js');
+		this.membersData = require('../Schemas/MemberData');
+
+		this.databaseCache = {};
+		this.databaseCache.users = new Collection();
+		this.databaseCache.guilds = new Collection();
+		this.databaseCache.members = new Collection();
+
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		};
@@ -47,6 +58,62 @@ module.exports = class ElainaClient extends Client {
 		};
 	}
 
+	async findOrCreateUser({ id: userID }, isLean) {
+		if (this.databaseCache.users.get(userID)) {
+			return isLean ? this.databaseCache.users.get(userID).toJSON() : this.databaseCache.users.get(userID);
+		} else {
+			let userData = isLean ? await this.usersData.findOne({ id: userID }).lean() : await this.usersData.findOne({ id: userID });
+			if (userData) {
+				if (!isLean) this.databaseCache.users.set(userID, userData);
+				return userData;
+			} else { // eslint-disable-next-line new-cap
+				userData = new this.usersData({ id: userID });
+				await userData.save();
+				this.databaseCache.users.set(userID, userData);
+				return isLean ? userData.toJSON() : userData;
+			}
+		}
+	}
+
+	async findOrCreateGuild({ id: guildID }, isLean) {
+		if (this.databaseCache.guilds.get(guildID)) {
+			return isLean ? this.databaseCache.guilds.get(guildID).toJSON() : this.databaseCache.guilds.get(guildID);
+		} else {
+			let guildData = isLean ? await this.guildsData.findOne({ id: guildID }).populate('members').lean() : await this.guildsData.findOne({ id: guildID }).populate('members');
+			if (guildData) {
+				if (!isLean) this.databaseCache.guilds.set(guildID, guildData);
+				return guildData;
+			} else { // eslint-disable-next-line new-cap
+				guildData = new this.guildsData({ id: guildID });
+				await guildData.save();
+				this.databaseCache.guilds.set(guildID, guildData);
+				return isLean ? guildData.toJSON() : guildData;
+			}
+		}
+	}
+
+	async findOrCreateMember({ id: memberID, guildID }, isLean) {
+		if (this.databaseCache.members.get(`${memberID}${guildID}`)) {
+			return isLean ? this.databaseCache.members.get(`${memberID}${guildID}`).toJSON() : this.databaseCache.members.get(`${memberID}${guildID}`);
+		} else {
+			let memberData = isLean ? await this.membersData.findOne({ guildID, id: memberID }).lean() : await this.membersData.findOne({ guildID, id: memberID });
+			if (memberData) {
+				if (!isLean) this.databaseCache.members.set(`${memberID}${guildID}`, memberData);
+				return memberData;
+			} else { // eslint-disable-next-line new-cap
+				memberData = new this.membersData({ id: memberID, guildID: guildID });
+				await memberData.save();
+				const guild = await this.findOrCreateGuild({ id: guildID });
+				if (guild) {
+					guild.members.push(memberData._id);
+					await guild.save();
+				}
+				this.databaseCache.members.set(`${memberID}${guildID}`, memberData);
+				return isLean ? memberData.toJSON() : memberData;
+			}
+		}
+	}
+
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
@@ -67,6 +134,7 @@ module.exports = class ElainaClient extends Client {
 	async start(token = this.token) {
 		this.utils.loadCommands();
 		this.utils.loadEvents();
+		this.database.loadDatabase();
 		super.login(token);
 	}
 
