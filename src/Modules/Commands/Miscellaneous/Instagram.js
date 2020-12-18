@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			aliases: ['ig', 'insta'],
 			description: 'Find out some nice instagram statistics',
 			category: 'Miscellaneous',
-			usage: '<username>'
+			usage: '<username>',
+			disabled: true
 		});
 	}
 
