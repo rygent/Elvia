@@ -114,6 +114,25 @@ module.exports = class ElainaClient extends Client {
 		}
 	}
 
+	/* eslint-disable no-empty-function */ /* eslint-disable consistent-return */
+	async resolveUser(search) {
+		let user = null;
+		if (!search || typeof search !== 'string') return;
+		if (search.match(/^<@!?(\d+)>$/)) {
+			const id = search.match(/^<@!?(\d+)>$/)[1];
+			user = this.users.fetch(id).catch(() => {});
+			if (user) return user;
+		}
+		if (search.match(/^!?(\w+)#(\d+)$/)) {
+			const username = search.match(/^!?(\w+)#(\d+)$/)[0];
+			const discriminator = search.match(/^!?(\w+)#(\d+)$/)[1];
+			user = this.users.find((users) => users.username === username && users.discriminator === discriminator);
+			if (user) return user;
+		}
+		user = await this.users.fetch(search).catch(() => {});
+		return user;
+	}
+
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
