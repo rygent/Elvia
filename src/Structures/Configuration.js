@@ -12,6 +12,7 @@ module.exports = {
 		GREY: '95a5a6',
 		G_TRANSLATE: '4989f4',
 		INSTAGRAM: 'e1306c',
+		NPM: 'cc3534',
 		STEAM: '2a475e',
 		WIKIPEDIA: '6b6b6b'
 	},
