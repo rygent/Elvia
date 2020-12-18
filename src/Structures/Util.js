@@ -31,6 +31,20 @@ module.exports = class Util {
 		return [...new Set(arr)];
 	}
 
+	formatPerms(perm) {
+		return perm
+			.toLowerCase()
+			// eslint-disable-next-line id-length
+			.replace(/(^|"|_)(\S)/g, (s) => s.toUpperCase())
+			.replace(/_/g, ' ')
+			.replace(/Guild/g, 'Server')
+			.replace(/Use Vad/g, 'Use Voice Acitvity');
+	}
+
+	formatArray(array, type = 'conjunction') {
+		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	categoryCheck(category, message) {
 		category = category.toLowerCase();

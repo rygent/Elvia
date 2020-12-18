@@ -1,4 +1,4 @@
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, Permissions } = require('discord.js');
 const Util = require('./Util.js');
 
 module.exports = class ElainaClient extends Client {
@@ -34,6 +34,9 @@ module.exports = class ElainaClient extends Client {
 		if (!options.prefix) throw new Error('You must pass a prefix for the client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
+
+		if (!options.defaultPerms) throw new Error('You must pass default perm(s) for the Client');
+		this.defaultPerms = new Permissions(options.defaultPerms).freeze();
 
 		if (!options.owner) throw new Error('You must pass a owner id for the client.');
 		this.owner = options.owner;

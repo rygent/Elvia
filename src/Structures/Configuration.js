@@ -3,6 +3,7 @@ module.exports = {
 	token: process.env.BOT_TOKEN,
 	prefix: process.env.BOT_PREFIX,
 	owner: process.env.BOT_OWNER,
+	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	Colors: {
 		DEFAULT: 'ff4654',
 		GREEN: '2ecc71',
