@@ -11,6 +11,7 @@ module.exports = {
 		RED: 'e74c3c',
 		GREY: '95a5a6',
 		G_TRANSLATE: '4989f4',
+		STEAM: '2a475e',
 		WIKIPEDIA: '6b6b6b'
 	},
 	Emojis: {
