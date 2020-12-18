@@ -11,6 +11,9 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.userPerms = new Permissions(options.userPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
+		this.ownerOnly = options.ownerOnly || false;
+		this.disabled = options.disabled || false;
+		this.nsfw = options.nsfw || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars

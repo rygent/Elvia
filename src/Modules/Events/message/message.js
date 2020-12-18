@@ -37,7 +37,20 @@ module.exports = class extends Event {
 						return message.reply(`I'm missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, I need them to use this command.`);
 					}
 				}
+
+				if (command.nsfw && !message.channel.nsfw) {
+					return message.reply('This command can only be ran in a NSFW marked channel.');
+				}
 			}
+
+			if (command.disabled) {
+				return message.quote('This command is currently disabled!');
+			}
+
+			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
+				return message.reply('Only developers can use this command.');
+			}
+
 			command.run(message, args);
 		}
 	}
