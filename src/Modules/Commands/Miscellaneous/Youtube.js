@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['yt'],
 			description: 'Searches for a video on youtube',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			disabled: true
 		});
 	}
 
