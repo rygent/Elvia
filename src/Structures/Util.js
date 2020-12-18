@@ -53,10 +53,11 @@ module.exports = class Util {
 		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
 	}
 
-	// eslint-disable-next-line no-unused-vars
 	categoryCheck(category, message) {
 		category = category.toLowerCase();
 		switch (category) {
+			case 'developer':
+				return this.checkOwner(message.author.id);
 			default:
 				return true;
 		}
