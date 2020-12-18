@@ -28,6 +28,7 @@
     "eslint-config-tesseract": "^0.0.3"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "glob": "^7.1.6",
