@@ -38,6 +38,7 @@
     "figlet": "^1.5.0",
     "glob": "^7.1.6",
     "imdb-api": "^4.4.1",
+    "jikan-node": "^1.2.1",
     "libnpmsearch": "^3.1.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
