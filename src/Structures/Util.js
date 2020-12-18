@@ -63,6 +63,8 @@ module.exports = class Util {
 		switch (category) {
 			case 'developer':
 				return this.checkOwner(message.author.id);
+			case 'nsfw':
+				return message.channel.nsfw;
 			default:
 				return true;
 		}
