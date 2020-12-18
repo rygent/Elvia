@@ -1,4 +1,5 @@
 const Event = require('../../Structures/Event.js');
+const { version } = require('../../../package.json');
 const chalk = require('chalk');
 const moment = require('moment');
 
@@ -19,6 +20,16 @@ module.exports = class extends Event {
 		].join('\n'));
 		process.stdout.write(`[${chalk.greenBright('BOOT')}] Connected to Discord API!\n`);
 		process.stdout.write(`[${chalk.greenBright('BOOT')}] Booted up on ${chalk.blueBright(`${moment().format('MMM D, YYYY HH:mm:ss')} ICT`)}\n`);
+
+		const activities = [
+			`${this.client.prefix}help`,
+			`@${this.client.user.username} help`
+		];
+
+		let i = 0;
+		setInterval(() => {
+			this.client.user.setPresence({ activity: { type: 'PLAYING', name: `${activities[i++ % activities.length]} | v${version}` } });
+		}, 20000);
 	}
 
 };
