@@ -17,6 +17,9 @@ module.exports = class extends Command {
 
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
+		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+		const prefix = guildData ? guildData.prefix : this.client.prefix;
+
 		const embed = new MessageEmbed()
 			.setColor(Colors.G_TRANSLATE)
 			.setAuthor('Google Translate', 'https://i.imgur.com/1JS81kv.png', 'https://translate.google.com/')
@@ -29,7 +32,7 @@ module.exports = class extends Command {
 			return message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 }));
 		}
 
-		if (!target) return message.quote(`Please enter a language! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
+		if (!target) return message.quote(`Please enter a language! To display the list of languages, type \`${prefix}translate langs\` !`);
 
 		const language = target.toLowerCase();
 
@@ -38,7 +41,7 @@ module.exports = class extends Command {
 		if (toTranslate.length > 2800) return message.quote('Unfortunately, the specified text is too long. Please try again with something a little shorter.');
 
 		if (!JSON.stringify(translator).includes(language)) {
-			return message.quote(`The language \`${language}\` does not exist! To display the list of languages, type \`${this.client.prefix}translate langs\` !`);
+			return message.quote(`The language \`${language}\` does not exist! To display the list of languages, type \`${prefix}translate langs\` !`);
 		}
 
 		const translated = await translate(toTranslate, { to: language });

@@ -14,6 +14,8 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [command]) {
+		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+		const prefix = guildData ? guildData.prefix : this.client.prefix;
 		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
@@ -33,7 +35,7 @@ module.exports = class extends Command {
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
-				`***Usage:*** ${cmd.usage ? `\`${this.client.prefix + cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix + cmd.name}\``}`
+				`***Usage:*** ${cmd.usage ? `\`${prefix + cmd.name} ${cmd.usage}\`` : `\`${prefix + cmd.name}\``}`
 			].join('\n'));
 
 			return message.channel.send(embed);
@@ -41,7 +43,7 @@ module.exports = class extends Command {
 			embed.setDescription([
 				`These are the available commands for ${this.client.user.username}.`,
 				`Need more help? Come join our [guild](https://discord.gg/nW6x9EN)`,
-				`The bot prefix is: \`${this.client.prefix}\``
+				`The bot prefix is: \`${prefix}\``
 			].join('\n'));
 			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 

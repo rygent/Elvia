@@ -2,18 +2,21 @@ const Event = require('../../../Structures/Event.js');
 
 module.exports = class extends Event {
 
-	/* eslint-disable consistent-return */
+	/* eslint-disable consistent-return */ /* eslint-disable complexity */
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
 		if (!message.guild || message.author.bot) return;
 
+		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+		const customPrefix = guildData ? guildData.prefix : this.client.prefix;
+
 		if (message.content.match(mentionRegex)) {
-			message.quote(`Hello **${message.author.username}**, my prefix on this server is \`${this.client.prefix}\`.\nUse \`${this.client.prefix}help\` to get the list of the commands!`);
+			message.quote(`Hello **${message.author.username}**, my prefix on this server is \`${customPrefix}\`.\nUse \`${customPrefix}help\` to get the list of the commands!`);
 		}
 
-		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
+		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : customPrefix;
 
 		if (!message.content.startsWith(prefix)) return;
 
