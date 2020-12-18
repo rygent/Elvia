@@ -4,6 +4,9 @@ module.exports = {
 	prefix: process.env.BOT_PREFIX,
 	owner: process.env.BOT_OWNER,
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+	Access: {
+		IMDB: process.env.IMDB_KEY
+	},
 	Colors: {
 		DEFAULT: 'ff4654',
 		GREEN: '2ecc71',
@@ -11,6 +14,7 @@ module.exports = {
 		RED: 'e74c3c',
 		GREY: '95a5a6',
 		G_TRANSLATE: '4989f4',
+		IMDB: 'f3ce13',
 		INSTAGRAM: 'e1306c',
 		NPM: 'cc3534',
 		STEAM: '2a475e',
