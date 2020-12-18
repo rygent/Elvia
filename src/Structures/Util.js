@@ -26,6 +26,19 @@ module.exports = class Util {
 		return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
 	}
 
+	removeDuplicates(arr) {
+		return [...new Set(arr)];
+	}
+
+	// eslint-disable-next-line no-unused-vars
+	categoryCheck(category, message) {
+		category = category.toLowerCase();
+		switch (category) {
+			default:
+				return true;
+		}
+	}
+
 	async loadCommands() {
 		return glob(`${this.directory}Modules/Commands/**/*.js`).then(commands => {
 			for (const commandFile of commands) {

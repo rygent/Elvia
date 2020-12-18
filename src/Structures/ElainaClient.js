@@ -3,6 +3,7 @@ const Util = require('./Util.js');
 
 module.exports = class ElainaClient extends Client {
 
+	/* eslint-disable func-names */
 	constructor(options = {}) {
 		super({
 			disableMentions: 'everyone',
@@ -37,6 +38,10 @@ module.exports = class ElainaClient extends Client {
 				command.run(message, args);
 			}
 		});
+
+		String.prototype.toProperCase = function () {
+			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+		};
 	}
 
 	validate(options) {
