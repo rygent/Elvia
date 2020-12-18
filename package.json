@@ -44,6 +44,7 @@
     "moment-duration-format": "^2.3.2",
     "os": "^0.1.1",
     "path": "^0.12.7",
+    "simple-youtube-api": "^5.2.1",
     "util": "^0.12.3"
   }
 }

@@ -5,7 +5,8 @@ module.exports = {
 	owner: process.env.BOT_OWNER,
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	Access: {
-		IMDB: process.env.IMDB_KEY
+		IMDB: process.env.IMDB_KEY,
+		YOUTUBE: process.env.YOUTUBE_KEY
 	},
 	Colors: {
 		DEFAULT: 'ff4654',
@@ -19,6 +20,7 @@ module.exports = {
 		MAL: '2e51a2',
 		NPM: 'cc3534',
 		STEAM: '2a475e',
+		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
 	},
 	Emojis: {
