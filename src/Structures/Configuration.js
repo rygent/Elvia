@@ -9,5 +9,12 @@ module.exports = {
 		ORANGE: 'e67e22',
 		RED: 'e74c3c',
 		GREY: '95a5a6'
+	},
+	Emojis: {
+		BOT: '<:bot:729455298917564467>',
+		ONLINE: '<:online:712397262256472075>',
+		IDLE: '<:idle:712397201955094708>',
+		DND: '<:dnd:712397154836283392>',
+		OFFLINE: '<:offline:712397086100029440>'
 	}
 };
