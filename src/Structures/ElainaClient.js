@@ -1,4 +1,4 @@
-const { Client, Collection, Intents, Permissions } = require('discord.js');
+const { APIMessage, Client, Collection, Intents, Message, Permissions } = require('discord.js');
 const Util = require('./Util.js');
 
 module.exports = class ElainaClient extends Client {
@@ -22,6 +22,28 @@ module.exports = class ElainaClient extends Client {
 
 		Number.prototype.formatNumber = function () {
 			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+		};
+
+		/* eslint-disable camelcase */ // eslint-disable-next-line no-shadow
+		Message.prototype.quote = async function (content, options) {
+			const reference = {
+				message_id: (
+					!!content && !options ?
+						typeof content === 'object' && content.messageID :
+						options && options.messageID
+				) || this.id,
+				message_channel: this.channel.id
+			};
+
+			const { data: parsed, files } = await APIMessage
+				.create(this, content, options)
+				.resolveData()
+				.resolveFiles();
+
+			this.client.api.channels[this.channel.id].messages.post({
+				data: { ...parsed, message_reference: reference },
+				files
+			});
 		};
 	}
 
