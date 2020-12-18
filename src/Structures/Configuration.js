@@ -11,6 +11,7 @@ module.exports = {
 		GREY: '95a5a6'
 	},
 	Emojis: {
+		DEVELOPER: '<:developer:712397604192780328>',
 		BOT: '<:bot:729455298917564467>',
 		ONLINE: '<:online:712397262256472075>',
 		IDLE: '<:idle:712397201955094708>',
