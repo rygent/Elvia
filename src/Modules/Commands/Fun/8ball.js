@@ -28,7 +28,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setTitle(`🎱 ${args.slice(0).join(' ')}`)
 			.setDescription(`❯  ${Choice.Message}`)
-			.setFooter(`Requested by ${message.author.tag} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.channel.send(embed);
 	}

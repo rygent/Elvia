@@ -79,7 +79,7 @@ module.exports = class extends Command {
 				`***List:*** ${roles}`
 			].join('\n'))
 			.addField('__Permissions__', allowed || 'None')
-			.setFooter(`Requested by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

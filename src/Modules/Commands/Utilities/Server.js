@@ -77,7 +77,7 @@ module.exports = class extends Command {
 			.addField(`__Roles [${message.guild.roles.cache.filter(fil => fil.name !== '@everyone').size}]__`, [
 				`${message.guild.roles.cache.sort((a, b) => b.position - a.position).filter(fil => fil.name !== '@everyone').map(re => re.name).join(', ')}`
 			])
-			.setFooter(`Requested by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

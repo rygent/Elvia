@@ -20,7 +20,7 @@ module.exports = class extends Command {
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
-			.setFooter(`Requested by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (command) {
 			const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
@@ -43,7 +43,7 @@ module.exports = class extends Command {
 				`Need more help? Come join our [guild](https://discord.gg/nW6x9EN)`,
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
-			embed.setFooter(`Requested by ${message.author.tag} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
 
 			const categories = this.client.utils.removeDuplicates(this.client.commands.map(cmd => cmd.category));
 

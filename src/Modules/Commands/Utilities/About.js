@@ -50,7 +50,7 @@ module.exports = class extends Command {
 				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}\n`,
 				`[Repository](https://github.com/XRzky/Elaina) | [Support Server](https://discord.gg/nW6x9EN) | [Vote](https://discord.boats/bot/614645495779819551)`
 			].join('\n'))
-			.setFooter(`Requested by ${message.author.tag}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		message.channel.send(embed);
 	}

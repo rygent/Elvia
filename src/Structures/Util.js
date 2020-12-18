@@ -31,6 +31,11 @@ module.exports = class Util {
 		return [...new Set(arr)];
 	}
 
+	responseTime(message) {
+		const time = Date.now() - message.createdTimestamp;
+		return `${time.formatNumber() || 0}ms`;
+	}
+
 	checkOwner(target) {
 		return this.client.owner.includes(target);
 	}

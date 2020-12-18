@@ -26,7 +26,7 @@ module.exports = class extends Command {
 		}
 
 		const embed = new MessageEmbed(result)
-			.setFooter(`Requested by ${message.author.tag} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
 
 		if (!message.guild) {
 			return message.channel.send(embed);
