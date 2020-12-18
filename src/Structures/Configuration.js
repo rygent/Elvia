@@ -10,7 +10,8 @@ module.exports = {
 		ORANGE: 'e67e22',
 		RED: 'e74c3c',
 		GREY: '95a5a6',
-		G_TRANSLATE: '4989f4'
+		G_TRANSLATE: '4989f4',
+		WIKIPEDIA: '6b6b6b'
 	},
 	Emojis: {
 		DEVELOPER: '<:developer:712397604192780328>',
