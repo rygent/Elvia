@@ -18,7 +18,7 @@ module.exports = class extends Command {
 		const target = message.mentions.channels.filter(ch => ch.type === 'text' && ch.guild.id === message.guild.id).last() || message.channel;
 
 		if (!option) {
-			this.client.reply.message('msgError', message, 'Please provide an valid option.');
+			message.quote('Please provide an valid option.');
 		}
 
 		switch (option.toLowerCase()) {
@@ -26,16 +26,16 @@ module.exports = class extends Command {
 				guildData.plugins.moderations = target.id;
 				guildData.markModified('plugins.moderations');
 				guildData.save();
-				this.client.reply.message('msgSuccess', message, `Moderation channel defined on <#${target.id}> !`);
+				message.quote(`Moderation channel defined on <#${target.id}> !`);
 				break;
 			case 'audit-channel':
 				guildData.plugins.audits = target.id;
 				guildData.markModified('plugins.audits');
 				guildData.save();
-				this.client.reply.message('msgSuccess', message, `Audit channel defined on <#${target.id}> !`);
+				message.quote(`Audit channel defined on <#${target.id}> !`);
 				break;
 			default:
-				this.client.reply.message('msgError', message, `\`${option}\` is not a option!`);
+				message.quote(`\`${option}\` is not a option!`);
 		}
 	}
 
