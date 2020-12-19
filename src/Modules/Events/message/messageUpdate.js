@@ -9,26 +9,30 @@ module.exports = class extends Event {
 	async run(old, message) {
 		if (!message.guild || old.content === message.content || message.author.bot) return;
 
-		const sendChannel = message.guild.channels.cache.find(ch => ch.name === 'audit-logs');
-		if (!sendChannel) return;
+		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
+		if (guildData.plugins.audits) {
+			const sendChannel = message.guild.channels.cache.get(guildData.plugins.audits);
+			if (!sendChannel) return;
 
-		const embed = new ElainaEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle('Message Edited')
-			.setDescription([
-				`***Message ID:*** \`${old.id}\``,
-				`***Channel:*** ${old.channel}`,
-				`***Author:*** ${old.author.tag} (\`${old.author.id}\`)`
-			].join('\n'))
-			.setURL(old.url)
-			.splitFields(diffWordsWithSpace(escapeMarkdown(old.content), escapeMarkdown(message.content))
-				.map(result => result.added ? `**${result.value}**` : result.removed ? `~~${result.value}~~` : result.value)
-				.join(' '))
-			.setFooter(`Powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+			const roleColor = message.guild.me.roles.highest.hexColor;
 
-		if (sendChannel) sendChannel.send(embed);
+			const embed = new ElainaEmbed()
+				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+				.setTitle('Message Edited')
+				.setDescription([
+					`***Message ID:*** \`${old.id}\``,
+					`***Channel:*** ${old.channel}`,
+					`***Author:*** ${old.author.tag} (\`${old.author.id}\`)`
+				].join('\n'))
+				.setURL(old.url)
+				.splitFields(diffWordsWithSpace(escapeMarkdown(old.content), escapeMarkdown(message.content))
+					.map(result => result.added ? `**${result.value}**` : result.removed ? `~~${result.value}~~` : result.value)
+					.join(' '))
+				.setFooter(`Powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+
+			if (sendChannel) sendChannel.send(embed);
+		}
 	}
 
 };

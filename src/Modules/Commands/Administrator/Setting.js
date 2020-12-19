@@ -28,6 +28,12 @@ module.exports = class extends Command {
 				guildData.save();
 				this.client.reply.message('msgSuccess', message, `Moderation channel defined on <#${target.id}> !`);
 				break;
+			case 'audit-channel':
+				guildData.plugins.audits = target.id;
+				guildData.markModified('plugins.audits');
+				guildData.save();
+				this.client.reply.message('msgSuccess', message, `Audit channel defined on <#${target.id}> !`);
+				break;
 			default:
 				this.client.reply.message('msgError', message, `\`${option}\` is not a option!`);
 		}
