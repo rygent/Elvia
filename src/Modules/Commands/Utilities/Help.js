@@ -36,7 +36,8 @@ module.exports = class extends Command {
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
-				`***Usage:*** ${cmd.usage ? `\`${prefix + cmd.name} ${cmd.usage}\`` : `\`${prefix + cmd.name}\``}`
+				`***Usage:*** ${cmd.usage ? `\`${prefix + cmd.name} ${cmd.usage}\`` : `\`${prefix + cmd.name}\``}`,
+				`***Cooldown:*** ${cmd.cooldown / 1000} seconds`
 			].join('\n'));
 
 			return message.channel.send(embed);
