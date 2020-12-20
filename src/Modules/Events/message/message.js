@@ -1,3 +1,4 @@
+const { Collection } = require('discord.js');
 const Event = require('../../../Structures/Event.js');
 
 module.exports = class extends Event {
@@ -53,6 +54,26 @@ module.exports = class extends Event {
 			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
 				return message.quote('Only developers can use this command.');
 			}
+
+			if (!this.client.cooldowns.has(command.name)) {
+				this.client.cooldowns.set(command.name, new Collection());
+			}
+
+			const now = Date.now();
+			const timestamps = this.client.cooldowns.get(command.name);
+			const cooldownAmount = command.cooldown;
+
+			if (timestamps.has(message.author.id)) {
+				const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+				if (now < expirationTime) {
+					const timeLeft = (expirationTime - now) / 1000;
+					return message.channel.send(`You must wait **${timeLeft.toFixed(2)}** second(s) to be able to run the \`${command.name}\` command again!`)
+						.then(msg => msg.delete({ timeout: expirationTime - now }));
+				}
+			}
+			timestamps.set(message.author.id, now);
+			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 			command.run(message, args);
 		}

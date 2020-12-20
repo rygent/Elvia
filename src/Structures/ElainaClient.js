@@ -14,6 +14,7 @@ module.exports = class ElainaClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.events = new Collection();
+		this.cooldowns = new Collection();
 		this.utils = new Util(this);
 
 		this.database = new (require('./ElainaDatabase.js'));
