@@ -11,7 +11,7 @@ module.exports = class extends Command {
 			description: 'Locks a channel down for a set duration. Use `lockdown release` to end the lockdown prematurely.',
 			category: 'Moderation',
 			usage: '<duration> <sec|min|hr>',
-			memberPerms: ['MANAGE_CHANNELS'],
+			userPerms: ['MANAGE_CHANNELS'],
 			clientPerms: ['MANAGE_CHANNELS']
 		});
 	}
