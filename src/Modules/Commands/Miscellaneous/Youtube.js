@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			description: 'Searches for a video on youtube',
 			category: 'Miscellaneous',
 			usage: '<querySearch>',
-			disabled: true
+			disabled: true,
+			cooldown: 5000
 		});
 	}
 

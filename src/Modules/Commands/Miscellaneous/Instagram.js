@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			description: 'Find out some nice instagram statistics',
 			category: 'Miscellaneous',
 			usage: '<username>',
-			disabled: true
+			disabled: true,
+			cooldown: 5000
 		});
 	}
 

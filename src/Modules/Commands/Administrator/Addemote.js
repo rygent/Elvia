@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			category: 'Administrator',
 			usage: '<URL> <name>',
 			userPerms: ['MANAGE_GUILD', 'MANAGE_EMOJIS'],
-			clientPerms: ['MANAGE_GUILD', 'MANAGE_EMOJIS']
+			clientPerms: ['MANAGE_GUILD', 'MANAGE_EMOJIS'],
+			cooldown: 5000
 		});
 	}
 

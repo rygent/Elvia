@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			description: 'Display information from the discord.js documentation.',
 			category: 'Developer',
 			usage: '<searchQuery>',
-			clientPerms: ['ADD_REACTIONS', 'MANAGE_MESSAGES']
+			clientPerms: ['ADD_REACTIONS', 'MANAGE_MESSAGES'],
+			cooldown: 5000
 		});
 	}
 

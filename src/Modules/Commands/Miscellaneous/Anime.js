@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['mal', 'myanimelist'],
 			description: 'Searches information from my anime list.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			cooldown: 5000
 		});
 	}
 

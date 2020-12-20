@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['movie', 'series'],
 			description: 'Searches IMDb for your query, getting movie/TV series results.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			cooldown: 5000
 		});
 	}
 

@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			aliases: ['8-ball', 'eightball', 'fortune'],
 			description: 'A command decides your fate with an 8-ball, obviously 8-balls aren\'t real you dingus.',
 			category: 'Fun',
-			usage: '<question>'
+			usage: '<question>',
+			cooldown: 3000
 		});
 	}
 

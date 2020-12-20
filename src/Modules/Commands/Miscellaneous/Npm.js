@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Searches for packages on the npm registry.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			cooldown: 5000
 		});
 	}
 

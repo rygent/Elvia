@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			category: 'Moderation',
 			usage: '<Mention | ID> <reason>',
 			userPerms: ['BAN_MEMBERS'],
-			clientPerms: ['BAN_MEMBERS']
+			clientPerms: ['BAN_MEMBERS'],
+			cooldown: 3000
 		});
 	}
 

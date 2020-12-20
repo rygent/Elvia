@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			aliases: ['halp'],
 			description: 'Displays all commands that the bot has.',
 			category: 'Utilities',
-			usage: '[Command | Alias]'
+			usage: '[Command | Alias]',
+			cooldown: 5000
 		});
 	}
 

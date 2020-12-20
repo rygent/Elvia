@@ -8,7 +8,8 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Turn your text into ascii characters!',
 			category: 'Fun',
-			usage: '<text>'
+			usage: '<text>',
+			cooldown: 5000
 		});
 	}
 

@@ -12,7 +12,8 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['botinfo', 'info'],
 			description: 'Shows some information about the running instance!',
-			category: 'Utilities'
+			category: 'Utilities',
+			cooldown: 3000
 		});
 	}
 

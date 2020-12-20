@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			description: 'Evaluate JS Code.',
 			category: 'Developer',
 			usage: '<code>',
-			ownerOnly: true
+			ownerOnly: true,
+			cooldown: 3000
 		});
 	}
 

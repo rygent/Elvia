@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			aliases: ['affinity'],
 			description: 'Shows how in love you are with a user.',
 			category: 'Fun',
-			usage: '<Mention | ID>'
+			usage: '<Mention | ID>',
+			cooldown: 5000
 		});
 	}
 

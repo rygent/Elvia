@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			aliases: ['av'],
 			description: 'Sends the mentioned user\'s avatar.',
 			category: 'Utilities',
-			usage: '[Mention | ID]'
+			usage: '[Mention | ID]',
+			cooldown: 5000
 		});
 	}
 

@@ -8,7 +8,8 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: [],
 			description: 'Gives you the bot invite link!',
-			category: 'Utilities'
+			category: 'Utilities',
+			cooldown: 3000
 		});
 	}
 

@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['traduction', 'translation', 'trad', 'tl'],
 			description: 'Translates your text into the desired language!',
 			category: 'Utilities',
-			usage: '<language> <message>'
+			usage: '<language> <message>',
+			cooldown: 8000
 		});
 	}
 

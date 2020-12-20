@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			category: 'Moderation',
 			usage: '<number-of-messages> [mention|id]',
 			userPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
-			clientPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS']
+			clientPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
+			cooldown: 3000
 		});
 	}
 

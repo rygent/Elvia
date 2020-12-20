@@ -10,7 +10,8 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: [],
 			description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
-			category: 'Fun'
+			category: 'Fun',
+			cooldown: 5000
 		});
 	}
 

@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			description: 'Executes commands in the console.',
 			category: 'Developer',
 			usage: '<query>',
-			ownerOnly: true
+			ownerOnly: true,
+			cooldown: 3000
 		});
 	}
 

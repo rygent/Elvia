@@ -9,7 +9,8 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['serverinfo', 'guild', 'guildinfo'],
 			description: 'Displays information about the current server.',
-			category: 'Utilities'
+			category: 'Utilities',
+			cooldown: 5000
 		});
 	}
 

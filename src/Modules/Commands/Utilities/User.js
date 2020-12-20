@@ -11,7 +11,8 @@ module.exports = class extends Command {
 			aliases: ['uinfo', 'userinfo', 'whois'],
 			description: 'Displays information about the mentioned user.',
 			category: 'Utilities',
-			usage: '[Mention | ID]'
+			usage: '[Mention | ID]',
+			cooldown: 3000
 		});
 	}
 

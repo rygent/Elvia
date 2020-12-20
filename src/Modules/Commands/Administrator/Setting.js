@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			category: 'Administrator',
 			usage: '<option> <channel>',
 			userPerms: ['MANAGE_GUILD'],
-			clientPerms: ['MANAGE_GUILD']
+			clientPerms: ['MANAGE_GUILD'],
+			cooldown: 3000
 		});
 	}
 

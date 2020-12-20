@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			category: 'Moderation',
 			usage: '<duration> <sec|min|hr>',
 			userPerms: ['MANAGE_CHANNELS'],
-			clientPerms: ['MANAGE_CHANNELS']
+			clientPerms: ['MANAGE_CHANNELS'],
+			cooldown: 3000
 		});
 	}
 

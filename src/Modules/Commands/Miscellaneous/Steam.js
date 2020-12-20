@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Searches game from steam store.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			cooldown: 5000
 		});
 	}
 

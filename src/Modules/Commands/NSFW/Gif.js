@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			aliases: [],
 			description: 'Posts a random Gif picture. Warning this commands for 18+',
 			category: 'NSFW',
-			nsfw: true
+			nsfw: true,
+			cooldown: 10000
 		});
 	}
 

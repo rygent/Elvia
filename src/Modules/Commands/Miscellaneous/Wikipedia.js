@@ -10,7 +10,8 @@ module.exports = class extends Command {
 			aliases: ['wiki'],
 			description: 'Searches Wikipedia Article use title',
 			category: 'Miscellaneous',
-			usage: '<querySearch>'
+			usage: '<querySearch>',
+			cooldown: 5000
 		});
 	}
 
