@@ -6,6 +6,7 @@ module.exports = {
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	Access: {
 		IMDB: process.env.IMDB_KEY,
+		OPENWEATHER: process.env.OPEN_WEATHER_ID,
 		YOUTUBE: process.env.YOUTUBE_KEY
 	},
 	Colors: {
@@ -19,6 +20,7 @@ module.exports = {
 		INSTAGRAM: 'e1306c',
 		MAL: '2e51a2',
 		NPM: 'cc3534',
+		OPENWEATHER: 'e96e4c',
 		STEAM: '2a475e',
 		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
