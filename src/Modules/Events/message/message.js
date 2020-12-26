@@ -75,7 +75,15 @@ module.exports = class extends Event {
 			timestamps.set(message.author.id, now);
 			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-			command.run(message, args);
+			try {
+				command.run(message, args);
+				if (command.category === 'Moderation' && guildData.autoDeleteModCommands) {
+					message.delete();
+				}
+			} catch (err) {
+				console.log(err);
+				return message.quote('Something went wrong... Please retry again later!');
+			}
 		}
 	}
 
