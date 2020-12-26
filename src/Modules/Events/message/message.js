@@ -17,6 +17,25 @@ module.exports = class extends Event {
 			message.quote(`Hello **${message.author.username}**, my prefix on this server is \`${customPrefix}\`.\nUse \`${customPrefix}help\` to get the list of the commands!`);
 		}
 
+		const userData = await this.client.findOrCreateUser({ id: message.author.id });
+
+		if (message.guild) {
+			const afkReason = userData.afk;
+			if (afkReason) {
+				userData.afk = null;
+				await userData.save();
+				message.quote(`**${message.author.username}**, your AFK status has just been deleted!`);
+			}
+
+			message.mentions.users.forEach(async (user) => {
+				// eslint-disable-next-line no-shadow
+				const userData = await this.client.findOrCreateUser({ id: user.id });
+				if (userData.afk) {
+					message.quote(`**${user.tag}** is currently AFK!\nReason: ${userData.afk}`);
+				}
+			});
+		}
+
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : customPrefix;
 
 		if (!message.content.startsWith(prefix)) return;
