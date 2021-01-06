@@ -1,5 +1,6 @@
 const { APIMessage, Client, Collection, Intents, Message, Permissions } = require('discord.js');
 const Util = require('./Util.js');
+const Database = require('./ElainaDatabase.js');
 
 module.exports = class ElainaClient extends Client {
 
@@ -16,8 +17,7 @@ module.exports = class ElainaClient extends Client {
 		this.events = new Collection();
 		this.cooldowns = new Collection();
 		this.utils = new Util(this);
-
-		this.database = new (require('./ElainaDatabase.js'));
+		this.database = new Database;
 
 		this.usersData = require('../Schemas/UserData.js');
 		this.guildsData = require('../Schemas/GuildData.js');
@@ -27,6 +27,8 @@ module.exports = class ElainaClient extends Client {
 		this.databaseCache.users = new Collection();
 		this.databaseCache.guilds = new Collection();
 		this.databaseCache.members = new Collection();
+
+		this.databaseCache.mutedUsers = new Collection();
 
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
