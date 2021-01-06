@@ -138,6 +138,23 @@ module.exports = class ElainaClient extends Client {
 		return user;
 	}
 
+	async resolveMember(search, guild) {
+		let member = null;
+		if (!search || typeof search !== 'string') return;
+		if (search.match(/^<@!?(\d+)>$/)) {
+			const id = search.match(/^<@!?(\d+)>$/)[1];
+			member = await guild.members.fetch(id).catch(() => {});
+			if (member) return member;
+		}
+		if (search.match(/^!?(\w+)#(\d+)$/)) {
+			guild = await guild.fetch();
+			member = guild.members.cache.find((members) => members.user.tag === search);
+			if (member) return member;
+		}
+		member = await guild.members.fetch(search).catch(() => {});
+		return member;
+	}
+
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
