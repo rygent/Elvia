@@ -9,7 +9,7 @@ module.exports = class extends Command {
 			aliases: ['banish', 'permban'],
 			description: 'Bans the given user and DMs them the reason!',
 			category: 'Moderation',
-			usage: '<Mention | ID> <reason>',
+			usage: '<@member> <reason>',
 			userPerms: ['BAN_MEMBERS'],
 			clientPerms: ['BAN_MEMBERS'],
 			cooldown: 3000
@@ -19,42 +19,29 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
-		if (!member) return message.quote('Please mention a valid member!');
+		if (!member) return message.quote('Please specify a valid member to ban!');
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const memberData = message.guild.members.cache.get(member.id) ? await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id }) : null;
 
-		if (member.id === this.client.user.id) return message.quote('Please don\'t banned me...!');
-		if (member.id === message.author.id) return message.quote('You can\'t banned yourself!');
-		if (member.id === this.client.owner) return message.quote('I can\'t banned my master');
+		if (member.id === message.author.id) return message.quote('You can\'t ban yourself!');
 		if (message.guild.member(message.author).roles.highest.position <= message.guild.member(member).roles.highest.position) {
-			return message.quote(`You can't banned **${member.user.username}**! Their position is higher than you!`);
+			return message.quote('You can\'t banned a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const reason = args.join(' ');
-		if (!reason) return message.quote('Please provide a reason');
+		if (!reason) return message.quote('Please enter a reason!');
 
 		if (!message.guild.member(member).bannable) {
 			return message.quote(`I can't banned **${member.user.username}**! Their role is higher than mine!`);
 		}
 
 		if (!member.user.bot) {
-			const embed = new MessageEmbed()
-				.setColor(Colors.RED)
-				.setTitle('🚫 Banned')
-				.setDescription([
-					`Hello <@${member.id}>,`,
-					`You have just been banned from **${message.guild.name}** by **${message.author.tag}**`,
-					`Reason: **${reason}**\n`,
-					`__*Please make sure you always follow the rules, because not doing so can result in punishment.*__`
-				].join('\n'))
-				.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
-
-			member.send(embed);
+			await member.send(`Hello <@${member.id}>,\nYou have just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 		}
 
 		message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason}` }).then(() => {
-			message.quote(`**${member.user.username}**, has been banned.`);
+			message.quote(`**${member.user.username}** has just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 
 			const caseInfo = {
 				channel: message.channel.id,
@@ -83,8 +70,8 @@ module.exports = class extends Command {
 					.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 					.setAuthor(`Moderation: Ban | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }))
 					.setDescription([
-						`***User:*** ${member.user.tag} (${member.user.id})`,
-						`***Moderator:*** ${message.author.tag} (${message.author.id})`,
+						`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
+						`***Moderator:*** ${message.author.tag} (\`${message.author.id}\`)`,
 						`***Reason:*** ${reason}`
 					].join('\n'))
 					.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
