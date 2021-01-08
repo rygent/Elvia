@@ -68,15 +68,15 @@ module.exports = class extends Command {
 				caseInfo.type = 'ban';
 				embed.setAuthor(`Moderation: Ban | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
 				message.guild.members.ban(member);
-				message.quote(`**${member.tag}** was automatically banned because they reach more than **${banCount}** warns!`);
+				message.quote(`**${member.user.tag}** was automatically banned because they reach more than **${banCount}** warns!`);
 			}
 		} else if (kickCount) {
 			if (sanctions >= kickCount) {
 				member.send(`Hello <@${member.id}>,\nYou've just been kicked from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 				caseInfo.type = 'kick';
 				embed.setAuthor(`Moderation: Kick | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
-				message.guild.members.kick(member);
-				message.quote(`**${member.tag}** was automatically kicked because they reach more than **${kickCount}** warns!`);
+				member.kick(member);
+				message.quote(`**${member.user.tag}** was automatically kicked because they reach more than **${kickCount}** warns!`);
 			}
 		} else {
 			member.send(`Hello <@${member.id}>,\nYou've just been warned on **${message.guild.name}** by **${message.author.tag}** for **${reason}**!`);

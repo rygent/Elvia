@@ -47,14 +47,14 @@ module.exports = class extends Command {
 			guildData.plugins.warnsSanctions.kick = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`**\`${number}\` warnings will result in an expulsion!**\n\n*Send \`${guildData.prefix}configuration\` to see the updated configuration!*`);
+			return message.quote(`**\`${number}\` warnings will result in an expulsion!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
 		}
 
 		if (sanction === 'ban') {
 			guildData.plugins.warnsSanctions.ban = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`**\`${number}\` warnings will result in a ban!**\n\n*Send \`${guildData.prefix}configuration\` to see the updated configuration!*`);
+			return message.quote(`**\`${number}\` warnings will result in a ban!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
 		}
 	}
 
