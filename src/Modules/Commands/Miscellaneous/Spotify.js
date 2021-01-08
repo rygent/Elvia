@@ -28,14 +28,12 @@ module.exports = class extends Command {
 		const response = await spotify.search({ type: 'track', query: query });
 		const track = response.tracks.items[0];
 		const artists = track.artists.map(artist => artist.name);
-		const artistResponse = await spotify.search({ type: 'artist', query: artists[0] });
 
 		const embed = new MessageEmbed()
 			.setColor(Colors.SPOTIFY)
 			.setAuthor('Spotify Search Engine', 'https://i.imgur.com/9xO7toS.png', 'https://www.spotify.com/')
 			.setTitle(track.name)
 			.setURL(track.external_urls.spotify)
-			.setThumbnail(artistResponse.artists.items[0].images[0].url)
 			.setImage(track.album.images[0].url)
 			.setDescription([
 				`***Artists:*** ${artists.join(', ')}`,
