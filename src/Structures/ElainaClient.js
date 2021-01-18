@@ -1,4 +1,4 @@
-const { APIMessage, Client, Collection, Intents, Message, Permissions } = require('discord.js');
+const { APIMessage, Client, Collection, Message, Permissions } = require('discord.js');
 const { Player } = require('discord-player');
 const Util = require('./Util.js');
 const Database = require('./ElainaDatabase.js');
@@ -9,7 +9,7 @@ module.exports = class ElainaClient extends Client {
 	constructor(options = {}) {
 		super({
 			disableMentions: 'everyone',
-			ws: { intents: Intents.ALL }
+			partials: ['GUILD_MEMBER', 'MESSAGE', 'USER']
 		});
 		this.validate(options);
 
