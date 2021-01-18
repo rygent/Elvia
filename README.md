@@ -1,9 +1,9 @@
-<img width="160" height="160" align="left" style="float: left; margin: 0 10px 10px 0;" alt="Elaina" src="https://i.imgur.com/gzyjFvY.png">
+<img width="160" height="160" align="left" style="float: left; margin: 0 10px 10px 0;" alt="Elaina" src="https://i.imgur.com/3Zvcbtu.jpeg">
 
 # Elaina
 
-[![Support](https://img.shields.io/discord/708659047057981451?color=7289da&label=discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/nW6x9EN)
 [![Build](https://img.shields.io/travis/XRzky/Elaina/stable?style=for-the-badge)](https://travis-ci.com/XRzky/Elaina)
+[![Status](https://botlist.space/bot/614645495779819551/badge?property=status&style=for-the-badge)](https://discordapp.com/oauth2/authorize?&client_id=614645495779819551&scope=bot&permissions=2146958847)
 [![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/stable?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/XRzky/Elaina/dashboard)
 [![License](https://img.shields.io/github/license/XRzky/Elaina?style=for-the-badge)](https://github.com/XRzky/Elaina/blob/stable/LICENSE)
 [![Version](https://img.shields.io/github/package-json/v/XRzky/Elaina/stable?label=version&style=for-the-badge)](https://github.com/XRzky/Elaina/blob/stable/package.json)
@@ -12,68 +12,65 @@
 <p align="center">
   <a href="#features">Features</a>
   •
+  <a href="#basic-usage">Basic Usage</a>
+  •
+  <a href="#self-hosting">Self Hosting</a>
+  •
   <a href="#installation">Installation</a>
   •
-  <a href="#configuration">Configuration</a>
+  <a href="https://rygent.gitbook.io/elaina/f.a.q">F.A.Q</a>
   •
   <a href="#contributing">Contributing</a>
   •
   <a href="#credits">Credits</a>
+  •
+  <a href="#license">License</a>
 </p>
 
 ---
 
-<i>Elaina is an open source, multipurpose Discord bot that is intended to be able to perform various tasks, ranging from simple server moderation (ban, kick, etc.)
-and also other functions such as the ability to search, weather forecasts, and much more.
+<i>Elaina is a multipurpose Discord bot that is intended to be able to perform various tasks, ranging from simple server moderation (ban, kick, etc.)
+and also other functions such as the ability to search, music, and much more.
 
 this bot was made in
 [Node.JS](https://nodejs.org),
 using the [Discord.js](https://discord.js.org/#/) library.
-
-If you liked or enjoyed this repository, feel free to leave a star ⭐ to help promote Elaina!
 </i>
 
----
-
 ## Features
-* Moderation commands (ban, kick, etc.)
-* General/utility commands.
-* Searches commands (anime, spotify, youtube, etc.)
-* Weather forecast.
-* Custom prefix.
-* and much more...
+This is not a command list. Some of the descriptions after the dash are not actually
+how you use that command. Use `$help` in a server with Elaina to find Elaina's full command list.
+
+* Administrator:
+  * Server Management - prefix & setting.
+* Moderation:
+  * Moderator Commands - ban, kick, mute, etc.
+  * Chat Management - purge & lock.
+* Utilities Commands - afk, server, translate, etc.
+* Music Commands - play, stop, volume, etc.
+* Miscellaneous Commands - anime, spotify, weather, etc.
+* Fun Commands - 8ball, advice, ascii, etc.
+
+[See the full commands list](https://rygent.gitbook.io/elaina/commands)
+
+## Basic Usage
+* The prefix of Elaina is `$`.
+  * For the full commands list, type `$help`.
+  * Each command is called using the prefix, in following form: `$<command>` where is the command. For example, to call the command ping, you would type `$ping`.
+  * Feel free to join [this support server](https://discord.gg/nW6x9EN) if additional help is needed!
+
+## Self Hosting
+Elaina can be hosted on anything, from your personal computer, to a Raspberry Pi, or even cloud services such as Google Cloud, Amazon Web Services, or Heroku.
 
 ## Installation
-```dosini
-# Clone this repository
-$ git clone -b stable https://github.com/XRzky/Elaina.git
+If you don't want to edit the code of the bot, a permanent online version is available, which you can invite to your own Discord!
 
-# Install Node dependencies
-$ npm install
+[![Discord Boats](https://discord.boats/api/widget/614645495779819551)](https://discord.boats/bot/614645495779819551)
 
-# Copy example.env to .env and replace it with your value
-$ cp example.env .env
-
-# Run the bot!
-$ node src/index
-```
-
-## Configuration
-You can find all the settings in the **Configuration.js** file, without filling in all the details,
-some features may not function as expected. Below you can find a quick summary of all the settings in the **.env** file.
-
-```dosini
-BOT_TOKEN=Input here your Discord bot token
-BOT_PREFIX=Input here the prefix for your bot. To use before the command is carried out. Example: ?
-BOT_OWNER=Input here your ID as the bot owner
-YOUTUBE_KEY=Input here your YouTube API. Otherwise the youtube command does not work
-IMDB_KEY=Input here your IMDb API. Otherwise the imdb command does not work
-OPEN_WEATHER_ID=Input here your OpenWeather AppID. Otherwise the weather command does not work
-```
+If you want to edit the bot's code and host it on your machine, it's possible!  
+You must follow the [installation guide](https://rygent.gitbook.io/elaina/installation) to properly install it! Don't worry, it's fast and simple if you follow the guide!
 
 ## Contributing
-Want to contribute?
-
 Elaina is open-source on our GitHub repository so everyone can contribute to the growth of the bot.
 Whether it is from reporting issues, requesting features, or straight-up requesting to add some new code, it can all be done on our GitHub repo!
 
@@ -83,8 +80,11 @@ We review all pull requests even if we don't reply to them.
 ## Credits
 * Made using <i>[Discord.js](https://github.com/discordjs/discord.js)</i>.
 * Bot based on <i>[Discord.js-v12-Tutorials](https://github.com/MenuDocs/Discord.js-v12-Tutorials)</i> by **MenuDocs**.
-* The bot moderation part is based on <i>[Amaterasu](https://github.com/t41y0u/Amaterasu)</i> by **t41y0u**.
-* The bot database part is based on <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz**.
+* The bot database & moderation part is based on <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz**.
+* The bot music part is based on <i>[Music-bot](https://github.com/ZerioDev/Music-bot)</i> by **ZerioDev**.
+
+## License
+Elaina is licensed under the GPL 3.0 license. See the file `LICENSE` for more information.
 
 ---
 <i>"Discord", "Discord App", and any associated logos are registered trademarks of Discord, inc.</i>
