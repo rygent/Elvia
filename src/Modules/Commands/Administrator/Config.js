@@ -27,7 +27,7 @@ module.exports = class extends Command {
 				`***Server prefix:*** \`${guildData.prefix}\``,
 				`***Ignored channels:*** ${guildData.ignoredChannels.length > 0 ? guildData.ignoredChannels.map((ch) => `<#${ch}>`).join(', ') : 'No ignored channels.'}`,
 				`***Autorole:*** ${guildData.plugins.autorole.enabled ? `<@&${guildData.plugins.autorole.role}>` : 'Autorole disabled.'}`,
-				`***Automatic delete moderation commands:*** ${!message.guild.autoDeleteModCommands ? 'Enabled' : 'Disabled'}`
+				`***Automatic delete moderation commands:*** ${guildData.autoDeleteModCommands ? 'Enabled' : 'Disabled'}`
 			].join('\n'))
 			.addField('Special channels', [
 				`***Moderations:*** ${guildData.plugins.moderations ? `<#${guildData.plugins.moderations}>` : 'Not defined.'}`,
