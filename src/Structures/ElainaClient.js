@@ -1,4 +1,5 @@
 const { APIMessage, Client, Collection, Intents, Message, Permissions } = require('discord.js');
+const { Player } = require('discord-player');
 const Util = require('./Util.js');
 const Database = require('./ElainaDatabase.js');
 
@@ -18,6 +19,7 @@ module.exports = class ElainaClient extends Client {
 		this.cooldowns = new Collection();
 		this.utils = new Util(this);
 		this.database = new Database;
+		this.player = new Player(this);
 
 		this.usersData = require('../Schemas/UserData.js');
 		this.guildsData = require('../Schemas/GuildData.js');
