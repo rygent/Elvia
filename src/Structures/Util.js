@@ -97,11 +97,9 @@ module.exports = class Util {
 				const File = require(eventFile);
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
 				const event = new File(this.client, name.toLowerCase());
-				const player = new File(this.client.player, name.toLowerCase());
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Event directory.`);
 				this.client.events.set(event.name, event);
 				event.emitter[event.type](name, (...args) => event.run(...args));
-				player.emitter[player.type](name, (...args) => player.run(...args));
 			}
 		});
 	}

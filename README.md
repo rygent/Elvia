@@ -30,7 +30,7 @@
 ---
 
 <i>Elaina is a multipurpose Discord bot that is intended to be able to perform various tasks, ranging from simple server moderation (ban, kick, etc.)
-and also other functions such as the ability to search, music, and much more.
+and also other functions such as the ability to search and much more.
 
 this bot was made in
 [Node.JS](https://nodejs.org),
@@ -47,7 +47,6 @@ how you use that command. Use `$help` in a server with Elaina to find Elaina's f
   * Moderator Commands - ban, kick, mute, etc.
   * Chat Management - purge & lock.
 * Utilities Commands - afk, server, translate, etc.
-* Music Commands - play, stop, volume, etc.
 * Miscellaneous Commands - anime, spotify, weather, etc.
 * Fun Commands - 8ball, advice, ascii, etc.
 
@@ -81,7 +80,6 @@ We review all pull requests even if we don't reply to them.
 * Made using <i>[Discord.js](https://github.com/discordjs/discord.js)</i>.
 * Bot based on <i>[Discord.js-v12-Tutorials](https://github.com/MenuDocs/Discord.js-v12-Tutorials)</i> by **MenuDocs**.
 * The bot database & moderation part is based on <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz**.
-* The bot music part is based on <i>[Music-bot](https://github.com/ZerioDev/Music-bot)</i> by **ZerioDev**.
 
 ## License
 Elaina is licensed under the GPL 3.0 license. See the file `LICENSE` for more information.
