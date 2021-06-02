@@ -2,12 +2,13 @@
 
 # Elaina
 
-[![Build](https://img.shields.io/travis/XRzky/Elaina/stable?style=for-the-badge)](https://travis-ci.com/XRzky/Elaina)
+[![Support](https://img.shields.io/discord/708659047057981451?color=7289da&label=discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/nW6x9EN)
+[![Build](https://img.shields.io/travis/Rygent/Elaina/stable?style=for-the-badge)](https://travis-ci.com/Rygent/Elaina)
+[![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/stable?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/Elaina/dashboard)
+[![License](https://img.shields.io/github/license/Rygent/Elaina?style=for-the-badge)](https://github.com/Rygent/Elaina/blob/stable/LICENSE)
 [![Status](https://botlist.space/bot/614645495779819551/badge?property=status&style=for-the-badge)](https://discordapp.com/oauth2/authorize?&client_id=614645495779819551&scope=bot&permissions=2146958847)
-[![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/stable?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/XRzky/Elaina/dashboard)
-[![License](https://img.shields.io/github/license/XRzky/Elaina?style=for-the-badge)](https://github.com/XRzky/Elaina/blob/stable/LICENSE)
-[![Version](https://img.shields.io/github/package-json/v/XRzky/Elaina/stable?label=version&style=for-the-badge)](https://github.com/XRzky/Elaina/blob/stable/package.json)
-[![Issues](https://img.shields.io/github/issues/XRzky/Elaina.svg?color=37f149&style=for-the-badge)](https://github.com/XRzky/Elaina/issues)
+[![Version](https://img.shields.io/github/package-json/v/Rygent/Elaina/stable?label=version&style=for-the-badge)](https://github.com/Rygent/Elaina/blob/stable/package.json)
+[![Issues](https://img.shields.io/github/issues/Rygent/Elaina.svg?color=37f149&style=for-the-badge)](https://github.com/Rygent/Elaina/issues)
 
 <p align="center">
   <a href="#features">Features</a>
@@ -64,6 +65,7 @@ Elaina can be hosted on anything, from your personal computer, to a Raspberry Pi
 ## Installation
 If you don't want to edit the code of the bot, a permanent online version is available, which you can invite to your own Discord!
 
+[![Discord Bots](https://top.gg/api/widget/614645495779819551.svg)](https://top.gg/bot/614645495779819551)
 [![Discord Boats](https://discord.boats/api/widget/614645495779819551)](https://discord.boats/bot/614645495779819551)
 
 If you want to edit the bot's code and host it on your machine, it's possible!  
