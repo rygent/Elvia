@@ -18,7 +18,6 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const Owner = this.client.users.cache.get(this.client.owner);
 		const core = os.cpus()[0];
 
 		const status = {
@@ -32,16 +31,17 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle(`__Information About ${this.client.user.username}__`)
+			.setAuthor(`Information about ${this.client.user.username}`, this.client.user.displayAvatarURL({ dynamic: true }))
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
-			.addField('__Details__', [
-				`***Client:*** ${this.client.user.tag} (\`${this.client.user.id}\`)`,
-				`***Creator:*** ${Owner.tag}`,
+			.setDescription([
+				`***Client:*** ${this.client.user.tag}`,
+				`***ID:*** \`${this.client.user.id}\``,
+				`***Creator:*** <@${this.client.owner}>`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${version}`,
 				`***Node:*** [${process.version}](https://nodejs.org/)`,
 				`***Library:*** [Discord.js v${discordVersion}](https://discord.js.org/)`,
-				`***Created at:*** ${moment(this.client.user.createdAt).format('MMMM D, YYYY HH:mm')} (${moment(this.client.user.createdAt, 'YYYYMMDDHHmmss').fromNow()})`
+				`***Created:*** ${moment(this.client.user.createdAt).format('MMMM D, YYYY HH:mm')} (${moment(this.client.user.createdAt, 'YYYYMMDDHHmmss').fromNow()})`
 			].join('\n'))
 			.addField('__Systems__', [
 				`***Platform:*** ${os.type} ${os.release} ${os.arch}`,
