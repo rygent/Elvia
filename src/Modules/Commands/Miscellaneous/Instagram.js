@@ -15,8 +15,7 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, args) {
-		const query = args.trim();
+	async run(message, [query]) {
 		if (!query) {
 			return message.quote('Please enter a username to start searching!');
 		}

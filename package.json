@@ -1,6 +1,6 @@
 {
   "name": "elaina",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Elaina is a powerful Discord bot made with Node.js with a lot of commands!",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XRzky/Elaina.git"
+    "url": "git+https://github.com/Rygent/Elaina.git"
   },
   "keywords": [
     "discord-bot",
@@ -20,11 +20,11 @@
   "author": "Rygent",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/XRzky/Elaina/issues"
+    "url": "https://github.com/Rygent/Elaina/issues"
   },
-  "homepage": "https://github.com/XRzky/Elaina#readme",
+  "homepage": "https://github.com/Rygent/Elaina#readme",
   "devDependencies": {
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
     "eslint-config-tesseract": "^0.2.1"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "libnpmsearch": "^3.1.2",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.12.12",
+    "mongoose": "^5.12.13",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.1",
     "os": "^0.1.1",
