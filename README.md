@@ -3,11 +3,11 @@
 # Elaina
 
 [![Support](https://img.shields.io/discord/708659047057981451?color=7289da&label=discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/nW6x9EN)
-[![Build](https://img.shields.io/travis/Rygent/Elaina/stable?style=for-the-badge)](https://travis-ci.com/Rygent/Elaina)
-[![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/stable?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/Elaina/dashboard)
-[![License](https://img.shields.io/github/license/Rygent/Elaina?style=for-the-badge)](https://github.com/Rygent/Elaina/blob/stable/LICENSE)
+[![Build](https://img.shields.io/travis/Rygent/Elaina/main?style=for-the-badge)](https://travis-ci.com/Rygent/Elaina)
+[![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/Elaina/dashboard)
+[![License](https://img.shields.io/github/license/Rygent/Elaina?style=for-the-badge)](https://github.com/Rygent/Elaina/blob/main/LICENSE)
 [![Status](https://botlist.space/bot/614645495779819551/badge?property=status&style=for-the-badge)](https://discordapp.com/oauth2/authorize?&client_id=614645495779819551&scope=bot&permissions=2146958847)
-[![Version](https://img.shields.io/github/package-json/v/Rygent/Elaina/stable?label=version&style=for-the-badge)](https://github.com/Rygent/Elaina/blob/stable/package.json)
+[![Version](https://img.shields.io/github/package-json/v/Rygent/Elaina/main?label=version&style=for-the-badge)](https://github.com/Rygent/Elaina/blob/main/package.json)
 [![Issues](https://img.shields.io/github/issues/Rygent/Elaina.svg?color=37f149&style=for-the-badge)](https://github.com/Rygent/Elaina/issues)
 
 <p align="center">
