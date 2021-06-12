@@ -45,16 +45,17 @@ module.exports = class extends Command {
 			ALL_MEMBERS: 'Scan all messages'
 		};
 
+		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.name).slice(0, -1);
 		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
 			.setAuthor(`Server Information for ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
 			.setThumbnail(message.guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
-			.addField('__Details__', [
+			.setDescription([
 				`***Name:*** ${message.guild.name}`,
-				`***ID:*** ${message.guild.id}`,
-				`***Owner:*** ${message.guild.owner.user.tag}`,
+				`***ID:*** \`${message.guild.id}\``,
+				`***Owner:*** <@${message.guild.ownerID}>`,
 				`***Region:*** ${region[message.guild.region]}`,
 				`***Boost Tier:*** ${message.guild.premiumTier ? `Tier: ${message.guild.premiumTier}` : 'None'}`,
 				`***Explicit filter:*** ${contentFilterLevels[message.guild.explicitContentFilter]}`,
@@ -75,8 +76,8 @@ module.exports = class extends Command {
 			.addField('__Others__', [
 				`***Booster:*** ${message.guild.premiumSubscriptionCount}`
 			], true)
-			.addField(`__Roles [${message.guild.roles.cache.filter(fil => fil.name !== '@everyone').size}]__`, [
-				`${message.guild.roles.cache.sort((a, b) => b.position - a.position).filter(fil => fil.name !== '@everyone').map(re => re.name).join(', ')}`
+			.addField(`__Roles__`, [
+				`${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`
 			])
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
