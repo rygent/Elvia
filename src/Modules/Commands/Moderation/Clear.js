@@ -4,10 +4,10 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['prune', 'clear', 'bulkdelete'],
+			aliases: ['clean', 'purge'],
 			description: 'Deletes messages very quickly!',
 			category: 'Moderation',
-			usage: '<number-of-messages> [mention|id]',
+			usage: '[number] (member)',
 			userPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
 			clientPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
 			cooldown: 3000
