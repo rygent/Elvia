@@ -1,6 +1,6 @@
 const Command = require('../../../Structures/Command.js');
 const { MessageAttachment } = require('discord.js');
-const { Type } = require('@extreme_hero/deeptype');
+const { Type } = require('@anishshobith/deeptype');
 const { inspect } = require('util');
 
 module.exports = class extends Command {

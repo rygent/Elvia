@@ -2,7 +2,7 @@ const Command = require('../../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../Structures/Configuration.js');
 const translator = require('../../../../assets/json/Translator.json');
-const translate = require('@k3rn31p4nic/google-translate-api');
+const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Command {
 
