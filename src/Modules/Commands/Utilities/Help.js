@@ -7,9 +7,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['halp'],
-			description: 'Displays all commands that the bot has.',
+			description: 'Shows all available commands.',
 			category: 'Utilities',
-			usage: '[Command | Alias]',
+			usage: '(command)',
 			cooldown: 5000
 		});
 	}
@@ -32,7 +32,7 @@ module.exports = class extends Command {
 
 			embed.setAuthor(`Commands | ${cmd.name.toProperCase()}`, 'https://i.imgur.com/YxoUvH8.png');
 			embed.setDescription([
-				`Command Parameters: \`<>\` is strict & \`[]\` is optional\n`,
+				`Command Parameters: \`[]\` is strict & \`()\` is optional\n`,
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,

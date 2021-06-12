@@ -9,9 +9,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Searches for spotify tracks and artists.',
+			description: 'Shows song information on spotify.',
 			category: 'Miscellaneous',
-			usage: '<searchQuery>',
+			usage: '[searchQuery]',
 			cooldown: 3000
 		});
 	}
@@ -23,7 +23,7 @@ module.exports = class extends Command {
 		});
 
 		const query = args.join(' ').trim();
-		if (!query) return message.quote('You must provide a search query!');
+		if (!query) return message.quote('Please enter the song title to search!');
 
 		const response = await spotify.search({ type: 'track', query: query });
 		const track = response.tracks.items[0];

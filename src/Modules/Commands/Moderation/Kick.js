@@ -6,10 +6,10 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['boot'],
-			description: 'Kicks the given user and DMs them the reason!',
+			aliases: [],
+			description: 'Kick certain users from the server!',
 			category: 'Moderation',
-			usage: '<@member> <reason>',
+			usage: '[member] [reason]',
 			userPerms: ['KICK_MEMBERS'],
 			clientPerms: ['KICK_MEMBERS'],
 			cooldown: 3000
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
-		if (!member) return message.quote('Please specify a valid member to ban!');
+		if (!member) return message.quote('Please specify a valid member to kick!');
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
@@ -33,7 +33,7 @@ module.exports = class extends Command {
 		if (!reason) return message.quote('Please enter a reason!');
 
 		if (!message.guild.member(member).kickable) {
-			return message.quote(`I can't kick **${member.user.username}**! Their role is higher than mine!`);
+			return message.quote(`I can't kick **${member.user.username}**! For having a higher role than mine!`);
 		}
 
 		if (!member.user.bot) {

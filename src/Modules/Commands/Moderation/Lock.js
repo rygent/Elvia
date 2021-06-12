@@ -7,10 +7,10 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['lockdown', 'ld'],
-			description: 'Locks a channel down for a set duration. Use `lockdown release` to end the lockdown prematurely.',
+			aliases: ['lockdown'],
+			description: 'Lock the channel for a certain period of time! Use `lockdown end` to end lockdown early.',
 			category: 'Moderation',
-			usage: '<duration> <sec|min|hr>',
+			usage: '[duration]',
 			userPerms: ['MANAGE_CHANNELS'],
 			clientPerms: ['MANAGE_CHANNELS'],
 			cooldown: 3000
@@ -21,11 +21,11 @@ module.exports = class extends Command {
 	async run(message, [time]) {
 		if (!this.client.lockit) this.client.lockit = [];
 		if (!time) {
-			return message.quote('A duration for the lockdown must be set. This can be in hours, minutes or seconds.');
+			return message.quote('A duration for the lockdown must be set!');
 		}
 
 		const roleColor = message.guild.me.roles.highest.hexColor;
-		const validUnlocks = ['release', 'rel', 'unlock', 'end', 'stop'];
+		const validUnlocks = ['unlock', 'end', 'stop'];
 		if (validUnlocks.includes(time)) {
 			message.channel.updateOverwrite(message.guild.id, { SEND_MESSAGES: null }).then(() => {
 				message.channel.send('Lockdown lifted.');

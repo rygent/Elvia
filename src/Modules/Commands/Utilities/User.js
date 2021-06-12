@@ -11,7 +11,7 @@ module.exports = class extends Command {
 			aliases: ['uinfo', 'userinfo', 'whois'],
 			description: 'Displays information about the mentioned user.',
 			category: 'Utilities',
-			usage: '[Mention | ID]',
+			usage: '(member)',
 			cooldown: 3000
 		});
 	}
@@ -82,7 +82,7 @@ module.exports = class extends Command {
 			.addField('__Permissions__', allowed || 'None')
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		message.channel.send(embed);
+		return message.channel.send(embed);
 	}
 
 };

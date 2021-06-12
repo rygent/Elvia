@@ -8,9 +8,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['eval'],
-			description: 'Evaluate JS Code.',
+			description: 'Evaluating javascript language code.',
 			category: 'Developer',
-			usage: '<code>',
+			usage: '[code]',
 			ownerOnly: true,
 			cooldown: 3000
 		});
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, args) {
 		const msg = message;
-		if (!args.length) return msg.reply(`I need a code to eval!`);
+		if (!args.length) return msg.quote(`Please enter the javascript code that will be evaluated!`);
 		let code = args.join(' ');
 		code = code.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		let evaled;

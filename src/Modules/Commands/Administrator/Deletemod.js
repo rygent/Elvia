@@ -5,9 +5,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['autodeletemodcommands'],
-			description: 'Enables or disables the auto deletion of moderation commands!',
+			description: 'Automatically delete commands on moderation.',
 			category: 'Administrator',
-			usage: '<on/off>',
+			usage: '[enable/disable]',
 			userPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES'],
 			clientPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES'],
 			cooldown: 3000
@@ -15,26 +15,26 @@ module.exports = class extends Command {
 	}
 
 	/* eslint-disable consistent-return */
-	async run(message, [status]) {
+	async run(message, [option]) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 
-		if (!status) {
-			return message.quote(`You must specify \`on\` or \`off\`!`);
+		if (!option) {
+			return message.quote(`You have to select the options to \`enable\` or \`disable\`!`);
 		}
 
-		switch (status.toLowerCase()) {
-			case 'on':
+		switch (option.toLowerCase()) {
+			case 'enable':
 				guildData.autoDeleteModCommands = true;
 				guildData.save();
-				message.quote('Moderation commands will be automatically deleted!');
+				message.quote('Automatic delete is enabled.\nModeration commands will be automatically deleted!');
 				break;
-			case 'off':
+			case 'disable':
 				guildData.autoDeleteModCommands = false;
 				guildData.save();
-				message.quote('Moderation commands will no longer be automatically deleted!');
+				message.quote('Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!');
 				break;
 			default:
-				message.quote(`You have to choose \`on\` or \`off\`!`);
+				return message.quote(`This option is not found. Please select the option \`enable\` or \`disable\`!`);
 		}
 	}
 

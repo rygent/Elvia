@@ -7,9 +7,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['av'],
-			description: 'Sends the mentioned user\'s avatar.',
+			description: 'Showing avatar of the mentioned user!',
 			category: 'Utilities',
-			usage: '[Mention | ID]',
+			usage: '(member)',
 			cooldown: 5000
 		});
 	}

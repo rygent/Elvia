@@ -5,9 +5,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Clear a member sanctions!',
+			description: 'Remove warnings on certain members!',
 			category: 'Moderation',
-			usage: '<@member>',
+			usage: '[member]',
 			userPerms: ['MANAGE_MESSAGES'],
 			clientPerms: ['MANAGE_MESSAGES'],
 			cooldown: 3000
@@ -17,13 +17,13 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please mention the member you wish to remove the sanctions from!');
+		if (!member) return message.quote('Please specify valid member to remove the warning!');
 
 		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
 		memberData.sanctions = [];
 		memberData.save();
-		return message.quote(`**${member.user.tag}**'s sanctions were deleted!`);
+		return message.quote(`**${member.user.tag}**'s warning has been removed!`);
 	}
 
 };

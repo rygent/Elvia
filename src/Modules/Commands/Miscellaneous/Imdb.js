@@ -9,9 +9,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['movie', 'series'],
-			description: 'Searches IMDb for your query, getting movie/TV series results.',
+			description: 'Shows Movie / TV Series information from IMDb.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>',
+			usage: '[searchQuery]',
 			cooldown: 5000
 		});
 	}
@@ -20,7 +20,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please give the name of movie or series.');
+			return message.quote('Please enter a movie / tv series title to start searching!');
 		}
 
 		try {
@@ -75,7 +75,7 @@ module.exports = class extends Command {
 			return message.channel.send(embed);
 		} catch (err) {
 			if (err.message.startsWith('Movie not found!:')) {
-				return message.quote('Request not found, make sure you have written the title correctly');
+				return message.quote('Search not found, please make sure you have entered the title correctly!');
 			}
 		}
 	}

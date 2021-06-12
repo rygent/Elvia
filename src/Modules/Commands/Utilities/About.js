@@ -11,7 +11,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['botinfo', 'info'],
-			description: 'Shows some information about the running instance!',
+			description: 'Displays information about running Bots!',
 			category: 'Utilities',
 			cooldown: 3000
 		});
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
 			.addField('__Details__', [
 				`***Client:*** ${this.client.user.tag} (\`${this.client.user.id}\`)`,
-				`***Creator:*** ${Owner.tag} ${Emojis.DEVELOPER}`,
+				`***Creator:*** ${Owner.tag}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${version}`,
 				`***Node:*** [${process.version}](https://nodejs.org/)`,
@@ -48,12 +48,11 @@ module.exports = class extends Command {
 				`***CPU:*** ${core.model} ${os.cpus().length} Cores ${core.speed}MHz`,
 				`***Memory:*** ${this.client.utils.formatBytes(process.memoryUsage().heapUsed)} / ${this.client.utils.formatBytes(process.memoryUsage().heapTotal)}`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
-				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}\n`,
-				`[Repository](https://github.com/XRzky/Elaina) | [Support Server](https://discord.gg/nW6x9EN) | [Vote](https://discord.boats/bot/614645495779819551)`
+				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
 			].join('\n'))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		message.channel.send(embed);
+		return message.channel.send(embed);
 	}
 
 };

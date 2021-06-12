@@ -5,9 +5,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Define the sanctions that members will get after a certain number of warns!',
+			description: 'Determine the sanctions given along with the warning limits.',
 			category: 'Administrator',
-			usage: '<kick/ban> <number/reset>',
+			usage: '[sanction] [number/reset]',
 			userPerms: ['MANAGE_GUILD', 'BAN_MEMBERS', 'KICK_MEMBERS'],
 			clientPerms: ['MANAGE_GUILD', 'BAN_MEMBERS', 'KICK_MEMBERS'],
 			cooldown: 3000
@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
 		const sanction = args[0];
 		if (!sanction || (sanction !== 'kick' && sanction !== 'ban')) {
-			message.quote('Please specify sanction between `kick` and `ban`');
+			message.quote(`Please specify a sanction to be given, \`kick\` or \`ban\`.`);
 		}
 
 		const number = args[1];
@@ -29,14 +29,14 @@ module.exports = class extends Command {
 				guildData.plugins.warnsSanctions.kick = false;
 				guildData.markModified('plugins.warnsSanctions');
 				guildData.save();
-				return message.quote(`**Members can no longer be automatically kicked!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
+				return message.quote(`Members will no longer be kicked automatically!`);
 			}
 
 			if (sanction === 'ban') {
 				guildData.plugins.warnsSanctions.ban = false;
 				guildData.markModified('plugins.warnsSanctions');
 				guildData.save();
-				return message.quote(`**Members can no longer be automatically banned!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
+				return message.quote(`Members will no longer be banned automatically!`);
 			}
 		}
 
@@ -47,14 +47,14 @@ module.exports = class extends Command {
 			guildData.plugins.warnsSanctions.kick = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`**\`${number}\` warnings will result in an expulsion!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
+			return message.quote(`\`${number}\` warnings will be given and sanction will be kicked from the server.`);
 		}
 
 		if (sanction === 'ban') {
 			guildData.plugins.warnsSanctions.ban = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`**\`${number}\` warnings will result in a ban!**\n\n*Send \`${guildData.prefix}config\` to see the updated configuration!*`);
+			return message.quote(`\`${number}\` warnings will be given and sanction will be banned from the server.`);
 		}
 	}
 

@@ -8,9 +8,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['forecast'],
-			description: 'Displays weather information for the specified location.',
+			description: 'Shows weather information at a specific location.',
 			category: 'Miscellaneous',
-			usage: '<location>',
+			usage: '[location]',
 			cooldown: 3000
 		});
 	}
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const location = args.join(' ').trim();
 		if (!location) {
-			return message.quote('Please provide me a city to search up!');
+			return message.quote('Please enter a city name to search!');
 		}
 
 		weather.setAPPID(Access.OPENWEATHER);
@@ -28,11 +28,11 @@ module.exports = class extends Command {
 		weather.setCity(location.toLowerCase());
 		weather.getAllWeather((err, res) => {
 			if (err) {
-				return message.quote('An Error Has occured, Try again later.');
+				return message.quote('An API error occurred, Please try again later!');
 			}
 
 			if (res.cod === '404' || !res.sys.country) {
-				return message.quote('Couldn\'t Find That Location!');
+				return message.quote('Couldn\'t find that location!');
 			} else if (res.cod === '401') {
 				return message.quote('Invalid API Key!');
 			}
@@ -75,7 +75,7 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by OpenWeatherMap`, message.author.avatarURL({ dynamic: true }));
 
-			message.channel.send(embed);
+			return message.channel.send(embed);
 		});
 	}
 

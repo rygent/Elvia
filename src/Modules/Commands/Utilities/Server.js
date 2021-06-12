@@ -8,7 +8,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['serverinfo', 'guild', 'guildinfo'],
-			description: 'Displays information about the current server.',
+			description: 'Shows about the current server information.',
 			category: 'Utilities',
 			cooldown: 5000
 		});
@@ -80,7 +80,7 @@ module.exports = class extends Command {
 			])
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		message.channel.send(embed);
+		return message.channel.send(embed);
 	}
 
 };

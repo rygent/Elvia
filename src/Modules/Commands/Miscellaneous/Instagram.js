@@ -8,18 +8,17 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['ig', 'insta'],
-			description: 'Find out some nice instagram statistics',
+			description: 'Shows information about Instagram users.',
 			category: 'Miscellaneous',
-			usage: '<username>',
-			disabled: true,
+			usage: '[username]',
 			cooldown: 5000
 		});
 	}
 
 	async run(message, args) {
-		const query = args.join(' ').trim();
+		const query = args.trim();
 		if (!query) {
-			return message.quote('Maybe it\'s useful to actually search for someone...!');
+			return message.quote('Please enter a username to start searching!');
 		}
 
 		try {
@@ -45,7 +44,7 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} catch {
-			return message.quote('I couldn\'t find that account...');
+			return message.quote('Username not found, please make sure you write it correctly!');
 		}
 	}
 

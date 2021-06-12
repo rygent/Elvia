@@ -8,7 +8,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Posts a random Boobs picture. Warning this commands for 18+',
+			description: 'Post random "Boobs" images. This command contains NSFW!',
 			category: 'NSFW',
 			nsfw: true,
 			cooldown: 10000

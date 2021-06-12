@@ -7,9 +7,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Warn a member in private messages',
+			description: 'Give warning to members!',
 			category: 'Moderation',
-			usage: '<@member> <reason>',
+			usage: '[member] [reason]',
 			userPerms: ['MANAGE_MESSAGES'],
 			clientPerms: ['MANAGE_MESSAGES'],
 			cooldown: 3000
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please specify the member you want to warn!');
+		if (!member) return message.quote('Please specify valid member to warn!');
 		if (member.user.bot) return message.quote('This user is a bot!');
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });

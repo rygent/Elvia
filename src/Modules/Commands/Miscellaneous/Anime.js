@@ -9,9 +9,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['mal', 'myanimelist'],
-			description: 'Searches information from my anime list.',
+			description: 'Shows anime information from MyAnimeList.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>',
+			usage: '[searchQuery]',
 			cooldown: 5000
 		});
 	}
@@ -20,7 +20,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please specify an anime to search!');
+			return message.quote('Please enter a specific anime title!');
 		}
 
 		function output(a) {
@@ -44,7 +44,7 @@ module.exports = class extends Command {
 				const id = data.results[0].mal_id;
 				// eslint-disable-next-line complexity
 				mal.findAnime(id).then(result => {
-					if (result.length === 0) return message.quote('Can\'t search, make sure the anime title is correct');
+					if (result.length === 0) return message.quote('Search not found, make sure the title name matches what you are looking for!');
 
 					const embed = new MessageEmbed()
 						.setColor(Colors.MAL)
@@ -86,7 +86,7 @@ module.exports = class extends Command {
 				});
 			});
 		} catch {
-			return message.quote('Sorry, an API error has occured. Please try again later.');
+			return message.quote('An API error has occurred. Please try again later.');
 		}
 	}
 

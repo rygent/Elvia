@@ -8,9 +8,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Searches game from steam store.',
+			description: 'Shows game information on Steam store.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>',
+			usage: '[searchQuery]',
 			cooldown: 5000
 		});
 	}
@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please provide query to search on Steam store');
+			return message.quote('Please enter the game title to search!');
 		}
 
 		try {
@@ -60,7 +60,7 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} catch {
-			return message.quote('No results were found!');
+			return message.quote('No results found!');
 		}
 	}
 

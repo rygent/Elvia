@@ -6,16 +6,16 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Turn your text into ascii characters!',
+			description: 'Change text letters to ascii characters.',
 			category: 'Fun',
-			usage: '<text>',
+			usage: '[text]',
 			cooldown: 5000
 		});
 	}
 
 	async run(message, args) {
 		const text = args.join(' ');
-		if (!text || text.length > 20) return message.quote('Please enter a valid text (less than 20 characters)!');
+		if (!text || text.length > 20) return message.quote('Please enter text that is no longer than 20 characters!');
 
 		return message.channel.send(await figlet(text), { code: true });
 	}

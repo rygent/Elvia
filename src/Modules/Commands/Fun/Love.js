@@ -7,9 +7,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['affinity'],
-			description: 'Shows how in love you are with a user.',
+			description: 'Show your love to other members.',
 			category: 'Fun',
-			usage: '<Mention | ID>',
+			usage: '[member]',
 			cooldown: 5000
 		});
 	}
@@ -35,7 +35,7 @@ module.exports = class extends Command {
 			])
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		message.channel.send(embed);
+		return message.channel.send(embed);
 	}
 
 };

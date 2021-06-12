@@ -8,16 +8,16 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['8-ball', 'eightball', 'fortune'],
-			description: 'A command decides your fate with an 8-ball, obviously 8-balls aren\'t real you dingus.',
+			description: 'Determine your destiny with the 8-ball.',
 			category: 'Fun',
-			usage: '<question>',
+			usage: '[question]',
 			cooldown: 3000
 		});
 	}
 
 	async run(message, args) {
 		if (!args[1]) {
-			return message.quote('Provide a question for the 8-ball.');
+			return message.quote('Please enter a question to determine your destiny!');
 		}
 
 		const RatingArray = ['Low', 'Medium', 'High'];

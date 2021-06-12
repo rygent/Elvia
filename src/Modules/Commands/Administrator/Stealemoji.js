@@ -6,9 +6,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Steal an emoji from a different server',
+			description: 'Steal emojis from other servers.',
 			category: 'Administrator',
-			usage: '<emoji> [name]',
+			usage: '[emoji] (name)',
 			userPerms: ['MANAGE_GUILD', 'MANAGE_EMOJIS'],
 			clientPerms: ['MANAGE_GUILD', 'MANAGE_EMOJIS'],
 			cooldown: 5000
@@ -17,14 +17,14 @@ module.exports = class extends Command {
 
 	/* eslint-disable consistent-return */
 	async run(message, [emoji, name]) {
-		if (!emoji) return message.quote('Please provide a Emoji or URL of the emoji!');
+		if (!emoji) return message.quote('You have to provide an emoji or url of the emoji!');
 
 		try {
 			if (emoji.startsWith('https://cdn.discordapp.com')) {
-				if (!name) return message.quote('Please provide a name of the emoji!');
+				if (!name) return message.quote('Please specify a name for the emoji!');
 
 				await message.guild.emojis.create(emoji, name).then(emote => {
-					message.quote(`Emoji has been added as **${emote.name}** \`${emote.toString()}\``);
+					message.quote(`Emojis have been added as **${emote.name}** \`${emote.toString()}\``);
 				});
 			}
 
@@ -33,11 +33,11 @@ module.exports = class extends Command {
 				const link = `https://cdn.discordapp.com/emojis/${customEmoji.id}.${customEmoji.animated ? 'gif' : 'png'}`;
 
 				await message.guild.emojis.create(link, name || customEmoji.name).then(emote => {
-					message.quote(`Emoji has been added as **${emote.name}** \`${emote.toString()}\``);
+					message.quote(`Emojis have been added as **${emote.name}** \`${emote.toString()}\``);
 				});
 			}
 		} catch (err) {
-			return message.quote('The Emoji is invalid or you don\'t have more space on your server!');
+			return message.quote('The emoji are invalid or you don\'t have more space on your server!');
 		}
 	}
 

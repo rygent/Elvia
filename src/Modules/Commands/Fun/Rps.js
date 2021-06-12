@@ -2,14 +2,14 @@ const Command = require('../../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../Structures/Configuration.js');
 
-const chooseArr = ['🗻', '📰', '✂'];
+const chooseArr = ['👊', '🖐', '✌'];
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Rock Paper Scissors game. React to one of the emojis to play the game.',
+			description: 'Play rock paper scissors game by choosing emoji reactions.',
 			category: 'Fun',
 			cooldown: 5000
 		});
@@ -20,7 +20,6 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
-			.setTitle('Rock Paper Scissors')
 			.setDescription('Choose emojis to start the game!')
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
@@ -30,20 +29,19 @@ module.exports = class extends Command {
 		const result = await getResult(reacted, botChoice);
 		await msg.reactions.removeAll();
 
-		embed.setDescription('');
-		embed.addField(result, `${reacted} vs ${botChoice}`);
+		embed.setDescription(`${reacted} vs ${botChoice} (${result})`);
 
 		msg.edit(embed);
 
 		function getResult(me, clientChosen) {
-			if ((me === '🗻' && clientChosen === '✂') ||
-                (me === '📰' && clientChosen === '🗻') ||
-                (me === '✂' && clientChosen === '📰')) {
-				return 'You won!';
+			if ((me === '👊' && clientChosen === '✌') ||
+                (me === '🖐' && clientChosen === '👊') ||
+                (me === '✌' && clientChosen === '🖐')) {
+				return 'You win';
 			} else if (me === clientChosen) {
-				return 'Its a tie!';
+				return 'It\'s a draw';
 			} else {
-				return 'You lost!';
+				return 'You lose';
 			}
 		}
 	}

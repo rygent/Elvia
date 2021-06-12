@@ -8,9 +8,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['wiki'],
-			description: 'Searches Wikipedia Article use title',
+			description: 'Shows short information articles from Wikipedia.',
 			category: 'Miscellaneous',
-			usage: '<querySearch>',
+			usage: '[searchQuery]',
 			cooldown: 5000
 		});
 	}
@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please provide query to search on Wikipedia');
+			return message.quote('Please enter the article title to search!');
 		}
 
 		try {
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} catch {
-			return message.quote('I couldn\'t find a wikipedia article with that title!');
+			return message.quote('Couldn\'t find a wikipedia article with that title!');
 		}
 	}
 

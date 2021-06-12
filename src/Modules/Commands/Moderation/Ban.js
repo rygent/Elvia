@@ -6,10 +6,10 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['banish', 'permban'],
-			description: 'Bans the given user and DMs them the reason!',
+			aliases: [],
+			description: 'Ban certain users from the server!',
 			category: 'Moderation',
-			usage: '<@member> <reason>',
+			usage: '[member] [reason]',
 			userPerms: ['BAN_MEMBERS'],
 			clientPerms: ['BAN_MEMBERS'],
 			cooldown: 3000
@@ -26,18 +26,18 @@ module.exports = class extends Command {
 
 		if (member.id === message.author.id) return message.quote('You can\'t ban yourself!');
 		if (message.guild.member(message.author).roles.highest.position <= message.guild.member(member).roles.highest.position) {
-			return message.quote('You can\'t banned a member who has an higher or equal role hierarchy to yours!');
+			return message.quote('You can\'t ban a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const reason = args.join(' ');
 		if (!reason) return message.quote('Please enter a reason!');
 
 		if (!message.guild.member(member).bannable) {
-			return message.quote(`I can't banned **${member.user.username}**! Their role is higher than mine!`);
+			return message.quote(`I can't banned **${member.user.username}**! For having a higher role than mine!`);
 		}
 
 		if (!member.user.bot) {
-			await member.send(`Hello <@${member.id}>,\nYou have just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
+			await member.send(`Hello <@${member.id}>,\nYou've just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 		}
 
 		message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason}` }).then(() => {

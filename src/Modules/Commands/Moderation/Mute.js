@@ -9,9 +9,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Prevents a member from sending messages and connecting to a voice chat room for a defined period of time!',
+			description: 'Restrict members from sending messages and voice chats for a certain period of time!',
 			category: 'Moderation',
-			usage: '<@member> <time> <reason>',
+			usage: '[member] [duration] [reason]',
 			userPerms: ['MANAGE_MESSAGES'],
 			clientPerms: ['MANAGE_CHANNELS'],
 			cooldown: 3000
@@ -35,7 +35,7 @@ module.exports = class extends Command {
 		if (!time || isNaN(ms(time))) return message.quote('You must enter a valid time! Available units: `s`, `m`, `h` or `d`');
 
 		const reason = args.join(' ');
-		if (!reason) return message.quote('No reason provided');
+		if (!reason) return message.quote('Please enter a reason!');
 
 		message.guild.channels.cache.forEach((channel) => {
 			channel.updateOverwrite(member.id, {

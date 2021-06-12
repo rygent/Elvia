@@ -5,38 +5,39 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['set'],
-			description: 'Set a default channel',
+			description: 'Defines a channel for sending log history.',
 			category: 'Administrator',
-			usage: '<option> <channel>',
+			usage: '[option] [channel]',
 			userPerms: ['MANAGE_GUILD'],
 			clientPerms: ['MANAGE_GUILD'],
 			cooldown: 3000
 		});
 	}
 
+	/* eslint-disable consistent-return */
 	async run(message, [option]) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const target = message.mentions.channels.filter(ch => ch.type === 'text' && ch.guild.id === message.guild.id).last() || message.channel;
 
 		if (!option) {
-			message.quote('Please provide an valid option.');
+			return message.quote(`You have to select the options to \`moderation\` and \`message\`!`);
 		}
 
 		switch (option.toLowerCase()) {
-			case 'moderation-channel':
+			case 'moderation':
 				guildData.plugins.moderations = target.id;
 				guildData.markModified('plugins.moderations');
 				guildData.save();
-				message.quote(`Moderation channel defined on <#${target.id}> !`);
+				message.quote(`Moderation log channels have been defined in <#${target.id}>`);
 				break;
-			case 'audit-channel':
+			case 'message':
 				guildData.plugins.audits = target.id;
 				guildData.markModified('plugins.audits');
 				guildData.save();
-				message.quote(`Audit channel defined on <#${target.id}> !`);
+				message.quote(`Message log channels have been defined in <#${target.id}>`);
 				break;
 			default:
-				message.quote(`\`${option}\` is not a option!`);
+				return message.quote(`This option is not found. Please select the option \`moderation\` and \`message\`!`);
 		}
 	}
 

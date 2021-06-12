@@ -5,9 +5,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Unmute the mentioned member!',
+			description: 'Unmute for specific members!',
 			category: 'Moderation',
-			usage: '<@member>',
+			usage: '[member]',
 			userPerms: ['MANAGE_MESSAGES'],
 			clientPerms: ['MANAGE_CHANNELS'],
 			cooldown: 3000
@@ -17,7 +17,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please specify the member you want to unmute!');
+		if (!member) return message.quote('Please specify valid member to unmuted');
 		const memberPosition = member.roles.highest.position;
 		const moderationPosition = message.member.roles.highest.position;
 		if (message.member.ownerID !== message.author.id && !(moderationPosition > memberPosition)) {
