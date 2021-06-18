@@ -35,8 +35,9 @@ module.exports = class extends Command {
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
-				`***Usage:*** ${cmd.usage ? `\`${prefix + cmd.name} ${cmd.usage}\`` : `\`${prefix + cmd.name}\``}`,
-				`***Cooldown:*** ${cmd.cooldown / 1000} seconds`
+				`***Permission:*** ${cmd.userPerms.toArray().length > 0 ? `${cmd.userPerms.toArray().map((perm) => `\`${this.client.utils.formatPerms(perm)}\``).join(', ')}` : 'No permission required.'}`,
+				`***Cooldown:*** \`${cmd.cooldown / 1000}\` seconds`,
+				`***Usage:*** ${cmd.usage ? `\`${prefix + cmd.name} ${cmd.usage}\`` : `\`${prefix + cmd.name}\``}`
 			].join('\n'));
 
 			return message.reply({ embeds: [embed] });
@@ -53,7 +54,7 @@ module.exports = class extends Command {
 			for (const category of categories) {
 				const dir = this.client.commands.filter(cmd => cmd.category === category);
 				if (this.client.utils.categoryCheck(category, message)) {
-					embed.addField(`__${category}__ [${dir.size}]`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
+					embed.addField(`__${category}__ (${dir.size})`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
 				}
 			}
 
