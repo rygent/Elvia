@@ -6,9 +6,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['discordjs', 'docs'],
+			aliases: ['discordjs', 'djs'],
 			description: 'Shows information from the discord.js documentation.',
-			category: 'Developer',
+			category: 'Miscellaneous',
 			usage: '[searchQuery]',
 			clientPerms: ['ADD_REACTIONS', 'MANAGE_MESSAGES'],
 			cooldown: 5000
@@ -27,28 +27,12 @@ module.exports = class extends Command {
 		}
 
 		const embed = new MessageEmbed(result)
+			.setAuthor(result.author.name, 'https://discord.js.org/favicon-32x32.png', result.author.url)
+			.setColor('#5865F2')
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
 
-		if (!message.guild) {
-			return message.reply({ embeds: [embed] });
-		}
 
-		const msg = await message.reply({ embeds: [embed] });
-		msg.react('🗑');
-
-		let react;
-		try {
-			react = await msg.awaitReactions(
-				(reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id,
-				{ max: 1, time: 10000, errors: ['time'] }
-			);
-		} catch (error) {
-			msg.reactions.removeAll();
-		}
-
-		if (react && react.first()) msg.delete();
-
-		return message;
+		return message.reply({ embeds: [embed] });
 	}
 
 };
