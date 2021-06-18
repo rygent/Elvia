@@ -29,7 +29,7 @@ module.exports = class extends Command {
 			embed.setDescription('Please try again later');
 		}
 
-		msg.edit('\u200B', embed);
+		msg.edit({ content: '\u200B', embeds: [embed] });
 	}
 
 };

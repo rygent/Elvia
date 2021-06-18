@@ -25,7 +25,7 @@ module.exports = class extends Command {
 			.setImage(`http://media.obutts.ru/${data[0].preview}`)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		return message.channel.send(embed);
+		return message.channel.send({ embeds: [embed] });
 	}
 
 };

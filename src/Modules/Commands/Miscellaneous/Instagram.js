@@ -42,7 +42,7 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Instagram`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} catch {
 			return message.quote('Username not found, please make sure you write it correctly!');
 		}

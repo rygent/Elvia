@@ -72,7 +72,7 @@ module.exports = class extends Command {
 				embed.addField('__Awards__', data.awards, false);
 			}
 
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} catch (err) {
 			if (err.message.startsWith('Movie not found!:')) {
 				return message.quote('Search not found, please make sure you have entered the title correctly!');

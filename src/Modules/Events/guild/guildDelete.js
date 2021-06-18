@@ -18,7 +18,7 @@ module.exports = class extends Event {
 			].join('\n'));
 
 		const sendChannel = this.client.channels.cache.get(Supports.GUILD_LOGS);
-		sendChannel.send(embed);
+		sendChannel.send({ embeds: [embed] });
 	}
 
 };

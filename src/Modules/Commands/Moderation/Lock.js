@@ -42,7 +42,7 @@ module.exports = class extends Command {
 					].join('\n'))
 					.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
 
-				message.channel.send(embed).then(() => {
+				message.channel.send({ embeds: [embed] }).then(() => {
 					this.client.lockit[message.channel.id] = setTimeout(() => {
 						message.channel.updateOverwrite(message.guild.id, { SEND_MESSAGES: null })
 							.then(message.channel.send('Lockdown lifted.'));

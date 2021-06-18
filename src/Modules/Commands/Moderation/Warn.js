@@ -91,7 +91,7 @@ module.exports = class extends Command {
 		if (guildData.plugins.moderations) {
 			const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
 			if (!sendChannel) return;
-			sendChannel.send(embed);
+			sendChannel.send({ embeds: [embed] });
 		}
 	}
 

@@ -58,7 +58,7 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Steam`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} catch {
 			return message.quote('No results found!');
 		}

@@ -30,7 +30,7 @@ module.exports = class extends Event {
 				embed.splitFields(`***Deleted Message:*** ${message.content}`);
 			}
 
-			if (sendChannel) sendChannel.send(embed);
+			if (sendChannel) sendChannel.send({ embeds: [embed] });
 		}
 	}
 

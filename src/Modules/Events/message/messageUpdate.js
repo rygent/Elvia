@@ -30,7 +30,7 @@ module.exports = class extends Event {
 					.join(' '))
 				.setFooter(`Powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
 
-			if (sendChannel) sendChannel.send(embed);
+			if (sendChannel) sendChannel.send({ embeds: [embed] });
 		}
 	}
 

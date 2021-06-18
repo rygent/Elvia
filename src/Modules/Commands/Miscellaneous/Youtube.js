@@ -35,7 +35,7 @@ module.exports = class extends Command {
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by YouTube`, message.author.avatarURL({ dynamic: true }))
 				.setTimestamp(new Date(data[0].publishedAt));
 
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} catch {
 			return message.quote('No results found!');
 		}

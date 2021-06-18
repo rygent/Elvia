@@ -20,7 +20,7 @@ module.exports = class extends Event {
 			].join('\n'));
 
 		const sendChannel = this.client.channels.cache.get(Supports.GUILD_LOGS);
-		sendChannel.send(embed);
+		sendChannel.send({ embeds: [embed] });
 
 		const directEmbed = new MessageEmbed()
 			.setColor(Colors.DEFAULT)
@@ -33,7 +33,7 @@ module.exports = class extends Event {
 			].join('\n'));
 
 		const sendOwner = this.client.users.cache.get(guild.ownerID);
-		sendOwner.send(directEmbed);
+		sendOwner.send({ embeds: [directEmbed] });
 	}
 
 };

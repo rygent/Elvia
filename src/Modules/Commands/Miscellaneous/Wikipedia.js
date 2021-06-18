@@ -34,7 +34,7 @@ module.exports = class extends Command {
 				.setDescription(data.extract)
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} catch {
 			return message.quote('Couldn\'t find a wikipedia article with that title!');
 		}

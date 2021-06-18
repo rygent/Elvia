@@ -30,10 +30,10 @@ module.exports = class extends Command {
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
 
 		if (!message.guild) {
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		}
 
-		const msg = await message.channel.send(embed);
+		const msg = await message.channel.send({ embeds: [embed] });
 		msg.react('🗑');
 
 		let react;

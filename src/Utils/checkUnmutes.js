@@ -40,7 +40,7 @@ module.exports = {
 					.setFooter(`Moderation system powered by ${client.user.username}`, client.user.avatarURL({ dynamic: true }));
 				const sendChannel = guild.channels.cache.get(guildData.plugins.moderations);
 				if (sendChannel) {
-					sendChannel.send(embed);
+					sendChannel.send({ embeds: [embed] });
 				}
 				memberData.mute = {
 					muted: false,

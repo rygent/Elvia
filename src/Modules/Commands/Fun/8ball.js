@@ -29,7 +29,7 @@ module.exports = class extends Command {
 			.setDescription(`❯  ${Choice.Message}`)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
 
-		return message.channel.send(embed);
+		return message.channel.send({ embeds: [embed] });
 	}
 
 };
