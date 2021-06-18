@@ -23,10 +23,8 @@ module.exports = class extends Command {
 		const RatingArray = ['Low', 'Medium', 'High'];
 		const Choice = answers[Math.floor(Math.random() * answers.length).toString(10)];
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setTitle(`🎱 ${args.slice(0).join(' ')}`)
 			.setDescription(`❯  ${Choice.Message}`)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));

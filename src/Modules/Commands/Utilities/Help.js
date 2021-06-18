@@ -17,12 +17,11 @@ module.exports = class extends Command {
 	async run(message, [command]) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const prefix = guildData ? guildData.prefix : this.client.prefix;
-		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
-			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (command) {

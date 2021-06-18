@@ -30,15 +30,14 @@ module.exports = class extends Command {
 		const userFlags = member.user.flags.toArray();
 
 		const embed = new MessageEmbed()
-			.setColor(member.displayHexColor === '#000000' ? Colors.DEFAULT : member.displayHexColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`User Information for ${member.user.username}`, member.user.avatarURL({ dynamic: true }))
-			.setThumbnail(member.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***Username:*** ${member.user.tag} ${member.user.bot ? Emojis.BOT : ''}`,
 				`***ID:*** \`${member.id}\``,
 				`***Nickname:*** ${member.nickname || member.user.username}`,
 				`***Flags:*** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(' ') : 'None.'}`,
-				`***Avatar:*** [Link to Avatar](${member.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })})`,
 				`***Status:*** ${status[member.user.presence.status]}`,
 				`***Activity:*** ${member.user.presence.activities.length > 0 ? member.user.presence.activities.join(', ') : 'No Activity.'}`,
 				`***Created:*** ${moment(member.user.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(member.user.createdTimestamp).fromNow()})`

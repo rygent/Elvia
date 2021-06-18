@@ -10,16 +10,16 @@
     "success_url": "https://discord.gg/nW6x9EN",
     "stack": "container",
     "env": {
-      "BOT_TOKEN": {
+      "DISCORD_TOKEN": {
         "description": "Get this value from https://discord.com/developers/applications.",
         "required": true
       },
-      "BOT_PREFIX": {
+      "DISCORD_PREFIX": {
         "description": "Input here the prefix for your bot.",
         "value": "$",
         "require": true
       },
-      "BOT_OWNER": {
+      "DISCORD_OWNER": {
         "description": "Input here your ID as the bot owner.",
         "required": true
       },

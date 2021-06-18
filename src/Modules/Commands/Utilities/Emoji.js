@@ -24,10 +24,8 @@ module.exports = class extends Command {
 		const authorFetch = await emoji.fetchAuthor();
 		const checkOrCross = (bool) => bool ? 'Yes' : 'No';
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`Emoji information on ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
 			.setTitle(emoji.name.toLowerCase())
 			.setURL(emoji.url)

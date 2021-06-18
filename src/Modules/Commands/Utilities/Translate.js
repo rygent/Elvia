@@ -30,7 +30,7 @@ module.exports = class extends Command {
 			embed.setTitle('Available Languages');
 			embed.setDescription(`\`\`\`JSON\n${JSON.stringify(translator).replace(/[{}]/g, '').split(',').join(',\n')}\`\`\``);
 
-			return message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 }));
+			return message.channel.send(embed).then(msg => this.client.setTimeout(() => msg.delete(), 60000));
 		}
 
 		if (!target) return message.quote(`Please provide the desired language!\nTo display a list of languages, type \`${prefix}translate lang\` !`);

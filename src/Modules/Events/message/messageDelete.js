@@ -1,5 +1,5 @@
 const Event = require('../../../Structures/Event.js');
-const ElainaEmbed = require('../../../Structures/ElainaEmbed.js');
+const ClientEmbed = require('../../../Structures/ClientEmbed.js');
 const { Colors } = require('../../../Structures/Configuration.js');
 
 module.exports = class extends Event {
@@ -14,15 +14,15 @@ module.exports = class extends Event {
 			if (!sendChannel) return;
 
 			const attachments = message.attachments.size ? message.attachments.map(attachment => attachment.proxyURL) : null;
-			const roleColor = message.guild.me.roles.highest.hexColor;
 
-			const embed = new ElainaEmbed()
-				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			const embed = new ClientEmbed()
+				.setColor(Colors.DEFAULT)
 				.setTitle('Message Delete')
+				.setThumbnail(message.member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 				.setDescription([
 					`***Message ID:*** \`${message.id}\``,
 					`***Channel:*** ${message.channel}`,
-					`***Author:*** ${message.member.displayName}`,
+					`***Author:*** <@${message.member.id}>`,
 					`${attachments ? `***Attachments:*** ${attachments.join('\n')}` : ''}`
 				].join('\n'))
 				.setFooter(`Powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));

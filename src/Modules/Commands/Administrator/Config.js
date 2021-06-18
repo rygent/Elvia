@@ -17,12 +17,11 @@ module.exports = class extends Command {
 
 	async run(message) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`Configuration on ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
-			.setThumbnail(message.guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***Server prefix:*** \`${guildData.prefix}\``,
 				`***Ignored channels:*** ${guildData.ignoredChannels.length > 0 ? guildData.ignoredChannels.map((ch) => `<#${ch}>`).join(', ') : 'No ignored channels.'}`,

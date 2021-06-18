@@ -1,14 +1,23 @@
-const { APIMessage, Client, Collection, Message, Permissions } = require('discord.js');
+const { APIMessage, Client, Collection, Intents, Message, Permissions } = require('discord.js');
 const Util = require('./Util.js');
-const Database = require('./ElainaDatabase.js');
+const Database = require('./ClientDatabase.js');
 
-module.exports = class ElainaClient extends Client {
+module.exports = class BaseClient extends Client {
 
 	/* eslint-disable func-names */
 	constructor(options = {}) {
 		super({
-			disableMentions: 'everyone',
-			partials: ['GUILD_MEMBER', 'MESSAGE', 'USER']
+			intents: [
+				Intents.FLAGS.GUILDS,
+				Intents.FLAGS.GUILD_MEMBERS,
+				Intents.FLAGS.GUILD_PRESENCES,
+				Intents.FLAGS.GUILD_MESSAGES,
+				Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+				Intents.FLAGS.DIRECT_MESSAGES
+			],
+			allowedMentions: {
+				parse: ['users']
+			}
 		});
 		this.validate(options);
 
@@ -21,7 +30,7 @@ module.exports = class ElainaClient extends Client {
 
 		this.usersData = require('../Schemas/UserData.js');
 		this.guildsData = require('../Schemas/GuildData.js');
-		this.membersData = require('../Schemas/MemberData');
+		this.membersData = require('../Schemas/MemberData.js');
 
 		this.databaseCache = {};
 		this.databaseCache.users = new Collection();

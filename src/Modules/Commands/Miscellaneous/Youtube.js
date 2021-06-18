@@ -11,8 +11,7 @@ module.exports = class extends Command {
 			aliases: ['yt'],
 			description: 'Searches for a video on youtube',
 			category: 'Miscellaneous',
-			usage: '<querySearch>',
-			disabled: true,
+			usage: '[searchQuery]',
 			cooldown: 5000
 		});
 	}
@@ -20,7 +19,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please provide query to search on YouTube');
+			return message.quote('Please enter a query to search!');
 		}
 
 		try {
@@ -38,7 +37,7 @@ module.exports = class extends Command {
 
 			return message.channel.send(embed);
 		} catch {
-			return message.quote('No results were found!');
+			return message.quote('No results found!');
 		}
 	}
 

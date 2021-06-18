@@ -17,7 +17,7 @@ module.exports = class extends Command {
 		const text = args.join(' ');
 		if (!text || text.length > 20) return message.quote('Please enter text that is no longer than 20 characters!');
 
-		return message.channel.send(await figlet(text), { code: true });
+		return message.channel.send({ content: await figlet(text), code: true });
 	}
 
 };

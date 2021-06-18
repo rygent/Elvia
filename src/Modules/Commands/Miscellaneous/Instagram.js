@@ -15,13 +15,14 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [query]) {
+	async run(message, args) {
+		const query = args.join();
 		if (!query) {
 			return message.quote('Please enter a username to start searching!');
 		}
 
 		try {
-			const headers = { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36' };
+			const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
 			const data = await axios.get(`https://instagram.com/${query}/?__a=1`, { headers }).then(res => res.data.graphql.user);
 
 			const embed = new MessageEmbed()

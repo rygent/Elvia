@@ -17,7 +17,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		exec(args.join(' '), (error, stdout) => {
 			const response = stdout || error;
-			return message.channel.send(response, { split: true, code: true });
+			return message.channel.send({ content: response, split: true, code: true });
 		});
 	}
 

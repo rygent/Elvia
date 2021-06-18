@@ -16,10 +16,8 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setDescription('Choose emojis to start the game!')
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 

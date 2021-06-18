@@ -15,22 +15,6 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const region = {
-			brazil: ':flag_br: Brazil',
-			europe: ':flag_eu: Europe',
-			hongkong: ':flag_hk: Hong Kong',
-			india: ':flag_in: India',
-			japan: ':flag_jp: Japan',
-			russia: ':flag_ru: Russia',
-			singapore: ':flag_sg: Singapore',
-			southafrica: ':flag_za: South Africa',
-			sydney: ':flag_au: Sydney',
-			'us-central': ':flag_us: U.S. Central',
-			'us-east': ':flag_us: U.S. East',
-			'us-south': ':flag_us: U.S. South',
-			'us-west': ':flag_us: U.S. West'
-		};
-
 		const verificationLevels = {
 			NONE: 'None',
 			LOW: 'Low',
@@ -46,18 +30,16 @@ module.exports = class extends Command {
 		};
 
 		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.name).slice(0, -1);
-		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`Server Information for ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
-			.setThumbnail(message.guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***Name:*** ${message.guild.name}`,
 				`***ID:*** \`${message.guild.id}\``,
 				`***Owner:*** <@${message.guild.ownerID}>`,
-				`***Region:*** ${region[message.guild.region]}`,
-				`***Boost Tier:*** ${message.guild.premiumTier ? `Tier: ${message.guild.premiumTier}` : 'None'}`,
+				`***Boost Tier:*** ${message.guild.premiumTier.toProperCase()}`,
 				`***Explicit filter:*** ${contentFilterLevels[message.guild.explicitContentFilter]}`,
 				`***Verification:*** ${verificationLevels[message.guild.verificationLevel]}`,
 				`***Created:*** ${moment(message.guild.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(message.guild.createdTimestamp).fromNow()})`

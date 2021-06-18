@@ -22,10 +22,9 @@ module.exports = class extends Command {
 		if (!user) return message.quote('You must specify a member\'s username!');
 
 		const memberData = await this.client.findOrCreateMember({ id: user.id, guildID: message.guild.id });
-		const roleColor = message.guild.me.roles.highest.hexColor;
 
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.YELLOW)
 			.setAuthor(user.tag, user.avatarURL({ dynamic: true }))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 

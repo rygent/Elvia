@@ -27,12 +27,10 @@ module.exports = class extends Command {
 			invisible: `${Emojis.OFFLINE} Offline`
 		};
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setAuthor(`Information about ${this.client.user.username}`, this.client.user.displayAvatarURL({ dynamic: true }))
-			.setThumbnail(this.client.user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***Client:*** ${this.client.user.tag}`,
 				`***ID:*** \`${this.client.user.id}\``,

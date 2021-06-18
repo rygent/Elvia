@@ -1,8 +1,8 @@
 /* eslint-disable no-process-env */
 module.exports = {
-	token: process.env.BOT_TOKEN,
-	prefix: process.env.BOT_PREFIX,
-	owner: process.env.BOT_OWNER,
+	token: process.env.DISCORD_TOKEN,
+	prefix: process.env.DISCORD_PREFIX,
+	owner: process.env.DISCORD_OWNER,
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	Access: {
 		IMDB: process.env.IMDB_KEY,
@@ -11,11 +11,13 @@ module.exports = {
 			CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
 			CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET
 		},
-		YOUTUBE: process.env.YOUTUBE_KEY
+		YOUTUBE: process.env.YOUTUBE_KEY,
+		MONGO_URI: process.env.MONGO_URI
 	},
 	Colors: {
-		DEFAULT: 'ff4654',
+		DEFAULT: '2f3136',
 		GREEN: '2ecc71',
+		YELLOW: 'ffff00',
 		ORANGE: 'e67e22',
 		RED: 'e74c3c',
 		GREY: '95a5a6',
@@ -30,12 +32,8 @@ module.exports = {
 		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
 	},
-	Emojis: {
-		DEVELOPER: '<:developer:712397604192780328>',
-		BOT: '<:bot:729455298917564467>',
-		ONLINE: '<:online:712397262256472075>',
-		IDLE: '<:idle:712397201955094708>',
-		DND: '<:dnd:712397154836283392>',
-		OFFLINE: '<:offline:712397086100029440>'
+	Emojis: require('../../assets/json/Emoji.json'),
+	Supports: {
+		GUILD_LOGS: process.env.GUILD_LOGS
 	}
 };

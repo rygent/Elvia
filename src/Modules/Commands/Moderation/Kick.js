@@ -62,10 +62,8 @@ module.exports = class extends Command {
 				const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
 				if (!sendChannel) return;
 
-				const roleColor = message.guild.me.roles.highest.hexColor;
-
 				const embed = new MessageEmbed()
-					.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+					.setColor(Colors.ORANGE)
 					.setAuthor(`Moderation: Kick | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }))
 					.setDescription([
 						`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,

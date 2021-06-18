@@ -14,10 +14,8 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setTitle('Click here to add me to your server!')
 			.setURL(`https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1584786551`)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));

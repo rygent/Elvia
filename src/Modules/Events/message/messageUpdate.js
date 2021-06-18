@@ -1,5 +1,5 @@
 const Event = require('../../../Structures/Event.js');
-const ElainaEmbed = require('../../../Structures/ElainaEmbed.js');
+const ClientEmbed = require('../../../Structures/ClientEmbed.js');
 const { Colors } = require('../../../Structures/Configuration.js');
 const { Util: { escapeMarkdown } } = require('discord.js');
 const { diffWordsWithSpace } = require('diff');
@@ -15,15 +15,14 @@ module.exports = class extends Event {
 			const sendChannel = message.guild.channels.cache.get(guildData.plugins.audits);
 			if (!sendChannel) return;
 
-			const roleColor = message.guild.me.roles.highest.hexColor;
-
-			const embed = new ElainaEmbed()
-				.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			const embed = new ClientEmbed()
+				.setColor(Colors.DEFAULT)
 				.setTitle('Message Edited')
+				.setThumbnail(old.author.displayAvatarURL({ dynamic: true, size: 512 }))
 				.setDescription([
 					`***Message ID:*** \`${old.id}\``,
 					`***Channel:*** ${old.channel}`,
-					`***Author:*** ${old.author.tag} (\`${old.author.id}\`)`
+					`***Author:*** <@${old.author.id}>`
 				].join('\n'))
 				.setURL(old.url)
 				.splitFields(diffWordsWithSpace(escapeMarkdown(old.content), escapeMarkdown(message.content))

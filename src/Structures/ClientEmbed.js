@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const ZWS = '\u200B';
 
-module.exports = class ElainaEmbed extends MessageEmbed {
+module.exports = class ClientEmbed extends MessageEmbed {
 
 	splitFields(contentOrTitle, rawContent) {
 		if (typeof contentOrTitle === 'undefined') return this;

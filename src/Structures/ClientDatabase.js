@@ -1,10 +1,11 @@
+const { Access } = require('./Configuration.js');
 const database = require('mongoose');
 const chalk = require('chalk');
 
-module.exports = class ElainaDatabase {
+module.exports = class ClientDatabase {
 
-	async loadDatabase() { // eslint-disable-next-line no-process-env
-		database.connect(process.env.MONGO_URI, {
+	async loadDatabase() {
+		database.connect(Access.MONGO_URI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		});
@@ -18,7 +19,7 @@ module.exports = class ElainaDatabase {
 		});
 
 		database.connection.on('disconnected', () => {
-			process.stdout.write(`[${chalk.blueBright('INFO')}] MongoDB connection is disconnected\n`);
+			process.stdout.write(`[${chalk.grey('INFO')}] MongoDB connection is disconnected\n`);
 		});
 	}
 

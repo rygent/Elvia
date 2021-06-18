@@ -1,6 +1,6 @@
 const Event = require('../../../Structures/Event.js');
 const { MessageEmbed } = require('discord.js');
-const { Colors } = require('../../../Structures/Configuration.js');
+const { Colors, Supports } = require('../../../Structures/Configuration.js');
 
 module.exports = class extends Event {
 
@@ -10,14 +10,14 @@ module.exports = class extends Event {
 		const embed = new MessageEmbed()
 			.setColor(Colors.RED)
 			.setTitle(`${this.client.user.username} left a server.`)
-			.setThumbnail(guild.iconURL({ format: 'png', dynamic: true, size: 4096 }))
+			.setThumbnail(guild.iconURL({ dynamic: true, size: 512 }))
 			.setDescription([
-				`***Server:*** ${guild.name} (${guild.id})`,
-				`***Owner:*** ${guild.owner.user.tag} (${guild.ownerID})`
+				`***Server:*** ${guild.name}`,
+				`***ID:*** \`${guild.id}\``,
+				`***Owner:*** <@${guild.ownerID}>`
 			].join('\n'));
 
-		// eslint-disable-next-line no-process-env
-		const sendChannel = this.client.channels.cache.get(process.env.GUILD_LOGS);
+		const sendChannel = this.client.channels.cache.get(Supports.GUILD_LOGS);
 		sendChannel.send(embed);
 	}
 

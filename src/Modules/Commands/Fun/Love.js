@@ -25,10 +25,8 @@ module.exports = class extends Command {
 		const loveIndex = Math.floor(love / 10);
 		const loveLevel = '💖'.repeat(loveIndex) + '💔'.repeat(10 - loveIndex);
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.DEFAULT)
 			.setDescription([
 				`**${message.member.displayName}** is ${Math.floor(love)}% in love with **${person.displayName}**`,
 				`${loveLevel}`

@@ -24,7 +24,6 @@ module.exports = class extends Command {
 			return message.quote('A duration for the lockdown must be set!');
 		}
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
 		const validUnlocks = ['unlock', 'end', 'stop'];
 		if (validUnlocks.includes(time)) {
 			message.channel.updateOverwrite(message.guild.id, { SEND_MESSAGES: null }).then(() => {
@@ -35,7 +34,7 @@ module.exports = class extends Command {
 		} else {
 			message.channel.updateOverwrite(message.guild.id, { SEND_MESSAGES: false }).then(() => {
 				const embed = new MessageEmbed()
-					.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+					.setColor(Colors.DEFAULT)
 					.setTitle('🔒 Channel locked down')
 					.setDescription([
 						`***Duration:*** ${ms(ms(time), { long: true })}`,

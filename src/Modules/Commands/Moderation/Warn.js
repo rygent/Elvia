@@ -51,10 +51,8 @@ module.exports = class extends Command {
 			reason
 		};
 
-		const roleColor = message.guild.me.roles.highest.hexColor;
-
 		const embed = new MessageEmbed()
-			.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+			.setColor(Colors.YELLOW)
 			.setDescription([
 				`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
 				`***Moderator:*** ${message.author.tag} (\`${message.author.id}\`)`,
@@ -67,6 +65,7 @@ module.exports = class extends Command {
 				member.send(`Hello <@${member.id}>,\nYou've just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 				caseInfo.type = 'ban';
 				embed.setAuthor(`Moderation: Ban | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
+				embed.setColor(Colors.RED);
 				message.guild.members.ban(member);
 				message.quote(`**${member.user.tag}** was automatically banned because they reach more than **${banCount}** warns!`);
 			}
@@ -75,6 +74,7 @@ module.exports = class extends Command {
 				member.send(`Hello <@${member.id}>,\nYou've just been kicked from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 				caseInfo.type = 'kick';
 				embed.setAuthor(`Moderation: Kick | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
+				embed.setColor(Colors.ORANGE);
 				member.kick(member);
 				message.quote(`**${member.user.tag}** was automatically kicked because they reach more than **${kickCount}** warns!`);
 			}

@@ -14,7 +14,7 @@ module.exports = class extends Event {
 		const customPrefix = guildData ? guildData.prefix : this.client.prefix;
 
 		if (message.content.match(mentionRegex)) {
-			message.quote(`Hello **${message.author.username}**, my prefix on this server is \`${customPrefix}\`.\nUse \`${customPrefix}help\` to get the list of the commands!`);
+			return message.quote(`Hello **${message.author.username}**, my prefix on this server is \`${customPrefix}\`.\nUse \`${customPrefix}help\` to get the list of the commands!`);
 		}
 
 		const userData = await this.client.findOrCreateUser({ id: message.author.id });
@@ -24,14 +24,13 @@ module.exports = class extends Event {
 			if (afkReason) {
 				userData.afk = null;
 				await userData.save();
-				message.quote(`**${message.author.username}**, your AFK status has just been deleted!`);
+				return message.quote(`**${message.author.username}**, your AFK status has just been deleted!`).then(msg => this.client.setTimeout(() => msg.delete(), 5000));
 			}
 
 			message.mentions.users.forEach(async (user) => {
-				// eslint-disable-next-line no-shadow
-				const userData = await this.client.findOrCreateUser({ id: user.id });
-				if (userData.afk) {
-					message.quote(`**${user.tag}** is currently AFK!\nReason: ${userData.afk}`);
+				const dataUser = await this.client.findOrCreateUser({ id: user.id });
+				if (dataUser.afk) {
+					return message.quote(`**${user.tag}** is currently AFK!\nReason: ${dataUser.afk}`).then(msg => this.client.setTimeout(() => msg.delete(), 15000));
 				}
 			});
 		}
@@ -88,7 +87,7 @@ module.exports = class extends Event {
 				if (now < expirationTime) {
 					const timeLeft = (expirationTime - now) / 1000;
 					return message.channel.send(`You must wait **${timeLeft.toFixed(2)}** second(s) to be able to run the \`${command.name}\` command again!`)
-						.then(msg => msg.delete({ timeout: expirationTime - now }));
+						.then(msg => this.client.setTimeout(() => msg.delete(), expirationTime - now));
 				}
 			}
 			timestamps.set(message.author.id, now);

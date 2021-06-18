@@ -34,9 +34,8 @@ module.exports = {
 					});
 				}
 				const user = member ? member.user : await client.users.fetch(memberData.id);
-				const roleColor = guild.me.roles.highest.hexColor;
 				const embed = new MessageEmbed()
-					.setColor(roleColor === '#000000' ? Colors.DEFAULT : roleColor)
+					.setColor(Colors.DEFAULT)
 					.setDescription(`${user.toString()} (\`${user.tag}\`) has just been unmuted! (mute case: #${memberData.mute.case})`)
 					.setFooter(`Moderation system powered by ${client.user.username}`, client.user.avatarURL({ dynamic: true }));
 				const sendChannel = guild.channels.cache.get(guildData.plugins.moderations);
