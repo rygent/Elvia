@@ -55,12 +55,8 @@ module.exports = class extends Command {
 				`***Bots:*** ${message.guild.members.cache.filter(mbr => mbr.user.bot).size}`,
 				`***Members:*** ${message.guild.memberCount}`
 			].join('\n'), true)
-			.addField('__Others__', [
-				`***Booster:*** ${message.guild.premiumSubscriptionCount}`
-			], true)
-			.addField(`__Roles__`, [
-				`${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`
-			])
+			.addField('__Others__', `***Booster:*** ${message.guild.premiumSubscriptionCount}`, true)
+			.addField(`__Roles__`, `${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.channel.send({ embeds: [embed] });
