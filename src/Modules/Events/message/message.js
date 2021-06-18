@@ -1,4 +1,4 @@
-const { Collection } = require('discord.js');
+const { Collection, MessageActionRow, MessageButton } = require('discord.js');
 const Event = require('../../../Structures/Event.js');
 
 module.exports = class extends Event {
@@ -14,10 +14,20 @@ module.exports = class extends Event {
 		const customPrefix = guildData ? guildData.prefix : this.client.prefix;
 
 		if (message.content.match(mentionRegex)) {
-			return message.reply([
+			const row = new MessageActionRow()
+				.addComponents(new MessageButton()
+					.setStyle('LINK')
+					.setLabel('Vote me!')
+					.setURL(`https://top.gg/bot/${this.client.user.id}`))
+				.addComponents(new MessageButton()
+					.setStyle('LINK')
+					.setLabel('Invite me!')
+					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=3757436023&scope=bot%20applications.commands`));
+
+			return message.reply({ content: [
 				`Hi, my prefix for this guild is \`${customPrefix}\`.`,
 				`Use \`${customPrefix}help\` to get a list of commands!`
-			].join('\n'));
+			].join('\n'), components: [row] });
 		}
 
 		const userData = await this.client.findOrCreateUser({ id: message.author.id });
