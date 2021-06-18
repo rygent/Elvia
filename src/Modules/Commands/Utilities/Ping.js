@@ -1,6 +1,4 @@
 const Command = require('../../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Colors } = require('../../../Structures/Configuration.js');
 
 module.exports = class extends Command {
 
@@ -8,8 +6,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['pong'],
 			description: 'Shows Bot latency & API response time.',
-			category: 'Utilities',
-			cooldown: 1000
+			category: 'Utilities'
 		});
 	}
 
@@ -17,19 +14,14 @@ module.exports = class extends Command {
 		const msg = await message.reply('Pinging...');
 		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
 
-		const embed = new MessageEmbed()
-			.setColor(Colors.DEFAULT)
-			.setDescription([
+		if (latency <= 0) {
+			msg.edit('Please try again later!');
+		} else {
+			msg.edit([
 				`💓 ***Heartbeat:*** \`${Math.round(this.client.ws.ping)}ms\``,
 				`⏱️ ***Latency:*** \`${latency}ms\``
-			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
-
-		if (latency <= 0) {
-			embed.setDescription('Please try again later');
+			].join('\n'));
 		}
-
-		msg.edit({ content: '\u200B', embeds: [embed] });
 	}
 
 };
