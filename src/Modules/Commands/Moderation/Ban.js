@@ -19,21 +19,21 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
-		if (!member) return message.quote('Please specify a valid member to ban!');
+		if (!member) return message.reply('Please specify a valid member to ban!');
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const memberData = message.guild.members.cache.get(member.id) ? await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id }) : null;
 
-		if (member.id === message.author.id) return message.quote('You can\'t ban yourself!');
+		if (member.id === message.author.id) return message.reply('You can\'t ban yourself!');
 		if (message.guild.member(message.author).roles.highest.position <= message.guild.member(member).roles.highest.position) {
-			return message.quote('You can\'t ban a member who has an higher or equal role hierarchy to yours!');
+			return message.reply('You can\'t ban a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const reason = args.join(' ');
-		if (!reason) return message.quote('Please enter a reason!');
+		if (!reason) return message.reply('Please enter a reason!');
 
 		if (!message.guild.member(member).bannable) {
-			return message.quote(`I can't banned **${member.user.username}**! For having a higher role than mine!`);
+			return message.reply(`I can't banned **${member.user.username}**! For having a higher role than mine!`);
 		}
 
 		if (!member.user.bot) {
@@ -41,7 +41,7 @@ module.exports = class extends Command {
 		}
 
 		message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason}` }).then(() => {
-			message.quote(`**${member.user.username}** has just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
+			message.reply(`**${member.user.username}** has just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
 
 			const caseInfo = {
 				channel: message.channel.id,

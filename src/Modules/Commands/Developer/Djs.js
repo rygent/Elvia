@@ -17,23 +17,23 @@ module.exports = class extends Command {
 
 	async run(message, args) {
 		const query = args.join(' ').trim();
-		if (!query) return message.quote('Please specify a valid query to search!');
+		if (!query) return message.reply('Please specify a valid query to search!');
 
 		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
 		const result = await axios.get(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`, { headers }).then(res => res.data);
 
 		if (!result || result.error) {
-			return message.quote(`\`${query}\` couldn't be located within the discord.js documentation (<https://discord.js.org/>).`);
+			return message.reply(`\`${query}\` couldn't be located within the discord.js documentation (<https://discord.js.org/>).`);
 		}
 
 		const embed = new MessageEmbed(result)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
 
 		if (!message.guild) {
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		}
 
-		const msg = await message.channel.send({ embeds: [embed] });
+		const msg = await message.reply({ embeds: [embed] });
 		msg.react('🗑');
 
 		let react;

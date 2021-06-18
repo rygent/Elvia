@@ -15,13 +15,13 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message) {
 		try {
-			message.quote(`The bot will restart in 5 seconds, it may take a few minutes for it to boot up again.`);
+			message.reply(`The bot will restart in 5 seconds, it may take a few minutes for it to boot up again.`);
 
 			setTimeout(() => {
 				process.exit(1);
 			}, 5000);
 		} catch (err) {
-			return message.quote(err.message);
+			return message.reply(err.message);
 		}
 	}
 

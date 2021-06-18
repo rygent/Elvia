@@ -20,7 +20,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please enter a specific anime title!');
+			return message.reply('Please enter a specific anime title!');
 		}
 
 		function output(a) {
@@ -44,7 +44,7 @@ module.exports = class extends Command {
 				const id = data.results[0].mal_id;
 				// eslint-disable-next-line complexity
 				mal.findAnime(id).then(result => {
-					if (result.length === 0) return message.quote('Search not found, make sure the title name matches what you are looking for!');
+					if (result.length === 0) return message.reply('Search not found, make sure the title name matches what you are looking for!');
 
 					const embed = new MessageEmbed()
 						.setColor(Colors.MAL)
@@ -82,11 +82,11 @@ module.exports = class extends Command {
 						].join('\n'))
 						.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
 
-					return message.channel.send({ embeds: [embed] });
+					return message.reply({ embeds: [embed] });
 				});
 			});
 		} catch {
-			return message.quote('An API error has occurred. Please try again later.');
+			return message.reply('An API error has occurred. Please try again later.');
 		}
 	}
 

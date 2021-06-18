@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please enter the game title to search!');
+			return message.reply('Please enter the game title to search!');
 		}
 
 		try {
@@ -58,9 +58,9 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Steam`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		} catch {
-			return message.quote('No results found!');
+			return message.reply('No results found!');
 		}
 	}
 

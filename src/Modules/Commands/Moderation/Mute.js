@@ -21,21 +21,21 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target, time, ...args]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please specify a valid member to mute!');
-		if (member.id === message.author.id) return message.quote('You can\'t mute yourself!');
+		if (!member) return message.reply('Please specify a valid member to mute!');
+		if (member.id === message.author.id) return message.reply('You can\'t mute yourself!');
 		const memberPosition = member.roles.highest.position;
 		const moderationPosition = message.member.roles.highest.position;
 		if (message.member.ownerID !== message.author.id && !(moderationPosition > memberPosition)) {
-			return message.quote('You can\'t mute a member who has an higher or equal role hierarchy to yours!');
+			return message.reply('You can\'t mute a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
-		if (!time || isNaN(ms(time))) return message.quote('You must enter a valid time! Available units: `s`, `m`, `h` or `d`');
+		if (!time || isNaN(ms(time))) return message.reply('You must enter a valid time! Available units: `s`, `m`, `h` or `d`');
 
 		const reason = args.join(' ');
-		if (!reason) return message.quote('Please enter a reason!');
+		if (!reason) return message.reply('Please enter a reason!');
 
 		message.guild.channels.cache.forEach((channel) => {
 			channel.updateOverwrite(member.id, {
@@ -46,7 +46,7 @@ module.exports = class extends Command {
 		});
 
 		member.send(`Hello <@${member.user.id}>,\nYou've just been muted on **${message.guild.name}** by **${message.author.tag}** for **${time}** because of **${reason}**!`);
-		message.quote(`**${member.user.username}** is now muted for **${time}** because of **${reason}**!`);
+		message.reply(`**${member.user.username}** is now muted for **${time}** because of **${reason}**!`);
 
 		guildData.casesCount++;
 

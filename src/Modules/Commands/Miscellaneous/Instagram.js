@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join();
 		if (!query) {
-			return message.quote('Please enter a username to start searching!');
+			return message.reply('Please enter a username to start searching!');
 		}
 
 		try {
@@ -42,9 +42,9 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Instagram`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		} catch {
-			return message.quote('Username not found, please make sure you write it correctly!');
+			return message.reply('Username not found, please make sure you write it correctly!');
 		}
 	}
 

@@ -20,7 +20,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please enter a movie / tv series title to start searching!');
+			return message.reply('Please enter a movie / tv series title to start searching!');
 		}
 
 		try {
@@ -72,10 +72,10 @@ module.exports = class extends Command {
 				embed.addField('__Awards__', data.awards, false);
 			}
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		} catch (err) {
 			if (err.message.startsWith('Movie not found!:')) {
-				return message.quote('Search not found, please make sure you have entered the title correctly!');
+				return message.reply('Search not found, please make sure you have entered the title correctly!');
 			}
 		}
 	}

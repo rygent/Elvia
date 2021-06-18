@@ -17,7 +17,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, args) {
 		if (args[0] === 'all') {
-			message.quote('All messages of the channel will be deleted! To confirm type `confirm`');
+			message.reply('All messages of the channel will be deleted! To confirm type `confirm`');
 			await message.channel.awaitMessages(msg => (msg.author.id === message.author.id) && (msg.content === 'confirm'), {
 				max: 1,
 				time: 20000,
@@ -35,7 +35,7 @@ module.exports = class extends Command {
 
 		let amount = args[0];
 		if (!amount || isNaN(amount) || parseInt(amount) < 1) {
-			return message.quote('You must specify a number of messages to delete!');
+			return message.reply('You must specify a number of messages to delete!');
 		}
 
 		await message.delete();

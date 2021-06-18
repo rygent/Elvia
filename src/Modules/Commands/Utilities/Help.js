@@ -27,7 +27,7 @@ module.exports = class extends Command {
 		if (command) {
 			const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
 
-			if (!cmd) return message.quote(`Invalid Command named. \`${command}\``);
+			if (!cmd) return message.reply(`Invalid Command named. \`${command}\``);
 
 			embed.setAuthor(`Commands | ${cmd.name.toProperCase()}`, 'https://i.imgur.com/YxoUvH8.png');
 			embed.setDescription([
@@ -39,7 +39,7 @@ module.exports = class extends Command {
 				`***Cooldown:*** ${cmd.cooldown / 1000} seconds`
 			].join('\n'));
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		} else {
 			embed.setDescription([
 				`These are the available commands for ${this.client.user.username}.`,
@@ -57,7 +57,7 @@ module.exports = class extends Command {
 				}
 			}
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		}
 	}
 

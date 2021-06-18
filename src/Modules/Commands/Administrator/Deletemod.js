@@ -19,22 +19,22 @@ module.exports = class extends Command {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 
 		if (!option) {
-			return message.quote(`You have to select the options to \`enable\` or \`disable\`!`);
+			return message.reply(`You have to select the options to \`enable\` or \`disable\`!`);
 		}
 
 		switch (option.toLowerCase()) {
 			case 'enable':
 				guildData.autoDeleteModCommands = true;
 				guildData.save();
-				message.quote('Automatic delete is enabled.\nModeration commands will be automatically deleted!');
+				message.reply('Automatic delete is enabled.\nModeration commands will be automatically deleted!');
 				break;
 			case 'disable':
 				guildData.autoDeleteModCommands = false;
 				guildData.save();
-				message.quote('Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!');
+				message.reply('Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!');
 				break;
 			default:
-				return message.quote(`This option is not found. Please select the option \`enable\` or \`disable\`!`);
+				return message.reply(`This option is not found. Please select the option \`enable\` or \`disable\`!`);
 		}
 	}
 

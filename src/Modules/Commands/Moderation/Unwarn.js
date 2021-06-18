@@ -17,13 +17,13 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please specify valid member to remove the warning!');
+		if (!member) return message.reply('Please specify valid member to remove the warning!');
 
 		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
 		memberData.sanctions = [];
 		memberData.save();
-		return message.quote(`**${member.user.tag}**'s warning has been removed!`);
+		return message.reply(`**${member.user.tag}**'s warning has been removed!`);
 	}
 
 };

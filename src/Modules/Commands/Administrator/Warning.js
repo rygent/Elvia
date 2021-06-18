@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
 		const sanction = args[0];
 		if (!sanction || (sanction !== 'kick' && sanction !== 'ban')) {
-			message.quote(`Please specify a sanction to be given, \`kick\` or \`ban\`.`);
+			return message.reply(`Please specify a sanction to be given, \`kick\` or \`ban\`.`);
 		}
 
 		const number = args[1];
@@ -29,32 +29,32 @@ module.exports = class extends Command {
 				guildData.plugins.warnsSanctions.kick = false;
 				guildData.markModified('plugins.warnsSanctions');
 				guildData.save();
-				return message.quote(`Members will no longer be kicked automatically!`);
+				return message.reply(`Members will no longer be kicked automatically!`);
 			}
 
 			if (sanction === 'ban') {
 				guildData.plugins.warnsSanctions.ban = false;
 				guildData.markModified('plugins.warnsSanctions');
 				guildData.save();
-				return message.quote(`Members will no longer be banned automatically!`);
+				return message.reply(`Members will no longer be banned automatically!`);
 			}
 		}
 
-		if (!number || isNaN(number)) return message.quote('Please specify a valid number!');
-		if (number < 1 || number > 10) return message.quote('Please specify a valid number between **1** and **10**!');
+		if (!number || isNaN(number)) return message.reply('Please specify a valid number!');
+		if (number < 1 || number > 10) return message.reply('Please specify a valid number between **1** and **10**!');
 
 		if (sanction === 'kick') {
 			guildData.plugins.warnsSanctions.kick = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`\`${number}\` warnings will be given and sanction will be kicked from the server.`);
+			return message.reply(`\`${number}\` warnings will be given and sanction will be kicked from the server.`);
 		}
 
 		if (sanction === 'ban') {
 			guildData.plugins.warnsSanctions.ban = number;
 			guildData.markModified('plugins.warnsSanctions');
 			guildData.save();
-			return message.quote(`\`${number}\` warnings will be given and sanction will be banned from the server.`);
+			return message.reply(`\`${number}\` warnings will be given and sanction will be banned from the server.`);
 		}
 	}
 

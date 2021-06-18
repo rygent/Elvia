@@ -21,13 +21,13 @@ module.exports = class extends Command {
 	async run(message, [time]) {
 		if (!this.client.lockit) this.client.lockit = [];
 		if (!time) {
-			return message.quote('A duration for the lockdown must be set!');
+			return message.reply('A duration for the lockdown must be set!');
 		}
 
 		const validUnlocks = ['unlock', 'end', 'stop'];
 		if (validUnlocks.includes(time)) {
 			message.channel.updateOverwrite(message.guild.id, { SEND_MESSAGES: null }).then(() => {
-				message.channel.send('Lockdown lifted.');
+				message.reply('Lockdown lifted.');
 				clearTimeout(this.client.lockit[message.channel.id]);
 				delete this.client.lockit[message.channel.id];
 			});

@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const location = args.join(' ').trim();
 		if (!location) {
-			return message.quote('Please enter a city name to search!');
+			return message.reply('Please enter a city name to search!');
 		}
 
 		weather.setAPPID(Access.OPENWEATHER);
@@ -28,13 +28,13 @@ module.exports = class extends Command {
 		weather.setCity(location.toLowerCase());
 		weather.getAllWeather((err, res) => {
 			if (err) {
-				return message.quote('An API error occurred, Please try again later!');
+				return message.reply('An API error occurred, Please try again later!');
 			}
 
 			if (res.cod === '404' || !res.sys.country) {
-				return message.quote('Couldn\'t find that location!');
+				return message.reply('Couldn\'t find that location!');
 			} else if (res.cod === '401') {
-				return message.quote('Invalid API Key!');
+				return message.reply('Invalid API Key!');
 			}
 
 			let compass;
@@ -75,7 +75,7 @@ module.exports = class extends Command {
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by OpenWeatherMap`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		});
 	}
 

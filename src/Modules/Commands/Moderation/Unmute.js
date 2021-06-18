@@ -17,11 +17,11 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
 		const member = await this.client.resolveMember(target, message.guild);
-		if (!member) return message.quote('Please specify valid member to unmuted');
+		if (!member) return message.reply('Please specify valid member to unmuted');
 		const memberPosition = member.roles.highest.position;
 		const moderationPosition = message.member.roles.highest.position;
 		if (message.member.ownerID !== message.author.id && !(moderationPosition > memberPosition)) {
-			return message.quote('You can\'t unmute for a member who has an higher or equal role hierarchy to yours!');
+			return message.reply('You can\'t unmute for a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
@@ -30,9 +30,9 @@ module.exports = class extends Command {
 			memberData.mute.endDate = Date.now();
 			memberData.markModified('mute');
 			memberData.save();
-			return message.quote(`**${member.user.tag}** has just been unmuted!`);
+			return message.reply(`**${member.user.tag}** has just been unmuted!`);
 		} else {
-			return message.quote(`**${member.user.tag}** is not muted on this server!`);
+			return message.reply(`**${member.user.tag}** is not muted on this server!`);
 		}
 	}
 

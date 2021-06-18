@@ -21,7 +21,7 @@ module.exports = class extends Command {
 			.setDescription('Choose emojis to start the game!')
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		const msg = await message.channel.send({ embeds: [embed] });
+		const msg = await message.reply({ embeds: [embed] });
 		const reacted = await this.promptMessage(msg, message.author, 30, chooseArr);
 		const botChoice = chooseArr.random();
 		const result = await getResult(reacted, botChoice);

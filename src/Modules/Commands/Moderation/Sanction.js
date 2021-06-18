@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
 		const user = await this.client.resolveUser(target);
-		if (!user) return message.quote('You must specify a member\'s username!');
+		if (!user) return message.reply('You must specify a member\'s username!');
 
 		const memberData = await this.client.findOrCreateMember({ id: user.id, guildID: message.guild.id });
 
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
 		if (memberData.sanctions.length < 1) {
-			return message.quote(`**${user.tag}** doesn't have any warning!`);
+			return message.reply(`**${user.tag}** doesn't have any warning!`);
 		} else {
 			memberData.sanctions.forEach((sanction) => {
 				embed.addField(`${sanction.type.toProperCase()} | Case #${sanction.case}`, [
@@ -39,7 +39,7 @@ module.exports = class extends Command {
 			});
 		}
 
-		return message.channel.send({ embeds: [embed] });
+		return message.reply({ embeds: [embed] });
 	}
 
 };

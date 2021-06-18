@@ -19,7 +19,7 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, args) {
 		const msg = message;
-		if (!args.length) return msg.quote(`Please enter the javascript code that will be evaluated!`);
+		if (!args.length) return msg.reply(`Please enter the javascript code that will be evaluated!`);
 		let code = args.join(' ');
 		code = code.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		let evaled;

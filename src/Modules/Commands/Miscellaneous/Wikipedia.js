@@ -18,7 +18,7 @@ module.exports = class extends Command {
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
-			return message.quote('Please enter the article title to search!');
+			return message.reply('Please enter the article title to search!');
 		}
 
 		try {
@@ -34,9 +34,9 @@ module.exports = class extends Command {
 				.setDescription(data.extract)
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
 
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		} catch {
-			return message.quote('Couldn\'t find a wikipedia article with that title!');
+			return message.reply('Couldn\'t find a wikipedia article with that title!');
 		}
 	}
 

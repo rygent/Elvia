@@ -30,19 +30,19 @@ module.exports = class extends Command {
 			embed.setTitle('Available Languages');
 			embed.setDescription(`\`\`\`JSON\n${JSON.stringify(translator).replace(/[{}]/g, '').split(',').join(',\n')}\`\`\``);
 
-			return message.channel.send({ embeds: [embed] }).then(msg => this.client.setTimeout(() => msg.delete(), 60000));
+			return message.reply({ embeds: [embed] }).then(msg => this.client.setTimeout(() => msg.delete(), 60000));
 		}
 
-		if (!target) return message.quote(`Please provide the desired language!\nTo display a list of languages, type \`${prefix}translate lang\` !`);
+		if (!target) return message.reply(`Please provide the desired language!\nTo display a list of languages, type \`${prefix}translate lang\` !`);
 
 		const language = target.toLowerCase();
 
 		const toTranslate = args.join(' ');
-		if (!toTranslate) return message.quote('Please provide the text you want to translate!');
-		if (toTranslate.length > 2800) return message.quote('Unfortunately, the text is too long!\nPlease try again with shorter text.');
+		if (!toTranslate) return message.reply('Please provide the text you want to translate!');
+		if (toTranslate.length > 2800) return message.reply('Unfortunately, the text is too long!\nPlease try again with shorter text.');
 
 		if (!JSON.stringify(translator).includes(language)) {
-			return message.quote(`The language of \`${language}\` does not exist!\nTo display a list of languages, type \`${prefix}translate lang\` !`);
+			return message.reply(`The language of \`${language}\` does not exist!\nTo display a list of languages, type \`${prefix}translate lang\` !`);
 		}
 
 		const translated = await translate(toTranslate, { to: language });
@@ -52,7 +52,7 @@ module.exports = class extends Command {
 			`Translation from ***${translator[translated.from.language.iso]}*** to ***${translator[language]}***`
 		].join('\n'));
 
-		return message.channel.send({ embeds: [embed] });
+		return message.reply({ embeds: [embed] });
 	}
 
 };

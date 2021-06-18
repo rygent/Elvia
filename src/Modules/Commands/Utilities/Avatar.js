@@ -27,7 +27,7 @@ module.exports = class extends Command {
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
-		return message.channel.send({ embeds: [embed] });
+		return message.reply({ embeds: [embed] });
 	}
 
 };

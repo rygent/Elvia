@@ -19,14 +19,14 @@ module.exports = class extends Command {
 
 		const banned = ['#', '@', '`'];
 
-		if (!prefix) return message.quote('You must define a valid prefix to change it!');
-		if (banned.includes(prefix)) return message.quote('This prefix is not available, because it contains a markdown character!');
-		if (prefix.length > 5) return message.quote('The prefix cannot be longer than 5 characters!');
+		if (!prefix) return message.reply('You must define a valid prefix to change it!');
+		if (banned.includes(prefix)) return message.reply('This prefix is not available, because it contains a markdown character!');
+		if (prefix.length > 5) return message.reply('The prefix cannot be longer than 5 characters!');
 
 		guildData.prefix = prefix;
 		guildData.save();
 
-		return message.quote(`The prefix has been changed to \`${guildData.prefix}\`.\nIf you forget the prefix just mention me!`);
+		return message.reply(`The prefix has been changed to \`${guildData.prefix}\`.\nIf you forget the prefix just mention me!`);
 	}
 
 };

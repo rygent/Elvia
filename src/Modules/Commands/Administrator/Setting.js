@@ -20,7 +20,7 @@ module.exports = class extends Command {
 		const target = message.mentions.channels.filter(ch => ch.type === 'text' && ch.guild.id === message.guild.id).last() || message.channel;
 
 		if (!option) {
-			return message.quote(`You have to select the options to \`moderation\` and \`message\`!`);
+			return message.reply(`You have to select the options to \`moderation\` and \`message\`!`);
 		}
 
 		switch (option.toLowerCase()) {
@@ -28,16 +28,16 @@ module.exports = class extends Command {
 				guildData.plugins.moderations = target.id;
 				guildData.markModified('plugins.moderations');
 				guildData.save();
-				message.quote(`Moderation log channels have been defined in <#${target.id}>`);
+				message.reply(`Moderation log channels have been defined in <#${target.id}>`);
 				break;
 			case 'message':
 				guildData.plugins.audits = target.id;
 				guildData.markModified('plugins.audits');
 				guildData.save();
-				message.quote(`Message log channels have been defined in <#${target.id}>`);
+				message.reply(`Message log channels have been defined in <#${target.id}>`);
 				break;
 			default:
-				return message.quote(`This option is not found. Please select the option \`moderation\` and \`message\`!`);
+				return message.reply(`This option is not found. Please select the option \`moderation\` and \`message\`!`);
 		}
 	}
 
