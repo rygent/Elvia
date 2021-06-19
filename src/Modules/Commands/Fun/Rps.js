@@ -1,59 +1,58 @@
 const Command = require('../../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Colors } = require('../../../Structures/Configuration.js');
-
-const chooseArr = ['👊', '🖐', '✌'];
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: [],
-			description: 'Play rock paper scissors game by choosing emoji reactions.',
+			description: 'Play rock paper scissors game.',
 			category: 'Fun',
-			cooldown: 5000
+			cooldown: 3000
 		});
 	}
 
 	async run(message) {
-		const embed = new MessageEmbed()
-			.setColor(Colors.DEFAULT)
-			.setDescription('Choose emojis to start the game!')
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+		const row = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('SECONDARY')
+				.setLabel('Rock')
+				.setEmoji('🪨')
+				.setCustomID('rock'))
+			.addComponents(new MessageButton()
+				.setStyle('SECONDARY')
+				.setLabel('Paper')
+				.setEmoji('📄')
+				.setCustomID('paper'))
+			.addComponents(new MessageButton()
+				.setStyle('SECONDARY')
+				.setLabel('Scissors')
+				.setEmoji('✂️')
+				.setCustomID('scissors'));
 
-		const msg = await message.reply({ embeds: [embed] });
-		const reacted = await this.promptMessage(msg, message.author, 30, chooseArr);
-		const botChoice = chooseArr.random();
-		const result = await getResult(reacted, botChoice);
-		await msg.reactions.removeAll();
+		const choices = ['rock', 'paper', 'scissors'];
+		const result = choices[Math.floor(Math.random() * 3)];
 
-		embed.setDescription(`${reacted} vs ${botChoice} (${result})`);
+		return message.reply({ content: 'Choose one of the buttons below to start the game!', components: [row] }).then((msg) => {
+			const filter = (button) => button.user.id === message.author.id;
+			const collector = msg.createMessageComponentInteractionCollector(filter, { time: 30000 });
 
-		msg.edit({ embeds: [embed] });
+			collector.on('collect', async (button) => {
+				const winChoice = (button.customID === 'rock' && result === 'scissors') || (button.customID === 'paper' && result === 'rock') || (button.customID === 'scissors' && result === 'paper');
 
-		function getResult(me, clientChosen) {
-			if ((me === '👊' && clientChosen === '✌') ||
-                (me === '🖐' && clientChosen === '👊') ||
-                (me === '✌' && clientChosen === '🖐')) {
-				return 'You win';
-			} else if (me === clientChosen) {
-				return 'It\'s a draw';
-			} else {
-				return 'You lose';
-			}
-		}
-	}
+				if (winChoice) {
+					return msg.edit({ content: `You won, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+				} else if (button.customID === result) {
+					return msg.edit({ content: `We tied, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+				} else {
+					return msg.edit({ content: `You lost, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+				}
+			});
 
-	async promptMessage(message, author, time, validReactions) {
-		time *= 1000;
-
-		for (const reaction of validReactions) await message.react(reaction);
-
-		const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
-
-		return message
-			.awaitReactions(filter, { max: 1, time: time })
-			.then(collected => collected.first() && collected.first().emoji.name);
+			collector.on('end', (collected) => {
+				if (collected.size === 0) msg.edit({ content: 'Time is up, please try again next time!', components: [] });
+			});
+		});
 	}
 
 };
