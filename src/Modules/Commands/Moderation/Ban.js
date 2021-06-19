@@ -25,14 +25,14 @@ module.exports = class extends Command {
 		const memberData = message.guild.members.cache.get(member.id) ? await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id }) : null;
 
 		if (member.id === message.author.id) return message.reply('You can\'t ban yourself!');
-		if (message.guild.member(message.author).roles.highest.position <= message.guild.member(member).roles.highest.position) {
+		if (message.guild.members.cache.get(message.author.id).roles.highest.position <= message.guild.members.cache.get(member.id).roles.highest.position) {
 			return message.reply('You can\'t ban a member who has an higher or equal role hierarchy to yours!');
 		}
 
 		const reason = args.join(' ');
 		if (!reason) return message.reply('Please enter a reason!');
 
-		if (!message.guild.member(member).bannable) {
+		if (!message.guild.members.cache.get(member.id).bannable) {
 			return message.reply(`I can't banned **${member.user.username}**! For having a higher role than mine!`);
 		}
 
