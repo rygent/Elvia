@@ -1,4 +1,5 @@
 const Command = require('../../../Structures/Command.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -17,20 +18,38 @@ module.exports = class extends Command {
 	/* eslint-disable consistent-return */
 	async run(message, args) {
 		if (args[0] === 'all') {
-			message.reply('All messages of the channel will be deleted! To confirm type `confirm`');
-			await message.channel.awaitMessages(msg => (msg.author.id === message.author.id) && (msg.content === 'confirm'), {
-				max: 1,
-				time: 20000,
-				errors: ['time']
-			}).catch(() => {
-				message.channel.send('Time\'s up! Please retype the command!');
-				return;
+			const row = new MessageActionRow()
+				.addComponents(new MessageButton()
+					.setStyle('SUCCESS')
+					.setLabel('Confirm')
+					.setCustomID('confirm'))
+				.addComponents(new MessageButton()
+					.setStyle('DANGER')
+					.setLabel('Cancel')
+					.setCustomID('cancel'));
+
+			return message.reply({ content: 'Please confirm if you want to delete all messages on this channel!', components: [row] }).then((msg) => {
+				const filter = (button) => button.user.id === message.author.id;
+				const collector = msg.createMessageComponentInteractionCollector(filter, { time: 10000 });
+
+				collector.on('collect', async (button) => {
+					if (button.customID === 'confirm') {
+						const posChannel = message.channel.position;
+						const newChannel = await message.channel.clone();
+						await message.channel.delete();
+						newChannel.setPosition(posChannel);
+						return newChannel.send('Successfully deleted all messages').then((msge) => this.client.setTimeout(() => msge.delete(), 10000));
+					}
+
+					if (button.customID === 'cancel') {
+						return msg.delete() && message.delete();
+					}
+				});
+
+				collector.on('end', (collected) => {
+					if (collected.size === 0) msg.edit({ content: 'Time has passed, please retype it if you want to continue!', components: [] });
+				});
 			});
-			const { position } = message.channel;
-			const newChannel = await message.channel.clone();
-			await message.channel.delete();
-			newChannel.setPosition(position);
-			return newChannel.send('Salon reinitialized!');
 		}
 
 		let amount = args[0];
