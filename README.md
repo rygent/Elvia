@@ -2,13 +2,14 @@
 
 # Elaina
 
-[![Support](https://img.shields.io/discord/708659047057981451?color=7289da&label=discord&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/nW6x9EN)
+[![Library](https://discordlist.space/bot/614645495779819551/badge?property=library&style=for-the-badge&color=5865f2)]()
 [![Build](https://img.shields.io/travis/Rygent/Elaina/main?style=for-the-badge)](https://travis-ci.com/Rygent/Elaina)
 [![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/Elaina/dashboard)
 [![License](https://img.shields.io/github/license/Rygent/Elaina?style=for-the-badge)](https://github.com/Rygent/Elaina/blob/main/LICENSE)
-[![Status](https://botlist.space/bot/614645495779819551/badge?property=status&style=for-the-badge)](https://discordapp.com/oauth2/authorize?&client_id=614645495779819551&scope=bot&permissions=2146958847)
-[![Version](https://img.shields.io/github/package-json/v/Rygent/Elaina/main?label=version&style=for-the-badge)](https://github.com/Rygent/Elaina/blob/main/package.json)
-[![Issues](https://img.shields.io/github/issues/Rygent/Elaina.svg?color=37f149&style=for-the-badge)](https://github.com/Rygent/Elaina/issues)
+[![Version](https://img.shields.io/github/package-json/v/Rygent/Elaina/main?label=version&color=ff4949&style=for-the-badge)](https://github.com/Rygent/Elaina/blob/main/package.json)
+[![Status](https://discordlist.space/bot/614645495779819551/badge?property=status&style=for-the-badge)](https://discord.com/api/oauth2/authorize?client_id=614645495779819551&permissions=2013654135&scope=bot%20applications.commands)
+[![Uptime](https://discordlist.space/bot/614645495779819551/badge?property=uptime.2&style=for-the-badge&color=f0db4f)](https://discord.com/api/oauth2/authorize?client_id=614645495779819551&permissions=2013654135&scope=bot%20applications.commands)
+[![Owner](https://discordlist.space/bot/614645495779819551/badge?property=owner&style=for-the-badge&color=37f149)]()
 
 <p align="center">
   <a href="#features">Features</a>
@@ -21,9 +22,11 @@
   •
   <a href="https://rygent.gitbook.io/elaina/f.a.q">F.A.Q</a>
   •
+  <a href="#maintainers">Maintainers</a>
+  •
   <a href="#contributing">Contributing</a>
   •
-  <a href="#credits">Credits</a>
+  <a href="#source">Source</a>
   •
   <a href="#license">License</a>
 </p>
@@ -65,20 +68,21 @@ Elaina can be hosted on anything, from your personal computer, to a Raspberry Pi
 ## Installation
 If you don't want to edit the code of the bot, a permanent online version is available, which you can invite to your own Discord!
 
-[![Discord Bots](https://top.gg/api/widget/614645495779819551.svg)](https://top.gg/bot/614645495779819551)
-[![Discord Boats](https://discord.boats/api/widget/614645495779819551)](https://discord.boats/bot/614645495779819551)
+[![Top.gg](https://top.gg/api/widget/614645495779819551.svg)](https://top.gg/bot/614645495779819551)
+[![Discordboats](https://discord.boats/api/widget/614645495779819551)](https://discord.boats/bot/614645495779819551)
 
 If you want to edit the bot's code and host it on your machine, it's possible!  
 You must follow the [installation guide](https://rygent.gitbook.io/elaina/installation) to properly install it! Don't worry, it's fast and simple if you follow the guide!
 
+## Maintainers
+Maintainers are needed, I cannot keep with all the updates by myself. If you are
+interested please open a Pull Request.
+
 ## Contributing
-Elaina is open-source on our GitHub repository so everyone can contribute to the growth of the bot.
-Whether it is from reporting issues, requesting features, or straight-up requesting to add some new code, it can all be done on our GitHub repo!
+Pull requests are welcome. For major changes, please open an issue first to
+discuss what you would like to change.
 
-Elaina is written in Discord.js. If you want to add a feature or work on the code, feel free make a pull request. 
-We review all pull requests even if we don't reply to them.
-
-## Credits
+## Source
 * Made using <i>[Discord.js](https://github.com/discordjs/discord.js)</i>.
 * Bot based on <i>[Discord.js-v12-Tutorials](https://github.com/MenuDocs/Discord.js-v12-Tutorials)</i> by **MenuDocs**.
 * The bot database & moderation part is based on <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz**.
