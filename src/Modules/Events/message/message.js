@@ -114,10 +114,6 @@ module.exports = class extends Event {
 				console.log(err);
 				return message.reply('Something went wrong, please contact the developer to fix it!');
 			});
-
-			if (command.category === 'Moderation' && guildData.autoDeleteModCommands) {
-				message.delete();
-			}
 		}
 	}
 

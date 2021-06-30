@@ -76,6 +76,10 @@ module.exports = class extends Command {
 						guildData.casesCount++;
 						guildData.save();
 
+						if (guildData.autoDeleteModCommands) {
+							message.delete();
+						}
+
 						if (guildData.plugins.moderations) {
 							const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
 							if (!sendChannel) return;
