@@ -41,11 +41,11 @@ module.exports = class extends Command {
 				const winChoice = (button.customID === 'rock' && result === 'scissors') || (button.customID === 'paper' && result === 'rock') || (button.customID === 'scissors' && result === 'paper');
 
 				if (winChoice) {
-					return msg.edit({ content: `You won, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+					return button.update({ content: `You won, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
 				} else if (button.customID === result) {
-					return msg.edit({ content: `We tied, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+					return button.update({ content: `We tied, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
 				} else {
-					return msg.edit({ content: `You lost, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+					return button.update({ content: `You lost, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
 				}
 			});
 
