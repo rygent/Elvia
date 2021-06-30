@@ -5,7 +5,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: [],
+			aliases: ['bigtext', 'banner'],
 			description: 'Change text letters to ascii characters.',
 			category: 'Fun',
 			usage: '[text]',
