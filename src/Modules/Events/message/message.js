@@ -22,7 +22,7 @@ module.exports = class extends Event {
 				.addComponents(new MessageButton()
 					.setStyle('LINK')
 					.setLabel('Invite me!')
-					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=3757436023&scope=bot%20applications.commands`));
+					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=2013654135&scope=bot%20applications.commands`));
 
 			return message.reply({ content: [
 				`Hi, my prefix for this guild is \`${customPrefix}\`.`,
