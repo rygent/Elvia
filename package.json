@@ -43,11 +43,11 @@
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.12.13",
-    "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.1",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "simple-youtube-api": "^5.2.1",
+    "spotify-url-info": "^2.2.3",
     "util": "^0.12.4"
   }
 }

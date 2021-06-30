@@ -8,10 +8,6 @@ module.exports = {
 		IMDB: process.env.IMDB_KEY,
 		MONGO_URI: process.env.MONGO_URI,
 		OPENWEATHER: process.env.OPEN_WEATHER_ID,
-		Spotify: {
-			CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
-			CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET
-		},
 		WEBHOOK_ID: process.env.WEBHOOK_ID,
 		WEBHOOK_TOKEN: process.env.WEBHOOK_TOKEN,
 		YOUTUBE: process.env.YOUTUBE_KEY

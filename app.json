@@ -35,14 +35,6 @@
         "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
         "required": true
       },
-      "SPOTIFY_CLIENT_ID": {
-        "description": "Spotify API Key. Get from https://developer.spotify.com/documentation/general/guides/app-settings/",
-        "required": true
-      },
-      "SPOTIFY_CLIENT_SECRET": {
-        "description": "Spotify API Key. Get from https://developer.spotify.com/documentation/general/guides/app-settings/",
-        "required": true
-      },
       "WEBHOOK_ID": {
         "description": "Input here the webhook id.",
         "require": true
