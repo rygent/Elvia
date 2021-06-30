@@ -6,13 +6,15 @@ module.exports = {
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	Access: {
 		IMDB: process.env.IMDB_KEY,
+		MONGO_URI: process.env.MONGO_URI,
 		OPENWEATHER: process.env.OPEN_WEATHER_ID,
 		Spotify: {
 			CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
 			CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET
 		},
-		YOUTUBE: process.env.YOUTUBE_KEY,
-		MONGO_URI: process.env.MONGO_URI
+		WEBHOOK_ID: process.env.WEBHOOK_ID,
+		WEBHOOK_TOKEN: process.env.WEBHOOK_TOKEN,
+		YOUTUBE: process.env.YOUTUBE_KEY
 	},
 	Colors: {
 		DEFAULT: '2f3136',
@@ -32,8 +34,5 @@ module.exports = {
 		YOUTUBE: 'c4302b',
 		WIKIPEDIA: '6b6b6b'
 	},
-	Emojis: require('../../assets/json/Emoji.json'),
-	Supports: {
-		GUILD_LOGS: process.env.GUILD_LOGS
-	}
+	Emojis: require('../../assets/json/Emoji.json')
 };
