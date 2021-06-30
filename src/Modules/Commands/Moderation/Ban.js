@@ -1,5 +1,5 @@
 const Command = require('../../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const { Colors } = require('../../../Structures/Configuration.js');
 
 module.exports = class extends Command {
@@ -18,13 +18,13 @@ module.exports = class extends Command {
 
 	/* eslint-disable consistent-return */
 	async run(message, [target, ...args]) {
-		const member = message.mentions.members.last() || message.guild.members.cache.get(target);
+		const member = await this.client.resolveMember(target, message.guild);
 		if (!member) return message.reply('Please specify a valid member to ban!');
 
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const memberData = message.guild.members.cache.get(member.id) ? await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id }) : null;
+		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
-		if (member.id === message.author.id) return message.reply('You can\'t ban yourself!');
+		if (!member.bannable) return message.reply(`I can't banned **${member.displayName}**! For having a higher role than mine!`);
 		if (message.guild.members.cache.get(message.author.id).roles.highest.position <= message.guild.members.cache.get(member.id).roles.highest.position) {
 			return message.reply('You can\'t ban a member who has an higher or equal role hierarchy to yours!');
 		}
@@ -32,50 +32,81 @@ module.exports = class extends Command {
 		const reason = args.join(' ');
 		if (!reason) return message.reply('Please enter a reason!');
 
-		if (!message.guild.members.cache.get(member.id).bannable) {
-			return message.reply(`I can't banned **${member.user.username}**! For having a higher role than mine!`);
-		}
+		const row = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('SUCCESS')
+				.setLabel('Confirm')
+				.setCustomID('confirm'))
+			.addComponents(new MessageButton()
+				.setStyle('DANGER')
+				.setLabel('Cancel')
+				.setCustomID('cancel'));
 
-		if (!member.user.bot) {
-			await member.send(`Hello <@${member.id}>,\nYou've just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
-		}
+		return message.reply({ content: `Please confirm if you want to ban **${member.displayName}**!`, components: [row] }).then((msg) => {
+			const filter = (button) => button.user.id === message.author.id;
+			const collector = msg.createMessageComponentInteractionCollector(filter, { time: 10000 });
 
-		message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason}` }).then(() => {
-			message.reply(`**${member.user.username}** has just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!`);
+			collector.on('collect', async (button) => {
+				if (button.customID === 'confirm') {
+					if (!member.user.bot) {
+						await member.send([
+							`Hello **${member.user.username}**, You've just been banned from _${message.guild.name}_ by _${message.author.tag}_!`,
+							`***Reason:*** ${reason}`
+						].join('\n'));
+					}
 
-			const caseInfo = {
-				channel: message.channel.id,
-				moderator: message.author.id,
-				date: Date.now(),
-				type: 'ban',
-				case: guildData.casesCount,
-				reason
-			};
+					message.guild.members.ban(member, { reason: `${message.author.tag}: ${reason}` }).then(() => {
+						button.update({ content: [
+							`**${member.displayName}** has been successfully banned from this guild!`,
+							`***Reason:*** ${reason}`
+						].join('\n'), components: [] });
 
-			if (memberData) {
-				memberData.sanctions.push(caseInfo);
-				memberData.save();
-			}
+						const caseInfo = {
+							channel: message.channel.id,
+							moderator: message.author.id,
+							date: Date.now(),
+							type: 'ban',
+							case: guildData.casesCount,
+							reason
+						};
 
-			guildData.casesCount++;
-			guildData.save();
+						memberData.sanctions.push(caseInfo);
+						memberData.save();
 
-			if (guildData.plugins.moderations) {
-				const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
-				if (!sendChannel) return;
+						guildData.casesCount++;
+						guildData.save();
 
-				const embed = new MessageEmbed()
-					.setColor(Colors.RED)
-					.setAuthor(`Moderation: Ban | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }))
-					.setDescription([
-						`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
-						`***Moderator:*** ${message.author.tag} (\`${message.author.id}\`)`,
-						`***Reason:*** ${reason}`
-					].join('\n'))
-					.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+						if (guildData.plugins.moderations) {
+							const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
+							if (!sendChannel) return;
 
-				sendChannel.send({ embeds: [embed] });
-			}
+							const embed = new MessageEmbed()
+								.setColor(Colors.RED)
+								.setAuthor(`Actioned by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+								.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+								.setDescription([
+									`***Member:*** ${member.user.tag} (\`${member.user.id}\`)`,
+									`***Action:*** Ban`,
+									`***Reason:*** ${reason}`
+								].join('\n'))
+								.setFooter(`Case #${guildData.casesCount} | Powered by ${this.client.user.username}`, this.client.user.displayAvatarURL({ dynamic: true }));
+
+							return sendChannel.send({ embeds: [embed] });
+						}
+					});
+				}
+
+				if (button.customID === 'cancel') {
+					collector.stop();
+					return button.update({ content: 'Command has been cancelled!', components: [] }).then(this.client.setTimeout(() => message.delete() && msg.delete(), 5000));
+				}
+			});
+
+			collector.on('end', (collected) => {
+				if (collected.size === 0) {
+					return msg.edit({ content: 'Time has run out, please use the command again!', components: [] }).then(this.client.setTimeout(() => message.delete() && msg.delete(), 5000));
+				}
+			});
 		});
 	}
 
