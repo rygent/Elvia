@@ -34,7 +34,7 @@ module.exports = class extends Command {
 			.setDescription([
 				`***Client:*** ${this.client.user.tag}`,
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Creator:*** <@${this.client.owner}>`,
+				`***Creator:*** ${this.client.users.cache.get(this.client.owner).tag}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${version}`,
 				`***Node:*** [${process.version}](https://nodejs.org/)`,
