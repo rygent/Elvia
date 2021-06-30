@@ -11,13 +11,12 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const msg = await message.reply('Pinging...');
-		const latency = Math.round(msg.createdTimestamp - message.createdTimestamp);
+		const latency = Math.round(Date.now() - message.createdTimestamp);
 
 		if (latency <= 0) {
-			msg.edit('Please try again later!');
+			return message.reply('Please try again later!');
 		} else {
-			msg.edit([
+			return message.reply([
 				`💓 ***Heartbeat:*** \`${Math.round(this.client.ws.ping)}ms\``,
 				`⏱️ ***Latency:*** \`${latency}ms\``
 			].join('\n'));
