@@ -16,6 +16,8 @@
   •
   <a href="#basic-usage">Basic Usage</a>
   •
+  <a href="#requirements">Requirements</a>
+  •
   <a href="#self-hosting">Self Hosting</a>
   •
   <a href="#installation">Installation</a>
@@ -61,6 +63,9 @@ how you use that command. Use `$help` in a server with Elaina to find Elaina's f
   * For the full commands list, type `$help`.
   * Each command is called using the prefix, in following form: `$<command>` where is the command. For example, to call the command ping, you would type `$ping`.
   * Feel free to join [this support server](https://discord.gg/nW6x9EN) if additional help is needed!
+
+## Requirements
+* Node.js v14 (recomended) or higher.
 
 ## Self Hosting
 Elaina can be hosted on anything, from your personal computer, to a Raspberry Pi, or even cloud services such as Google Cloud, Amazon Web Services, or Heroku.
