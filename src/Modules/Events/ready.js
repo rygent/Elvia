@@ -11,11 +11,13 @@ module.exports = class extends Event {
 		});
 	}
 
+	/* eslint-disable max-len */
 	async run() {
+		await this.client.utils.loadInteractions();
+
 		console.log([
 			`[${chalk.grey('INFO')}] Logged in as ${chalk.redBright(`${this.client.user.tag}`)}`,
-			`[${chalk.grey('INFO')}] Loaded ${this.client.commands.size.formatNumber()} commands & ${this.client.events.size.formatNumber()} events!`,
-			// eslint-disable-next-line max-len
+			`[${chalk.grey('INFO')}] Loaded ${this.client.commands.size.formatNumber()} commands, ${this.client.interactions.size.formatNumber()} interactions & ${this.client.events.size.formatNumber()} events!`,
 			`[${chalk.grey('INFO')}] Ready in ${this.client.guilds.cache.size.formatNumber()} guilds on ${this.client.channels.cache.size.formatNumber()} channels, for a total of ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users.`
 		].join('\n'));
 		process.stdout.write(`[${chalk.greenBright('BOOT')}] Connected to Discord API!\n`);
