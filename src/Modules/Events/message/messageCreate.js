@@ -109,11 +109,12 @@ module.exports = class extends Event {
 			timestamps.set(message.author.id, now);
 			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-
-			command.run(message, args).catch(err => {
-				console.log(err);
-				return message.reply('Something went wrong, please contact the developer to fix it!');
-			});
+			try {
+				await command.run(message, args);
+			} catch (error) {
+				await message.reply('Something went wrong, please report it to our guild support!');
+				return console.log(error);
+			}
 		}
 	}
 
