@@ -27,23 +27,23 @@ module.exports = class extends Command {
 			.addComponents(new MessageButton()
 				.setStyle('SUCCESS')
 				.setLabel('Confirm')
-				.setCustomID('confirm'))
+				.setCustomId('confirm'))
 			.addComponents(new MessageButton()
 				.setStyle('DANGER')
 				.setLabel('Cancel')
-				.setCustomID('cancel'));
+				.setCustomId('cancel'));
 
 		return message.reply({ content: `Please confirm if you want to leave from the **${guild.name}** guild!`, components: [row] }).then(msg => {
 			const filter = (button) => button.user.id === message.author.id;
-			const collector = msg.createMessageComponentInteractionCollector(filter, { time: 10000 });
+			const collector = msg.createMessageComponentCollector(filter, { time: 10000 });
 
 			collector.on('collect', async (button) => {
-				if (button.customID === 'confirm') {
+				if (button.customId === 'confirm') {
 					await guild.leave();
 					return button.update({ content: `Successfully left guild **${guild.name}**!`, components: [] }).then(this.client.setTimeout(() => message.delete() && msg.delete(), 10000));
 				}
 
-				if (button.customID === 'cancel') {
+				if (button.customId === 'cancel') {
 					collector.stop();
 					return button.update({ content: 'Command has been cancelled!', components: [] }).then(this.client.setTimeout(() => message.delete() && msg.delete(), 10000));
 				}

@@ -31,22 +31,22 @@ module.exports = class extends Command {
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
 				.setEmoji('⬅️')
-				.setCustomID('previous'))
+				.setCustomId('previous'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
 				.setEmoji('➡️')
-				.setCustomID('next'))
+				.setCustomId('next'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
 				.setEmoji('❌')
-				.setCustomID('delete'));
+				.setCustomId('delete'));
 
 		return message.reply({ embeds: [embed], components: [row] }).then(msg => {
 			const filter = (button) => button.user.id === message.author.id;
-			const collector = msg.createMessageComponentInteractionCollector(filter);
+			const collector = msg.createMessageComponentCollector(filter);
 
 			collector.on('collect', async (button) => {
-				switch (button.customID) {
+				switch (button.customId) {
 					case 'previous':
 						i0 -= 10;
 						i1 -= 10;

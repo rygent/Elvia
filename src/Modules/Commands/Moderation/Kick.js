@@ -36,18 +36,18 @@ module.exports = class extends Command {
 			.addComponents(new MessageButton()
 				.setStyle('SUCCESS')
 				.setLabel('Confirm')
-				.setCustomID('confirm'))
+				.setCustomId('confirm'))
 			.addComponents(new MessageButton()
 				.setStyle('DANGER')
 				.setLabel('Cancel')
-				.setCustomID('cancel'));
+				.setCustomId('cancel'));
 
 		return message.reply({ content: `Please confirm if you want to kick **${member.displayName}**!`, components: [row] }).then((msg) => {
 			const filter = (button) => button.user.id === message.author.id;
-			const collector = msg.createMessageComponentInteractionCollector(filter, { time: 10000 });
+			const collector = msg.createMessageComponentCollector(filter, { time: 10000 });
 
 			collector.on('collect', async (button) => {
-				if (button.customID === 'confirm') {
+				if (button.customId === 'confirm') {
 					if (!member.user.bot) {
 						await member.send([
 							`Hello **${member.user.username}**, You've just been kicked from _${message.guild.name}_ by _${message.author.tag}_!`,
@@ -100,7 +100,7 @@ module.exports = class extends Command {
 					});
 				}
 
-				if (button.customID === 'cancel') {
+				if (button.customId === 'cancel') {
 					collector.stop();
 					return button.update({ content: 'Command has been cancelled!', components: [] }).then(this.client.setTimeout(() => message.delete() && msg.delete(), 5000));
 				}

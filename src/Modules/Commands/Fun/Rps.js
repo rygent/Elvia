@@ -18,34 +18,34 @@ module.exports = class extends Command {
 				.setStyle('SECONDARY')
 				.setLabel('Rock')
 				.setEmoji('🪨')
-				.setCustomID('rock'))
+				.setCustomId('rock'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
 				.setLabel('Paper')
 				.setEmoji('📄')
-				.setCustomID('paper'))
+				.setCustomId('paper'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
 				.setLabel('Scissors')
 				.setEmoji('✂️')
-				.setCustomID('scissors'));
+				.setCustomId('scissors'));
 
 		const choices = ['rock', 'paper', 'scissors'];
 		const result = choices[Math.floor(Math.random() * 3)];
 
 		return message.reply({ content: 'Choose one of the buttons below to start the game!', components: [row] }).then((msg) => {
 			const filter = (button) => button.user.id === message.author.id;
-			const collector = msg.createMessageComponentInteractionCollector(filter, { time: 30000 });
+			const collector = msg.createMessageComponentCollector(filter, { time: 30000 });
 
 			collector.on('collect', async (button) => {
-				const winChoice = (button.customID === 'rock' && result === 'scissors') || (button.customID === 'paper' && result === 'rock') || (button.customID === 'scissors' && result === 'paper');
+				const winChoice = (button.customId === 'rock' && result === 'scissors') || (button.customId === 'paper' && result === 'rock') || (button.customId === 'scissors' && result === 'paper');
 
 				if (winChoice) {
-					return button.update({ content: `You won, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
-				} else if (button.customID === result) {
-					return button.update({ content: `We tied, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+					return button.update({ content: `You won, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+				} else if (button.customId === result) {
+					return button.update({ content: `We tied, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
 				} else {
-					return button.update({ content: `You lost, you choose \`${button.customID.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+					return button.update({ content: `You lost, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
 				}
 			});
 
