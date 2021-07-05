@@ -1,4 +1,5 @@
 const Command = require('../../../Structures/Command.js');
+const { MessageSelectMenu } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -7,35 +8,43 @@ module.exports = class extends Command {
 			aliases: ['autodeletemodcommands'],
 			description: 'Automatically delete commands on moderation.',
 			category: 'Administrator',
-			usage: '[enable/disable]',
-			userPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES'],
-			clientPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES'],
-			cooldown: 3000
+			userPerms: ['MANAGE_GUILD'],
+			clientPerms: ['MANAGE_GUILD']
 		});
 	}
 
 	/* eslint-disable consistent-return */
-	async run(message, [option]) {
+	async run(message) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
 
-		if (!option) {
-			return message.reply(`You have to select the options to \`enable\` or \`disable\`!`);
-		}
+		const menu = new MessageSelectMenu()
+			.setCustomId('select')
+			.setMaxValues(1)
+			.addOptions([{
+				label: 'Enable',
+				description: 'Will be deleted automatically',
+				value: 'enable'
+			}, {
+				label: 'Disable',
+				description: 'Will not be deleted automatically',
+				value: 'disable'
+			}]);
 
-		switch (option.toLowerCase()) {
-			case 'enable':
-				guildData.autoDeleteModCommands = true;
-				guildData.save();
-				message.reply('Automatic delete is enabled.\nModeration commands will be automatically deleted!');
-				break;
-			case 'disable':
-				guildData.autoDeleteModCommands = false;
-				guildData.save();
-				message.reply('Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!');
-				break;
-			default:
-				return message.reply(`This option is not found. Please select the option \`enable\` or \`disable\`!`);
-		}
+		return message.reply({ content: 'Select the following options to define auto-delete moderation settings', components: [[menu]] }).then((msg) => {
+			const filter = (select) => select.user.id === message.author.id;
+			msg.awaitMessageComponent({ filter, time: 10000 }).then((select) => {
+				switch (select.values[0]) {
+					case 'enable':
+						guildData.autoDeleteModCommands = true;
+						guildData.save();
+						return select.update({ content: 'Automatic delete is enabled.\nModeration commands will be automatically deleted!', components: [] });
+					case 'disable':
+						guildData.autoDeleteModCommands = false;
+						guildData.save();
+						return select.update({ content: 'Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!', components: [] });
+				}
+			}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
+		});
 	}
 
 };
