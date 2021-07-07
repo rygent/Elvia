@@ -38,7 +38,7 @@ module.exports = class extends Command {
 			.setDescription([
 				`***Name:*** ${message.guild.name}`,
 				`***ID:*** \`${message.guild.id}\``,
-				`***Owner:*** <@${message.guild.ownerID}>`,
+				`***Owner:*** <@${message.guild.ownerId}>`,
 				`***Boost Tier:*** ${message.guild.premiumTier.toProperCase()}`,
 				`***Explicit filter:*** ${contentFilterLevels[message.guild.explicitContentFilter]}`,
 				`***Verification:*** ${verificationLevels[message.guild.verificationLevel]}`,
