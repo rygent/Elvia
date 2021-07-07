@@ -17,13 +17,12 @@ module.exports = class extends Command {
 	}
 	/* eslint-disable consistent-return */
 	async run(message, [target]) {
-		const member = await this.client.resolveUser(target) || message.author;
-		const activity = member.presence.activities.find(spotify => spotify.name === 'Spotify');
-		if (!activity) {
-			return message.reply(`**${member.tag}** is not listening to Spotify!`);
+		const member = await this.client.resolveMember(target, message.guild) || message.member;
+		if (member.presence === null || !member.presence.activities.find(spotify => spotify.name === 'Spotify')) {
+			return message.reply(`**${member.displayName}** is not listening to Spotify!`);
 		}
 
-		getData(`https://open.spotify.com/track/${activity.syncID}`).then(async track => {
+		getData(`https://open.spotify.com/track/${member.presence.activities.find(spotify => spotify.name === 'Spotify').syncId}`).then(async track => {
 			const button = new MessageButton()
 				.setStyle('LINK')
 				.setLabel('Play on Spotify')
@@ -40,9 +39,9 @@ module.exports = class extends Command {
 					`***Artists:*** ${track.artists.map(artist => artist.name).join(', ')}`,
 					`***Album:*** ${track.album.name}`,
 					`***Tracks:*** ${track.track_number.formatNumber()} of ${track.album.total_tracks.formatNumber()}`,
-					`***Release Date:*** ${moment(track.album.release_date).format('MMMM D, YYYY')}`,
+					`***Released:*** ${moment(track.album.release_date).format('MMMM D, YYYY')}`,
 					`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
-					`***Listener:*** <@${member.id}>`
+					`***Listener:*** <@${member.user.id}>`
 				].join('\n'))
 				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
 
