@@ -77,6 +77,10 @@ module.exports = class Util {
 		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
 	}
 
+	formatLanguage(string) {
+		return new Intl.DisplayNames(['en'], { type: 'language' }).of(string);
+	}
+
 	categoryCheck(category, message) {
 		category = category.toLowerCase();
 		switch (category) {
