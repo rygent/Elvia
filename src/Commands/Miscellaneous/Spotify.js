@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Utils/Configuration.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { Color, Emoji, Environment } = require('../../Utils/Configuration.js');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 
@@ -29,23 +29,30 @@ module.exports = class extends Command {
 		const track = response.tracks.items[0];
 		const artists = track.artists.map(artist => artist.name);
 
+		const button = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('LINK')
+				.setLabel('Play on Spotify')
+				.setEmoji(Emoji.SPOTIFY)
+				.setURL(track.external_urls.spotify));
+
 		const embed = new MessageEmbed()
 			.setColor(Color.SPOTIFY)
 			.setAuthor('Spotify', 'https://i.imgur.com/9xO7toS.png', 'https://www.spotify.com/')
 			.setTitle(track.name)
-			.setURL(track.external_urls.spotify)
+			.setURL(track.album.external_urls.spotify)
 			.setImage(track.album.images[0].url)
 			.setDescription([
 				`***Artists:*** ${artists.join(', ')}`,
 				`***Album:*** ${track.album.name}`,
-				`***Tracks:*** ${track.album.total_tracks.formatNumber()}`,
-				`***Release Date:*** ${moment(track.album.release_date).format('MMMM D, YYYY')}`,
-				`***Duration:*** ${moment.duration(track.duration_ms).format('d [Days] h [Hours] m [Minutes] s [Seconds]')}`,
+				`***Tracks:*** ${track.track_number.formatNumber()} of ${track.album.total_tracks.formatNumber()}`,
+				`***Released:*** ${moment(track.album.release_date).format('MMMM D, YYYY')}`,
+				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
 
-		return message.reply({ embeds: [embed] });
+		return message.reply({ embeds: [embed], components: [button] });
 	}
 
 };

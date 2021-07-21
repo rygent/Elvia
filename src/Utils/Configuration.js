@@ -34,7 +34,8 @@ module.exports = {
 		IDLE: '<:idle:712397201955094708>',
 		DND: '<:dnd:712397154836283392>',
 		OFFLINE: '<:offline:712397086100029440>',
-		BOT: '<:bot:729455298917564467>'
+		BOT: '<:bot:729455298917564467>',
+		SPOTIFY: '<:spotify:859713717595144233>'
 	},
 	Environment: {
 		IMDB: process.env.IMDB_KEY,
