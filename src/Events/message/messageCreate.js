@@ -111,9 +111,6 @@ module.exports = class extends Event {
 
 			try {
 				await command.run(message, args);
-				if (command.category === 'Moderation' && guildData.autoDeleteModCommands) {
-					message.delete();
-				}
 			} catch (error) {
 				await message.reply({ embeds: [{
 					color: Color.DEFAULT,
