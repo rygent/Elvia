@@ -5,7 +5,9 @@ module.exports = {
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	mongoUri: process.env.MONGO_URI,
 	Access: {
-		INVITE_CODE: process.env.INVITE_CODE
+		INVITE_CODE: process.env.INVITE_CODE,
+		INVITE_PERMISSION: process.env.INVITE_PERMISSION,
+		INVITE_SCOPE: process.env.INVITE_SCOPE.split(',').join('%20')
 	},
 	Color: {
 		DEFAULT: '2f3136',

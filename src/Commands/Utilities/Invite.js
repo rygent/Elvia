@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
+const { Access } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Command {
 
@@ -14,13 +14,13 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
-			.setTitle('Click here to add me to your server!')
-			.setURL(`https://discordapp.com/oauth2/authorize?&client_id=${this.client.user.id}&scope=bot&permissions=1584786551`)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+		const button = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('LINK')
+				.setLabel('Click here to invite!')
+				.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=${Access.INVITE_PERMISSION}&scope=${Access.INVITE_SCOPE}`));
 
-		return message.reply({ embeds: [embed] });
+		return message.reply({ content: 'Invite me to your server!', components: [button] });
 	}
 
 };
