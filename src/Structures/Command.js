@@ -9,12 +9,12 @@ module.exports = class Command {
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Miscellaneous';
 		this.usage = options.usage || '';
-		this.userPerms = new Permissions(options.userPerms).freeze();
+		this.memberPerms = new Permissions(options.memberPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
-		this.ownerOnly = options.ownerOnly || false;
-		this.disabled = options.disabled || false;
-		this.nsfw = options.nsfw || false;
-		this.cooldown = options.cooldown || 3000;
+		this.cooldown = options.cooldown || 0;
+		this.isNsfw = options.nsfw || false;
+		this.isOwner = options.ownerOnly || false;
+		this.isDisabled = options.disabled || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars

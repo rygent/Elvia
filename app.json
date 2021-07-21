@@ -1,30 +1,42 @@
 {
-    "name": "Elaina",
-    "description": "Elaina is a powerful Discord bot made with Node.js with a lot of commands!",
-    "logo": "https://i.imgur.com/3Zvcbtu.jpeg",
+    "name": "Elvia",
+    "description": "Elvia is a powerful Discord bot made with Node.js with a lot of commands!",
+    "logo": "https://i.imgur.com/EDf862b.jpeg",
     "keywords": [
         "discord-bot", "discord.js", "discord-js"
     ],
-    "repository": "https://github.com/XRzky/Elaina",
+    "repository": "https://github.com/Rygent/Elvia",
     "website": "",
     "success_url": "https://discord.gg/nW6x9EN",
     "stack": "container",
     "env": {
-      "BOT_TOKEN": {
+      "DISCORD_TOKEN": {
         "description": "Get this value from https://discord.com/developers/applications.",
         "required": true
       },
-      "BOT_PREFIX": {
+      "DISCORD_PREFIX": {
         "description": "Input here the prefix for your bot.",
         "value": "$",
         "require": true
       },
-      "BOT_OWNER": {
+      "DISCORD_OWNER": {
         "description": "Input here your ID as the bot owner.",
+        "required": true
+      },
+      "GUILD_LOGS": {
+        "description": "Input here channel ID for log of bot.",
         "required": true
       },
       "IMDB_KEY": {
         "description": "Get this value from https://imdb.com.",
+        "required": true
+      },
+      "INVITE_CODE": {
+        "description": "Input here the guild invite code.",
+        "required": true
+      },
+      "MONGO_URI": {
+        "description": "MongoDB URI. Get from https://mongodb.com/",
         "required": true
       },
       "OPEN_WEATHER_ID": {
@@ -41,14 +53,6 @@
       },
       "YOUTUBE_KEY": {
         "description": "YouTube Data API Key. Get from https://developers.google.com/youtube/v3/getting-started",
-        "required": true
-      },
-      "MONGO_URI": {
-        "description": "MongoDB URI. Get from https://mongodb.com/",
-        "required": true
-      },
-      "GUILD_LOGS": {
-        "description": "Input here channel ID for log of bot.",
         "required": true
       }
     }

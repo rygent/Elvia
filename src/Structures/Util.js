@@ -1,6 +1,7 @@
 const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
+const { connect } = require('mongoose');
 const Command = require('./Command.js');
 const Event = require('./Event.js');
 
@@ -56,10 +57,12 @@ module.exports = class Util {
 	formatPerms(perm) {
 		return perm
 			.toLowerCase()
-			// eslint-disable-next-line id-length
-			.replace(/(^|"|_)(\S)/g, (s) => s.toUpperCase())
+			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
 			.replace(/_/g, ' ')
+			.replace(/To/g, 'to')
+			.replace(/And/g, 'and')
 			.replace(/Guild/g, 'Server')
+			.replace(/Tts/g, 'Text-to-Speech')
 			.replace(/Use Vad/g, 'Use Voice Acitvity');
 	}
 
@@ -79,15 +82,22 @@ module.exports = class Util {
 		}
 	}
 
+	async loadDatabase() {
+		return connect(this.client.mongoUri, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true
+		});
+	}
+
 	async loadCommands() {
-		return glob(`${this.directory}Modules/Commands/**/*.js`).then(commands => {
+		return glob(`${this.directory}Commands/**/*.js`).then(commands => {
 			for (const commandFile of commands) {
 				delete require.cache[commandFile];
 				const { name } = path.parse(commandFile);
 				const File = require(commandFile);
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client, name.toLowerCase());
-				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands.`);
+				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands directory.`);
 				this.client.commands.set(command.name, command);
 				if (command.aliases.length) {
 					for (const alias of command.aliases) {
@@ -99,7 +109,7 @@ module.exports = class Util {
 	}
 
 	async loadEvents() {
-		return glob(`${this.directory}Modules/Events/**/*.js`).then(events => {
+		return glob(`${this.directory}Events/**/*.js`).then(events => {
 			for (const eventFile of events) {
 				delete require.cache[eventFile];
 				const { name } = path.parse(eventFile);

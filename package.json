@@ -1,7 +1,7 @@
 {
-  "name": "elaina",
-  "version": "3.3.0",
-  "description": "Elaina is a powerful Discord bot made with Node.js with a lot of commands!",
+  "name": "elvia",
+  "version": "4.0.0",
+  "description": "Elvia is a powerful Discord bot made with Node.js with a lot of commands!",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rygent/Elaina.git"
+    "url": "git+https://github.com/Rygent/Elvia.git"
   },
   "keywords": [
     "discord-bot",
@@ -20,12 +20,12 @@
   "author": "Rygent",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Rygent/Elaina/issues"
+    "url": "https://github.com/Rygent/Elvia/issues"
   },
-  "homepage": "https://github.com/Rygent/Elaina#readme",
+  "homepage": "https://github.com/Rygent/Elvia#readme",
   "devDependencies": {
-    "eslint": "^7.28.0",
-    "eslint-config-tesseract": "^0.2.1"
+    "eslint": "^7.31.0",
+    "eslint-config-tesseract": "^0.3.0"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
@@ -33,7 +33,7 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "diff": "^5.0.0",
-    "discord.js": "^12.5.3",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^10.0.0",
     "figlet": "^1.5.0",
     "glob": "^7.1.7",
@@ -42,10 +42,10 @@
     "libnpmsearch": "^3.1.2",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.12.13",
+    "mongoose": "^5.13.3",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.1",
-    "os": "^0.1.1",
+    "os": "^0.1.2",
     "path": "^0.12.7",
     "simple-youtube-api": "^5.2.1",
     "util": "^0.12.4"

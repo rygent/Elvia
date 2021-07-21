@@ -1,5 +1,5 @@
 # We're using Alpine
-FROM node:lts-alpine3.12
+FROM node:lts-alpine3.13
 
 # Installing packages
 RUN apk add --no-cache=true --update \
@@ -19,6 +19,6 @@ COPY .env.example .env
 
 # Installing required & optional dependencies
 RUN yarn install
-RUN yarn add libsodium-wrappers bufferutil utf-8-validate
+RUN yarn add bufferutil utf-8-validate
 
 CMD ["node", "."]
