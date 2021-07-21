@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Structures/Configuration.js');
+const { Color, Environment } = require('../../Utils/Configuration.js');
 const IMDb = require('imdb-api');
 const moment = require('moment');
 

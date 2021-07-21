@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Structures/Configuration.js');
+const { Color, Environment } = require('../../Utils/Configuration.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(Environment.YOUTUBE);
 

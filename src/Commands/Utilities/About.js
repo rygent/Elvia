@@ -1,7 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed, version: discordVersion } = require('discord.js');
 const { version } = require('../../../package.json');
-const { Color, Emoji } = require('../../Structures/Configuration.js');
+const { Color, Emoji } = require('../../Utils/Configuration.js');
 const moment = require('moment');
 const os = require('os');
 require('moment-duration-format');

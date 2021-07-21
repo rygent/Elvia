@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Structures/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 const translator = require('../../../assets/json/Translator.json');
 const translate = require('@iamtraction/google-translate');
 

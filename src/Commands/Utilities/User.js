@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color, Emoji } = require('../../Structures/Configuration.js');
+const { Color, Emoji } = require('../../Utils/Configuration.js');
 const flags = require('../../../assets/json/Badge.json');
 const moment = require('moment');
 

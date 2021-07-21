@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const ClientEmbed = require('../../Structures/ClientEmbed.js');
-const { Color } = require('../../Structures/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 const { Util: { escapeMarkdown } } = require('discord.js');
 const { diffWordsWithSpace } = require('diff');
 

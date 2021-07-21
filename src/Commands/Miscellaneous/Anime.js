@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Structures/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 const Jikan = require('jikan-node');
 const mal = new Jikan();
 

@@ -1,4 +1,4 @@
-const { Access, Environment } = require('../Structures/Configuration.js');
+const { Access, Environment } = require('../Utils/Configuration.js');
 
 module.exports = class checkValid {
 

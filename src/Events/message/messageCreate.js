@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const { Collection } = require('discord.js');
-const { Access, Color } = require('../../Structures/Configuration.js');
+const { Access, Color } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Event {
 

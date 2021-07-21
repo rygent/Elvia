@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { prefix } = require('../Structures/Configuration.js');
+const { prefix } = require('../Utils/Configuration.js');
 
 module.exports = model('Guild', new Schema({
 	id: { type: String },
