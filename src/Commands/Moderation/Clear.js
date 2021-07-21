@@ -4,35 +4,18 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['clean', 'purge'],
+			aliases: ['delete', 'purge'],
 			description: 'Deletes messages very quickly!',
 			category: 'Moderation',
 			usage: '[number] (member)',
-			memberPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
-			clientPerms: ['MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
+			memberPerms: ['MANAGE_MESSAGES'],
+			clientPerms: ['MANAGE_MESSAGES'],
 			cooldown: 3000
 		});
 	}
 
-	async run(message, args) {
-		if (args[0] === 'all') {
-			message.reply({ content: 'All messages of the channel will be deleted! To confirm type `confirm`' });
-			await message.channel.awaitMessages(msg => (msg.author.id === message.author.id) && (msg.content === 'confirm'), {
-				max: 1,
-				time: 20000,
-				errors: ['time']
-			}).catch(() => {
-				message.channel.send({ content: 'Time\'s up! Please retype the command!' });
-				return;
-			});
-			const { position } = message.channel;
-			const newChannel = await message.channel.clone();
-			await message.channel.delete();
-			newChannel.setPosition(position);
-			return newChannel.send({ content: 'Salon reinitialized!' });
-		}
-
-		let amount = args[0];
+	async run(message, [number]) {
+		let amount = number;
 		if (!amount || isNaN(amount) || parseInt(amount) < 1) {
 			return message.reply({ content: 'You must specify a number of messages to delete!' });
 		}
@@ -56,14 +39,14 @@ module.exports = class extends Command {
 		let toDelete = null;
 
 		if (member) {
-			toDelete = await message.channel.send({ content: `🗑️ **${--amount}** messages of **${member.user.tag}** deleted!` });
+			toDelete = await message.channel.send({ content: `Successfully deleted \`${--amount}\` messages from **${member.displayName}**!` });
 		} else {
-			toDelete = await message.channel.send({ content: `🗑️ **${--amount}** messages deleted!` });
+			toDelete = await message.channel.send({ content: `Successfully deleted \`${--amount}\` messages!` });
 		}
 
 		setTimeout(() => {
 			toDelete.delete();
-		}, 2000);
+		}, 3000);
 	}
 
 };
