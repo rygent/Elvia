@@ -31,6 +31,12 @@ module.exports = class Util {
 		return arr;
 	}
 
+	trimString(string) {
+		let i = string.lastIndexOf(' ', 2047);
+		if (i > 2044) i = string.lastIndexOf(' ', i - 1);
+		return `${string.substring(0, i + 1)}...`;
+	}
+
 	formatBytes(bytes) {
 		if (bytes === 0) return '0 Bytes';
 		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];

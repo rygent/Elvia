@@ -1,8 +1,7 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const { Color } = require('../../Utils/Configuration.js');
-const Jikan = require('jikan-node');
-const mal = new Jikan();
+const { getInfoFromName } = require('mal-scraper');
 
 module.exports = class extends Command {
 
@@ -16,76 +15,58 @@ module.exports = class extends Command {
 		});
 	}
 
-	/* eslint-disable id-length */
 	async run(message, args) {
 		const query = args.join(' ').trim();
 		if (!query) {
 			return message.reply({ content: 'Please enter a specific anime title!' });
 		}
 
-		function output(a) {
-			var s = a[0].name;
-			for (var i = 1; i < a.length; i++) {
-				s += `, ${a[i].name}`;
-			}
-			return s;
-		}
-		function andanotheroutput(s) {
-			let i = s.lastIndexOf(' ', 2047);
-			if (i > 2044) {
-				i = s.lastIndexOf(' ', i - 1);
-			}
-			console.log(i);
-			return `${s.substring(0, i + 1)}...`;
-		}
-
 		try {
-			mal.search('anime', query).then(data => {
-				const id = data.results[0].mal_id;
-				mal.findAnime(id).then(result => {
-					if (result.length === 0) return message.reply({ content: 'Search not found, make sure the title name matches what you are looking for!' });
+			const data = await getInfoFromName(query, false);
 
-					const embed = new MessageEmbed()
-						.setColor(Color.MAL)
-						.setAuthor('MyAnimeList', 'https://i.imgur.com/QABhOrL.png', 'https://myanimelist.net/')
-						.setTitle(result.title)
-						.setURL(result.url)
-						.setThumbnail(result.image_url)
-						.setDescription(result.synopsis ? result.synopsis.length <= 2048 ? result.synopsis.replace(/<[^>]*>/g, '') : andanotheroutput(result.synopsis.replace(/<[^>]*>/g, '')) : '`N/A`')
-						.addField('__Details__', [
-							`***English:*** ${result.title_english ? result.title_english : result.title}`,
-							`***Synonyms:*** ${result.title_synonyms[0] ? result.title_synonyms.join(', ').toString() : '`N/A`'}`,
-							`***Japanese:*** ${result.title_japanese}`,
-							`***Score:*** ${result.score ? result.score : '`N/A`'} (${result.scored_by ? `${result.scored_by.formatNumber()} users` : '`N/A`'})`,
-							`***Genres:*** ${result.genres[0] ? output(result.genres) : '`N/A`'}`,
-							`***Rating:*** ${result.rating ? result.rating : '`N/A`'}`,
-							`***Source:*** ${result.source}`,
-							`***Type:*** ${result.type ? result.type : '`N/A`'}`,
-							`***Premiered:*** ${result.premiered ? result.premiered : '`N/A`'}`,
-							`***Broadcast:*** ${result.broadcast}`,
-							`***Episodes:*** ${result.episodes ? result.episodes : '`N/A`'}`,
-							`***Duration:*** ${result.duration ? result.duration : '`N/A`'}`,
-							`***Status:*** ${result.status}`,
-							`***Aired:*** ${result.aired.string}`
-						].join('\n'))
-						.addField('\u200B', [
-							`***Producers:*** ${result.producers[0] ? output(result.producers) : '`N/A`'}`,
-							`***Licensors:*** ${result.licensors[0] ? output(result.licensors) : '`N/A`'}`,
-							`***Studios:*** ${result.studios[0] ? output(result.studios) : '`N/A`'}`,
-							`***Opening:*** ${result.opening_themes[0] ? result.opening_themes.join(', ').toString() : '`N/A`'}`,
-							`***Ending:*** ${result.ending_themes[0] ? result.ending_themes.join(', ').toString() : '`N/A`'}`,
-							`***Ranked:*** #${result.rank ? result.rank.formatNumber() : '`N/A`'}`,
-							`***Popularity:*** #${result.popularity ? result.popularity.formatNumber() : '`N/A`'}`,
-							`***Members:*** ${result.members ? result.members.formatNumber() : '`N/A`'}`,
-							`***Favorites:*** ${result.favorites ? result.favorites.formatNumber() : '`N/A`'}`
-						].join('\n'))
-						.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+			const button = new MessageActionRow()
+				.addComponents(new MessageButton()
+					.setStyle('LINK')
+					.setLabel('Trailer')
+					.setURL(data.trailer));
 
-					return message.reply({ embeds: [embed] });
-				});
-			});
+			const embed = new MessageEmbed()
+				.setColor(Color.MAL)
+				.setAuthor('MyAnimeList', 'https://i.imgur.com/QABhOrL.png', 'https://myanimelist.net/')
+				.setTitle(data.title)
+				.setURL(data.url)
+				.setThumbnail(data.picture)
+				.setDescription(data.synopsis)
+				.addField('__Detail__', [
+					`***English:*** ${data.englishTitle ? data.englishTitle : data.title}`,
+					`***Synonyms:*** ${data.synonyms[0] ? data.synonyms.join(', ').toString() : '`N/A`'}`,
+					`***Japanese:*** ${data.japaneseTitle}`,
+					`***Score:*** ${data.score ? data.score : '`N/A`'} (${data.scoreStats ? data.scoreStats : '`N/A`'})`,
+					`***Genres:*** ${data.genres[0] ? data.genres.join(', ').toString() : '`N/A`'}`,
+					`***Rating:*** ${data.rating ? data.rating : '`N/A`'}`,
+					`***Source:*** ${data.source}`,
+					`***Type:*** ${data.type ? data.type : '`N/A`'}`,
+					`***Premiered:*** ${data.premiered ? data.premiered : '`N/A`'}`,
+					`***Broadcast:*** ${data.broadcast}`,
+					`***Episodes:*** ${data.episodes ? data.episodes : '`N/A`'}`,
+					`***Duration:*** ${data.duration ? data.duration : '`N/A`'}`,
+					`***Status:*** ${data.status}`,
+					`***Aired:*** ${data.aired}`
+				].join('\n'))
+				.addField('\u200B', [
+					`***Characters:*** ${data.characters[0] ? data.characters.map((get) => `${get.name} (${get.role})`).join(', ') : '`N/A`'}`,
+					`***Producers:*** ${data.producers[0] ? data.producers.join(', ').toString() : '`N/A`'}`,
+					`***Studios:*** ${data.studios[0] ? data.studios.join(', ').toString() : '`N/A`'}`,
+					`***Ranked:*** ${data.ranked ? data.ranked : '`N/A`'}`,
+					`***Popularity:*** ${data.popularity ? data.popularity : '`N/A`'}`,
+					`***Members:*** ${data.members ? data.members : '`N/A`'}`,
+					`***Favorites:*** ${data.favorites ? data.favorites : '`N/A`'}`
+				].join('\n'))
+				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+
+			return message.reply({ embeds: [embed], components: [button] });
 		} catch {
-			return message.reply({ content: 'An API error has occurred. Please try again later.' });
+			return message.reply({ content: 'No result found!' });
 		}
 	}
 
