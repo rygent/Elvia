@@ -7,7 +7,9 @@ module.exports = {
 	Access: {
 		INVITE_CODE: process.env.INVITE_CODE,
 		INVITE_PERMISSION: process.env.INVITE_PERMISSION,
-		INVITE_SCOPE: process.env.INVITE_SCOPE.split(',').join('%20')
+		INVITE_SCOPE: process.env.INVITE_SCOPE.split(',').join('%20'),
+		WEBHOOK_ID: process.env.WEBHOOK_ID,
+		WEBHOOK_TOKEN: process.env.WEBHOOK_TOKEN
 	},
 	Color: {
 		DEFAULT: '2f3136',

@@ -1,6 +1,7 @@
 const Event = require('../../Structures/Event.js');
-const { MessageEmbed } = require('discord.js');
-const { Color, Supports } = require('../../Utils/Configuration.js');
+const { MessageEmbed, WebhookClient } = require('discord.js');
+const { Access, Color } = require('../../Utils/Configuration.js');
+const webhook = new WebhookClient(Access.WEBHOOK_ID, Access.WEBHOOK_TOKEN);
 
 module.exports = class extends Event {
 
@@ -20,8 +21,7 @@ module.exports = class extends Event {
 			].join('\n'))
 			.setFooter(`${this.client.guilds.cache.size.formatNumber()} guilds | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`, this.client.user.avatarURL({ dynamic: true }));
 
-		const sendChannel = this.client.channels.cache.get(Supports.GUILD_LOGS);
-		sendChannel.send({ embeds: [embed] });
+		return webhook.send({ username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ dynamic: true }), embeds: [embed] });
 	}
 
 };

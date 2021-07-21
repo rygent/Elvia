@@ -61,6 +61,14 @@
         "description": "Spotify API Key. Get from https://developer.spotify.com/documentation/general/guides/app-settings/",
         "required": true
       },
+      "WEBHOOK_ID": {
+        "description": "Input here the webhook id.",
+        "require": true
+      },
+      "WEBHOOK_TOKEN": {
+        "description": "Input here the webhook token.",
+        "require": true
+      },
       "YOUTUBE_KEY": {
         "description": "YouTube Data API Key. Get from https://developers.google.com/youtube/v3/getting-started",
         "required": true

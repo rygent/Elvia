@@ -27,6 +27,10 @@ module.exports = class checkValid {
 			this.client.logger.log({ content: 'Spotify Client ID & Client Secret required for "spotify" command!', type: 'warn' });
 		}
 
+		if (!Access.WEBHOOK_ID || !Access.WEBHOOK_TOKEN) {
+			this.client.logger.log({ content: 'Webhook ID & Token required to send client logs!', type: 'warn' });
+		}
+
 		if (!Environment.YOUTUBE) {
 			this.client.logger.log({ content: 'YouTube API key required for "youtube" command!', type: 'warn' });
 		}
