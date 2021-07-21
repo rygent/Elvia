@@ -1,5 +1,5 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 
 module.exports = class extends Command {
@@ -10,7 +10,6 @@ module.exports = class extends Command {
 			description: 'Shows information from the discord.js documentation.',
 			category: 'Developer',
 			usage: '[searchQuery]',
-			clientPerms: ['ADD_REACTIONS', 'MANAGE_MESSAGES'],
 			cooldown: 3000
 		});
 	}
@@ -26,29 +25,23 @@ module.exports = class extends Command {
 			return message.reply({ content: `\`${query}\` couldn't be located within the discord.js documentation (<https://discord.js.org/>).` });
 		}
 
+		const button = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('DANGER')
+				.setLabel('Delete')
+				.setCustomId('delete'));
+
 		const embed = new MessageEmbed(result)
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
 
-		if (!message.guild) {
-			return message.reply({ embeds: [embed] });
-		}
+		const msg = await message.reply({ embeds: [embed], components: [button] });
 
-		const msg = await message.reply({ embeds: [embed] });
-		msg.react('🗑');
-
-		let react;
-		try {
-			react = await msg.awaitReactions(
-				(reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id,
-				{ max: 1, time: 10000, errors: ['time'] }
-			);
-		} catch (error) {
-			msg.reactions.removeAll();
-		}
-
-		if (react && react.first()) msg.delete();
-
-		return message;
+		const filter = (button) => button.user.id === message.author.id;
+		await msg.awaitMessageComponent({ filter, time: 10000 }).then(async (button) => {
+			if (button.customId === 'delete') {
+				return msg.delete();
+			}
+		}).catch(() => msg.edit({ components: [] }));
 	}
 
 };
