@@ -42,8 +42,5 @@ module.exports = {
 		SPOTIFY_ID: process.env.SPOTIFY_CLIENT_ID,
 		SPOTIFY_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
 		YOUTUBE: process.env.YOUTUBE_KEY
-	},
-	Supports: {
-		GUILD_LOGS: process.env.GUILD_LOGS
 	}
 };

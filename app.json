@@ -23,10 +23,6 @@
         "description": "Input here your ID as the bot owner.",
         "required": true
       },
-      "GUILD_LOGS": {
-        "description": "Input here channel ID for log of bot.",
-        "required": true
-      },
       "IMDB_KEY": {
         "description": "Get this value from https://imdb.com.",
         "required": true
