@@ -41,6 +41,25 @@
         "value": "bot,applications.commands",
         "required": true
       },
+      "LAVALINK_ID": {
+        "description": "Input here the lavalink host name.",
+        "require": false
+      },
+      "LAVALINK_HOST": {
+        "description": "Input here the lavalink host.",
+        "value": "localhost",
+        "require": true
+      },
+      "LAVALINK_PORT": {
+        "description": "Input here the lavalink port.",
+        "value": "2333",
+        "require": true
+      },
+      "LAVALINK_PASSWORD": {
+        "description": "Input here the lavalink password.",
+        "value": "youshallnotpass",
+        "require": true
+      },
       "MONGO_URI": {
         "description": "MongoDB URI. Get from https://mongodb.com/",
         "required": true

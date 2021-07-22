@@ -43,5 +43,12 @@ module.exports = {
 		SPOTIFY_ID: process.env.SPOTIFY_CLIENT_ID,
 		SPOTIFY_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
 		YOUTUBE: process.env.YOUTUBE_KEY
+	},
+	Lavalink: {
+		ID: process.env.LAVALINK_ID || 'Main',
+		HOST: process.env.LAVALINK_HOST,
+		PORT: +process.env.LAVALINK_PORT,
+		PASSWORD: process.env.LAVALINK_PASSWORD,
+		SECURE: false
 	}
 };

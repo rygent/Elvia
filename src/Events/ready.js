@@ -13,6 +13,7 @@ module.exports = class extends Event {
 
 	async run() {
 		await this.client.utils.loadSlashes();
+		await this.client.manager.init(this.client.user.id);
 
 		this.client.logger.log({ content: `Logged in as ${chalk.redBright(`${this.client.user.tag}`)}` });
 		this.client.logger.log({ content: `Loaded ${this.client.commands.size.formatNumber()} commands, ${this.client.slashes.size.formatNumber()} slashes & ${this.client.events.size.formatNumber()} events!` });

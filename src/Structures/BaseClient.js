@@ -1,4 +1,8 @@
 const { Client, Collection, Intents, Permissions } = require('discord.js');
+const { Environment, Lavalink } = require('../Utils/Configuration.js');
+const { Manager } = require('erela.js');
+const Spotify = require('erela.js-spotify');
+const Deezer = require('erela.js-deezer');
 const Util = require('./Util.js');
 
 module.exports = class BaseClient extends Client {
@@ -12,6 +16,7 @@ module.exports = class BaseClient extends Client {
 				Intents.FLAGS.GUILD_PRESENCES,
 				Intents.FLAGS.GUILD_MESSAGES,
 				Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+				Intents.FLAGS.GUILD_VOICE_STATES,
 				Intents.FLAGS.DIRECT_MESSAGES
 			],
 			allowedMentions: {
@@ -29,6 +34,27 @@ module.exports = class BaseClient extends Client {
 		this.utils = new Util(this);
 
 		this.logger = require('../Helpers/Logger.js');
+		this.manager = new Manager({
+			nodes: [{
+				identifier: Lavalink.ID,
+				host: Lavalink.HOST,
+				port: Lavalink.PORT,
+				password: Lavalink.PASSWORD,
+				secure: Lavalink.SECURE
+			}],
+			plugins: [
+				new Deezer(),
+				new Spotify({
+					clientID: Environment.SPOTIFY_ID,
+					clientSecret: Environment.SPOTIFY_SECRET
+				})
+			],
+			send: (id, payload) => {
+				const guild = this.guilds.cache.get(id);
+				if (guild) guild.shard.send(payload);
+			},
+			autoPlay: true
+		});
 
 		this.usersData = require('../Schemas/UserData.js');
 		this.guildsData = require('../Schemas/GuildData.js');
