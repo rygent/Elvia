@@ -94,7 +94,7 @@ module.exports = class Util {
 	}
 
 	async loadDatabase() {
-		return connect(this.client.mongoUri, {
+		await connect(this.client.mongoUri, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		});
