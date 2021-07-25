@@ -20,7 +20,6 @@ module.exports = {
 		GREY: '95a5a6',
 		G_TRANSLATE: '4989f4',
 		IMDB: 'f3ce13',
-		INSTAGRAM: 'e1306c',
 		MAL: '2e51a2',
 		NPM: 'cc3534',
 		OPENWEATHER: 'e96e4c',
