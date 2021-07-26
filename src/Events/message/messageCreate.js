@@ -1,6 +1,7 @@
 const Event = require('../../Structures/Event.js');
 const { Collection, MessageActionRow, MessageButton } = require('discord.js');
 const { Access, Color } = require('../../Utils/Configuration.js');
+const moment = require('moment');
 
 module.exports = class extends Event {
 
@@ -33,19 +34,22 @@ module.exports = class extends Event {
 		const userData = await this.client.findOrCreateUser({ id: message.author.id });
 
 		if (message.guild) {
-			const afkReason = userData.afk;
-			if (afkReason) {
-				userData.afk = null;
+			const { isAfk } = userData.afk;
+			if (isAfk) {
+				userData.afk.isAfk = false;
+				userData.afk.sinceDate = null;
+				userData.afk.reason = null;
+				userData.markModified('afk');
 				await userData.save();
 				await message.reply({ content: `You're no longer AFK!` }).then(msg => setTimeout(() => msg.delete(), 5000));
 			}
 
 			message.mentions.users.forEach(async (user) => {
 				const dataUser = await this.client.findOrCreateUser({ id: user.id });
-				if (dataUser.afk) {
+				if (dataUser.afk.isAfk) {
 					return message.reply({ content: [
-						`<@${user.id}> is currently AFK!`,
-						`***Reason:*** ${dataUser.afk}`
+						`<@${user.id}> is currently AFK! (\`${moment(dataUser.afk.sinceDate).fromNow()}\`)`,
+						`***Reason:*** ${dataUser.afk.reason}`
 					].join('\n') }).then(msg => setTimeout(() => msg.delete(), 15000));
 				}
 			});

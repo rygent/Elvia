@@ -24,8 +24,11 @@ module.exports = class extends Slash {
 
 		const userData = await this.client.findOrCreateUser({ id: interaction.user.id });
 
-		userData.afk = reason;
-		userData.save();
+		userData.afk.isAfk = true;
+		userData.afk.sinceDate = Date.now();
+		userData.afk.reason = reason;
+		userData.markModified('afk');
+		await userData.save();
 
 		return interaction.reply({ content: `You're now AFK!\n***Reason:*** ${reason}`, ephemeral: true });
 	}

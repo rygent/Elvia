@@ -18,8 +18,11 @@ module.exports = class extends Command {
 
 		const userData = await this.client.findOrCreateUser({ id: message.author.id });
 
-		userData.afk = reason;
-		userData.save();
+		userData.afk.isAfk = true;
+		userData.afk.sinceDate = Date.now();
+		userData.afk.reason = reason;
+		userData.markModified('afk');
+		await userData.save();
 
 		return message.reply({ content: `You're now AFK!\n***Reason:*** ${reason}` });
 	}
