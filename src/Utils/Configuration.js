@@ -12,14 +12,7 @@ module.exports = {
 		WEBHOOK_TOKEN: process.env.WEBHOOK_TOKEN
 	},
 	Color: require('../../assets/json/Color.json'),
-	Emoji: {
-		ONLINE: '<:online:712397262256472075>',
-		IDLE: '<:idle:712397201955094708>',
-		DND: '<:dnd:712397154836283392>',
-		OFFLINE: '<:offline:712397086100029440>',
-		BOT: '<:bot:729455298917564467>',
-		SPOTIFY: '<:spotify:859713717595144233>'
-	},
+	Emoji: require('../../assets/json/Emoji.json'),
 	Environment: {
 		IMDB: process.env.IMDB_KEY,
 		OPEN_WEATHER_ID: process.env.OPEN_WEATHER_ID,
