@@ -114,6 +114,7 @@ module.exports = class extends Event {
 			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 			try {
+				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
 				await message.reply({ embeds: [{
