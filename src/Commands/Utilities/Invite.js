@@ -18,7 +18,7 @@ module.exports = class extends Command {
 			.addComponents(new MessageButton()
 				.setStyle('LINK')
 				.setLabel('Click here to invite!')
-				.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=${Access.INVITE_PERMISSION}&scope=${Access.INVITE_SCOPE}`));
+				.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=${Access.INVITE_PERMISSION}&scope=${Access.INVITE_SCOPE.join('%20')}`));
 
 		return message.reply({ content: 'Invite me to your server!', components: [button] });
 	}

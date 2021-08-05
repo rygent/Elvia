@@ -31,16 +31,6 @@
         "description": "Input here the guild invite code.",
         "required": true
       },
-      "INVITE_PERMISSION": {
-        "description": "Input here the invite permission.",
-        "value": "2013654135",
-        "required": true
-      },
-      "INVITE_SCOPE": {
-        "description": "Input here the invite scope.",
-        "value": "bot,applications.commands",
-        "required": true
-      },
       "MONGO_URI": {
         "description": "MongoDB URI. Get from https://mongodb.com/",
         "required": true

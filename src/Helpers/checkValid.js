@@ -11,10 +11,6 @@ module.exports = class checkValid {
 			this.client.logger.log({ content: 'Guild invite code required!', type: 'warn' });
 		}
 
-		if (!Access.INVITE_PERMISSION || !Access.INVITE_SCOPE) {
-			this.client.logger.log({ content: 'Invite permission & scope required for "invite" command!', type: 'warn' });
-		}
-
 		if (!Environment.IMDB) {
 			this.client.logger.log({ content: 'IMDb API key required for "imdb" command!', type: 'warn' });
 		}
