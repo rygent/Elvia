@@ -1,0 +1,18 @@
+{
+    "DEFAULT": "2f3136",
+    "GREEN": "2ecc71",
+    "YELLOW": "ffff00",
+    "ORANGE": "e67e22",
+    "RED": "e74c3c",
+    "GREY": "95a5a6",
+
+    "G_TRANSLATE": "4989f4",
+    "IMDB": "f3ce13",
+    "MAL": "2e51a2",
+    "NPM": "cc3534",
+    "OPENWEATHER": "e96e4c",
+    "SPOTIFY": "1db954",
+    "STEAM": "2a475e",
+    "YOUTUBE": "c4302b",
+    "WIKIPEDIA": "6b6b6b"
+}
