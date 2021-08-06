@@ -28,8 +28,8 @@ module.exports = class extends Event {
 
 		const activities = [
 			`@${this.client.user.username} help | v${version}`,
-			`${this.client.prefix}help | ${this.client.guilds.cache.size.formatNumber()} guilds`,
-			`Slash command available now!`
+			`${this.client.prefix}help | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`,
+			`/invite | ${this.client.guilds.cache.size.formatNumber()} guilds`
 		];
 
 		let i = 0;
