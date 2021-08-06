@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
 	async run(message, [option]) {
 		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const target = message.mentions.channels.filter(ch => ch.type === 'text' && ch.guild.id === message.guild.id).last() || message.channel;
+		const target = message.mentions.channels.filter(channel => channel.isText() && channel.guild.id === message.guild.id).last() || message.channel;
 
 		if (!option) {
 			return message.reply({ content: `You have to select the options to \`moderation\` and \`message\`!` });
