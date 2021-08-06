@@ -9,7 +9,6 @@ yarn-error.log*
 pids
 *.pid
 *.seed
-*.lock
 *.pid.lock
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)

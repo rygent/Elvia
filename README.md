@@ -3,12 +3,11 @@
 # Elvia
 
 [![Library](https://img.shields.io/badge/library-discord.js-5865f2?style=for-the-badge)](https://discord.js.org/#/)
-[![Build](https://img.shields.io/travis/Rygent/Elvia/main?style=for-the-badge)](https://travis-ci.com/Rygent/Elvia)
+[![Build](https://img.shields.io/github/workflow/status/Rygent/Elvia/ESLint?logo=github&style=for-the-badge)](https://github.com/Rygent/Elvia/actions/workflows/lint.yml)
 [![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/Elvia/dashboard)
 [![License](https://img.shields.io/github/license/Rygent/Elvia?style=for-the-badge)](./LICENSE)
 [![Language](https://img.shields.io/github/languages/top/Rygent/Elvia?color=f0db4f&logoColor=white&style=for-the-badge)]()
 [![Version](https://img.shields.io/github/package-json/v/Rygent/Elvia/main?label=version&color=ff4949&style=for-the-badge)](./package.json)
-[![Pull Request](https://img.shields.io/github/issues-pr/Rygent/Elvia?style=for-the-badge)](https://github.com/Rygent/Elvia/pulls)
 
 <p align="center">
   <a href="#features">Features</a>
