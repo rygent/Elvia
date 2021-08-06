@@ -5,7 +5,6 @@ module.exports = class BaseClient extends Client {
 
 	constructor(options = {}) {
 		super({
-			partials: ['GUILD_MEMBER', 'MESSAGE', 'USER'],
 			intents: [
 				Intents.FLAGS.GUILDS,
 				Intents.FLAGS.GUILD_MEMBERS,
