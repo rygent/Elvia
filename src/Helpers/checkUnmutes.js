@@ -12,7 +12,7 @@ module.exports = {
 		});
 
 		setInterval(async () => {
-			client.databaseCache.mutedUsers.array().filter((member) => member.mute.endDate <= Date.now()).forEach(async (memberData) => {
+			client.databaseCache.mutedUsers.filter((member) => member.mute.endDate <= Date.now()).forEach(async (memberData) => {
 				const guild = client.guilds.cache.get(memberData.guildID);
 				if (!guild) return;
 				const member = guild.members.cache.get(memberData.id) || await guild.members.fetch(memberData.id).catch(() => {
