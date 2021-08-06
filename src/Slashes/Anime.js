@@ -21,7 +21,7 @@ module.exports = class extends Slash {
 		const query = interaction.options.getString('query', true);
 
 		try {
-			await interaction.defer();
+			await interaction.deferReply();
 
 			const data = await getInfoFromName(query.trim(), false);
 
