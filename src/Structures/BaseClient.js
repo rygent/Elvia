@@ -149,7 +149,8 @@ module.exports = class BaseClient extends Client {
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
-		if (parseFloat(process.versions.node) < 14) throw new Error('This client requires Node.js version 14 or higher.');
+		const nodeVersion = parseFloat(process.versions.node);
+		if (nodeVersion < 16.6) throw new Error('This client requires Node.js v16.6.x or higher.');
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
 		this.token = options.token;
