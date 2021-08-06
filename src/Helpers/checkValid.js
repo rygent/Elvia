@@ -11,6 +11,10 @@ module.exports = class checkValid {
 			this.client.logger.log({ content: 'Guild invite code required!', type: 'warn' });
 		}
 
+		if (!Access.WEBHOOK_URL) {
+			this.client.logger.log({ content: 'Webhook URL required to send client logs!', type: 'warn' });
+		}
+
 		if (!Environment.IMDB) {
 			this.client.logger.log({ content: 'IMDb API key required for "imdb" command!', type: 'warn' });
 		}
@@ -21,10 +25,6 @@ module.exports = class checkValid {
 
 		if (!Environment.SPOTIFY_ID || !Environment.SPOTIFY_SECRET) {
 			this.client.logger.log({ content: 'Spotify Client ID & Client Secret required for "spotify" command!', type: 'warn' });
-		}
-
-		if (!Access.WEBHOOK_ID || !Access.WEBHOOK_TOKEN) {
-			this.client.logger.log({ content: 'Webhook ID & Token required to send client logs!', type: 'warn' });
 		}
 
 		if (!Environment.YOUTUBE) {

@@ -47,12 +47,8 @@
         "description": "Spotify API Key. Get from https://developer.spotify.com/documentation/general/guides/app-settings/",
         "required": true
       },
-      "WEBHOOK_ID": {
-        "description": "Input here the webhook id.",
-        "require": true
-      },
-      "WEBHOOK_TOKEN": {
-        "description": "Input here the webhook token.",
+      "WEBHOOK_URL": {
+        "description": "Input here the webhook url.",
         "require": true
       },
       "YOUTUBE_KEY": {
