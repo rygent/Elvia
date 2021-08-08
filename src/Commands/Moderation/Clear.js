@@ -25,7 +25,7 @@ module.exports = class extends Command {
 		const member = message.mentions.members.first();
 
 		let messages = await message.channel.messages.fetch({ limit: 100 });
-		messages = messages.array();
+		messages = [...messages.values()];
 		if (member) {
 			messages = messages.filter(mbr => mbr.author.id === member.id);
 		} else if (messages.length > amount) {
