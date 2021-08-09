@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Formatters: { hyperlink }, MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
+const { Access, Color } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Command {
 
@@ -20,7 +20,6 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
-			.setAuthor(`${this.client.user.username} | Commands`, 'https://i.imgur.com/YxoUvH8.png')
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
 
@@ -42,23 +41,69 @@ module.exports = class extends Command {
 
 			return message.reply({ embeds: [embed] });
 		} else {
+			const categories = this.client.utils.removeDuplicates(this.client.commands.map((cmd) => cmd.category)).map((dir) => {
+				const getCommand = this.client.commands.filter((cmd) => cmd.category === dir)
+					.map((cmd) => ({
+						name: cmd.name
+					}));
+
+				return {
+					directory: dir,
+					commands: getCommand
+				};
+			});
+
+			embed.setAuthor(`${this.client.user.username} | Help`, 'https://i.imgur.com/YxoUvH8.png');
 			embed.setDescription([
-				`These are the available commands for ${this.client.user.username}.`,
-				`Need more help? Come join our [guild](https://discord.gg/nW6x9EN)`,
-				`The bot prefix is: \`${prefix}\``
+				`Need more help? Come join our ${hyperlink('guild', `https://discord.gg/${Access.INVITE_CODE}`)}`,
+				`The bot prefix is: \`${prefix}\`\n`,
+				`***Select a category from the dropdown menu below!***`
 			].join('\n'));
-			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | ${this.client.commands.size} commands`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Times out in 5 minutes`, message.author.avatarURL({ dynamic: true }));
 
-			const categories = this.client.utils.removeDuplicates(this.client.commands.map(cmd => cmd.category));
+			const menus = (state) => [
+				new MessageActionRow().addComponents(
+					new MessageSelectMenu()
+						.setCustomId('help_menu')
+						.setPlaceholder('Please select a category')
+						.setDisabled(state)
+						.addOptions(categories.map((cmd) => ({
+							label: cmd.directory,
+							value: cmd.directory.toLowerCase(),
+							description: `Commands from ${cmd.directory} category`
+						})))
+				)
+			];
 
-			for (const category of categories) {
-				const dir = this.client.commands.filter(cmd => cmd.category === category);
-				if (this.client.utils.categoryCheck(category, message)) {
-					embed.addField(`__${category}__ (${dir.size})`, this.client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
-				}
-			}
+			const msg = await message.reply({ embeds: [embed], components: menus(false) });
 
-			return message.reply({ embeds: [embed] });
+			const filter = (interaction) => interaction.user.id === message.author.id;
+			const collector = message.channel.createMessageComponentCollector({ filter, componentType: 'SELECT_MENU', time: 300000 });
+
+			collector.on('collect', async (interaction) => {
+				const [directory] = interaction.values;
+				const category = categories.find((cmd) => cmd.directory.toLowerCase() === directory);
+
+				const replyEmbed = new MessageEmbed()
+					.setColor(Color.DEFAULT)
+					.setAuthor(`Category | ${directory === 'nsfw' ? directory.toUpperCase() : directory.toProperCase()}`, 'https://i.imgur.com/YxoUvH8.png')
+					.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
+					.setDescription([
+						`Need more help? Come join our ${hyperlink('guild', `https://discord.gg/${Access.INVITE_CODE}`)}`,
+						`The bot prefix is: \`${prefix}\`\n`,
+						`***Available commands***`,
+						`${category.commands.map((cmd) => `\`${cmd.name}\``).join(' ')}`
+					].join('\n'))
+					.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+
+				await interaction.deferReply({ ephemeral: true });
+				return interaction.editReply({ embeds: [replyEmbed] });
+			});
+
+			collector.on('end', () => {
+				embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Timed out`, message.author.avatarURL({ dynamic: true }));
+				return msg.edit({ embeds: [embed], components: menus(true) });
+			});
 		}
 	}
 
