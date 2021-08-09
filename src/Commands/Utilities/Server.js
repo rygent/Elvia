@@ -57,7 +57,7 @@ module.exports = class extends Command {
 			].join('\n'), true)
 			.addField('__Others__', `***Booster:*** ${message.guild.premiumSubscriptionCount}`, true)
 			.addField(`__Roles__`, `${roles.length < 15 ? roles.join(', ') : roles.length > 15 ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

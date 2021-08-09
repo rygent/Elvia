@@ -39,7 +39,7 @@ module.exports = class extends Command {
 					`***Repository:*** ${data[0].links.repository ? data[0].links.repository : 'None'}`,
 					`***Keywords:*** ${data[0].keywords ? data[0].keywords.join(', ') : 'None'}`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by NPM`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by NPM', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

@@ -48,7 +48,7 @@ module.exports = class extends Command {
 				`***Hoist Role:*** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
 				`***Roles (${roles.length}):*** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

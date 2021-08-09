@@ -25,7 +25,7 @@ module.exports = class extends Command {
 			.setColor(Color.DEFAULT)
 			.setDescription(`<@${message.author.id}> kissed ${message.author.id === member.id ? 'themselves' : `<@${member.id}>`}`)
 			.setImage(data.url)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

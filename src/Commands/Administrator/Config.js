@@ -37,7 +37,7 @@ module.exports = class extends Command {
 				`***Kick:*** ${guildData.plugins.warnsSanctions.kick ? `After **${guildData.plugins.warnsSanctions.kick}** warnings.` : 'Not defined.'}`,
 				`***Ban:*** ${guildData.plugins.warnsSanctions.ban ? `After **${guildData.plugins.warnsSanctions.ban}** warnings.` : 'Not defined.'}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

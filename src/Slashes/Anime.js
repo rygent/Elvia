@@ -63,7 +63,7 @@ module.exports = class extends Slash {
 					`***Members:*** ${data.members ? data.members : '`N/A`'}`,
 					`***Favorites:*** ${data.favorites ? data.favorites : '`N/A`'}`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(interaction)} | Powered by MyAnimeList`, interaction.user.avatarURL({ dynamic: true }));
+				.setFooter('Powered by MyAnimeList', interaction.user.avatarURL({ dynamic: true }));
 
 			return interaction.editReply({ embeds: [embed], components: [button] });
 		} catch {

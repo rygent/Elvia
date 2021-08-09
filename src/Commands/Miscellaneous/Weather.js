@@ -72,7 +72,7 @@ module.exports = class extends Command {
 					`***Pressure:*** ${res.main.pressure} hPA`,
 					`***Wind Speed:*** ${(res.wind.speed * 3.6).toFixed(2)} km/h | ${(res.wind.speed * 2.2369).toFixed(2)} mph, ${compass} (${res.wind.deg}°)`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by OpenWeatherMap`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by Open Weather Map', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		});

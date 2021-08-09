@@ -51,7 +51,7 @@ module.exports = class extends Slash {
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(interaction)} | Powered by Spotify`, interaction.user.avatarURL({ dynamic: true }));
+			.setFooter('Powered by Spotify', interaction.user.avatarURL({ dynamic: true }));
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

@@ -56,7 +56,7 @@ module.exports = class extends Command {
 					`***Website:*** ${details.website ? details.website : 'None'}`,
 					`***Support:*** ${details.support_info ? details.support_info.url : details.support_info.email || 'None'}`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Steam`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by Steam Store', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

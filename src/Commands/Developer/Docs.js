@@ -32,7 +32,7 @@ module.exports = class extends Command {
 				.setCustomId('delete'));
 
 		const embed = new MessageEmbed(result)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Discord.js`, message.author.avatarURL({ dynamic: true }));
+			.setFooter('Powered by Discord.js', message.author.avatarURL({ dynamic: true }));
 
 		const msg = await message.reply({ embeds: [embed], components: [button] });
 

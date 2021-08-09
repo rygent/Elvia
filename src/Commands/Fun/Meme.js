@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			.setTitle(data.title)
 			.setDescription(`[Click here if the image failed to load.](${data.url})`)
 			.setImage(data.url)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

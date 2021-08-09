@@ -62,7 +62,7 @@ module.exports = class extends Command {
 					`***Members:*** ${data.members ? data.members : '`N/A`'}`,
 					`***Favorites:*** ${data.favorites ? data.favorites : '`N/A`'}`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by MyAnimeList', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed], components: [button] });
 		} catch {

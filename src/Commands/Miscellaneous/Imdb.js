@@ -32,7 +32,7 @@ module.exports = class extends Command {
 				.setURL(data.imdburl)
 				.setThumbnail(data.poster)
 				.setDescription(data.plot)
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by IMDb`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by IMDb', message.author.avatarURL({ dynamic: true }));
 
 			if (data.series !== true) {
 				embed.addField('__Details__', [

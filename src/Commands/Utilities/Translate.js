@@ -34,7 +34,7 @@ module.exports = class extends Command {
 					`${translated.text}\n`,
 					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Google Translate`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by Google Translate', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

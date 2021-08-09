@@ -32,7 +32,7 @@ module.exports = class extends Command {
 				.setURL(data.content_urls.desktop.page)
 				.setThumbnail(data.originalimage ? data.originalimage.source : null)
 				.setDescription(data.extract)
-				.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
+				.setFooter('Powered by Wikipedia', message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

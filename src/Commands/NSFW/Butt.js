@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			.setColor(Color.DEFAULT)
 			.setDescription(`[Click here if the image failed to load.](http://media.obutts.ru/${data[0].preview})`)
 			.setImage(`http://media.obutts.ru/${data[0].preview}`)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

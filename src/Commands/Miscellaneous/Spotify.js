@@ -50,7 +50,7 @@ module.exports = class extends Command {
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
+			.setFooter('Powered by Spotify', message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed], components: [button] });
 	}

@@ -29,7 +29,7 @@ module.exports = class extends Slash {
 			.setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
 			.setDescription(`\`ID: ${user.id}\``)
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
-			.setFooter(`Responded in ${this.client.utils.responseTime(interaction)}`, interaction.user.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, interaction.user.avatarURL({ dynamic: true }));
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

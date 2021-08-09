@@ -25,7 +25,7 @@ module.exports = class extends Command {
 		const embed = new MessageEmbed()
 			.setColor(Color.YELLOW)
 			.setAuthor(user.tag, user.avatarURL({ dynamic: true }))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		if (memberData.sanctions.length < 1) {
 			return message.reply({ content: `**${user.tag}** doesn't have any warning!` });

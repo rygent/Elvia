@@ -25,7 +25,7 @@ module.exports = class extends Command {
 				`[Click here to download](${user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })})`
 			].join('\n'))
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

@@ -27,7 +27,7 @@ module.exports = class extends Command {
 			.setColor(Color.DEFAULT)
 			.setTitle(`🎱 ${args.slice(0).join(' ')}`)
 			.setDescription(`❯  ${Choice.Message}`)
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

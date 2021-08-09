@@ -21,7 +21,7 @@ module.exports = class extends Command {
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		if (command) {
 			const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
@@ -59,7 +59,7 @@ module.exports = class extends Command {
 				`The bot prefix is: \`${prefix}\`\n`,
 				`***Select a category from the dropdown menu below!***`
 			].join('\n'));
-			embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Times out in 5 minutes`, message.author.avatarURL({ dynamic: true }));
+			embed.setFooter(`Powered by ${this.client.user.username} | Times out in 5 minutes`, message.author.avatarURL({ dynamic: true }));
 
 			const menus = (state) => [
 				new MessageActionRow().addComponents(
@@ -94,14 +94,14 @@ module.exports = class extends Command {
 						`***Available commands***`,
 						`${category.commands.map((cmd) => `\`${cmd.name}\``).join(' ')}`
 					].join('\n'))
-					.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+					.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 				await interaction.deferReply({ ephemeral: true });
 				return interaction.editReply({ embeds: [replyEmbed] });
 			});
 
 			collector.on('end', () => {
-				embed.setFooter(`Responded in ${this.client.utils.responseTime(message)} | Timed out`, message.author.avatarURL({ dynamic: true }));
+				embed.setFooter(`Powered by ${this.client.user.username} | Timed out`, message.author.avatarURL({ dynamic: true }));
 				return msg.edit({ embeds: [embed], components: menus(true) });
 			});
 		}

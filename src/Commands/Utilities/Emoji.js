@@ -41,7 +41,7 @@ module.exports = class extends Command {
 				`***Animated:*** ${checkOrCross(emoji.animated)}`,
 				`***Managed:*** ${checkOrCross(emoji.managed)}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

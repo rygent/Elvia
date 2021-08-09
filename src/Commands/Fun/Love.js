@@ -31,7 +31,7 @@ module.exports = class extends Command {
 				`**${message.member.displayName}** is ${Math.floor(love)}% in love with **${person.displayName}**`,
 				`${loveLevel}`
 			].join('\n'))
-			.setFooter(`Responded in ${this.client.utils.responseTime(message)}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

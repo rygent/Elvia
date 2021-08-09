@@ -47,7 +47,7 @@ module.exports = class extends Slash {
 					`${translated.text}\n`,
 					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(toLanguage.trim())}***`
 				].join('\n'))
-				.setFooter(`Responded in ${this.client.utils.responseTime(interaction)} | Powered by Google Translate`, interaction.user.avatarURL({ dynamic: true }));
+				.setFooter('Powered by Google Translate', interaction.user.avatarURL({ dynamic: true }));
 
 			return interaction.reply({ embeds: [embed] });
 		} catch {
