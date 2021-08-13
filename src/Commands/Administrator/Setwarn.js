@@ -26,14 +26,14 @@ module.exports = class extends Command {
 			if (sanction === 'kick') {
 				guildData.plugins.warnsSanctions.kick = false;
 				guildData.markModified('plugins.warnsSanctions');
-				guildData.save();
+				await guildData.save();
 				return message.reply({ content: `Members will no longer be kicked automatically!` });
 			}
 
 			if (sanction === 'ban') {
 				guildData.plugins.warnsSanctions.ban = false;
 				guildData.markModified('plugins.warnsSanctions');
-				guildData.save();
+				await guildData.save();
 				return message.reply({ content: `Members will no longer be banned automatically!` });
 			}
 		}
@@ -44,14 +44,14 @@ module.exports = class extends Command {
 		if (sanction === 'kick') {
 			guildData.plugins.warnsSanctions.kick = number;
 			guildData.markModified('plugins.warnsSanctions');
-			guildData.save();
+			await guildData.save();
 			return message.reply({ content: `\`${number}\` warnings will be given and sanction will be kicked from the server.` });
 		}
 
 		if (sanction === 'ban') {
 			guildData.plugins.warnsSanctions.ban = number;
 			guildData.markModified('plugins.warnsSanctions');
-			guildData.save();
+			await guildData.save();
 			return message.reply({ content: `\`${number}\` warnings will be given and sanction will be banned from the server.` });
 		}
 	}
