@@ -1,7 +1,7 @@
 module.exports = {
 	token: process.env.DISCORD_TOKEN,
 	prefix: process.env.DISCORD_PREFIX,
-	owner: process.env.DISCORD_OWNER,
+	owners: process.env.DISCORD_OWNERS.split(','),
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	mongoUri: process.env.MONGO_URI,
 	Access: {

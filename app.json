@@ -19,7 +19,7 @@
         "value": "$",
         "require": true
       },
-      "DISCORD_OWNER": {
+      "DISCORD_OWNERS": {
         "description": "Input here your ID as the bot owner.",
         "required": true
       },
