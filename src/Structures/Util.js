@@ -46,10 +46,6 @@ module.exports = class Util {
 		return this.client.owners.includes(target);
 	}
 
-	comparePerms(member, target) {
-		return member.roles.highest.position < target.roles.highest.position;
-	}
-
 	formatPerms(perm) {
 		return perm
 			.toLowerCase()
