@@ -66,18 +66,6 @@ module.exports = class Util {
 		return new Intl.DisplayNames(['en'], { type: 'language' }).of(string);
 	}
 
-	categoryCheck(category, message) {
-		category = category.toLowerCase();
-		switch (category) {
-			case 'developer':
-				return this.checkOwner(message.author.id);
-			case 'nsfw':
-				return message.channel.nsfw;
-			default:
-				return true;
-		}
-	}
-
 	async loadDatabases() {
 		return connect(this.client.mongoUri, {
 			useNewUrlParser: true,
