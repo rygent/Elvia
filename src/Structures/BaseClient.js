@@ -166,9 +166,9 @@ module.exports = class BaseClient extends Client {
 	}
 
 	async start(token = this.token) {
+		this.utils.loadDatabases();
 		this.utils.loadCommands();
 		this.utils.loadEvents();
-		this.utils.loadDatabase();
 		super.login(token);
 	}
 
