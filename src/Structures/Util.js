@@ -3,8 +3,8 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const { connect } = require('mongoose');
 const Command = require('./Command.js');
+const Interaction = require('./Interaction.js');
 const Event = require('./Event.js');
-const Slash = require('./Slash.js');
 
 module.exports = class Util {
 
@@ -93,6 +93,21 @@ module.exports = class Util {
 		});
 	}
 
+	async loadInteractions() {
+		return glob(`${this.directory}Interactions/**/*.js`).then(interactions => {
+			for (const interactionFile of interactions) {
+				delete require.cache[interactionFile];
+				const { name } = path.parse(interactionFile);
+				const File = require(interactionFile);
+				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
+				const interaction = new File(this.client, name);
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
+				this.client.interactions.set(interaction.name, interaction);
+				this.client.application?.commands.create(interaction);
+			}
+		});
+	}
+
 	async loadEvents() {
 		return glob(`${this.directory}Events/**/*.js`).then(events => {
 			for (const eventFile of events) {
@@ -104,21 +119,6 @@ module.exports = class Util {
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
 				this.client.events.set(event.name, event);
 				event.emitter[event.type](name, (...args) => event.run(...args));
-			}
-		});
-	}
-
-	async loadSlashes() {
-		return glob(`${this.directory}Slashes/**/*.js`).then(slashes => {
-			for (const slashFile of slashes) {
-				delete require.cache[slashFile];
-				const { name } = path.parse(slashFile);
-				const File = require(slashFile);
-				if (!this.isClass(File)) throw new TypeError(`Slash ${name} doesn't export a class.`);
-				const slash = new File(this.client, name.toLowerCase());
-				if (!(slash instanceof Slash)) throw new TypeError(`Slash ${name} doesn't belong in Slashes directory.`);
-				this.client.slashes.set(slash.name, slash);
-				this.client.application?.commands.create(slash);
 			}
 		});
 	}

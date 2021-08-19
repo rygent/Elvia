@@ -19,9 +19,9 @@ module.exports = class BaseClient extends Client {
 
 		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.interactions = new Collection();
 		this.events = new Collection();
 		this.cooldowns = new Collection();
-		this.slashes = new Collection();
 		this.utils = new Util(this);
 
 		this.logger = require('../Helpers/Logger.js');

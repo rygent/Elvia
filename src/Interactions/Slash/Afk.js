@@ -1,9 +1,10 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'afk',
 			description: 'Give reasons when AFK',
 			options: [{
 				type: 'SUB_COMMAND',

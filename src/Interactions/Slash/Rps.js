@@ -1,10 +1,11 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'rps',
 			description: 'Play Rock Paper Scissors with bot'
 		});
 	}

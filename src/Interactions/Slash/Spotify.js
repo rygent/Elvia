@@ -1,13 +1,14 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color, Emoji, Environment } = require('../Utils/Configuration.js');
+const { Color, Emoji, Environment } = require('../../Utils/Configuration.js');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'spotify',
 			description: 'Gets song information from Spotify',
 			options: [{
 				type: 'STRING',

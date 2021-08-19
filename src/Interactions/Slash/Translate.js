@@ -1,12 +1,13 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../Utils/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 const translate = require('@iamtraction/google-translate');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'translate',
 			description: 'Translate text to the desired language',
 			options: [{
 				type: 'STRING',

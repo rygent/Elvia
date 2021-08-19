@@ -1,11 +1,12 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../Utils/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'avatar',
 			description: 'Gets user avatar',
 			options: [{
 				type: 'USER',

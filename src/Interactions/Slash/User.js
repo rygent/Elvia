@@ -1,12 +1,13 @@
-const Slash = require('../Structures/Slash.js');
+const Interaction = require('../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../Utils/Configuration.js');
+const { Color } = require('../../Utils/Configuration.js');
 const moment = require('moment');
 
-module.exports = class extends Slash {
+module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'user',
 			description: 'User information',
 			options: [{
 				type: 'SUB_COMMAND',

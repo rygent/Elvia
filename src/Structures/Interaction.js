@@ -1,15 +1,16 @@
-module.exports = class Slash {
+module.exports = class Interaction {
 
 	constructor(client, name, options = {}) {
 		this.client = client;
 		this.name = options.name || name;
 		this.description = options.description || 'No description provided.';
 		this.options = options.options || [];
+		this.defaultPermission = options.defaultPermission;
 	}
 
-	/* eslint-disable no-unused-vars */
+	// eslint-disable-next-line no-unused-vars
 	async run(interaction) {
-		throw new Error(`Slash ${this.name} doesn't provide a run method!`);
+		throw new Error(`Interaction ${this.name} doesn't provide a run method!`);
 	}
 
 };
