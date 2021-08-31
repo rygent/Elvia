@@ -44,7 +44,7 @@
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.13.7",
     "node-spotify-api": "^1.1.1",
-    "openweather-apis": "^4.4.1",
+    "openweather-apis": "^4.4.2",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "simple-youtube-api": "^5.2.1",
