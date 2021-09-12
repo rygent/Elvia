@@ -14,9 +14,9 @@ module.exports = class extends Command {
 
 	async run(message) {
 		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-		const data = await axios.get('https://api.adviceslip.com/advice', { headers }).then(res => res.data);
+		const result = await axios.get('https://api.adviceslip.com/advice', { headers }).then(res => res.data);
 
-		return message.reply({ content: data.slip.advice });
+		return message.reply({ content: result.slip.advice });
 	}
 
 };

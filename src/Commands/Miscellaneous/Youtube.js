@@ -1,8 +1,8 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Utils/Configuration.js');
+const { Formatters, MessageEmbed } = require('discord.js');
+const { Api, Color } = require('../../Utils/Setting.js');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube(Environment.YOUTUBE);
+const youtube = new YouTube(Api.Youtube);
 
 module.exports = class extends Command {
 
@@ -30,10 +30,13 @@ module.exports = class extends Command {
 				.setAuthor('YouTube', 'https://i.imgur.com/lbS6Vil.png', 'https://youtube.com/')
 				.setTitle(data[0].title)
 				.setURL(data[0].shortURL)
+				.setDescription([
+					`**${data[0].channel.title}**`,
+					`${data[0].description}\n`,
+					`***Published:*** ${Formatters.time(new Date(data[0].publishedAt))}`
+				].join('\n'))
 				.setImage(data[0].thumbnails.high.url)
-				.addField(data[0].channel.title, data[0].description)
-				.setFooter('Powered by YouTube', message.author.avatarURL({ dynamic: true }))
-				.setTimestamp(new Date(data[0].publishedAt));
+				.setFooter(`${message.author.username}  •  Powered by YouTube`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

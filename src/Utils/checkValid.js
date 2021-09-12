@@ -1,4 +1,4 @@
-const { Access, Environment } = require('../Utils/Configuration.js');
+const { Access, Api } = require('./Setting.js');
 
 module.exports = class checkValid {
 
@@ -7,27 +7,27 @@ module.exports = class checkValid {
 	}
 
 	validate() {
-		if (!Access.INVITE_CODE) {
+		if (!Access.InviteCode) {
 			this.client.logger.log({ content: 'Guild invite code required!', type: 'warn' });
 		}
 
-		if (!Access.WEBHOOK_URL) {
+		if (!Access.WebhookURL) {
 			this.client.logger.log({ content: 'Webhook URL required to send client logs!', type: 'warn' });
 		}
 
-		if (!Environment.IMDB) {
+		if (!Api.Imdb) {
 			this.client.logger.log({ content: 'IMDb API key required for "imdb" command!', type: 'warn' });
 		}
 
-		if (!Environment.OPEN_WEATHER_ID) {
+		if (!Api.OpenWeatherMap) {
 			this.client.logger.log({ content: 'Open Weather Map API key required for "weather" command!', type: 'warn' });
 		}
 
-		if (!Environment.SPOTIFY_ID || !Environment.SPOTIFY_SECRET) {
+		if (!Api.Spotify.ClientId || !Api.Spotify.ClientSecret) {
 			this.client.logger.log({ content: 'Spotify Client ID & Client Secret required for "spotify" command!', type: 'warn' });
 		}
 
-		if (!Environment.YOUTUBE) {
+		if (!Api.Youtube) {
 			this.client.logger.log({ content: 'YouTube API key required for "youtube" command!', type: 'warn' });
 		}
 	}

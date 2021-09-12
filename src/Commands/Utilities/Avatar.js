@@ -1,6 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
+const Resolver = require('../../Modules/Resolver.js');
 
 module.exports = class extends Command {
 
@@ -10,12 +11,12 @@ module.exports = class extends Command {
 			description: 'Showing avatar of the mentioned user!',
 			category: 'Utilities',
 			usage: '(member)',
-			cooldown: 5000
+			cooldown: 3000
 		});
 	}
 
 	async run(message, [target]) {
-		const user = await this.client.resolveUser(target) || message.author;
+		const user = await Resolver.resolveUser({ message, target }) || message.author;
 
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
@@ -25,7 +26,7 @@ module.exports = class extends Command {
 				`[Click here to download](${user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })})`
 			].join('\n'))
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
-			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`${message.author.username}  •  Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

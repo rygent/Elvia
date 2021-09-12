@@ -21,27 +21,27 @@ module.exports = class extends Command {
 		const button = new MessageActionRow()
 			.addComponents(new MessageButton()
 				.setStyle('PRIMARY')
-				.setLabel('Confirm')
-				.setCustomId('confirm'))
+				.setCustomId('confirm')
+				.setLabel('Yep!'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
-				.setLabel('Cancel')
-				.setCustomId('cancel'));
+				.setCustomId('cancel')
+				.setLabel('Cancel'));
 
-		return message.reply({ content: `Please confirm if you want to leave from the **${guild.name}** guild!`, components: [button] }).then((msg) => {
-			const filter = (button) => button.user.id === message.author.id;
-			msg.awaitMessageComponent({ filter, time: 15000 }).then(async (button) => {
-				switch (button.customId) {
-					case 'confirm': {
-						await guild.leave();
-						return button.update({ content: `Successfully left guild **${guild.name}**!`, components: [] });
-					}
-					case 'cancel': {
-						return button.update({ content: 'Command has been cancelled!', components: [] });
-					}
+		const msg = await message.reply({ content: `Please confirm if you want to leave from the **${guild.name}** guild!`, components: [button] });
+
+		const filter = (interaction) => interaction.user.id === message.author.id;
+		message.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1000 * 15 }).then(async (interaction) => {
+			switch (interaction.customId) {
+				case 'confirm': {
+					await guild.leave();
+					return interaction.update({ content: `Successfully left guild **${guild.name}**!`, components: [] });
 				}
-			}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
-		});
+				case 'cancel': {
+					return msg.delete() && message.delete();
+				}
+			}
+		}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
 	}
 
 };

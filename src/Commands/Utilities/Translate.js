@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Command {
@@ -11,7 +11,7 @@ module.exports = class extends Command {
 			description: 'Translate your text to the desired language.',
 			category: 'Utilities',
 			usage: '[languageCodes] [text]',
-			cooldown: 5000
+			cooldown: 3000
 		});
 	}
 
@@ -34,14 +34,17 @@ module.exports = class extends Command {
 					`${translated.text}\n`,
 					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`
 				].join('\n'))
-				.setFooter('Powered by Google Translate', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by Google Translate`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {
-			return message.reply({ embeds: [{
-				color: Color.DEFAULT,
-				description: 'Please send valid [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) languages codes.'
-			}] });
+			const button = new MessageActionRow()
+				.addComponents(new MessageButton()
+					.setStyle('LINK')
+					.setLabel('ISO 639-1')
+					.setURL('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes'));
+
+			return message.reply({ content: 'Please send valid **ISO 639-1** languages codes.', components: [button] });
 		}
 	}
 

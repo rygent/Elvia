@@ -1,17 +1,17 @@
 const Event = require('../../Structures/Event.js');
 const ClientEmbed = require('../../Structures/ClientEmbed.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 
 module.exports = class extends Event {
 
 	async run(message) {
 		if (!message.guild || message.author.bot) return;
 
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+		const guildData = await this.client.findOrCreateGuild({ id: message.guildId });
 
-		if (guildData.plugins.audits) {
-			const sendChannel = message.guild.channels.cache.get(guildData.plugins.audits);
-			if (!sendChannel) return;
+		if (guildData.plugins.messages) {
+			const channel = message.guild.channels.cache.get(guildData.plugins.messages);
+			if (!channel) return;
 
 			const attachments = message.attachments.size ? message.attachments.map(attachment => attachment.proxyURL) : null;
 
@@ -30,7 +30,7 @@ module.exports = class extends Event {
 				embed.splitFields(`***Deleted Message:*** ${message.content}`);
 			}
 
-			if (sendChannel) sendChannel.send({ embeds: [embed] });
+			return channel.send({ embeds: [embed] });
 		}
 	}
 

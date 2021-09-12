@@ -3,8 +3,8 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const { connect } = require('mongoose');
 const Command = require('./Command.js');
-const Interaction = require('./Interaction.js');
 const Event = require('./Event.js');
+const Interaction = require('./Interaction.js');
 
 module.exports = class Util {
 
@@ -66,11 +66,22 @@ module.exports = class Util {
 		return new Intl.DisplayNames(['en'], { type: 'language' }).of(string);
 	}
 
+	categoryCheck(category, message) {
+		category = category.toLowerCase();
+		switch (category) {
+			case 'developer':
+				return this.checkOwner(message.author.id);
+			case 'nsfw':
+				return message.channel.nsfw;
+			default:
+				return true;
+		}
+	}
+
 	async loadDatabases() {
-		return connect(this.client.mongoUri, {
+		return await connect(this.client.mongoURL, {
 			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			useCreateIndex: true
+			useUnifiedTopology: true
 		});
 	}
 
@@ -82,7 +93,7 @@ module.exports = class Util {
 				const File = require(commandFile);
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client, name.toLowerCase());
-				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands directory.`);
+				if (!(command instanceof Command)) throw new TypeError(`Comamnd ${name} doesn't belong in Commands.`);
 				this.client.commands.set(command.name, command);
 				if (command.aliases.length) {
 					for (const alias of command.aliases) {
@@ -93,7 +104,7 @@ module.exports = class Util {
 		});
 	}
 
-	async loadInteractions() {
+	async loadInteractions(guildId) {
 		return glob(`${this.directory}Interactions/**/*.js`).then(interactions => {
 			for (const interactionFile of interactions) {
 				delete require.cache[interactionFile];
@@ -101,9 +112,11 @@ module.exports = class Util {
 				const File = require(interactionFile);
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name);
-				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions.`);
 				this.client.interactions.set(interaction.name, interaction);
-				this.client.application?.commands.create(interaction);
+				this.client.guilds.cache.map(x => x.id).forEach(id => {
+					this.client.guilds.cache.get(guildId || id)?.commands.create(interaction);
+				});
 			}
 		});
 	}
@@ -115,10 +128,10 @@ module.exports = class Util {
 				const { name } = path.parse(eventFile);
 				const File = require(eventFile);
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
-				const event = new File(this.client, name.toLowerCase());
-				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
+				const event = new File(this.client, name);
+				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events.`);
 				this.client.events.set(event.name, event);
-				event.emitter[event.type](name, (...args) => event.run(...args));
+				event.emitter[event.type](event.name, (...args) => event.run(...args));
 			}
 		});
 	}

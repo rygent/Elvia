@@ -1,6 +1,6 @@
 const Interaction = require('../../Structures/Interaction.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Interaction {
@@ -9,22 +9,11 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'translate',
 			description: 'Translate text to the desired language',
-			options: [{
-				type: 'STRING',
-				name: 'from',
-				description: 'Source language',
-				required: true
-			}, {
-				type: 'STRING',
-				name: 'to',
-				description: 'Destination language',
-				required: true
-			}, {
-				type: 'STRING',
-				name: 'message',
-				description: 'Message to translate (max: 2800)',
-				required: true
-			}]
+			options: [
+				{ type: 'STRING', name: 'from', description: 'Source language', required: true },
+				{ type: 'STRING', name: 'to', description: 'Destination language', required: true },
+				{ type: 'STRING', name: 'message', description: 'Message to translate (max: 2800)', required: true }
+			]
 		});
 	}
 
@@ -48,14 +37,17 @@ module.exports = class extends Interaction {
 					`${translated.text}\n`,
 					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(toLanguage.trim())}***`
 				].join('\n'))
-				.setFooter('Powered by Google Translate', interaction.user.avatarURL({ dynamic: true }));
+				.setFooter(`${interaction.user.username}  •  Powered by Google Translate`, interaction.user.avatarURL({ dynamic: true }));
 
 			return interaction.reply({ embeds: [embed] });
 		} catch {
-			return interaction.reply({ embeds: [{
-				color: Color.DEFAULT,
-				description: 'Please send valid [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) languages codes.'
-			}], ephemeral: true });
+			const button = new MessageActionRow()
+				.addComponents(new MessageButton()
+					.setStyle('LINK')
+					.setLabel('ISO 639-1')
+					.setURL('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes'));
+
+			return interaction.reply({ content: 'Please send valid **ISO 639-1** languages codes.', components: [button], ephemeral: true });
 		}
 	}
 

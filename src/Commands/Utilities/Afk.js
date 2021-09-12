@@ -12,17 +12,15 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, args) {
+	async run(message, args, data) {
 		const reason = args.join(' ');
 		if (!reason) return message.reply({ content: 'Please enter your reason!' });
 
-		const userData = await this.client.findOrCreateUser({ id: message.author.id });
-
-		userData.afk.isAfk = true;
-		userData.afk.sinceDate = Date.now();
-		userData.afk.reason = reason;
-		userData.markModified('afk');
-		await userData.save();
+		data.user.afk.enabled = true;
+		data.user.afk.since = Date.now();
+		data.user.afk.reason = reason;
+		data.user.markModified('afk');
+		await data.user.save();
 
 		return message.reply({ content: `You're now AFK!\n***Reason:*** ${reason}` });
 	}

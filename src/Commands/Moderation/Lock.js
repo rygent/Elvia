@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 const ms = require('ms');
 
 module.exports = class extends Command {

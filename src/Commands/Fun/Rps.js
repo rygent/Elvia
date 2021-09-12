@@ -33,20 +33,20 @@ module.exports = class extends Command {
 		const choices = ['rock', 'paper', 'scissors'];
 		const result = choices[Math.floor(Math.random() * 3)];
 
-		return message.reply({ content: 'Choose one of the buttons below to start the game!', components: [button] }).then((msg) => {
-			const filter = (button) => button.user.id === message.author.id;
-			msg.awaitMessageComponent({ filter, time: 15000 }).then((button) => {
-				const winChoice = (button.customId === 'rock' && result === 'scissors') || (button.customId === 'paper' && result === 'rock') || (button.customId === 'scissors' && result === 'paper');
+		const m = await message.reply({ content: 'Choose one of the buttons below to start the game!', components: [button] });
 
-				if (winChoice) {
-					return button.update({ content: `You won, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
-				} else if (button.customId === result) {
-					return button.update({ content: `We tied, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
-				} else {
-					return button.update({ content: `You lost, you choose \`${button.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
-				}
-			}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
-		});
+		const filter = (interaction) => interaction.user.id === message.author.id;
+		message.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1000 * 15 }).then((interaction) => {
+			const winChoice = (interaction.customId === 'rock' && result === 'scissors') || (interaction.customId === 'paper' && result === 'rock') || (interaction.customId === 'scissors' && result === 'paper');
+
+			if (winChoice) {
+				return interaction.update({ content: `You won, you choose \`${interaction.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+			} else if (interaction.customId === result) {
+				return interaction.update({ content: `We tied, you choose \`${interaction.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+			} else {
+				return interaction.update({ content: `You lost, you choose \`${interaction.customId.toProperCase()}\` while I choose \`${result.toProperCase()}\`!`, components: [] });
+			}
+		}).catch(() => m.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
 	}
 
 };

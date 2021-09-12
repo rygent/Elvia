@@ -1,0 +1,22 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "tesseract",
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "complexity": ["warn", { "max": 30 }],
+        "consistent-return": "off",
+        "func-names": ["error", "never"],
+        "id-length": ["error", { "exceptions": ["i", "m", "a", "b", "x", "v"] }],
+        "max-len": ["warn", { "code": 300 }],
+        "new-cap": ["error", { "newIsCapExceptionPattern": "^this\\.." }],
+        "no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
+        "no-process-env": "off",
+        "no-shadow": ["error", { "allow": ["error", "m"] }]
+    }
+}

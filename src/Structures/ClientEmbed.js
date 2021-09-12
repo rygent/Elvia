@@ -22,7 +22,6 @@ module.exports = class ClientEmbed extends MessageEmbed {
 			return this;
 		}
 
-		// eslint-disable-next-line id-length
 		let x;
 		let slice;
 		while (content.length) {

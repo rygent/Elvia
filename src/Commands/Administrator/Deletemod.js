@@ -1,4 +1,5 @@
 const Command = require('../../Structures/Command.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -7,33 +8,39 @@ module.exports = class extends Command {
 			aliases: ['autodeletemodcommands'],
 			description: 'Automatically delete commands on moderation.',
 			category: 'Administrator',
-			usage: '[enable/disable]',
 			memberPerms: ['MANAGE_GUILD'],
 			clientPerms: ['MANAGE_GUILD', 'MANAGE_MESSAGES']
 		});
 	}
 
-	async run(message, [option]) {
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+	async run(message, _args, data) {
+		const button = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('PRIMARY')
+				.setCustomId('enable')
+				.setLabel('Enable'))
+			.addComponents(new MessageButton()
+				.setStyle('SECONDARY')
+				.setCustomId('disable')
+				.setLabel('Disable'));
 
-		if (!option) {
-			return message.reply({ content: `You have to select the options to \`enable\` or \`disable\`!` });
-		}
+		const msg = await message.reply({ content: 'Please select an option below!', components: [button] });
 
-		switch (option.toLowerCase()) {
-			case 'enable':
-				guildData.autoDeleteModCommands = true;
-				guildData.save();
-				message.reply({ content: 'Automatic delete is enabled.\nModeration commands will be automatically deleted!' });
-				break;
-			case 'disable':
-				guildData.autoDeleteModCommands = false;
-				guildData.save();
-				message.reply({ content: 'Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!' });
-				break;
-			default:
-				return message.reply({ content: `This option is not found. Please select the option \`enable\` or \`disable\`!` });
-		}
+		const filter = (interaction) => interaction.user.id === message.author.id;
+		message.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1000 * 15 }).then(async (interaction) => {
+			switch (interaction.customId) {
+				case 'enable': {
+					data.guild.autoDeleteModCommands = true;
+					await data.guild.save();
+					return interaction.update({ content: 'Automatic delete is enabled.\nModeration commands will be automatically deleted!', components: [] });
+				}
+				case 'disable': {
+					data.guild.autoDeleteModCommands = false;
+					await data.guild.save();
+					return interaction.update({ content: 'Automatic delete is disabled.\nModeration commands will no longer be automatically deleted!', components: [] });
+				}
+			}
+		}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
 	}
 
 };

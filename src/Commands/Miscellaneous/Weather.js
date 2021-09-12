@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Utils/Configuration.js');
+const { Api, Color } = require('../../Utils/Setting.js');
 const weather = require('openweather-apis');
 
 module.exports = class extends Command {
@@ -21,7 +21,7 @@ module.exports = class extends Command {
 			return message.reply({ content: 'Please enter a city name to search!' });
 		}
 
-		weather.setAPPID(Environment.OPEN_WEATHER_ID);
+		weather.setAPPID(Api.OpenWeatherMap);
 		weather.setLang('en');
 		weather.setUnits('metric');
 		weather.setCity(location.toLowerCase());
@@ -72,7 +72,7 @@ module.exports = class extends Command {
 					`***Pressure:*** ${res.main.pressure} hPA`,
 					`***Wind Speed:*** ${(res.wind.speed * 3.6).toFixed(2)} km/h | ${(res.wind.speed * 2.2369).toFixed(2)} mph, ${compass} (${res.wind.deg}°)`
 				].join('\n'))
-				.setFooter('Powered by Open Weather Map', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by Open Weather Map`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		});

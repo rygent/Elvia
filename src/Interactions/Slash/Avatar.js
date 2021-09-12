@@ -1,6 +1,6 @@
 const Interaction = require('../../Structures/Interaction.js');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 
 module.exports = class extends Interaction {
 
@@ -8,31 +8,26 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'avatar',
 			description: 'Gets user avatar',
-			options: [{
-				type: 'USER',
-				name: 'user',
-				description: 'User to fetch avatar'
-			}]
+			options: [
+				{ type: 'USER', name: 'user', description: 'User to fetch avatar' }
+			]
 		});
 	}
 
 	async run(interaction) {
 		const user = await interaction.options.getUser('user') || interaction.user;
 
-		const button = new MessageActionRow()
-			.addComponents(new MessageButton()
-				.setStyle('LINK')
-				.setLabel('Download')
-				.setURL(user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })));
-
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
 			.setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
-			.setDescription(`\`ID: ${user.id}\``)
+			.setDescription([
+				`\`ID: ${user.id}\``,
+				`[Click here to download](${user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })})`
+			].join('\n'))
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
-			.setFooter(`Powered by ${this.client.user.username}`, interaction.user.avatarURL({ dynamic: true }));
+			.setFooter(`${interaction.user.username}  •  Powered by ${this.client.user.username}`, interaction.user.avatarURL({ dynamic: true }));
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ embeds: [embed] });
 	}
 
 };

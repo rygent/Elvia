@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color, Emoji, Environment } = require('../../Utils/Configuration.js');
+const { Api, Color, Emoji } = require('../../Utils/Setting.js');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 
@@ -18,8 +18,8 @@ module.exports = class extends Command {
 
 	async run(message, args) {
 		const spotify = new Spotify({
-			id: Environment.SPOTIFY_ID,
-			secret: Environment.SPOTIFY_SECRET
+			id: Api.Spotify.ClientId,
+			secret: Api.Spotify.ClientSecret
 		});
 
 		const query = args.join(' ').trim();
@@ -50,7 +50,7 @@ module.exports = class extends Command {
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
-			.setFooter('Powered by Spotify', message.author.avatarURL({ dynamic: true }));
+			.setFooter(`${message.author.username}  •  Powered by Spotify`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed], components: [button] });
 	}

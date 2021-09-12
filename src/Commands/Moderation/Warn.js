@@ -1,6 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
+const Resolver = require('../../Modules/Resolver.js');
 
 module.exports = class extends Command {
 
@@ -16,13 +17,10 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [target, ...args]) {
-		const member = await this.client.resolveMember(target, message.guild);
+	async run(message, [target, ...args], data) {
+		const member = await Resolver.resolveMember({ message, target });
 		if (!member) return message.reply({ content: 'Please specify valid member to warn!' });
 		if (member.user.bot) return message.reply({ content: 'This user is a bot!' });
-
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
 		if (member.id === message.author.id) return message.reply({ content: 'You can\'t warn yourself!' });
 		const memberPosition = member.roles.highest.position;
@@ -34,19 +32,19 @@ module.exports = class extends Command {
 		const reason = args.join(' ');
 		if (!reason) return message.reply({ content: 'Please enter a reason!' });
 
-		const sanctions = memberData.sanctions.filter((sanction) => sanction.type === 'warn').length;
-		const banCount = guildData.plugins.warnsSanctions.ban;
-		const kickCount = guildData.plugins.warnsSanctions.kick;
+		const sanctions = data.member.sanctions.filter((sanction) => sanction.type === 'warn').length;
+		const banCount = data.guild.plugins.warnsSanctions.ban;
+		const kickCount = data.guild.plugins.warnsSanctions.kick;
 
-		guildData.casesCount++;
-		guildData.save();
+		data.guild.casesCount++;
+		data.guild.save();
 
 		const caseInfo = {
 			channel: message.channel.id,
 			moderator: message.author.id,
 			date: Date.now(),
 			type: 'warn',
-			case: guildData.casesCount,
+			case: data.guild.casesCount,
 			reason
 		};
 
@@ -57,13 +55,13 @@ module.exports = class extends Command {
 				`***Moderator:*** ${message.author.tag} (\`${message.author.id}\`)`,
 				`***Reason:*** ${reason}`
 			].join('\n'))
-			.setFooter(`Moderation system powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
+			.setFooter(this.client.user.username, this.client.user.avatarURL({ dynamic: true }));
 
 		if (banCount) {
 			if (sanctions >= banCount) {
 				member.send({ content: `Hello <@${member.id}>,\nYou've just been banned from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!` });
 				caseInfo.type = 'ban';
-				embed.setAuthor(`Moderation: Ban | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
+				embed.setAuthor(`Moderation: Ban | Case #${data.guild.casesCount}`, member.user.avatarURL({ dynamic: true }));
 				embed.setColor(Color.RED);
 				message.guild.members.ban(member);
 				message.reply({ content: `**${member.user.tag}** was automatically banned because they reach more than **${banCount}** warns!` });
@@ -72,7 +70,7 @@ module.exports = class extends Command {
 			if (sanctions >= kickCount) {
 				member.send({ content: `Hello <@${member.id}>,\nYou've just been kicked from **${message.guild.name}** by **${message.author.tag}** because of **${reason}**!` });
 				caseInfo.type = 'kick';
-				embed.setAuthor(`Moderation: Kick | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
+				embed.setAuthor(`Moderation: Kick | Case #${data.guild.casesCount}`, member.user.avatarURL({ dynamic: true }));
 				embed.setColor(Color.ORANGE);
 				member.kick(member);
 				message.reply({ content: `**${member.user.tag}** was automatically kicked because they reach more than **${kickCount}** warns!` });
@@ -80,15 +78,15 @@ module.exports = class extends Command {
 		} else {
 			member.send({ content: `Hello <@${member.id}>,\nYou've just been warned on **${message.guild.name}** by **${message.author.tag}** for **${reason}**!` });
 			caseInfo.type = 'warn';
-			embed.setAuthor(`Moderation: Warn | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }));
+			embed.setAuthor(`Moderation: Warn | Case #${data.guild.casesCount}`, member.user.avatarURL({ dynamic: true }));
 			message.reply({ content: `**${member.user.tag}** has been warned in private messages for **${reason}**!` });
 		}
 
-		memberData.sanctions.push(caseInfo);
-		memberData.save();
+		data.member.sanctions.push(caseInfo);
+		data.member.save();
 
-		if (guildData.plugins.moderations) {
-			const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
+		if (data.guild.plugins.moderations) {
+			const sendChannel = message.guild.channels.cache.get(data.guild.plugins.moderations);
 			if (!sendChannel) return;
 			sendChannel.send({ embeds: [embed] });
 		}

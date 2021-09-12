@@ -1,6 +1,6 @@
 const Interaction = require('../../Structures/Interaction.js');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const { getInfoFromName } = require('mal-scraper');
 
 module.exports = class extends Interaction {
@@ -9,12 +9,9 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'anime',
 			description: 'Gets anime information from MAL',
-			options: [{
-				type: 'STRING',
-				name: 'query',
-				description: 'Search for information Anime',
-				required: true
-			}]
+			options: [
+				{ type: 'STRING', name: 'query', description: 'Search for information Anime', required: true }
+			]
 		});
 	}
 
@@ -25,12 +22,6 @@ module.exports = class extends Interaction {
 			await interaction.deferReply();
 
 			const data = await getInfoFromName(query.trim(), false);
-
-			const button = new MessageActionRow()
-				.addComponents(new MessageButton()
-					.setStyle('LINK')
-					.setLabel('Trailer')
-					.setURL(data.trailer));
 
 			const embed = new MessageEmbed()
 				.setColor(Color.MAL)
@@ -64,9 +55,9 @@ module.exports = class extends Interaction {
 					`***Members:*** ${data.members ? data.members : '`N/A`'}`,
 					`***Favorites:*** ${data.favorites ? data.favorites : '`N/A`'}`
 				].join('\n'))
-				.setFooter('Powered by MyAnimeList', interaction.user.avatarURL({ dynamic: true }));
+				.setFooter(`${interaction.user.username}  •  Powered by MyAnimeList`, interaction.user.avatarURL({ dynamic: true }));
 
-			return interaction.editReply({ embeds: [embed], components: [button] });
+			return interaction.editReply({ embeds: [embed] });
 		} catch {
 			return interaction.editReply({ content: 'No result found!' });
 		}

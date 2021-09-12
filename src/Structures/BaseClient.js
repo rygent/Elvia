@@ -13,7 +13,8 @@ module.exports = class BaseClient extends Client {
 			allowedMentions: {
 				parse: ['users', 'roles'],
 				repliedUser: false
-			}
+			},
+			failIfNotExists: false
 		});
 		this.validate(options);
 
@@ -24,7 +25,7 @@ module.exports = class BaseClient extends Client {
 		this.cooldowns = new Collection();
 		this.utils = new Util(this);
 
-		this.logger = require('../Helpers/Logger.js');
+		this.logger = require('../Modules/Logger.js');
 
 		this.usersData = require('../Schemas/UserData.js');
 		this.guildsData = require('../Schemas/GuildData.js');
@@ -50,96 +51,60 @@ module.exports = class BaseClient extends Client {
 		};
 	}
 
-	async findOrCreateUser({ id: userID }, isLean) {
-		if (this.databaseCache.users.get(userID)) {
-			return isLean ? this.databaseCache.users.get(userID).toJSON() : this.databaseCache.users.get(userID);
+	async findOrCreateUser({ id: userId }, isLean) {
+		if (this.databaseCache.users.get(userId)) {
+			return isLean ? this.databaseCache.users.get(userId).toJSON() : this.databaseCache.users.get(userId);
 		} else {
-			let userData = isLean ? await this.usersData.findOne({ id: userID }).lean() : await this.usersData.findOne({ id: userID });
+			let userData = isLean ? await this.usersData.findOne({ id: userId }).lean() : await this.usersData.findOne({ id: userId });
 			if (userData) {
-				if (!isLean) this.databaseCache.users.set(userID, userData);
+				if (!isLean) this.databaseCache.users.set(userId, userData);
 				return userData;
 			} else {
-				userData = new this.usersData({ id: userID });
+				userData = new this.usersData({ id: userId });
 				await userData.save();
-				this.databaseCache.users.set(userID, userData);
+				this.databaseCache.users.set(userId, userData);
 				return isLean ? userData.toJSON() : userData;
 			}
 		}
 	}
 
-	async findOrCreateGuild({ id: guildID }, isLean) {
-		if (this.databaseCache.guilds.get(guildID)) {
-			return isLean ? this.databaseCache.guilds.get(guildID).toJSON() : this.databaseCache.guilds.get(guildID);
+	async findOrCreateGuild({ id: guildId }, isLean) {
+		if (this.databaseCache.guilds.get(guildId)) {
+			return isLean ? this.databaseCache.guilds.get(guildId).toJSON() : this.databaseCache.guilds.get(guildId);
 		} else {
-			let guildData = isLean ? await this.guildsData.findOne({ id: guildID }).populate('members').lean() : await this.guildsData.findOne({ id: guildID }).populate('members');
+			let guildData = isLean ? await this.guildsData.findOne({ id: guildId }).populate('members').lean() : await this.guildsData.findOne({ id: guildId }).populate('members');
 			if (guildData) {
-				if (!isLean) this.databaseCache.guilds.set(guildID, guildData);
+				if (!isLean) this.databaseCache.guilds.set(guildId, guildData);
 				return guildData;
 			} else {
-				guildData = new this.guildsData({ id: guildID });
+				guildData = new this.guildsData({ id: guildId });
 				await guildData.save();
-				this.databaseCache.guilds.set(guildID, guildData);
+				this.databaseCache.guilds.set(guildId, guildData);
 				return isLean ? guildData.toJSON() : guildData;
 			}
 		}
 	}
 
-	async findOrCreateMember({ id: memberID, guildID }, isLean) {
-		if (this.databaseCache.members.get(`${memberID}${guildID}`)) {
-			return isLean ? this.databaseCache.members.get(`${memberID}${guildID}`).toJSON() : this.databaseCache.members.get(`${memberID}${guildID}`);
+	async findOrCreateMember({ id: memberId, guildId }, isLean) {
+		if (this.databaseCache.members.get(`${memberId}${guildId}`)) {
+			return isLean ? this.databaseCache.members.get(`${memberId}${guildId}`).toJSON() : this.databaseCache.members.get(`${memberId}${guildId}`);
 		} else {
-			let memberData = isLean ? await this.membersData.findOne({ guildID, id: memberID }).lean() : await this.membersData.findOne({ guildID, id: memberID });
+			let memberData = isLean ? await this.membersData.findOne({ guildId, id: memberId }).lean() : await this.membersData.findOne({ guildId, id: memberId });
 			if (memberData) {
-				if (!isLean) this.databaseCache.members.set(`${memberID}${guildID}`, memberData);
+				if (!isLean) this.databaseCache.members.set(`${memberId}${guildId}`, memberData);
 				return memberData;
 			} else {
-				memberData = new this.membersData({ id: memberID, guildID: guildID });
+				memberData = new this.membersData({ id: memberId, guildId: guildId });
 				await memberData.save();
-				const guild = await this.findOrCreateGuild({ id: guildID });
+				const guild = await this.findOrCreateGuild({ id: guildId });
 				if (guild) {
 					guild.members.push(memberData._id);
 					await guild.save();
 				}
-				this.databaseCache.members.set(`${memberID}${guildID}`, memberData);
+				this.databaseCache.members.set(`${memberId}${guildId}`, memberData);
 				return isLean ? memberData.toJSON() : memberData;
 			}
 		}
-	}
-
-	/* eslint-disable no-empty-function */
-	async resolveUser(search) {
-		let user = null;
-		if (!search || typeof search !== 'string') return;
-		if (search.match(/^<@!?(\d+)>$/)) {
-			const id = search.match(/^<@!?(\d+)>$/)[1];
-			user = this.users.fetch(id).catch(() => {});
-			if (user) return user;
-		}
-		if (search.match(/^!?(\w+)#(\d+)$/)) {
-			const username = search.match(/^!?(\w+)#(\d+)$/)[0];
-			const discriminator = search.match(/^!?(\w+)#(\d+)$/)[1];
-			user = this.users.find((users) => users.username === username && users.discriminator === discriminator);
-			if (user) return user;
-		}
-		user = await this.users.fetch(search).catch(() => {});
-		return user;
-	}
-
-	async resolveMember(search, guild) {
-		let member = null;
-		if (!search || typeof search !== 'string') return;
-		if (search.match(/^<@!?(\d+)>$/)) {
-			const id = search.match(/^<@!?(\d+)>$/)[1];
-			member = await guild.members.fetch(id).catch(() => {});
-			if (member) return member;
-		}
-		if (search.match(/^!?(\w+)#(\d+)$/)) {
-			guild = await guild.fetch();
-			member = guild.members.cache.find((members) => members.user.tag === search);
-			if (member) return member;
-		}
-		member = await guild.members.fetch(search).catch(() => {});
-		return member;
 	}
 
 	validate(options) {
@@ -162,8 +127,8 @@ module.exports = class BaseClient extends Client {
 		if (!options.defaultPerms) throw new Error('You must pass default perm(s) for the Client.');
 		this.defaultPerms = new Permissions(options.defaultPerms).freeze();
 
-		if (!options.mongoUri) throw new Error('You must pass mongo uri for the Client.');
-		this.mongoUri = options.mongoUri;
+		if (!options.mongoURL) throw new Error('You must pass MongoDB URL for the Client.');
+		this.mongoURL = options.mongoURL;
 	}
 
 	async start(token = this.token) {

@@ -1,8 +1,7 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Formatters, MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const npm = require('libnpmsearch');
-const moment = require('moment');
 
 module.exports = class extends Command {
 
@@ -23,23 +22,23 @@ module.exports = class extends Command {
 		}
 
 		try {
-			const data = await npm(query, { sortBy: 'popularity' });
+			const result = await npm(query, { sortBy: 'popularity' });
 
 			const embed = new MessageEmbed()
 				.setColor(Color.NPM)
 				.setAuthor('NPM', 'https://i.imgur.com/7hzjnuJ.png', 'https://www.npmjs.com/')
-				.setTitle(data[0].name)
-				.setURL(data[0].links ? data[0].links.npm : 'None')
+				.setTitle(result[0].name)
+				.setURL(result[0].links ? result[0].links.npm : 'None')
 				.setThumbnail(`https://i.imgur.com/CJ70ktz.png`)
-				.setDescription(data[0].description ? data[0].description : 'None')
+				.setDescription(result[0].description ? result[0].description : 'None')
 				.addField('__Details__', [
-					`***Version:*** ${data[0].version}`,
-					`***Publisher:*** ${data[0].publisher.username}`,
-					`***Date:*** ${moment(data[0].date).format('MMMM D, YYYY')}`,
-					`***Repository:*** ${data[0].links.repository ? data[0].links.repository : 'None'}`,
-					`***Keywords:*** ${data[0].keywords ? data[0].keywords.join(', ') : 'None'}`
+					`***Version:*** ${result[0].version}`,
+					`***Publisher:*** ${result[0].publisher.username}`,
+					`***Date:*** ${Formatters.time(new Date(result[0].date))}`,
+					`***Repository:*** ${result[0].links.repository ? result[0].links.repository : 'None'}`,
+					`***Keywords:*** ${result[0].keywords ? result[0].keywords.join(', ') : 'None'}`
 				].join('\n'))
-				.setFooter('Powered by NPM', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by NPM`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

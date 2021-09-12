@@ -9,7 +9,7 @@ module.exports = class extends Command {
 			aliases: ['exec'],
 			description: 'Executes commands on the console.',
 			category: 'Developer',
-			usage: '[command]',
+			usage: '[bash]',
 			ownerOnly: true
 		});
 	}

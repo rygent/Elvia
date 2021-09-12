@@ -1,24 +1,31 @@
 const Event = require('../../Structures/Event.js');
-const { Access, Color } = require('../../Utils/Configuration.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
+const { Access } = require('../../Utils/Setting.js');
 
 module.exports = class extends Event {
 
 	async run(interaction) {
+		if (!interaction.isCommand()) return;
 		if (!interaction.inGuild()) return;
-		if (interaction.isCommand()) {
-			await this.client.application?.commands.fetch(interaction.commandId).catch(() => null);
 
-			const command = this.client.interactions.get(interaction.commandName);
-			if (command) {
-				try {
-					await command.run(interaction);
-				} catch (error) {
-					await interaction.reply({ embeds: [{
-						color: Color.DEFAULT,
-						description: `Something went wrong, please report it to our **[guild support](https://discord.gg/${Access.INVITE_CODE})**!`
-					}], ephemeral: true });
-					return this.client.logger.log({ content: error.stack, type: 'error' });
-				}
+		const data = {};
+		data.user = await this.client.findOrCreateUser({ id: interaction.user.id });
+		data.guild = await this.client.findOrCreateGuild({ id: interaction.guildId });
+		data.member = await this.client.findOrCreateMember({ id: interaction.user.id, guildId: interaction.guildId });
+
+		const command = this.client.interactions.get(interaction.commandName);
+		if (command) {
+			try {
+				await command.run(interaction, data);
+			} catch (error) {
+				const button = new MessageActionRow()
+					.addComponents(new MessageButton()
+						.setStyle('LINK')
+						.setLabel('Support Server')
+						.setURL(`https://discord.gg/${Access.InviteCode}`));
+
+				this.client.logger.log({ content: error.stack, type: 'error' });
+				return interaction.reply({ content: `Something went wrong, please report it to our **guild support**!`, components: [button], ephemeral: true });
 			}
 		}
 	}

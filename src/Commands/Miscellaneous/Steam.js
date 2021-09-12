@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 const axios = require('axios');
 
 module.exports = class extends Command {
@@ -56,7 +56,7 @@ module.exports = class extends Command {
 					`***Website:*** ${details.website ? details.website : 'None'}`,
 					`***Support:*** ${details.support_info ? details.support_info.url : details.support_info.email || 'None'}`
 				].join('\n'))
-				.setFooter('Powered by Steam Store', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by Steam Store`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

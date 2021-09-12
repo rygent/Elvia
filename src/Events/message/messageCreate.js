@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const { Collection, MessageActionRow, MessageButton } = require('discord.js');
-const { Access, Color } = require('../../Utils/Configuration.js');
+const { Access } = require('../../Utils/Setting.js');
 const moment = require('moment');
 
 module.exports = class extends Event {
@@ -8,54 +8,49 @@ module.exports = class extends Event {
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
-
 		if (!message.guild || message.author.bot) return;
 
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const customPrefix = guildData ? guildData.prefix : this.client.prefix;
-
-		if (message.content.match(mentionRegex)) {
-			const button = new MessageActionRow()
-				.addComponents(new MessageButton()
-					.setStyle('LINK')
-					.setLabel('Vote me!')
-					.setURL(`https://top.gg/bot/${this.client.user.id}`))
-				.addComponents(new MessageButton()
-					.setStyle('LINK')
-					.setLabel('Invite me!')
-					.setURL(`https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=${Access.INVITE_PERMISSION}&scope=${Access.INVITE_SCOPE.join('%20')}`));
-
-			return message.reply({ content: [
-				`Hi, my prefix for this guild is \`${customPrefix}\`.`,
-				`Use \`${customPrefix}help\` to get a list of commands!`
-			].join('\n'), components: [button] });
-		}
-
-		const userData = await this.client.findOrCreateUser({ id: message.author.id });
+		const data = {};
+		data.user = await this.client.findOrCreateUser({ id: message.author.id });
 
 		if (message.guild) {
-			const { isAfk } = userData.afk;
-			if (isAfk) {
-				userData.afk.isAfk = false;
-				userData.afk.sinceDate = null;
-				userData.afk.reason = null;
-				userData.markModified('afk');
-				await userData.save();
-				await message.reply({ content: `You're no longer AFK!` }).then(msg => setTimeout(() => msg.delete(), 5000));
+			data.guild = await this.client.findOrCreateGuild({ id: message.guildId });
+			data.member = await this.client.findOrCreateMember({ id: message.author.id, guildId: message.guildId });
+		}
+
+		if (message.content.match(mentionRegex)) {
+			await message.channel.sendTyping();
+			return message.reply([
+				`Hi, my prefix for this guild is \`${data.guild?.prefix}\`.`,
+				`Use \`${data.guild?.prefix}help\` to get a list of commands!`
+			].join('\n'));
+		}
+
+		if (message.guild) {
+			if (data.user.afk.enabled) {
+				data.user.afk.enabled = false;
+				data.user.afk.since = null;
+				data.user.afk.reason = null;
+				data.user.markModified('afk');
+				await data.user.save();
+
+				await message.channel.sendTyping();
+				await message.reply({ content: `You're no longer AFK!` }).then(m => setTimeout(() => m.delete(), 5000));
 			}
 
 			message.mentions.users.forEach(async (user) => {
 				const dataUser = await this.client.findOrCreateUser({ id: user.id });
-				if (dataUser.afk.isAfk) {
+				if (dataUser.afk.enabled) {
+					await message.channel.sendTyping();
 					return message.reply({ content: [
-						`<@${user.id}> is currently AFK! (\`${moment(dataUser.afk.sinceDate).fromNow()}\`)`,
+						`<@${user.id}> is currently AFK! (\`${moment(dataUser.afk.since).fromNow()}\`)`,
 						`***Reason:*** ${dataUser.afk.reason}`
-					].join('\n') }).then(msg => setTimeout(() => msg.delete(), 15000));
+					].join('\n') }).then(m => setTimeout(() => m.delete(), 15000));
 				}
 			});
 		}
 
-		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : customPrefix;
+		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : data.guild?.prefix;
 
 		if (!message.content.startsWith(prefix)) return;
 
@@ -68,6 +63,7 @@ module.exports = class extends Event {
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
+						await message.channel.sendTyping();
 						return message.reply({ content: `You don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, you need it to continue this command!` });
 					}
 				}
@@ -76,20 +72,24 @@ module.exports = class extends Event {
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
 					if (missing.length) {
+						await message.channel.sendTyping();
 						return message.reply({ content: `I don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, I need it to continue this command!` });
 					}
 				}
 
-				if (command.isNsfw && !message.channel.nsfw) {
+				if (command.nsfw && !message.channel.nsfw) {
+					await message.channel.sendTyping();
 					return message.reply({ content: 'This command is only accessible on NSFW channels!' });
 				}
 			}
 
-			if (command.isDisabled) {
-				return message.reply({ content: 'This command is currently inaccessible for some reason!' });
+			if (command.disabled) {
+				await message.channel.sendTyping();
+				return message.reply({ content: 'This command is currently inaccessible!' });
 			}
 
-			if (command.isOwner && !this.client.utils.checkOwner(message.author.id)) {
+			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
+				await message.channel.sendTyping();
 				return message.reply({ content: 'This command is only accessible for developers!' });
 			}
 
@@ -106,8 +106,9 @@ module.exports = class extends Event {
 
 				if (now < expirationTime) {
 					const timeLeft = (expirationTime - now) / 1000;
+					await message.channel.sendTyping();
 					return message.reply({ content: `You've to wait **${timeLeft.toFixed(2)}** second(s) before you can use this command again!` })
-						.then(msg => setTimeout(() => msg.delete(), expirationTime - now));
+						.then(m => setTimeout(() => m.delete(), expirationTime - now));
 				}
 			}
 			timestamps.set(message.author.id, now);
@@ -115,13 +116,16 @@ module.exports = class extends Event {
 
 			try {
 				await message.channel.sendTyping();
-				await command.run(message, args);
+				await command.run(message, args, data);
 			} catch (error) {
-				await message.reply({ embeds: [{
-					color: Color.DEFAULT,
-					description: `Something went wrong, please report it to our **[guild support](https://discord.gg/${Access.INVITE_CODE})**!`
-				}] });
-				return this.client.logger.log({ content: error.stack, type: 'error' });
+				const button = new MessageActionRow()
+					.addComponents(new MessageButton()
+						.setStyle('LINK')
+						.setLabel('Support Server')
+						.setURL(`https://discord.gg/${Access.InviteCode}`));
+
+				this.client.logger.log({ content: error.stack, type: 'error' });
+				return message.reply({ content: 'Something went wrong, please report it to our **guild support**!', components: [button] });
 			}
 		}
 	}

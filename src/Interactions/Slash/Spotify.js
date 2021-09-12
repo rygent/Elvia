@@ -1,6 +1,6 @@
 const Interaction = require('../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color, Emoji, Environment } = require('../../Utils/Configuration.js');
+const { Api, Color, Emoji } = require('../../Utils/Setting.js');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 
@@ -10,12 +10,9 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'spotify',
 			description: 'Gets song information from Spotify',
-			options: [{
-				type: 'STRING',
-				name: 'query',
-				description: 'Search for a Song',
-				required: true
-			}]
+			options: [
+				{ type: 'STRING', name: 'query', description: 'Search for a Song', required: true }
+			]
 		});
 	}
 
@@ -23,8 +20,8 @@ module.exports = class extends Interaction {
 		const title = interaction.options.getString('query', true);
 
 		const spotify = new Spotify({
-			id: Environment.SPOTIFY_ID,
-			secret: Environment.SPOTIFY_SECRET
+			id: Api.Spotify.ClientId,
+			secret: Api.Spotify.ClientSecret
 		});
 
 		const response = await spotify.search({ type: 'track', query: title });
@@ -52,7 +49,7 @@ module.exports = class extends Interaction {
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
-			.setFooter('Powered by Spotify', interaction.user.avatarURL({ dynamic: true }));
+			.setFooter(`${interaction.user.username}  •  Powered by Spotify`, interaction.user.avatarURL({ dynamic: true }));
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

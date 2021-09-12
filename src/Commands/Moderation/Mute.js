@@ -1,6 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
+const Resolver = require('../../Modules/Resolver.js');
 const moment = require('moment');
 const ms = require('ms');
 
@@ -18,8 +19,8 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [target, time, ...args]) {
-		const member = await this.client.resolveMember(target, message.guild);
+	async run(message, [target, time, ...args], data) {
+		const member = await Resolver.resolveMember({ message, target });
 		if (!member) return message.reply({ content: 'Please specify a valid member to mute!' });
 		if (member.id === message.author.id) return message.reply({ content: 'You can\'t mute yourself!' });
 		const memberPosition = member.roles.highest.position;
@@ -27,9 +28,6 @@ module.exports = class extends Command {
 		if (message.member.ownerID !== message.author.id && !(moderationPosition > memberPosition)) {
 			return message.reply({ content: 'You can\'t mute a member who has an higher or equal role hierarchy to yours!' });
 		}
-
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-		const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: message.guild.id });
 
 		if (!time || isNaN(ms(time))) return message.reply({ content: 'You must enter a valid time! Available units: `s`, `m`, `h` or `d`' });
 
@@ -47,38 +45,38 @@ module.exports = class extends Command {
 		member.send({ content: `Hello <@${member.user.id}>,\nYou've just been muted on **${message.guild.name}** by **${message.author.tag}** for **${time}** because of **${reason}**!` });
 		message.reply({ content: `**${member.user.username}** is now muted for **${time}** because of **${reason}**!` });
 
-		guildData.casesCount++;
+		data.guild.casesCount++;
 
 		const caseInfo = {
 			channel: message.channel.id,
 			moderator: message.author.id,
 			date: Date.now(),
 			type: 'mute',
-			case: guildData.casesCount,
+			case: data.guild.casesCount,
 			reason,
 			time
 		};
 
-		memberData.mute.muted = true;
-		memberData.mute.endDate = Date.now() + ms(time);
-		memberData.mute.case = guildData.casesCount;
-		memberData.sanctions.push(caseInfo);
+		data.member.mute.muted = true;
+		data.member.mute.endDate = Date.now() + ms(time);
+		data.member.mute.case = data.guild.casesCount;
+		data.member.sanctions.push(caseInfo);
 
-		memberData.markModified('sanctions');
-		memberData.markModified('mute');
-		await memberData.save();
+		data.member.markModified('sanctions');
+		data.member.markModified('mute');
+		await data.member.save();
 
-		await guildData.save();
+		await data.guild.save();
 
-		this.client.databaseCache.mutedUsers.set(`${member.id}${message.guild.id}`, memberData);
+		this.client.databaseCache.mutedUsers.set(`${member.id}${message.guild.id}`, data.member);
 
-		if (guildData.plugins.moderations) {
-			const sendChannel = message.guild.channels.cache.get(guildData.plugins.moderations);
+		if (data.guild.plugins.moderations) {
+			const sendChannel = message.guild.channels.cache.get(data.guild.plugins.moderations);
 			if (!sendChannel) return;
 
 			const embed = new MessageEmbed()
 				.setColor(Color.GREY)
-				.setAuthor(`Moderation: Mute | Case #${guildData.casesCount}`, member.user.avatarURL({ dynamic: true }))
+				.setAuthor(`Moderation: Mute | Case #${data.guild.casesCount}`, member.user.avatarURL({ dynamic: true }))
 				.setDescription([
 					`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
 					`***Moderator:*** ${message.author.tag} (\`${message.author.id}\`)`,

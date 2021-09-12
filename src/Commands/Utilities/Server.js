@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Formatters, MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const moment = require('moment');
 
 module.exports = class extends Command {
@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			aliases: ['serverinfo', 'guild', 'guildinfo'],
 			description: 'Shows about the current server information.',
 			category: 'Utilities',
-			cooldown: 5000
+			cooldown: 3000
 		});
 	}
 
@@ -33,31 +33,30 @@ module.exports = class extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
-			.setAuthor(`Server Information for ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
+			.setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }))
 			.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
 			.setDescription([
-				`***Name:*** ${message.guild.name}`,
 				`***ID:*** \`${message.guild.id}\``,
-				`***Owner:*** <@${message.guild.ownerId}>`,
-				`***Boost Tier:*** ${message.guild.premiumTier.toProperCase()}`,
+				`***Owner:*** ${Formatters.memberNicknameMention(message.guild.ownerId)}`,
+				`***Boost Tier:*** ${message.guild.premiumTier.replace(/_/g, ' ').toProperCase()}`,
 				`***Explicit filter:*** ${contentFilterLevels[message.guild.explicitContentFilter]}`,
 				`***Verification:*** ${verificationLevels[message.guild.verificationLevel]}`,
-				`***Registered:*** ${moment(message.guild.createdTimestamp).format('MMMM D, YYYY HH:mm')} (${moment(message.guild.createdTimestamp).fromNow()})`
+				`***Created:*** ${Formatters.time(new Date(message.guild.createdTimestamp))} (${moment(message.guild.createdTimestamp).fromNow()})`
 			].join('\n'))
 			.addField('__Channels__', [
-				`***Categories:*** ${message.guild.channels.cache.filter(ch => ch.type === 'category').size}`,
-				`***Text:*** ${message.guild.channels.cache.filter(ch => ch.type === 'text').size}`,
-				`***Voice:*** ${message.guild.channels.cache.filter(ch => ch.type === 'voice').size}`,
+				`***Categories:*** ${message.guild.channels.cache.filter(x => x.type === 'GUILD_CATEGORY').size}`,
+				`***Text:*** ${message.guild.channels.cache.filter(x => x.type === 'GUILD_TEXT').size}`,
+				`***Voice:*** ${message.guild.channels.cache.filter(x => x.type === 'GUILD_VOICE').size}`,
 				`***AFK:*** ${message.guild.afkChannel ? message.guild.afkChannel.name : 'None'}`
 			].join('\n'), true)
 			.addField('__Users__', [
-				`***Humans:*** ${message.guild.memberCount - message.guild.members.cache.filter(mbr => mbr.user.bot).size}`,
-				`***Bots:*** ${message.guild.members.cache.filter(mbr => mbr.user.bot).size}`,
+				`***Humans:*** ${message.guild.memberCount - message.guild.members.cache.filter(x => x.user.bot).size}`,
+				`***Bots:*** ${message.guild.members.cache.filter(x => x.user.bot).size}`,
 				`***Members:*** ${message.guild.memberCount}`
 			].join('\n'), true)
 			.addField('__Others__', `***Booster:*** ${message.guild.premiumSubscriptionCount}`, true)
 			.addField(`__Roles__`, `${roles.length < 15 ? roles.join(', ') : roles.length > 15 ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`)
-			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`${message.author.username}  •  Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

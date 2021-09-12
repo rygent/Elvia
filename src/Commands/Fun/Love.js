@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 
 module.exports = class extends Command {
 
@@ -31,7 +31,7 @@ module.exports = class extends Command {
 				`**${message.member.displayName}** is ${Math.floor(love)}% in love with **${person.displayName}**`,
 				`${loveLevel}`
 			].join('\n'))
-			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`${message.author.username}  •  Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

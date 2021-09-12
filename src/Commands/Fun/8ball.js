@@ -1,7 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
-const answers = require('../../../assets/json/8ball.json');
+const { Color } = require('../../Utils/Setting.js');
+const Answer = require('../../../assets/json/8ball.json');
 
 module.exports = class extends Command {
 
@@ -21,13 +21,16 @@ module.exports = class extends Command {
 		}
 
 		const RatingArray = ['Low', 'Medium', 'High'];
-		const Choice = answers[Math.floor(Math.random() * answers.length).toString(10)];
+		const Choice = Answer[Math.floor(Math.random() * Answer.length).toString(10)];
 
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
 			.setTitle(`🎱 ${args.slice(0).join(' ')}`)
-			.setDescription(`❯  ${Choice.Message}`)
-			.setFooter(`Powered by ${this.client.user.username} | Rate: ${RatingArray[Choice.Rating]}`, message.author.avatarURL({ dynamic: true }));
+			.setDescription([
+				`❯  ${Choice.Message}\n`,
+				`***Rate:*** ${RatingArray[Choice.Rating]}`
+			].join('\n'))
+			.setFooter(`${message.author.username}  •  Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

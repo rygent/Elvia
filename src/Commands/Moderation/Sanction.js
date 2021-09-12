@@ -1,6 +1,7 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
+const Resolver = require('../../Modules/Resolver.js');
 
 module.exports = class extends Command {
 
@@ -16,21 +17,19 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [target]) {
-		const user = await this.client.resolveUser(target);
+	async run(message, [target], data) {
+		const user = await Resolver.resolveUser({ message, target });
 		if (!user) return message.reply({ content: 'You must specify a member\'s username!' });
-
-		const memberData = await this.client.findOrCreateMember({ id: user.id, guildID: message.guild.id });
 
 		const embed = new MessageEmbed()
 			.setColor(Color.YELLOW)
 			.setAuthor(user.tag, user.avatarURL({ dynamic: true }))
 			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
-		if (memberData.sanctions.length < 1) {
+		if (data.member.sanctions.length < 1) {
 			return message.reply({ content: `**${user.tag}** doesn't have any warning!` });
 		} else {
-			memberData.sanctions.forEach((sanction) => {
+			data.member.sanctions.forEach((sanction) => {
 				embed.addField(`${sanction.type.toProperCase()} | Case #${sanction.case}`, [
 					`***Moderator:*** <@${sanction.moderator}>`,
 					`***Reason:*** ${sanction.reason}`

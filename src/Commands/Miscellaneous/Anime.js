@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { MessageEmbed } = require('discord.js');
+const { Color } = require('../../Utils/Setting.js');
 const { getInfoFromName } = require('mal-scraper');
 
 module.exports = class extends Command {
@@ -23,12 +23,6 @@ module.exports = class extends Command {
 
 		try {
 			const data = await getInfoFromName(query, false);
-
-			const button = new MessageActionRow()
-				.addComponents(new MessageButton()
-					.setStyle('LINK')
-					.setLabel('Trailer')
-					.setURL(data.trailer));
 
 			const embed = new MessageEmbed()
 				.setColor(Color.MAL)
@@ -62,9 +56,9 @@ module.exports = class extends Command {
 					`***Members:*** ${data.members ? data.members : '`N/A`'}`,
 					`***Favorites:*** ${data.favorites ? data.favorites : '`N/A`'}`
 				].join('\n'))
-				.setFooter('Powered by MyAnimeList', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by MyAnimeList`, message.author.avatarURL({ dynamic: true }));
 
-			return message.reply({ embeds: [embed], components: [button] });
+			return message.reply({ embeds: [embed] });
 		} catch {
 			return message.reply({ content: 'No result found!' });
 		}

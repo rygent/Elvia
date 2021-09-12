@@ -12,9 +12,9 @@ module.exports = class Command {
 		this.memberPerms = new Permissions(options.memberPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
 		this.cooldown = options.cooldown || 1000;
-		this.isNsfw = options.nsfw || false;
-		this.isOwner = options.ownerOnly || false;
-		this.isDisabled = options.disabled || false;
+		this.nsfw = options.nsfw || false;
+		this.ownerOnly = options.ownerOnly || false;
+		this.disabled = options.disabled || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars

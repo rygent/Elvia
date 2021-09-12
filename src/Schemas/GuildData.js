@@ -1,11 +1,10 @@
 const { Schema, model } = require('mongoose');
-const { prefix } = require('../Utils/Configuration.js');
 
 module.exports = model('Guild', new Schema({
 	id: { type: String },
 	membersData: { type: Object, default: {} },
 	members: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
-	prefix: { type: String, default: prefix },
+	prefix: { type: String, default: process.env.CLIENT_PREFIX },
 	plugins: { type: Object, default: {
 		welcome: {
 			enabled: false,
@@ -33,6 +32,7 @@ module.exports = model('Guild', new Schema({
 		},
 		suggestions: false,
 		moderations: false,
+		messages: false,
 		audits: false,
 		reports: false,
 		logs: false

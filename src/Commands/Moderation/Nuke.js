@@ -19,31 +19,31 @@ module.exports = class extends Command {
 		const button = new MessageActionRow()
 			.addComponents(new MessageButton()
 				.setStyle('PRIMARY')
-				.setLabel('Confirm')
-				.setCustomId('confirm'))
+				.setCustomId('confirm')
+				.setLabel('Yep!'))
 			.addComponents(new MessageButton()
 				.setStyle('SECONDARY')
-				.setLabel('Cancel')
-				.setCustomId('cancel'));
+				.setCustomId('cancel')
+				.setLabel('Cancel'));
 
-		return message.reply({ content: 'Please confirm if you want to nuke this channel!', components: [button] }).then((msg) => {
-			const filter = (button) => button.user.id === message.author.id;
-			msg.awaitMessageComponent({ filter, time: 15000 }).then(async (button) => {
-				switch (button.customId) {
-					case 'confirm': {
-						const { position, topic } = message.channel;
-						const newChannel = await message.channel.clone();
-						newChannel.setPosition(position);
-						newChannel.setTopic(topic);
-						await message.channel.delete();
-						return newChannel.send({ content: 'Channel has been successfully nuked!' }).then((msg) => setTimeout(() => msg.delete(), 10000));
-					}
-					case 'cancel': {
-						return button.update({ content: 'Command has been cancelled!', components: [] });
-					}
+		const m = await message.reply({ content: 'Please confirm if you want to nuke this channel!', components: [button] });
+
+		const filter = (interaction) => interaction.user.id === message.author.id;
+		message.channel.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 15000 }).then(async (interaction) => {
+			switch (interaction.customId) {
+				case 'confirm': {
+					const { position, topic } = message.channel;
+					const newChannel = await message.channel.clone();
+					newChannel.setPosition(position);
+					newChannel.setTopic(topic);
+					await message.channel.delete();
+					return newChannel.send({ content: 'Channel has been successfully nuked!' }).then(m => setTimeout(() => m.delete(), 10000));
 				}
-			}).catch(() => msg.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
-		});
+				case 'cancel': {
+					return interaction.update({ content: 'Command has been cancelled!', components: [] });
+				}
+			}
+		}).catch(() => m.edit({ content: 'Time\'s up! Please send the command again!', components: [] }));
 	}
 
 };

@@ -5,12 +5,14 @@ module.exports = class extends Event {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'open',
+			once: true,
 			emitter: connection
 		});
 	}
 
 	async run() {
-		this.client.logger.log({ content: 'Disconnected from Database!', type: 'warn' });
+		this.client.logger.log({ content: 'Connected to Database!', type: 'ready' });
 	}
 
 };

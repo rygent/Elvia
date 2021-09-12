@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color, Environment } = require('../../Utils/Configuration.js');
+const { Api, Color } = require('../../Utils/Setting.js');
 const IMDb = require('imdb-api');
 const moment = require('moment');
 
@@ -23,52 +23,52 @@ module.exports = class extends Command {
 		}
 
 		try {
-			const data = await IMDb.get({ name: query }, { apiKey: Environment.IMDB });
+			const result = await IMDb.get({ name: query }, { apiKey: Api.Imdb });
 
 			const embed = new MessageEmbed()
 				.setColor(Color.IMDB)
 				.setAuthor('IMDb', 'https://i.imgur.com/0BTAjjv.png', 'https://www.imdb.com/')
-				.setTitle(data.title)
-				.setURL(data.imdburl)
-				.setThumbnail(data.poster)
-				.setDescription(data.plot)
-				.setFooter('Powered by IMDb', message.author.avatarURL({ dynamic: true }));
+				.setTitle(result.title)
+				.setURL(result.imdburl)
+				.setThumbnail(result.poster)
+				.setDescription(result.plot)
+				.setFooter(`${message.author.username}  •  Powered by IMDb`, message.author.avatarURL({ dynamic: true }));
 
-			if (data.series !== true) {
+			if (result.series !== true) {
 				embed.addField('__Details__', [
-					`***Released:*** ${moment(data.released).format('MMMM DD, YYYY')}`,
-					`***Ratings:*** ${data.rating} ⭐ (by ${data.votes} users)`,
-					`***Metascores:*** ${data.metascore} from [metacritic](https://metacritic.com)`,
-					`***Genres:*** ${data.genres}`,
-					`***Rated:*** ${data.rated}`,
-					`***Type:*** ${data.type.toProperCase()}`,
-					`***Runtime:*** ${data.runtime}`,
-					`***Directors:*** ${data.director}`,
-					`***Cast:*** ${data.actors}`,
-					`***Production:*** ${data.production || 'Unknown'}`,
-					`***Country:*** ${data.country}`,
-					`***Language:*** ${data.languages}`
+					`***Released:*** ${moment(result.released).format('MMMM DD, YYYY')}`,
+					`***Ratings:*** ${result.rating} ⭐ (by ${result.votes} users)`,
+					`***Metascores:*** ${result.metascore} from [metacritic](https://metacritic.com)`,
+					`***Genres:*** ${result.genres}`,
+					`***Rated:*** ${result.rated}`,
+					`***Type:*** ${result.type.toProperCase()}`,
+					`***Runtime:*** ${result.runtime}`,
+					`***Directors:*** ${result.director}`,
+					`***Cast:*** ${result.actors}`,
+					`***Production:*** ${result.production || 'Unknown'}`,
+					`***Country:*** ${result.country}`,
+					`***Language:*** ${result.languages}`
 				].join('\n'));
 			} else {
 				embed.addField('__Details__', [
-					`***Released:*** ${moment(data.released).format('MMMM DD, YYYY')}`,
-					`***Released Year:*** ${data._year_data}`,
-					`***Ratings:*** ${data.rating} ⭐ (by ${data.votes} users)`,
-					`***Genres:*** ${data.genres}`,
-					`***Rated:*** ${data.rated}`,
-					`***Type:*** ${data.type.toProperCase()}`,
-					`***Runtime:*** ${data.runtime}`,
-					`***Total Seasons:*** ${data.totalseasons}`,
-					`***Directors:*** ${data.director}`,
-					`***Cast:*** ${data.actors}`,
-					`***Production:*** ${data.production || 'Unknown'}`,
-					`***Country:*** ${data.country}`,
-					`***Language:*** ${data.languages}`
+					`***Released:*** ${moment(result.released).format('MMMM DD, YYYY')}`,
+					`***Released Year:*** ${result._year_result}`,
+					`***Ratings:*** ${result.rating} ⭐ (by ${result.votes} users)`,
+					`***Genres:*** ${result.genres}`,
+					`***Rated:*** ${result.rated}`,
+					`***Type:*** ${result.type.toProperCase()}`,
+					`***Runtime:*** ${result.runtime}`,
+					`***Total Seasons:*** ${result.totalseasons}`,
+					`***Directors:*** ${result.director}`,
+					`***Cast:*** ${result.actors}`,
+					`***Production:*** ${result.production || 'Unknown'}`,
+					`***Country:*** ${result.country}`,
+					`***Language:*** ${result.languages}`
 				].join('\n'));
 			}
 
-			if (data.awards !== 'N/A') {
-				embed.addField('__Awards__', data.awards, false);
+			if (result.awards !== 'N/A') {
+				embed.addField('__Awards__', result.awards, false);
 			}
 
 			return message.reply({ embeds: [embed] });

@@ -12,22 +12,22 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message, [cmd]) {
-		if (!cmd) {
+	async run(message, [commandName]) {
+		if (!commandName) {
 			return message.reply({ content: 'Please input the name of the command to reloaded!' });
 		}
 
-		const command = this.client.commands.get(cmd) || this.client.commands.get(this.client.aliases.get(cmd));
+		const cmd = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName));
 
 		try {
-			delete require.cache[require.resolve(`../${command.category}/${command.name.toProperCase()}.js`)];
-			const File = require(`../${command.category}/${command.name.toProperCase()}.js`);
-			const Commands = new File(this.client, command.name.toLowerCase());
-			this.client.commands.delete(command.name);
-			await this.client.commands.set(command.name, Commands);
-			return message.reply({ content: `Successfully reloaded the \`${command.name}\` command!` });
+			delete require.cache[require.resolve(`../${cmd.category}/${cmd.name.toProperCase()}.js`)];
+			const File = require(`../${cmd.category}/${cmd.name.toProperCase()}.js`);
+			const command = new File(this.client, cmd.name.toLowerCase());
+			this.client.commands.delete(cmd.name);
+			await this.client.commands.set(cmd.name, command);
+			return message.reply({ content: `Successfully reloaded the \`${cmd.name}\` command!` });
 		} catch {
-			return message.reply({ content: `Can't find \`${cmd}\` command!` });
+			return message.reply({ content: `Can't find \`${commandName}\` command!` });
 		}
 	}
 

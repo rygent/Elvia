@@ -3,7 +3,8 @@ module.exports = class Interaction {
 	constructor(client, name, options = {}) {
 		this.client = client;
 		this.name = options.name || name;
-		this.description = options.description || 'No description provided.';
+		this.type = options.type || 'CHAT_INPUT';
+		this.description = this.type === 'CHAT_INPUT' ? options.description || 'No description provided' : undefined;
 		this.options = options.options || [];
 		this.defaultPermission = options.defaultPermission;
 	}

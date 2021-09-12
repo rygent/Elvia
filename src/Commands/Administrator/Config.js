@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 
 module.exports = class extends Command {
 
@@ -14,30 +14,29 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message) {
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
-
+	async run(message, _args, data) {
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
 			.setAuthor(`Configuration on ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
 			.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
 			.setDescription([
-				`***Server prefix:*** \`${guildData.prefix}\``,
-				`***Ignored channels:*** ${guildData.ignoredChannels.length > 0 ? guildData.ignoredChannels.map((ch) => `<#${ch}>`).join(', ') : 'No ignored channels.'}`,
-				`***Automatic role:*** ${guildData.plugins.autorole.enabled ? `<@&${guildData.plugins.autorole.role}>` : 'Disabled'}`,
-				`***Automatic delete commands:*** ${guildData.autoDeleteModCommands ? 'Enabled' : 'Disabled'}`
+				`***Server prefix:*** \`${data.guild?.prefix}\``,
+				`***Ignored channels:*** ${data.guild.ignoredChannels.length > 0 ? data.guild.ignoredChannels.map(ch => `<#${ch}>`).join(', ') : 'No ignored channels.'}`,
+				`***Automatic role:*** ${data.guild.plugins.autorole.enabled ? `<@&${data.guild.plugins.autorole.role}>` : 'Disabled'}`,
+				`***Automatic delete commands:*** ${data.guild.autoDeleteModCommands ? 'Enabled' : 'Disabled'}`
 			].join('\n'))
 			.addField('__Special channels__', [
-				`***Moderations:*** ${guildData.plugins.moderations ? `<#${guildData.plugins.moderations}>` : 'Not defined.'}`,
-				`***Messages:*** ${guildData.plugins.audits ? `<#${guildData.plugins.audits}>` : 'Not defined.'}`,
-				`***Suggestions:*** ${guildData.plugins.suggestions ? `<#${guildData.plugins.suggestions}>` : 'Not defined.'}`,
-				`***Reports:*** ${guildData.plugins.reports ? `<#${guildData.plugins.reports}>` : 'Not defined.'}`
+				`***Moderations:*** ${data.guild.plugins.moderations ? `<#${data.guild.plugins.moderations}>` : 'Not defined.'}`,
+				`***Messages:*** ${data.guild.plugins.messages ? `<#${data.guild.plugins.messages}>` : 'Not defined.'}`,
+				`***Audits:*** ${data.guild.plugins.audits ? `<#${data.guild.plugins.audits}>` : 'Not defined.'}`,
+				`***Suggestions:*** ${data.guild.plugins.suggestions ? `<#${data.guild.plugins.suggestions}>` : 'Not defined.'}`,
+				`***Reports:*** ${data.guild.plugins.reports ? `<#${data.guild.plugins.reports}>` : 'Not defined.'}`
 			].join('\n'))
 			.addField('__Warning sanctions__', [
-				`***Kick:*** ${guildData.plugins.warnsSanctions.kick ? `After **${guildData.plugins.warnsSanctions.kick}** warnings.` : 'Not defined.'}`,
-				`***Ban:*** ${guildData.plugins.warnsSanctions.ban ? `After **${guildData.plugins.warnsSanctions.ban}** warnings.` : 'Not defined.'}`
+				`***Kick:*** ${data.guild.plugins.warnsSanctions.kick ? `After **${data.guild.plugins.warnsSanctions.kick}** warnings.` : 'Not defined.'}`,
+				`***Ban:*** ${data.guild.plugins.warnsSanctions.ban ? `After **${data.guild.plugins.warnsSanctions.ban}** warnings.` : 'Not defined.'}`
 			].join('\n'))
-			.setFooter(`Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
+			.setFooter(`${message.author.username}  •  Powered by ${this.client.user.username}`, message.author.avatarURL({ dynamic: true }));
 
 		return message.reply({ embeds: [embed] });
 	}

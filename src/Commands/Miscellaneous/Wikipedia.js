@@ -1,6 +1,6 @@
 const Command = require('../../Structures/Command.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 const axios = require('axios');
 
 module.exports = class extends Command {
@@ -30,9 +30,9 @@ module.exports = class extends Command {
 				.setAuthor('Wikipedia', 'https://i.imgur.com/C665mkB.png', 'https://en.wikipedia.org/')
 				.setTitle(data.title)
 				.setURL(data.content_urls.desktop.page)
-				.setThumbnail(data.originalimage ? data.originalimage.source : null)
+				.setThumbnail(data.originalimage?.source)
 				.setDescription(data.extract)
-				.setFooter('Powered by Wikipedia', message.author.avatarURL({ dynamic: true }));
+				.setFooter(`${message.author.username}  •  Powered by Wikipedia`, message.author.avatarURL({ dynamic: true }));
 
 			return message.reply({ embeds: [embed] });
 		} catch {

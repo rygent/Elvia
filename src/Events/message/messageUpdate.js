@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const ClientEmbed = require('../../Structures/ClientEmbed.js');
-const { Color } = require('../../Utils/Configuration.js');
+const { Color } = require('../../Utils/Setting.js');
 const { Util: { escapeMarkdown } } = require('discord.js');
 const { diffWordsWithSpace } = require('diff');
 
@@ -9,11 +9,11 @@ module.exports = class extends Event {
 	async run(old, message) {
 		if (!message.guild || old.content === message.content || message.author.bot) return;
 
-		const guildData = await this.client.findOrCreateGuild({ id: message.guild.id });
+		const guildData = await this.client.findOrCreateGuild({ id: message.guildId });
 
-		if (guildData.plugins.audits) {
-			const sendChannel = message.guild.channels.cache.get(guildData.plugins.audits);
-			if (!sendChannel) return;
+		if (guildData.plugins.messages) {
+			const channel = message.guild.channels.cache.get(guildData.plugins.messages);
+			if (!channel) return;
 
 			const embed = new ClientEmbed()
 				.setColor(Color.DEFAULT)
@@ -30,7 +30,7 @@ module.exports = class extends Event {
 					.join(' '))
 				.setFooter(`Powered by ${this.client.user.username}`, this.client.user.avatarURL({ dynamic: true }));
 
-			if (sendChannel) sendChannel.send({ embeds: [embed] });
+			return channel.send({ embeds: [embed] });
 		}
 	}
 
