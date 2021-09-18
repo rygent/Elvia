@@ -18,6 +18,24 @@ module.exports = class extends Event {
 
 		const command = this.client.interactions.get(interaction.commandName);
 		if (command) {
+			if (interaction.inGuild()) {
+				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
+				if (memberPermCheck) {
+					const missing = interaction.channel.permissionsFor(interaction.member).missing(memberPermCheck);
+					if (missing.length) {
+						return interaction.reply({ content: `You don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, you need it to continue this command!`, ephemeral: true });
+					}
+				}
+
+				const clientPermCheck = command.clientPerms ? this.client.defaultPerms.add(command.clientPerms) : this.client.defaultPerms;
+				if (clientPermCheck) {
+					const missing = interaction.channel.permissionsFor(interaction.guild.me).missing(clientPermCheck);
+					if (missing.length) {
+						return interaction.reply({ content: `I don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, I need it to continue this command!`, ephemeral: true });
+					}
+				}
+			}
+
 			try {
 				await command.run(interaction, data);
 			} catch (error) {
