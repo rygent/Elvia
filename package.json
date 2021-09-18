@@ -27,10 +27,12 @@
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.21.4",
     "chalk": "^4.1.2",
     "diff": "^5.0.0",
+    "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "figlet": "^1.5.2",

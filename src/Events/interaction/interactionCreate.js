@@ -10,8 +10,11 @@ module.exports = class extends Event {
 
 		const data = {};
 		data.user = await this.client.findOrCreateUser({ id: interaction.user.id });
-		data.guild = await this.client.findOrCreateGuild({ id: interaction.guildId });
-		data.member = await this.client.findOrCreateMember({ id: interaction.user.id, guildId: interaction.guildId });
+
+		if (interaction.inGuild()) {
+			data.guild = await this.client.findOrCreateGuild({ id: interaction.guildId });
+			data.member = await this.client.findOrCreateMember({ id: interaction.user.id, guildId: interaction.guildId });
+		}
 
 		const command = this.client.interactions.get(interaction.commandName);
 		if (command) {

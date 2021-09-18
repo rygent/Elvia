@@ -9,7 +9,7 @@ module.exports = class extends Interaction {
 			name: 'avatar',
 			description: 'Gets user avatar',
 			options: [
-				{ type: 'USER', name: 'user', description: 'User to fetch avatar' }
+				{ type: 6, name: 'user', description: 'User to fetch avatar' }
 			]
 		});
 	}

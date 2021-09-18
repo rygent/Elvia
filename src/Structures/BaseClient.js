@@ -48,6 +48,10 @@ module.exports = class BaseClient extends Client {
 		Array.prototype.random = function () {
 			return this[Math.floor(Math.random() * this.length)];
 		};
+
+		BigInt.prototype.toJSON = function () {
+			return this.toString();
+		};
 	}
 
 	async findOrCreateUser({ id: userId }, isLean) {
@@ -115,6 +119,9 @@ module.exports = class BaseClient extends Client {
 		if (!options.token) throw new Error('You must pass the token for the Client.');
 		this.token = options.token;
 
+		if (!options.applicationId) throw new Error('You must pass the application id of the Client.');
+		this.applicationId = options.applicationId;
+
 		if (!options.prefix) throw new Error('You must pass a prefix for the Client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
@@ -134,6 +141,7 @@ module.exports = class BaseClient extends Client {
 		this.utils.loadDatabases();
 		this.utils.loadCommands();
 		this.utils.loadEvents();
+		this.utils.loadInteractions();
 		super.login(token);
 	}
 

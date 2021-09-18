@@ -10,7 +10,7 @@ module.exports = class extends Interaction {
 			name: 'anime',
 			description: 'Gets anime information from MAL',
 			options: [
-				{ type: 'STRING', name: 'query', description: 'Search for information Anime', required: true }
+				{ type: 3, name: 'query', description: 'Search for information Anime', required: true }
 			]
 		});
 	}

@@ -10,9 +10,9 @@ module.exports = class extends Interaction {
 			name: 'translate',
 			description: 'Translate text to the desired language',
 			options: [
-				{ type: 'STRING', name: 'from', description: 'Source language', required: true },
-				{ type: 'STRING', name: 'to', description: 'Destination language', required: true },
-				{ type: 'STRING', name: 'message', description: 'Message to translate (max: 2800)', required: true }
+				{ type: 3, name: 'from', description: 'Source language', required: true },
+				{ type: 3, name: 'to', description: 'Destination language', required: true },
+				{ type: 3, name: 'message', description: 'Message to translate (max: 2800)', required: true }
 			]
 		});
 	}

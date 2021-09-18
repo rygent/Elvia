@@ -2,6 +2,8 @@ const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const { connect } = require('mongoose');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const Command = require('./Command.js');
 const Event = require('./Event.js');
 const Interaction = require('./Interaction.js');
@@ -104,23 +106,6 @@ module.exports = class Util {
 		});
 	}
 
-	async loadInteractions(guildId) {
-		return glob(`${this.directory}Interactions/**/*.js`).then(interactions => {
-			for (const interactionFile of interactions) {
-				delete require.cache[interactionFile];
-				const { name } = path.parse(interactionFile);
-				const File = require(interactionFile);
-				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
-				const interaction = new File(this.client, name);
-				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions.`);
-				this.client.interactions.set(interaction.name, interaction);
-				this.client.guilds.cache.map(x => x.id).forEach(id => {
-					this.client.guilds.cache.get(guildId || id)?.commands.create(interaction);
-				});
-			}
-		});
-	}
-
 	async loadEvents() {
 		return glob(`${this.directory}Events/**/*.js`).then(events => {
 			for (const eventFile of events) {
@@ -132,6 +117,22 @@ module.exports = class Util {
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events.`);
 				this.client.events.set(event.name, event);
 				event.emitter[event.type](event.name, (...args) => event.run(...args));
+			}
+		});
+	}
+
+	async loadInteractions() {
+		return glob(`${this.directory}Interactions/**/*.js`).then(interactions => {
+			for (const interactionFile of interactions) {
+				delete require.cache[interactionFile];
+				const { name } = path.parse(interactionFile);
+				const File = require(interactionFile);
+				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
+				const interaction = new File(this.client, name);
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions.`);
+				this.client.interactions.set(interaction.name, interaction);
+				const rest = new REST({ version: '9' }).setToken(this.client.token);
+				rest.post(Routes.applicationCommands(this.client.applicationId), { body: interaction });
 			}
 		});
 	}

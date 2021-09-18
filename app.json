@@ -14,6 +14,10 @@
         "description": "Get this value from https://discord.com/developers/applications.",
         "required": true
       },
+      "CLIENT_ID": {
+        "description": "Input here id of the bot. Ex: 886367XXXXXXXXXXXX",
+        "required": true
+      },
       "CLIENT_PREFIX": {
         "description": "Input here the prefix for your bot.",
         "value": "!",

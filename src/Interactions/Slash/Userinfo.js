@@ -11,7 +11,7 @@ module.exports = class extends Interaction {
 			name: 'userinfo',
 			description: 'Gets user information',
 			options: [
-				{ type: 'USER', name: 'user', description: 'User to fetch information' }
+				{ type: 6, name: 'user', description: 'User to fetch information' }
 			]
 		});
 	}

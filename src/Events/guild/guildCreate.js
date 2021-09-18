@@ -6,8 +6,6 @@ const webhook = new WebhookClient({ url: Access.WebhookURL });
 module.exports = class extends Event {
 
 	async run(guild) {
-		await this.client.utils.loadInteractions(guild.id);
-
 		if (!guild.available) return;
 		const guildOwner = await guild.fetchOwner();
 

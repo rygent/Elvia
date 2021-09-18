@@ -11,7 +11,7 @@ module.exports = class extends Interaction {
 			name: 'spotify',
 			description: 'Gets song information from Spotify',
 			options: [
-				{ type: 'STRING', name: 'query', description: 'Search for a Song', required: true }
+				{ type: 3, name: 'query', description: 'Search for a Song', required: true }
 			]
 		});
 	}

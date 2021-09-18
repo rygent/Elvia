@@ -7,8 +7,8 @@ module.exports = class extends Interaction {
 			name: 'afk',
 			description: 'Give reasons when AFK',
 			options: [
-				{ type: 'SUB_COMMAND', name: 'set', description: 'Sets status when AFK', options: [
-					{ type: 'STRING', name: 'reason', description: 'Reason for being AFK', required: true }
+				{ type: 1, name: 'set', description: 'Sets status when AFK', options: [
+					{ type: 3, name: 'reason', description: 'Reason for being AFK', required: true }
 				] }
 			]
 		});
