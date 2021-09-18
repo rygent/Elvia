@@ -1,5 +1,5 @@
 const Event = require('../../Structures/Event.js');
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { Collection, MessageActionRow, MessageButton } = require('discord.js');
 const { Access } = require('../../Utils/Setting.js');
 
 module.exports = class extends Event {
@@ -35,6 +35,25 @@ module.exports = class extends Event {
 					}
 				}
 			}
+
+			if (!this.client.cooldowns.has(command.name)) {
+				this.client.cooldowns.set(command.name, new Collection());
+			}
+
+			const now = Date.now();
+			const timestamps = this.client.cooldowns.get(command.name);
+			const cooldownAmount = command.cooldown;
+
+			if (timestamps.has(interaction.user.id)) {
+				const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+
+				if (now < expirationTime) {
+					const timeLeft = (expirationTime - now) / 1000;
+					return interaction.reply({ content: `You've to wait **${timeLeft.toFixed(2)}** second(s) before you can use this command again!`, ephemeral: true });
+				}
+			}
+			timestamps.set(interaction.user.id, now);
+			setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
 			try {
 				await command.run(interaction, data);

@@ -11,6 +11,7 @@ module.exports = class Interaction {
 		this.defaultPermission = options.defaultPermission;
 		this.memberPerms = new Permissions(options.memberPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
+		this.cooldown = options.cooldown || 3000;
 	}
 
 	// eslint-disable-next-line no-unused-vars
