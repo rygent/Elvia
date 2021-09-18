@@ -10,7 +10,7 @@ module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'aboutme',
+			name: 'about',
 			description: 'Gets bots information'
 		});
 	}
