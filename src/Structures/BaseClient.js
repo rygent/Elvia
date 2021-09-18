@@ -13,8 +13,7 @@ module.exports = class BaseClient extends Client {
 			allowedMentions: {
 				parse: ['users', 'roles'],
 				repliedUser: false
-			},
-			failIfNotExists: false
+			}
 		});
 		this.validate(options);
 
