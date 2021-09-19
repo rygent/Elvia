@@ -18,6 +18,10 @@ module.exports = class extends Event {
 
 		const command = this.client.interactions.get(interaction.commandName);
 		if (command) {
+			if (command.disabled) {
+				return interaction.reply({ content: 'This command is currently inaccessible!', ephemeral: true });
+			}
+
 			if (interaction.inGuild()) {
 				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
 				if (memberPermCheck) {
@@ -34,6 +38,10 @@ module.exports = class extends Event {
 						return interaction.reply({ content: `I don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, I need it to continue this command!`, ephemeral: true });
 					}
 				}
+			}
+
+			if (command.ownerOnly && !this.client.utils.checkOwner(interaction.user.id)) {
+				return interaction.reply({ content: 'This command is only accessible for developers!', ephemeral: true });
 			}
 
 			if (!this.client.cooldowns.has(command.name)) {

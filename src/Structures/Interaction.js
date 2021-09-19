@@ -12,6 +12,9 @@ module.exports = class Interaction {
 		this.memberPerms = new Permissions(options.memberPerms).freeze();
 		this.clientPerms = new Permissions(options.clientPerms).freeze();
 		this.cooldown = options.cooldown || 3000;
+		this.guildOnly = options.guildOnly || false;
+		this.ownerOnly = options.ownerOnly || false;
+		this.disabled = options.disabled || false;
 	}
 
 	// eslint-disable-next-line no-unused-vars

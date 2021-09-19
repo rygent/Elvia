@@ -58,6 +58,11 @@ module.exports = class extends Event {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
+			if (command.disabled) {
+				await message.channel.sendTyping();
+				return message.reply({ content: 'This command is currently inaccessible!' });
+			}
+
 			if (message.guild) {
 				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
 				if (memberPermCheck) {
@@ -81,11 +86,6 @@ module.exports = class extends Event {
 					await message.channel.sendTyping();
 					return message.reply({ content: 'This command is only accessible on NSFW channels!' });
 				}
-			}
-
-			if (command.disabled) {
-				await message.channel.sendTyping();
-				return message.reply({ content: 'This command is currently inaccessible!' });
 			}
 
 			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
