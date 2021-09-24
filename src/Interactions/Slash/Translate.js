@@ -27,6 +27,7 @@ module.exports = class extends Interaction {
 		}
 
 		try {
+			await interaction.deferReply();
 			const translated = await translate(message, { from: fromLanguage.trim(), to: toLanguage.trim() });
 			const from = translated.from.language.iso;
 
@@ -39,7 +40,7 @@ module.exports = class extends Interaction {
 				].join('\n'))
 				.setFooter(`${interaction.user.username}  •  Powered by Google Translate`, interaction.user.avatarURL({ dynamic: true }));
 
-			return interaction.reply({ embeds: [embed] });
+			return interaction.editReply({ embeds: [embed] });
 		} catch {
 			const button = new MessageActionRow()
 				.addComponents(new MessageButton()
@@ -47,7 +48,7 @@ module.exports = class extends Interaction {
 					.setLabel('ISO 639-1')
 					.setURL('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes'));
 
-			return interaction.reply({ content: 'Please send valid **ISO 639-1** languages codes.', components: [button], ephemeral: true });
+			return interaction.editReply({ content: 'Please send valid **ISO 639-1** languages codes.', components: [button] });
 		}
 	}
 
