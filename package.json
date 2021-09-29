@@ -47,6 +47,7 @@
     "openweather-apis": "^4.4.2",
     "os": "^0.1.2",
     "path": "^0.12.7",
+    "semver": "^7.3.5",
     "simple-youtube-api": "^5.2.1",
     "util": "^0.12.4"
   }
