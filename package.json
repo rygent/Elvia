@@ -42,7 +42,7 @@
     "mal-scraper": "^2.11.3",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^6.0.8",
+    "mongoose": "^6.0.11",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.2",
     "os": "^0.1.2",
