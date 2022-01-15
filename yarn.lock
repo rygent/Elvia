@@ -1520,10 +1520,10 @@ make-fetch-happen@^9.0.1:
     socks-proxy-agent "^6.0.0"
     ssri "^8.0.0"
 
-mal-scraper@^2.11.3:
-  version "2.11.3"
-  resolved "https://registry.yarnpkg.com/mal-scraper/-/mal-scraper-2.11.3.tgz#f8482d36670cff08eb7daeffe24a45e06b58225e"
-  integrity sha512-OzWDPet6e0f7ijthlNoYEOSJH8ggVvJzm5aUXA7BACtL9np+7acQpnHou90vShOwCx4VR4ofkut5RO/oD2wOAg==
+mal-scraper@^2.11.4:
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/mal-scraper/-/mal-scraper-2.11.4.tgz#9be686b4434f271b9bd94055826933eac332886f"
+  integrity sha512-anBsZuI1tKj28O9NEWx7nA+CiJUV/WfOfQiHYHOqn0WPYPcSmUh5TvClP+jWUMTmHosyL0X7NCF9Get8ykWj4A==
   dependencies:
     axios "^0.21.1"
     cheerio "^1.0.0-rc.3"
