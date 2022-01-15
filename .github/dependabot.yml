@@ -4,6 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+      time: "09:00"
+      timezone: Asia/Tokyo
     open-pull-requests-limit: 5
     reviewers:
       - Rygent
+    ignore:
+      - dependency-name: "chalk"
+        versions: ["5.x"]
