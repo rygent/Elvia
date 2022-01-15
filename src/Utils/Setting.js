@@ -7,8 +7,6 @@ module.exports = {
 	mongoURL: process.env.MONGODB_URL,
 	Access: {
 		InviteCode: process.env.INVITE_CODE,
-		InvitePermission: 2013654135,
-		InviteScope: ['bot', 'applications.commands'],
 		WebhookURL: process.env.WEBHOOK_URL
 	},
 	Api: {
