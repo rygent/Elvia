@@ -5,7 +5,7 @@ const { Access } = require('../../Utils/Setting.js');
 module.exports = class extends Event {
 
 	async run(interaction) {
-		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
+		if (!interaction.isCommand()) return;
 		if (!interaction.inGuild()) return;
 
 		const data = {};
