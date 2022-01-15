@@ -40,10 +40,6 @@ module.exports = class Util {
 		return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
 	}
 
-	removeDuplicates(arr) {
-		return [...new Set(arr)];
-	}
-
 	checkOwner(target) {
 		return this.client.owners.includes(target);
 	}
@@ -66,18 +62,6 @@ module.exports = class Util {
 
 	formatLanguage(string) {
 		return new Intl.DisplayNames(['en'], { type: 'language' }).of(string);
-	}
-
-	categoryCheck(category, message) {
-		category = category.toLowerCase();
-		switch (category) {
-			case 'developer':
-				return this.checkOwner(message.author.id);
-			case 'nsfw':
-				return message.channel.nsfw;
-			default:
-				return true;
-		}
 	}
 
 	async loadDatabases() {
