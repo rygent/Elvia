@@ -29,7 +29,7 @@
     "@anishshobith/deeptype": "^1.1.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "@iamtraction/google-translate": "^1.1.2",
-    "axios": "^0.22.0",
+    "axios": "^0.23.0",
     "chalk": "^4.1.2",
     "diff": "^5.0.0",
     "discord-api-types": "^0.23.1",
