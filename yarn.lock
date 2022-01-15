@@ -1464,10 +1464,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libnpmsearch@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/libnpmsearch/-/libnpmsearch-3.1.2.tgz#aee81b9e4768750d842b627a3051abc89fdc15f3"
-  integrity sha512-BaQHBjMNnsPYk3Bl6AiOeVuFgp72jviShNBw5aHaHNKWqZxNi38iVNoXbo6bG/Ccc/m1To8s0GtMdtn6xZ1HAw==
+libnpmsearch@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/libnpmsearch/-/libnpmsearch-4.0.0.tgz#3d65a0eace4356fe7230ff0dfdc6dfd44968ad99"
+  integrity sha512-bzr8L7nfJ1FtYJ9Cq4p2qRTLWR2EuxVXH0X4WBjuiAGDcORmvlL2+9ODaplcKGpbtvwSTSOvKnM9u0AbUVIgeg==
   dependencies:
     npm-registry-fetch "^11.0.0"
 
