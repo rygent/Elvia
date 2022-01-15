@@ -16,9 +16,6 @@ module.exports = class extends Event {
 		this.client.logger.log({ content: `Ready in ${this.client.guilds.cache.size.formatNumber()} guilds on ${this.client.channels.cache.size.formatNumber()} channels, for a total of ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users.` });
 		this.client.logger.log({ content: 'Connected to Discord API!', type: 'ready' });
 		this.client.logger.log({ content: `Booted up on ${chalk.blueBright(`${moment().format('dddd, MMM D, YYYY HH:mm:ss')}`)}`, type: 'ready' });
-
-		const checkValid = new (require('../Utils/checkValid.js'))(this.client);
-		checkValid.validate();
 	}
 
 };
