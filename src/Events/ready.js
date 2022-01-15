@@ -19,9 +19,6 @@ module.exports = class extends Event {
 
 		const checkValid = new (require('../Utils/checkValid.js'))(this.client);
 		checkValid.validate();
-
-		const checkUnmutes = new (require('../Utils/checkUnmutes.js'))(this.client);
-		checkUnmutes.init();
 	}
 
 };
