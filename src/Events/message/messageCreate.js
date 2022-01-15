@@ -1,7 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const { Collection, MessageActionRow, MessageButton } = require('discord.js');
 const { Access } = require('../../Utils/Setting.js');
-const moment = require('moment');
 
 module.exports = class extends Event {
 
@@ -24,30 +23,6 @@ module.exports = class extends Event {
 				`Hi, my prefix for this guild is \`${data.guild?.prefix}\`.`,
 				`Use \`${data.guild?.prefix}help\` to get a list of commands!`
 			].join('\n'));
-		}
-
-		if (message.guild) {
-			if (data.user.afk.enabled) {
-				data.user.afk.enabled = false;
-				data.user.afk.since = null;
-				data.user.afk.reason = null;
-				data.user.markModified('afk');
-				await data.user.save();
-
-				await message.channel.sendTyping();
-				await message.reply({ content: `You're no longer AFK!` }).then(m => setTimeout(() => m.delete(), 5000));
-			}
-
-			message.mentions.users.forEach(async (user) => {
-				const dataUser = await this.client.findOrCreateUser({ id: user.id });
-				if (dataUser.afk.enabled) {
-					await message.channel.sendTyping();
-					return message.reply({ content: [
-						`<@${user.id}> is currently AFK! (\`${moment(dataUser.afk.since).fromNow()}\`)`,
-						`***Reason:*** ${dataUser.afk.reason}`
-					].join('\n') }).then(m => setTimeout(() => m.delete(), 15000));
-				}
-			});
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : data.guild?.prefix;
