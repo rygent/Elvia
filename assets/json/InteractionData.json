@@ -1,0 +1,160 @@
+[
+    {
+        "type": 3,
+        "name": "Translate to English"
+    }, {
+        "type": 1,
+        "name": "8ball",
+        "description": "Ask the magic 8ball a question.",
+        "options": [{
+            "type": 3, "name": "question", "description": "Question to ask.", "required": true
+        }]
+    }, {
+        "type": 1,
+        "name": "lovecalc",
+        "description": "Calculate love percentage between two users.",
+        "options": [{
+            "type": 6, "name": "user1", "description": "First user.", "required": true
+        }, {
+            "type": 6, "name": "user2", "description": "Second user.", "required": true
+        }]
+    }, {
+        "type": 1,
+        "name": "text",
+        "description": "Description of Text command.",
+        "options": [{
+            "type": 1, "name": "ascii", "description": "Transform your text to ascii characters.", "options": [{
+                "type": 3, "name": "text", "description": "Your text. (Max. 20 letters)", "required": true
+            }]
+        }, {
+            "type": 1, "name": "reverse", "description": "Reverse your text.", "options": [{
+                "type": 3, "name": "text", "description": "Your text.", "required": true
+            }]
+        }]
+    }, {
+        "type": 1,
+        "name": "interact",
+        "description": "Description of Interact command.",
+        "options": [{
+            "type": 1, "name": "kiss", "description": "Kiss someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "hug", "description": "Hug someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "baka", "description": "Say baka to someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "cuddle", "description": "Cuddle someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "feed", "description": "Feed someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "slap", "description": "Slap someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "pat", "description": "Pat someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "smug", "description": "Smug at someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "poke", "description": "Poke someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }]
+    }, {
+        "type": 1,
+        "name": "avatar",
+        "description": "Display the avatar of the provided user.",
+        "options": [{
+            "type": 6, "name": "user", "description": "User to display.", "required": false
+        }]
+    }, {
+        "type": 1,
+        "name": "ping",
+        "description": "Send a ping request."
+    }, {
+        "type": 1,
+        "name": "translate",
+        "description": "Translate text.",
+        "options": [{
+            "type": 3, "name": "from", "description": "Source language.", "required": true
+        }, {
+            "type": 3, "name": "to", "description": "Destination language.", "required": true
+        }, {
+            "type": 3, "name": "text", "description": "Text to translate.", "required": true
+        }]
+    }, {
+        "type": 1,
+        "name": "information",
+        "description": "Description of Information command",
+        "options": [{
+            "type": 1, "name": "user", "description": "Get user information.", "options": [{
+                "type": 6, "name": "user", "description": "User to get.", "required": false
+            }]
+        }, {
+            "type": 1, "name": "server", "description": "Get server information."
+        }, {
+            "type": 1, "name": "bots", "description": "Get bots information."
+        }]
+    }, {
+        "type": 1,
+        "name": "ban",
+        "description": "Ban a user with optional reason.",
+        "options": [{
+            "type": 6, "name": "user", "description": "User to ban.", "required": true
+        }, {
+            "type": 3, "name": "reason", "description": "Reason of the ban.", "required": false
+        }, {
+            "type": 4, "name": "days", "description": "Number of days to delete messages for. (0-7)", "required": false, "minValue": 0, "maxValue": 7
+        }]
+    }, {
+        "type": 1,
+        "name": "kick",
+        "description": "Kick a member with optional reason.",
+        "options": [{
+            "type": 6, "name": "member", "description": "Member to kick.", "required": true
+        }, {
+            "type": 3, "name": "reason", "description": "Reason of the kick.", "required": false
+        }]
+    }, {
+        "type": 1,
+        "name": "search",
+        "description": "Description of Search command.",
+        "options": [{
+            "type": 1, "name": "anime", "description": "Search for an Anime on Kitsu.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "imdb", "description": "Search for something on IMDb.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "spotify", "description": "Search for a Song on Spotify.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "weather", "description": "Search for a Weather forecast.", "options": [{
+                "type": 3, "name": "location", "description": "Your location.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "wikipedia", "description": "Search for something on Wikipedia.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
+            "type": 1, "name": "youtube", "description": "Search for a YouTube videos.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }]
+    }
+]

@@ -1,27 +1,20 @@
 const Event = require('../../Structures/Event.js');
-const { Collection, MessageActionRow, MessageButton } = require('discord.js');
-const { Access } = require('../../Utils/Setting.js');
+const { Access } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Event {
 
 	async run(interaction) {
-		if (!interaction.isCommand()) return;
 		if (!interaction.inGuild()) return;
+		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
 
-		const data = {};
-		data.user = await this.client.findOrCreateUser({ id: interaction.user.id });
-
-		if (interaction.inGuild()) {
-			data.guild = await this.client.findOrCreateGuild({ id: interaction.guildId });
-			data.member = await this.client.findOrCreateMember({ id: interaction.user.id, guildId: interaction.guildId });
+		let command;
+		if (interaction.isMessageComponent()) {
+			command = this.client.interactions.get(interaction.commandName);
+		} else {
+			command = this.client.interactions.get(this.client.utils.getCommandName(interaction));
 		}
 
-		const command = this.client.interactions.get(interaction.commandName);
 		if (command) {
-			if (command.disabled) {
-				return interaction.reply({ content: 'This command is currently inaccessible!', ephemeral: true });
-			}
-
 			if (interaction.inGuild()) {
 				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
 				if (memberPermCheck) {
@@ -40,40 +33,11 @@ module.exports = class extends Event {
 				}
 			}
 
-			if (command.ownerOnly && !this.client.utils.checkOwner(interaction.user.id)) {
-				return interaction.reply({ content: 'This command is only accessible for developers!', ephemeral: true });
-			}
-
-			if (!this.client.cooldowns.has(command.name)) {
-				this.client.cooldowns.set(command.name, new Collection());
-			}
-
-			const now = Date.now();
-			const timestamps = this.client.cooldowns.get(command.name);
-			const cooldownAmount = command.cooldown;
-
-			if (timestamps.has(interaction.user.id)) {
-				const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
-
-				if (now < expirationTime) {
-					const timeLeft = (expirationTime - now) / 1000;
-					return interaction.reply({ content: `You've to wait **${timeLeft.toFixed(2)}** second(s) before you can use this command again!`, ephemeral: true });
-				}
-			}
-			timestamps.set(interaction.user.id, now);
-			setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
-
 			try {
-				await command.run(interaction, data);
+				await command.run(interaction);
 			} catch (error) {
-				const button = new MessageActionRow()
-					.addComponents(new MessageButton()
-						.setStyle('LINK')
-						.setLabel('Support Server')
-						.setURL(`https://discord.gg/${Access.InviteCode}`));
-
 				this.client.logger.log({ content: error.stack, type: 'error' });
-				return interaction.reply({ content: `Something went wrong, please report it to our **guild support**!`, components: [button], ephemeral: true });
+				return interaction.reply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!`, ephemeral: true });
 			}
 		}
 	}

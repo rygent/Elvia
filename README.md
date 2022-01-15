@@ -27,7 +27,7 @@ and also other functions such as the ability to search and much more.
 this bot was made in [Node.JS](https://nodejs.org/), using the [Discord.JS](https://discord.js.org/#/) library.
 </i>
 
-[![Support Server](https://discord.com/api/guilds/708659047057981451/embed.png?style=banner2)](https://discord.gg/FD5MMabf8Y)
+[![Support Server](https://invidget.switchblade.xyz/FD5MMabf8Y)](https://discord.gg/FD5MMabf8Y)
 
 ## Disclaimer
 

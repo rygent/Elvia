@@ -1,10 +1,8 @@
 {
     "name": "Elvia",
-    "description": "Elvia is a powerful Discord bot made with Node.js with a lot of commands!",
+    "description": "",
     "logo": "https://i.imgur.com/EDf862b.jpeg",
-    "keywords": [
-        "discord-bot", "discord.js", "discord-js"
-    ],
+    "keywords": [],
     "repository": "https://github.com/Rygent/ElviaBot",
     "website": "",
     "success_url": "https://discord.gg/nW6x9EN",
@@ -12,10 +10,6 @@
     "env": {
       "DISCORD_TOKEN": {
         "description": "Get this value from https://discord.com/developers/applications.",
-        "required": true
-      },
-      "CLIENT_ID": {
-        "description": "Input here id of the bot. Ex: 886367XXXXXXXXXXXX",
         "required": true
       },
       "CLIENT_PREFIX": {

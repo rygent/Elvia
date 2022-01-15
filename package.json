@@ -1,7 +1,6 @@
 {
   "name": "elvia",
-  "version": "4.0.0",
-  "description": "Elvia is a powerful Discord bot made with Node.js with a lot of commands!",
+  "version": "4.5.0",
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
@@ -9,35 +8,23 @@
     "lint:fix": "eslint . --ext .js --fix",
     "update": "yarn upgrade-interactive --latest"
   },
-  "keywords": [
-    "discord-bot",
-    "discordjs"
-  ],
-  "repository": "https://github.com/Rygent/ElviaBot.git",
-  "bugs": {
-    "url": "https://github.com/Rygent/ElviaBot/issues"
-  },
-  "homepage": "https://github.com/Rygent/ElviaBot#readme",
   "author": "Rygent",
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.6.0",
-    "eslint-config-tesseract": "^0.3.0"
+    "eslint": "^8.6.0"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
-    "@discordjs/rest": "^0.1.0-canary.0",
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
-    "discord-api-types": "^0.23.1",
     "discord.js": "^13.6.0",
     "dotenv": "^12.0.3",
     "figlet": "^1.5.2",
     "glob": "^7.2.0",
     "imdb-api": "^4.4.1",
-    "mal-scraper": "^2.11.4",
+    "kitsu": "^10.0.0-alpha.19",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.1.6",

@@ -16,7 +16,7 @@ module.exports = class Logger {
 				return this.console({ content, status: 'ERROR', color: 'redBright', error: true });
 			}
 			case 'debug': {
-				return this.console({ content, status: 'DEBUG', color: 'grey' });
+				return this.console({ content, status: 'DEBUG', color: 'blackBright' });
 			}
 			case 'ready': {
 				return this.console({ content, status: 'BOOT', color: 'greenBright' });
@@ -26,9 +26,9 @@ module.exports = class Logger {
 	}
 
 	static console({ content, status, color, error = false }) {
-		const timestamp = chalk.dim(moment().utc().format('DD-MM-YYYY HH:mm:ss z'));
+		const timestamp = chalk.dim(moment().format('DD/MM/YYYY HH:mm:ss z'));
 		const stream = error ? process.stderr : process.stdout;
-		stream.write(`${timestamp} | [${chalk[color].bold(status)}] ${this.clean(content)}\n`);
+		stream.write(`${timestamp} [\u200B${chalk[color].bold(status)}\u200B] ${this.clean(content)}\n`);
 	}
 
 	static clean(content) {

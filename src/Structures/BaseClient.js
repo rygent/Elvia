@@ -39,16 +39,12 @@ module.exports = class BaseClient extends Client {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		};
 
+		String.prototype.trimString = function (length, dots = '...') {
+			return `${this.substring(0, length) + dots}`;
+		};
+
 		Number.prototype.formatNumber = function () {
 			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-		};
-
-		Array.prototype.random = function () {
-			return this[Math.floor(Math.random() * this.length)];
-		};
-
-		BigInt.prototype.toJSON = function () {
-			return this.toString();
 		};
 	}
 
@@ -116,9 +112,6 @@ module.exports = class BaseClient extends Client {
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
 		this.token = options.token;
-
-		if (!options.applicationId) throw new Error('You must pass the application id of the Client.');
-		this.applicationId = options.applicationId;
 
 		if (!options.prefix) throw new Error('You must pass a prefix for the Client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');

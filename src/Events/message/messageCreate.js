@@ -1,31 +1,14 @@
 const Event = require('../../Structures/Event.js');
 const { Collection, MessageActionRow, MessageButton } = require('discord.js');
-const { Access } = require('../../Utils/Setting.js');
+const { Access } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Event {
 
 	async run(message) {
-		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 		if (!message.guild || message.author.bot) return;
 
-		const data = {};
-		data.user = await this.client.findOrCreateUser({ id: message.author.id });
-
-		if (message.guild) {
-			data.guild = await this.client.findOrCreateGuild({ id: message.guildId });
-			data.member = await this.client.findOrCreateMember({ id: message.author.id, guildId: message.guildId });
-		}
-
-		if (message.content.match(mentionRegex)) {
-			await message.channel.sendTyping();
-			return message.reply([
-				`Hi, my prefix for this guild is \`${data.guild?.prefix}\`.`,
-				`Use \`${data.guild?.prefix}help\` to get a list of commands!`
-			].join('\n'));
-		}
-
-		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : data.guild?.prefix;
+		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
 
 		if (!message.content.startsWith(prefix)) return;
 
@@ -91,7 +74,7 @@ module.exports = class extends Event {
 
 			try {
 				await message.channel.sendTyping();
-				await command.run(message, args, data);
+				await command.run(message, args);
 			} catch (error) {
 				const button = new MessageActionRow()
 					.addComponents(new MessageButton()

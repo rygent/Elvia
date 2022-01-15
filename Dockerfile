@@ -1,5 +1,5 @@
 # We're using Alpine
-FROM node:current-alpine3.13
+FROM node:lts-alpine3.13
 
 # Installing packages
 RUN apk add --no-cache=true --update \
