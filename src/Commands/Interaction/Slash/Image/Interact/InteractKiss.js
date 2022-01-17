@@ -23,7 +23,7 @@ module.exports = class extends Interaction {
 			.setColor(Color.DEFAULT)
 			.setDescription(`**${member.user.username}**, you've got a kiss from **${interaction.user.username}**.`)
 			.setImage(result.url)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
 		return await interaction.reply({ embeds: [embed] });
 	}
