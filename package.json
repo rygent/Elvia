@@ -27,6 +27,7 @@
     "kitsu": "^10.0.0-alpha.19",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.34",
     "mongoose": "^6.1.6",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.2",

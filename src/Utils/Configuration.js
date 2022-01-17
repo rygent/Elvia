@@ -2,6 +2,7 @@ module.exports = {
 	token: process.env.DISCORD_TOKEN,
 	prefix: process.env.CLIENT_PREFIX,
 	owners: process.env.CLIENT_OWNERS.split(','),
+	timezone: 'Asia/Jakarta',
 	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	mongoURL: process.env.MONGODB_URL,
 	Access: {
