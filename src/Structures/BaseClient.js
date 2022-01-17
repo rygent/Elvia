@@ -36,7 +36,7 @@ module.exports = class BaseClient extends Client {
 		this.databaseCache.members = new Collection();
 
 		String.prototype.toProperCase = function () {
-			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 		};
 
 		String.prototype.trimString = function (length, dots = '...') {
