@@ -1,5 +1,4 @@
 const Interaction = require('../../../../Structures/Interaction.js');
-const Answer = require('../../../../../assets/json/8ball.json');
 
 module.exports = class extends Interaction {
 
@@ -13,11 +12,12 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		const question = await interaction.options.getString('question', true);
 
-		const Choice = Answer[Math.floor(Math.random() * Answer.length).toString(10)];
+		const answer = require('../../../../../assets/json/8ball.json');
+		const choice = answer[Math.floor(Math.random() * answer.length)];
 
-		return await interaction.reply({ content: [
-			`🎱 ${question}`,
-			`> ${Choice.Message}`
+		return interaction.reply({ content: [
+			`> **${interaction.user.username}**: ${question}`,
+			`🎱 ${choice}`
 		].join('\n') });
 	}
 
