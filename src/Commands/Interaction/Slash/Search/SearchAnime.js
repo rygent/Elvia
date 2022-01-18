@@ -11,7 +11,7 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'search',
 			subCommand: 'anime',
-			description: 'Search for an Anime on MyAnimeList.'
+			description: 'Search for an Anime on Kitsu.'
 		});
 	}
 
