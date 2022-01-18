@@ -22,24 +22,6 @@ module.exports = class extends Event {
 			}
 
 			if (message.guild) {
-				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
-				if (memberPermCheck) {
-					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
-					if (missing.length) {
-						await message.channel.sendTyping();
-						return message.reply({ content: `You don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, you need it to continue this command!` });
-					}
-				}
-
-				const clientPermCheck = command.clientPerms ? this.client.defaultPerms.add(command.clientPerms) : this.client.defaultPerms;
-				if (clientPermCheck) {
-					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
-					if (missing.length) {
-						await message.channel.sendTyping();
-						return message.reply({ content: `I don't have *${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))}* permission, I need it to continue this command!` });
-					}
-				}
-
 				if (command.nsfw && !message.channel.nsfw) {
 					await message.channel.sendTyping();
 					return message.reply({ content: 'This command is only accessible on NSFW channels!' });
