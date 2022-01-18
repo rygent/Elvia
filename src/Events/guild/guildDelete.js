@@ -17,7 +17,7 @@ module.exports = class extends Event {
 				`***Server:*** ${guild.name} (\`${guild.id}\`)`,
 				`***Owner:*** ${guildOwner.user.tag} (\`${guildOwner.id}\`)`
 			].join('\n'))
-			.setFooter(`${this.client.guilds.cache.size.formatNumber()} guilds | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`, this.client.user.avatarURL({ dynamic: true }));
+			.setFooter({ text: `${this.client.guilds.cache.size.formatNumber()} guilds | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`, iconURL: this.client.user.avatarURL({ dynamic: true }) });
 
 		return webhook.send({ username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ dynamic: true }), embeds: [embed] });
 	}
