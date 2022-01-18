@@ -14,6 +14,16 @@ module.exports = class extends Event {
 		this.client.logger.log({ content: `Loaded ${(this.client.commands.size + this.client.interactions.size).formatNumber()} commands & ${this.client.events.size.formatNumber()} events!` });
 		this.client.logger.log({ content: `Ready in ${this.client.guilds.cache.size.formatNumber()} guilds on ${this.client.channels.cache.size.formatNumber()} channels, for a total of ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users.` });
 		this.client.logger.log({ content: 'Connected to Discord API!', type: 'ready' });
+
+		const activities = [
+			{ name: `${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`, type: 'LISTENING' },
+			{ name: `${this.client.guilds.cache.size.formatNumber()} servers`, type: 'WATCHING' }
+		];
+
+		let i = 0;
+		setInterval(() => {
+			this.client.user.setActivity(activities[i++ % activities.length]);
+		}, 30_000);
 	}
 
 };
