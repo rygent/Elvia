@@ -33,10 +33,10 @@ module.exports = class extends Interaction {
 
 		await interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] });
 
-		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = interaction.channel.createMessageComponentCollector({ filter, componentType: 'SELECT_MENU', time: 60000 });
+		const collector = interaction.channel.createMessageComponentCollector({ componentType: 'SELECT_MENU', time: 60_000 });
 
 		collector.on('collect', async (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 			await i.deferUpdate();
 
 			const [choices] = i.values;
@@ -63,8 +63,8 @@ module.exports = class extends Interaction {
 			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
 		});
 
-		collector.on('end', (collected) => {
-			if (collected.size === 0) return interaction.deleteReply();
+		collector.on('end', (collected, reason) => {
+			if (reason === 'time') return interaction.deleteReply();
 		});
 	}
 
