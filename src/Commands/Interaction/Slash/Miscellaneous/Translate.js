@@ -30,9 +30,9 @@ module.exports = class extends Interaction {
 				].join('\n'))
 				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-			return await interaction.reply({ embeds: [embed] });
+			return interaction.reply({ embeds: [embed] });
 		} catch {
-			return await interaction.reply({ content: 'Please send valid **[ISO 639-1](<https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>)** languages codes.', ephemeral: true });
+			return interaction.reply({ content: 'Please send valid **[ISO 639-1](<https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>)** languages codes.', ephemeral: true });
 		}
 	}
 

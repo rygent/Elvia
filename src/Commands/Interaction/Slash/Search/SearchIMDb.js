@@ -66,10 +66,10 @@ module.exports = class extends Interaction {
 				embed.addField('__Awards__', result.awards, false);
 			}
 
-			return await interaction.reply({ embeds: [embed] });
+			return interaction.reply({ embeds: [embed] });
 		} catch (error) {
 			if (error.message.startsWith('Movie not found!:')) {
-				return await interaction.reply({ content: 'Search not found, please make sure you have entered the title correctly!', ephemeral: true });
+				return interaction.reply({ content: 'Search not found, please make sure you have entered the title correctly!', ephemeral: true });
 			}
 		}
 	}

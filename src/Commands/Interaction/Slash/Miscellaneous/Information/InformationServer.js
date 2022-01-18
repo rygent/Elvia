@@ -56,7 +56,7 @@ module.exports = class extends Interaction {
 			.addField(`__Roles__`, `${roles.length < 15 ? roles.join(', ') : roles.length > 15 ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-		return await interaction.reply({ embeds: [embed] });
+		return interaction.reply({ embeds: [embed] });
 	}
 
 };

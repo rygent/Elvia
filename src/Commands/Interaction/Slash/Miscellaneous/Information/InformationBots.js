@@ -48,7 +48,7 @@ module.exports = class extends Interaction {
 			].join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-		return await interaction.reply({ embeds: [embed] });
+		return interaction.reply({ embeds: [embed] });
 	}
 
 };

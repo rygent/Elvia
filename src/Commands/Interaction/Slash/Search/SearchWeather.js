@@ -21,12 +21,12 @@ module.exports = class extends Interaction {
 		weather.setUnits('metric');
 		weather.setCity(location.toLowerCase());
 		weather.getAllWeather(async (error, result) => {
-			if (error) return await interaction.reply({ content: 'An API error occurred, Please try again later!', ephemeral: true });
+			if (error) return interaction.reply({ content: 'An API error occurred, Please try again later!', ephemeral: true });
 
 			if (result.cod === '404' || !result.sys.country) {
-				return await interaction.reply({ content: 'Couldn\'t find that location!', ephemeral: true });
+				return interaction.reply({ content: 'Couldn\'t find that location!', ephemeral: true });
 			} else if (result.cod === '401') {
-				return await interaction.reply({ content: 'Invalid API Key!', ephemeral: true });
+				return interaction.reply({ content: 'Invalid API Key!', ephemeral: true });
 			}
 
 			let compass;
@@ -72,7 +72,7 @@ module.exports = class extends Interaction {
 				].join('\n'))
 				.setFooter({ text: `Powered by OpenWeatherMap`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-			return await interaction.reply({ embeds: [embed], components: [button] });
+			return interaction.reply({ embeds: [embed], components: [button] });
 		});
 	}
 

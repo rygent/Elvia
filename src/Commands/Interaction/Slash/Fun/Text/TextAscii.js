@@ -14,9 +14,9 @@ module.exports = class extends Interaction {
 
 	async run(interaction) {
 		const text = await interaction.options.getString('text', true);
-		if (text.length > 20) return await interaction.reply({ content: 'Please enter text that is no longer than 20 characters!', ephemeral: true });
+		if (text.length > 20) return interaction.reply({ content: 'Please enter text that is no longer than 20 characters!', ephemeral: true });
 
-		return await interaction.reply({ content: Formatters.codeBlock(await figlet(text)) });
+		return interaction.reply({ content: Formatters.codeBlock(await figlet(text)) });
 	}
 
 };

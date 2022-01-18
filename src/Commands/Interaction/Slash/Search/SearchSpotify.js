@@ -50,7 +50,7 @@ module.exports = class extends Interaction {
 			].join('\n'))
 			.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-		return await interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
 };

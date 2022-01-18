@@ -20,7 +20,7 @@ module.exports = class extends Interaction {
 		await interaction.deferReply();
 
 		const { data } = await api.get('anime', { params: { filter: { text: search } } });
-		if (data.length === 0) return await interaction.editReply({ content: 'Nothing found for this search.' });
+		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
 
 		const select = new MessageActionRow()
 			.addComponents(new MessageSelectMenu()

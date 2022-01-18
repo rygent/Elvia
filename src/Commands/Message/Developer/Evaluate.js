@@ -34,10 +34,10 @@ module.exports = class extends Command {
 			];
 			const res = response.join('\n');
 			if (res.length < 2000) {
-				await message.channel.send({ content: res });
+				return message.channel.send({ content: res });
 			} else {
 				const output = new MessageAttachment(Buffer.from(res), 'output.txt');
-				await message.channel.send({ files: [output] });
+				return message.channel.send({ files: [output] });
 			}
 		} catch (err) {
 			return message.channel.send({ content: `Error:\`\`\`xl\n${this.clean(err)}\n\`\`\`` });

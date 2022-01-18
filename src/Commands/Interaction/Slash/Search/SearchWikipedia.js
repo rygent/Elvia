@@ -34,9 +34,9 @@ module.exports = class extends Interaction {
 				.setDescription(result.extract)
 				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-			return await interaction.reply({ embeds: [embed], components: [button] });
+			return interaction.reply({ embeds: [embed], components: [button] });
 		} catch {
-			return await interaction.reply({ content: 'Couldn\'t find a wikipedia article', ephemeral: true });
+			return interaction.reply({ content: 'Couldn\'t find a wikipedia article', ephemeral: true });
 		}
 	}
 

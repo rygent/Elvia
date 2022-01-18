@@ -15,7 +15,7 @@ module.exports = class extends Interaction {
 
 		const translated = await translate(message, { to: 'en' });
 
-		return await interaction.editReply({ content: [
+		return interaction.editReply({ content: [
 			`${translated.text}\n`,
 			`__*Translated from **${this.client.utils.formatLanguage(translated.from.language.iso)}***__`
 		].join('\n') });

@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 			.setImage(user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-		return await interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
 };

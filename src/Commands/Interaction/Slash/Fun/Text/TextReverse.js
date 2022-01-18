@@ -15,7 +15,7 @@ module.exports = class extends Interaction {
 
 		const converted = text.split('').reverse().join('');
 
-		return await interaction.reply({ content: converted });
+		return interaction.reply({ content: converted });
 	}
 
 };

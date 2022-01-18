@@ -4,7 +4,7 @@ const { Access } = require('../../Utils/Configuration.js');
 module.exports = class extends Event {
 
 	async run(interaction) {
-		if (!interaction.inGuild()) return;
+		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
 
 		let command;

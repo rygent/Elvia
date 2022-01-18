@@ -22,14 +22,14 @@ module.exports = class extends Interaction {
 
 		await interaction.deferReply({ ephemeral: true });
 
-		if (!member.kickable) return await interaction.editReply({ content: `I can't kicked **${member.displayName}**! For having a higher role than mine!` });
+		if (!member.kickable) return interaction.editReply({ content: `I can't kicked **${member.displayName}**! For having a higher role than mine!` });
 		if (!member.manageable) {
-			return await interaction.editReply({ content: 'You can\'t kick a member who has an higher or equal role hierarchy to yours!' });
+			return interaction.editReply({ content: 'You can\'t kick a member who has an higher or equal role hierarchy to yours!' });
 		}
 
 		return interaction.guild.members.kick(member, { reason }).then(async () => {
 			if (!member.user.bot) {
-				await member.send({ content: [
+				return member.send({ content: [
 					`Hello **${member.user.username}**, You've just been kicked from _${interaction.guild.name}_ by _${interaction.user.tag}_!`,
 					`***Reason:*** ${reason}`
 				].join('\n') });
