@@ -7,7 +7,6 @@ module.exports = class Command {
 		this.description = options.description || 'No description provided.';
 		this.category = options.category || 'Miscellaneous';
 		this.usage = options.usage || '';
-		this.cooldown = options.cooldown || 3000;
 		this.nsfw = options.nsfw || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.disabled = options.disabled || false;

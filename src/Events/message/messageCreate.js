@@ -1,5 +1,5 @@
 const Event = require('../../Structures/Event.js');
-const { Collection, MessageActionRow, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 const { Access } = require('../../Utils/Configuration.js');
 
 module.exports = class extends Event {
@@ -32,27 +32,6 @@ module.exports = class extends Event {
 				await message.channel.sendTyping();
 				return message.reply({ content: 'This command is only accessible for developers!' });
 			}
-
-			if (!this.client.cooldowns.has(command.name)) {
-				this.client.cooldowns.set(command.name, new Collection());
-			}
-
-			const now = Date.now();
-			const timestamps = this.client.cooldowns.get(command.name);
-			const cooldownAmount = command.cooldown;
-
-			if (timestamps.has(message.author.id)) {
-				const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-				if (now < expirationTime) {
-					const timeLeft = (expirationTime - now) / 1000;
-					await message.channel.sendTyping();
-					return message.reply({ content: `You've to wait **${timeLeft.toFixed(2)}** second(s) before you can use this command again!` })
-						.then(m => setTimeout(() => m.delete(), expirationTime - now));
-				}
-			}
-			timestamps.set(message.author.id, now);
-			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 			try {
 				await message.channel.sendTyping();
