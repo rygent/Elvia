@@ -59,6 +59,11 @@
   dependencies:
     got "^11.8.1"
 
+"@lukeed/csprng@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@lukeed/csprng/-/csprng-1.0.1.tgz#625e93a0edb2c830e3c52ce2d67b9d53377c6a66"
+  integrity sha512-uSvJdwQU5nK+Vdf6zxcWAY2A8r7uqe+gePwLWzJ+fsQehq18pc0I2hJKwypZ2aLM90+Er9u1xn4iLJPZ+xlL4g==
+
 "@sapphire/async-queue@^1.1.9":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.1.9.tgz#ce69611c8753c4affd905a7ef43061c7eb95c01b"
@@ -1705,6 +1710,13 @@ type-fest@^0.20.2:
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
+
+uid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/uid/-/uid-2.0.0.tgz#1773bec106e96955f1658f20272e2ccea414e8bc"
+  integrity sha512-hFw+zKBA1szYdbZWj6FjTxZzJnKNf+wTDcsxlJaXS64MCy9LQEmJUVieGYHCKek/WRyFIcs0cEXtGIQmfvHe2A==
+  dependencies:
+    "@lukeed/csprng" "^1.0.0"
 
 unbox-primitive@^1.0.1:
   version "1.0.1"
