@@ -20,6 +20,13 @@
         }]
     }, {
         "type": 1,
+        "name": "roulette",
+        "description": "Get a random winner from the roulette.",
+        "options": [{
+            "type": 3, "name": "title", "description": "The title of the winner.", "required": true
+        }]
+    }, {
+        "type": 1,
         "name": "text",
         "description": "Description of Text command.",
         "options": [{
