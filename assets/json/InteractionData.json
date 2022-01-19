@@ -11,6 +11,13 @@
         }]
     }, {
         "type": 1,
+        "name": "define",
+        "description": "Define a word.",
+        "options": [{
+            "type": 3, "name": "word", "description": "Word to define.", "required": true
+        }]
+    }, {
+        "type": 1,
         "name": "lovecalc",
         "description": "Calculate love percentage between two users.",
         "options": [{
