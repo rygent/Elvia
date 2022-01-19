@@ -92,6 +92,8 @@
         "description": "Display the avatar of the provided user.",
         "options": [{
             "type": 6, "name": "user", "description": "User to display.", "required": false
+        }, {
+            "type": 5, "name": "guild", "description": "Display user's guild avatar. (If they have one)", "required": false
         }]
     }, {
         "type": 1,
