@@ -136,6 +136,17 @@
         }]
     }, {
         "type": 1,
+        "name": "timeout",
+        "description": "Timeout a member with duration and optional reason.",
+        "options": [{
+            "type": 6, "name": "member", "description": "Member to timeout.", "required": true
+        }, {
+            "type": 3, "name": "duration", "description": "Duration of the timeout. (Example: 2d for 2 days)", "required": true
+        }, {
+            "type": 3, "name": "reason", "description": "Reason of the timeout.", "required": false
+        }]
+    }, {
+        "type": 1,
         "name": "search",
         "description": "Description of Search command.",
         "options": [{
