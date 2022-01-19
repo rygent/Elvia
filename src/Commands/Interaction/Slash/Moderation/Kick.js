@@ -39,7 +39,7 @@ module.exports = class extends Interaction {
 			if (!channel) return;
 
 			const embed = new MessageEmbed()
-				.setColor(Color.ORANGE)
+				.setColor(Color.DEFAULT)
 				.setAuthor({ name: `Actioned by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
 				.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
 				.setDescription([
