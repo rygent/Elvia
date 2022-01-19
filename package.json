@@ -17,7 +17,7 @@
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@iamtraction/google-translate": "^1.1.2",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "chalk": "^4.1.2",
     "discord.js": "^13.6.0",
     "dotenv": "^14.2.0",
