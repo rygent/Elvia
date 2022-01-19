@@ -97,6 +97,15 @@
         }]
     }, {
         "type": 1,
+        "name": "banner",
+        "description": "Display the banner of the provided user.",
+        "options": [{
+            "type": 6, "name": "user", "description": "User to display.", "required": false
+        }, {
+            "type": 5, "name": "color", "description": "Display user's banner color.", "required": false
+        }]
+    }, {
+        "type": 1,
         "name": "ping",
         "description": "Send a ping request."
     }, {
