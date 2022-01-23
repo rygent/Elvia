@@ -149,6 +149,17 @@
         }]
     }, {
         "type": 1,
+        "name": "slowmode",
+        "description": "Description of Slowmode command.",
+        "options": [{
+            "type": 1, "name": "set", "description": "Set slowmode duration.", "options": [{
+                "type": 3, "name": "duration", "description": "Duration of the slowmode. (Example: 2 hours)", "required": true
+            }, {
+                "type": 7, "name": "channel", "description": "Channel to set slowmode in. (Defaults to current channel)", "required": false, "channelTypes": [0]
+            }]
+        }]
+    }, {
+        "type": 1,
         "name": "softban",
         "description": "Softban a user. (Bans and unbans to clear up the user's messages.)",
         "options": [{
