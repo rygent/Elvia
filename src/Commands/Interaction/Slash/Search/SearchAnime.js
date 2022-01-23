@@ -17,7 +17,7 @@ module.exports = class extends Interaction {
 
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
-		await interaction.deferReply();
+		await interaction.deferReply({ fetchReply: true });
 
 		const { data } = await api.get('anime', { params: { filter: { text: search } } });
 		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
@@ -32,52 +32,54 @@ module.exports = class extends Interaction {
 					value: res.slug
 				}))));
 
-		await interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] });
+		return interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] }).then(message => {
+			const collector = message.createMessageComponentCollector({ componentType: 'SELECT_MENU', time: 60_000 });
 
-		const collector = interaction.channel.createMessageComponentCollector({ componentType: 'SELECT_MENU', time: 60_000 });
+			collector.on('collect', async (i) => {
+				if (i.user.id !== interaction.user.id) return i.deferUpdate();
+				await i.deferUpdate();
 
-		collector.on('collect', async (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
-			await i.deferUpdate();
+				const [choices] = i.values;
+				const result = data.find(x => x.slug === choices);
 
-			const [choices] = i.values;
-			const result = data.find(x => x.slug === choices);
+				const button = new MessageActionRow()
+					.addComponents(new MessageButton()
+						.setStyle('LINK')
+						.setLabel('Open in Browser')
+						.setURL(`https://kitsu.io/anime/${result.slug}`));
 
-			const button = new MessageActionRow()
-				.addComponents(new MessageButton()
-					.setStyle('LINK')
-					.setLabel('Open in Browser')
-					.setURL(`https://kitsu.io/anime/${result.slug}`));
+				const embed = new MessageEmbed()
+					.setColor(Color.DEFAULT)
+					.setAuthor({ name: 'Kitsu', iconURL: 'https://kitsu.io/kitsu-256-d4c4633df2c4745352100a4f0a7f5f9e.png', url: 'https://kitsu.io' })
+					.setTitle(result.titles.en_jp || result.titles.en || result.titles.en_us)
+					.setThumbnail(result.posterImage?.original)
+					.addField('__Detail__', [
+						`***English:*** ${result.titles.en ? result.titles.en : result.titles.en_jp}`,
+						`***Japanese:*** ${result.titles.ja_jp ? result.titles.ja_jp : '`N/A`'}`,
+						`***Synonyms:*** ${result.abbreviatedTitles.length > 0 ? result.abbreviatedTitles.join(', ') : '`N/A`'}`,
+						`***Score:*** ${result.averageRating ? result.averageRating : '`N/A`'}`,
+						`***Rating:*** ${result.ageRating ? result.ageRating : '`N/A`'}${result.ageRatingGuide ? ` - ${result.ageRatingGuide}` : ''}`,
+						`***Type:*** ${result.showType ? `${result.showType !== 'TV' ? result.showType.toProperCase() : result.showType}` : '`N/A`'}`,
+						`***Episodes:*** ${result.episodeCount ? result.episodeCount : '`N/A`'}`,
+						`***Length:*** ${result.episodeLength ? `${result.episodeLength} minutes` : '`N/A`'}`,
+						`***Status:*** ${result.status.toProperCase()}`,
+						`***Aired:*** ${result.startDate ? `${result.showType === 'movie' ? moment(result.startDate).format('MMM D, YYYY') : `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}`}` : '`N/A`'}`
+					].join('\n'))
+					.setImage(result.coverImage?.small)
+					.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
-			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
-				.setAuthor({ name: 'Kitsu', iconURL: 'https://kitsu.io/kitsu-256-d4c4633df2c4745352100a4f0a7f5f9e.png', url: 'https://kitsu.io' })
-				.setTitle(result.titles.en_jp || result.titles.en || result.titles.en_us)
-				.setThumbnail(result.posterImage?.original)
-				.addField('__Detail__', [
-					`***English:*** ${result.titles.en ? result.titles.en : result.titles.en_jp}`,
-					`***Japanese:*** ${result.titles.ja_jp ? result.titles.ja_jp : '`N/A`'}`,
-					`***Synonyms:*** ${result.abbreviatedTitles.length > 0 ? result.abbreviatedTitles.join(', ') : '`N/A`'}`,
-					`***Score:*** ${result.averageRating ? result.averageRating : '`N/A`'}`,
-					`***Rating:*** ${result.ageRating ? result.ageRating : '`N/A`'}${result.ageRatingGuide ? ` - ${result.ageRatingGuide}` : ''}`,
-					`***Type:*** ${result.showType ? `${result.showType !== 'TV' ? result.showType.toProperCase() : result.showType}` : '`N/A`'}`,
-					`***Episodes:*** ${result.episodeCount ? result.episodeCount : '`N/A`'}`,
-					`***Length:*** ${result.episodeLength ? `${result.episodeLength} minutes` : '`N/A`'}`,
-					`***Status:*** ${result.status.toProperCase()}`,
-					`***Aired:*** ${result.startDate ? `${result.showType === 'movie' ? moment(result.startDate).format('MMM D, YYYY') : `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}`}` : '`N/A`'}`
-				].join('\n'))
-				.setImage(result.coverImage?.small)
-				.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				if (result.synopsis) {
+					embed.setDescription(result.synopsis);
+				}
 
-			if (result.synopsis) {
-				embed.setDescription(result.synopsis);
-			}
+				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+			});
 
-			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
-		});
-
-		collector.on('end', (collected, reason) => {
-			if (reason === 'time') return interaction.deleteReply();
+			collector.on('end', (collected, reason) => {
+				if ((collected.size === 0 || collected.filter(x => x.user.id === interaction.user.id).size === 0) && reason === 'time') {
+					return interaction.deleteReply();
+				}
+			});
 		});
 	}
 
