@@ -157,6 +157,10 @@
             }, {
                 "type": 7, "name": "channel", "description": "Channel to set slowmode in. (Defaults to current channel)", "required": false, "channelTypes": [0]
             }]
+        }, {
+            "type": 1, "name": "off", "description": "Turn off slowmode.", "options": [{
+                "type": 7, "name": "channel", "description": "Channel to turn slowmode off. (Defaults to current channel)", "required": false, "channelTypes": [0]
+            }]
         }]
     }, {
         "type": 1,
