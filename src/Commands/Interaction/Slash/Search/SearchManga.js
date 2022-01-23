@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 				.setCustomId('data_menu')
 				.setPlaceholder('Select a manga!')
 				.addOptions(data.map(res => ({
-					label: res.titles.en_jp || Object.values(res.titles)[1] || Object.values(res.titles)[0],
+					label: res.titles.en_jp || Object.values(res.titles)[0],
 					description: res.description.length > 100 ? res.description.trimString(97) : res.description,
 					value: res.slug
 				}))));
@@ -51,7 +51,7 @@ module.exports = class extends Interaction {
 				const embed = new MessageEmbed()
 					.setColor(Color.DEFAULT)
 					.setAuthor({ name: 'Kitsu', iconURL: 'https://i.imgur.com/YlUX5JD.png', url: 'https://kitsu.io' })
-					.setTitle(result.titles.en_jp || Object.values(result.titles)[1] || Object.values(result.titles)[0])
+					.setTitle(result.titles.en_jp || Object.values(result.titles)[0])
 					.setThumbnail(result.posterImage?.original)
 					.addField('__Detail__', [
 						`***English:*** ${result.titles.en ? result.titles.en : '`N/A`'}`,
