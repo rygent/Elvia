@@ -106,6 +106,10 @@
         }]
     }, {
         "type": 1,
+        "name": "icon",
+        "description": "Display the server icon."
+    }, {
+        "type": 1,
         "name": "ping",
         "description": "Send a ping request."
     }, {
