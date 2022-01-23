@@ -10,8 +10,8 @@ module.exports = class extends Interaction {
 	constructor(...args) {
 		super(...args, {
 			name: 'search',
-			subCommand: 'anime',
-			description: 'Search for an Anime on Kitsu.'
+			subCommand: 'manga',
+			description: 'Search for a Manga on Kitsu.'
 		});
 	}
 
@@ -19,13 +19,13 @@ module.exports = class extends Interaction {
 		const search = await interaction.options.getString('search', true);
 		await interaction.deferReply({ fetchReply: true });
 
-		const { data } = await api.get('anime', { params: { filter: { text: search } } });
+		const { data } = await api.get('manga', { params: { filter: { text: search } } });
 		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
 
 		const select = new MessageActionRow()
 			.addComponents(new MessageSelectMenu()
 				.setCustomId('data_menu')
-				.setPlaceholder('Select an anime!')
+				.setPlaceholder('Select a manga!')
 				.addOptions(data.map(res => ({
 					label: res.titles.en_jp || res.titles.en || res.titles.en_us,
 					description: res.description?.trimString(97),
@@ -46,7 +46,7 @@ module.exports = class extends Interaction {
 					.addComponents(new MessageButton()
 						.setStyle('LINK')
 						.setLabel('Open in Browser')
-						.setURL(`https://kitsu.io/anime/${result.slug}`));
+						.setURL(`https://kitsu.io/manga/${result.slug}`));
 
 				const embed = new MessageEmbed()
 					.setColor(Color.DEFAULT)
@@ -59,11 +59,12 @@ module.exports = class extends Interaction {
 						`***Synonyms:*** ${result.abbreviatedTitles.length > 0 ? result.abbreviatedTitles.join(', ') : '`N/A`'}`,
 						`***Score:*** ${result.averageRating ? result.averageRating : '`N/A`'}`,
 						`***Rating:*** ${result.ageRating ? result.ageRating : '`N/A`'}${result.ageRatingGuide ? ` - ${result.ageRatingGuide}` : ''}`,
-						`***Type:*** ${result.showType ? `${result.showType !== 'TV' ? result.showType.toProperCase() : result.showType}` : '`N/A`'}`,
-						`***Episodes:*** ${result.episodeCount ? result.episodeCount : '`N/A`'}`,
-						`***Length:*** ${result.episodeLength ? `${result.episodeLength} minutes` : '`N/A`'}`,
-						`***Status:*** ${result.status.toProperCase()}`,
-						`***Aired:*** ${result.startDate ? `${result.showType === 'movie' ? moment(result.startDate).format('MMM D, YYYY') : `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}`}` : '`N/A`'}`
+						`***Type:*** ${result.mangaType ? result.mangaType.toProperCase() : '`N/A`'}`,
+						`***Volumes:*** ${result.volumeCount ? result.volumeCount : '`N/A`'}`,
+						`***Chapters:*** ${result.chapterCount ? result.chapterCount : '`N/A`'}`,
+						`***Status:*** ${result.status ? result.status.toProperCase() : '`N/A`'}`,
+						`***Published:*** ${result.startDate ? `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}` : '`N/A`'}`,
+						`***Serialization:*** ${result.serialization ? result.serialization : '`N/A`'}`
 					].join('\n'))
 					.setImage(result.coverImage?.small)
 					.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });

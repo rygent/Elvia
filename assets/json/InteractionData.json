@@ -187,6 +187,10 @@
                 "type": 3, "name": "search", "description": "Your search.", "required": true
             }]
         }, {
+            "type": 1, "name": "manga", "description": "Search for a Manga on Kitsu.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
             "type": 1, "name": "spotify", "description": "Search for a Song on Spotify.", "options": [{
                 "type": 3, "name": "search", "description": "Your search.", "required": true
             }]

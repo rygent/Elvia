@@ -40,7 +40,7 @@ module.exports = class BaseClient extends Client {
 		};
 
 		String.prototype.trimString = function (length, dots = '...') {
-			return `${this.substring(0, length) + dots}`;
+			return this.substring(0, length) + dots;
 		};
 
 		Number.prototype.formatNumber = function () {
