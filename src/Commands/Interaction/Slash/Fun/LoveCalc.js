@@ -10,8 +10,8 @@ module.exports = class extends Interaction {
 	}
 
 	async run(interaction) {
-		const user1 = await interaction.options.getMember('user1', true);
-		const user2 = await interaction.options.getMember('user2', true);
+		const user1 = await interaction.options.getMember('1st', true);
+		const user2 = await interaction.options.getMember('2nd', true);
 
 		const love = Math.random() * 100;
 		const loveIndex = Math.floor(love / 10);

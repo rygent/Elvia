@@ -21,9 +21,9 @@
         "name": "lovecalc",
         "description": "Calculate love percentage between two users.",
         "options": [{
-            "type": 6, "name": "user1", "description": "First user.", "required": true
+            "type": 6, "name": "1st", "description": "1st user.", "required": true
         }, {
-            "type": 6, "name": "user2", "description": "Second user.", "required": true
+            "type": 6, "name": "2nd", "description": "2nd user.", "required": true
         }]
     }, {
         "type": 1,
