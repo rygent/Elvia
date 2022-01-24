@@ -214,6 +214,12 @@
             "type": 1, "name": "messages", "description": "Purge messages in the channel.", "options": [{
                 "type": 4, "name": "amount", "description": "Amount of messages to delete.", "required": false, "minValue": 1, "maxValue": 100
             }]
+        }, {
+            "type": 1, "name": "user", "description": "Purge user messages in the channel.", "options": [{
+                "type": 6, "name": "user", "description": "User to delete messages.", "required": true
+            }, {
+                "type": 4, "name": "amount", "description": "Amount of messages to delete.", "required": false, "minValue": 1, "maxValue": 100
+            }]
         }]
     }, {
         "type": 1,
