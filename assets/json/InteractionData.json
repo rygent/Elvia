@@ -208,6 +208,15 @@
         }]
     }, {
         "type": 1,
+        "name": "purge",
+        "description": "Description of Purge command.",
+        "options": [{
+            "type": 1, "name": "messages", "description": "Purge messages in the channel.", "options": [{
+                "type": 4, "name": "amount", "description": "Amount of messages to delete.", "required": false, "minValue": 1, "maxValue": 100
+            }]
+        }]
+    }, {
+        "type": 1,
         "name": "slowmode",
         "description": "Description of Slowmode command.",
         "options": [{
