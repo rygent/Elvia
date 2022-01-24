@@ -138,6 +138,15 @@
         }]
     }, {
         "type": 1,
+        "name": "emoji",
+        "description": "Description of Emoji command",
+        "options": [{
+            "type": 1, "name": "image", "description": "Get the full size image of an emoji.", "options": [{
+                "type": 3, "name": "emoji", "description": "The emoji to get.", "required": true
+            }]
+        }]
+    }, {
+        "type": 1,
         "name": "ban",
         "description": "Ban a user with optional reason.",
         "options": [{
