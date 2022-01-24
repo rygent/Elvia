@@ -151,6 +151,10 @@
                 "type": 3, "name": "emoji", "description": "The emoji to add. (Can be an existing emoji or a link)", "required": true
             }]
         }, {
+            "type": 1, "name": "delete", "description": "Delete a server emoji.", "options": [{
+                "type": 3, "name": "emoji", "description": "The emoji to delete.", "required": true
+            }]
+        }, {
             "type": 1, "name": "list", "description": "List server emojis."
         }]
     }, {
