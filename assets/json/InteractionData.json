@@ -232,6 +232,10 @@
             "type": 1, "name": "embeds", "description": "Purge messages that contain embeds in the channel.", "options": [{
                 "type": 4, "name": "amount", "description": "Amount of messages to delete.", "required": false, "minValue": 1, "maxValue": 100
             }]
+        }, {
+            "type": 1, "name": "invites", "description": "Purge messages that contain invite links in the channel.", "options": [{
+                "type": 4, "name": "amount", "description": "Amount of messages to delete.", "required": false, "minValue": 1, "maxValue": 100
+            }]
         }]
     }, {
         "type": 1,
