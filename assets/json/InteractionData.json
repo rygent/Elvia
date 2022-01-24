@@ -131,6 +131,13 @@
         }]
     }, {
         "type": 1,
+        "name": "color",
+        "description": "Get information about a color.",
+        "options": [{
+            "type": 3, "name": "color", "description": "Hexadecimal/RGB code of the color or random to get a random color.", "required": true
+        }]
+    }, {
+        "type": 1,
         "name": "icon",
         "description": "Display the server icon."
     }, {
