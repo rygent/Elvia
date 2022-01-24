@@ -11,6 +11,31 @@
         }]
     }, {
         "type": 1,
+        "name": "choose",
+        "description": "Let me make a choice for you.",
+        "options": [{
+            "type": 3, "name": "1st", "description": "1st choice.", "required": true
+        }, {
+            "type": 3, "name": "2nd", "description": "2nd choice.", "required": true
+        }, {
+            "type": 3, "name": "3rd", "description": "3rd choice.", "required": false
+        }, {
+            "type": 3, "name": "4th", "description": "4th choice.", "required": false
+        }, {
+            "type": 3, "name": "5th", "description": "5th choice.", "required": false
+        }, {
+            "type": 3, "name": "6th", "description": "6th choice.", "required": false
+        }, {
+            "type": 3, "name": "7th", "description": "7th choice.", "required": false
+        }, {
+            "type": 3, "name": "8th", "description": "8th choice.", "required": false
+        }, {
+            "type": 3, "name": "9th", "description": "9th choice.", "required": false
+        }, {
+            "type": 3, "name": "10th", "description": "10th choice.", "required": false
+        }]
+    }, {
+        "type": 1,
         "name": "define",
         "description": "Define a word.",
         "options": [{
