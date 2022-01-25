@@ -127,6 +127,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "stare", "description": "Stare at someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "smug", "description": "Smug at someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
