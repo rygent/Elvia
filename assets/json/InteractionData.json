@@ -350,6 +350,10 @@
                 "type": 3, "name": "search", "description": "Your search.", "required": true
             }]
         }, {
+            "type": 1, "name": "steam", "description": "Search for a Games on Steam.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
+            }]
+        }, {
             "type": 1, "name": "weather", "description": "Search for weather forecast.", "options": [{
                 "type": 3, "name": "search", "description": "Your search.", "required": true
             }]
