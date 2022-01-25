@@ -9,17 +9,17 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'search',
 			subCommand: 'weather',
-			description: 'Search for a Weather forecast.'
+			description: 'Search for weather forecast.'
 		});
 	}
 
 	async run(interaction) {
-		const location = await interaction.options.getString('location', true);
+		const search = await interaction.options.getString('search', true);
 
 		weather.setAPPID(Api.OpenWeatherMap);
 		weather.setLang('en');
 		weather.setUnits('metric');
-		weather.setCity(location.toLowerCase());
+		weather.setCity(search.toLowerCase());
 		weather.getAllWeather(async (error, result) => {
 			if (error) return interaction.reply({ content: 'An API error occurred, Please try again later!', ephemeral: true });
 

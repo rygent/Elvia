@@ -334,8 +334,8 @@
                 "type": 3, "name": "search", "description": "Your search.", "required": true
             }]
         }, {
-            "type": 1, "name": "weather", "description": "Search for a Weather forecast.", "options": [{
-                "type": 3, "name": "location", "description": "Your location.", "required": true
+            "type": 1, "name": "weather", "description": "Search for weather forecast.", "options": [{
+                "type": 3, "name": "search", "description": "Your search.", "required": true
             }]
         }, {
             "type": 1, "name": "wikipedia", "description": "Search for something on Wikipedia.", "options": [{
