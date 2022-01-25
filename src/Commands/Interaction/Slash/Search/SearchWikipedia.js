@@ -16,10 +16,10 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-		const result = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { headers }).then(res => res.data);
-
 		try {
+			const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
+			const result = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { headers }).then(res => res.data);
+
 			const button = new MessageActionRow()
 				.addComponents(new MessageButton()
 					.setStyle('LINK')
@@ -35,8 +35,10 @@ module.exports = class extends Interaction {
 				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed], components: [button] });
-		} catch {
-			return interaction.reply({ content: 'Couldn\'t find a wikipedia article', ephemeral: true });
+		} catch (error) {
+			if (error.response.status === 404) {
+				return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+			}
 		}
 	}
 
