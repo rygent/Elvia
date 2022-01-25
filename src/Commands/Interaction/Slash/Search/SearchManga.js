@@ -28,7 +28,7 @@ module.exports = class extends Interaction {
 				.setPlaceholder('Select a manga!')
 				.addOptions(data.map(res => ({
 					label: res.titles.en_jp || Object.values(res.titles)[0],
-					description: res.description.length > 100 ? res.description.trimString(97) : res.description,
+					description: res.description?.length > 100 ? res.description.trimString(97) : res.description,
 					value: res.slug
 				}))));
 
