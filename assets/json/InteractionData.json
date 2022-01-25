@@ -95,6 +95,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "confused", "description": "Someone made you confused.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "cuddle", "description": "Cuddle someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
