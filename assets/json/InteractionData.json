@@ -146,6 +146,10 @@
             "type": 1, "name": "highfive", "description": "Highfive someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
+        }, {
+            "type": 1, "name": "handholding", "description": "Hold the hand of someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
         }]
     }, {
         "type": 1,
