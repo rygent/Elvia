@@ -91,6 +91,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "blush", "description": "Blust at someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "cuddle", "description": "Cuddle someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
