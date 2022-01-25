@@ -1135,18 +1135,18 @@ keyv@^4.0.0:
   dependencies:
     json-buffer "3.0.1"
 
-kitsu-core@^10.0.0-alpha.19:
-  version "10.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.19.tgz#62698bc2df4bd7f4d873ed93a6f673effd112181"
-  integrity sha512-zpWBiVz7hjD4958JIbu0XdNe+PklxoRea5rh4zz197w9DufRe5OIZ5oSs61iDHXhjI7LUilo9NvWMbfaJyWB3w==
+kitsu-core@^10.0.0-alpha.20:
+  version "10.0.0-alpha.20"
+  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.20.tgz#2bf772452f9c2ab4709c826ee072c74846e22776"
+  integrity sha512-NEQ1Q/ZBTxY0jzjLpBXtSw6awki6adOHpHafGH4uGRGq2eBBQeuaPl6C0NFnjAqVF39iIk40j5LOEXfC1yPNDA==
 
-kitsu@^10.0.0-alpha.19:
-  version "10.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.19.tgz#c935a4a7b4511c186aba0ac590dee19d8907e83e"
-  integrity sha512-klGBasazkWPyhIFSxBhFb9zAGKu4XBQQbd3oS6v1R4wWm0tnr/EDCflexMDF+tWovxo9Zw95ZSICZOqomGZ/UA==
+kitsu@^10.0.0-alpha.20:
+  version "10.0.0-alpha.20"
+  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.20.tgz#0c819e27d0c347bf85807c61dd012a31f93def9e"
+  integrity sha512-eqWtrIpOMAXDK933BkuDGMc1KL6x6GnPeuZpRqQXeq1/T9BIvcS1T0Yal8Qst9j2FFeRAOt1VVXZjgFcUNQM0w==
   dependencies:
-    axios "^0.24.0"
-    kitsu-core "^10.0.0-alpha.19"
+    axios "^0.25.0"
+    kitsu-core "^10.0.0-alpha.20"
     pluralize "^8.0.0"
 
 ky-universal@^0.8.2:
