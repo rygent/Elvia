@@ -135,6 +135,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "punch", "description": "Punch someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "poke", "description": "Poke someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
