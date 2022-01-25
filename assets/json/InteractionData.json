@@ -123,6 +123,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "smile", "description": "Someone made you smile.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "smug", "description": "Smug at someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
