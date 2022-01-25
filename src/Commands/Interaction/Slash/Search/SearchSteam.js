@@ -17,20 +17,21 @@ module.exports = class extends Interaction {
 		const search = await interaction.options.getString('search', true);
 
 		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-		const result = await axios.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { headers }).then(res => res.data);
+		const response = await axios.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { headers }).then(res => res.data);
 
-		if (result.total === 0) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		const result = response.items.filter(x => x.type === 'app');
+		if (result.length === 0) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const select = new MessageActionRow()
 			.addComponents(new MessageSelectMenu()
 				.setCustomId('data_menu')
 				.setPlaceholder('Select a game!')
-				.addOptions(result.items.filter(x => x.type === 'app').map(res => ({
+				.addOptions(result.map(res => ({
 					label: res.name,
 					value: res.id.toString()
 				}))));
 
-		return interaction.reply({ content: `I found **${result.items.length}** possible matches, please select one of the following:`, components: [select], fetchReply: true }).then(message => {
+		return interaction.reply({ content: `I found **${result.length}** possible matches, please select one of the following:`, components: [select], fetchReply: true }).then(message => {
 			const collector = message.createMessageComponentCollector({ componentType: 'SELECT_MENU', time: 60_000 });
 
 			collector.on('collect', async (i) => {
