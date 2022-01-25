@@ -25,7 +25,7 @@ module.exports = class extends Interaction {
 			.addComponents(new MessageSelectMenu()
 				.setCustomId('data_menu')
 				.setPlaceholder('Select a game!')
-				.addOptions(result.items.map(res => ({
+				.addOptions(result.items.filter(x => x.type === 'app').map(res => ({
 					label: res.name,
 					value: res.id.toString()
 				}))));
