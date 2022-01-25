@@ -154,6 +154,10 @@
             "type": 1, "name": "dance", "description": "Dance with someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
+        }, {
+            "type": 1, "name": "tickle", "description": "Tickle someone.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
         }]
     }, {
         "type": 1,
