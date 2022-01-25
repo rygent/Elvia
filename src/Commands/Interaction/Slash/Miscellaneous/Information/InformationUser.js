@@ -1,6 +1,6 @@
 const Interaction = require('../../../../../Structures/Interaction.js');
 const { Formatters, MessageEmbed } = require('discord.js');
-const { Color, Emoji } = require('../../../../../Utils/Configuration.js');
+const { Color, Emoji } = require('../../../../../Settings/Configuration.js');
 const flags = require('../../../../../../assets/json/Badge.json');
 
 module.exports = class extends Interaction {
@@ -44,7 +44,7 @@ module.exports = class extends Interaction {
 				`***Hoist Role:*** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
 				`***Roles (${roles.length}):*** ${roles.length < 10 ? roles.join(' ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`
 			].join('\n'))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed] });
 	}

@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -32,7 +32,7 @@ module.exports = class extends Interaction {
 				.setTitle(result.title)
 				.setThumbnail(result.originalimage?.source)
 				.setDescription(result.extract)
-				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed], components: [button] });
 		} catch (error) {

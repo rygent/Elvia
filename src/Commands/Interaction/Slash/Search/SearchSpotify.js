@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Api, Color, Emoji } = require('../../../../Utils/Configuration.js');
+const { Api, Color, Emoji } = require('../../../../Settings/Configuration.js');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 require('moment-duration-format');
@@ -48,7 +48,7 @@ module.exports = class extends Interaction {
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
 				`***Popularity:*** ${track.popularity.formatNumber()}`
 			].join('\n'))
-			.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

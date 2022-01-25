@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Interaction {
@@ -37,7 +37,7 @@ module.exports = class extends Interaction {
 					`${translated.text}\n`,
 					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`
 				].join('\n'))
-				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed] });
 		} catch (error) {

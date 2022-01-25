@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
-const { Access } = require('../../Utils/Configuration.js');
+const { Access } = require('../../Settings/Configuration.js');
 
 module.exports = class extends Event {
 

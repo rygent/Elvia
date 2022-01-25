@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Api, Color } = require('../../../../Utils/Configuration.js');
+const { Api, Color } = require('../../../../Settings/Configuration.js');
 const weather = require('openweather-apis');
 
 module.exports = class extends Interaction {
@@ -70,7 +70,7 @@ module.exports = class extends Interaction {
 					`***Pressure:*** ${result.main.pressure} hPA`,
 					`***Wind Speed:*** ${(result.wind.speed * 3.6).toFixed(2)} km/h | ${(result.wind.speed * 2.2369).toFixed(2)} mph, ${compass} (${result.wind.deg}°)`
 				].join('\n'))
-				.setFooter({ text: `Powered by OpenWeatherMap`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: `Powered by OpenWeatherMap`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed], components: [button] });
 		});

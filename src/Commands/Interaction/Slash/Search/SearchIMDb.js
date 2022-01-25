@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Api, Color } = require('../../../../Utils/Configuration.js');
+const { Api, Color } = require('../../../../Settings/Configuration.js');
 const IMDb = require('imdb-api');
 const moment = require('moment');
 
@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 				.setURL(result.imdburl)
 				.setThumbnail(result.poster)
 				.setDescription(result.plot)
-				.setFooter({ text: 'Powered by IMDb', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: 'Powered by IMDb', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			if (result.series !== true) {
 				embed.addField('__Details__', [

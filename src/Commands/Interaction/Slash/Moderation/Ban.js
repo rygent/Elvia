@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 
 module.exports = class extends Interaction {
 
@@ -41,7 +41,7 @@ module.exports = class extends Interaction {
 
 			const embed = new MessageEmbed()
 				.setColor(Color.RED)
-				.setAuthor({ name: `Actioned by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+				.setAuthor({ name: `Actioned by ${interaction.user.tag}`, iconURL: interaction.user.avatarURL({ dynamic: true }) })
 				.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
 				.setDescription([
 					`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,

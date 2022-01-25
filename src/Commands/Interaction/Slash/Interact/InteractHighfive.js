@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -23,7 +23,7 @@ module.exports = class extends Interaction {
 			.setColor(Color.DEFAULT)
 			.setDescription(`**${interaction.user.username}** highfives **${member.user.username}**.`)
 			.setImage(result.url)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed] });
 	}

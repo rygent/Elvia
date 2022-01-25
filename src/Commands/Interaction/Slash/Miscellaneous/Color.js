@@ -50,7 +50,7 @@ module.exports = class extends Interaction {
 				`***XYZ:*** (${result.XYZ.X}, ${result.XYZ.Y}, ${result.XYZ.Z})`
 			].join('\n'))
 			.setImage(`https://serux.pro/rendercolour?hex=${result.hex.clean}&height=200&width=512`)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

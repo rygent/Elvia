@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event.js');
 const { MessageEmbed, WebhookClient } = require('discord.js');
-const { Access, Color } = require('../../Utils/Configuration.js');
+const { Access, Color } = require('../../Settings/Configuration.js');
 const webhook = new WebhookClient({ url: Access.WebhookURL });
 
 module.exports = class extends Event {

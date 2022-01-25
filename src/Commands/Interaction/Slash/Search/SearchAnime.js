@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const Kitsu = require('kitsu');
 const api = new Kitsu();
 const moment = require('moment');
@@ -66,7 +66,7 @@ module.exports = class extends Interaction {
 						`***Aired:*** ${result.startDate ? `${result.showType === 'movie' ? moment(result.startDate).format('MMM D, YYYY') : `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}`}` : '`N/A`'}`
 					].join('\n'))
 					.setImage(result.coverImage?.small)
-					.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+					.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 				if (result.synopsis) {
 					embed.setDescription(result.synopsis.length > 512 ? result.synopsis.trimString(512) : result.synopsis);

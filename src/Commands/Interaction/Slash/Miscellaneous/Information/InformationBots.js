@@ -1,7 +1,7 @@
 const Interaction = require('../../../../../Structures/Interaction.js');
 const { Formatters, MessageEmbed, version: discordVersion } = require('discord.js');
 const { version } = require('../../../../../../package.json');
-const { Color, Emoji } = require('../../../../../Utils/Configuration.js');
+const { Color, Emoji } = require('../../../../../Settings/Configuration.js');
 const moment = require('moment');
 const os = require('os');
 require('moment-duration-format');
@@ -46,7 +46,7 @@ module.exports = class extends Interaction {
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
 				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
 			].join('\n'))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed] });
 	}

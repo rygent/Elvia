@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -63,7 +63,7 @@ module.exports = class extends Interaction {
 						`${data.content_descriptors?.notes ? `\n*${data.content_descriptors.notes.replace(/\r|\n/g, '')}*` : ''}`
 					].join('\n'))
 					.setImage(data.header_image)
-					.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+					.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
 			});

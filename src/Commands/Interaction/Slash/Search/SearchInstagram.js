@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -40,7 +40,7 @@ module.exports = class extends Interaction {
 					`***Followers:*** ${account.edge_followed_by.count.formatNumber()}`,
 					`***Following:*** ${account.edge_follow.count.formatNumber()}`
 				].join('\n'))
-				.setFooter({ text: `Powered by Instagram`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: `Powered by Instagram`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed], components: [button] });
 		} catch (error) {

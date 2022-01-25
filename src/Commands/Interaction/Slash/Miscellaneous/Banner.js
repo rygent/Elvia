@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Utils/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -20,7 +20,7 @@ module.exports = class extends Interaction {
 			const embed = new MessageEmbed()
 				.setColor(Color.DEFAULT)
 				.setAuthor({ name: result.tag, iconURL: result.displayAvatarURL({ dynamic: true }) })
-				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.member.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			if (!color) {
 				if (!result.banner) return interaction.reply({ content: `**${result.tag}**'s has no banner!`, ephemeral: true });

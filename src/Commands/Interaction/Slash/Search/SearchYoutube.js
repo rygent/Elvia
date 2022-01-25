@@ -1,6 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction.js');
 const { Formatters, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Api, Color } = require('../../../../Utils/Configuration.js');
+const { Api, Color } = require('../../../../Settings/Configuration.js');
 const YouTube = require('simple-youtube-api');
 const api = new YouTube(Api.Youtube);
 
@@ -57,7 +57,7 @@ module.exports = class extends Interaction {
 						`***Published:*** ${Formatters.time(new Date(result.publishedAt))}`
 					].join('\n'))
 					.setImage(result.thumbnails.high.url)
-					.setFooter({ text: 'Powered by YouTube', iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+					.setFooter({ text: 'Powered by YouTube', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
 			});

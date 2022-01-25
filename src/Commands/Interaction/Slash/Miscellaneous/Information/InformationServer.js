@@ -1,6 +1,6 @@
 const Interaction = require('../../../../../Structures/Interaction.js');
 const { Formatters, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../../Utils/Configuration.js');
+const { Color } = require('../../../../../Settings/Configuration.js');
 
 module.exports = class extends Interaction {
 
@@ -54,7 +54,7 @@ module.exports = class extends Interaction {
 			].join('\n'), true)
 			.addField('__Others__', `***Booster:*** ${interaction.guild.premiumSubscriptionCount}`, true)
 			.addField(`__Roles__`, `${roles.length < 15 ? roles.join(', ') : roles.length > 15 ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed] });
 	}
