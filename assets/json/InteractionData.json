@@ -99,6 +99,10 @@
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
         }, {
+            "type": 1, "name": "cry", "description": "Someone made you cry.", "options": [{
+                "type": 6, "name": "user", "description": "User to interact with.", "required": true
+            }]
+        }, {
             "type": 1, "name": "cuddle", "description": "Cuddle someone.", "options": [{
                 "type": 6, "name": "user", "description": "User to interact with.", "required": true
             }]
