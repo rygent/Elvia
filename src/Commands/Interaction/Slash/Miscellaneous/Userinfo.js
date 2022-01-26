@@ -1,14 +1,13 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction.js');
 const { Formatters, MessageEmbed } = require('discord.js');
-const { Color, Emoji } = require('../../../../../Settings/Configuration.js');
-const flags = require('../../../../../../assets/json/Badge.json');
+const { Color, Emoji } = require('../../../../Settings/Configuration.js');
+const flags = require('../../../../../assets/json/Badge.json');
 
 module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'information',
-			subCommand: 'user',
+			name: 'userinfo',
 			description: 'Get user information.'
 		});
 	}
