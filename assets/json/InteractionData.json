@@ -209,6 +209,13 @@
         }]
     }, {
         "type": 1,
+        "name": "userinfo",
+        "description": "Get user information.",
+        "options": [{
+            "type": 6, "name": "user", "description": "User to get.", "required": false
+        }]
+    }, {
+        "type": 1,
         "name": "emoji",
         "description": "Description of Emoji command",
         "options": [{
