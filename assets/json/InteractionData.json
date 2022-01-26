@@ -213,8 +213,6 @@
             }]
         }, {
             "type": 1, "name": "server", "description": "Get server information."
-        }, {
-            "type": 1, "name": "bots", "description": "Get bots information."
         }]
     }, {
         "type": 1,

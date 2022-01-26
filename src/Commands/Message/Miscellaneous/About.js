@@ -1,22 +1,22 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Command = require('../../../Structures/Command.js');
 const { Formatters, MessageEmbed, version: discordVersion } = require('discord.js');
-const { version } = require('../../../../../../package.json');
-const { Color, Emoji } = require('../../../../../Settings/Configuration.js');
+const { version } = require('../../../../package.json');
+const { Color, Emoji } = require('../../../Settings/Configuration.js');
 const moment = require('moment');
 const os = require('os');
 require('moment-duration-format');
 
-module.exports = class extends Interaction {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'information',
-			subCommand: 'bots',
-			description: 'Get bots information.'
+			aliases: ['botinfo', 'info'],
+			description: 'Get bots information.',
+			category: 'Miscellaneous'
 		});
 	}
 
-	async run(interaction) {
+	async run(message) {
 		const core = os.cpus()[0];
 
 		const status = {
@@ -32,7 +32,7 @@ module.exports = class extends Interaction {
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Creators:*** ${Formatters.userMention(this.client.owners[0])}`,
+				`***Owners:*** ${this.client.utils.formatArray(this.client.owners.map(x => Formatters.userMention(x)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${version}`,
 				`***Node.JS:*** [${process.version}](https://nodejs.org/)`,
@@ -46,9 +46,9 @@ module.exports = class extends Interaction {
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
 				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
 			].join('\n'))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL({ dynamic: true }) });
 
-		return interaction.reply({ embeds: [embed] });
+		return message.reply({ embeds: [embed] });
 	}
 
 };
