@@ -194,6 +194,10 @@
         "description": "Send a ping request."
     }, {
         "type": 1,
+        "name": "serverinfo",
+        "description": "Get server information."
+    }, {
+        "type": 1,
         "name": "translate",
         "description": "Translate your text.",
         "options": [{
@@ -211,8 +215,6 @@
             "type": 1, "name": "user", "description": "Get user information.", "options": [{
                 "type": 6, "name": "user", "description": "User to get.", "required": false
             }]
-        }, {
-            "type": 1, "name": "server", "description": "Get server information."
         }]
     }, {
         "type": 1,

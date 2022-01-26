@@ -1,13 +1,12 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction.js');
 const { Formatters, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../../Settings/Configuration.js');
+const { Color } = require('../../../../Settings/Configuration.js');
 
 module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'information',
-			subCommand: 'server',
+			name: 'serverinfo',
 			description: 'Get server information.'
 		});
 	}
