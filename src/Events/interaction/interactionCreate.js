@@ -37,7 +37,13 @@ module.exports = class extends Event {
 				await command.run(interaction);
 			} catch (error) {
 				this.client.logger.log({ content: error.stack, type: 'error' });
-				return interaction.reply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!`, ephemeral: true });
+
+				if (interaction.replied) return;
+				if (interaction.deferred) {
+					return interaction.editReply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!` });
+				} else {
+					return interaction.reply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!`, ephemeral: true });
+				}
 			}
 		}
 	}
