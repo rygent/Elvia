@@ -3,7 +3,7 @@ const { Formatters, MessageEmbed, version: discordVersion } = require('discord.j
 const { version } = require('../../../../package.json');
 const { Color, Emoji } = require('../../../Settings/Configuration.js');
 const moment = require('moment');
-const os = require('os');
+const si = require('systeminformation');
 require('moment-duration-format');
 
 module.exports = class extends Command {
@@ -17,7 +17,14 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		const core = os.cpus()[0];
+		const value = {
+			osInfo: 'distro, arch, release',
+			cpu: 'manufacturer, brand, speedMin, speedMax, physicalCores, cores',
+			mem: 'used, total',
+			diskLayout: 'type, name, size',
+			time: 'uptime'
+		};
+		const sys = await si.get(value);
 
 		const status = {
 			online: `${Emoji.ONLINE} Online`,
@@ -40,11 +47,12 @@ module.exports = class extends Command {
 				`***Registered:*** ${Formatters.time(new Date(this.client.user.createdAt))} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`
 			].join('\n'))
 			.addField('__Systems__', [
-				`***Platform:*** ${os.type} ${os.release} ${os.arch}`,
-				`***CPU:*** ${core.model} ${os.cpus().length} Cores ${core.speed}MHz`,
-				`***Memory:*** ${this.client.utils.formatBytes(process.memoryUsage().heapUsed)} / ${this.client.utils.formatBytes(process.memoryUsage().heapTotal)}`,
+				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.arch} ${sys.osInfo.release}`,
+				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speedMin}Ghz ${sys.cpu.speedMax}Ghz ${sys.cpu.physicalCores} Cores ${sys.cpu.cores} Threads`,
+				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)}`,
+				`***Disk:*** ${sys.diskLayout[0].type} ${sys.diskLayout[0].name} ${this.client.utils.formatBytes(sys.diskLayout[0].size)}`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
-				`***Host:*** ${moment.duration(os.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
+				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
 			].join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL({ dynamic: true }) });
 
