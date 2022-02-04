@@ -18,9 +18,10 @@ module.exports = class extends Command {
 
 	async run(message) {
 		const value = {
-			osInfo: 'distro, arch, release',
-			cpu: 'manufacturer, brand, speedMin, speedMax, physicalCores, cores',
+			osInfo: 'platform, distro, release, kernel, arch',
+			cpu: 'manufacturer, brand, speed, speedMax, physicalCores, cores',
 			mem: 'used, total',
+			fsSize: 'used, size',
 			time: 'uptime'
 		};
 		const sys = await si.get(value);
@@ -38,19 +39,20 @@ module.exports = class extends Command {
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Owners:*** ${this.client.utils.formatArray(this.client.owners.map(x => Formatters.userMention(x)))}`,
+				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(x => Formatters.userMention(x)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${version}`,
-				`***Node.JS:*** [${process.version}](https://nodejs.org/)`,
-				`***Library:*** [Discord.JS v${discordVersion}](https://discord.js.org/)`,
-				`***Registered:*** ${Formatters.time(new Date(this.client.user.createdAt))} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`
+				`***Node.JS:*** ${process.version}`,
+				`***Library:*** Discord.JS v${discordVersion}`,
+				`***Registered:*** ${Formatters.time(new Date(this.client.user.createdAt), 'D')} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`
 			].join('\n'))
-			.addField('__Systems__', [
-				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.arch} ${sys.osInfo.release}`,
-				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speedMin}Ghz ${sys.cpu.speedMax}Ghz ${sys.cpu.physicalCores} Cores ${sys.cpu.cores} Threads`,
-				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)}`,
-				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
-				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
+			.addField('__System__', [
+				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.release}${sys.osInfo.platform !== 'Windows' ? ` ${sys.osInfo.kernel}` : ''} ${sys.osInfo.arch}`,
+				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speed}Ghz${sys.cpu.speedMax !== 'NaN' ? ` ${sys.cpu.speedMax}Ghz` : ''} ${sys.cpu.cores} Cores`,
+				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
+				`***Disk:*** ${this.client.utils.formatBytes(sys.fsSize[0].used)} / ${this.client.utils.formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
+				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hours], m [minutes], s [seconds]')}`,
+				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hours], m [minutes], s [seconds]')}`
 			].join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL({ dynamic: true }) });
 
