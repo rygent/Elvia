@@ -21,7 +21,6 @@ module.exports = class extends Command {
 			osInfo: 'distro, arch, release',
 			cpu: 'manufacturer, brand, speedMin, speedMax, physicalCores, cores',
 			mem: 'used, total',
-			diskLayout: 'type, name, size',
 			time: 'uptime'
 		};
 		const sys = await si.get(value);
@@ -50,7 +49,6 @@ module.exports = class extends Command {
 				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.arch} ${sys.osInfo.release}`,
 				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speedMin}Ghz ${sys.cpu.speedMax}Ghz ${sys.cpu.physicalCores} Cores ${sys.cpu.cores} Threads`,
 				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)}`,
-				`***Disk:*** ${sys.diskLayout[0].type} ${sys.diskLayout[0].name} ${this.client.utils.formatBytes(sys.diskLayout[0].size)}`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hrs], m [mins], s [secs]')}`,
 				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hrs], m [mins], s [secs]')}`
 			].join('\n'))
