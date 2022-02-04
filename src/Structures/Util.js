@@ -54,12 +54,12 @@ module.exports = class Util {
 			.replace(/Use Vad/g, 'Use Voice Acitvity');
 	}
 
-	formatArray(array, type = 'conjunction') {
-		return new Intl.ListFormat('en-GB', { style: 'short', type: type }).format(array);
+	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
+		return new Intl.ListFormat('en-US', { style, type }).format(array);
 	}
 
-	formatLanguage(string) {
-		return new Intl.DisplayNames(['en'], { type: 'language' }).of(string);
+	formatLanguage(string, { type = 'language', languageDisplay = 'standard' } = {}) {
+		return new Intl.DisplayNames('en-US', { type, languageDisplay }).of(string);
 	}
 
 	getCommandName(interaction) {
