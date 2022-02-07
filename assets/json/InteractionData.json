@@ -52,6 +52,17 @@
         }]
     }, {
         "type": 1,
+        "name": "roll",
+        "description": "Roll random number with optional minimum and maximum numbers or using a dice.",
+        "options": [{
+            "type": 4, "name": "min", "description": "Minimum value.", "required": false
+        }, {
+            "type": 4, "name": "max", "description": "Maximum value.", "required": false
+        }, {
+            "type": 3, "name": "dice", "description": "Roll a dice. (Example: 2d6)", "required": false
+        }]
+    }, {
+        "type": 1,
         "name": "roulette",
         "description": "Get a random winner from the roulette.",
         "options": [{
