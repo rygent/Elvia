@@ -94,7 +94,7 @@ module.exports = class Util {
 				const File = require(commandFile);
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client, name.toLowerCase());
-				if (!(command instanceof Command)) throw new TypeError(`Comamnd ${name} doesn't belong in Commands.`);
+				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands directory.`);
 				this.client.commands.set(command.name, command);
 				if (command.aliases.length) {
 					for (const alias of command.aliases) {
@@ -113,7 +113,7 @@ module.exports = class Util {
 				const File = require(eventFile);
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
 				const event = new File(this.client, name);
-				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events.`);
+				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
 				this.client.events.set(event.name, event);
 				event.emitter[event.type](event.name, (...args) => event.run(...args));
 			}
@@ -128,7 +128,7 @@ module.exports = class Util {
 				const File = require(interactionFile);
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name);
-				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions.`);
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
 				let command;
 				if (interaction.subCommand) {
 					if (interaction.subCommandGroup) {
