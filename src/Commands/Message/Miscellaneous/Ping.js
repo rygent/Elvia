@@ -12,8 +12,8 @@ module.exports = class extends Command {
 
 	async run(message) {
 		return message.reply({ content: [
-			`💓 ***Heartbeat:*** \`${Math.round(this.client.ws.ping)}ms\``,
-			`⏱️ ***Latency:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
+			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
+			`***REST:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
 		].join('\n') });
 	}
 
