@@ -393,6 +393,15 @@ module.exports = [{
 		type: 'STRING', name: 'reason', description: 'Reason of the timeout.', required: false
 	}]
 }, {
+	name: 'untimeout',
+	description: 'Remove timeout from a member.',
+	type: 'CHAT_INPUT',
+	options: [{
+		type: 'USER', name: 'member', description: 'Member to remove timeout from.', required: true
+	}, {
+		type: 'STRING', name: 'reason', description: 'Reason of the timeout removal.', required: false
+	}]
+}, {
 	name: 'search',
 	description: 'No description provided.',
 	type: 'CHAT_INPUT',
