@@ -74,6 +74,10 @@ module.exports = [
 				type: 'STRING', name: 'text', description: 'Text to transform.', required: true
 			}]
 		}, {
+			type: 'SUB_COMMAND', name: 'flip', description: 'Flip your text.', options: [{
+				type: 'STRING', name: 'text', description: 'Text to flip.', required: true
+			}]
+		}, {
 			type: 'SUB_COMMAND', name: 'reverse', description: 'Reverse your text.', options: [{
 				type: 'STRING', name: 'text', description: 'Text to reverse.', required: true
 			}]
