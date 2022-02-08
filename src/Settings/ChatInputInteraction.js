@@ -82,6 +82,10 @@ module.exports = [
 				type: 'STRING', name: 'text', description: 'Text to mocking.', required: true
 			}]
 		}, {
+			type: 'SUB_COMMAND', name: 'owofy', description: 'Transform your text into owo and uwu.', options: [{
+				type: 'STRING', name: 'text', description: 'Text to transform.', required: true
+			}]
+		}, {
 			type: 'SUB_COMMAND', name: 'reverse', description: 'Reverse your text.', options: [{
 				type: 'STRING', name: 'text', description: 'Text to reverse.', required: true
 			}]
