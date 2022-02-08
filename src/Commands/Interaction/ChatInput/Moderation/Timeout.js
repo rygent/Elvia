@@ -20,7 +20,10 @@ module.exports = class extends Interaction {
 		const reason = await interaction.options.getString('reason');
 
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
-		const parsed = ms(duration);
+
+		var parsed = ms(duration);
+		if (parsed > 2419200000) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
+		if (parsed > 2418840000 && parsed <= 2419200000) var parsed = 2418840000; // eslint-disable-line no-redeclare
 
 		if (!member.moderatable) return interaction.reply({ content: `I can't timed out **${member.displayName}**! For having a higher role than mine!`, ephemeral: true });
 		if (!member.manageable) {
