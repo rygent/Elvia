@@ -20,6 +20,7 @@
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.25.0",
     "chalk": "^4.1.2",
+    "discord-emoji-convert": "^2.1.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "emoji-regex": "^10.0.0",

@@ -86,6 +86,10 @@ module.exports = [
 				type: 'STRING', name: 'text', description: 'Text to transform.', required: true
 			}]
 		}, {
+			type: 'SUB_COMMAND', name: 'regional', description: 'Transform your text to regional indicators.', options: [{
+				type: 'STRING', name: 'text', description: 'Text to transform.', required: true
+			}]
+		}, {
 			type: 'SUB_COMMAND', name: 'reverse', description: 'Reverse your text.', options: [{
 				type: 'STRING', name: 'text', description: 'Text to reverse.', required: true
 			}]
