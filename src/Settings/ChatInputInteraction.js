@@ -78,6 +78,10 @@ module.exports = [
 				type: 'STRING', name: 'text', description: 'Text to flip.', required: true
 			}]
 		}, {
+			type: 'SUB_COMMAND', name: 'mocking', description: 'Applies spongemock effect to your text.', options: [{
+				type: 'STRING', name: 'text', description: 'Text to mocking.', required: true
+			}]
+		}, {
 			type: 'SUB_COMMAND', name: 'reverse', description: 'Reverse your text.', options: [{
 				type: 'STRING', name: 'text', description: 'Text to reverse.', required: true
 			}]
