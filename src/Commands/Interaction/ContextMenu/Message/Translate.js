@@ -1,11 +1,11 @@
-const Interaction = require('../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction.js');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'Translate Message'
+			name: 'Translate'
 		});
 	}
 
@@ -15,13 +15,7 @@ module.exports = class extends Interaction {
 
 		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });
 
-		let locale;
-		if (interaction.locale === 'zh-CN' || interaction.locale === 'zh-TW') {
-			locale = interaction.locale; // eslint-disable-line prefer-destructuring
-		} else {
-			locale = new Intl.Locale(interaction.locale).language;
-		}
-
+		const locale = !['zh-CN', 'zh-TW'].includes(interaction.locale) ? new Intl.Locale(interaction.locale).language : interaction.locale;
 		const translated = await translate(message.content.replace(/(<a?)?:\w+:(\d{18}>)?/g, ''), { to: locale });
 
 		return interaction.editReply({ content: translated.text });

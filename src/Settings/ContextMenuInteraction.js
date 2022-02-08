@@ -1,6 +1,6 @@
 module.exports = [
 	{
-		name: 'Translate Message',
+		name: 'Translate',
 		type: 'MESSAGE'
 	}
 ];
