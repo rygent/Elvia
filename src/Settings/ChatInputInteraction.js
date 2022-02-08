@@ -189,8 +189,6 @@ module.exports = [
 		type: 'CHAT_INPUT',
 		options: [{
 			type: 'USER', name: 'user', description: 'User to display.', required: false
-		}, {
-			type: 'BOOLEAN', name: 'guild', description: "Display user's guild avatar. (If they have one)", required: false
 		}]
 	}, {
 		name: 'banner',
