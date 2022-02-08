@@ -75,7 +75,7 @@ module.exports = [
 			}]
 		}, {
 			type: 'SUB_COMMAND', name: 'reverse', description: 'Reverse your text.', options: [{
-				type: 'STRING', name: 'text', description: 'Your text.', required: true
+				type: 'STRING', name: 'text', description: 'Text to reverse.', required: true
 			}]
 		}]
 	}, {
