@@ -7,13 +7,7 @@ module.exports = class extends Event {
 		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
 
-		let command;
-		if (interaction.isMessageComponent()) {
-			command = this.client.interactions.get(interaction.commandName);
-		} else {
-			command = this.client.interactions.get(this.client.utils.getCommandName(interaction));
-		}
-
+		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
 			if (interaction.inGuild()) {
 				const memberPermCheck = command.memberPerms ? this.client.defaultPerms.add(command.memberPerms) : this.client.defaultPerms;
@@ -46,6 +40,25 @@ module.exports = class extends Event {
 				}
 			}
 		}
+	}
+
+	getCommandName(interaction) {
+		let command;
+		// eslint-disable-next-line prefer-destructuring
+		const commandName = interaction.commandName;
+		const subCommandGroup = interaction.options.getSubcommandGroup(false);
+		const subCommand = interaction.options.getSubcommand(false);
+
+		if (subCommand) {
+			if (subCommandGroup) {
+				command = `${commandName}-${subCommandGroup}-${subCommand}`;
+			} else {
+				command = `${commandName}-${subCommand}`;
+			}
+		} else {
+			command = commandName;
+		}
+		return command;
 	}
 
 };

@@ -70,23 +70,6 @@ module.exports = class Util {
 		return new Intl.DisplayNames('en-US', { type, languageDisplay }).of(string);
 	}
 
-	getCommandName(interaction) {
-		let command;
-		const { commandName } = interaction;
-		const subCommandGroup = interaction.options.getSubcommandGroup(false);
-		const subCommand = interaction.options.getSubcommand(false);
-		if (subCommand) {
-			if (subCommandGroup) {
-				command = `${commandName}-${subCommandGroup}-${subCommand}`;
-			} else {
-				command = `${commandName}-${subCommand}`;
-			}
-		} else {
-			command = commandName;
-		}
-		return command;
-	}
-
 	async loadDatabases() {
 		return connect(this.client.mongoURL, {
 			useNewUrlParser: true,
