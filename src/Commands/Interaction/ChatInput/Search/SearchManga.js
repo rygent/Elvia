@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 				.setCustomId('data_menu')
 				.setPlaceholder('Select a manga!')
 				.addOptions(data.map(res => ({
-					label: res.titles.en_jp || Object.values(res.titles)[0],
+					label: res.titles.en_jp || Object.values(res.titles)[0] || 'Unknown Name',
 					description: this.client.utils.truncateString(res.description, 100),
 					value: res.slug
 				}))));
