@@ -36,9 +36,9 @@ module.exports = class extends Interaction {
 				.setDescription(`${account.biography.length === 0 ? 'No Biography' : account.biography}`)
 				.addField('__Detail__', [
 					`***Username:*** @${account.username}${account.is_verified ? '✅' : ''}${account.is_private ? '🔒' : ''}`,
-					`***Posts:*** ${account.edge_owner_to_timeline_media.count.formatNumber()}`,
-					`***Followers:*** ${account.edge_followed_by.count.formatNumber()}`,
-					`***Following:*** ${account.edge_follow.count.formatNumber()}`
+					`***Posts:*** ${account.edge_owner_to_timeline_media.count.toLocaleString()}`,
+					`***Followers:*** ${account.edge_followed_by.count.toLocaleString()}`,
+					`***Following:*** ${account.edge_follow.count.toLocaleString()}`
 				].join('\n'))
 				.setFooter({ text: `Powered by Instagram`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 

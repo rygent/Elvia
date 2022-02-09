@@ -43,10 +43,10 @@ module.exports = class extends Interaction {
 			.setDescription([
 				`***Artists:*** ${artists.join(', ')}`,
 				`***Album:*** ${track.album.name}`,
-				`***Tracks:*** ${track.track_number.formatNumber()} of ${track.album.total_tracks.formatNumber()}`,
+				`***Tracks:*** ${track.track_number.toLocaleString()} of ${track.album.total_tracks.toLocaleString()}`,
 				`***Released:*** ${moment(track.album.release_date).format('MMMM D, YYYY')}`,
 				`***Duration:*** ${moment.duration(track.duration_ms).format('HH:mm:ss')}`,
-				`***Popularity:*** ${track.popularity.formatNumber()}`
+				`***Popularity:*** ${track.popularity.toLocaleString()}`
 			].join('\n'))
 			.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
