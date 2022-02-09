@@ -36,9 +36,9 @@ module.exports = class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
+				if (interaction.replied) return;
 				this.client.logger.log({ content: error.stack, type: 'error' });
 
-				if (interaction.replied) return;
 				if (interaction.deferred) {
 					return interaction.editReply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!` });
 				} else {
