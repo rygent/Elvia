@@ -35,6 +35,14 @@ module.exports = class Util {
 		return arr;
 	}
 
+	truncateString(string, maxLen = 100) {
+		let i = string?.lastIndexOf(' ', maxLen);
+		if (i > maxLen - 3) {
+			i = string?.lastIndexOf(' ', i - 1);
+		}
+		return string?.length > maxLen ? `${string.substring(0, i)}...` : string;
+	}
+
 	formatBytes(bytes) {
 		if (bytes === 0) return '0 Bytes';
 		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];

@@ -38,10 +38,6 @@ module.exports = class BaseClient extends Client {
 		String.prototype.toProperCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
 		};
-
-		String.prototype.trimString = function (length, dots = '...') {
-			return this.substring(0, length) + dots;
-		};
 	}
 
 	async findOrCreateUser({ id: userId }, isLean) {

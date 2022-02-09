@@ -28,7 +28,7 @@ module.exports = class extends Interaction {
 				.setPlaceholder('Select an anime!')
 				.addOptions(data.map(res => ({
 					label: res.titles.en_jp || Object.values(res.titles)[0],
-					description: res.description?.length > 100 ? res.description.trimString(97) : res.description,
+					description: this.client.utils.truncateString(res.description, 100),
 					value: res.slug
 				}))));
 
@@ -69,7 +69,7 @@ module.exports = class extends Interaction {
 					.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 				if (result.synopsis) {
-					embed.setDescription(result.synopsis.length > 512 ? result.synopsis.trimString(512) : result.synopsis);
+					embed.setDescription(this.client.utils.truncateString(result.synopsis, 512));
 				}
 
 				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
