@@ -8,8 +8,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'kick',
 			description: 'Kick a member with optional reason.',
-			memberPerms: ['KICK_MEMBERS'],
-			clientPerms: ['KICK_MEMBERS']
+			memberPermission: ['KICK_MEMBERS'],
+			clientPermission: ['KICK_MEMBERS']
 		});
 	}
 

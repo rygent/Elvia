@@ -8,8 +8,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'untimeout',
 			description: 'Remove timeout from a member.',
-			memberPerms: ['MODERATE_MEMBERS'],
-			clientPerms: ['MODERATE_MEMBERS']
+			memberPermission: ['MODERATE_MEMBERS'],
+			clientPermission: ['MODERATE_MEMBERS']
 		});
 	}
 
@@ -19,8 +19,8 @@ module.exports = class extends Interaction {
 
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
 
-		if (!member.moderatable) return interaction.reply({ content: 'You cannot remove a timeout from a member who has a higher or equal role than yours.', ephemeral: true });
 		if (!member.moderatable) return interaction.reply({ content: `I cannot remove a timeout from a member who has a higher or equal role than mine.`, ephemeral: true });
+		if (!member.manageable) return interaction.reply({ content: 'You cannot remove a timeout from a member who has a higher or equal role than yours.', ephemeral: true });
 
 		await member.timeout(null, `${reason ? `${reason} (Time out removed by ${interaction.user.tag})` : `(Time out removed by ${interaction.user.tag})`}`);
 

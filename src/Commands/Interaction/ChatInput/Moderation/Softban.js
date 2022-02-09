@@ -8,8 +8,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'softban',
 			description: 'Softban a user. (Bans and unbans to clear up the user\'s messages.)',
-			memberPerms: ['BAN_MEMBERS'],
-			clientPerms: ['BAN_MEMBERS']
+			memberPermission: ['BAN_MEMBERS'],
+			clientPermission: ['BAN_MEMBERS']
 		});
 	}
 

@@ -3,7 +3,7 @@ module.exports = {
 	prefix: process.env.CLIENT_PREFIX,
 	owners: process.env.CLIENT_OWNERS?.split(','),
 	timezone: 'Asia/Jakarta',
-	defaultPerms: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+	defaultPermission: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
 	mongoURL: process.env.MONGODB_URL,
 	Access: {
 		InviteCode: process.env.INVITE_CODE,

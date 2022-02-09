@@ -10,8 +10,8 @@ module.exports = class extends Interaction {
 			name: 'slowmode',
 			subCommand: 'set',
 			description: 'Set slowmode duration.',
-			memberPerms: ['MANAGE_CHANNELS'],
-			clientPerms: ['MANAGE_CHANNELS']
+			memberPermission: ['MANAGE_CHANNELS'],
+			clientPermission: ['MANAGE_CHANNELS']
 		});
 	}
 

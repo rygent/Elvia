@@ -117,8 +117,8 @@ module.exports = class BaseClient extends Client {
 		if (!Array.isArray(options.owners)) throw new TypeError('Owners should be a type of Array<String>.');
 		this.owners = options.owners;
 
-		if (!options.defaultPerms) throw new Error('You must pass default perm(s) for the Client.');
-		this.defaultPerms = new Permissions(options.defaultPerms).freeze();
+		if (!options.defaultPermission) throw new Error('You must pass default perm(s) for the Client.');
+		this.defaultPermission = new Permissions(options.defaultPermission).freeze();
 
 		if (!options.mongoURL) throw new Error('You must pass MongoDB URL for the Client.');
 		this.mongoURL = options.mongoURL;

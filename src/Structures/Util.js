@@ -50,14 +50,14 @@ module.exports = class Util {
 		return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
 	}
 
-	formatPerms(perm) {
-		return perm
-			.toLowerCase()
+	formatPermission(permission) {
+		return permission.toLowerCase()
 			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
 			.replace(/_/g, ' ')
-			.replace(/To/g, 'to')
-			.replace(/And/g, 'and')
+			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
+			.replace(/ Instant| Embedded/g, '')
 			.replace(/Guild/g, 'Server')
+			.replace(/Moderate/g, 'Timeout')
 			.replace(/Tts/g, 'Text-to-Speech')
 			.replace(/Use Vad/g, 'Use Voice Acitvity');
 	}

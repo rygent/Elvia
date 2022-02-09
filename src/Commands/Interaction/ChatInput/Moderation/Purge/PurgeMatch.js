@@ -7,8 +7,8 @@ module.exports = class extends Interaction {
 			name: 'purge',
 			subCommand: 'match',
 			description: 'Purge messages that match specified content in the channel.',
-			memberPerms: ['MANAGE_MESSAGES'],
-			clientPerms: ['MANAGE_MESSAGES']
+			memberPermission: ['MANAGE_MESSAGES'],
+			clientPermission: ['MANAGE_MESSAGES']
 		});
 	}
 

@@ -9,8 +9,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'timeout',
 			description: 'Timeout a member with duration and optional reason.',
-			memberPerms: ['MODERATE_MEMBERS'],
-			clientPerms: ['MODERATE_MEMBERS']
+			memberPermission: ['MODERATE_MEMBERS'],
+			clientPermission: ['MODERATE_MEMBERS']
 		});
 	}
 

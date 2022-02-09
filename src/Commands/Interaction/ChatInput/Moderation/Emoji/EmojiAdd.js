@@ -8,8 +8,8 @@ module.exports = class extends Interaction {
 			name: 'emoji',
 			subCommand: 'add',
 			description: 'Add an emoji to the server.',
-			memberPerms: ['MANAGE_EMOJIS_AND_STICKERS'],
-			clientPerms: ['MANAGE_EMOJIS_AND_STICKERS']
+			memberPermission: ['MANAGE_EMOJIS_AND_STICKERS'],
+			clientPermission: ['MANAGE_EMOJIS_AND_STICKERS']
 		});
 	}
 
