@@ -59,10 +59,10 @@ module.exports = class extends Interaction {
 						`***Synonyms:*** ${result.abbreviatedTitles.length > 0 ? result.abbreviatedTitles.join(', ') : '`N/A`'}`,
 						`***Score:*** ${result.averageRating ? result.averageRating : '`N/A`'}`,
 						`***Rating:*** ${result.ageRating ? result.ageRating : '`N/A`'}${result.ageRatingGuide ? ` - ${result.ageRatingGuide}` : ''}`,
-						`***Type:*** ${result.showType ? `${result.showType !== 'TV' ? result.showType.toProperCase() : result.showType}` : '`N/A`'}`,
+						`***Type:*** ${result.showType ? !['ONA', 'OVA', 'TV'].includes(result.showType) ? result.showType.toSentenceCase() : result.showType : '`N/A`'}`,
 						`***Episodes:*** ${result.episodeCount ? result.episodeCount : '`N/A`'}`,
 						`***Length:*** ${result.episodeLength ? `${result.episodeLength} minutes` : '`N/A`'}`,
-						`***Status:*** ${result.status.toProperCase()}`,
+						`***Status:*** ${result.status ? result.status === 'tba' ? result.status.toUpperCase() : result.status.toSentenceCase() : '`N/A`'}`,
 						`***Aired:*** ${result.startDate ? `${result.showType === 'movie' ? moment(result.startDate).format('MMM D, YYYY') : `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}`}` : '`N/A`'}`
 					].join('\n'))
 					.setImage(result.coverImage?.small)

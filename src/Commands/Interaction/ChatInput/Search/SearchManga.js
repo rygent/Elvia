@@ -59,10 +59,10 @@ module.exports = class extends Interaction {
 						`***Synonyms:*** ${result.abbreviatedTitles.length > 0 ? result.abbreviatedTitles.join(', ') : '`N/A`'}`,
 						`***Score:*** ${result.averageRating ? result.averageRating : '`N/A`'}`,
 						`***Rating:*** ${result.ageRating ? result.ageRating : '`N/A`'}${result.ageRatingGuide ? ` - ${result.ageRatingGuide}` : ''}`,
-						`***Type:*** ${result.mangaType ? result.mangaType.toProperCase() : '`N/A`'}`,
+						`***Type:*** ${result.mangaType ? result.mangaType === 'oel' ? result.mangaType.toUpperCase() : result.mangaType.toSentenceCase() : '`N/A`'}`,
 						`***Volumes:*** ${result.volumeCount ? result.volumeCount : '`N/A`'}`,
 						`***Chapters:*** ${result.chapterCount ? result.chapterCount : '`N/A`'}`,
-						`***Status:*** ${result.status ? result.status.toProperCase() : '`N/A`'}`,
+						`***Status:*** ${result.status ? result.status === 'tba' ? result.status.toUpperCase() : result.status.toSentenceCase() : '`N/A`'}`,
 						`***Published:*** ${result.startDate ? `${moment(result.startDate).format('MMM D, YYYY')} to ${result.endDate ? moment(result.endDate).format('MMM D, YYYY') : '?'}` : '`N/A`'}`,
 						`***Serialization:*** ${result.serialization ? result.serialization : '`N/A`'}`
 					].join('\n'))
