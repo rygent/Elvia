@@ -26,6 +26,22 @@ module.exports = class Util {
 		return this.client.owners.includes(target);
 	}
 
+	categoryCheck(category, message) {
+		category = category.toLowerCase();
+		switch (category) {
+			case 'developer':
+				return this.checkOwner(message.author.id);
+			case 'nsfw':
+				return message.channel.nsfw;
+			default:
+				return true;
+		}
+	}
+
+	removeDuplicates(array) {
+		return [...new Set(array)];
+	}
+
 	trimArray(arr, maxLen = 10) {
 		if (arr.length > maxLen) {
 			const len = arr.length - maxLen;
