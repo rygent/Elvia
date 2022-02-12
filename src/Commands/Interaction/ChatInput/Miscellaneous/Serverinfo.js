@@ -26,7 +26,15 @@ module.exports = class extends Interaction {
 			ALL_MEMBERS: 'Scan all messages'
 		};
 
-		const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.name).slice(0, -1);
+		const boostLevel = {
+			NONE: 'Level 0',
+			TIER_1: 'Level 1',
+			TIER_2: 'Level 2',
+			TIER_3: 'Level 3'
+		};
+
+		const channels = interaction.guild.channels.cache;
+		const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1);
 
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
@@ -35,24 +43,14 @@ module.exports = class extends Interaction {
 			.setDescription([
 				`***ID:*** \`${interaction.guildId}\``,
 				`***Owner:*** ${Formatters.memberNicknameMention(interaction.guild.ownerId)}`,
-				`***Boost Tier:*** ${interaction.guild.premiumTier.replace(/_/g, ' ').toProperCase()}`,
-				`***Explicit filter:*** ${contentFilterLevels[interaction.guild.explicitContentFilter]}`,
+				`***Boost Status:*** ${interaction.guild.premiumSubscriptionCount} Boosts (\`${boostLevel[interaction.guild.premiumTier]}\`)`,
+				`***Explicit Filter:*** ${contentFilterLevels[interaction.guild.explicitContentFilter]}`,
 				`***Verification:*** ${verificationLevels[interaction.guild.verificationLevel]}`,
-				`***Created:*** ${Formatters.time(new Date(interaction.guild.createdTimestamp))} (${Formatters.time(new Date(interaction.guild.createdTimestamp), 'R')})`
+				`***Created:*** ${Formatters.time(new Date(interaction.guild.createdTimestamp), 'D')} (${Formatters.time(new Date(interaction.guild.createdTimestamp), 'R')})`,
+				`***Channels:*** ${channels.filter(channel => !['GUILD_VOICE', 'GUILD_STAGE_VOICE'].includes(channel.type)).size.toLocaleString()} Text / ${channels.filter(channel => ['GUILD_VOICE', 'GUILD_STAGE_VOICE'].includes(channel.type)).size.toLocaleString()} Voice`,
+				`***Online Members:*** ${interaction.guild.members.cache.filter(members => ['online', 'idle', 'dnd'].includes(members.presence?.status)).size.toLocaleString()} of ${interaction.guild.memberCount.toLocaleString()} Members`
 			].join('\n'))
-			.addField('__Channels__', [
-				`***Categories:*** ${interaction.guild.channels.cache.filter(x => x.type === 'GUILD_CATEGORY').size}`,
-				`***Text:*** ${interaction.guild.channels.cache.filter(x => x.type === 'GUILD_TEXT').size}`,
-				`***Voice:*** ${interaction.guild.channels.cache.filter(x => x.type === 'GUILD_VOICE').size}`,
-				`***AFK:*** ${interaction.guild.afkChannel ? interaction.guild.afkChannel.name : 'None'}`
-			].join('\n'), true)
-			.addField('__Users__', [
-				`***Humans:*** ${interaction.guild.memberCount - interaction.guild.members.cache.filter(x => x.user.bot).size}`,
-				`***Bots:*** ${interaction.guild.members.cache.filter(x => x.user.bot).size}`,
-				`***Members:*** ${interaction.guild.memberCount}`
-			].join('\n'), true)
-			.addField('__Others__', `***Booster:*** ${interaction.guild.premiumSubscriptionCount}`, true)
-			.addField(`__Roles__`, `${roles.length < 15 ? roles.join(', ') : roles.length > 15 ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`)
+			.addField(`__Roles__ (${roles.length})`, `${roles.length > 0 ? this.client.utils.formatArray(this.client.utils.trimArray(roles, 15)) : 'None'}`)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		return interaction.reply({ embeds: [embed] });
