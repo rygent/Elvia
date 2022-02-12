@@ -15,7 +15,6 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		const member = await interaction.options.getMember('user') || interaction.member;
 
-		const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1);
 		const status = {
 			online: `${Emoji.ONLINE} Online`,
 			idle: `${Emoji.IDLE} Idle`,
@@ -24,26 +23,27 @@ module.exports = class extends Interaction {
 		};
 		const userFlags = member.user.flags.toArray();
 
+		const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1);
+		const permissions = member.permissions.toArray().filter(x => !interaction.guild.roles.everyone.permissions.toArray().includes(x));
+
 		const embed = new MessageEmbed()
 			.setColor(Color.DEFAULT)
 			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL({ dynamic: true }) })
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
-				`***Username:*** ${member.user.username} ${member.user.bot ? Emoji.BOT : ''}`,
 				`***ID:*** \`${member.id}\``,
-				`***Nickname:*** ${member.nickname || 'None'}`,
-				`***Flags:*** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(' ') : 'None'}`,
+				`***Nickname:*** ${member.nickname || '`N/A`'}`,
+				`***Flags:*** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(' ') : '`N/A`'}`,
 				`***Status:*** ${status[member.presence?.status] || status.offline}`,
-				`***Activity:*** ${member.presence?.activities.join(', ') || 'No Activity'}`,
-				`***Registered:*** ${Formatters.time(new Date(member.user.createdTimestamp))} (${Formatters.time(new Date(member.user.createdTimestamp), 'R')})`
+				`***Created:*** ${Formatters.time(new Date(member.user.createdTimestamp), 'D')} (${Formatters.time(new Date(member.user.createdTimestamp), 'R')})`,
+				`***Joined:*** ${Formatters.time(new Date(member.joinedAt), 'D')} (${Formatters.time(new Date(member.joinedAt), 'R')})`
 			].join('\n'))
-			.addField(`__Member__`, [
-				`***Joined:*** ${Formatters.time(new Date(member.joinedAt))} (${Formatters.time(new Date(member.joinedAt), 'R')})`,
-				`***Highest Role:*** ${member.roles.highest.id === interaction.guild.id ? 'None' : member.roles.highest.name}`,
-				`***Hoist Role:*** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-				`***Roles (${roles.length}):*** ${roles.length < 10 ? roles.join(' ') : roles.length > 10 ? this.client.utils.trimArray(roles).join(', ') : 'None'}`
-			].join('\n'))
+			.addField(`__Roles__ (${roles.length > 0 ? roles.length : '1'})`, `${roles.length > 0 ? this.client.utils.formatArray(roles) : `@everyone`}`)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+
+		if (permissions.length > 0) {
+			embed.addField('__Permission(s)__', `${this.client.utils.formatArray(permissions.map(x => this.client.utils.formatPermission(x)))}`);
+		}
 
 		return interaction.reply({ embeds: [embed] });
 	}
