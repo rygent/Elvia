@@ -393,6 +393,15 @@ module.exports = [{
 		type: 'STRING', name: 'reason', description: 'Reason of the timeout.', required: false
 	}]
 }, {
+	name: 'unban',
+	description: 'Unban a user with optional reason.',
+	type: 'CHAT_INPUT',
+	options: [{
+		type: 'STRING', name: 'user', description: 'User to unban. (Username or User ID)', required: true
+	}, {
+		type: 'STRING', name: 'reason', description: 'Reason of the unban.', required: false
+	}]
+}, {
 	name: 'untimeout',
 	description: 'Remove timeout from a member.',
 	type: 'CHAT_INPUT',
