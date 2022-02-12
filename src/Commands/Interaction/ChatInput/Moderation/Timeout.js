@@ -1,6 +1,5 @@
 const Interaction = require('../../../../Structures/Interaction.js');
-const { Formatters, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Formatters } = require('discord.js');
 const ms = require('ms');
 
 module.exports = class extends Interaction {
@@ -15,50 +14,36 @@ module.exports = class extends Interaction {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('member', true);
+		const user = await interaction.options.getUser('member', true);
 		const duration = await interaction.options.getString('duration', true);
 		const reason = await interaction.options.getString('reason');
 
+		const member = await interaction.guild.members.cache.get(user.id);
+		if (!member) return interaction.reply({ content: 'Member not found, please verify that this user is a server member.', ephemeral: true });
+
+		if (member.user.id === interaction.user.id) return interaction.reply({ content: `You can't timeout yourself.`, ephemeral: true });
+		if (member.user.id === this.client.user.id) return interaction.reply({ content: `You cannot timeout me!`, ephemeral: true });
+		if (member.roles.highest.comparePositionTo(interaction.member.roles.highest) > 0) {
+			return interaction.reply({ content: 'You cannot timeout a member who has a higher or equal role than yours.', ephemeral: true });
+		}
+		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
+
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
 
-		var parsed = ms(duration);
-		if (parsed > 2419200000) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
-		if (parsed > 2418840000 && parsed <= 2419200000) var parsed = 2418840000; // eslint-disable-line no-redeclare
+		var parsedDuration = ms(duration);
+		if (parsedDuration > 2419200000) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
+		if (parsedDuration > 2418840000 && parsedDuration <= 2419200000) parsedDuration = 2418840000;
 
-		if (!member.moderatable) return interaction.reply({ content: `I can't timed out **${member.displayName}**! For having a higher role than mine!`, ephemeral: true });
-		if (!member.manageable) {
-			return interaction.reply({ content: 'You can\'t timed out a member who has an higher or equal role hierarchy to yours!', ephemeral: true });
-		}
-
-		await member.timeout(parsed, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
+		await member.timeout(parsedDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
 
 		guildData.casesCount++;
 		await guildData.save();
 
-		interaction.reply({ content: [
+		return interaction.reply({ content: [
 			`**${member.user.tag}** was timed out!`,
 			`${reason ? `\n***Reason:*** ${reason}` : ''}`,
-			`\n***Expiration:*** ${Formatters.time(new Date(Date.now() + parsed), 'R')}`
+			`\n***Expiration:*** ${Formatters.time(new Date(Date.now() + parsedDuration), 'R')}`
 		].join('') });
-
-		if (guildData.plugins.moderations) {
-			const channel = interaction.guild.channels.cache.get(guildData.plugins.moderations);
-			if (!channel) return;
-
-			const embed = new MessageEmbed()
-				.setColor(Color.GREY)
-				.setAuthor({ name: `Actioned by ${interaction.user.tag}`, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-				.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-				.setDescription([
-					`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
-					`***Action:*** Timeout`,
-					`***Reason:*** ${reason || 'None specified'}`,
-					`***Expiration:*** ${Formatters.time(new Date(Date.now() + parsed), 'R')}`
-				].join('\n'))
-				.setFooter({ text: `Powered by ${this.client.user.username}  •  Case #${guildData.casesCount}`, iconURL: this.client.user.avatarURL({ dynamic: true }) });
-
-			return channel.send({ embeds: [embed] });
-		}
 	}
 
 };
