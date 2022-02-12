@@ -1,6 +1,4 @@
 const Interaction = require('../../../../Structures/Interaction.js');
-const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
 
 module.exports = class extends Interaction {
 
@@ -14,44 +12,30 @@ module.exports = class extends Interaction {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('user', true);
+		const user = await interaction.options.getUser('user', true);
 		const reason = await interaction.options.getString('reason');
 		const days = await interaction.options.getInteger('days');
 
+		if (user.id === interaction.user.id) return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
+		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });
+
+		const member = interaction.guild.members.cache.get(user.id);
+		if (member && member.roles.highest.comparePositionTo(interaction.member.roles.highest) > 0) {
+			return interaction.reply({ content: 'You cannot ban a member who has a higher or equal role than yours.', ephemeral: true });
+		}
+		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
+
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
 
-		if (!member.bannable) return interaction.reply({ content: `I can't banned **${member.displayName}**! For having a higher role than mine!`, ephemeral: true });
-		if (!member.manageable) {
-			return interaction.reply({ content: 'You can\'t ban a member who has an higher or equal role hierarchy to yours!', ephemeral: true });
-		}
-
-		await member.ban({ days, reason: `${reason ? `${reason} (Banned by ${interaction.user.tag})` : `(Banned by ${interaction.user.tag})`}` });
+		await interaction.guild.members.ban(user, { days, reason: `${reason ? `${reason} (Banned by ${interaction.user.tag})` : `(Banned by ${interaction.user.tag})`}` });
 
 		guildData.casesCount++;
 		await guildData.save();
 
-		interaction.reply({ content: [
-			`**${member.user.tag}** was banned!`,
+		return interaction.reply({ content: [
+			`**${user.tag}** was banned!`,
 			`${reason ? `\n***Reason:*** ${reason}` : ''}`
 		].join('') });
-
-		if (guildData.plugins.moderations) {
-			const channel = interaction.guild.channels.cache.get(guildData.plugins.moderations);
-			if (!channel) return;
-
-			const embed = new MessageEmbed()
-				.setColor(Color.RED)
-				.setAuthor({ name: `Actioned by ${interaction.user.tag}`, iconURL: interaction.user.avatarURL({ dynamic: true }) })
-				.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-				.setDescription([
-					`***User:*** ${member.user.tag} (\`${member.user.id}\`)`,
-					`***Action:*** Ban`,
-					`***Reason:*** ${reason || 'None specified'}`
-				].join('\n'))
-				.setFooter({ text: `Powered by ${this.client.user.username}  •  Case #${guildData.casesCount}`, iconURL: this.client.user.avatarURL({ dynamic: true }) });
-
-			return channel.send({ embeds: [embed] });
-		}
 	}
 
 };
