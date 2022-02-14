@@ -33,7 +33,6 @@
         "func-names": ["error", "never"],
         "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
         "handle-callback-err": "error",
-        "id-length": ["error", { "exceptions": ["i", "j", "m", "x", "v", "a", "b"] }],
         "indent": ["error", "tab", { "SwitchCase": 1 }],
         "key-spacing": "error",
         "keyword-spacing": ["error", {
