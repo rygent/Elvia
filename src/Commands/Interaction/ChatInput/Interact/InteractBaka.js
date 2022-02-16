@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -20,7 +20,7 @@ module.exports = class extends Interaction {
 		const result = await axios.get(`https://nekos.life/api/v2/img/baka`, { headers }).then(res => res.data);
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setDescription(`**${interaction.user.username}** says that **${member.user.username}** is a baka.`)
 			.setImage(result.url)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });

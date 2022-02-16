@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const Kitsu = require('kitsu');
 const api = new Kitsu();
 const moment = require('moment');
@@ -49,7 +49,7 @@ module.exports = class extends Interaction {
 						.setURL(`https://kitsu.io/manga/${result.slug}`));
 
 				const embed = new MessageEmbed()
-					.setColor(Color.DEFAULT)
+					.setColor(Colors.Default)
 					.setAuthor({ name: 'Kitsu', iconURL: 'https://i.imgur.com/YlUX5JD.png', url: 'https://kitsu.io' })
 					.setTitle(result.titles.en_jp || Object.values(result.titles)[0])
 					.setThumbnail(result.posterImage?.original)

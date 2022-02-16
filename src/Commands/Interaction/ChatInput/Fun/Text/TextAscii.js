@@ -1,4 +1,4 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../../Structures/Interaction');
 const { Formatters } = require('discord.js');
 const figlet = require('util').promisify(require('figlet'));
 

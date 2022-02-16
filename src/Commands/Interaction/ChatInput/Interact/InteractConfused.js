@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -20,7 +20,7 @@ module.exports = class extends Interaction {
 		const result = await axios.get(`https://anime-reactions.uzairashraf.dev/api/reactions/random?category=confused`, { headers }).then(res => res.data);
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setDescription(`**${member.user.username}** made **${interaction.user.username}** confused.`)
 			.setImage(result.reaction)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });

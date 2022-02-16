@@ -1,5 +1,4 @@
-const Event = require('../../Structures/Event.js');
-const { Access } = require('../../Settings/Configuration.js');
+const Event = require('../../Structures/Event');
 
 module.exports = class extends Event {
 
@@ -34,9 +33,9 @@ module.exports = class extends Event {
 				this.client.logger.log({ content: error.stack, type: 'error' });
 
 				if (interaction.deferred) {
-					return interaction.editReply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!` });
+					return interaction.editReply({ content: 'An unexpected error occurred.' });
 				} else {
-					return interaction.reply({ content: `Something went wrong, please report it to our **[guild support](<https://discord.gg/${Access.InviteCode}>)**!`, ephemeral: true });
+					return interaction.reply({ content: 'An unexpected error occurred.', ephemeral: true });
 				}
 			}
 		}

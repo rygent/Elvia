@@ -1,4 +1,4 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../../Structures/Interaction');
 
 module.exports = class extends Interaction {
 

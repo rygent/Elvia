@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -18,7 +18,7 @@ module.exports = class extends Interaction {
 
 		return interaction.client.users.fetch(user, { force: true }).then(async (result) => {
 			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
+				.setColor(Colors.Default)
 				.setAuthor({ name: result.tag, iconURL: result.displayAvatarURL({ dynamic: true }) })
 				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 

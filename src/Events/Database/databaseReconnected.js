@@ -1,4 +1,4 @@
-const Event = require('../../Structures/Event.js');
+const Event = require('../../Structures/Event');
 const { connection } = require('mongoose');
 
 module.exports = class extends Event {

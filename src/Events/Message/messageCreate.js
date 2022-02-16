@@ -1,6 +1,4 @@
-const Event = require('../../Structures/Event.js');
-const { MessageActionRow, MessageButton } = require('discord.js');
-const { Access } = require('../../Settings/Configuration.js');
+const Event = require('../../Structures/Event');
 
 module.exports = class extends Event {
 
@@ -11,11 +9,10 @@ module.exports = class extends Event {
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
 		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `The prefix for this server is \`${this.client.prefix}\`.` });
+			return message.reply({ content: `Hi, my prefix for this server is \`${this.client.prefix}\`.` });
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
-
 		if (!message.content.startsWith(prefix)) return;
 
 		const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -57,14 +54,7 @@ module.exports = class extends Event {
 				await command.run(message, args);
 			} catch (error) {
 				this.client.logger.log({ content: error.stack, type: 'error' });
-
-				const button = new MessageActionRow()
-					.addComponents(new MessageButton()
-						.setStyle('LINK')
-						.setLabel('Support Server')
-						.setURL(`https://discord.gg/${Access.InviteCode}`));
-
-				return message.reply({ content: 'Something went wrong, please report it to our **guild support**!', components: [button] });
+				return message.reply({ content: 'An unexpected error occurred.' });
 			}
 		}
 	}

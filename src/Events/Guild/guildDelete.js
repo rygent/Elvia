@@ -1,16 +1,18 @@
-const Event = require('../../Structures/Event.js');
+const Event = require('../../Structures/Event');
 const { MessageEmbed, WebhookClient } = require('discord.js');
-const { Access, Color } = require('../../Settings/Configuration.js');
-const webhook = new WebhookClient({ url: Access.WebhookURL });
+const { Access, Colors } = require('../../Utils/Constants');
+const webhook = new WebhookClient({ url: Access.GuildLogWebhook });
 
 module.exports = class extends Event {
 
 	async run(guild) {
 		if (!guild.available) return;
+		if (!webhook) return;
+
 		const guildOwner = await guild.fetchOwner();
 
 		const embed = new MessageEmbed()
-			.setColor(Color.RED)
+			.setColor(Colors.Red)
 			.setTitle(`${this.client.user.username} left a Server!`)
 			.setThumbnail(guild.iconURL() ? guild.iconURL({ dynamic: true, size: 512 }) : `https://guild-default-icon.herokuapp.com/${encodeURIComponent(guild.nameAcronym)}`)
 			.setDescription([

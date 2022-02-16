@@ -1,4 +1,4 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 

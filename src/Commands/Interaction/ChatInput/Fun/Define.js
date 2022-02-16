@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -25,7 +25,7 @@ module.exports = class extends Interaction {
 				.setURL(result.permalink));
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://www.urbandictionary.com/' })
 			.setTitle(result.word)
 			.setDescription(result.definition)

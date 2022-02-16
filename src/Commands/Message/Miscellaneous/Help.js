@@ -1,6 +1,6 @@
-const Command = require('../../../Structures/Command.js');
+const Command = require('../../../Structures/Command');
 const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Access, Color } = require('../../../Settings/Configuration.js');
+const { Access, Colors } = require('../../../Utils/Constants');
 
 module.exports = class extends Command {
 
@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
 	async run(message, [command]) {
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL({ dynamic: true }) });
 
@@ -49,7 +49,7 @@ module.exports = class extends Command {
 
 			embed.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: 'https://i.imgur.com/YxoUvH8.png' });
 			embed.setDescription([
-				`Need more help? Come join our [guild](https://discord.gg/${Access.InviteCode})`,
+				`Need more help? Come join our [guild](${Access.InviteLink})`,
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
 

@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Api, Color } = require('../../../../Settings/Configuration.js');
+const { Colors, Secrets } = require('../../../../Utils/Constants');
 const IMDb = require('imdb-api');
 
 module.exports = class extends Interaction {
@@ -17,7 +17,7 @@ module.exports = class extends Interaction {
 		const search = await interaction.options.getString('search', true);
 
 		try {
-			const result = await IMDb.search({ name: search }, { apiKey: Api.Imdb }, 1).then(res => res.results);
+			const result = await IMDb.search({ name: search }, { apiKey: Secrets.ImdbApiKey }, 1).then(res => res.results);
 
 			const select = new MessageActionRow()
 				.addComponents(new MessageSelectMenu()
@@ -37,7 +37,7 @@ module.exports = class extends Interaction {
 					await i.deferUpdate();
 
 					const [ids] = i.values;
-					const data = await IMDb.get({ id: ids }, { apiKey: Api.Imdb });
+					const data = await IMDb.get({ id: ids }, { apiKey: Secrets.ImdbApiKey });
 
 					const rating = data.ratings.find(x => x.source === 'Internet Movie Database');
 					const tomatometer = data.ratings.find(x => x.source === 'Rotten Tomatoes');
@@ -50,7 +50,7 @@ module.exports = class extends Interaction {
 							.setURL(data.imdburl));
 
 					const embed = new MessageEmbed()
-						.setColor(Color.DEFAULT)
+						.setColor(Colors.Default)
 						.setAuthor({ name: 'IMDb', iconURL: 'https://i.imgur.com/0BTAjjv.png', url: 'https://www.imdb.com/' })
 						.setTitle(`${data.title} (${data.series ? data.year === 0 ? data.start_year : data.year : data.year})`)
 						.setThumbnail(data.poster)

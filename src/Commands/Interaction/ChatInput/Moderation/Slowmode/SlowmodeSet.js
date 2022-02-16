@@ -1,4 +1,4 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../../Structures/Interaction');
 const moment = require('moment');
 const ms = require('ms');
 require('moment-duration-format');

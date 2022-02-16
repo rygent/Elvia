@@ -1,4 +1,4 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../../Structures/Interaction');
 const { MessageAttachment, Util } = require('discord.js');
 
 module.exports = class extends Interaction {

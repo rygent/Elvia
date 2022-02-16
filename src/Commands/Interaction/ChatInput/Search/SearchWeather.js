@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Api, Color } = require('../../../../Settings/Configuration.js');
+const { Colors, Secrets } = require('../../../../Utils/Constants');
 const weather = require('openweather-apis');
 
 module.exports = class extends Interaction {
@@ -16,7 +16,7 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		weather.setAPPID(Api.OpenWeatherMap);
+		weather.setAPPID(Secrets.OpenWeatherApiKey);
 		weather.setLang('en');
 		weather.setUnits('metric');
 		weather.setCity(search.toLowerCase());
@@ -56,7 +56,7 @@ module.exports = class extends Interaction {
 
 			/* eslint-disable no-mixed-operators */
 			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
+				.setColor(Colors.Default)
 				.setAuthor({ name: 'Open Weather Map', iconURL: 'https://pbs.twimg.com/profile_images/1173919481082580992/f95OeyEW_400x400.jpg', url: 'https://openweathermap.org/' })
 				.setTitle(`:flag_${result.sys.country.toLowerCase()}: ${result.name} - ${result.weather[0].main}`)
 				.setThumbnail(`https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`)

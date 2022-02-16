@@ -1,6 +1,6 @@
-const Command = require('../../../Structures/Command.js');
-const ChatInput = require('../../../Settings/ChatInputInteraction.js');
-const ContextMenu = require('../../../Settings/ContextMenuInteraction.js');
+const Command = require('../../../Structures/Command');
+const ChatInput = require('../../../Utils/ChatInputInteraction');
+const ContextMenu = require('../../../Utils/ContextMenuInteraction');
 
 module.exports = class extends Command {
 

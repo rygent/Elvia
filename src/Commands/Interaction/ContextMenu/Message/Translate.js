@@ -1,4 +1,4 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Interaction {

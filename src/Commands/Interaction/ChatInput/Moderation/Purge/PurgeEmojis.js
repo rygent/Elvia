@@ -1,4 +1,4 @@
-const Interaction = require('../../../../../Structures/Interaction.js');
+const Interaction = require('../../../../../Structures/Interaction');
 const emojiregex = require('emoji-regex');
 
 module.exports = class extends Interaction {

@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -29,7 +29,7 @@ module.exports = class extends Interaction {
 					.setURL(`https://instagram.com/${account.username}`));
 
 			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
+				.setColor(Colors.Default)
 				.setAuthor({ name: 'Instagram', iconURL: 'https://i.imgur.com/wgMjJvq.png', url: 'https://instagram.com/' })
 				.setTitle(account.full_name)
 				.setThumbnail(account.profile_pic_url_hd)

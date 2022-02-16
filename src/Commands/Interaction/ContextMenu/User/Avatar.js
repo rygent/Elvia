@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 
 module.exports = class extends Interaction {
 
@@ -20,7 +20,7 @@ module.exports = class extends Interaction {
 				.setURL(member.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })));
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setAuthor({ name: member.user.tag, iconURL: member.displayAvatarURL({ dynamic: true }) })
 			.setDescription(`***ID:*** \`${member.user.id}\``)
 			.setImage(member.displayAvatarURL({ dynamic: true, size: 512 }))

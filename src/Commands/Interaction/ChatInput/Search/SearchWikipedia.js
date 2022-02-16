@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 					.setURL(result.content_urls.desktop.page));
 
 			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
+				.setColor(Colors.Default)
 				.setAuthor({ name: 'Wikipedia', iconURL: 'https://i.imgur.com/a4eeEhh.png', url: 'https://en.wikipedia.org/' })
 				.setTitle(result.title)
 				.setThumbnail(result.originalimage?.source)

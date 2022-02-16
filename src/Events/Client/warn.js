@@ -1,4 +1,4 @@
-const Event = require('../../Structures/Event.js');
+const Event = require('../../Structures/Event');
 
 module.exports = class extends Event {
 

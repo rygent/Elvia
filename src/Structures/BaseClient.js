@@ -1,5 +1,5 @@
 const { Client, Collection, Intents, Permissions } = require('discord.js');
-const Util = require('./Util.js');
+const Util = require('./Util');
 
 module.exports = class BaseClient extends Client {
 
@@ -23,14 +23,13 @@ module.exports = class BaseClient extends Client {
 		this.aliases = new Collection();
 		this.interactions = new Collection();
 		this.events = new Collection();
-		this.cooldowns = new Collection();
 		this.utils = new Util(this);
 
-		this.logger = require('../Modules/Logger.js');
+		this.logger = require('../Modules/Logger');
 
-		this.usersData = require('../Schemas/UserData.js');
-		this.guildsData = require('../Schemas/GuildData.js');
-		this.membersData = require('../Schemas/MemberData.js');
+		this.usersData = require('../Schemas/UserData');
+		this.guildsData = require('../Schemas/GuildData');
+		this.membersData = require('../Schemas/MemberData');
 
 		this.databaseCache = {};
 		this.databaseCache.users = new Collection();
@@ -122,8 +121,8 @@ module.exports = class BaseClient extends Client {
 		if (!options.defaultPermission) throw new Error('You must pass default perm(s) for the Client.');
 		this.defaultPermission = new Permissions(options.defaultPermission).freeze();
 
-		if (!options.mongoURL) throw new Error('You must pass MongoDB URL for the Client.');
-		this.mongoURL = options.mongoURL;
+		if (!options.mongoURI) throw new Error('You must pass MongoDB URI for the Client.');
+		this.mongoURI = options.mongoURI;
 	}
 
 	async start(token = this.token) {

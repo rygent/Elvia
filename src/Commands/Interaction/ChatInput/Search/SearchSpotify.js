@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { Api, Color, Emoji } = require('../../../../Settings/Configuration.js');
+const { Colors, Emojis, Secrets } = require('../../../../Utils/Constants');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
 require('moment-duration-format');
@@ -19,8 +19,8 @@ module.exports = class extends Interaction {
 		const search = await interaction.options.getString('search', true);
 
 		const spotify = new Spotify({
-			id: Api.Spotify.ClientId,
-			secret: Api.Spotify.ClientSecret
+			id: Secrets.SpotifyId,
+			secret: Secrets.SpotifySecret
 		});
 
 		const result = await spotify.search({ type: 'track', query: search });
@@ -31,12 +31,12 @@ module.exports = class extends Interaction {
 			.addComponents(new MessageButton()
 				.setStyle('LINK')
 				.setLabel('Play on Spotify')
-				.setEmoji(Emoji.SPOTIFY)
+				.setEmoji(Emojis.Spotify)
 				.setURL(track.external_urls.spotify));
 
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setAuthor({ name: 'Spotify', iconURL: 'https://i.imgur.com/9xO7toS.png', url: 'https://www.spotify.com/' })
 			.setTitle(track.name)
 			.setImage(track.album.images[0].url)

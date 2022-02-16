@@ -1,7 +1,7 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageEmbed } = require('discord.js');
-const { Color, Emoji } = require('../../../../Settings/Configuration.js');
-const flags = require('../../../../../assets/json/Badge.json');
+const { Colors, Emojis } = require('../../../../Utils/Constants');
+const flags = require('../../../../assets/json/Badge.json');
 
 module.exports = class extends Interaction {
 
@@ -16,10 +16,10 @@ module.exports = class extends Interaction {
 		const member = await interaction.options.getMember('user') || interaction.member;
 
 		const status = {
-			online: `${Emoji.ONLINE} Online`,
-			idle: `${Emoji.IDLE} Idle`,
-			dnd: `${Emoji.DND} Do Not Disturb`,
-			offline: `${Emoji.OFFLINE} Offline`
+			online: `${Emojis.Online} Online`,
+			idle: `${Emojis.Idle} Idle`,
+			dnd: `${Emojis.Dnd} Do Not Disturb`,
+			offline: `${Emojis.Offline} Offline`
 		};
 		const userFlags = member.user.flags.toArray();
 
@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 		const permissions = member.permissions.toArray().filter(x => !interaction.guild.roles.everyone.permissions.toArray().includes(x));
 
 		const embed = new MessageEmbed()
-			.setColor(Color.DEFAULT)
+			.setColor(Colors.Default)
 			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL({ dynamic: true }) })
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([

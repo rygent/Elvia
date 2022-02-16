@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageEmbed } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const translate = require('@iamtraction/google-translate');
 
 module.exports = class extends Interaction {
@@ -25,7 +25,7 @@ module.exports = class extends Interaction {
 			const from = translated.from.language.iso;
 
 			const embed = new MessageEmbed()
-				.setColor(Color.DEFAULT)
+				.setColor(Colors.Default)
 				.setAuthor({ name: 'Google Translate', iconURL: 'https://i.imgur.com/1JS81kv.png', url: 'https://translate.google.com/' })
 				.setDescription([
 					`${translated.text}\n`,
@@ -34,8 +34,8 @@ module.exports = class extends Interaction {
 				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 			return interaction.reply({ embeds: [embed] });
-		} catch (error) {
-			if (error.code === 400) {
+		} catch (e) {
+			if (e.code === 400) {
 				return interaction.reply({ content: 'Please send valid **[ISO 639-1](<https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>)** languages codes.', ephemeral: true });
 			}
 		}

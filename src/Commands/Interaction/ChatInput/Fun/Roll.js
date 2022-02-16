@@ -1,4 +1,4 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { DiceRoll, NumberGenerator } = require('@dice-roller/rpg-dice-roller');
 
 module.exports = class extends Interaction {

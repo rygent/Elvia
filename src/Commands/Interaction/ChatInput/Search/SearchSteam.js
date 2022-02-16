@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction.js');
+const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { Color } = require('../../../../Settings/Configuration.js');
+const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
 module.exports = class extends Interaction {
@@ -48,7 +48,7 @@ module.exports = class extends Interaction {
 						.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`));
 
 				const embed = new MessageEmbed()
-					.setColor(Color.DEFAULT)
+					.setColor(Colors.Default)
 					.setAuthor({ name: 'Steam', iconURL: 'https://i.imgur.com/xxr2UBZ.png', url: 'http://store.steampowered.com/' })
 					.setTitle(data.name)
 					.setDescription(data.short_description)
