@@ -1,7 +1,7 @@
 const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageEmbed } = require('discord.js');
 const { Colors, Emojis } = require('../../../../Utils/Constants');
-const flags = require('../../../../assets/json/Badge.json');
+const flags = require('../../../../Assets/json/Badge.json');
 
 module.exports = class extends Interaction {
 
