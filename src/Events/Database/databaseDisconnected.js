@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log({ content: 'Disconnected from Database!', type: 'warn' });
+		this.client.logger.debug('Disconnected from Database!');
 	}
 
 };

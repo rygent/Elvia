@@ -53,7 +53,7 @@ module.exports = class extends Event {
 				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
-				this.client.logger.log({ content: error.stack, type: 'error' });
+				this.client.logger.error(error.stack);
 				return message.reply({ content: 'An unexpected error occurred.' });
 			}
 		}

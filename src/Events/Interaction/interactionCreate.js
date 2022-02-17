@@ -30,7 +30,7 @@ module.exports = class extends Event {
 				await command.run(interaction);
 			} catch (error) {
 				if (interaction.replied) return;
-				this.client.logger.log({ content: error.stack, type: 'error' });
+				this.client.logger.error(error.stack);
 
 				if (interaction.deferred) {
 					return interaction.editReply({ content: 'An unexpected error occurred.' });

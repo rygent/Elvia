@@ -8,8 +8,9 @@ module.exports = class extends Event {
 		});
 	}
 
-	async run(error) {
-		this.client.logger.log({ content: error.stack, type: 'error' });
+	// eslint-disable-next-line no-unused-vars
+	async run(error, origin) {
+		this.client.logger.error(error.stack);
 	}
 
 };

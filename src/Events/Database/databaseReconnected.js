@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log({ content: 'Reconnected to Database!', type: 'ready' });
+		this.client.logger.debug('Reconnecting to Database!');
 	}
 
 };

@@ -23,7 +23,7 @@ module.exports = class extends Command {
 				await guild?.commands.set(InteractionData).then(data => {
 					m.edit({ content: `\`${data.size.toLocaleString()}\` Commands (\`${data.map(i => i.options).flat().length.toLocaleString()}\` Subcommands) loaded for **${guild.name}**` });
 				}).catch(error => {
-					this.client.logger.log({ content: error.stack, type: 'error' });
+					this.client.logger.error(error.stack);
 					m.edit({ content: `Could not load the Slash Commands for ${guild.name}` });
 				});
 			});

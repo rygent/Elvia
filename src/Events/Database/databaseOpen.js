@@ -12,7 +12,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log({ content: 'Connected to Database!', type: 'ready' });
+		this.client.logger.log('Connected to Database!', { status: 'BOOT', color: 'greenBright' });
 	}
 
 };

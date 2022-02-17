@@ -4,25 +4,20 @@ const moment = require('moment');
 
 module.exports = class Logger {
 
-	static log({ content, type = 'log' }) {
-		switch (type) {
-			case 'log': {
-				return this.console({ content, status: 'INFO', color: 'blueBright' });
-			}
-			case 'warn': {
-				return this.console({ content, status: 'WARN', color: 'yellowBright' });
-			}
-			case 'error': {
-				return this.console({ content, status: 'ERROR', color: 'redBright', error: true });
-			}
-			case 'debug': {
-				return this.console({ content, status: 'DEBUG', color: 'blackBright' });
-			}
-			case 'ready': {
-				return this.console({ content, status: 'BOOT', color: 'greenBright' });
-			}
-			default: throw new TypeError('Logger type must be either warn, debug, log, ready or error.');
-		}
+	static log(content, { status = 'INFO', color = 'blueBright' } = {}) {
+		return this.console({ content, status, color });
+	}
+
+	static error(content) {
+		return this.console({ content, status: 'ERROR', color: 'redBright', error: true });
+	}
+
+	static warn(content) {
+		return this.console({ content, status: 'WARN', color: 'yellowBright' });
+	}
+
+	static debug(content) {
+		return this.console({ content, status: 'DEBUG', color: 'blackBright' });
 	}
 
 	static console({ content, status, color, error = false }) {

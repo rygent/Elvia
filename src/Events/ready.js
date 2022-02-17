@@ -10,8 +10,8 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log({ content: `Loaded ${(this.client.commands.size + this.client.interactions.size).toLocaleString()} commands & ${this.client.events.size.toLocaleString()} events!` });
-		this.client.logger.log({ content: `Logged in as ${chalk.redBright(`${this.client.user.tag}`)}`, type: 'ready' });
+		this.client.logger.log(`Logged in as ${chalk.redBright(`${this.client.user.tag}`)}`, { status: 'BOOT', color: 'greenBright' });
+		this.client.logger.log(`Loaded ${(this.client.commands.size + this.client.interactions.size).toLocaleString()} commands & ${this.client.events.size.toLocaleString()} events!`);
 
 		const activities = [
 			{ name: `${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} users`, type: 'LISTENING' },
