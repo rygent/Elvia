@@ -1,7 +1,9 @@
+const { ApplicationCommandType } = require('discord-api-types/v9');
+
 module.exports = [{
-	name: 'Translate',
-	type: 'MESSAGE'
-}, {
 	name: 'Avatar',
-	type: 'USER'
+	type: ApplicationCommandType.User
+}, {
+	name: 'Translate',
+	type: ApplicationCommandType.Message
 }];
