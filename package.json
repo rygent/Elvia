@@ -4,6 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
+    "deploy": "node script/register.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "update": "yarn upgrade-interactive --latest"
@@ -17,6 +18,7 @@
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.0",
+    "@discordjs/rest": "^0.3.0",
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.26.0",
     "chalk": "^4.1.2",
@@ -29,6 +31,7 @@
     "flip-text": "^1.2.0",
     "glob": "^7.2.0",
     "imdb-api": "^4.4.1",
+    "inquirer": "^8.2.0",
     "kitsu": "^10.0.0-alpha.20",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
