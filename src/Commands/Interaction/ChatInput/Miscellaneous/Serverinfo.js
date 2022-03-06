@@ -1,5 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageEmbed } = require('discord.js');
+const { ChannelType } = require('discord-api-types/v9');
 const { Colors } = require('../../../../Utils/Constants');
 
 module.exports = class extends Interaction {
@@ -47,7 +48,7 @@ module.exports = class extends Interaction {
 				`***Explicit Filter:*** ${contentFilterLevels[interaction.guild.explicitContentFilter]}`,
 				`***Verification:*** ${verificationLevels[interaction.guild.verificationLevel]}`,
 				`***Created:*** ${Formatters.time(new Date(interaction.guild.createdTimestamp), 'D')} (${Formatters.time(new Date(interaction.guild.createdTimestamp), 'R')})`,
-				`***Channels:*** ${channels.filter(channel => !['GUILD_VOICE', 'GUILD_STAGE_VOICE'].includes(channel.type)).size.toLocaleString()} Text / ${channels.filter(channel => ['GUILD_VOICE', 'GUILD_STAGE_VOICE'].includes(channel.type)).size.toLocaleString()} Voice`,
+				`***Channels:*** ${channels.filter(channel => ![ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(channel.type)).size.toLocaleString()} Text / ${channels.filter(channel => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(channel.type)).size.toLocaleString()} Voice`,
 				`***Online Members:*** ${interaction.guild.members.cache.filter(members => ['online', 'idle', 'dnd'].includes(members.presence?.status)).size.toLocaleString()} of ${interaction.guild.memberCount.toLocaleString()} Members`
 			].join('\n'))
 			.addField(`__Roles__ (${roles.length})`, `${roles.length > 0 ? this.client.utils.formatArray(this.client.utils.trimArray(roles, 15)) : 'None'}`)

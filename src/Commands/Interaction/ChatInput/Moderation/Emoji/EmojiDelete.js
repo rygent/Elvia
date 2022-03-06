@@ -1,5 +1,6 @@
 const Interaction = require('../../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, Util } = require('discord.js');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
 
 module.exports = class extends Interaction {
 
@@ -23,16 +24,16 @@ module.exports = class extends Interaction {
 
 		const button = new MessageActionRow()
 			.addComponents(new MessageButton()
-				.setStyle('SECONDARY')
+				.setStyle(ButtonStyle.Secondary)
 				.setCustomId('cancel')
 				.setLabel('Cancel'))
 			.addComponents(new MessageButton()
-				.setStyle('DANGER')
+				.setStyle(ButtonStyle.Danger)
 				.setCustomId('delete')
 				.setLabel('Delete'));
 
 		return interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button], fetchReply: true }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: 'BUTTON', time: 60_000 });
+			const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				if (i.user.id !== interaction.user.id) return i.deferUpdate();

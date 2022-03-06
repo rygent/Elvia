@@ -1,5 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
 const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
@@ -32,7 +33,7 @@ module.exports = class extends Interaction {
 				}))));
 
 		return interaction.reply({ content: `I found **${result.length}** possible matches, please select one of the following:`, components: [select], fetchReply: true }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: 'SELECT_MENU', time: 60_000 });
+			const collector = message.createMessageComponentCollector({ componentType: ComponentType.SelectMenu, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				if (i.user.id !== interaction.user.id) return i.deferUpdate();
@@ -43,7 +44,7 @@ module.exports = class extends Interaction {
 
 				const button = new MessageActionRow()
 					.addComponents(new MessageButton()
-						.setStyle('LINK')
+						.setStyle(ButtonStyle.Link)
 						.setLabel('Open in Browser')
 						.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`));
 

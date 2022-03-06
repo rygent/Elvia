@@ -1,4 +1,5 @@
-const { Client, Collection, Intents, Permissions } = require('discord.js');
+const { Client, Collection, Permissions } = require('discord.js');
+const { GatewayIntentBits } = require('discord-api-types/v9');
 const Logger = require('../Modules/Logger');
 const Util = require('./Util');
 
@@ -7,11 +8,11 @@ module.exports = class BaseClient extends Client {
 	constructor(options = {}) {
 		super({
 			intents: [
-				Intents.FLAGS.GUILDS,
-				Intents.FLAGS.GUILD_BANS,
-				Intents.FLAGS.GUILD_MEMBERS,
-				Intents.FLAGS.GUILD_MESSAGES,
-				Intents.FLAGS.GUILD_PRESENCES
+				GatewayIntentBits.Guilds,
+				GatewayIntentBits.GuildBans,
+				GatewayIntentBits.GuildMembers,
+				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.GuildPresences
 			],
 			allowedMentions: {
 				parse: ['users', 'roles'],

@@ -1,5 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { ButtonStyle } = require('discord-api-types/v9');
 const { Colors, Emojis, Secrets } = require('../../../../Utils/Constants');
 const Spotify = require('node-spotify-api');
 const moment = require('moment');
@@ -29,7 +30,7 @@ module.exports = class extends Interaction {
 
 		const button = new MessageActionRow()
 			.addComponents(new MessageButton()
-				.setStyle('LINK')
+				.setStyle(ButtonStyle.Link)
 				.setLabel('Play on Spotify')
 				.setEmoji(Emojis.Spotify)
 				.setURL(track.external_urls.spotify));

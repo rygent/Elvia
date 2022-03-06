@@ -1,5 +1,6 @@
 const Command = require('../../../Structures/Command');
 const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
+const { ComponentType } = require('discord-api-types/v9');
 const { Access, Colors } = require('../../../Utils/Constants');
 
 module.exports = class extends Command {
@@ -65,7 +66,7 @@ module.exports = class extends Command {
 
 			return message.reply({ embeds: [embed], components: [select(false)] }).then(msg => {
 				const filter = (i) => i.customId === 'help_menu';
-				const collector = msg.createMessageComponentCollector({ filter, componentType: 'SELECT_MENU', time: 60_000 });
+				const collector = msg.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 				collector.on('collect', async (i) => {
 					if (i.user.id !== message.author.id) return i.deferUpdate();

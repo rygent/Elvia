@@ -1,5 +1,6 @@
 const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { ButtonStyle } = require('discord-api-types/v9');
 const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
@@ -20,7 +21,7 @@ module.exports = class extends Interaction {
 
 		const button = new MessageActionRow()
 			.addComponents(new MessageButton()
-				.setStyle('LINK')
+				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
 				.setURL(result.permalink));
 
