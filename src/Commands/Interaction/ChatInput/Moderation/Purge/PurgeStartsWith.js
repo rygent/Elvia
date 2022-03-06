@@ -7,8 +7,8 @@ module.exports = class extends Interaction {
 			name: 'purge',
 			subCommand: 'starts-with',
 			description: 'Purge messages that starts with specified content in the channel.',
-			memberPermission: ['MANAGE_MESSAGES'],
-			clientPermission: ['MANAGE_MESSAGES']
+			memberPermissions: ['MANAGE_MESSAGES'],
+			clientPermissions: ['MANAGE_MESSAGES']
 		});
 	}
 

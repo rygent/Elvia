@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['h'],
 			description: 'View help.',
-			category: 'Miscellaneous',
+			category: 'Utility',
 			usage: '(command)'
 		});
 	}
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
-				`***Permission:*** ${cmd.memberPermission.toArray().length > 0 ? `${cmd.memberPermission.toArray().map((perm) => `\`${this.client.utils.formatPermission(perm)}\``).join(', ')}` : 'No permission required.'}`,
+				`***Permission(s):*** ${cmd.memberPermission.toArray().length > 0 ? `${cmd.memberPermission.toArray().map((perm) => `\`${this.client.utils.formatPermissions(perm)}\``).join(', ')}` : 'No permission required.'}`,
 				`***Usage:*** ${cmd.usage ? `\`${this.client.prefix + cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix + cmd.name}\``}`
 			].join('\n'));
 
@@ -58,7 +58,7 @@ module.exports = class extends Command {
 					.setCustomId('help_menu')
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
-					.addOptions(categories.filter(x => this.client.utils.categoryCheck(x.directory, message)).map((cmd) => ({
+					.addOptions(categories.filter(x => this.client.utils.filterCategory(x.directory, message)).map((cmd) => ({
 						label: cmd.directory,
 						value: cmd.directory.toLowerCase()
 					}))));

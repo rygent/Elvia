@@ -7,8 +7,8 @@ module.exports = class extends Interaction {
 			name: 'purge',
 			subCommand: 'ends-with',
 			description: 'Purge messages that ends with specified content in the channel.',
-			memberPermission: ['MANAGE_MESSAGES'],
-			clientPermission: ['MANAGE_MESSAGES']
+			memberPermissions: ['MANAGE_MESSAGES'],
+			clientPermissions: ['MANAGE_MESSAGES']
 		});
 	}
 

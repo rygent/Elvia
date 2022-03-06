@@ -42,7 +42,7 @@ module.exports = class extends Interaction {
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
 		if (permissions.length > 0) {
-			embed.addField('__Permission(s)__', `${this.client.utils.formatArray(permissions.map(x => this.client.utils.formatPermission(x)))}`);
+			embed.addField('__Permission(s)__', `${this.client.utils.formatArray(permissions.map(x => this.client.utils.formatPermissions(x)))}`);
 		}
 
 		return interaction.reply({ embeds: [embed] });

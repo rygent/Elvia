@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run(error) {
-		this.client.logger.error(`Unable to connect database:\n${error.stack}`);
+		this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`);
 	}
 
 };

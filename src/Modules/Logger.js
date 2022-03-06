@@ -1,32 +1,39 @@
-const { inspect } = require('util');
+const { inspect } = require('node:util');
 const chalk = require('chalk');
 const moment = require('moment');
 
 module.exports = class Logger {
 
-	static log(content, { status = 'INFO', color = 'blueBright' } = {}) {
-		return this.console({ content, status, color });
+	constructor(client) {
+		this.client = client;
 	}
 
-	static error(content) {
-		return this.console({ content, status: 'ERROR', color: 'redBright', error: true });
+	log(content, options = {}) {
+		options.status = options.status || 'INFO';
+		options.color = options.color || 'blueBright';
+		return this.write(content, { status: options.status, color: options.color });
 	}
 
-	static warn(content) {
-		return this.console({ content, status: 'WARN', color: 'yellowBright' });
+	error(content) {
+		return this.write(content, { status: 'ERROR', color: 'redBright', error: true });
 	}
 
-	static debug(content) {
-		return this.console({ content, status: 'DEBUG', color: 'blackBright' });
+	warn(content) {
+		return this.write(content, { status: 'WARN', color: 'yellowBright' });
 	}
 
-	static console({ content, status, color, error = false }) {
+	debug(content) {
+		return this.write(content, { status: 'DEBUG', color: 'blackBright' });
+	}
+
+	write(content, options = {}) {
+		options.error = options.error || false;
 		const timestamp = chalk.dim(moment().format('DD/MM/YYYY HH:mm:ss z'));
-		const stream = error ? process.stderr : process.stdout;
-		stream.write(`${timestamp} [\u200B${chalk[color].bold(status)}\u200B] ${this.clean(content)}\n`);
+		const stream = options.error ? process.stderr : process.stdout;
+		stream.write(`${timestamp} [\u200B${chalk[options.color].bold(options.status)}\u200B] ${this.clean(content)}\n`);
 	}
 
-	static clean(content) {
+	clean(content) {
 		if (typeof content === 'string') return content;
 		const cleaned = inspect(content, { depth: Infinity });
 		return cleaned;

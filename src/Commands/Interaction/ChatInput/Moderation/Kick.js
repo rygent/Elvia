@@ -6,8 +6,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'kick',
 			description: 'Kick a member with optional reason.',
-			memberPermission: ['KICK_MEMBERS'],
-			clientPermission: ['KICK_MEMBERS']
+			memberPermissions: ['KICK_MEMBERS'],
+			clientPermissions: ['KICK_MEMBERS']
 		});
 	}
 

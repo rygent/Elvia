@@ -6,14 +6,14 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['pong'],
 			description: 'Send a ping request.',
-			category: 'Miscellaneous'
+			category: 'Utility'
 		});
 	}
 
 	async run(message) {
 		return message.reply({ content: [
 			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
-			`***REST:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
+			`***Latency:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
 		].join('\n') });
 	}
 

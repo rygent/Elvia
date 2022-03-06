@@ -9,19 +9,19 @@ module.exports = class extends Event {
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
 			if (interaction.inGuild()) {
-				const memberPermCheck = command.memberPermission ? this.client.defaultPermission.add(command.memberPermission) : this.client.defaultPermission;
+				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
 				if (memberPermCheck) {
 					const missing = interaction.channel.permissionsFor(interaction.member).missing(memberPermCheck);
 					if (missing.length) {
-						return interaction.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermission(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+						return interaction.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
 
-				const clientPermCheck = command.clientPermission ? this.client.defaultPermission.add(command.clientPermission) : this.client.defaultPermission;
+				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
 				if (clientPermCheck) {
 					const missing = interaction.channel.permissionsFor(interaction.guild.me).missing(clientPermCheck);
 					if (missing.length) {
-						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermission(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
 			}
@@ -33,9 +33,15 @@ module.exports = class extends Event {
 				this.client.logger.error(error.stack);
 
 				if (interaction.deferred) {
-					return interaction.editReply({ content: 'An unexpected error occurred.' });
+					return interaction.editReply({ content: [
+						'An error has occured when executing this command, our developers have been informed.',
+						'If the issue persists, please contact us in our Support Server.'
+					].join('\n') });
 				} else {
-					return interaction.reply({ content: 'An unexpected error occurred.', ephemeral: true });
+					return interaction.reply({ content: [
+						'An error has occured when executing this command, our developers have been informed.',
+						'If the issue persists, please contact us in our Support Server.'
+					].join('\n'), ephemeral: true });
 				}
 			}
 		}
@@ -43,8 +49,7 @@ module.exports = class extends Event {
 
 	getCommandName(interaction) {
 		let command;
-		// eslint-disable-next-line prefer-destructuring
-		const commandName = interaction.commandName;
+		const { commandName } = interaction;
 		const subCommandGroup = interaction.options.getSubcommandGroup(false);
 		const subCommand = interaction.options.getSubcommand(false);
 

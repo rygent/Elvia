@@ -1,7 +1,7 @@
 const moment = require('moment-timezone');
-require('dotenv').config();
+require('dotenv/config');
 
-moment.tz.setDefault(process.env.TZ);
+moment.tz.setDefault(process.env.TIMEZONE);
 
 const BaseClient = require('./Structures/BaseClient');
 const Configuration = require('./Utils/Configuration');

@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.debug('Disconnected from Database!');
+		this.client.logger.debug('Disconnected from MongoDB!');
 	}
 
 };

@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.debug('Reconnecting to Database!');
+		this.client.logger.debug('Reconnecting to MongoDB!');
 	}
 
 };

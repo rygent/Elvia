@@ -1,4 +1,5 @@
 const { Client, Collection, Intents, Permissions } = require('discord.js');
+const Logger = require('../Modules/Logger');
 const Util = require('./Util');
 
 module.exports = class BaseClient extends Client {
@@ -23,9 +24,9 @@ module.exports = class BaseClient extends Client {
 		this.aliases = new Collection();
 		this.interactions = new Collection();
 		this.events = new Collection();
-		this.utils = new Util(this);
 
-		this.logger = require('../Modules/Logger');
+		this.utils = new Util(this);
+		this.logger = new Logger(this);
 
 		this.usersData = require('../Schemas/UserData');
 		this.guildsData = require('../Schemas/GuildData');
@@ -118,8 +119,8 @@ module.exports = class BaseClient extends Client {
 		if (!Array.isArray(options.owners)) throw new TypeError('Owners should be a type of Array<String>.');
 		this.owners = options.owners;
 
-		if (!options.defaultPermission) throw new Error('You must pass default perm(s) for the Client.');
-		this.defaultPermission = new Permissions(options.defaultPermission).freeze();
+		if (!options.defaultPermissions) throw new Error('You must pass default permission(s) for the Client.');
+		this.defaultPermissions = new Permissions(options.defaultPermissions).freeze();
 
 		if (!options.mongoURI) throw new Error('You must pass MongoDB URI for the Client.');
 		this.mongoURI = options.mongoURI;

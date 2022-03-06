@@ -24,19 +24,19 @@ module.exports = class extends Event {
 			}
 
 			if (message.inGuild()) {
-				const memberPermCheck = command.memberPermission ? this.client.defaultPermission.add(command.memberPermission) : this.client.defaultPermission;
+				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermission(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
-				const clientPermCheck = command.clientPermission ? this.client.defaultPermission.add(command.clientPermission) : this.client.defaultPermission;
+				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermission(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
@@ -54,7 +54,10 @@ module.exports = class extends Event {
 				await command.run(message, args);
 			} catch (error) {
 				this.client.logger.error(error.stack);
-				return message.reply({ content: 'An unexpected error occurred.' });
+				return message.reply({ content: [
+					'An error has occured when executing this command, our developers have been informed.',
+					'If the issue persists, please contact us in our Support Server.'
+				].join('\n') });
 			}
 		}
 	}

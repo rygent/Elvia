@@ -8,8 +8,8 @@ module.exports = class Interaction {
 		this.subCommandGroup = options.subCommandGroup;
 		this.subCommand = options.subCommand;
 		this.description = options.description || 'No description provided';
-		this.memberPermission = new Permissions(options.memberPermission).freeze();
-		this.clientPermission = new Permissions(options.clientPermission).freeze();
+		this.memberPermissions = new Permissions(options.memberPermissions).freeze();
+		this.clientPermissions = new Permissions(options.clientPermissions).freeze();
 		this.guildOnly = options.guildOnly || false;
 	}
 

@@ -1,6 +1,6 @@
 const Command = require('../../../Structures/Command');
 const { Formatters, Util } = require('discord.js');
-const { exec } = require('child_process');
+const { exec } = require('node:child_process');
 
 module.exports = class extends Command {
 

@@ -7,8 +7,8 @@ module.exports = class extends Interaction {
 			name: 'slowmode',
 			subCommand: 'off',
 			description: 'Turn off slowmode.',
-			memberPermission: ['MANAGE_CHANNELS'],
-			clientPermission: ['MANAGE_CHANNELS']
+			memberPermissions: ['MANAGE_CHANNELS'],
+			clientPermissions: ['MANAGE_CHANNELS']
 		});
 	}
 

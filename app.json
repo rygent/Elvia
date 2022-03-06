@@ -25,7 +25,7 @@
         "description": "Input here your MongoDB URI.",
         "required": true
       },
-      "TZ": {
+      "TIMEZONE": {
         "description": "Input here your timezone.",
         "required": false
       },

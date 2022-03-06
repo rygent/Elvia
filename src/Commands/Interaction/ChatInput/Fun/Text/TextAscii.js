@@ -1,6 +1,7 @@
 const Interaction = require('../../../../../Structures/Interaction');
 const { Formatters } = require('discord.js');
-const figlet = require('util').promisify(require('figlet'));
+const { promisify } = require('node:util');
+const figlet = promisify(require('figlet'));
 
 module.exports = class extends Interaction {
 

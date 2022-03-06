@@ -8,8 +8,8 @@ module.exports = class extends Interaction {
 			name: 'purge',
 			subCommand: 'emojis',
 			description: 'Purge messages that contain emojis in the channel.',
-			memberPermission: ['MANAGE_MESSAGES'],
-			clientPermission: ['MANAGE_MESSAGES']
+			memberPermissions: ['MANAGE_MESSAGES'],
+			clientPermissions: ['MANAGE_MESSAGES']
 		});
 	}
 

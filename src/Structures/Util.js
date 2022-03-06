@@ -1,5 +1,5 @@
-const path = require('path');
-const { promisify } = require('util');
+const path = require('node:path');
+const { promisify } = require('node:util');
 const glob = promisify(require('glob'));
 const { connect } = require('mongoose');
 const Command = require('./Command');
@@ -22,11 +22,11 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename)}${path.sep}`;
 	}
 
-	checkOwner(target) {
-		return this.client.owners.includes(target);
+	checkOwner(userId) {
+		return this.client.owners.includes(userId);
 	}
 
-	categoryCheck(category, message) {
+	filterCategory(category, message) {
 		category = category.toLowerCase();
 		switch (category) {
 			case 'developer':
@@ -38,25 +38,8 @@ module.exports = class Util {
 		}
 	}
 
-	removeDuplicates(array) {
-		return [...new Set(array)];
-	}
-
-	trimArray(arr, maxLen = 10) {
-		if (arr.length > maxLen) {
-			const len = arr.length - maxLen;
-			arr = arr.slice(0, maxLen);
-			arr.push(`${len} more...`);
-		}
-		return arr;
-	}
-
-	truncateString(string, maxLen = 100) {
-		let i = string?.lastIndexOf(' ', maxLen);
-		if (i > maxLen - 3) {
-			i = string?.lastIndexOf(' ', i - 1);
-		}
-		return string?.length > maxLen ? `${string.substring(0, i)}...` : string;
+	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
+		return new Intl.ListFormat('en-US', { style, type }).format(array);
 	}
 
 	formatBytes(bytes) {
@@ -66,8 +49,12 @@ module.exports = class Util {
 		return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
 	}
 
-	formatPermission(permission) {
-		return permission.toLowerCase()
+	formatLanguage(string, { type = 'language', languageDisplay = 'standard' } = {}) {
+		return new Intl.DisplayNames('en-US', { type, languageDisplay }).of(string);
+	}
+
+	formatPermissions(permissions) {
+		return permissions.toLowerCase()
 			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
 			.replace(/_/g, ' ')
 			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
@@ -78,12 +65,43 @@ module.exports = class Util {
 			.replace(/Use Vad/g, 'Use Voice Acitvity');
 	}
 
-	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
-		return new Intl.ListFormat('en-US', { style, type }).format(array);
+	removeDuplicates(array) {
+		return [...new Set(array)];
 	}
 
-	formatLanguage(string, { type = 'language', languageDisplay = 'standard' } = {}) {
-		return new Intl.DisplayNames('en-US', { type, languageDisplay }).of(string);
+	trimArray(array, maxLen = 10) {
+		if (array.length > maxLen) {
+			const len = array.length - maxLen;
+			array = array.slice(0, maxLen);
+			array.push(`${len} more...`);
+		}
+		return array;
+	}
+
+	truncateString(string, maxLen = 100) {
+		let i = string?.lastIndexOf(' ', maxLen);
+		if (i > maxLen - 3) {
+			i = string?.lastIndexOf(' ', i - 1);
+		}
+		return string?.length > maxLen ? `${string.substring(0, i)}...` : string;
+	}
+
+	getCommandName(interaction) {
+		let command;
+		const { name } = interaction;
+		const group = interaction.subCommandGroup;
+		const subcommand = interaction.subCommand;
+
+		if (subcommand) {
+			if (group) {
+				command = `${name}-${group}-${subcommand}`;
+			} else {
+				command = `${name}-${subcommand}`;
+			}
+		} else {
+			command = name;
+		}
+		return command;
 	}
 
 	async loadDatabases() {
@@ -136,17 +154,7 @@ module.exports = class Util {
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name);
 				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
-				let command;
-				if (interaction.subCommand) {
-					if (interaction.subCommandGroup) {
-						command = `${interaction.name}-${interaction.subCommandGroup}-${interaction.subCommand}`;
-					} else {
-						command = `${interaction.name}-${interaction.subCommand}`;
-					}
-				} else {
-					command = interaction.name;
-				}
-				this.client.interactions.set(command, interaction);
+				this.client.interactions.set(this.getCommandName(interaction), interaction);
 			}
 		});
 	}

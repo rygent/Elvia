@@ -12,7 +12,7 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		return interaction.reply({ content: [
 			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
-			`***REST:*** \`${Math.round(Date.now() - interaction.createdTimestamp)}ms\``
+			`***Latency:*** \`${Math.round(Date.now() - interaction.createdTimestamp)}ms\``
 		].join('\n') });
 	}
 

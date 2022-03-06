@@ -6,8 +6,8 @@ module.exports = class extends Interaction {
 		super(...args, {
 			name: 'untimeout',
 			description: 'Remove timeout from a member.',
-			memberPermission: ['MODERATE_MEMBERS'],
-			clientPermission: ['MODERATE_MEMBERS']
+			memberPermissions: ['MODERATE_MEMBERS'],
+			clientPermissions: ['MODERATE_MEMBERS']
 		});
 	}
 

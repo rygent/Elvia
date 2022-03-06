@@ -1,7 +1,7 @@
 const Command = require('../../../Structures/Command');
 const { Formatters, MessageAttachment } = require('discord.js');
 const { Type } = require('@anishshobith/deeptype');
-const { inspect } = require('util');
+const { inspect } = require('node:util');
 
 module.exports = class extends Command {
 
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 			const stop = process.hrtime(start);
 			const response = [
 				`**Output:** ${Formatters.codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}`,
-				`**Type:** ${Formatters.inlineCode(new Type(evaled).is)}`,
+				`**Type:** ${Formatters.codeBlock('ts', new Type(evaled).is)}`,
 				`**Time:** ${Formatters.inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			];
 			const res = response.join('\n');
