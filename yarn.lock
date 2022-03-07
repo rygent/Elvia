@@ -259,13 +259,6 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
-  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
-  dependencies:
-    follow-redirects "^1.14.7"
-
 axios@^0.26.0:
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
@@ -770,7 +763,7 @@ flip-text@^1.2.0:
   resolved "https://registry.yarnpkg.com/flip-text/-/flip-text-1.2.0.tgz#c26e4218d7d115d1a0d7433c32097c6d7de77193"
   integrity sha512-6gZynclke4Cwl1VCUXDjryfqYZIIYwZnlYHOsUF5Btrax2+6VndQdsdwDiPyKE4Uv2qYFFxzM4XYPjF7DfdBhw==
 
-follow-redirects@^1.14.7, follow-redirects@^1.14.8:
+follow-redirects@^1.14.8:
   version "1.14.8"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
   integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
@@ -1112,18 +1105,18 @@ keyv@^4.0.0:
   dependencies:
     json-buffer "3.0.1"
 
-kitsu-core@^10.0.0-alpha.20:
-  version "10.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.20.tgz#2bf772452f9c2ab4709c826ee072c74846e22776"
-  integrity sha512-NEQ1Q/ZBTxY0jzjLpBXtSw6awki6adOHpHafGH4uGRGq2eBBQeuaPl6C0NFnjAqVF39iIk40j5LOEXfC1yPNDA==
+kitsu-core@^10.0.0-alpha.22:
+  version "10.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.22.tgz#783fa6352245f147b1ddde057aef424d4d0e4da9"
+  integrity sha512-+1O27hmKlTxYSTOuJw0D5leJMD5KMpcRczb4k3CGKylRMyBlNqsCCFLb6FNDRIDVu4szRYKAnypljVJMgSkovg==
 
-kitsu@^10.0.0-alpha.20:
-  version "10.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.20.tgz#0c819e27d0c347bf85807c61dd012a31f93def9e"
-  integrity sha512-eqWtrIpOMAXDK933BkuDGMc1KL6x6GnPeuZpRqQXeq1/T9BIvcS1T0Yal8Qst9j2FFeRAOt1VVXZjgFcUNQM0w==
+kitsu@^10.0.0-alpha.22:
+  version "10.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.22.tgz#d30281bad42572bed5ea78adf6fe3e7b92e93b65"
+  integrity sha512-EgDxOfiBEBj7n0FgEqzJSReqiXcUDwcKNKiVJcgbaCjISdkN9PdiSNTN3KWRYS4EuetLkIjWpH40VMkGAW4fjg==
   dependencies:
-    axios "^0.25.0"
-    kitsu-core "^10.0.0-alpha.20"
+    axios "^0.26.0"
+    kitsu-core "^10.0.0-alpha.22"
     pluralize "^8.0.0"
 
 ky-universal@^0.8.2:
