@@ -22,7 +22,7 @@
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.26.0",
     "chalk": "^4.1.2",
-    "discord-api-types": "^0.27.3",
+    "discord-api-types": "^0.28.0",
     "discord-emoji-convert": "^2.1.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
