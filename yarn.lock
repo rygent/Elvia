@@ -259,13 +259,6 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
-  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
-  dependencies:
-    follow-redirects "^1.14.7"
-
 axios@^0.26.0:
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
@@ -553,10 +546,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-emoji-regex@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.0.0.tgz#96559e19f82231b436403e059571241d627c42b8"
-  integrity sha512-KmJa8l6uHi1HrBI34udwlzZY1jOEuID/ft4d8BSSEdRyap7PwBEt910453PJa5MuGvxkLqlt4Uvhu7tttFHViw==
+emoji-regex@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.0.1.tgz#77180edb279b99510a21b79b19e1dc283d8f3991"
+  integrity sha512-cLuZzriSWVE+rllzeq4zpUEoCPfYEbQ6ZVhIq+ed6ynWST7Bw9XnOr+bKWgCup4paq72DI21gw9M3aaFkm4HAw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -770,7 +763,7 @@ flip-text@^1.2.0:
   resolved "https://registry.yarnpkg.com/flip-text/-/flip-text-1.2.0.tgz#c26e4218d7d115d1a0d7433c32097c6d7de77193"
   integrity sha512-6gZynclke4Cwl1VCUXDjryfqYZIIYwZnlYHOsUF5Btrax2+6VndQdsdwDiPyKE4Uv2qYFFxzM4XYPjF7DfdBhw==
 
-follow-redirects@^1.14.7, follow-redirects@^1.14.8:
+follow-redirects@^1.14.8:
   version "1.14.8"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
   integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
@@ -976,10 +969,10 @@ inherits@2, inherits@^2.0.3, inherits@^2.0.4:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-inquirer@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-8.2.0.tgz#f44f008dd344bbfc4b30031f45d984e034a3ac3a"
-  integrity sha512-0crLweprevJ02tTuA6ThpoAERAGyVILC4sS74uib58Xf/zSr1/ZWtmm7D5CI+bSQEaA04f0K7idaHpQbSWgiVQ==
+inquirer@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-8.2.1.tgz#e00022e3e8930a92662f760f020686530a84671d"
+  integrity sha512-pxhBaw9cyTFMjwKtkjePWDhvwzvrNGAw7En4hottzlPvz80GZaMZthdDU35aA6/f5FRZf3uhE057q8w1DE3V2g==
   dependencies:
     ansi-escapes "^4.2.1"
     chalk "^4.1.1"
@@ -991,7 +984,7 @@ inquirer@^8.2.0:
     mute-stream "0.0.8"
     ora "^5.4.1"
     run-async "^2.4.0"
-    rxjs "^7.2.0"
+    rxjs "^7.5.5"
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
     through "^2.3.6"
@@ -1112,18 +1105,18 @@ keyv@^4.0.0:
   dependencies:
     json-buffer "3.0.1"
 
-kitsu-core@^10.0.0-alpha.20:
-  version "10.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.20.tgz#2bf772452f9c2ab4709c826ee072c74846e22776"
-  integrity sha512-NEQ1Q/ZBTxY0jzjLpBXtSw6awki6adOHpHafGH4uGRGq2eBBQeuaPl6C0NFnjAqVF39iIk40j5LOEXfC1yPNDA==
+kitsu-core@^10.0.0-alpha.22:
+  version "10.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.22.tgz#783fa6352245f147b1ddde057aef424d4d0e4da9"
+  integrity sha512-+1O27hmKlTxYSTOuJw0D5leJMD5KMpcRczb4k3CGKylRMyBlNqsCCFLb6FNDRIDVu4szRYKAnypljVJMgSkovg==
 
-kitsu@^10.0.0-alpha.20:
-  version "10.0.0-alpha.20"
-  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.20.tgz#0c819e27d0c347bf85807c61dd012a31f93def9e"
-  integrity sha512-eqWtrIpOMAXDK933BkuDGMc1KL6x6GnPeuZpRqQXeq1/T9BIvcS1T0Yal8Qst9j2FFeRAOt1VVXZjgFcUNQM0w==
+kitsu@^10.0.0-alpha.22:
+  version "10.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.22.tgz#d30281bad42572bed5ea78adf6fe3e7b92e93b65"
+  integrity sha512-EgDxOfiBEBj7n0FgEqzJSReqiXcUDwcKNKiVJcgbaCjISdkN9PdiSNTN3KWRYS4EuetLkIjWpH40VMkGAW4fjg==
   dependencies:
-    axios "^0.25.0"
-    kitsu-core "^10.0.0-alpha.20"
+    axios "^0.26.0"
+    kitsu-core "^10.0.0-alpha.22"
     pluralize "^8.0.0"
 
 ky-universal@^0.8.2:
@@ -1581,10 +1574,10 @@ run-async@^2.4.0:
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.4.1.tgz#8440eccf99ea3e70bd409d49aab88e10c189a455"
   integrity sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==
 
-rxjs@^7.2.0:
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.4.tgz#3d6bd407e6b7ce9a123e76b1e770dc5761aa368d"
-  integrity sha512-h5M3Hk78r6wAheJF0a5YahB1yRQKCsZ4MsGdZ5O9ETbVtjPcScGfrMmoOq7EBsCRzd4BDkvDJ7ogP8Sz5tTFiQ==
+rxjs@^7.5.5:
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
+  integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
   dependencies:
     tslib "^2.1.0"
 
