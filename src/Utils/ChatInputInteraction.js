@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v9');
 
 module.exports = [{
@@ -38,8 +39,8 @@ module.exports = [{
 		name: 'days',
 		description: 'Number of days to delete messages for. (0-7)',
 		type: ApplicationCommandOptionType.Integer,
-		minValue: 0,
-		maxValue: 7,
+		min_value: 0,
+		max_value: 7,
 		required: false
 	}]
 }, {
@@ -456,8 +457,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -473,8 +474,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -485,8 +486,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -497,8 +498,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -509,8 +510,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -521,8 +522,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -533,8 +534,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -545,8 +546,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -557,8 +558,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -569,8 +570,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -581,8 +582,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -593,8 +594,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -610,8 +611,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -627,8 +628,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}, {
@@ -644,8 +645,8 @@ module.exports = [{
 			name: 'amount',
 			description: 'Amount of messages to delete.',
 			type: ApplicationCommandOptionType.Integer,
-			minValue: 1,
-			maxValue: 100,
+			min_value: 1,
+			max_value: 100,
 			required: false
 		}]
 	}]
@@ -828,8 +829,8 @@ module.exports = [{
 		name: 'days',
 		description: 'Number of days to delete messages for. (0-7)',
 		type: ApplicationCommandOptionType.Integer,
-		minValue: 0,
-		maxValue: 7,
+		min_value: 0,
+		max_value: 7,
 		required: false
 	}]
 }, {
