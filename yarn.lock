@@ -1724,10 +1724,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.11.6:
-  version "5.11.6"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.11.6.tgz#8624cbb2e95e6fa98a4ebb0d10759427c0e88144"
-  integrity sha512-7KBXgdnIDxABQ93w+GrPSrK/pup73+fM09VGka4A/+FhgzdlRY0JNGGDFmV8BHnFuzP9zwlI3n64yDbp7emasQ==
+systeminformation@^5.11.8:
+  version "5.11.8"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.11.8.tgz#fd6244cd13e5fcb863e6dde9cb02edb4a5a3115b"
+  integrity sha512-u30rM0KwGKiJof44Ak25WeSh9661NU2GshXpHPpv/zGXvvSGI5eALjpVJ3EYnIroceToWzy9+xkuMfjHIx6OiQ==
 
 text-table@^0.2.0:
   version "0.2.0"
