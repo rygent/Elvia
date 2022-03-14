@@ -13,7 +13,7 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.10.0"
+    "eslint": "^8.11.0"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
