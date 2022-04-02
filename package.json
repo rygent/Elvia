@@ -31,7 +31,7 @@
     "flip-text": "^1.2.0",
     "glob": "^7.2.0",
     "imdb-api": "^4.4.1",
-    "inquirer": "^8.2.1",
+    "inquirer": "^8.2.2",
     "kitsu": "^10.0.0-alpha.22",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
