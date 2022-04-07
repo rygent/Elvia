@@ -36,7 +36,7 @@
     "moment": "^2.29.2",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.34",
-    "mongoose": "^6.2.9",
+    "mongoose": "^6.2.10",
     "ms": "^2.1.3",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.2",
