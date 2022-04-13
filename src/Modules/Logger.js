@@ -1,5 +1,5 @@
 const { inspect } = require('node:util');
-const chalk = require('chalk');
+const colorette = require('colorette');
 const moment = require('moment');
 
 module.exports = class Logger {
@@ -28,9 +28,9 @@ module.exports = class Logger {
 
 	write(content, options = {}) {
 		options.error = options.error || false;
-		const timestamp = chalk.dim(moment().format('DD/MM/YYYY HH:mm:ss z'));
+		const timestamp = colorette.dim(moment().format('DD/MM/YYYY HH:mm:ss z'));
 		const stream = options.error ? process.stderr : process.stdout;
-		stream.write(`${timestamp} [\u200B${chalk[options.color].bold(options.status)}\u200B] ${this.clean(content)}\n`);
+		stream.write(`${timestamp} [\u200B${colorette.bold(colorette[options.color](options.status))}\u200B] ${this.clean(content)}\n`);
 	}
 
 	clean(content) {
