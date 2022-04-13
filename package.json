@@ -19,7 +19,7 @@
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.0",
-    "@discordjs/rest": "^0.3.0",
+    "@discordjs/rest": "^0.4.0-dev.1649808564-01a423d",
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.26.1",
     "colorette": "^2.0.16",
