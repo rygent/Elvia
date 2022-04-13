@@ -22,7 +22,7 @@
     mathjs "^10.0.0"
     random-js "^2.1.0"
 
-"@discordjs/builders@^0.13.0-dev":
+"@discordjs/builders@^0.13.0-dev", "@discordjs/builders@^0.13.0-dev.1649808566-01a423d":
   version "0.13.0-dev.1649808566-01a423d"
   resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.13.0-dev.1649808566-01a423d.tgz#9da3afae53fcc83043b322818762b54f9d0a725f"
   integrity sha512-tl5m/f7JskhZ/D6q/sZAGCjzqzv4nST/GLbA4NX+HQCMEVDplCsECL6JTVneQ6kY/JZZTNq2qw0gqkgCWlgJaw==
