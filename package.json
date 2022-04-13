@@ -1,10 +1,10 @@
 {
   "name": "elvia",
-  "version": "4.6.0",
+  "version": "5.0.0-canary",
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
-    "deploy": "node script/register.js",
+    "register": "node script/register.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "update": "yarn upgrade-interactive --latest"
@@ -45,7 +45,6 @@
     "owofy": "^1.0.2",
     "simple-youtube-api": "^5.2.1",
     "spongemock": "^0.0.8",
-    "systeminformation": "^5.11.9",
-    "uid": "^2.0.0"
+    "systeminformation": "^5.11.9"
   }
 }
