@@ -13,7 +13,8 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.13.0"
+    "eslint": "^8.13.0",
+    "semver": "^7.3.7"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
@@ -41,7 +42,6 @@
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.2",
     "owofy": "^1.0.2",
-    "semver": "^7.3.7",
     "simple-youtube-api": "^5.2.1",
     "spongemock": "^0.0.8",
     "systeminformation": "^5.11.9",
