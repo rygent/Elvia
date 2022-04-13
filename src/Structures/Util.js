@@ -19,7 +19,7 @@ module.exports = class Util {
 	}
 
 	get directory() {
-		return `${path.dirname(require.main.filename)}${path.sep}`;
+		return `${path.dirname(require.main.filename) + path.sep}`.split(path.sep).join('/');
 	}
 
 	checkOwner(userId) {
