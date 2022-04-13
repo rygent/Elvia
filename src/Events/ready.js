@@ -1,5 +1,5 @@
 const Event = require('../Structures/Event');
-const chalk = require('chalk');
+const colorette = require('colorette');
 
 module.exports = class extends Event {
 
@@ -10,7 +10,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log(`Logged in as ${chalk.redBright(`${this.client.user.tag}`)}`, { status: 'BOOT', color: 'greenBright' });
+		this.client.logger.log(`Logged in as ${colorette.redBright(`${this.client.user.tag}`)}`, { status: 'BOOT', color: 'greenBright' });
 		this.client.logger.log(`Loaded ${(this.client.commands.size + this.client.interactions.size).toLocaleString()} commands & ${this.client.events.size.toLocaleString()} events!`);
 
 		const activities = [
