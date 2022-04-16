@@ -11,7 +11,7 @@
 
 ---
 
-<i>**Elvia** is powerful, multipurpose and free Discord bot with a lot of abilities created with [Discord.JS](https://discord.js.org/#/).
+<i>**Elvia** is powerful, multipurpose and free Discord bot with a lot of abilities created with [Discord.JS](https://github.com/discordjs/discord.js).
 
 We'll be very glad if you give this repo a star, so that we grow much faster.
 </i>
@@ -20,7 +20,7 @@ We'll be very glad if you give this repo a star, so that we grow much faster.
 
 ## Features
 
-* Slash command focused.
+* Slash command based.
 * Server, Emoji and User info.
 * Powerful Message Pruning.
 * Easy Moderation `ban`, `kick`, `timeout`, etc.
@@ -30,9 +30,9 @@ We'll be very glad if you give this repo a star, so that we grow much faster.
 * Translate message to user setting language in context menu.
 
 ## Requirements
-1. [Node.JS v16.6+](https://nodejs.org/en/download/) or higher.
-2. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Optional)
-3. MongoDB for database.
+1. [Node.JS v16.9+](https://nodejs.org/en/download) or higher.
+2. [MongoDB v5.0+](https://www.mongodb.com/try/download/community) or higher.
+3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Optional) (Recommended)
 
 ## Invite
 
@@ -43,10 +43,9 @@ If you don't want to edit the code of the bot, a permanent online version is ava
 ## Contributing
 For contributing instructions, or to find out all of the ways you can contribute, read [CONTRIBUTING.md](./.github/CONTRIBUTING.md). All contributions are welcome and encouraged, but please [read the information](./.github/CONTRIBUTING.md) given before doing so.
 
-## Source
-* Made using <i>[Discord.JS](https://github.com/discordjs/discord.js)</i>.
-* Bot based on <i>[Discord.JS-Template](https://github.com/MenuDocs/discord.js-template)</i> by **MenuDocs**.
-* The bot database part is based on <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz2091**.
+## Credit
+* <i>[Discord.JS-Template](https://github.com/MenuDocs/discord.js-template)</i> by **MenuDocs**.
+* <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz2091**.
 
 ## License
 This project is licensed under the GPL 3.0 license. See the file [`LICENSE`](./LICENSE) for more information.

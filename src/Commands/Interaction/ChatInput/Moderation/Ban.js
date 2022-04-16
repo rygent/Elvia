@@ -1,13 +1,13 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'ban',
 			description: 'Ban a user with optional reason.',
-			memberPermissions: ['BAN_MEMBERS'],
-			clientPermissions: ['BAN_MEMBERS']
+			memberPermissions: ['BanMembers'],
+			clientPermissions: ['BanMembers']
 		});
 	}
 
@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
 
-		await interaction.guild.members.ban(user, { days, reason: `${reason ? `${reason} (Banned by ${interaction.user.tag})` : `(Banned by ${interaction.user.tag})`}` });
+		await interaction.guild.members.ban(user, { deleteMessageDays: days, reason: `${reason ? `${reason} (Banned by ${interaction.user.tag})` : `(Banned by ${interaction.user.tag})`}` });
 
 		guildData.casesCount++;
 		await guildData.save();

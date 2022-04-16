@@ -2,9 +2,9 @@ const path = require('node:path');
 const { promisify } = require('node:util');
 const glob = promisify(require('glob'));
 const { connect } = require('mongoose');
+const Interaction = require('./Interaction');
 const Command = require('./Command');
 const Event = require('./Event');
-const Interaction = require('./Interaction');
 
 module.exports = class Util {
 
@@ -15,7 +15,7 @@ module.exports = class Util {
 	isClass(input) {
 		return typeof input === 'function' &&
         typeof input.prototype === 'object' &&
-        input.toString().substring(0, 5) === 'class';
+        input.toString().slice(0, 5) === 'class';
 	}
 
 	get directory() {
@@ -26,13 +26,13 @@ module.exports = class Util {
 		return this.client.owners.includes(userId);
 	}
 
-	filterCategory(category, message) {
-		category = category.toLowerCase();
-		switch (category) {
+	filterCategory(category, options = {}) {
+		const { interaction, message } = options;
+		switch (category.toLowerCase()) {
 			case 'developer':
-				return this.checkOwner(message.author.id);
+				return this.checkOwner(interaction?.user.id || message?.author.id);
 			case 'nsfw':
-				return message.channel.nsfw;
+				return interaction?.channel.nsfw || message?.channel.nsfw;
 			default:
 				return true;
 		}
@@ -54,15 +54,13 @@ module.exports = class Util {
 	}
 
 	formatPermissions(permissions) {
-		return permissions.toLowerCase()
-			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
-			.replace(/_/g, ' ')
-			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
+		return permissions.replace(/(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])/g, ' $1')
+			.replace(/To|And|In\b/g, (txt) => txt.toLowerCase())
 			.replace(/ Instant| Embedded/g, '')
 			.replace(/Guild/g, 'Server')
 			.replace(/Moderate/g, 'Timeout')
-			.replace(/Tts/g, 'Text-to-Speech')
-			.replace(/Use Vad/g, 'Use Voice Acitvity');
+			.replace(/TTS/g, 'Text-to-Speech')
+			.replace(/Use VAD/g, 'Use Voice Activity');
 	}
 
 	removeDuplicates(array) {
@@ -83,7 +81,7 @@ module.exports = class Util {
 		if (i > maxLen - 3) {
 			i = string?.lastIndexOf(' ', i - 1);
 		}
-		return string?.length > maxLen ? `${string.substring(0, i)}...` : string;
+		return string?.length > maxLen ? `${string.slice(0, i)}...` : string;
 	}
 
 	getCommandName(interaction) {
@@ -108,6 +106,20 @@ module.exports = class Util {
 		return connect(this.client.mongoURI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
+		});
+	}
+
+	async loadInteractions() {
+		return glob(`${this.directory}Commands/Interaction/**/*.js`).then(interactions => {
+			for (const interactionFile of interactions) {
+				delete require.cache[interactionFile];
+				const { name } = path.parse(interactionFile);
+				const File = require(interactionFile);
+				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
+				const interaction = new File(this.client, name);
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
+				this.client.interactions.set(this.getCommandName(interaction), interaction);
+			}
 		});
 	}
 
@@ -141,20 +153,6 @@ module.exports = class Util {
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
 				this.client.events.set(event.name, event);
 				event.emitter[event.type](event.name, (...args) => event.run(...args));
-			}
-		});
-	}
-
-	async loadInteractions() {
-		return glob(`${this.directory}Commands/Interaction/**/*.js`).then(interactions => {
-			for (const interactionFile of interactions) {
-				delete require.cache[interactionFile];
-				const { name } = path.parse(interactionFile);
-				const File = require(interactionFile);
-				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
-				const interaction = new File(this.client, name);
-				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
-				this.client.interactions.set(this.getCommandName(interaction), interaction);
 			}
 		});
 	}

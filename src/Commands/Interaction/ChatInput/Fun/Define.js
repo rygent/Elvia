@@ -1,10 +1,10 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { ButtonStyle } = require('discord-api-types/v9');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,22 +16,22 @@ module.exports = class extends Interaction {
 	async run(interaction) {
 		const word = await interaction.options.getString('word', true);
 
-		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-		const result = await axios.get(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, { headers }).then(res => res.data.list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);
+		const response = await axios.get(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`)
+			.then(({ data }) => data.list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);
 
-		const button = new MessageActionRow()
-			.addComponents(new MessageButton()
+		const button = new ActionRowBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(result.permalink));
+				.setURL(response.permalink));
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
 			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://www.urbandictionary.com/' })
-			.setTitle(result.word)
-			.setDescription(result.definition)
-			.addField('__Example__', result.example)
-			.setFooter({ text: `Powered by Urban Dictionary`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+			.setTitle(response.word)
+			.setDescription(response.definition)
+			.addFields({ name: '__Example__', value: response.example, inline: false })
+			.setFooter({ text: `Powered by Urban Dictionary`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}

@@ -1,10 +1,13 @@
 const Event = require('../../Structures/Event');
+const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
+const { ButtonStyle } = require('discord-api-types/v10');
+const { Access } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
 	async run(interaction) {
 		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
-		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
+		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return;
 
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
@@ -32,16 +35,21 @@ module.exports = class extends Event {
 				if (interaction.replied) return;
 				this.client.logger.error(error.stack);
 
+				const content = [
+					'An error has occured when executing this command, our developers have been informed.',
+					'If the issue persists, please contact us in our **Support Server**.'
+				].join('\n');
+
+				const button = new ActionRowBuilder()
+					.addComponents(new ButtonBuilder()
+						.setStyle(ButtonStyle.Link)
+						.setLabel('Support Server')
+						.setURL(Access.InviteLink));
+
 				if (interaction.deferred) {
-					return interaction.editReply({ content: [
-						'An error has occured when executing this command, our developers have been informed.',
-						'If the issue persists, please contact us in our Support Server.'
-					].join('\n') });
+					return interaction.editReply({ content, components: [button] });
 				} else {
-					return interaction.reply({ content: [
-						'An error has occured when executing this command, our developers have been informed.',
-						'If the issue persists, please contact us in our Support Server.'
-					].join('\n'), ephemeral: true });
+					return interaction.reply({ content, components: [button], ephemeral: true });
 				}
 			}
 		}

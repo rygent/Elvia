@@ -1,4 +1,4 @@
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = class Interaction {
 
@@ -8,8 +8,8 @@ module.exports = class Interaction {
 		this.subCommandGroup = options.subCommandGroup;
 		this.subCommand = options.subCommand;
 		this.description = options.description || 'No description provided';
-		this.memberPermissions = new Permissions(options.memberPermissions).freeze();
-		this.clientPermissions = new Permissions(options.clientPermissions).freeze();
+		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
+		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
 		this.guildOnly = options.guildOnly || false;
 	}
 

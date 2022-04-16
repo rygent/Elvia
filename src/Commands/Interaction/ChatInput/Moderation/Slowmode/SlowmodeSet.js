@@ -1,17 +1,17 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 const moment = require('moment');
 const ms = require('ms');
 require('moment-duration-format');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'slowmode',
 			subCommand: 'set',
 			description: 'Set slowmode duration.',
-			memberPermissions: ['MANAGE_CHANNELS'],
-			clientPermissions: ['MANAGE_CHANNELS']
+			memberPermissions: ['ManageChannels'],
+			clientPermissions: ['ManageChannels']
 		});
 	}
 

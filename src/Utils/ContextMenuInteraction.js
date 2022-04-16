@@ -1,4 +1,4 @@
-const { ApplicationCommandType } = require('discord-api-types/v9');
+const { ApplicationCommandType } = require('discord-api-types/v10');
 
 module.exports = [{
 	name: 'Avatar',

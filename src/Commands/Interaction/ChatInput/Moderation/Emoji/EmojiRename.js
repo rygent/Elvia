@@ -1,16 +1,17 @@
-const Interaction = require('../../../../../Structures/Interaction');
-const { MessageActionRow, MessageButton, Util } = require('discord.js');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
+const InteractionCommand = require('../../../../../Structures/Interaction');
+const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
+const { Util } = require('discord.js');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'emoji',
 			subCommand: 'rename',
 			description: 'Rename a server emoji.',
-			memberPermissions: ['MANAGE_EMOJIS_AND_STICKERS'],
-			clientPermissions: ['MANAGE_EMOJIS_AND_STICKERS']
+			memberPermissions: ['ManageEmojisAndStickers'],
+			clientPermissions: ['ManageEmojisAndStickers']
 		});
 	}
 
@@ -23,12 +24,12 @@ module.exports = class extends Interaction {
 		const emojis = await interaction.guild.emojis.cache.get(parseEmoji.id);
 		if (!emojis.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
-		const button = new MessageActionRow()
-			.addComponents(new MessageButton()
+		const button = new ActionRowBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Secondary)
 				.setCustomId('cancel')
 				.setLabel('Cancel'))
-			.addComponents(new MessageButton()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Success)
 				.setCustomId('confirm')
 				.setLabel('Confirm'));

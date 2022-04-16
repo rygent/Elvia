@@ -1,15 +1,15 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 const { Formatters } = require('discord.js');
 const ms = require('ms');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'timeout',
 			description: 'Timeout a member with duration and optional reason.',
-			memberPermissions: ['MODERATE_MEMBERS'],
-			clientPermissions: ['MODERATE_MEMBERS']
+			memberPermissions: ['ModerateMembers'],
+			clientPermissions: ['ModerateMembers']
 		});
 	}
 

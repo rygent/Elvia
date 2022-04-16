@@ -1,13 +1,13 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'kick',
 			description: 'Kick a member with optional reason.',
-			memberPermissions: ['KICK_MEMBERS'],
-			clientPermissions: ['KICK_MEMBERS']
+			memberPermissions: ['KickMembers'],
+			clientPermissions: ['KickMembers']
 		});
 	}
 

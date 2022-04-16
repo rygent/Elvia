@@ -1,11 +1,12 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { Formatters, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
+const { Formatters } = require('discord.js');
 const { Colors, Secrets } = require('../../../../Utils/Constants');
 const YouTube = require('simple-youtube-api');
 const api = new YouTube(Secrets.YoutubeApiKey);
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -17,57 +18,58 @@ module.exports = class extends Interaction {
 
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
-		await interaction.deferReply({ fetchReply: true });
+		await interaction.deferReply();
 
-		const data = await api.searchVideos(search, 25);
-		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
+		const response = await api.searchVideos(search, 25);
+		if (!response.length) return interaction.editReply({ content: 'Nothing found for this search.' });
 
-		const select = new MessageActionRow()
-			.addComponents(new MessageSelectMenu()
+		const select = new ActionRowBuilder()
+			.addComponents(new SelectMenuBuilder()
 				.setCustomId('data_menu')
 				.setPlaceholder('Select a videos!')
-				.addOptions(data.map(res => ({
+				.addOptions(...response.map(res => ({
 					label: res.title,
-					description: res.channel.title,
-					value: res.id
+					value: res.id,
+					description: res.channel.title
 				}))));
 
-		return interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: ComponentType.SelectMenu, time: 60_000 });
+		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select], fetchReply: true });
 
-			collector.on('collect', async (i) => {
-				if (i.user.id !== interaction.user.id) return i.deferUpdate();
-				await i.deferUpdate();
+		const filter = (i) => i.customId === 'data_menu';
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
-				const [choices] = i.values;
-				const result = data.find(x => x.id === choices);
+		collector.on('collect', async (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
+			await i.deferUpdate();
 
-				const button = new MessageActionRow()
-					.addComponents(new MessageButton()
-						.setStyle(ButtonStyle.Link)
-						.setLabel('Open in Browser')
-						.setURL(result.shortURL));
+			const [selected] = i.values;
+			const data = response.find(x => x.id === selected);
 
-				const embed = new MessageEmbed()
-					.setColor(Colors.Default)
-					.setAuthor({ name: 'YouTube', iconURL: 'https://i.imgur.com/lbS6Vil.png', url: 'https://youtube.com/' })
-					.setTitle(result.title)
-					.setDescription([
-						`**${result.channel.title}**`,
-						`${result.description}\n`,
-						`***Published:*** ${Formatters.time(new Date(result.publishedAt))}`
-					].join('\n'))
-					.setImage(result.thumbnails.high.url)
-					.setFooter({ text: 'Powered by YouTube', iconURL: interaction.user.avatarURL({ dynamic: true }) });
+			const button = new ActionRowBuilder()
+				.addComponents(new ButtonBuilder()
+					.setStyle(ButtonStyle.Link)
+					.setLabel('Open in Browser')
+					.setURL(data.shortURL));
 
-				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
-			});
+			const embed = new EmbedBuilder()
+				.setColor(Colors.Default)
+				.setAuthor({ name: 'YouTube', iconURL: 'https://i.imgur.com/lbS6Vil.png', url: 'https://youtube.com/' })
+				.setTitle(data.title)
+				.setDescription([
+					`**${data.channel.title}**`,
+					`${data.description}\n`,
+					`***Published:*** ${Formatters.time(new Date(data.publishedAt))}`
+				].join('\n'))
+				.setImage(data.thumbnails.high.url)
+				.setFooter({ text: 'Powered by YouTube', iconURL: interaction.user.avatarURL() });
 
-			collector.on('end', (collected, reason) => {
-				if ((collected.size === 0 || collected.filter(x => x.user.id === interaction.user.id).size === 0) && reason === 'time') {
-					return interaction.deleteReply();
-				}
-			});
+			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+		});
+
+		collector.on('end', (collected, reason) => {
+			if ((collected.size === 0 || collected.filter(({ user }) => user.id === interaction.user.id).size === 0) && reason === 'time') {
+				return interaction.deleteReply();
+			}
 		});
 	}
 

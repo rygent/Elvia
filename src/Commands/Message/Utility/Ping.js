@@ -1,9 +1,10 @@
-const Command = require('../../../Structures/Command');
+const MessageCommand = require('../../../Structures/Command');
 
-module.exports = class extends Command {
+module.exports = class extends MessageCommand {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'ping',
 			aliases: ['pong'],
 			description: 'Send a ping request.',
 			category: 'Utility'

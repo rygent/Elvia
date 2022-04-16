@@ -1,14 +1,14 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'slowmode',
 			subCommand: 'off',
 			description: 'Turn off slowmode.',
-			memberPermissions: ['MANAGE_CHANNELS'],
-			clientPermissions: ['MANAGE_CHANNELS']
+			memberPermissions: ['ManageChannels'],
+			clientPermissions: ['ManageChannels']
 		});
 	}
 

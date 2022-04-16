@@ -1,7 +1,7 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 const flip = require('flip-text');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {

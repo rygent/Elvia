@@ -1,11 +1,12 @@
-const Command = require('../../../Structures/Command');
+const MessageCommand = require('../../../Structures/Command');
 const { Formatters, Util } = require('discord.js');
 const { exec } = require('node:child_process');
 
-module.exports = class extends Command {
+module.exports = class extends MessageCommand {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'execute',
 			aliases: ['exec'],
 			description: 'Executes commands on the console.',
 			category: 'Developer',

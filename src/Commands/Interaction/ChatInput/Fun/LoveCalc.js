@@ -1,6 +1,6 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -10,8 +10,8 @@ module.exports = class extends Interaction {
 	}
 
 	async run(interaction) {
-		const user1 = await interaction.options.getMember('1st', true);
-		const user2 = await interaction.options.getMember('2nd', true);
+		const user1 = await interaction.options.getMember('1st');
+		const user2 = await interaction.options.getMember('2nd');
 
 		const love = Math.random() * 100;
 		const loveIndex = Math.floor(love / 10);

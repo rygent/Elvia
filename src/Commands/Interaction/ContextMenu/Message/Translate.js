@@ -1,7 +1,7 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 const translate = require('@iamtraction/google-translate');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -10,7 +10,7 @@ module.exports = class extends Interaction {
 	}
 
 	async run(interaction) {
-		const message = interaction.options.getMessage('message', true);
+		const message = await interaction.options.getMessage('message', true);
 		await interaction.deferReply({ ephemeral: true });
 
 		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });

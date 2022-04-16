@@ -2,11 +2,11 @@
     "env": {
         "commonjs": true,
         "node": true,
-        "es6": true
+        "es2022": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2021
+        "ecmaVersion": 2022
     },
     "rules": {
         "accessor-pairs": "warn",
@@ -23,7 +23,6 @@
         "comma-style": "error",
         "complexity": ["warn", { "max": 30 }],
         "computed-property-spacing": "error",
-        "consistent-return": "off",
         "consistent-this": "error",
         "curly": ["error", "multi-line", "consistent"],
         "dot-location": ["error", "property"],
@@ -84,7 +83,6 @@
         "no-new-wrappers": "error",
         "no-octal-escape": "error",
         "no-path-concat": "error",
-        "no-process-env": "off",
         "no-return-assign": "error",
         "no-self-compare": "error",
         "no-sequences": "error",

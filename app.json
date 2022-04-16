@@ -41,11 +41,11 @@
         "description": "Input here the open weather map api key.",
         "required": true
       },
-      "SPOTIFY_ID": {
+      "SPOTIFY_CLIENT_ID": {
         "description": "Input here the spotify client id.",
         "required": true
       },
-      "SPOTIFY_SECRET": {
+      "SPOTIFY_CLIENT_SECRET": {
         "description": "Input here the spotify client secret.",
         "required": true
       },

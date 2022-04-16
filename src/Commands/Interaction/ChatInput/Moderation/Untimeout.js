@@ -1,13 +1,13 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'untimeout',
 			description: 'Remove timeout from a member.',
-			memberPermissions: ['MODERATE_MEMBERS'],
-			clientPermissions: ['MODERATE_MEMBERS']
+			memberPermissions: ['ModerateMembers'],
+			clientPermissions: ['ModerateMembers']
 		});
 	}
 

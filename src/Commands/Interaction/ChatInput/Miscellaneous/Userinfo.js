@@ -1,9 +1,9 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { Formatters, MessageEmbed } = require('discord.js');
-const { Colors, Emojis } = require('../../../../Utils/Constants');
-const flags = require('../../../../Assets/json/Badge.json');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { EmbedBuilder } = require('@discordjs/builders');
+const { Formatters } = require('discord.js');
+const { Badges, Colors, Emojis } = require('../../../../Utils/Constants');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -21,28 +21,28 @@ module.exports = class extends Interaction {
 			dnd: `${Emojis.Dnd} Do Not Disturb`,
 			offline: `${Emojis.Offline} Offline`
 		};
-		const userFlags = member.user.flags.toArray();
+		const userBadges = member.user.flags.toArray();
 
 		const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1);
-		const permissions = member.permissions.toArray().filter(x => !interaction.guild.roles.everyone.permissions.toArray().includes(x));
+		const permissions = member.permissions.toArray().filter(perm => !interaction.guild.roles.everyone.permissions.toArray().includes(perm));
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
-			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL({ dynamic: true }) })
-			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
+			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL() })
+			.setThumbnail(member.user.displayAvatarURL({ size: 512 }))
 			.setDescription([
 				`***ID:*** \`${member.id}\``,
 				`***Nickname:*** ${member.nickname || '`N/A`'}`,
-				`***Flags:*** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(' ') : '`N/A`'}`,
+				`***Badges:*** ${userBadges.length ? userBadges.map(item => Badges[item]).join(' ') : '`N/A`'}`,
 				`***Status:*** ${status[member.presence?.status] || status.offline}`,
 				`***Created:*** ${Formatters.time(new Date(member.user.createdTimestamp), 'D')} (${Formatters.time(new Date(member.user.createdTimestamp), 'R')})`,
 				`***Joined:*** ${Formatters.time(new Date(member.joinedAt), 'D')} (${Formatters.time(new Date(member.joinedAt), 'R')})`
 			].join('\n'))
-			.addField(`__Roles__ (${roles.length > 0 ? roles.length : '1'})`, `${roles.length > 0 ? this.client.utils.formatArray(roles) : `@everyone`}`)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+			.addFields({ name: `__Roles__ (${roles.length ? roles.length : 1})`, value: `${roles.length ? roles.join(', ') : `@everyone`}`, inline: false })
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
-		if (permissions.length > 0) {
-			embed.addField('__Permission(s)__', `${this.client.utils.formatArray(permissions.map(x => this.client.utils.formatPermissions(x)))}`);
+		if (permissions.length) {
+			embed.addFields({ name: '__Permission(s)__', value: `${this.client.utils.formatArray(permissions.map(perm => this.client.utils.formatPermissions(perm)))}`, inline: false });
 		}
 
 		return interaction.reply({ embeds: [embed] });

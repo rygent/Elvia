@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v9');
+const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v10');
 
 module.exports = [{
 	name: '8ball',

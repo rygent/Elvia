@@ -1,10 +1,10 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { ButtonStyle } = require('discord-api-types/v9');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const axios = require('axios');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -18,22 +18,21 @@ module.exports = class extends Interaction {
 		const search = await interaction.options.getString('search', true);
 
 		try {
-			const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-			const result = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { headers }).then(res => res.data);
+			const response = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`).then(({ data }) => data);
 
-			const button = new MessageActionRow()
-				.addComponents(new MessageButton()
+			const button = new ActionRowBuilder()
+				.addComponents(new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(result.content_urls.desktop.page));
+					.setURL(response.content_urls.desktop.page));
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Wikipedia', iconURL: 'https://i.imgur.com/a4eeEhh.png', url: 'https://en.wikipedia.org/' })
-				.setTitle(result.title)
-				.setThumbnail(result.originalimage?.source)
-				.setDescription(result.extract)
-				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+				.setTitle(response.title)
+				.setThumbnail(response.originalimage?.source)
+				.setDescription(response.extract)
+				.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.avatarURL() });
 
 			return interaction.reply({ embeds: [embed], components: [button] });
 		} catch (error) {

@@ -1,9 +1,9 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { MessageEmbed } = require('discord.js');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { EmbedBuilder } = require('@discordjs/builders');
 const { Colors } = require('../../../../Utils/Constants');
 const translate = require('@iamtraction/google-translate');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -24,18 +24,16 @@ module.exports = class extends Interaction {
 			const translated = await translate(text, { from: fromLanguage || 'auto', to: target });
 			const from = translated.from.language.iso;
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Google Translate', iconURL: 'https://i.imgur.com/1JS81kv.png', url: 'https://translate.google.com/' })
-				.setDescription([
-					`${translated.text}\n`,
-					`Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`
-				].join('\n'))
-				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL({ dynamic: true }) });
+				.setDescription(translated.text)
+				.addFields({ name: '\u200B', value: `Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`, inline: false })
+				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL() });
 
 			return interaction.reply({ embeds: [embed] });
-		} catch (e) {
-			if (e.code === 400) {
+		} catch (error) {
+			if (error.code === 400) {
 				return interaction.reply({ content: 'Please send valid **[ISO 639-1](<https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>)** languages codes.', ephemeral: true });
 			}
 		}

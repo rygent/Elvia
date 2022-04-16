@@ -38,16 +38,16 @@ body:
     id: djs-version
     attributes:
       label: Discord.JS version
-      description: Which version of discord.js are you using? Run `npm list discord.js` in your project directory and paste the output.
-      placeholder: Discord.js version 13.x.x
+      description: Which version of Discord.JS are you using? Run `yarn list --pattern discord.js` in your project directory and paste the output.
+      placeholder: Discord.JS version 14.x.x
     validations:
       required: true
   - type: input
     id: node-version
     attributes:
       label: Node.JS version
-      description: Which version of Node.js are you using? Run `node --version` in your project directory and paste the output.
-      placeholder: Node.js version 16.6+ is required
+      description: Which version of Node.JS are you using? Run `node --version` in your project directory and paste the output.
+      placeholder: Node.JS version 16.9+ is required
     validations:
       required: true
   - type: input
@@ -67,6 +67,26 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: partials
+    attributes:
+      label: Which partials do you have configured?
+      description: |
+        Check your Client constructor for the `partials` key.
+
+        Tip: you can select multiple items
+      options:
+        - No Partials
+        - User
+        - Channel
+        - GuildMember
+        - Message
+        - Reaction
+        - GuildScheduledEvent
+        - ThreadMember
+      multiple: true
+    validations:
+      required: true
+  - type: dropdown
     id: intents
     attributes:
       label: Which gateway intents are you subscribing to?
@@ -75,22 +95,23 @@ body:
 
         Tip: you can select multiple items
       options:
-        - GUILDS
-        - GUILD_MEMBERS
-        - GUILD_BANS
-        - GUILD_EMOJIS_AND_STICKERS
-        - GUILD_INTEGRATIONS
-        - GUILD_WEBHOOKS
-        - GUILD_INVITES
-        - GUILD_VOICE_STATES
-        - GUILD_PRESENCES
-        - GUILD_MESSAGES
-        - GUILD_MESSAGE_REACTIONS
-        - GUILD_MESSAGE_TYPING
-        - DIRECT_MESSAGES
-        - DIRECT_MESSAGE_REACTIONS
-        - DIRECT_MESSAGE_TYPING
-        - GUILD_SCHEDULED_EVENTS
+        - Guilds
+        - GuildMembers
+        - GuildBans
+        - GuildEmojisAndStickers
+        - GuildIntegrations
+        - GuildWebhooks
+        - GuildInvites
+        - GuildVoiceStates
+        - GuildPresences
+        - GuildMessages
+        - GuildMessageReactions
+        - GuildMessageTyping
+        - DirectMessages
+        - DirectMessageReactions
+        - DirectMessageTyping
+        - MessageContent
+        - GuildScheduledEvents
       multiple: true
     validations:
       required: true

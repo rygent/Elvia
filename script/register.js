@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const ChatInput = require('../src/Utils/ChatInputInteraction');
 const ContextMenu = require('../src/Utils/ContextMenuInteraction');
 require('dotenv/config');
@@ -44,7 +44,7 @@ require('dotenv/config');
 	}]);
 
 	if (!token) token = process.env.DISCORD_TOKEN;
-	const rest = new REST({ version: '9' }).setToken(token);
+	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {
 		console.log('Started refreshing application (/) commands.');

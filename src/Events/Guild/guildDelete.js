@@ -1,27 +1,29 @@
 const Event = require('../../Structures/Event');
-const { MessageEmbed, WebhookClient } = require('discord.js');
+const { EmbedBuilder } = require('@discordjs/builders');
+const { WebhookClient } = require('discord.js');
 const { Access, Colors } = require('../../Utils/Constants');
-const webhook = new WebhookClient({ url: Access.GuildLogWebhook });
 
 module.exports = class extends Event {
 
 	async run(guild) {
 		if (!guild.available) return;
+
+		const webhook = new WebhookClient({ url: Access.GuildLogWebhook });
 		if (!webhook) return;
 
 		const guildOwner = await guild.fetchOwner();
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
 			.setTitle(`${this.client.user.username} left a Server!`)
-			.setThumbnail(guild.iconURL() ? guild.iconURL({ dynamic: true, size: 512 }) : `https://guild-default-icon.herokuapp.com/${encodeURIComponent(guild.nameAcronym)}`)
+			.setThumbnail(guild.iconURL() ? guild.iconURL({ size: 512 }) : `https://guild-default-icon.herokuapp.com/${encodeURIComponent(guild.nameAcronym)}`)
 			.setDescription([
 				`***Server:*** ${guild.name} (\`${guild.id}\`)`,
 				`***Owner:*** ${guildOwner.user.tag} (\`${guildOwner.id}\`)`
 			].join('\n'))
-			.setFooter({ text: `${this.client.guilds.cache.size.toLocaleString()} guilds | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()} users`, iconURL: this.client.user.avatarURL({ dynamic: true }) });
+			.setFooter({ text: `${this.client.guilds.cache.size.formatNumber()} guilds | ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).formatNumber()} users`, iconURL: this.client.user.avatarURL() });
 
-		return webhook.send({ username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ dynamic: true }), embeds: [embed] });
+		return webhook.send({ username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL(), embeds: [embed] });
 	}
 
 };

@@ -1,15 +1,15 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 const emojiregex = require('emoji-regex');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'purge',
 			subCommand: 'emojis',
 			description: 'Purge messages that contain emojis in the channel.',
-			memberPermissions: ['MANAGE_MESSAGES'],
-			clientPermissions: ['MANAGE_MESSAGES']
+			memberPermissions: ['ManageMessages'],
+			clientPermissions: ['ManageMessages']
 		});
 	}
 

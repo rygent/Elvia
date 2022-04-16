@@ -9,6 +9,3 @@ updates:
     open-pull-requests-limit: 5
     reviewers:
       - Rygent
-    ignore:
-      - dependency-name: "chalk"
-        versions: ["5.x"]

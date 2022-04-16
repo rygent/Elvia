@@ -1,4 +1,7 @@
 const Event = require('../../Structures/Event');
+const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
+const { ButtonStyle } = require('discord-api-types/v10');
+const { Access } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
@@ -54,10 +57,17 @@ module.exports = class extends Event {
 				await command.run(message, args);
 			} catch (error) {
 				this.client.logger.error(error.stack);
+
+				const button = new ActionRowBuilder()
+					.addComponents(new ButtonBuilder()
+						.setStyle(ButtonStyle.Link)
+						.setLabel('Support Server')
+						.setURL(Access.InviteLink));
+
 				return message.reply({ content: [
 					'An error has occured when executing this command, our developers have been informed.',
-					'If the issue persists, please contact us in our Support Server.'
-				].join('\n') });
+					'If the issue persists, please contact us in our **Support Server**.'
+				].join('\n'), components: [button] });
 			}
 		}
 	}

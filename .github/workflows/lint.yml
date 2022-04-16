@@ -14,7 +14,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn --immutable
 
       - name: Run ESLint
         run: yarn lint

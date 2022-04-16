@@ -1,15 +1,15 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 const { Util } = require('discord.js');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'emoji',
 			subCommand: 'add',
 			description: 'Add an emoji to the server.',
-			memberPermissions: ['MANAGE_EMOJIS_AND_STICKERS'],
-			clientPermissions: ['MANAGE_EMOJIS_AND_STICKERS']
+			memberPermissions: ['ManageEmojisAndStickers'],
+			clientPermissions: ['ManageEmojisAndStickers']
 		});
 	}
 

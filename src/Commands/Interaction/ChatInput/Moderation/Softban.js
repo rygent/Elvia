@@ -1,13 +1,13 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'softban',
 			description: 'Softban a user. (Bans and unbans to clear up the user\'s messages.)',
-			memberPermissions: ['BAN_MEMBERS'],
-			clientPermissions: ['BAN_MEMBERS']
+			memberPermissions: ['BanMembers'],
+			clientPermissions: ['BanMembers']
 		});
 	}
 
@@ -27,7 +27,7 @@ module.exports = class extends Interaction {
 
 		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
 
-		await interaction.guild.members.ban(user, { days, reason: `${reason ? `${reason} (Softbanned by ${interaction.user.tag})` : `(Softbanned by ${interaction.user.tag})`}` });
+		await interaction.guild.members.ban(user, { deleteMessageDays: days, reason: `${reason ? `${reason} (Softbanned by ${interaction.user.tag})` : `(Softbanned by ${interaction.user.tag})`}` });
 		await interaction.guild.members.unban(user, `${reason ? `${reason} (Softbanned by ${interaction.user.tag})` : `(Softbanned by ${interaction.user.tag})`}`);
 
 		guildData.casesCount++;

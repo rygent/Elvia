@@ -1,14 +1,14 @@
-const Interaction = require('../../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'purge',
 			subCommand: 'starts-with',
 			description: 'Purge messages that starts with specified content in the channel.',
-			memberPermissions: ['MANAGE_MESSAGES'],
-			clientPermissions: ['MANAGE_MESSAGES']
+			memberPermissions: ['ManageMessages'],
+			clientPermissions: ['ManageMessages']
 		});
 	}
 

@@ -1,12 +1,14 @@
-const Command = require('../../../Structures/Command');
+const MessageCommand = require('../../../Structures/Command');
 const { Formatters, MessageAttachment } = require('discord.js');
 const { Type } = require('@anishshobith/deeptype');
 const { inspect } = require('node:util');
+const { Emojis } = require('../../../Utils/Constants');
 
-module.exports = class extends Command {
+module.exports = class extends MessageCommand {
 
 	constructor(...args) {
 		super(...args, {
+			name: 'evaluate',
 			aliases: ['eval'],
 			description: 'Evaluating javascript language code.',
 			category: 'Developer',
@@ -28,19 +30,18 @@ module.exports = class extends Command {
 			}
 			const stop = process.hrtime(start);
 			const response = [
-				`**Output:** ${Formatters.codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}`,
-				`**Type:** ${Formatters.codeBlock('ts', new Type(evaled).is)}`,
-				`**Time:** ${Formatters.inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
-			];
-			const res = response.join('\n');
-			if (res.length < 2000) {
-				await message.channel.send({ content: res });
+				`${Formatters.codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}\n`,
+				`${Emojis.Info} ${Formatters.inlineCode(new Type(evaled).is)} `,
+				`${Emojis.Alarm} ${Formatters.inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
+			].join('');
+			if (response.length < 2048) {
+				return message.channel.send({ content: response });
 			} else {
-				const output = new MessageAttachment(Buffer.from(res), 'output.txt');
-				await message.channel.send({ files: [output] });
+				const output = new MessageAttachment(Buffer.from(response), 'output.txt');
+				return message.channel.send({ files: [output] });
 			}
-		} catch (err) {
-			return message.channel.send({ content: `**Error:** ${Formatters.codeBlock('xl', this.clean(err))}` });
+		} catch (error) {
+			return message.channel.send({ content: `**Error:** ${Formatters.codeBlock('xl', this.clean(error))}` });
 		}
 	}
 

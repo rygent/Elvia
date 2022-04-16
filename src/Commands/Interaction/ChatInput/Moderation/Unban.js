@@ -1,13 +1,13 @@
-const Interaction = require('../../../../Structures/Interaction');
+const InteractionCommand = require('../../../../Structures/Interaction');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'unban',
 			description: 'Unban a user with optional reason.',
-			memberPermissions: ['BAN_MEMBERS'],
-			clientPermissions: ['BAN_MEMBERS']
+			memberPermissions: ['BanMembers'],
+			clientPermissions: ['BanMembers']
 		});
 	}
 

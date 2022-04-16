@@ -1,9 +1,10 @@
-const Interaction = require('../../../../Structures/Interaction');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const { ButtonStyle } = require('discord-api-types/v9');
+const InteractionCommand = require('../../../../Structures/Interaction');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { ButtonStyle } = require('discord-api-types/v10');
+const { Util } = require('discord.js');
 const axios = require('axios');
 
-module.exports = class extends Interaction {
+module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
@@ -33,14 +34,14 @@ module.exports = class extends Interaction {
 		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
 		const result = await axios.get(link, { headers }).then(res => res.data);
 
-		const button = new MessageActionRow()
-			.addComponents(new MessageButton()
+		const button = new ActionRowBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
 				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${result.hex.clean}`));
 
-		const embed = new MessageEmbed()
-			.setColor(result.hex.clean)
+		const embed = new EmbedBuilder()
+			.setColor(Util.resolveColor(result.hex.clean))
 			.setTitle(result.name.value)
 			.setDescription([
 				`***Hex:*** ${result.hex.value}`,
@@ -51,7 +52,7 @@ module.exports = class extends Interaction {
 				`***XYZ:*** (${result.XYZ.X}, ${result.XYZ.Y}, ${result.XYZ.Z})`
 			].join('\n'))
 			.setImage(`https://serux.pro/rendercolour?hex=${result.hex.clean}&height=200&width=512`)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
+			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}
