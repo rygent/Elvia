@@ -22,7 +22,7 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename) + path.sep}`.split(path.sep).join('/');
 	}
 
-	checkOwner(userId) {
+	isOwner(userId) {
 		return this.client.owners.includes(userId);
 	}
 
@@ -30,7 +30,7 @@ module.exports = class Util {
 		const { interaction, message } = options;
 		switch (category.toLowerCase()) {
 			case 'developer':
-				return this.checkOwner(interaction?.user.id || message?.author.id);
+				return this.isOwner(interaction?.user.id || message?.author.id);
 			case 'nsfw':
 				return interaction?.channel.nsfw || message?.channel.nsfw;
 			default:

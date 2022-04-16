@@ -22,7 +22,7 @@ module.exports = class extends Event {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
-			if (command.disabled && !this.client.utils.checkOwner(message.author.id)) {
+			if (command.disabled && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is currently inaccessible!' });
 			}
 
@@ -48,7 +48,7 @@ module.exports = class extends Event {
 				}
 			}
 
-			if (command.ownerOnly && !this.client.utils.checkOwner(message.author.id)) {
+			if (command.ownerOnly && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is only accessible for developers!' });
 			}
 
