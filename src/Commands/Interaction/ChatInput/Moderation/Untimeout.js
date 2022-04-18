@@ -23,7 +23,7 @@ module.exports = class extends InteractionCommand {
 		}
 		if (!member.moderatable) return interaction.reply({ content: `I cannot remove a timeout from a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
+		const guildData = await this.client.db.findOrCreateGuild({ id: interaction.guildId });
 
 		await member.timeout(null, `${reason ? `${reason} (Time out removed by ${interaction.user.tag})` : `(Time out removed by ${interaction.user.tag})`}`);
 

@@ -4,5 +4,5 @@ module.exports = {
 	owners: process.env.CLIENT_OWNERS?.split(',').filter(item => item.length),
 	timezone: process.env.TIMEZONE,
 	defaultPermissions: ['SendMessages', 'ViewChannel'],
-	mongoURI: process.env.MONGO_URI
+	mongodb: process.env.MONGODB_URI
 };

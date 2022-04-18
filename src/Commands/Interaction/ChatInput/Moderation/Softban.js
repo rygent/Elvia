@@ -25,7 +25,7 @@ module.exports = class extends InteractionCommand {
 		}
 		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
+		const guildData = await this.client.db.findOrCreateGuild({ id: interaction.guildId });
 
 		await interaction.guild.members.ban(user, { deleteMessageDays: days, reason: `${reason ? `${reason} (Softbanned by ${interaction.user.tag})` : `(Softbanned by ${interaction.user.tag})`}` });
 		await interaction.guild.members.unban(user, `${reason ? `${reason} (Softbanned by ${interaction.user.tag})` : `(Softbanned by ${interaction.user.tag})`}`);

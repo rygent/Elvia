@@ -1,7 +1,6 @@
 const path = require('node:path');
 const { promisify } = require('node:util');
 const glob = promisify(require('glob'));
-const { connect } = require('mongoose');
 const Interaction = require('./Interaction');
 const Command = require('./Command');
 const Event = require('./Event');
@@ -100,13 +99,6 @@ module.exports = class Util {
 			command = name;
 		}
 		return command;
-	}
-
-	async loadDatabases() {
-		return connect(this.client.mongoURI, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true
-		});
 	}
 
 	async loadInteractions() {

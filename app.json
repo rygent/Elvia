@@ -21,7 +21,7 @@
         "description": "Input here your User ID as the bot owner.",
         "required": true
       },
-      "MONGO_URI": {
+      "MONGODB_URI": {
         "description": "Input here your MongoDB URI.",
         "required": true
       },
