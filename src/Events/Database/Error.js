@@ -5,13 +5,14 @@ module.exports = class extends Event {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'disconnected',
+			name: 'error',
+			once: false,
 			emitter: connection
 		});
 	}
 
-	async run() {
-		this.client.logger.debug('Disconnected from MongoDB!');
+	async run(error) {
+		this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`);
 	}
 
 };

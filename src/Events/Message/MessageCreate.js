@@ -5,6 +5,13 @@ const { Access } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
+	constructor(...args) {
+		super(...args, {
+			name: 'messageCreate',
+			once: false
+		});
+	}
+
 	async run(message) {
 		if (!message.inGuild() || message.author.bot) return;
 

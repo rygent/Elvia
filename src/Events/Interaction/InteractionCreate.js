@@ -5,6 +5,13 @@ const { Access } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
+	constructor(...args) {
+		super(...args, {
+			name: 'interactionCreate',
+			once: false
+		});
+	}
+
 	async run(interaction) {
 		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return;

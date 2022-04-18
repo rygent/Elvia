@@ -6,6 +6,7 @@ module.exports = class extends Event {
 	constructor(...args) {
 		super(...args, {
 			name: 'reconnected',
+			once: false,
 			emitter: connection
 		});
 	}
