@@ -1,7 +1,7 @@
 const Event = require('../../Structures/Event');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { WebhookClient } = require('discord.js');
-const { Access, Colors } = require('../../Utils/Constants');
+const { Colors, Links } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
@@ -15,8 +15,8 @@ module.exports = class extends Event {
 	async run(guild) {
 		if (!guild.available) return;
 
-		if (!Access.GuildLogWebhook) return;
-		const webhook = new WebhookClient({ url: Access.GuildLogWebhook });
+		if (!Links.GuildWebhook) return;
+		const webhook = new WebhookClient({ url: Links.GuildWebhook });
 
 		const guildOwner = await guild.fetchOwner();
 

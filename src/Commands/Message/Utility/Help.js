@@ -1,7 +1,7 @@
 const MessageCommand = require('../../../Structures/Command');
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ComponentType } = require('discord-api-types/v10');
-const { Access, Colors } = require('../../../Utils/Constants');
+const { Colors, Links } = require('../../../Utils/Constants');
 
 module.exports = class extends MessageCommand {
 
@@ -52,7 +52,7 @@ module.exports = class extends MessageCommand {
 
 			embed.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: 'https://i.imgur.com/YxoUvH8.png' });
 			embed.setDescription([
-				`Need more help? Come join our [guild](${Access.InviteLink})`,
+				`Need more help? Come join our [guild](${Links.SupportServer})`,
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
 

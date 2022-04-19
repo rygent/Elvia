@@ -1,8 +1,3 @@
-exports.Access = {
-	InviteLink: process.env.INVITE_LINK,
-	GuildLogWebhook: process.env.GUILD_LOG_WEBHOOK_URL
-};
-
 exports.Badges = require('../Assets/js/Badge');
 
 exports.Colors = {
@@ -22,6 +17,11 @@ exports.Emojis = {
 	Dnd: '<:dnd:712397154836283392>',
 	Offline: '<:offline:712397086100029440>',
 	Verified: '<:verified:945933555089952848>'
+};
+
+exports.Links = {
+	SupportServer: process.env.INVITE_LINK,
+	GuildWebhook: process.env.GUILD_LOG_WEBHOOK_URL
 };
 
 exports.Secrets = {

@@ -1,7 +1,7 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
-const { Access } = require('../../Utils/Constants');
+const { Links } = require('../../Utils/Constants');
 
 module.exports = class extends Event {
 
@@ -69,7 +69,7 @@ module.exports = class extends Event {
 					.addComponents(new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
 						.setLabel('Support Server')
-						.setURL(Access.InviteLink));
+						.setURL(Links.SupportServer));
 
 				return message.reply({ content: [
 					'An error has occured when executing this command, our developers have been informed.',
