@@ -4,7 +4,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'kick',
+			name: ['kick'],
 			description: 'Kick a member with optional reason.',
 			memberPermissions: ['KickMembers'],
 			clientPermissions: ['KickMembers']

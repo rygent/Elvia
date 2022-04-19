@@ -4,7 +4,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'untimeout',
+			name: ['untimeout'],
 			description: 'Remove timeout from a member.',
 			memberPermissions: ['ModerateMembers'],
 			clientPermissions: ['ModerateMembers']

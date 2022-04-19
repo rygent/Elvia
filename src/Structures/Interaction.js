@@ -4,9 +4,7 @@ module.exports = class Interaction {
 
 	constructor(client, name, options = {}) {
 		this.client = client;
-		this.name = options.name || name;
-		this.subCommandGroup = options.subCommandGroup;
-		this.subCommand = options.subCommand;
+		this.name = options.name || [name];
 		this.description = options.description || 'No description provided';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();

@@ -5,7 +5,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'roll',
+			name: ['roll'],
 			description: 'Roll random number with optional minimum and maximum numbers or using a dice.'
 		});
 	}

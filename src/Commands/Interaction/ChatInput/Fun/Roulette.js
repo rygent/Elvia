@@ -4,7 +4,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'roulette',
+			name: ['roulette'],
 			description: 'Get a random winner from the roulette.'
 		});
 	}

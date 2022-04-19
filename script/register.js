@@ -1,11 +1,20 @@
+const { promisify } = require('node:util');
+const glob = promisify(require('glob'));
 const inquirer = require('inquirer');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
-const ChatInput = require('../src/Utils/ChatInputInteraction');
-const ContextMenu = require('../src/Utils/ContextMenuInteraction');
 require('dotenv/config');
 
-(async () => { // eslint-disable-next-line prefer-const
+(async () => {
+	const commands = [];
+	await glob('src/Interactions/**/*.js').then(interactions => {
+		for (const interactionFiles of interactions) {
+			const interaction = require(`../${interactionFiles}`);
+			commands.push(interaction);
+		}
+	});
+
+	// eslint-disable-next-line prefer-const
 	let { type, clientId, guildId, token } = await inquirer.prompt([{
 		type: 'rawlist',
 		name: 'type',
@@ -51,10 +60,10 @@ require('dotenv/config');
 
 		switch (type) {
 			case 'guild':
-				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...ChatInput, ...ContextMenu] });
+				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...commands.values()] });
 				break;
 			case 'global':
-				await rest.put(Routes.applicationCommands(clientId), { body: [...ChatInput, ...ContextMenu] });
+				await rest.put(Routes.applicationCommands(clientId), { body: [...commands.values()] });
 				break;
 		}
 

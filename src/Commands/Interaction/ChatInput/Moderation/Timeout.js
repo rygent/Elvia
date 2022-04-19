@@ -6,7 +6,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'timeout',
+			name: ['timeout'],
 			description: 'Timeout a member with duration and optional reason.',
 			memberPermissions: ['ModerateMembers'],
 			clientPermissions: ['ModerateMembers']

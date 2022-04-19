@@ -83,24 +83,6 @@ module.exports = class Util {
 		return string?.length > maxLen ? `${string.slice(0, i)}...` : string;
 	}
 
-	getCommandName(interaction) {
-		let command;
-		const { name } = interaction;
-		const group = interaction.subCommandGroup;
-		const subcommand = interaction.subCommand;
-
-		if (subcommand) {
-			if (group) {
-				command = `${name}-${group}-${subcommand}`;
-			} else {
-				command = `${name}-${subcommand}`;
-			}
-		} else {
-			command = name;
-		}
-		return command;
-	}
-
 	async loadInteractions() {
 		return glob(`${this.directory}Commands/Interaction/**/*.js`).then(interactions => {
 			for (const interactionFile of interactions) {
@@ -110,7 +92,7 @@ module.exports = class Util {
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name);
 				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
-				this.client.interactions.set(this.getCommandName(interaction), interaction);
+				this.client.interactions.set(interaction.name.join('-'), interaction);
 			}
 		});
 	}

@@ -4,7 +4,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'unban',
+			name: ['unban'],
 			description: 'Unban a user with optional reason.',
 			memberPermissions: ['BanMembers'],
 			clientPermissions: ['BanMembers']

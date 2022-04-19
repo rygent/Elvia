@@ -8,7 +8,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'define',
+			name: ['define'],
 			description: 'Define a word.'
 		});
 	}
