@@ -84,15 +84,5 @@ module.exports = {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}, {
-		name: 'youtube',
-		description: 'Search for a YouTube videos.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'search',
-			description: 'Your search.',
-			type: ApplicationCommandOptionType.String,
-			required: true
-		}]
 	}]
 };

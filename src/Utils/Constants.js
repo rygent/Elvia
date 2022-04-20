@@ -28,6 +28,5 @@ exports.Secrets = {
 	ImdbApiKey: process.env.IMDB_API_KEY,
 	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
 	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
-	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-	YoutubeApiKey: process.env.YOUTUBE_API_KEY
+	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET
 };
