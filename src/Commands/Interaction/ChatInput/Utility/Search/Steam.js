@@ -64,7 +64,7 @@ module.exports = class extends InteractionCommand {
 				.setImage(data.header_image)
 				.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.avatarURL() });
 
-			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+			return i.editReply({ content: null, embeds: [embed], components: [button] });
 		});
 
 		collector.on('end', (collected, reason) => {

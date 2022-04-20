@@ -67,7 +67,7 @@ module.exports = class extends InteractionCommand {
 				.setImage(data.album.images[0].url)
 				.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL() });
 
-			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+			return i.editReply({ content: null, embeds: [embed], components: [button] });
 		});
 
 		collector.on('end', (collected, reason) => {

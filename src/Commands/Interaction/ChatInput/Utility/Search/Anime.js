@@ -75,7 +75,7 @@ module.exports = class extends InteractionCommand {
 				embed.setDescription(this.client.utils.truncateString(data.synopsis, 512));
 			}
 
-			return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+			return i.editReply({ content: null, embeds: [embed], components: [button] });
 		});
 
 		collector.on('end', (collected, reason) => {

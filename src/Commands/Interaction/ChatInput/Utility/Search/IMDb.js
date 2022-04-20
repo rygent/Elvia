@@ -74,7 +74,7 @@ module.exports = class extends InteractionCommand {
 					].join(''), inline: false })
 					.setFooter({ text: 'Powered by IMDb', iconURL: interaction.user.avatarURL() });
 
-				return i.editReply({ content: '\u200B', embeds: [embed], components: [button] });
+				return i.editReply({ content: null, embeds: [embed], components: [button] });
 			});
 
 			collector.on('end', (collected, reason) => {
