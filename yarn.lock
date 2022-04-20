@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@anishshobith/deeptype/-/deeptype-1.1.0.tgz#38c8e634a563904753aedefdf0082a0b4f1b76a4"
   integrity sha512-C/NfCUQMydPrpVGVmcYjMxr4aIJ/tTps/voDSuDM3Zf0B5K5M0Kw4e9AeUppd55eH0j7DFHzc2eKsidz3qarRg==
 
-"@babel/runtime@^7.17.8":
+"@babel/runtime@^7.17.9":
   version "7.17.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
   integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
@@ -152,9 +152,9 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "17.0.23"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.23.tgz#3b41a6e643589ac6442bdbd7a4a3ded62f33f7da"
-  integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.25.tgz#527051f3c2f77aa52e5dc74e45a3da5fb2301448"
+  integrity sha512-wANk6fBrUwdpY4isjWrKTufkrXdu1D2YHCot2fD/DfWxF5sMrVSA+KN7ydckvaTCh0HiqX9IVl0L5/ZoXg5M7w==
 
 "@types/responselike@*", "@types/responselike@^1.0.0":
   version "1.0.0"
@@ -433,7 +433,7 @@ commander@^2.9.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-complex.js@^2.1.0:
+complex.js@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.1.1.tgz#0675dac8e464ec431fb2ab7d30f41d889fb25c31"
   integrity sha512-8njCHOTtFFLtegk6zQo0kkVX1rngygb/KQI6z1qZxlFI3scluC+LVTCFbrkWjBv4vvLlbQ9t88IPMC6k95VTTg==
@@ -528,12 +528,7 @@ discord-api-types@^0.29.0:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.29.0.tgz#8346352b623ddd8d8eed386b6eb758e2d82d6005"
   integrity sha512-Ekq1ICNpOTVajXKZguNFrsDeTmam+ZeA38txsNLZnANdXUjU6QBPIZLUQTC6MzigFGb0Tt8vk4xLnXmzv0shNg==
 
-discord-api-types@^0.31.1:
-  version "0.31.1"
-  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.31.1.tgz#e83208fef3669c263bb48e68c9c84ecf3e286b01"
-  integrity sha512-QBWl1/x20ZyKAiY750wuWAWokudhlOnQzXhCTEkQsCNOOM9tU/HIqkpLgZqJI1EFmZMeWHdaRKzpiD7n7iCS+w==
-
-discord-api-types@^0.31.2:
+discord-api-types@^0.31.1, discord-api-types@^0.31.2:
   version "0.31.2"
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.31.2.tgz#8d131e25340bd695815af3bb77128a6993c1b516"
   integrity sha512-gpzXTvFVg7AjKVVJFH0oJGC0q0tO34iJGSHZNz9u3aqLxlD6LfxEs9wWVVikJqn9gra940oUTaPFizCkRDcEiA==
@@ -1223,12 +1218,12 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 mathjs@^10.0.0:
-  version "10.4.3"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.3.tgz#456ae944204809e8e8266ff265b1ef724d03f90e"
-  integrity sha512-C50lWorCOplBec9Ik5fzhHuOx4G4+mtdz3r1G2I1/r8yj+CpYFXLXNqTdg59oKmIF1tKcIzpxlC4s2dGL7f3pg==
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.5.0.tgz#f81d0518fe7b4b2a0b85e1125b8ecfc364fb0292"
+  integrity sha512-gRnSY9psN9zgiB2QV9F4XbuX5hwjxY5Ou7qoTFWDbn2vZ3UEs+sjfK/SRg2WP30TNfZWpwlGdp8H1knFJnpFdA==
   dependencies:
-    "@babel/runtime" "^7.17.8"
-    complex.js "^2.1.0"
+    "@babel/runtime" "^7.17.9"
+    complex.js "^2.1.1"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
     fraction.js "^4.2.0"
@@ -1295,12 +1290,7 @@ moment-timezone@^0.5.34:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0":
-  version "2.29.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
-  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
-
-moment@^2.29.3:
+"moment@>= 2.9.0", moment@^2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
   integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
