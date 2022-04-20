@@ -20,10 +20,14 @@ module.exports = class Database {
 	}
 
 	async loadDatabases() {
-		return mongoose.connect(this.client.mongodb, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true
-		});
+		try {
+			return mongoose.connect(this.client.mongodb, {
+				useNewUrlParser: true,
+				useUnifiedTopology: true
+			});
+		} catch (error) {
+			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`);
+		}
 	}
 
 	async findOrCreateUser({ id: userId }, isLean) {
