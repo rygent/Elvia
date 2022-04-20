@@ -43,8 +43,8 @@ module.exports = class extends Event {
 				this.client.logger.error(error.stack);
 
 				const content = [
-					'An error has occured when executing this command, our developers have been informed.',
-					'If the issue persists, please contact us in our **Support Server**.'
+					'An error has occured when executing this command.',
+					'If the issue persists, please report in our *Support Server*.'
 				].join('\n');
 
 				const button = new ActionRowBuilder()

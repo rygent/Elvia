@@ -19,7 +19,7 @@ module.exports = class extends Event {
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
 		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `Hi, my prefix for this server is \`${this.client.prefix}\`.` });
+			return message.reply({ content: `My prefix for *${message.guild.name}* is \`${this.client.prefix}\`.` });
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -72,8 +72,8 @@ module.exports = class extends Event {
 						.setURL(Links.SupportServer));
 
 				return message.reply({ content: [
-					'An error has occured when executing this command, our developers have been informed.',
-					'If the issue persists, please contact us in our **Support Server**.'
+					'An error has occured when executing this command.',
+					'If the issue persists, please report in our *Support Server*.'
 				].join('\n'), components: [button] });
 			}
 		}

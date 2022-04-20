@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = req
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Formatters } = require('discord.js');
 const { Colors, Secrets } = require('../../../../../Utils/Constants');
-const api = require('imdb-api');
+const imdb = require('imdb-api');
 
 module.exports = class extends InteractionCommand {
 
@@ -18,7 +18,7 @@ module.exports = class extends InteractionCommand {
 		const search = await interaction.options.getString('search', true);
 
 		try {
-			const response = await api.search({ name: search }, { apiKey: Secrets.ImdbApiKey }, 1).then(({ results }) => results);
+			const response = await imdb.search({ name: search }, { apiKey: Secrets.ImdbApiKey }, 1).then(({ results }) => results);
 
 			const menu = new ActionRowBuilder()
 				.addComponents(new SelectMenuBuilder()
@@ -40,7 +40,7 @@ module.exports = class extends InteractionCommand {
 				await i.deferUpdate();
 
 				const [ids] = i.values;
-				const data = await api.get({ id: ids }, { apiKey: Secrets.ImdbApiKey });
+				const data = await imdb.get({ id: ids }, { apiKey: Secrets.ImdbApiKey });
 
 				const rating = data.ratings.find(item => item.source === 'Internet Movie Database');
 				const tomatometer = data.ratings.find(item => item.source === 'Rotten Tomatoes');
@@ -78,7 +78,7 @@ module.exports = class extends InteractionCommand {
 			});
 
 			collector.on('end', (collected, reason) => {
-				if ((collected.size === 0 || collected.filter(({ user }) => user.id === interaction.user.id).size === 0) && reason === 'time') {
+				if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
 					return interaction.deleteReply();
 				}
 			});

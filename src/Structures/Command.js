@@ -16,8 +16,7 @@ module.exports = class Command {
 		this.disabled = options.disabled || false;
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	async run(message, args) {
+	async run(message, args) { // eslint-disable-line no-unused-vars
 		throw new Error(`Command ${this.name} doesn't provide a run method!`);
 	}
 

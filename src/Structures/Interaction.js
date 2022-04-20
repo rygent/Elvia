@@ -11,8 +11,7 @@ module.exports = class Interaction {
 		this.guildOnly = options.guildOnly || false;
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	async run(interaction) {
+	async run(interaction) { // eslint-disable-line no-unused-vars
 		throw new Error(`Interaction ${this.name} doesn't provide a run method!`);
 	}
 

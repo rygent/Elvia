@@ -21,10 +21,6 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename) + path.sep}`.split(path.sep).join('/');
 	}
 
-	isOwner(userId) {
-		return this.client.owners.includes(userId);
-	}
-
 	filterCategory(category, options = {}) {
 		const { interaction, message } = options;
 		switch (category.toLowerCase()) {
@@ -60,6 +56,10 @@ module.exports = class Util {
 			.replace(/Moderate/g, 'Timeout')
 			.replace(/TTS/g, 'Text-to-Speech')
 			.replace(/Use VAD/g, 'Use Voice Activity');
+	}
+
+	isOwner(userId) {
+		return this.client.owners.includes(userId);
 	}
 
 	removeDuplicates(array) {

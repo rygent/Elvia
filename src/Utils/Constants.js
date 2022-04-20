@@ -20,8 +20,8 @@ exports.Emojis = {
 };
 
 exports.Links = {
-	SupportServer: process.env.INVITE_LINK,
-	GuildWebhook: process.env.GUILD_LOG_WEBHOOK_URL
+	SupportServer: process.env.SUPPORT_SERVER_URL,
+	GuildWebhook: process.env.GUILD_WEBHOOK_URL
 };
 
 exports.Secrets = {

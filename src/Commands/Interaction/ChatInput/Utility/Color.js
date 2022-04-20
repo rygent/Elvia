@@ -31,27 +31,26 @@ module.exports = class extends InteractionCommand {
 			return interaction.reply({ content: 'Please provide a valid **hexadecimal**/**rgb** color code. Example: **#77dd77**/**(253, 253, 150)** or **random** to get a random color.', ephemeral: true });
 		}
 
-		const headers = { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36' };
-		const result = await axios.get(link, { headers }).then(res => res.data);
+		const response = await axios.get(link).then(({ data }) => data);
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${result.hex.clean}`));
+				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`));
 
 		const embed = new EmbedBuilder()
-			.setColor(Util.resolveColor(result.hex.clean))
-			.setTitle(result.name.value)
+			.setColor(Util.resolveColor(response.hex.clean))
+			.setTitle(response.name.value)
 			.setDescription([
-				`***Hex:*** ${result.hex.value}`,
-				`***RGB:*** (${result.rgb.r}, ${result.rgb.g}, ${result.rgb.b})`,
-				`***HSL:*** (${result.hsl.h}, ${result.hsl.s}%, ${result.hsl.l}%)`,
-				`***HSV:*** (${result.hsv.h}, ${result.hsv.s}%, ${result.hsv.v}%)`,
-				`***CMYK:*** (${result.cmyk.c}, ${result.cmyk.m}, ${result.cmyk.y}, ${result.cmyk.k})`,
-				`***XYZ:*** (${result.XYZ.X}, ${result.XYZ.Y}, ${result.XYZ.Z})`
+				`***Hex:*** ${response.hex.value}`,
+				`***RGB:*** (${response.rgb.r}, ${response.rgb.g}, ${response.rgb.b})`,
+				`***HSL:*** (${response.hsl.h}, ${response.hsl.s}%, ${response.hsl.l}%)`,
+				`***HSV:*** (${response.hsv.h}, ${response.hsv.s}%, ${response.hsv.v}%)`,
+				`***CMYK:*** (${response.cmyk.c}, ${response.cmyk.m}, ${response.cmyk.y}, ${response.cmyk.k})`,
+				`***XYZ:*** (${response.XYZ.X}, ${response.XYZ.Y}, ${response.XYZ.Z})`
 			].join('\n'))
-			.setImage(`https://serux.pro/rendercolour?hex=${result.hex.clean}&height=200&width=512`)
+			.setImage(`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed], components: [button] });

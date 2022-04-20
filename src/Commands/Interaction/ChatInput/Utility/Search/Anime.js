@@ -2,9 +2,8 @@ const InteractionCommand = require('../../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../../Utils/Constants');
+const KitsuClient = require('kitsu');
 const moment = require('moment');
-const Kitsu = require('kitsu');
-const api = new Kitsu();
 
 module.exports = class extends InteractionCommand {
 
@@ -19,7 +18,9 @@ module.exports = class extends InteractionCommand {
 		const search = await interaction.options.getString('search', true);
 		await interaction.deferReply();
 
-		const { data: response } = await api.get('anime', { params: { filter: { text: search } } });
+		const kitsu = new KitsuClient();
+
+		const response = await kitsu.get('anime', { params: { filter: { text: search } } }).then(({ data }) => data);
 		if (!response.length) return interaction.editReply({ content: 'Nothing found for this search.' });
 
 		const menu = new ActionRowBuilder()
@@ -35,7 +36,7 @@ module.exports = class extends InteractionCommand {
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu], fetchReply: true });
 
 		const filter = (i) => i.customId === 'data_menu';
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {
 			if (i.user.id !== interaction.user.id) return i.deferUpdate();
@@ -78,7 +79,7 @@ module.exports = class extends InteractionCommand {
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((collected.size === 0 || collected.filter(({ user }) => user.id === interaction.user.id).size === 0) && reason === 'time') {
+			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

@@ -39,8 +39,7 @@ module.exports = class extends MessageCommand {
 					return i.update({ content: 'Cancelation of restarting the bot.', components: [] });
 				case 'restart':
 					setTimeout(async () => {
-						// eslint-disable-next-line no-unused-expressions
-						await reply.delete() && message.delete();
+						await (reply.delete() && message.delete());
 						return process.exit();
 					}, 5000);
 					return i.update({ content: 'The bot will restart in 5 seconds.\n*it may take a few minutes for it to boot up again*', components: [] });

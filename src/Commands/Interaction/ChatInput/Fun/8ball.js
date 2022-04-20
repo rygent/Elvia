@@ -15,10 +15,12 @@ module.exports = class extends InteractionCommand {
 		const answer = require('../../../../Assets/json/8ball.json');
 		const choice = answer[Math.floor(Math.random() * answer.length)];
 
-		return interaction.reply({ content: [
+		const content = [
 			`> **${interaction.user.username}**: ${question}`,
 			`🎱 ${choice}`
-		].join('\n') });
+		].join('\n');
+
+		return interaction.reply({ content });
 	}
 
 };

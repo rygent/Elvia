@@ -13,15 +13,15 @@ module.exports = class extends InteractionCommand {
 		const standardEmoji = [];
 		const animatedEmoji = [];
 
-		await interaction.guild.emojis.cache.forEach(x => {
-			if (x.animated) {
-				animatedEmoji.push(x.toString());
+		await interaction.guild.emojis.cache.forEach(emoji => {
+			if (emoji.animated) {
+				animatedEmoji.push(emoji.toString());
 			} else {
-				standardEmoji.push(x.toString());
+				standardEmoji.push(emoji.toString());
 			}
 		});
 
-		if (animatedEmoji.length === 0 && standardEmoji.length === 0) return interaction.reply({ content: 'There are no emojis in this server.', ephemeral: true });
+		if (!animatedEmoji.length && !standardEmoji.length) return interaction.reply({ content: 'There are no emojis in this server.', ephemeral: true });
 
 		return interaction.reply({ content: `${standardEmoji.join(' ')} ${animatedEmoji.join(' ')}`, ephemeral: true });
 	}

@@ -29,7 +29,7 @@
         "description": "Input here your timezone.",
         "required": false
       },
-      "INVITE_LINK": {
+      "SUPPORT_SERVER_URL": {
         "description": "Input here the guild invite link.",
         "required": true
       },
@@ -53,7 +53,7 @@
         "description": "Input here the youtube api key.",
         "required": true
       },
-      "GUILD_LOG_WEBHOOK_URL": {
+      "GUILD_WEBHOOK_URL": {
         "description": "Input here the guild log webhook url.",
         "require": false
       }

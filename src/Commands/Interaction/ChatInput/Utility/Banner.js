@@ -25,7 +25,7 @@ module.exports = class extends InteractionCommand {
 		if (color) {
 			if (!user.hexAccentColor) return interaction.reply({ content: `**${user.tag}**'s has no banner color!`, ephemeral: true });
 
-			const { data: response } = await axios.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`);
+			const response = await axios.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`).then(({ data }) => data);
 
 			embed.setColor(Util.resolveColor(response.hex.clean));
 			embed.setDescription([

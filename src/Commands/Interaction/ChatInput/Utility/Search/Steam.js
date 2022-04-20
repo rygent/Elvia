@@ -68,7 +68,7 @@ module.exports = class extends InteractionCommand {
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((collected.size === 0 || collected.filter(({ user }) => user.id === interaction.user.id).size === 0) && reason === 'time') {
+			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

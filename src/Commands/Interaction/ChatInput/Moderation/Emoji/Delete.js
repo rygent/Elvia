@@ -33,7 +33,7 @@ module.exports = class extends InteractionCommand {
 				.setLabel('Delete'));
 
 		return interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button], fetchReply: true }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60_000 });
+			const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 
 			collector.on('collect', async (i) => {
 				if (i.user.id !== interaction.user.id) return i.deferUpdate();
@@ -50,7 +50,7 @@ module.exports = class extends InteractionCommand {
 			});
 
 			collector.on('end', (collected, reason) => {
-				if ((collected.size === 0 || collected.filter(x => x.user.id === interaction.user.id).size === 0) && reason === 'time') {
+				if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
 					return interaction.deleteReply();
 				}
 			});

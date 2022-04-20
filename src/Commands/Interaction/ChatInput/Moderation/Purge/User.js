@@ -29,7 +29,7 @@ module.exports = class extends InteractionCommand {
 				} else {
 					await interaction.reply({ content: `Successfully deleted **${message.size}**/**${amount}** messages.` });
 				}
-				setTimeout(() => interaction.deleteReply(), 10_000);
+				setTimeout(() => interaction.deleteReply(), 10000);
 			});
 		} catch {
 			return interaction.reply({ content: 'You can only delete the messages which are not older than 14 days.', ephemeral: true });

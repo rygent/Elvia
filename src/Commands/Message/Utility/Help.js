@@ -87,7 +87,7 @@ module.exports = class extends MessageCommand {
 			});
 
 			collector.on('end', (collected, reason) => {
-				if (((collected.size === 0 || collected.filter(({ user }) => user.id === message.author.id).size === 0) && reason === 'time') || reason === 'time') {
+				if (((!collected.size || !collected.filter(({ user }) => user.id === message.author.id).size) && reason === 'time') || reason === 'time') {
 					return reply.edit({ components: [select(true)] });
 				}
 			});

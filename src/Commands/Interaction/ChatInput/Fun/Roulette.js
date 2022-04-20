@@ -12,7 +12,7 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const title = await interaction.options.getString('title', true);
 
-		const member = await interaction.guild.members.cache.filter(m => !m.user.bot).random();
+		const member = await interaction.guild.members.cache.filter(({ user }) => !user.bot).random();
 
 		return interaction.reply({ content: `🥇 Winner of **${title}** is ${member.user.tag}.` });
 	}

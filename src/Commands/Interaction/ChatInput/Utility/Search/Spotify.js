@@ -2,8 +2,7 @@ const InteractionCommand = require('../../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors, Secrets } = require('../../../../../Utils/Constants');
-const Spotify = require('node-spotify-api');
-const api = new Spotify({ id: Secrets.SpotifyClientId, secret: Secrets.SpotifyClientSecret });
+const SpotifyClient = require('node-spotify-api');
 const moment = require('moment');
 require('moment-duration-format');
 
@@ -19,7 +18,9 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const response = await api.search({ type: 'track', query: search, limit: 10 }).then(({ tracks }) => tracks.items);
+		const spotify = new SpotifyClient({ id: Secrets.SpotifyClientId, secret: Secrets.SpotifyClientSecret });
+
+		const response = await spotify.search({ type: 'track', query: search, limit: 10 }).then(({ tracks }) => tracks.items);
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const menu = new ActionRowBuilder()
@@ -70,7 +71,7 @@ module.exports = class extends InteractionCommand {
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((collected.size === 0 || collected.filter(({ user }) => user.id === interaction.user.id).size === 0) && reason === 'time') {
+			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});
