@@ -33,7 +33,7 @@ module.exports = class extends InteractionCommand {
 					description: this.client.utils.truncateString(res.description, 95).padEnd(1)
 				}))));
 
-		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu], fetchReply: true });
+		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
 		const filter = (i) => i.customId === 'data_menu';
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });

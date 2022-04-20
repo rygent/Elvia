@@ -33,7 +33,7 @@ module.exports = class extends InteractionCommand {
 					description: this.client.utils.truncateString(this.client.utils.formatArray(res.artists.map(({ name }) => name)), 95).padEnd(1)
 				}))));
 
-		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu], fetchReply: true });
+		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
 		const filter = (i) => i.customId === 'data_menu';
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });

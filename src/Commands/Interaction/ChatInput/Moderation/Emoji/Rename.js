@@ -33,7 +33,7 @@ module.exports = class extends InteractionCommand {
 				.setCustomId('confirm')
 				.setLabel('Confirm'));
 
-		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button], fetchReply: true });
+		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button] });
 
 		const collector = reply.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 

@@ -32,7 +32,7 @@ module.exports = class extends InteractionCommand {
 				.setCustomId('delete')
 				.setLabel('Delete'));
 
-		const reply = await interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button], fetchReply: true });
+		const reply = await interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button] });
 
 		const collector = reply.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 

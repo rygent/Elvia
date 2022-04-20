@@ -30,7 +30,7 @@ module.exports = class extends InteractionCommand {
 						description: res.type.toSentenceCase()
 					}))));
 
-			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu], fetchReply: true });
+			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
 			const filter = (i) => i.customId === 'data_menu';
 			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
