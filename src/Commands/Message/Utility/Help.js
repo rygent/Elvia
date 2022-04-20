@@ -2,6 +2,7 @@ const MessageCommand = require('../../../Structures/Command');
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ComponentType } = require('discord-api-types/v10');
 const { Colors, Links } = require('../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 
 module.exports = class extends MessageCommand {
 
@@ -56,9 +57,10 @@ module.exports = class extends MessageCommand {
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
 
-			const select = (state) => new ActionRowBuilder()
+			const menuId = `menu-${nanoid()}`;
+			const menu = (state) => new ActionRowBuilder()
 				.addComponents(new SelectMenuBuilder()
-					.setCustomId('data_menu')
+					.setCustomId(menuId)
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
 					.addOptions(...categories.filter(({ directory }) => this.client.utils.filterCategory(directory, { message })).map(({ directory }) => ({
@@ -67,9 +69,9 @@ module.exports = class extends MessageCommand {
 						description: `Shows all the ${directory} Commands`
 					}))));
 
-			const reply = await message.reply({ embeds: [embed], components: [select(false)] });
+			const reply = await message.reply({ embeds: [embed], components: [menu(false)] });
 
-			const filter = (i) => i.customId === 'data_menu';
+			const filter = (i) => i.customId === menuId;
 			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 			collector.on('collect', async (i) => {
@@ -83,12 +85,12 @@ module.exports = class extends MessageCommand {
 				embed.setFooter({ text: `Powered by ${this.client.user.username} | ${category.commands.length} Commands`, iconURL: message.author.avatarURL() });
 
 				collector.resetTimer();
-				return i.update({ embeds: [embed], components: [select(false)] });
+				return i.update({ embeds: [embed], components: [menu(false)] });
 			});
 
 			collector.on('end', (collected, reason) => {
 				if (((!collected.size || !collected.filter(({ user }) => user.id === message.author.id).size) && reason === 'time') || reason === 'time') {
-					return reply.edit({ components: [select(true)] });
+					return reply.edit({ components: [menu(true)] });
 				}
 			});
 		}

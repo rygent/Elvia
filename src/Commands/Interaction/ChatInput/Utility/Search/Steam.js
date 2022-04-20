@@ -2,6 +2,7 @@ const InteractionCommand = require('../../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const axios = require('axios');
 
 module.exports = class extends InteractionCommand {
@@ -19,9 +20,10 @@ module.exports = class extends InteractionCommand {
 		const response = await axios.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`).then(({ data }) => data.items.filter(({ type }) => type === 'app'));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
+		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId('data_menu')
+				.setCustomId(menuId)
 				.setPlaceholder('Select a game!')
 				.addOptions(...response.map(res => ({
 					label: res.name,
@@ -30,7 +32,7 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-		const filter = (i) => i.customId === 'data_menu';
+		const filter = (i) => i.customId === menuId;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {

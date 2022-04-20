@@ -2,6 +2,7 @@ const InteractionCommand = require('../../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors, Secrets } = require('../../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const SpotifyClient = require('node-spotify-api');
 const moment = require('moment');
 require('moment-duration-format');
@@ -23,9 +24,10 @@ module.exports = class extends InteractionCommand {
 		const response = await spotify.search({ type: 'track', query: search, limit: 10 }).then(({ tracks }) => tracks.items);
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
+		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId('data_menu')
+				.setCustomId(menuId)
 				.setPlaceholder('Select a song!')
 				.addOptions(...response.map(res => ({
 					label: this.client.utils.truncateString(res.name, 95),
@@ -35,7 +37,7 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-		const filter = (i) => i.customId === 'data_menu';
+		const filter = (i) => i.customId === menuId;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {

@@ -3,6 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = req
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Formatters } = require('discord.js');
 const { Colors, Secrets } = require('../../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const imdb = require('imdb-api');
 
 module.exports = class extends InteractionCommand {
@@ -20,9 +21,10 @@ module.exports = class extends InteractionCommand {
 		try {
 			const response = await imdb.search({ name: search }, { apiKey: Secrets.ImdbApiKey }, 1).then(({ results }) => results);
 
+			const menuId = `menu-${nanoid()}`;
 			const menu = new ActionRowBuilder()
 				.addComponents(new SelectMenuBuilder()
-					.setCustomId('data_menu')
+					.setCustomId(menuId)
 					.setPlaceholder('Select a movies/series!')
 					.addOptions(...response.map(res => ({
 						label: `${res.title} (${res.year})`,
@@ -32,7 +34,7 @@ module.exports = class extends InteractionCommand {
 
 			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-			const filter = (i) => i.customId === 'data_menu';
+			const filter = (i) => i.customId === menuId;
 			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 			collector.on('collect', async (i) => {

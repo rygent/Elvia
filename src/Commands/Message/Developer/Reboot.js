@@ -1,6 +1,7 @@
 const MessageCommand = require('../../../Structures/Command');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
+const { nanoid } = require('nanoid');
 
 module.exports = class extends MessageCommand {
 
@@ -15,29 +16,32 @@ module.exports = class extends MessageCommand {
 	}
 
 	async run(message) {
+		const [cancelId, restartId] = ['cancel', 'restart'].map(type => `${type}-${nanoid()}`);
 		const button = (state) => new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()
-				.setCustomId('cancel')
+				.setCustomId(cancelId)
 				.setStyle(ButtonStyle.Secondary)
 				.setLabel('Cancel')
 				.setDisabled(state))
 			.addComponents(new ButtonBuilder()
-				.setCustomId('restart')
+				.setCustomId(restartId)
 				.setStyle(ButtonStyle.Danger)
 				.setLabel('Restart')
 				.setDisabled(state));
 
 		const reply = await message.reply({ content: 'Are you sure want to restart the bot ?', components: [button(false)] });
-		const collector = reply.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15000 });
+
+		const filter = (i) => [cancelId, restartId].includes(i.customId);
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15000 });
 
 		collector.on('collect', async (i) => {
 			if (i.user.id !== message.author.id) return i.deferUpdate();
 
 			switch (i.customId) {
-				case 'cancel':
+				case cancelId:
 					collector.stop();
 					return i.update({ content: 'Cancelation of restarting the bot.', components: [] });
-				case 'restart':
+				case restartId:
 					setTimeout(async () => {
 						await (reply.delete() && message.delete());
 						return process.exit();

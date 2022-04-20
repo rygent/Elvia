@@ -2,6 +2,7 @@ const InteractionCommand = require('../../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const KitsuClient = require('kitsu');
 const moment = require('moment');
 
@@ -23,9 +24,10 @@ module.exports = class extends InteractionCommand {
 		const response = await kitsu.get('anime', { params: { filter: { text: search } } }).then(({ data }) => data);
 		if (!response.length) return interaction.editReply({ content: 'Nothing found for this search.' });
 
+		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId('data_menu')
+				.setCustomId(menuId)
 				.setPlaceholder('Select an anime!')
 				.addOptions(...response.map(res => ({
 					label: this.client.utils.truncateString(res.titles.en_jp || Object.values(res.titles)[0], 95) || 'Unknown Name',
@@ -35,7 +37,7 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-		const filter = (i) => i.customId === 'data_menu';
+		const filter = (i) => i.customId === menuId;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {
