@@ -33,28 +33,28 @@ module.exports = class extends InteractionCommand {
 				.setCustomId('confirm')
 				.setLabel('Confirm'));
 
-		return interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button], fetchReply: true }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
+		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button], fetchReply: true });
 
-			collector.on('collect', async (i) => {
-				if (i.user.id !== interaction.user.id) return i.deferUpdate();
-				await i.deferUpdate();
+		const collector = reply.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 
-				switch (i.customId) {
-					case 'cancel':
-						await collector.stop();
-						return i.editReply({ content: 'Cancelation of the emoji\'s name change.', components: [] });
-					case 'confirm':
-						await emojis.edit({ name });
-						return i.editReply({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully renamed.`, components: [] });
-				}
-			});
+		collector.on('collect', async (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
+			await i.deferUpdate();
 
-			collector.on('end', (collected, reason) => {
-				if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
-					return interaction.deleteReply();
-				}
-			});
+			switch (i.customId) {
+				case 'cancel':
+					await collector.stop();
+					return i.editReply({ content: 'Cancelation of the emoji\'s name change.', components: [] });
+				case 'confirm':
+					await emojis.edit({ name });
+					return i.editReply({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully renamed.`, components: [] });
+			}
+		});
+
+		collector.on('end', (collected, reason) => {
+			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
+				return interaction.deleteReply();
+			}
 		});
 	}
 
