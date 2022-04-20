@@ -43,6 +43,6 @@
     "node-spotify-api": "^1.1.1",
     "owofy": "^1.0.2",
     "spongemock": "^0.0.8",
-    "systeminformation": "^5.11.9"
+    "systeminformation": "^5.11.12"
   }
 }
