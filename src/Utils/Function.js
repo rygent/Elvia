@@ -41,4 +41,8 @@ module.exports = class Function {
 		return messages.concat(msg).filter(m => m);
 	}
 
+	static spongemock(text) {
+		return text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
+	}
+
 };

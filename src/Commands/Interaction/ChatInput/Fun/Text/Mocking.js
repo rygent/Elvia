@@ -1,5 +1,5 @@
 const InteractionCommand = require('../../../../../Structures/Interaction');
-const { spongeMock } = require('spongemock');
+const Function = require('../../../../../Utils/Function');
 
 module.exports = class extends InteractionCommand {
 
@@ -13,7 +13,7 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const text = await interaction.options.getString('text', true);
 
-		return interaction.reply({ content: spongeMock(text) });
+		return interaction.reply({ content: Function.spongemock(text) });
 	}
 
 };
