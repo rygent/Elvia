@@ -29,10 +29,10 @@ module.exports = class extends InteractionCommand {
 			.addComponents(new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a song!')
-				.addOptions(...response.map(res => ({
-					label: this.client.utils.truncateString(res.name, 95),
-					value: res.id,
-					description: this.client.utils.truncateString(this.client.utils.formatArray(res.artists.map(({ name }) => name)), 95).padEnd(1)
+				.addOptions(...response.map(data => ({
+					label: this.client.utils.truncateString(data.name, 95),
+					value: data.id,
+					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95).padEnd(1)
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
