@@ -10,19 +10,12 @@ module.exports = class extends InteractionCommand {
 	}
 
 	async run(interaction) {
-		const first = await interaction.options.getString('1st', true);
-		const second = await interaction.options.getString('2nd', true);
-		const third = await interaction.options.getString('3rd');
-		const fourth = await interaction.options.getString('4th');
-		const fifth = await interaction.options.getString('5th');
-		const sixth = await interaction.options.getString('6th');
-		const seventh = await interaction.options.getString('7th');
-		const eighth = await interaction.options.getString('8th');
-		const ninth = await interaction.options.getString('9th');
-		const tenth = await interaction.options.getString('10th');
+		const requiredChoice = ['1st', '2nd'].map(name => interaction.options.getString(name, true));
+		const optionalChoice = ['3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th']
+			.map(name => interaction.options.getString(name));
 
-		const choice = [first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth];
-		const filter = choice.filter(x => x !== null);
+		const choice = [...requiredChoice, ...optionalChoice];
+		const filter = choice.filter(item => item !== null);
 		const choose = choice[Math.floor(Math.random() * filter.length)];
 
 		return interaction.reply({ content: `I'm choosing **${choose}**!` });
