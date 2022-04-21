@@ -27,7 +27,7 @@ module.exports = class extends InteractionCommand {
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
-			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://www.urbandictionary.com/' })
+			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://urbandictionary.com/' })
 			.setTitle(response.word)
 			.setDescription(response.definition)
 			.addFields({ name: '__Example__', value: response.example, inline: false })
