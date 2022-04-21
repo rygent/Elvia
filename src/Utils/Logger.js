@@ -7,7 +7,7 @@ module.exports = class Logger {
 
 	constructor(options = {}) {
 		this.console = new Console({ stdout: options.stdout || process.stdout, stderr: options.stderr || process.stderr });
-		this.depth = options.depth || Infinity;
+		this.depth = options.depth || 2;
 	}
 
 	log(content, options = {}) {
