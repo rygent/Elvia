@@ -26,10 +26,10 @@ module.exports = class extends InteractionCommand {
 				.addComponents(new SelectMenuBuilder()
 					.setCustomId(menuId)
 					.setPlaceholder('Select a movies/series!')
-					.addOptions(...response.map(res => ({
-						label: `${res.title} (${res.year})`,
-						value: res.imdbid,
-						description: res.type.toSentenceCase()
+					.addOptions(...response.map(data => ({
+						label: `${data.title} (${data.year})`,
+						value: data.imdbid,
+						description: data.type.toSentenceCase()
 					}))));
 
 			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
