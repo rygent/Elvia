@@ -25,9 +25,9 @@ module.exports = class extends InteractionCommand {
 			.addComponents(new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a game!')
-				.addOptions(...response.map(res => ({
-					label: res.name,
-					value: res.id.toString()
+				.addOptions(...response.map(data => ({
+					label: data.name,
+					value: data.id.toString()
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
@@ -39,8 +39,8 @@ module.exports = class extends InteractionCommand {
 			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 			await i.deferUpdate();
 
-			const [ids] = i.values; // eslint-disable-next-line no-shadow
-			const data = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`).then(({ data }) => data[ids].data);
+			const [ids] = i.values;
+			const data = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`).then(res => res.data[ids].data);
 
 			const button = new ActionRowBuilder()
 				.addComponents(new ButtonBuilder()
