@@ -1,4 +1,5 @@
 const InteractionCommand = require('../../../../../Structures/Interaction');
+const Function = require('../../../../../Utils/Function');
 
 module.exports = class extends InteractionCommand {
 
@@ -12,9 +13,7 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const text = await interaction.options.getString('text', true);
 
-		const converted = text.split('').reverse().join('');
-
-		return interaction.reply({ content: converted });
+		return interaction.reply({ content: Function.reverseText(text) });
 	}
 
 };

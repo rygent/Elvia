@@ -2,6 +2,10 @@ const { Util } = require('discord.js');
 
 module.exports = class Function {
 
+	static reverseText(text) {
+		return text.split('').reverse().join('');
+	}
+
 	static splitMessage(text, { maxLength = 2000, char = '\n', prepend = '', append = '' } = {}) {
 		text = Util.verifyString(text);
 		if (text.length <= maxLength) return [text];
