@@ -1,6 +1,6 @@
 const { Client, Collection, PermissionsBitField } = require('discord.js');
 const { GatewayIntentBits } = require('discord-api-types/v10');
-const Logger = require('../Modules/Logger');
+const Logger = require('../Utils/Logger');
 const Util = require('./Util');
 const Database = require('./Database');
 const semver = require('semver');
@@ -22,7 +22,7 @@ module.exports = class BaseClient extends Client {
 				repliedUser: false
 			}
 		});
-		this.logger = new Logger(this);
+		this.logger = new Logger({ depth: 5 });
 		this.validate(options);
 
 		this.interactions = new Collection();

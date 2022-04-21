@@ -12,7 +12,7 @@ module.exports = class extends Event {
 	}
 
 	async run() {
-		this.client.logger.log('Connected to MongoDB!', { status: 'BOOT', color: 'greenBright' });
+		this.client.logger.log('Connected to MongoDB!', { infix: 'BOOT', color: 'greenBright' });
 	}
 
 };
