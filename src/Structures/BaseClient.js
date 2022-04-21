@@ -1,4 +1,4 @@
-const { Client, Collection, PermissionsBitField } = require('discord.js');
+const { Client, Collection, Partials, PermissionsBitField } = require('discord.js');
 const { GatewayIntentBits } = require('discord-api-types/v10');
 const { Secrets } = require('../Utils/Constants');
 const Logger = require('../Utils/Logger');
@@ -17,6 +17,9 @@ module.exports = class BaseClient extends Client {
 				GatewayIntentBits.GuildPresences,
 				GatewayIntentBits.GuildMessages,
 				GatewayIntentBits.MessageContent
+			],
+			partials: [
+				Partials.Channel
 			],
 			allowedMentions: {
 				parse: ['users', 'roles'],
