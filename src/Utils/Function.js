@@ -6,6 +6,12 @@ module.exports = class Function {
 		return text.split('').reverse().join('');
 	}
 
+	static rgbToHex(rgb) {
+		const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
+		// eslint-disable-next-line no-bitwise
+		return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+	}
+
 	static splitMessage(text, { maxLength = 2000, char = '\n', prepend = '', append = '' } = {}) {
 		text = Util.verifyString(text);
 		if (text.length <= maxLength) return [text];
