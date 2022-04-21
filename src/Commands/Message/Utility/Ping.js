@@ -12,10 +12,12 @@ module.exports = class extends MessageCommand {
 	}
 
 	async run(message) {
-		return message.reply({ content: [
+		const content = [
 			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
 			`***Latency:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
-		].join('\n') });
+		].join('\n');
+
+		return message.reply({ content });
 	}
 
 };
