@@ -29,10 +29,10 @@ module.exports = class extends InteractionCommand {
 			.addComponents(new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a manga!')
-				.addOptions(...response.map(res => ({
-					label: this.client.utils.truncateString(res.titles.en_jp || Object.values(res.titles)[0], 95) || 'Unknown Name',
-					value: res.id,
-					description: this.client.utils.truncateString(res.description, 95).padEnd(1)
+				.addOptions(...response.map(data => ({
+					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles)[0], 95) || 'Unknown Name',
+					value: data.id,
+					description: this.client.utils.truncateString(data.description, 95).padEnd(1)
 				}))));
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
@@ -61,7 +61,7 @@ module.exports = class extends InteractionCommand {
 				.addFields({ name: '__Detail__', value: [
 					`***English:*** ${data.titles.en ? data.titles.en : '`N/A`'}`,
 					`***Japanese:*** ${data.titles.ja_jp ? data.titles.ja_jp : '`N/A`'}`,
-					`***Synonyms:*** ${data.abbreviatedTitles.length > 0 ? data.abbreviatedTitles.join(', ') : '`N/A`'}`,
+					`***Synonyms:*** ${data.abbreviatedTitles.length ? data.abbreviatedTitles.join(', ') : '`N/A`'}`,
 					`***Score:*** ${data.averageRating ? data.averageRating : '`N/A`'}`,
 					`***Rating:*** ${data.ageRating ? data.ageRating : '`N/A`'}${data.ageRatingGuide ? ` - ${data.ageRatingGuide}` : ''}`,
 					`***Type:*** ${data.mangaType ? data.mangaType === 'oel' ? data.mangaType.toUpperCase() : data.mangaType.toSentenceCase() : '`N/A`'}`,
