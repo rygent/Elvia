@@ -1,5 +1,6 @@
 const { Client, Collection, PermissionsBitField } = require('discord.js');
 const { GatewayIntentBits } = require('discord-api-types/v10');
+const { Secrets } = require('../Utils/Constants');
 const Logger = require('../Utils/Logger');
 const Util = require('./Util');
 const Database = require('./Database');
@@ -67,6 +68,10 @@ module.exports = class BaseClient extends Client {
 
 		if (!options.mongodb) throw new Error('You must pass MongoDB URI for the Client.');
 		this.mongodb = options.mongodb;
+
+		if (!Secrets.ImdbApiKey) this.logger.warn('You must pass IMDb API Key to use "imdb" Command.');
+		if (!Secrets.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
+		if (!Secrets.SpotifyClientId || !Secrets.SpotifyClientSecret) this.logger.warn('You must pass Spotify Client ID & Secret to use "spotify" Command.');
 	}
 
 	async start(token = this.token) {
