@@ -40,10 +40,10 @@ module.exports = class extends InteractionCommand {
 		if (!user.banner) return interaction.reply({ content: `**${user.tag}**'s has no banner!`, ephemeral: true });
 
 		const button = new ActionRowBuilder()
-			.addComponents(new ButtonBuilder()
+			.addComponents([new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(user.bannerURL({ extension: 'png', size: 4096 })));
+				.setURL(user.bannerURL({ extension: 'png', size: 4096 }))]);
 
 		embed.setColor(Colors.Default);
 		embed.setDescription(`***ID:*** \`${user.id}\``);

@@ -48,10 +48,10 @@ module.exports = class extends Event {
 				].join('\n');
 
 				const button = new ActionRowBuilder()
-					.addComponents(new ButtonBuilder()
+					.addComponents([new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
 						.setLabel('Support Server')
-						.setURL(Links.SupportServer));
+						.setURL(Links.SupportServer)]);
 
 				if (interaction.deferred) {
 					return interaction.editReply({ content, components: [button] });

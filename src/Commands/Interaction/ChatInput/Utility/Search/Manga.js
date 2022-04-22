@@ -26,14 +26,14 @@ module.exports = class extends InteractionCommand {
 
 		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
-			.addComponents(new SelectMenuBuilder()
+			.addComponents([new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a manga!')
-				.addOptions(...response.map(data => ({
+				.addOptions(response.map(data => ({
 					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles)[0], 95) || 'Unknown Name',
 					value: data.id,
 					description: this.client.utils.truncateString(data.description, 95).padEnd(1)
-				}))));
+				})))]);
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
@@ -48,17 +48,17 @@ module.exports = class extends InteractionCommand {
 			const data = response.find(item => item.id === selected);
 
 			const button = new ActionRowBuilder()
-				.addComponents(new ButtonBuilder()
+				.addComponents([new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(`https://kitsu.io/manga/${data.slug}`));
+					.setURL(`https://kitsu.io/manga/${data.slug}`)]);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Kitsu', iconURL: 'https://i.imgur.com/YlUX5JD.png', url: 'https://kitsu.io' })
 				.setTitle(data.titles.en_jp || Object.values(data.titles)[0])
 				.setThumbnail(data.posterImage?.original)
-				.addFields({ name: '__Detail__', value: [
+				.addFields([{ name: '__Detail__', value: [
 					`***English:*** ${data.titles.en ? data.titles.en : '`N/A`'}`,
 					`***Japanese:*** ${data.titles.ja_jp ? data.titles.ja_jp : '`N/A`'}`,
 					`***Synonyms:*** ${data.abbreviatedTitles.length ? data.abbreviatedTitles.join(', ') : '`N/A`'}`,
@@ -70,7 +70,7 @@ module.exports = class extends InteractionCommand {
 					`***Status:*** ${data.status ? data.status === 'tba' ? data.status.toUpperCase() : data.status.toSentenceCase() : '`N/A`'}`,
 					`***Published:*** ${data.startDate ? `${moment(data.startDate).format('MMM D, YYYY')} to ${data.endDate ? moment(data.endDate).format('MMM D, YYYY') : '?'}` : '`N/A`'}`,
 					`***Serialization:*** ${data.serialization ? data.serialization : '`N/A`'}`
-				].join('\n'), inline: false })
+				].join('\n'), inline: false }])
 				.setImage(data.coverImage?.small)
 				.setFooter({ text: 'Powered by Kitsu', iconURL: interaction.user.avatarURL() });
 

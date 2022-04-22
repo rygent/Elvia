@@ -66,10 +66,10 @@ module.exports = class extends Event {
 				this.client.logger.error(error.stack, { error });
 
 				const button = new ActionRowBuilder()
-					.addComponents(new ButtonBuilder()
+					.addComponents([new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
 						.setLabel('Support Server')
-						.setURL(Links.SupportServer));
+						.setURL(Links.SupportServer)]);
 
 				return message.reply({ content: [
 					'An error has occured when executing this command.',

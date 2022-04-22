@@ -21,10 +21,10 @@ module.exports = class extends InteractionCommand {
 			const response = await axios.get(`${endpoint}?q=${encodeURIComponent(search)}&appid=${Secrets.OpenWeatherApiKey}&units=metric`).then(({ data }) => data);
 
 			const button = new ActionRowBuilder()
-				.addComponents(new ButtonBuilder()
+				.addComponents([new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(`https://openweathermap.org/city/${response.id}`));
+					.setURL(`https://openweathermap.org/city/${response.id}`)]);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)

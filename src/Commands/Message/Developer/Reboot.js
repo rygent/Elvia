@@ -18,16 +18,16 @@ module.exports = class extends MessageCommand {
 	async run(message) {
 		const [cancelId, restartId] = ['cancel', 'restart'].map(type => `${type}-${nanoid()}`);
 		const button = (state) => new ActionRowBuilder()
-			.addComponents(new ButtonBuilder()
+			.addComponents([new ButtonBuilder()
 				.setCustomId(cancelId)
 				.setStyle(ButtonStyle.Secondary)
 				.setLabel('Cancel')
-				.setDisabled(state))
-			.addComponents(new ButtonBuilder()
+				.setDisabled(state)])
+			.addComponents([new ButtonBuilder()
 				.setCustomId(restartId)
 				.setStyle(ButtonStyle.Danger)
 				.setLabel('Restart')
-				.setDisabled(state));
+				.setDisabled(state)]);
 
 		const reply = await message.reply({ content: 'Are you sure want to restart the bot ?', components: [button(false)] });
 

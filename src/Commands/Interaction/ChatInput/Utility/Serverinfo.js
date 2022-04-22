@@ -34,7 +34,7 @@ module.exports = class extends InteractionCommand {
 				`***Channels:*** ${channels.filter(({ type }) => ![ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Text / ${channels.filter(({ type }) => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Voice`,
 				`***Online Members:*** ${interaction.guild.members.cache.filter(({ presence }) => ['online', 'idle', 'dnd'].includes(presence?.status)).size.formatNumber()} of ${interaction.guild.memberCount.formatNumber()} Members`
 			].join('\n'))
-			.addFields({ name: `__Roles__ (${roles.length})`, value: `${roles.length ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`, inline: false })
+			.addFields([{ name: `__Roles__ (${roles.length})`, value: `${roles.length ? this.client.utils.trimArray(roles, 15).join(', ') : 'None'}`, inline: false }])
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed] });

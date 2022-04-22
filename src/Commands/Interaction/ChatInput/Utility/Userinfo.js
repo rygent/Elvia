@@ -38,11 +38,11 @@ module.exports = class extends InteractionCommand {
 				`***Created:*** ${Formatters.time(new Date(member.user.createdTimestamp), 'D')} (${Formatters.time(new Date(member.user.createdTimestamp), 'R')})`,
 				`***Joined:*** ${Formatters.time(new Date(member.joinedAt), 'D')} (${Formatters.time(new Date(member.joinedAt), 'R')})`
 			].join('\n'))
-			.addFields({ name: `__Roles__ (${roles.length ? roles.length : 1})`, value: `${roles.length ? roles.join(', ') : `@everyone`}`, inline: false })
+			.addFields([{ name: `__Roles__ (${roles.length ? roles.length : 1})`, value: `${roles.length ? roles.join(', ') : `@everyone`}`, inline: false }])
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		if (permissions.length) {
-			embed.addFields({ name: '__Permission(s)__', value: `${this.client.utils.formatArray(permissions.map(perm => this.client.utils.formatPermissions(perm)))}`, inline: false });
+			embed.addFields([{ name: '__Permission(s)__', value: `${this.client.utils.formatArray(permissions.map(perm => this.client.utils.formatPermissions(perm)))}`, inline: false }]);
 		}
 
 		return interaction.reply({ embeds: [embed] });

@@ -20,17 +20,17 @@ module.exports = class extends InteractionCommand {
 			.then(({ data }) => data.list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);
 
 		const button = new ActionRowBuilder()
-			.addComponents(new ButtonBuilder()
+			.addComponents([new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(response.permalink));
+				.setURL(response.permalink)]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
 			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://urbandictionary.com/' })
 			.setTitle(response.word)
 			.setDescription(response.definition)
-			.addFields({ name: '__Example__', value: response.example, inline: false })
+			.addFields([{ name: '__Example__', value: response.example, inline: false }])
 			.setFooter({ text: `Powered by Urban Dictionary`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed], components: [button] });

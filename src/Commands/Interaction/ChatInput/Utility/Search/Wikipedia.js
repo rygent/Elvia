@@ -20,10 +20,10 @@ module.exports = class extends InteractionCommand {
 			const response = await axios.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`).then(({ data }) => data);
 
 			const button = new ActionRowBuilder()
-				.addComponents(new ButtonBuilder()
+				.addComponents([new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(response.content_urls.desktop.page));
+					.setURL(response.content_urls.desktop.page)]);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)

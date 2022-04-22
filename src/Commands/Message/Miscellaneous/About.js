@@ -48,14 +48,14 @@ module.exports = class extends MessageCommand {
 				`***Library:*** Discord.JS v${DJSVersion}`,
 				`***Created:*** ${Formatters.time(new Date(this.client.user.createdAt), 'D')} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`
 			].join('\n'))
-			.addFields({ name: '__System__', value: [
+			.addFields([{ name: '__System__', value: [
 				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.release}${sys.osInfo.platform !== 'Windows' ? ` ${sys.osInfo.kernel}` : ''} ${sys.osInfo.arch}`,
 				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speed}Ghz${isNaN(sys.cpu.speedMax) ? '' : ` ${sys.cpu.speedMax}Ghz`} ${sys.cpu.cores} Cores`,
 				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
 				`***Disk:*** ${this.client.utils.formatBytes(sys.fsSize[0].used)} / ${this.client.utils.formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hours], m [minutes], s [seconds]')}`,
 				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hours], m [minutes], s [seconds]')}`
-			].join('\n'), inline: false })
+			].join('\n'), inline: false }])
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL() });
 
 		return message.reply({ embeds: [embed] });

@@ -28,7 +28,7 @@ module.exports = class extends InteractionCommand {
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Google Translate', iconURL: 'https://i.imgur.com/1JS81kv.png', url: 'https://translate.google.com/' })
 				.setDescription(translated.text)
-				.addFields({ name: '\u200B', value: `Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`, inline: false })
+				.addFields([{ name: '\u200B', value: `Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`, inline: false }])
 				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL() });
 
 			return interaction.reply({ embeds: [embed] });

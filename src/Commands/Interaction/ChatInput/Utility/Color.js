@@ -30,10 +30,10 @@ module.exports = class extends InteractionCommand {
 		const response = await axios.get(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`).then(({ data }) => data);
 
 		const button = new ActionRowBuilder()
-			.addComponents(new ButtonBuilder()
+			.addComponents([new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`));
+				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`)]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Util.resolveColor(response.hex.clean))

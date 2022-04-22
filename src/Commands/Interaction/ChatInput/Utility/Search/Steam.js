@@ -22,13 +22,13 @@ module.exports = class extends InteractionCommand {
 
 		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
-			.addComponents(new SelectMenuBuilder()
+			.addComponents([new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a game!')
-				.addOptions(...response.map(data => ({
+				.addOptions(response.map(data => ({
 					label: data.name,
 					value: data.id.toString()
-				}))));
+				})))]);
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
@@ -43,17 +43,17 @@ module.exports = class extends InteractionCommand {
 			const data = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`).then(res => res.data[ids].data);
 
 			const button = new ActionRowBuilder()
-				.addComponents(new ButtonBuilder()
+				.addComponents([new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`));
+					.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`)]);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Steam', iconURL: 'https://i.imgur.com/xxr2UBZ.png', url: 'http://store.steampowered.com/' })
 				.setTitle(data.name)
 				.setDescription(data.short_description)
-				.addFields({ name: '__Detail__', value: [
+				.addFields([{ name: '__Detail__', value: [
 					`***Release Date:*** ${data.release_date.coming_soon ? 'Coming soon' : data.release_date.date}`,
 					`***Price:*** \`${data.price_overview ? data.price_overview.final_formatted : 'Free'}\``,
 					`***Genres:*** ${data.genres.map(({ description }) => description).join(', ')}`,
@@ -62,7 +62,7 @@ module.exports = class extends InteractionCommand {
 					`***Developers:*** ${data.developers.join(', ')}`,
 					`***Publishers:*** ${data.publishers.join(', ')}`,
 					`${data.content_descriptors?.notes ? `\n*${data.content_descriptors.notes.replace(/\r|\n/g, '')}*` : ''}`
-				].join('\n'), inline: false })
+				].join('\n'), inline: false }])
 				.setImage(data.header_image)
 				.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.avatarURL() });
 
