@@ -12,7 +12,7 @@ module.exports = class extends Event {
 	}
 
 	async run(error, promise) { // eslint-disable-line no-unused-vars
-		this.client.logger.error(error.stack);
+		this.client.logger.error(error.stack, { error });
 	}
 
 };

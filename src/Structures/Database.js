@@ -26,7 +26,7 @@ module.exports = class Database {
 				useUnifiedTopology: true
 			});
 		} catch (error) {
-			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`);
+			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`, { error });
 		}
 	}
 

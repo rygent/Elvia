@@ -63,7 +63,7 @@ module.exports = class extends Event {
 				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
-				this.client.logger.error(error.stack);
+				this.client.logger.error(error.stack, { error });
 
 				const button = new ActionRowBuilder()
 					.addComponents(new ButtonBuilder()

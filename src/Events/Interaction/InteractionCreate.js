@@ -40,7 +40,7 @@ module.exports = class extends Event {
 				await command.run(interaction);
 			} catch (error) {
 				if (interaction.replied) return;
-				this.client.logger.error(error.stack);
+				this.client.logger.error(error.stack, { error });
 
 				const content = [
 					'An error has occured when executing this command.',

@@ -26,7 +26,7 @@ module.exports = class BaseClient extends Client {
 				repliedUser: false
 			}
 		});
-		this.logger = new Logger({ depth: 5 });
+		this.logger = new Logger(this, { depth: 5 });
 		this.validate(options);
 
 		this.interactions = new Collection();
