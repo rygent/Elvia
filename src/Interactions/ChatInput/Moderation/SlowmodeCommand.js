@@ -1,4 +1,5 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType, PermissionFlagsBits } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v10');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'slowmode',
@@ -32,6 +33,6 @@ module.exports = {
 			required: false
 		}]
 	}],
-	default_member_permissions: PermissionFlagsBits.ManageChannels.toString(),
+	default_member_permissions: new PermissionsBitField(['ManageChannels']).bitfield.toString(),
 	dm_permission: false
 };

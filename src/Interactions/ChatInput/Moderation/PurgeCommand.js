@@ -1,4 +1,5 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'purge',
@@ -205,6 +206,6 @@ module.exports = {
 			required: false
 		}]
 	}],
-	default_member_permissions: PermissionFlagsBits.ManageMessages.toString(),
+	default_member_permissions: new PermissionsBitField(['ManageMessages']).bitfield.toString(),
 	dm_permission: false
 };

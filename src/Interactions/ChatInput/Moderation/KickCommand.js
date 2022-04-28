@@ -1,4 +1,5 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'kick',
@@ -15,6 +16,6 @@ module.exports = {
 		type: ApplicationCommandOptionType.String,
 		required: false
 	}],
-	default_member_permissions: PermissionFlagsBits.KickMembers.toString(),
+	default_member_permissions: new PermissionsBitField(['KickMembers']).bitfield.toString(),
 	dm_permission: false
 };

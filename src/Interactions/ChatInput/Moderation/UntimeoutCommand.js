@@ -1,4 +1,5 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'untimeout',
@@ -15,6 +16,6 @@ module.exports = {
 		type: ApplicationCommandOptionType.String,
 		required: false
 	}],
-	default_member_permissions: PermissionFlagsBits.ModerateMembers.toString(),
+	default_member_permissions: new PermissionsBitField(['ModerateMembers']).bitfield.toString(),
 	dm_permission: false
 };

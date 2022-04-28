@@ -1,4 +1,5 @@
 const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'emoji',
@@ -59,5 +60,6 @@ module.exports = {
 		description: 'List server emojis.',
 		type: ApplicationCommandOptionType.Subcommand
 	}],
+	default_member_permissions: new PermissionsBitField(['ManageEmojisAndStickers']).bitfield.toString(),
 	dm_permission: false
 };
