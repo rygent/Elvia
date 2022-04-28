@@ -8,7 +8,7 @@ module.exports = class extends InteractionCommand {
 
 	constructor(...args) {
 		super(...args, {
-			name: ['emoji', 'rename'],
+			name: ['emojis', 'rename'],
 			description: 'Rename a server emoji.',
 			memberPermissions: ['ManageEmojisAndStickers'],
 			clientPermissions: ['ManageEmojisAndStickers']
