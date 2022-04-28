@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v9');
+const { Permissions } = require('discord.js');
 
 module.exports = [{
 	name: '8ball',
@@ -10,7 +11,8 @@ module.exports = [{
 		description: 'Question to ask.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'avatar',
 	description: 'Display the avatar of the provided user.',
@@ -20,7 +22,8 @@ module.exports = [{
 		description: 'User to display.',
 		type: ApplicationCommandOptionType.User,
 		required: false
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'ban',
 	description: 'Ban a user with optional reason.',
@@ -42,7 +45,9 @@ module.exports = [{
 		min_value: 0,
 		max_value: 7,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['BAN_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'banner',
 	description: 'Display the banner of the provided user.',
@@ -57,7 +62,8 @@ module.exports = [{
 		description: "Display user's banner color.",
 		type: ApplicationCommandOptionType.Boolean,
 		required: false
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'choose',
 	description: 'Let me make a choice for you.',
@@ -112,7 +118,8 @@ module.exports = [{
 		description: '10th choice.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'color',
 	description: 'Get information about a color.',
@@ -122,7 +129,8 @@ module.exports = [{
 		description: 'Hexadecimal/RGB code of the color or random to get a random color.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'define',
 	description: 'Define a word.',
@@ -132,7 +140,8 @@ module.exports = [{
 		description: 'Word to define.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'emoji',
 	description: 'No description provided.',
@@ -151,7 +160,8 @@ module.exports = [{
 		name: 'list',
 		description: 'List server emojis.',
 		type: ApplicationCommandOptionType.Subcommand
-	}]
+	}],
+	dm_permission: false
 }, {
 	name: 'emojis',
 	description: 'No description provided.',
@@ -196,11 +206,14 @@ module.exports = [{
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}]
+	}],
+	default_member_permissions: new Permissions(['MANAGE_EMOJIS_AND_STICKERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'icon',
 	description: 'Display the server icon.',
-	type: ApplicationCommandType.ChatInput
+	type: ApplicationCommandType.ChatInput,
+	dm_permission: false
 }, {
 	name: 'interact',
 	description: 'No description provided.',
@@ -415,7 +428,8 @@ module.exports = [{
 			type: ApplicationCommandOptionType.User,
 			required: true
 		}]
-	}]
+	}],
+	dm_permission: false
 }, {
 	name: 'kick',
 	description: 'Kick a member with optional reason.',
@@ -430,7 +444,9 @@ module.exports = [{
 		description: 'Reason of the kick.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['KICK_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'lovecalc',
 	description: 'Calculate love percentage between two users.',
@@ -445,11 +461,13 @@ module.exports = [{
 		description: '2nd user.',
 		type: ApplicationCommandOptionType.User,
 		required: true
-	}]
+	}],
+	dm_permission: false
 }, {
 	name: 'ping',
 	description: 'Send a ping request.',
-	type: ApplicationCommandType.ChatInput
+	type: ApplicationCommandType.ChatInput,
+	dm_permission: true
 }, {
 	name: 'purge',
 	description: 'No description provided.',
@@ -654,7 +672,9 @@ module.exports = [{
 			max_value: 100,
 			required: false
 		}]
-	}]
+	}],
+	default_member_permissions: new Permissions(['MANAGE_MESSAGES']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'roll',
 	description: 'Roll random number with optional minimum and maximum numbers or using a dice.',
@@ -674,7 +694,8 @@ module.exports = [{
 		description: 'Roll a dice. (Example: 2d6)',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'roulette',
 	description: 'Get a random winner from the roulette.',
@@ -684,7 +705,8 @@ module.exports = [{
 		description: 'The title of the winner.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: false
 }, {
 	name: 'search',
 	description: 'No description provided.',
@@ -779,11 +801,13 @@ module.exports = [{
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'serverinfo',
 	description: 'Get server information.',
-	type: ApplicationCommandType.ChatInput
+	type: ApplicationCommandType.ChatInput,
+	dm_permission: false
 }, {
 	name: 'slowmode',
 	description: 'No description provided.',
@@ -815,7 +839,9 @@ module.exports = [{
 			channelTypes: [ChannelType.GuildText],
 			required: false
 		}]
-	}]
+	}],
+	default_member_permissions: new Permissions(['MANAGE_CHANNELS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'softban',
 	description: "Softban a user. (Bans and unbans to clear up the user's messages.)",
@@ -837,7 +863,9 @@ module.exports = [{
 		min_value: 0,
 		max_value: 7,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['BAN_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'text',
 	description: 'No description provided.',
@@ -902,7 +930,8 @@ module.exports = [{
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'timeout',
 	description: 'Timeout a member with duration and optional reason.',
@@ -922,7 +951,9 @@ module.exports = [{
 		description: 'Reason of the timeout.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['MODERATE_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'translate',
 	description: 'Translate your text.',
@@ -942,7 +973,8 @@ module.exports = [{
 		description: 'Destination language. (Defaults to server language)',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 }, {
 	name: 'unban',
 	description: 'Unban a user with optional reason.',
@@ -957,7 +989,9 @@ module.exports = [{
 		description: 'Reason of the unban.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['BAN_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'untimeout',
 	description: 'Remove timeout from a member.',
@@ -972,7 +1006,9 @@ module.exports = [{
 		description: 'Reason of the timeout removal.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	default_member_permissions: new Permissions(['MODERATE_MEMBERS']).bitfield.toString(),
+	dm_permission: false
 }, {
 	name: 'userinfo',
 	description: 'Get user information.',
@@ -982,5 +1018,6 @@ module.exports = [{
 		description: 'User to get.',
 		type: ApplicationCommandOptionType.User,
 		required: false
-	}]
+	}],
+	dm_permission: false
 }];
