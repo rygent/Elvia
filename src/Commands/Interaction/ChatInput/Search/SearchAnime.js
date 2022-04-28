@@ -30,8 +30,8 @@ module.exports = class extends Interaction {
 				.setCustomId(selectId)
 				.setPlaceholder('Select an anime!')
 				.addOptions(data.map(res => ({
-					label: res.titles.en_jp || Object.values(res.titles)[0] || 'Unknown Name',
-					description: this.client.utils.truncateString(res.description, 100),
+					label: this.client.utils.truncateString(res.titles.en_jp || Object.values(res.titles)[0], 95) || 'Unknown Name',
+					description: this.client.utils.truncateString(res.description, 95),
 					value: res.slug
 				}))));
 
