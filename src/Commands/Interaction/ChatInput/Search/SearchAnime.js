@@ -2,6 +2,7 @@ const Interaction = require('../../../../Structures/Interaction');
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
 const { Colors } = require('../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const Kitsu = require('kitsu');
 const api = new Kitsu();
 const moment = require('moment');
@@ -23,9 +24,10 @@ module.exports = class extends Interaction {
 		const { data } = await api.get('anime', { params: { filter: { text: search } } });
 		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
 
+		const selectId = `select-${nanoid()}`;
 		const select = new MessageActionRow()
 			.addComponents(new MessageSelectMenu()
-				.setCustomId('data_menu')
+				.setCustomId(selectId)
 				.setPlaceholder('Select an anime!')
 				.addOptions(data.map(res => ({
 					label: res.titles.en_jp || Object.values(res.titles)[0] || 'Unknown Name',
@@ -34,7 +36,8 @@ module.exports = class extends Interaction {
 				}))));
 
 		return interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: ComponentType.SelectMenu, time: 60_000 });
+			const filter = (i) => i.customId === selectId;
+			const collector = message.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				if (i.user.id !== interaction.user.id) return i.deferUpdate();

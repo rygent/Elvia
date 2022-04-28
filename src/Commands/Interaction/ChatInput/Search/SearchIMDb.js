@@ -2,6 +2,7 @@ const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
 const { Colors, Secrets } = require('../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const IMDb = require('imdb-api');
 
 module.exports = class extends Interaction {
@@ -20,9 +21,10 @@ module.exports = class extends Interaction {
 		try {
 			const result = await IMDb.search({ name: search }, { apiKey: Secrets.ImdbApiKey }, 1).then(res => res.results);
 
+			const selectId = `select-${nanoid()}`;
 			const select = new MessageActionRow()
 				.addComponents(new MessageSelectMenu()
-					.setCustomId('data_menu')
+					.setCustomId(selectId)
 					.setPlaceholder('Select a movies/series!')
 					.addOptions(result.map(res => ({
 						label: `${res.title} (${res.year})`,
@@ -31,7 +33,8 @@ module.exports = class extends Interaction {
 					}))));
 
 			return interaction.reply({ content: `I found **${result.length}** possible matches, please select one of the following:`, components: [select], fetchReply: true }).then(message => {
-				const collector = message.createMessageComponentCollector({ componentType: ComponentType.SelectMenu, time: 60_000 });
+				const filter = (i) => i.customId === selectId;
+				const collector = message.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 				collector.on('collect', async (i) => {
 					if (i.user.id !== interaction.user.id) return i.deferUpdate();

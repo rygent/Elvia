@@ -2,6 +2,7 @@ const Interaction = require('../../../../Structures/Interaction');
 const { Formatters, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v9');
 const { Colors, Secrets } = require('../../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 const YouTube = require('simple-youtube-api');
 const api = new YouTube(Secrets.YoutubeApiKey);
 
@@ -22,9 +23,10 @@ module.exports = class extends Interaction {
 		const data = await api.searchVideos(search, 25);
 		if (data.length === 0) return interaction.editReply({ content: 'Nothing found for this search.' });
 
+		const selectId = `select-${nanoid()}`;
 		const select = new MessageActionRow()
 			.addComponents(new MessageSelectMenu()
-				.setCustomId('data_menu')
+				.setCustomId(selectId)
 				.setPlaceholder('Select a videos!')
 				.addOptions(data.map(res => ({
 					label: res.title,
@@ -33,7 +35,8 @@ module.exports = class extends Interaction {
 				}))));
 
 		return interaction.editReply({ content: `I found **${data.length}** possible matches, please select one of the following:`, components: [select] }).then(message => {
-			const collector = message.createMessageComponentCollector({ componentType: ComponentType.SelectMenu, time: 60_000 });
+			const filter = (i) => i.customId === selectId;
+			const collector = message.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				if (i.user.id !== interaction.user.id) return i.deferUpdate();

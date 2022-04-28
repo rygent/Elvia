@@ -2,6 +2,7 @@ const Command = require('../../../Structures/Command');
 const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
 const { ComponentType } = require('discord-api-types/v9');
 const { Access, Colors } = require('../../../Utils/Constants');
+const { nanoid } = require('nanoid');
 
 module.exports = class extends Command {
 
@@ -54,9 +55,10 @@ module.exports = class extends Command {
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
 
+			const selectId = `select-${nanoid()}`;
 			const select = (state) => new MessageActionRow()
 				.addComponents(new MessageSelectMenu()
-					.setCustomId('help_menu')
+					.setCustomId(selectId)
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
 					.addOptions(categories.filter(x => this.client.utils.filterCategory(x.directory, message)).map((cmd) => ({
@@ -65,7 +67,7 @@ module.exports = class extends Command {
 					}))));
 
 			return message.reply({ embeds: [embed], components: [select(false)] }).then(msg => {
-				const filter = (i) => i.customId === 'help_menu';
+				const filter = (i) => i.customId === selectId;
 				const collector = msg.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 				collector.on('collect', async (i) => {
