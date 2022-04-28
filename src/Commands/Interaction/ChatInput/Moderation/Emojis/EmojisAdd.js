@@ -5,7 +5,7 @@ module.exports = class extends Interaction {
 
 	constructor(...args) {
 		super(...args, {
-			name: 'emoji',
+			name: 'emojis',
 			subCommand: 'add',
 			description: 'Add an emoji to the server.',
 			memberPermissions: ['MANAGE_EMOJIS_AND_STICKERS'],

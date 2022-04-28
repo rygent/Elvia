@@ -148,6 +148,15 @@ module.exports = [{
 			required: true
 		}]
 	}, {
+		name: 'list',
+		description: 'List server emojis.',
+		type: ApplicationCommandOptionType.Subcommand
+	}]
+}, {
+	name: 'emojis',
+	description: 'No description provided.',
+	type: ApplicationCommandType.ChatInput,
+	options: [{
 		name: 'add',
 		description: 'Add an emoji to the server.',
 		type: ApplicationCommandOptionType.Subcommand,
@@ -187,10 +196,6 @@ module.exports = [{
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}, {
-		name: 'list',
-		description: 'List server emojis.',
-		type: ApplicationCommandOptionType.Subcommand
 	}]
 }, {
 	name: 'icon',
