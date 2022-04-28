@@ -116,11 +116,11 @@ module.exports = class BaseClient extends Client {
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
 
-		if (!options.owners || options.owners[0] === '') throw new Error('You must pass a list of owners for the Client.');
+		if (!options.owners.length) throw new Error('You must pass a list of owners for the Client.');
 		if (!Array.isArray(options.owners)) throw new TypeError('Owners should be a type of Array<String>.');
 		this.owners = options.owners;
 
-		if (!options.defaultPermissions) throw new Error('You must pass default permission(s) for the Client.');
+		if (!options.defaultPermissions.length) throw new Error('You must pass default permission(s) for the Client.');
 		this.defaultPermissions = new Permissions(options.defaultPermissions).freeze();
 
 		if (!options.mongoURI) throw new Error('You must pass MongoDB URI for the Client.');
