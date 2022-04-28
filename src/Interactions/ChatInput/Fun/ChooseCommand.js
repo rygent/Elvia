@@ -54,5 +54,6 @@ module.exports = {
 		description: '10th choice.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 };

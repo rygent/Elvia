@@ -9,5 +9,6 @@ module.exports = {
 		description: 'User to get.',
 		type: ApplicationCommandOptionType.User,
 		required: false
-	}]
+	}],
+	dm_permission: false
 };

@@ -14,5 +14,6 @@ module.exports = {
 		description: "Display user's banner color.",
 		type: ApplicationCommandOptionType.Boolean,
 		required: false
-	}]
+	}],
+	dm_permission: true
 };

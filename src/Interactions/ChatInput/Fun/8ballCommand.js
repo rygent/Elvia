@@ -9,5 +9,6 @@ module.exports = {
 		description: 'Question to ask.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: true
 };

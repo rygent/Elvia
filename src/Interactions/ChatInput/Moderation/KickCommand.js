@@ -1,4 +1,4 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord-api-types/v10');
 
 module.exports = {
 	name: 'kick',
@@ -14,5 +14,7 @@ module.exports = {
 		description: 'Reason of the kick.',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	default_member_permissions: PermissionFlagsBits.KickMembers.toString(),
+	dm_permission: false
 };

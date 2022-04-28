@@ -214,5 +214,6 @@ module.exports = {
 			type: ApplicationCommandOptionType.User,
 			required: true
 		}]
-	}]
+	}],
+	dm_permission: false
 };

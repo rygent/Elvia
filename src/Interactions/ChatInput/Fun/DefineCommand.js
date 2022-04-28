@@ -9,5 +9,6 @@ module.exports = {
 		description: 'Word to define.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: true
 };

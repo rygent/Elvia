@@ -14,5 +14,6 @@ module.exports = {
 		description: '2nd user.',
 		type: ApplicationCommandOptionType.User,
 		required: true
-	}]
+	}],
+	dm_permission: false
 };

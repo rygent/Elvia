@@ -19,5 +19,6 @@ module.exports = {
 		description: 'Destination language. (Defaults to server language)',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 };

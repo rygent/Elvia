@@ -58,5 +58,6 @@ module.exports = {
 		name: 'list',
 		description: 'List server emojis.',
 		type: ApplicationCommandOptionType.Subcommand
-	}]
+	}],
+	dm_permission: false
 };

@@ -9,5 +9,6 @@ module.exports = {
 		description: 'The title of the winner.',
 		type: ApplicationCommandOptionType.String,
 		required: true
-	}]
+	}],
+	dm_permission: false
 };

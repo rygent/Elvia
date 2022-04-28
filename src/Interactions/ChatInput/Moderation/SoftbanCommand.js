@@ -1,4 +1,4 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+const { ApplicationCommandType, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord-api-types/v10');
 
 module.exports = {
 	name: 'softban',
@@ -21,5 +21,7 @@ module.exports = {
 		min_value: 0,
 		max_value: 7,
 		required: false
-	}]
+	}],
+	default_member_permissions: PermissionFlagsBits.BanMembers.toString(),
+	dm_permission: false
 };

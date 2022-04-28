@@ -84,5 +84,6 @@ module.exports = {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
-	}]
+	}],
+	dm_permission: true
 };

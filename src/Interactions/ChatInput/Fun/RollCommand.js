@@ -19,5 +19,6 @@ module.exports = {
 		description: 'Roll a dice. (Example: 2d6)',
 		type: ApplicationCommandOptionType.String,
 		required: false
-	}]
+	}],
+	dm_permission: true
 };
