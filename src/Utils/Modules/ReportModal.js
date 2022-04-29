@@ -27,7 +27,7 @@ module.exports = class ReportModal {
 		await interaction.showModal(modal);
 
 		const filter = (i) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, time: 900000, max: 1 });
+		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, time: 900000 });
 
 		collector.on('collect', async (i) => {
 			const issue = await i.fields.getTextInputValue('issue-form');
