@@ -1,7 +1,9 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Links } = require('../../Utils/Constants');
+const { nanoid } = require('nanoid');
+const ReportModal = require('../../Utils/Modules/ReportModal');
 
 module.exports = class extends Event {
 
@@ -47,17 +49,40 @@ module.exports = class extends Event {
 					'If the issue persists, please report in our *Support Server*.'
 				].join('\n');
 
-				const button = new ActionRowBuilder()
+				const buttonId = `button-${nanoid()}`;
+				const button = (state) => new ActionRowBuilder()
 					.addComponents([new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
-						.setLabel('Support Server')
-						.setURL(Links.SupportServer)]);
+						.setLabel('Support server')
+						.setURL(Links.SupportServer)])
+					.addComponents([new ButtonBuilder()
+						.setCustomId(buttonId)
+						.setStyle(ButtonStyle.Danger)
+						.setLabel('Report bug')
+						.setDisabled(state)]);
 
+				let reply;
 				if (interaction.deferred) {
-					return interaction.editReply({ content, components: [button] });
+					reply = await interaction.editReply({ content, components: [button(false)] });
 				} else {
-					return interaction.reply({ content, components: [button], ephemeral: true });
+					reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
 				}
+
+				const filter = (i) => i.customId === buttonId;
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600000 });
+
+				const report = new ReportModal(this.client, { collector });
+
+				collector.on('collect', (i) => {
+					if (i.user.id !== interaction.user.id) return i.deferUpdate();
+					return report.showModal(i);
+				});
+
+				collector.on('end', (collected, reason) => {
+					if (reason === 'time' || reason === 'collected') {
+						return interaction.editReply({ components: [button(true)] });
+					}
+				});
 			}
 		}
 	}

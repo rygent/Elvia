@@ -22,6 +22,7 @@ exports.Emojis = {
 exports.Links = {
 	SupportServer: process.env.SUPPORT_SERVER_URL,
 	LoggerWebhook: process.env.LOGGER_WEBHOOK_URL,
+	ReportWebhook: process.env.REPORT_WEBHOOK_URL,
 	GuildWebhook: process.env.GUILD_WEBHOOK_URL
 };
 

@@ -53,6 +53,10 @@
         "description": "Input here the logger webhook url.",
         "require": false
       },
+      "REPORT_WEBHOOK_URL": {
+        "description": "Input here the report webhook url.",
+        "require": false
+      },
       "GUILD_WEBHOOK_URL": {
         "description": "Input here the guild log webhook url.",
         "require": false

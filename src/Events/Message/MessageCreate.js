@@ -1,7 +1,9 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
+const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Links } = require('../../Utils/Constants');
+const { nanoid } = require('nanoid');
+const ReportModal = require('../../Utils/Modules/ReportModal');
 
 module.exports = class extends Event {
 
@@ -65,16 +67,38 @@ module.exports = class extends Event {
 			} catch (error) {
 				this.client.logger.error(error.stack, { error });
 
-				const button = new ActionRowBuilder()
+				const buttonId = `button-${nanoid()}`;
+				const button = (state) => new ActionRowBuilder()
 					.addComponents([new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
-						.setLabel('Support Server')
-						.setURL(Links.SupportServer)]);
+						.setLabel('Support server')
+						.setURL(Links.SupportServer)])
+					.addComponents([new ButtonBuilder()
+						.setCustomId(buttonId)
+						.setStyle(ButtonStyle.Danger)
+						.setLabel('Report bug')
+						.setDisabled(state)]);
 
-				return message.reply({ content: [
+				const reply = await message.reply({ content: [
 					'An error has occured when executing this command.',
 					'If the issue persists, please report in our *Support Server*.'
-				].join('\n'), components: [button] });
+				].join('\n'), components: [button(false)] });
+
+				const filter = (i) => i.customId === buttonId;
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600000 });
+
+				const report = new ReportModal(this.client, { collector });
+
+				collector.on('collect', (i) => {
+					if (i.user.id !== message.author.id) return i.deferUpdate();
+					return report.showModal(i);
+				});
+
+				collector.on('end', (collected, reason) => {
+					if (reason === 'time' || reason === 'collected') {
+						return reply.edit({ components: [button(true)] });
+					}
+				});
 			}
 		}
 	}
