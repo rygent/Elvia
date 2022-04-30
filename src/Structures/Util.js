@@ -84,7 +84,7 @@ module.exports = class Util {
 	}
 
 	async loadInteractions() {
-		return glob(`${this.directory}Commands/Interaction/**/*.js`).then(interactions => {
+		return glob(`${this.directory}Commands/{Context,Slash}/**/*.js`).then(interactions => {
 			for (const interactionFile of interactions) {
 				delete require.cache[interactionFile];
 				const { name } = path.parse(interactionFile);
@@ -98,7 +98,7 @@ module.exports = class Util {
 	}
 
 	async loadCommands() {
-		return glob(`${this.directory}Commands/Message/**/*.js`).then(commands => {
+		return glob(`${this.directory}Commands/{Legacy}/**/*.js`).then(commands => {
 			for (const commandFile of commands) {
 				delete require.cache[commandFile];
 				const { name } = path.parse(commandFile);
