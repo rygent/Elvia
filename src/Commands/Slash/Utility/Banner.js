@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/bu
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Util } = require('discord.js');
 const { Colors } = require('../../../Utils/Constants');
-const axios = require('axios');
+const { fetch } = require('undici');
 
 module.exports = class extends InteractionCommand {
 
@@ -25,7 +25,8 @@ module.exports = class extends InteractionCommand {
 		if (color) {
 			if (!user.hexAccentColor) return interaction.reply({ content: `**${user.tag}**'s has no banner color!`, ephemeral: true });
 
-			const response = await axios.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`).then(({ data }) => data);
+			const body = await fetch(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, { method: 'GET' });
+			const response = await body.json();
 
 			embed.setColor(Util.resolveColor(response.hex.clean));
 			embed.setDescription([

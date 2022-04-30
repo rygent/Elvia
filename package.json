@@ -22,7 +22,6 @@
     "@discordjs/builders": "^0.14.0-dev.1650931748-df64d3e",
     "@discordjs/rest": "^0.5.0-dev.1650931739-df64d3e",
     "@iamtraction/google-translate": "^1.1.2",
-    "axios": "^0.27.2",
     "colorette": "^2.0.16",
     "discord-api-types": "^0.32.0",
     "discord-emoji-convert": "^2.1.2",
@@ -43,6 +42,7 @@
     "nanoid": "^3.3.3",
     "node-spotify-api": "^1.1.1",
     "owofy": "^1.0.2",
-    "systeminformation": "^5.11.14"
+    "systeminformation": "^5.11.14",
+    "undici": "^5.0.0"
   }
 }

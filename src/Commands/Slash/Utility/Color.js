@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/bu
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Util } = require('discord.js');
 const Function = require('../../../Utils/Function');
-const axios = require('axios');
+const { fetch } = require('undici');
 
 module.exports = class extends InteractionCommand {
 
@@ -27,7 +27,8 @@ module.exports = class extends InteractionCommand {
 			return interaction.reply({ content: 'Please provide a valid **hexadecimal**/**rgb** color code. Example: **#77dd77**/**(253, 253, 150)** or **random** to get a random color.', ephemeral: true });
 		}
 
-		const response = await axios.get(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`).then(({ data }) => data);
+		const body = await fetch(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, { method: 'GET' });
+		const response = await body.json();
 
 		const button = new ActionRowBuilder()
 			.addComponents([new ButtonBuilder()

@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = req
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const { nanoid } = require('nanoid');
-const axios = require('axios');
+const { fetch } = require('undici');
 
 module.exports = class extends InteractionCommand {
 
@@ -17,7 +17,8 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const response = await axios.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`).then(({ data }) => data.items.filter(({ type }) => type === 'app'));
+		const body = await fetch(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { method: 'GET' });
+		const response = await body.json().then(({ items }) => items.filter(({ type }) => type === 'app'));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const menuId = `menu-${nanoid()}`;
@@ -40,7 +41,8 @@ module.exports = class extends InteractionCommand {
 			await i.deferUpdate();
 
 			const [ids] = i.values;
-			const data = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`).then(res => res.data[ids].data);
+			const data = await fetch(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, { method: 'GET' })
+				.then(res => res.json().then(item => item[ids].data));
 
 			const button = new ActionRowBuilder()
 				.addComponents([new ButtonBuilder()

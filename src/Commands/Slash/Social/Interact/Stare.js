@@ -1,7 +1,7 @@
 const InteractionCommand = require('../../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { Colors } = require('../../../../Utils/Constants');
-const axios = require('axios');
+const { fetch } = require('undici');
 
 module.exports = class extends InteractionCommand {
 
@@ -15,7 +15,8 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const member = await interaction.options.getMember('user');
 
-		const response = await axios.get(`https://nekoapi.vanillank2006.repl.co/api/action/stare`).then(({ data }) => data);
+		const body = await fetch(`https://nekoapi.vanillank2006.repl.co/api/action/stare`, { method: 'GET' });
+		const response = await body.json();
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

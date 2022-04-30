@@ -1,7 +1,7 @@
 const InteractionCommand = require('../../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { Colors } = require('../../../../Utils/Constants');
-const axios = require('axios');
+const { fetch } = require('undici');
 
 module.exports = class extends InteractionCommand {
 
@@ -15,7 +15,8 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const member = await interaction.options.getMember('user');
 
-		const response = await axios.get(`https://api.waifu.pics/sfw/cry`).then(({ data }) => data);
+		const body = await fetch(`https://api.waifu.pics/sfw/cry`, { method: 'GET' });
+		const response = await body.json();
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
