@@ -11,8 +11,9 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
-		this.nsfw = options.nsfw || false;
+		this.guildOnly = options.guildOnly || false;
 		this.ownerOnly = options.ownerOnly || false;
+		this.nsfw = options.nsfw || false;
 		this.disabled = options.disabled || false;
 	}
 

@@ -15,11 +15,14 @@ module.exports = class extends Event {
 	}
 
 	async run(interaction) {
-		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return;
 
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
+			if (command.guildOnly && !interaction.inGuild()) {
+				return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
+			}
+
 			if (interaction.inGuild()) {
 				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
 				if (memberPermCheck) {

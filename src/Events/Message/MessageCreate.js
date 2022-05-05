@@ -15,10 +15,9 @@ module.exports = class extends Event {
 	}
 
 	async run(message) {
-		if (!message.inGuild() || message.author.bot) return;
-
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
+		if (message.author.bot) return;
 
 		if (message.content.match(mentionRegex)) {
 			return message.reply({ content: `My prefix for *${message.guild.name}* is \`${this.client.prefix}\`.` });
@@ -31,6 +30,10 @@ module.exports = class extends Event {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
+			if (command.guildOnly && !message.inGuild()) {
+				return message.reply({ content: 'This command cannot be used out of a server.' });
+			}
+
 			if (command.disabled && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is currently inaccessible!' });
 			}

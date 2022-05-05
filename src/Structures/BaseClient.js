@@ -16,6 +16,7 @@ module.exports = class BaseClient extends Client {
 				GatewayIntentBits.GuildBans,
 				GatewayIntentBits.GuildPresences,
 				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.DirectMessages,
 				GatewayIntentBits.MessageContent
 			],
 			partials: [
