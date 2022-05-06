@@ -2,9 +2,7 @@ const { Util } = require('discord.js');
 
 module.exports = class Function {
 
-	static reverseText(text) {
-		return text.split('').reverse().join('');
-	}
+	static reverseText = require('./Module/TextManipulation').reverseText;
 
 	static rgbToHex(rgb) {
 		const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
@@ -41,8 +39,6 @@ module.exports = class Function {
 		return messages.concat(msg).filter(m => m);
 	}
 
-	static spongemock(text) {
-		return text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
-	}
+	static spongemock = require('./Module/TextManipulation').spongemock;
 
 };
