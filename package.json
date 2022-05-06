@@ -24,7 +24,7 @@
     "@discordjs/rest": "^0.5.0-dev.1651493333-4ba0f56",
     "@iamtraction/google-translate": "^1.1.2",
     "colorette": "^2.0.16",
-    "discord-api-types": "^0.32.0",
+    "discord-api-types": "^0.32.1",
     "discord-emoji-convert": "^2.1.2",
     "discord.js": "^14.0.0-dev.1651493371-4ba0f56",
     "dotenv": "^16.0.0",
