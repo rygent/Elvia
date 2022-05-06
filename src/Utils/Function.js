@@ -4,6 +4,8 @@ module.exports = class Function {
 
 	static owofy = require('./Module/TextManipulation').owofy;
 
+	static regional = require('./Module/TextManipulation').regional;
+
 	static reverseText = require('./Module/TextManipulation').reverseText;
 
 	static rgbToHex(rgb) {
