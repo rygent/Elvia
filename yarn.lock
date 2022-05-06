@@ -22,10 +22,10 @@
     mathjs "^10.0.0"
     random-js "^2.1.0"
 
-"@discordjs/builders@^0.14.0-dev", "@discordjs/builders@^0.14.0-dev.1651147747-679dcda":
-  version "0.14.0-dev.1651147747-679dcda"
-  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.14.0-dev.1651147747-679dcda.tgz#fd7b427ca0e6fdbcea9e5394e91c65d9eacada43"
-  integrity sha512-XMI7ac6eMNJaH9ymT+B8fqSaCmR8vfuh40+BIomHpw27v1P1D1U41cpWdvQx74KDZfclFcoJhxhvvLQLeqGk7A==
+"@discordjs/builders@^0.14.0-dev", "@discordjs/builders@^0.14.0-dev.1651493044-4ba0f56":
+  version "0.14.0-dev.1651493044-4ba0f56"
+  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.14.0-dev.1651493044-4ba0f56.tgz#c68bb0c7b2f7576400bd66c74235fff8961cd688"
+  integrity sha512-SA2d0Fadpk2n/CtYsnPlWPB5gbO4d/KZG3lTWx90yGAgvf1yf+Tx+8TKcA8wI2bKgsy9hEwGOn7DdxYKePUNRw==
   dependencies:
     "@sapphire/shapeshift" "^2.0.0"
     "@sindresorhus/is" "^4.6.0"
@@ -35,14 +35,14 @@
     tslib "^2.3.1"
 
 "@discordjs/collection@^0.7.0-dev":
-  version "0.7.0-dev.1651147743-679dcda"
-  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.7.0-dev.1651147743-679dcda.tgz#3a51f6725e0a95257ad20205701657dffaa314b1"
-  integrity sha512-4Ciqaxrg2pE75Wo0z7lyEi2u3D0lV9GO6+M6kEyxQqlsYoYcF0i3ylfS5XWvERAXqPNTiafA9GW+7Oq76ikC0A==
+  version "0.7.0-dev.1651493036-4ba0f56"
+  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.7.0-dev.1651493036-4ba0f56.tgz#9d3ff2dd9e3eb21a754b4d54ead686750b117f42"
+  integrity sha512-/6eYweo3mprHqYO+DTM89mZNp1AdvZelMZGSeiCUtMadhsdjycR1cfA08fRtivDGaRnvmecDaKIEfig9mXaRxw==
 
-"@discordjs/rest@^0.5.0-dev", "@discordjs/rest@^0.5.0-dev.1651147752-679dcda":
-  version "0.5.0-dev.1651147752-679dcda"
-  resolved "https://registry.yarnpkg.com/@discordjs/rest/-/rest-0.5.0-dev.1651147752-679dcda.tgz#792c558eb26b4e99c83964755d0ea05608c648ca"
-  integrity sha512-D7czbjne217VzSCAzXeEjoRe75wkP4bb3x1g0RIfZq4mbEd07dBiQemq5RF5BJLmBHBzsbKxNTxzXGoBHj+p5Q==
+"@discordjs/rest@^0.5.0-dev", "@discordjs/rest@^0.5.0-dev.1651493333-4ba0f56":
+  version "0.5.0-dev.1651493333-4ba0f56"
+  resolved "https://registry.yarnpkg.com/@discordjs/rest/-/rest-0.5.0-dev.1651493333-4ba0f56.tgz#4ae937dde3f7ad90822938aa1b73baa8d59415a6"
+  integrity sha512-Snq9WiBG8EhS16jjv0sYwvOo+OTNG9KkmJlDAAERWnZsYJ9NtiMdZRzg+PmDyrqjIfNR8CPCycJRX804+IWwyQ==
   dependencies:
     "@discordjs/collection" "^0.7.0-dev"
     "@sapphire/async-queue" "^1.3.1"
@@ -538,10 +538,10 @@ discord-emoji-convert@^2.1.2:
   resolved "https://registry.yarnpkg.com/discord-emoji-convert/-/discord-emoji-convert-2.1.2.tgz#d589763b3e602587336c47d4d48e222205a74a80"
   integrity sha512-IAGzyA7y0+aBM1T4l80MHbZmRkRJxTHg6uIdcIJRXtPKQ3yi2smw+ENOejBgWTgVnVv9IWBy+3ZB3knNlIWc5A==
 
-discord.js@^14.0.0-dev.1651147765-679dcda:
-  version "14.0.0-dev.1651147765-679dcda"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-14.0.0-dev.1651147765-679dcda.tgz#4b9da52e0e431165f077f7b0924aebe50cbdfd58"
-  integrity sha512-hsD9/oS9nqMNO2JluSxeVQhFiQUpOZeX+Sr5L3Xa8Lth5P16dgWwm29hpPfWBzumU0QJcWKXhv1NtyJ7kXyAug==
+discord.js@^14.0.0-dev.1651493371-4ba0f56:
+  version "14.0.0-dev.1651493371-4ba0f56"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-14.0.0-dev.1651493371-4ba0f56.tgz#008f585e6e52c383ab03bee9d7882a43d89a8cbd"
+  integrity sha512-BTrhiEdZ5tKKQqzsx3nDalRE5fM7X4XQu8WOJEX9ELNgvdBZ6YUBE+Yp1H0cDX3OyvKuqK8ELtjJo+O0GhG09Q==
   dependencies:
     "@discordjs/builders" "^0.14.0-dev"
     "@discordjs/collection" "^0.7.0-dev"
@@ -1934,9 +1934,9 @@ wrappy@1:
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
 ws@^8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
-  integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.6.0.tgz#e5e9f1d9e7ff88083d0c0dd8281ea662a42c9c23"
+  integrity sha512-AzmM3aH3gk0aX7/rZLYvjdvZooofDu3fFOzGqcSnQ1tOcTWwhM/o+q++E8mAyVVIyUdajrkzWUGftaVSDLn1bw==
 
 yallist@^4.0.0:
   version "4.0.0"
