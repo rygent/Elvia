@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Links } = require('../../Utils/Constants');
 const { nanoid } = require('nanoid');
-const ReportModal = require('../../Utils/Modules/ReportModal');
+const ReportModal = require('../../Utils/Module/ReportModal');
 
 module.exports = class extends Event {
 
@@ -56,7 +56,7 @@ module.exports = class extends Event {
 				const button = (state) => new ActionRowBuilder()
 					.addComponents([new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
-						.setLabel('Support server')
+						.setLabel('Support Server')
 						.setURL(Links.SupportServer)])
 					.addComponents([new ButtonBuilder()
 						.setCustomId(buttonId)
