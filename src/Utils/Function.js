@@ -2,6 +2,8 @@ const { Util } = require('discord.js');
 
 module.exports = class Function {
 
+	static owofy = require('./Module/TextManipulation').owofy;
+
 	static reverseText = require('./Module/TextManipulation').reverseText;
 
 	static rgbToHex(rgb) {
