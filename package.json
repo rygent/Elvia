@@ -43,6 +43,6 @@
     "node-spotify-api": "^1.1.1",
     "owofy": "^1.0.2",
     "systeminformation": "^5.11.14",
-    "undici": "^5.0.0"
+    "undici": "^5.1.1"
   }
 }
