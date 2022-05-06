@@ -5,16 +5,6 @@ module.exports = {
 	description: 'Manipulate your text.',
 	type: ApplicationCommandType.ChatInput,
 	options: [{
-		name: 'ascii',
-		description: 'Transform your text to ascii characters.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to transform.',
-			type: ApplicationCommandOptionType.String,
-			required: true
-		}]
-	}, {
 		name: 'flip',
 		description: 'Flip your text.',
 		type: ApplicationCommandOptionType.Subcommand,
