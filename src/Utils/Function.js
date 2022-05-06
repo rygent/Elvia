@@ -10,7 +10,6 @@ module.exports = class Function {
 
 	static rgbToHex(rgb) {
 		const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
-		// eslint-disable-next-line no-bitwise
 		return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 	}
 

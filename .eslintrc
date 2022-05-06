@@ -59,7 +59,6 @@
         "new-cap": ["error", { "newIsCapExceptionPattern": "^this\\.." }],
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 6 }],
         "no-array-constructor": "error",
-        "no-bitwise": "warn",
         "no-console": ["error",{ "allow": ["log", "warn", "error"] }],
         "no-duplicate-imports": "error",
         "no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
