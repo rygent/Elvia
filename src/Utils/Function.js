@@ -44,4 +44,6 @@ module.exports = class Function {
 
 	static spongemock = require('./Module/TextManipulation').spongemock;
 
+	static vaporwave = require('./Module/TextManipulation').vaporwave;
+
 };

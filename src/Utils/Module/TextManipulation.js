@@ -44,3 +44,5 @@ exports.regional = (text) => {
 exports.reverseText = (text) => text.split('').reverse().join('');
 
 exports.spongemock = (text) => text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
+
+exports.vaporwave = (text) => text.replace(/[a-zA-Z0-9!\\?\\.'";:\]\\[}{\\)\\(@#\\$%\\^&\\*\-_=\\+`~><]/g, (char) => String.fromCharCode(0xfee0 + char.charCodeAt(0))).replace(/ /g, '　');

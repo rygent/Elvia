@@ -54,6 +54,16 @@ module.exports = {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
+	}, {
+		name: 'vaporwave',
+		description: 'Applies vaporwave effect to your text.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'text',
+			description: 'Text to vaporwave.',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}]
 	}],
 	dm_permission: true
 };
