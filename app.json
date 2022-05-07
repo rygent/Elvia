@@ -37,6 +37,10 @@
         "description": "Input here the imdb api key.",
         "required": true
       },
+      "IMGUR_CLIENT_ID": {
+        "description": "Input here the imgur client id.",
+        "required": true
+      },
       "OPEN_WEATHER_API_KEY": {
         "description": "Input here the open weather map api key.",
         "required": true
