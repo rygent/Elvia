@@ -12,6 +12,10 @@ module.exports = {
 		name: 'earth',
 		description: 'Sends Earth images from Imgur.',
 		type: ApplicationCommandOptionType.Subcommand
+	}, {
+		name: 'food',
+		description: 'Sends Food images from Imgur.',
+		type: ApplicationCommandOptionType.Subcommand
 	}],
 	dm_permission: true
 };
