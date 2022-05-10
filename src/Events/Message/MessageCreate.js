@@ -20,7 +20,8 @@ module.exports = class extends Event {
 		if (message.author.bot) return;
 
 		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `My prefix for *${message.guild.name}* is \`${this.client.prefix}\`.` });
+			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` })
+				.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -31,11 +32,13 @@ module.exports = class extends Event {
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
 			if (command.guildOnly && !message.inGuild()) {
-				return message.reply({ content: 'This command cannot be used out of a server.' });
+				return message.reply({ content: 'This command cannot be used out of a server.' })
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			if (command.disabled && !this.client.utils.isOwner(message.author.id)) {
-				return message.reply({ content: 'This command is currently inaccessible!' });
+				return message.reply({ content: 'This command is currently inaccessible!' })
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			if (message.inGuild()) {
@@ -43,7 +46,8 @@ module.exports = class extends Event {
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
+							.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 					}
 				}
 
@@ -51,17 +55,20 @@ module.exports = class extends Event {
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
+							.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 					}
 				}
 
 				if (command.nsfw && !message.channel.nsfw) {
-					return message.reply({ content: 'This command is only accessible on NSFW channels!' });
+					return message.reply({ content: 'This command is only accessible on NSFW channels!' })
+						.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 				}
 			}
 
 			if (command.ownerOnly && !this.client.utils.isOwner(message.author.id)) {
-				return message.reply({ content: 'This command is only accessible for developers!' });
+				return message.reply({ content: 'This command is only accessible for developers!' })
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			try {
