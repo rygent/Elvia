@@ -1,6 +1,7 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
+const { Collection } = require('discord.js');
 const { Links } = require('../../Utils/Constants');
 const { nanoid } = require('nanoid');
 const ReportModal = require('../../Utils/Module/ReportModal');
@@ -70,6 +71,26 @@ module.exports = class extends Event {
 				return message.reply({ content: 'This command is only accessible for developers!' })
 					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
+
+			if (!this.client.cooldown.has(command.name)) {
+				this.client.cooldown.set(command.name, new Collection());
+			}
+
+			const current = Date.now();
+			const cooldown = this.client.cooldown.get(command.name);
+
+			if (cooldown.has(message.author.id) && !this.client.utils.isOwner(message.author.id)) {
+				const expiration = cooldown.get(message.author.id) + command.cooldown;
+
+				if (current < expiration) {
+					const time = (expiration - current) / 1000;
+					return message.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.` })
+						.then(m => setTimeout(() => m.delete() && message.delete(), expiration - current));
+				}
+			}
+
+			cooldown.set(message.author.id, current);
+			setTimeout(() => cooldown.delete(message.author.id), command.cooldown);
 
 			try {
 				await message.channel.sendTyping();

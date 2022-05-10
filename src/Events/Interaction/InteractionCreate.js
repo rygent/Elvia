@@ -1,6 +1,7 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
+const { Collection } = require('discord.js');
 const { Links } = require('../../Utils/Constants');
 const { nanoid } = require('nanoid');
 const ReportModal = require('../../Utils/Module/ReportModal');
@@ -40,6 +41,25 @@ module.exports = class extends Event {
 					}
 				}
 			}
+
+			if (!this.client.cooldown.has(this.getCommandName(interaction))) {
+				this.client.cooldown.set(this.getCommandName(interaction), new Collection());
+			}
+
+			const current = Date.now();
+			const cooldown = this.client.cooldown.get(this.getCommandName(interaction));
+
+			if (cooldown.has(interaction.user.id) && !this.client.utils.isOwner(interaction.user.id)) {
+				const expiration = cooldown.get(interaction.user.id) + command.cooldown;
+
+				if (current < expiration) {
+					const time = (expiration - current) / 1000;
+					return interaction.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.`, ephemeral: true });
+				}
+			}
+
+			cooldown.set(interaction.user.id, current);
+			setTimeout(() => cooldown.delete(interaction.user.id), command.cooldown);
 
 			try {
 				await command.run(interaction);

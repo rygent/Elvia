@@ -34,6 +34,7 @@ module.exports = class BaseClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.events = new Collection();
+		this.cooldown = new Collection();
 
 		this.utils = new Util(this);
 		this.db = new Database(this);

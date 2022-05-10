@@ -11,6 +11,7 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
+		this.cooldown = options.cooldown || 3000;
 		this.guildOnly = options.guildOnly || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
