@@ -54,7 +54,7 @@ module.exports = class extends Event {
 
 				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
 				if (clientPermCheck) {
-					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
+					const missing = message.channel.permissionsFor(message.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
 						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
 							.then(m => setTimeout(() => m.delete() && message.delete(), 10000));

@@ -35,7 +35,7 @@ module.exports = class extends Event {
 
 				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
 				if (clientPermCheck) {
-					const missing = interaction.channel.permissionsFor(interaction.guild.me).missing(clientPermCheck);
+					const missing = interaction.channel.permissionsFor(interaction.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
 						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
