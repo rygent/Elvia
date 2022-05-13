@@ -30,7 +30,7 @@
     "emoji-regex": "^10.1.0",
     "figlet": "^1.5.2",
     "flip-text": "^1.2.0",
-    "glob": "^8.0.1",
+    "glob": "^8.0.2",
     "imdb-api": "^4.4.1",
     "inquirer": "^8.2.3",
     "kitsu": "^10.0.0-alpha.23",
