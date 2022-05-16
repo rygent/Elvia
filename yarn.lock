@@ -1187,9 +1187,9 @@ node-gyp-build@^4.3.0:
 
 "node-spotify-api@github:rygent/node-spotify-api":
   version "2.1.0"
-  resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/1fd2838cfd56ecd529232fe0147157aab1b2637a"
+  resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/868703bc8fe8be80bd6fc03b989ffcf6a804d587"
   dependencies:
-    undici "^5.1.1"
+    undici "^5.2.0"
 
 normalize-url@^6.0.1:
   version "6.1.0"
@@ -1532,7 +1532,7 @@ typed-function@^2.1.0:
   resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-2.1.0.tgz#ded6f8a442ba8749ff3fe75bc41419c8d46ccc3f"
   integrity sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ==
 
-undici@^5.1.1, undici@^5.2.0:
+undici@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/undici/-/undici-5.2.0.tgz#18c5bd59f8f1b1ed8dcc9dca2f754c44ec994059"
   integrity sha512-XY6+NS3WH9b3TKOHeNz2CjR+qrVz/k4fO9g3etPpLozRvULoQmZ1+dk9JbIz40ehn27xzFk4jYVU2MU3Nle62A==
