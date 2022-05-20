@@ -17,7 +17,10 @@ module.exports = class extends InteractionCommand {
 		const fromLanguage = await interaction.options.getString('from');
 		const toLanguage = await interaction.options.getString('to');
 
-		const locale = !['zh-CN', 'zh-TW'].includes(interaction.guildLocale) ? new Intl.Locale(interaction.guildLocale).language : interaction.guildLocale;
+		let locale;
+		if (!interaction.inGuild()) locale = !['zh-CN', 'zh-TW'].includes(interaction.locale) ? new Intl.Locale(interaction.locale).language : interaction.locale;
+		else locale = !['zh-CN', 'zh-TW'].includes(interaction.guildLocale) ? new Intl.Locale(interaction.guildLocale).language : interaction.guildLocale;
+
 		const target = toLanguage || locale;
 
 		try {
