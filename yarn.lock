@@ -1186,8 +1186,8 @@ node-gyp-build@^4.3.0:
   integrity sha512-amJnQCcgtRVw9SvoebO3BKGESClrfXGCUTX9hSn1OuGQTQBOZmVd0Z0OlecpuRksKvbsUqALE8jls/ErClAPuQ==
 
 "node-spotify-api@github:rygent/node-spotify-api":
-  version "2.1.0"
-  resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/868703bc8fe8be80bd6fc03b989ffcf6a804d587"
+  version "2.1.1"
+  resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/9fd27d4f0228091a2da365359d237d14cbfdd1ad"
   dependencies:
     undici "^5.2.0"
 
