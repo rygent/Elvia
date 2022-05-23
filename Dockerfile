@@ -1,22 +1,14 @@
-# We're using Alpine
 FROM node:current-alpine3.15
 
-# Installing packages
 RUN apk add --no-cache=true --update \
         bash curl git yarn sudo zip \
         neofetch chromium chromium-chromedriver
 
-# Create working directory
-RUN mkdir /home/app
+RUN mkdir /home/container
 
-# Copy files & prepare working directory
-COPY . /home/app
-WORKDIR /home/app
+COPY . /home/container
+WORKDIR /home/container
 
-# Copies config (if it exists)
-COPY .env.example .env
-
-# Installing required dependencies
 RUN yarn --immutable
 
 CMD ["node", "."]
