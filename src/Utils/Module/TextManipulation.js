@@ -12,6 +12,8 @@ const charTable = {
 	'/': 'heavy_division_sign'
 };
 
+const { tinyCapital } = require('../../Assets/js/Text');
+
 exports.owofy = (text) => text.replace(/[lr]/g, 'w')
 	.replace(/[LR]/g, 'W')
 	.replace(/(n)([aeiou])/gi, '$1y$2')
@@ -42,6 +44,20 @@ exports.regional = (text) => {
 };
 
 exports.reverseText = (text) => text.split('').reverse().join('');
+
+exports.smallcaps = (text) => {
+	let c = '';
+	let a;
+
+	text = text.toUpperCase();
+	for (let d = 0, e = text.length; d < e; d++) {
+		// eslint-disable-next-line no-sequences, no-unused-expressions
+		a = tinyCapital[text.charAt(d)],
+		typeof a === 'undefined' && (a = text.charAt(d)),
+		c += a;
+	}
+	return c;
+};
 
 exports.spongemock = (text) => text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
 

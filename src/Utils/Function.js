@@ -42,6 +42,8 @@ module.exports = class Function {
 		return messages.concat(msg).filter(m => m);
 	}
 
+	static smallcaps = require('./Module/TextManipulation').smallcaps;
+
 	static spongemock = require('./Module/TextManipulation').spongemock;
 
 	static vaporwave = require('./Module/TextManipulation').vaporwave;
