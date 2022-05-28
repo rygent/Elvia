@@ -14,8 +14,11 @@ module.exports = class extends InteractionCommand {
 	}
 
 	async run(interaction) {
+		const list = ['art', 'artporn', 'drawing', 'deviantart', 'illustration', 'streetart', 'pixelart'];
+		const subreddit = list[Math.floor(Math.random() * list.length)];
+
 		const headers = { Authorization: `Client-ID ${Secrets.ImgurClientId}` };
-		const body = await fetch('https://api.imgur.com/3/gallery/r/art', { method: 'GET', headers });
+		const body = await fetch(`https://api.imgur.com/3/gallery/r/${subreddit}`, { method: 'GET', headers });
 		const response = await body.json().then(({ data }) => data[Math.floor(Math.random() * data.length)]);
 
 		const button = new ActionRowBuilder()
