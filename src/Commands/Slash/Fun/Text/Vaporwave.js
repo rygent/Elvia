@@ -6,7 +6,7 @@ module.exports = class extends InteractionCommand {
 	constructor(...args) {
 		super(...args, {
 			name: ['text', 'vaporwave'],
-			description: 'Vaporwave your text.'
+			description: 'Transform your text into vaporwave.'
 		});
 	}
 

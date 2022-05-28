@@ -66,11 +66,11 @@ module.exports = {
 		}]
 	}, {
 		name: 'vaporwave',
-		description: 'Applies vaporwave effect to your text.',
+		description: 'Transform your text into vaporwave.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'text',
-			description: 'Text to vaporwave.',
+			description: 'Text to transform.',
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]
