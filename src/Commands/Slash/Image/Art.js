@@ -14,8 +14,9 @@ module.exports = class extends InteractionCommand {
 	}
 
 	async run(interaction) {
-		const list = ['art', 'artporn', 'drawing', 'deviantart', 'illustration', 'streetart', 'pixelart'];
-		const subreddit = list[Math.floor(Math.random() * list.length)];
+		const categories = ['art', 'artporn', 'drawing', 'deviantart', 'illustration', 'streetart', 'pixelart'];
+		const subreddit = categories[Math.floor(Math.random() * categories.length)];
+		await interaction.deferReply();
 
 		const headers = { Authorization: `Client-ID ${Secrets.ImgurClientId}` };
 		const body = await fetch(`https://api.imgur.com/3/gallery/r/${subreddit}`, { method: 'GET', headers });
@@ -34,7 +35,7 @@ module.exports = class extends InteractionCommand {
 			.setImage(response.link)
 			.setFooter({ text: 'Powered by Imgur', iconURL: interaction.user.avatarURL() });
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.editReply({ embeds: [embed], components: [button] });
 	}
 
 };
