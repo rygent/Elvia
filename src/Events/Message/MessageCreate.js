@@ -18,7 +18,7 @@ module.exports = class extends Event {
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
-		if (message.author.bot) return;
+		if (message.author.bot && !this.client.utils.isOwner(message.author.id)) return;
 
 		if (message.content.match(mentionRegex)) {
 			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` })
