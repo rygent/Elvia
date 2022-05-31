@@ -470,6 +470,11 @@ discord-api-types@^0.33.0:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.33.0.tgz#4c20b3a85b6d78ce71954a506e98b98ac3105661"
   integrity sha512-RS1dMM6xuMhdHwQJ0T+XuCD7v1tKnyZ89Eq6q/DbOJWMbIh3ihgAzDhcF70QsFCtk9a5Gn9XU29S7eoEXuwQ5w==
 
+discord-api-types@^0.33.1:
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.33.1.tgz#a855d3403dbf0d9251ad63d959490f535c7cb2a8"
+  integrity sha512-dc7Xzm3isROh77jdxikQnLzKDslOPORm2Q8odXrKgEy8Aqfd1r9ISVTU/xsHkH6bFo+Hjf1A1C5OnBtu8ghy4w==
+
 discord.js@^14.0.0-dev.1653480262-68d5169:
   version "14.0.0-dev.1653480262-68d5169"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-14.0.0-dev.1653480262-68d5169.tgz#4ff9ef76fa750a340674598d5a05312d60e70b89"
@@ -1189,7 +1194,7 @@ node-gyp-build@^4.3.0:
   version "2.1.1"
   resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/32b5e0033f5b45563ccdf5eed4644d68e3950c1a"
   dependencies:
-    undici "^5.3.0"
+    undici "^5.2.0"
 
 normalize-url@^6.0.1:
   version "6.1.0"
