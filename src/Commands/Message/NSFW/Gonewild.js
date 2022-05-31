@@ -12,7 +12,8 @@ module.exports = class extends MessageCommand {
 			description: 'This command contain explicit content!',
 			category: 'NSFW',
 			cooldown: 10000,
-			nsfw: true
+			nsfw: true,
+			disabled: true
 		});
 	}
 

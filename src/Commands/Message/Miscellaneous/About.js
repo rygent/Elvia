@@ -14,7 +14,8 @@ module.exports = class extends MessageCommand {
 			name: 'about',
 			aliases: ['botinfo', 'info'],
 			description: 'Get bots information.',
-			category: 'Miscellaneous'
+			category: 'Miscellaneous',
+			disabled: true
 		});
 	}
 

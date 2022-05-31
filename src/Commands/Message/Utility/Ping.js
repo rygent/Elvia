@@ -7,7 +7,8 @@ module.exports = class extends MessageCommand {
 			name: 'ping',
 			aliases: ['pong'],
 			description: 'Send a ping request.',
-			category: 'Utility'
+			category: 'Utility',
+			disabled: true
 		});
 	}
 

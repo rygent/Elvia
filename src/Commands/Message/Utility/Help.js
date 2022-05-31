@@ -12,7 +12,8 @@ module.exports = class extends MessageCommand {
 			aliases: ['h'],
 			description: 'View help.',
 			category: 'Utility',
-			usage: '(command)'
+			usage: '(command)',
+			disabled: true
 		});
 	}
 
