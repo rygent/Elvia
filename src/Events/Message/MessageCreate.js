@@ -22,7 +22,7 @@ module.exports = class extends Event {
 
 		if (message.content.match(mentionRegex)) {
 			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` })
-				.then(m => setTimeout(() => m.delete(), 10000));
+				.then(m => setTimeout(() => m.delete() && message.delete(), 30000));
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -34,12 +34,12 @@ module.exports = class extends Event {
 		if (command) {
 			if (command.guildOnly && !message.inGuild()) {
 				return message.reply({ content: 'This command cannot be used out of a server.' })
-					.then(m => setTimeout(() => m.delete(), 10000));
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			if (command.disabled && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is currently inaccessible!' })
-					.then(m => setTimeout(() => m.delete(), 10000));
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			if (message.inGuild()) {
@@ -69,7 +69,7 @@ module.exports = class extends Event {
 
 			if (command.ownerOnly && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is only accessible for developers!' })
-					.then(m => setTimeout(() => m.delete(), 10000));
+					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
 			}
 
 			if (!this.client.cooldown.has(command.name)) {
@@ -85,7 +85,7 @@ module.exports = class extends Event {
 				if (current < expiration) {
 					const time = (expiration - current) / 1000;
 					return message.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.` })
-						.then(m => setTimeout(() => m.delete(), expiration - current));
+						.then(m => setTimeout(() => m.delete() && message.delete(), expiration - current));
 				}
 			}
 
