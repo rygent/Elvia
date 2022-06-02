@@ -23,7 +23,7 @@ module.exports = class extends Event {
 
 		if (message.content.match(mentionRegex)) {
 			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` })
-				.then(m => setTimeout(() => m.delete() && message.delete(), 30000));
+				.then(m => setTimeout(() => m.delete(), 10000));
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -33,10 +33,7 @@ module.exports = class extends Event {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
-			if (command.disabled && !this.client.utils.isOwner(message.author.id)) {
-				return message.reply({ content: 'This command is currently inaccessible!' })
-					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
-			}
+			if (command.disabled && !this.client.utils.isOwner(message.author.id)) return;
 
 			if (message.inGuild()) {
 				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
@@ -44,7 +41,7 @@ module.exports = class extends Event {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
 						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
-							.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
+							.then(m => setTimeout(() => m.delete(), 10000));
 					}
 				}
 
@@ -53,7 +50,7 @@ module.exports = class extends Event {
 					const missing = message.channel.permissionsFor(message.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
 						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
-							.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
+							.then(m => setTimeout(() => m.delete(), 10000));
 					}
 				}
 
@@ -65,7 +62,7 @@ module.exports = class extends Event {
 
 			if (command.ownerOnly && !this.client.utils.isOwner(message.author.id)) {
 				return message.reply({ content: 'This command is only accessible for developers!' })
-					.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
+					.then(m => setTimeout(() => m.delete(), 10000));
 			}
 
 			if (!this.client.cooldown.has(command.name)) {
@@ -81,7 +78,7 @@ module.exports = class extends Event {
 				if (current < expiration) {
 					const time = (expiration - current) / 1000;
 					return message.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.` })
-						.then(m => setTimeout(() => m.delete() && message.delete(), expiration - current));
+						.then(m => setTimeout(() => m.delete(), expiration - current));
 				}
 			}
 
