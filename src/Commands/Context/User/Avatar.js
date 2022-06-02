@@ -27,7 +27,7 @@ module.exports = class extends InteractionCommand {
 			.setImage(member.displayAvatarURL({ size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
 	}
 
 };
