@@ -13,7 +13,7 @@ module.exports = class extends InteractionCommand {
 
 	async run(interaction) {
 		const media = await interaction.options.getAttachment('media', true);
-		await interaction.deferReply();
+		await interaction.deferReply({ ephemeral: true });
 
 		const stream = await fetch(media.attachment, { method: 'GET' });
 		const buffer = Buffer.from(await stream.arrayBuffer()).toString('base64');
