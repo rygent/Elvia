@@ -23,7 +23,7 @@
     "@iamtraction/google-translate": "^1.1.2",
     "axios": "^0.27.2",
     "colorette": "^2.0.16",
-    "discord-api-types": "^0.33.1",
+    "discord-api-types": "^0.33.2",
     "discord-emoji-convert": "^2.1.2",
     "discord.js": "^13.7.0",
     "dotenv": "^16.0.0",
