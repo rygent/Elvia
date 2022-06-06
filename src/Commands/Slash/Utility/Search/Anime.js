@@ -82,7 +82,7 @@ module.exports = class extends InteractionCommand {
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((!collected.size && reason === 'time') || reason === 'time') {
+			if (!collected.size && reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

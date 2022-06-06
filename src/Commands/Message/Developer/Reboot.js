@@ -53,7 +53,7 @@ module.exports = class extends MessageCommand {
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((!collected.size && reason === 'time') || reason === 'time') {
+			if (!collected.size && reason === 'time') {
 				reply.edit({ components: [button(true)] });
 			}
 		});
