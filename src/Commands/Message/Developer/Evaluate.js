@@ -1,5 +1,5 @@
 const MessageCommand = require('../../../Structures/Command');
-const { Attachment, Formatters } = require('discord.js');
+const { AttachmentBuilder, Formatters } = require('discord.js');
 const { Type } = require('@anishshobith/deeptype');
 const { inspect } = require('node:util');
 const { Emojis } = require('../../../Utils/Constants');
@@ -37,8 +37,11 @@ module.exports = class extends MessageCommand {
 			if (response.length < 2048) {
 				return message.channel.send({ content: response });
 			} else {
-				const output = new Attachment(Buffer.from(response), 'output.txt');
-				return message.channel.send({ files: [output] });
+				const attachment = new AttachmentBuilder()
+					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 0 }))))
+					.setName('output.txt');
+
+				return message.channel.send({ content: response, files: [attachment] });
 			}
 		} catch (error) {
 			return message.channel.send({ content: `**Error:** ${Formatters.codeBlock('xl', this.clean(error))}` });

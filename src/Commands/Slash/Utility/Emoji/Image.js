@@ -1,5 +1,5 @@
 const InteractionCommand = require('../../../../Structures/Interaction');
-const { Attachment, Util } = require('discord.js');
+const { AttachmentBuilder, Util } = require('discord.js');
 
 module.exports = class extends InteractionCommand {
 
@@ -18,7 +18,9 @@ module.exports = class extends InteractionCommand {
 		if (!emojis.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
 		const buffer = `https://cdn.discordapp.com/emojis/${emojis.id}.${emojis.animated ? 'gif' : 'png'}`;
-		const attachment = new Attachment(buffer);
+
+		const attachment = new AttachmentBuilder()
+			.setFile(buffer);
 
 		return interaction.reply({ files: [attachment] });
 	}
