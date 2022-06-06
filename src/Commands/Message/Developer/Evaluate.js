@@ -34,14 +34,14 @@ module.exports = class extends MessageCommand {
 				`${Emojis.Info} ${Formatters.inlineCode(new Type(evaled).is)} `,
 				`${Emojis.Alarm} ${Formatters.inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			].join('');
-			if (response.length < 2048) {
+			if (response.length < 2000) {
 				return message.channel.send({ content: response });
 			} else {
 				const attachment = new AttachmentBuilder()
 					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 0 }))))
 					.setName('output.txt');
 
-				return message.channel.send({ content: response, files: [attachment] });
+				return message.channel.send({ files: [attachment] });
 			}
 		} catch (error) {
 			return message.channel.send({ content: `**Error:** ${Formatters.codeBlock('xl', this.clean(error))}` });
