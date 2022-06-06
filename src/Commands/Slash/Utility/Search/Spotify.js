@@ -37,13 +37,10 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-		const filter = (i) => i.customId === menuId;
+		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
-			await i.deferUpdate();
-
 			const [selected] = i.values;
 			const data = response.find(item => item.id === selected);
 
@@ -69,11 +66,15 @@ module.exports = class extends InteractionCommand {
 				.setImage(data.album.images[0].url)
 				.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL() });
 
-			return i.editReply({ content: null, embeds: [embed], components: [button] });
+			return i.update({ content: null, embeds: [embed], components: [button] });
+		});
+
+		collector.on('ignore', (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
+			if ((!collected.size && reason === 'time') || reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

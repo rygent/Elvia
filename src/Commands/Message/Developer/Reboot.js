@@ -31,12 +31,10 @@ module.exports = class extends MessageCommand {
 
 		const reply = await message.reply({ content: 'Are you sure want to restart the bot ?', components: [button(false)] });
 
-		const filter = (i) => [cancelId, restartId].includes(i.customId);
+		const filter = (i) => i.user.id === message.author.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15000 });
 
 		collector.on('collect', async (i) => {
-			if (i.user.id !== message.author.id) return i.deferUpdate();
-
 			switch (i.customId) {
 				case cancelId:
 					collector.stop();
@@ -50,7 +48,15 @@ module.exports = class extends MessageCommand {
 			}
 		});
 
-		collector.on('end', () => reply.edit({ components: [button(true)] }));
+		collector.on('ignore', (i) => {
+			if (i.user.id !== message.author.id) return i.deferUpdate();
+		});
+
+		collector.on('end', (collected, reason) => {
+			if ((!collected.size && reason === 'time') || reason === 'time') {
+				reply.edit({ components: [button(true)] });
+			}
+		});
 	}
 
 };

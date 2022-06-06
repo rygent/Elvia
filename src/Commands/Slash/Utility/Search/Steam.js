@@ -33,13 +33,10 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
-		const filter = (i) => i.customId === menuId;
+		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 		collector.on('collect', async (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
-			await i.deferUpdate();
-
 			const [ids] = i.values;
 			const data = await fetch(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, { method: 'GET' })
 				.then(res => res.json().then(item => item[ids].data));
@@ -68,11 +65,15 @@ module.exports = class extends InteractionCommand {
 				.setImage(data.header_image)
 				.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.avatarURL() });
 
-			return i.editReply({ content: null, embeds: [embed], components: [button] });
+			return i.update({ content: null, embeds: [embed], components: [button] });
+		});
+
+		collector.on('ignore', (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {
-			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
+			if ((!collected.size && reason === 'time') || reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

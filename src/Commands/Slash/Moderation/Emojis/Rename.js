@@ -37,25 +37,26 @@ module.exports = class extends InteractionCommand {
 
 		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button] });
 
-		const filter = (i) => [cancelId, confirmId].includes(i.customId);
+		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60000 });
 
 		collector.on('collect', async (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
-			await i.deferUpdate();
-
 			switch (i.customId) {
 				case cancelId:
 					await collector.stop();
-					return i.editReply({ content: 'Cancelation of the emoji\'s name change.', components: [] });
+					return i.update({ content: 'Cancelation of the emoji\'s name change.', components: [] });
 				case confirmId:
 					await emojis.edit({ name });
-					return i.editReply({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully renamed.`, components: [] });
+					return i.update({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully renamed.`, components: [] });
 			}
 		});
 
+		collector.on('ignore', (i) => {
+			if (i.user.id !== interaction.user.id) return i.deferUpdate();
+		});
+
 		collector.on('end', (collected, reason) => {
-			if ((!collected.size || !collected.filter(({ user }) => user.id === interaction.user.id).size) && reason === 'time') {
+			if ((!collected.size && reason === 'time') || reason === 'time') {
 				return interaction.deleteReply();
 			}
 		});

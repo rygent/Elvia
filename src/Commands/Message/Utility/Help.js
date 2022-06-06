@@ -72,11 +72,11 @@ module.exports = class extends MessageCommand {
 
 			const reply = await message.reply({ embeds: [embed], components: [menu(false)] });
 
-			const filter = (i) => i.customId === menuId;
+			const filter = (i) => i.user.id === message.author.id;
 			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
 
 			collector.on('collect', async (i) => {
-				if (i.user.id !== message.author.id) return i.deferUpdate();
+				collector.resetTimer();
 
 				const [selected] = i.values;
 				const category = categories.find(({ directory }) => directory.toLowerCase() === selected);
@@ -85,12 +85,15 @@ module.exports = class extends MessageCommand {
 				embed.setFields([{ name: `__Available commands__`, value: category.commands.map(({ name }) => `\`${name}\``).join(' ') }]);
 				embed.setFooter({ text: `Powered by ${this.client.user.username} | ${category.commands.length} Commands`, iconURL: message.author.avatarURL() });
 
-				collector.resetTimer();
 				return i.update({ embeds: [embed], components: [menu(false)] });
 			});
 
+			collector.on('ignore', (i) => {
+				if (i.user.id !== message.author.id) return i.deferUpdate();
+			});
+
 			collector.on('end', (collected, reason) => {
-				if (((!collected.size || !collected.filter(({ user }) => user.id === message.author.id).size) && reason === 'time') || reason === 'time') {
+				if ((!collected.size && reason === 'time') || reason === 'time') {
 					return reply.edit({ components: [menu(true)] });
 				}
 			});
