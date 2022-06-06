@@ -543,10 +543,10 @@ discord-api-types@^0.31.1:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.31.2.tgz#8d131e25340bd695815af3bb77128a6993c1b516"
   integrity sha512-gpzXTvFVg7AjKVVJFH0oJGC0q0tO34iJGSHZNz9u3aqLxlD6LfxEs9wWVVikJqn9gra940oUTaPFizCkRDcEiA==
 
-discord-api-types@^0.33.1:
-  version "0.33.1"
-  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.33.1.tgz#a855d3403dbf0d9251ad63d959490f535c7cb2a8"
-  integrity sha512-dc7Xzm3isROh77jdxikQnLzKDslOPORm2Q8odXrKgEy8Aqfd1r9ISVTU/xsHkH6bFo+Hjf1A1C5OnBtu8ghy4w==
+discord-api-types@^0.33.3:
+  version "0.33.3"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.33.3.tgz#882c39331871f619035917a1f80d486f605b3e7a"
+  integrity sha512-P3A1RJXKEDmGPHrFTN5+gYLsBPGUVGj+D3+fa3m0K/umc+LMfqGuEad+p7cNq7ry/icReVhS3bz9jvBvne/BRA==
 
 discord-emoji-convert@^2.1.2:
   version "2.1.2"
