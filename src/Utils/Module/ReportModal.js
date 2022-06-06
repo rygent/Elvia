@@ -16,13 +16,13 @@ module.exports = class ReportModal {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Report bug')
-			.addComponents([new ActionRowBuilder()
-				.addComponents([new TextInputBuilder()
+			.addComponents(new ActionRowBuilder()
+				.addComponents(new TextInputBuilder()
 					.setCustomId('issue-form')
 					.setStyle(TextInputStyle.Paragraph)
 					.setRequired(true)
 					.setLabel('Issue Description')
-					.setPlaceholder('Describe the issue in as much detail as possible.')])]);
+					.setPlaceholder('Describe the issue in as much detail as possible.')));
 
 		await interaction.showModal(modal);
 

@@ -26,14 +26,14 @@ module.exports = class extends InteractionCommand {
 
 		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
-			.addComponents([new SelectMenuBuilder()
+			.addComponents(new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select a song!')
-				.addOptions(response.map(data => ({
+				.addOptions(...response.map(data => ({
 					label: this.client.utils.truncateString(data.name, 95),
 					value: data.id,
 					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95).padEnd(1)
-				})))]);
+				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
@@ -45,11 +45,11 @@ module.exports = class extends InteractionCommand {
 			const data = response.find(item => item.id === selected);
 
 			const button = new ActionRowBuilder()
-				.addComponents([new ButtonBuilder()
+				.addComponents(new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setEmoji({ id: '950481019012804659', name: 'spotify', animated: false })
 					.setLabel('Play on Spotify')
-					.setURL(data.external_urls.spotify)]);
+					.setURL(data.external_urls.spotify));
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)

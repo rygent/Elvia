@@ -26,14 +26,14 @@ module.exports = class extends InteractionCommand {
 
 		const [cancelId, confirmId] = ['cancel', 'confirm'].map(type => `${type}-${nanoid()}`);
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setCustomId(cancelId)
 				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel')])
-			.addComponents([new ButtonBuilder()
+				.setLabel('Cancel'))
+			.addComponents(new ButtonBuilder()
 				.setCustomId(confirmId)
 				.setStyle(ButtonStyle.Success)
-				.setLabel('Confirm')]);
+				.setLabel('Confirm'));
 
 		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button] });
 

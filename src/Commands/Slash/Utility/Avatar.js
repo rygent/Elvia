@@ -16,10 +16,10 @@ module.exports = class extends InteractionCommand {
 		const user = await interaction.options.getUser('user') || interaction.user;
 
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(user.displayAvatarURL({ extension: 'png', size: 4096 }))]);
+				.setURL(user.displayAvatarURL({ extension: 'png', size: 4096 })));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

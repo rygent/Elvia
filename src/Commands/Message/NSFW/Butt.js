@@ -22,10 +22,10 @@ module.exports = class extends MessageCommand {
 		const response = await body.json();
 
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(`http://media.obutts.ru/${response[0].preview}`)]);
+				.setURL(`http://media.obutts.ru/${response[0].preview}`));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

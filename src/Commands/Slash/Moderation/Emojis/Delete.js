@@ -25,14 +25,14 @@ module.exports = class extends InteractionCommand {
 
 		const [cancelId, deleteId] = ['cancel', 'delete'].map(type => `${type}-${nanoid()}`);
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setCustomId(cancelId)
 				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel')])
-			.addComponents([new ButtonBuilder()
+				.setLabel('Cancel'))
+			.addComponents(new ButtonBuilder()
 				.setCustomId(deleteId)
 				.setStyle(ButtonStyle.Danger)
-				.setLabel('Delete')]);
+				.setLabel('Delete'));
 
 		const reply = await interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button] });
 

@@ -16,10 +16,10 @@ module.exports = class extends InteractionCommand {
 		if (!interaction.guild.iconURL()) return interaction.reply({ content: 'This server has no icon.', ephemeral: true });
 
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(interaction.guild.iconURL({ extension: 'png', size: 4096 }))]);
+				.setURL(interaction.guild.iconURL({ extension: 'png', size: 4096 })));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

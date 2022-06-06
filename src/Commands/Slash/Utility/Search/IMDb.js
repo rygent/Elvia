@@ -23,14 +23,14 @@ module.exports = class extends InteractionCommand {
 
 			const menuId = `menu-${nanoid()}`;
 			const menu = new ActionRowBuilder()
-				.addComponents([new SelectMenuBuilder()
+				.addComponents(new SelectMenuBuilder()
 					.setCustomId(menuId)
 					.setPlaceholder('Select a movies/series!')
-					.addOptions(response.map(data => ({
+					.addOptions(...response.map(data => ({
 						label: `${data.title} (${data.year})`,
 						value: data.imdbid,
 						description: data.type.toSentenceCase()
-					})))]);
+					}))));
 
 			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
 
@@ -46,10 +46,10 @@ module.exports = class extends InteractionCommand {
 				const metascore = data.ratings.find(item => item.source === 'Metacritic');
 
 				const button = new ActionRowBuilder()
-					.addComponents([new ButtonBuilder()
+					.addComponents(new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
 						.setLabel('Open in Browser')
-						.setURL(data.imdburl)]);
+						.setURL(data.imdburl));
 
 				const embed = new EmbedBuilder()
 					.setColor(Colors.Default)
@@ -57,7 +57,7 @@ module.exports = class extends InteractionCommand {
 					.setTitle(`${data.title} (${data.series ? data.year === 0 ? data.start_year : data.year : data.year})`)
 					.setThumbnail(data.poster)
 					.setDescription(data.plot)
-					.addFields([{ name: '__Detail__', value: [
+					.addFields({ name: '__Detail__', value: [
 						`***Genre:*** ${data.genres ? data.genres : '`N/A`'}\n`,
 						`***Rating:*** ${rating ? `${rating.value}${data.votes ? ` (by ${data.votes} users)` : ''}` : '`N/A`'}\n`,
 						`***Tomatometer:*** ${tomatometer ? `${tomatometer.value} from [Rotten Tomatoes](https://rottentomatoes.com/)` : '`N/A`'}\n`,
@@ -70,7 +70,7 @@ module.exports = class extends InteractionCommand {
 						`***Director:*** ${data.director !== 'N/A' ? data.director : '`N/A`'}\n`,
 						`***Cast:*** ${data.actors !== 'N/A' ? data.actors : '`N/A`'}`,
 						`${data.awards !== 'N/A' ? `\n***Awards:*** ${data.awards}` : ''}`
-					].join(''), inline: false }])
+					].join(''), inline: false })
 					.setFooter({ text: 'Powered by IMDb', iconURL: interaction.user.avatarURL() });
 
 				return i.update({ content: null, embeds: [embed], components: [button] });

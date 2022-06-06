@@ -60,15 +60,15 @@ module.exports = class extends MessageCommand {
 
 			const menuId = `menu-${nanoid()}`;
 			const menu = (state) => new ActionRowBuilder()
-				.addComponents([new SelectMenuBuilder()
+				.addComponents(new SelectMenuBuilder()
 					.setCustomId(menuId)
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
-					.addOptions(categories.filter(({ directory }) => this.client.utils.filterCategory(directory, { message })).map(({ directory }) => ({
+					.addOptions(...categories.filter(({ directory }) => this.client.utils.filterCategory(directory, { message })).map(({ directory }) => ({
 						label: directory,
 						value: directory.toLowerCase(),
 						description: `Shows all the ${directory} Commands`
-					})))]);
+					}))));
 
 			const reply = await message.reply({ embeds: [embed], components: [menu(false)] });
 
@@ -82,7 +82,7 @@ module.exports = class extends MessageCommand {
 				const category = categories.find(({ directory }) => directory.toLowerCase() === selected);
 
 				embed.setAuthor({ name: `Category | ${category.directory}`, iconURL: 'https://i.imgur.com/YxoUvH8.png' });
-				embed.setFields([{ name: `__Available commands__`, value: category.commands.map(({ name }) => `\`${name}\``).join(' ') }]);
+				embed.setFields({ name: `__Available commands__`, value: category.commands.map(({ name }) => `\`${name}\``).join(' ') });
 				embed.setFooter({ text: `Powered by ${this.client.user.username} | ${category.commands.length} Commands`, iconURL: message.author.avatarURL() });
 
 				return i.update({ embeds: [embed], components: [menu(false)] });

@@ -24,10 +24,10 @@ module.exports = class extends InteractionCommand {
 		const response = await body.json();
 
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(`https://openweathermap.org/city/${response.id}`)]);
+				.setURL(`https://openweathermap.org/city/${response.id}`));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

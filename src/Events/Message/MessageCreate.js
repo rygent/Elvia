@@ -93,15 +93,15 @@ module.exports = class extends Event {
 
 				const buttonId = `button-${nanoid()}`;
 				const button = (state) => new ActionRowBuilder()
-					.addComponents([new ButtonBuilder()
+					.addComponents(new ButtonBuilder()
 						.setStyle(ButtonStyle.Link)
 						.setLabel('Support Server')
-						.setURL(Links.SupportServer)])
-					.addComponents([new ButtonBuilder()
+						.setURL(Links.SupportServer))
+					.addComponents(new ButtonBuilder()
 						.setCustomId(buttonId)
 						.setStyle(ButtonStyle.Danger)
 						.setLabel('Report bug')
-						.setDisabled(state)]);
+						.setDisabled(state));
 
 				const reply = await message.reply({ content: [
 					'An error has occured when executing this command.',

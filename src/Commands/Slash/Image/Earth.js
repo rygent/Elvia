@@ -19,10 +19,10 @@ module.exports = class extends InteractionCommand {
 		const response = await body.json().then(({ data }) => data[Math.floor(Math.random() * data.length)]);
 
 		const button = new ActionRowBuilder()
-			.addComponents([new ButtonBuilder()
+			.addComponents(new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(response.link)]);
+				.setURL(response.link));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
