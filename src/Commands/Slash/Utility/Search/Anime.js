@@ -32,7 +32,7 @@ module.exports = class extends InteractionCommand {
 				.addOptions(...response.map(data => ({
 					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles)[0], 95) || 'Unknown Name',
 					value: data.id,
-					description: this.client.utils.truncateString(data.description, 95)
+					description: data.description?.length ? this.client.utils.truncateString(data.description, 95) : null
 				}))));
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
