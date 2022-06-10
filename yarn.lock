@@ -34,7 +34,7 @@
     ts-mixer "^6.0.1"
     tslib "^2.4.0"
 
-"@discordjs/collection@^0.8.0-dev":
+"@discordjs/collection@^0.8.0-dev", "@discordjs/collection@^0.8.0-dev.1654819806-2791c86":
   version "0.8.0-dev.1654819806-2791c86"
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.8.0-dev.1654819806-2791c86.tgz#0de3593946c8e970b6dd7483d4c964ceaa395aca"
   integrity sha512-TocFeXrqdaCX0V6LQvg4oknC8GMAUDWuyR3bKCEtJtc2RvAq3junj4nOt1nKAdpJZQF6sm0AbyuLSKI5jtUpaA==
@@ -1189,7 +1189,7 @@ node-gyp-build@^4.3.0:
   version "2.1.1"
   resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/19052706b80adcde81a2bed63136354c4f334442"
   dependencies:
-    undici "^5.4.0"
+    undici "^5.2.0"
 
 normalize-url@^6.0.1:
   version "6.1.0"

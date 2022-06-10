@@ -1,4 +1,4 @@
-const { Collection } = require('discord.js');
+const { Collection } = require('@discordjs/collection');
 const UserData = require('../Schemas/UserData');
 const GuildData = require('../Schemas/GuildData');
 const MemberData = require('../Schemas/MemberData');

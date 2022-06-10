@@ -1,7 +1,7 @@
 const Event = require('../../Structures/Event');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Collection } = require('discord.js');
+const { Collection } = require('@discordjs/collection');
 const { Links } = require('../../Utils/Constants');
 const { nanoid } = require('nanoid');
 const ReportModal = require('../../Utils/Module/ReportModal');

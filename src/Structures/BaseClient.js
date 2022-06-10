@@ -1,4 +1,5 @@
-const { Client, Collection, Partials, PermissionsBitField } = require('discord.js');
+const { Client, Partials, PermissionsBitField } = require('discord.js');
+const { Collection } = require('@discordjs/collection');
 const { GatewayIntentBits } = require('discord-api-types/v10');
 const { Secrets } = require('../Utils/Constants');
 const Logger = require('../Utils/Logger');

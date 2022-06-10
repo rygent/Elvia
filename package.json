@@ -21,6 +21,7 @@
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.0",
     "@discordjs/builders": "^0.16.0-dev.1654819801-2791c86",
+    "@discordjs/collection": "^0.8.0-dev.1654819806-2791c86",
     "@discordjs/rest": "^0.6.0-dev.1654819794-2791c86",
     "@iamtraction/google-translate": "^1.1.2",
     "colorette": "^2.0.17",
