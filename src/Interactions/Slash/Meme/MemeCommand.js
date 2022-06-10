@@ -5,6 +5,10 @@ module.exports = {
 	description: 'Use memes commands.',
 	type: ApplicationCommandType.ChatInput,
 	options: [{
+		name: 'random',
+		description: 'Displays random memes.',
+		type: ApplicationCommandOptionType.Subcommand
+	}, {
 		name: 'fml',
 		description: 'Get a random F My Life story.',
 		type: ApplicationCommandOptionType.Subcommand,
