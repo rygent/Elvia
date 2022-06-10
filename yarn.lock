@@ -1189,7 +1189,7 @@ node-gyp-build@^4.3.0:
   version "2.1.1"
   resolved "https://codeload.github.com/rygent/node-spotify-api/tar.gz/19052706b80adcde81a2bed63136354c4f334442"
   dependencies:
-    undici "^5.2.0"
+    undici "^5.4.0"
 
 normalize-url@^6.0.1:
   version "6.1.0"
