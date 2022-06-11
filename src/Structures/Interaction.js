@@ -10,6 +10,8 @@ module.exports = class Interaction {
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
 		this.cooldown = options.cooldown || 3000;
 		this.guildOnly = options.guildOnly || false;
+		this.ownerOnly = options.ownerOnly || false;
+		this.disabled = options.disabled || false;
 	}
 
 	async run(interaction) { // eslint-disable-line no-unused-vars

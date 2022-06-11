@@ -20,6 +20,10 @@ module.exports = class extends Event {
 
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
+			if (command.disabled && !this.client.utils.isOwner(interaction.user.id)) {
+				return interaction.reply({ content: 'This command is currently inaccessible.', ephemeral: true });
+			}
+
 			if (command.guildOnly && !interaction.inGuild()) {
 				return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 			}
@@ -40,6 +44,10 @@ module.exports = class extends Event {
 						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
+			}
+
+			if (command.ownerOnly && !this.client.utils.isOwner(interaction.user.id)) {
+				return interaction.reply({ content: 'This command is only accessible for developers.', ephemeral: true });
 			}
 
 			if (!this.client.cooldown.has(this.getCommandName(interaction))) {
