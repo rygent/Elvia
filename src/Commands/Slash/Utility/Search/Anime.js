@@ -1,5 +1,5 @@
 const InteractionCommand = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, UnsafeSelectMenuBuilder } = require('@discordjs/builders');
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const { nanoid } = require('nanoid');
@@ -26,13 +26,13 @@ module.exports = class extends InteractionCommand {
 
 		const menuId = `menu-${nanoid()}`;
 		const menu = new ActionRowBuilder()
-			.addComponents(new UnsafeSelectMenuBuilder()
+			.addComponents(new SelectMenuBuilder()
 				.setCustomId(menuId)
 				.setPlaceholder('Select an anime!')
 				.addOptions(...response.map(data => ({
 					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles)[0], 95) || 'Unknown Name',
 					value: data.id,
-					description: data.description?.length ? this.client.utils.truncateString(data.description, 95) : null
+					...data.description?.length && { description: this.client.utils.truncateString(data.description, 95) }
 				}))));
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
