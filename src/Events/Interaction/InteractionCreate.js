@@ -94,7 +94,8 @@ module.exports = class extends Event {
 
 				let reply;
 				if (interaction.deferred) {
-					reply = await interaction.editReply({ content, components: [button(false)] });
+					reply = await interaction.editReply({ content, components: [button(false)] })
+						.then(i => setTimeout(() => i.deleteReply(), 300000));
 				} else {
 					reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
 				}
