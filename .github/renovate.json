@@ -1,0 +1,15 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "assignAutomerge": true,
+    "branchConcurrentLimit": 10,
+    "dependencyDashboard": true,
+    "labels": ["dependencies"],
+    "packageRules": [{
+        "matchUpdateTypes": ["minor", "patch"],
+        "automerge": true
+    }],
+    "reviewers": ["Rygent"],
+    "schedule": ["every weekend"],
+    "separateMajorMinor": true,
+    "timezone": "Asia/Tokyo"
+}
