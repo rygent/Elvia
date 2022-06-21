@@ -20,7 +20,7 @@
     }],
     "prCreation": "status-success",
     "reviewers": ["Rygent"],
-    "schedule": ["0 7 * * 6,0"],
+    "schedule": ["* 7 * * 6,0"],
     "separateMajorMinor": true,
     "timezone": "Asia/Tokyo"
 }
