@@ -1,21 +1,26 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "baseBranches": ["main", "canary"],
     "branchConcurrentLimit": 10,
     "commitMessageTopic": "{{depName}}",
     "dependencyDashboard": true,
     "enabled": true,
     "labels": ["dependencies"],
     "packageRules": [{
-        "matchDepTypes": ["devDependencies", "optionalDependencies"],
+        "matchUpdateTypes": ["major"],
+        "dependencyDashboardApproval": true
+    }, {
+        "matchUpdateTypes": ["minor", "patch"],
         "automerge": true
-      }, {
-        "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest"],
-        "assignAutomerge": true,
+    }, {
+        "matchDepTypes": ["devDependencies"],
+        "automerge": true
+    }, {
+        "matchDepTypes": ["action"],
         "automerge": true
     }],
+    "prCreation": "status-success",
     "reviewers": ["Rygent"],
-    "schedule": ["every weekend"],
+    "schedule": ["0 7 * * 6,0"],
     "separateMajorMinor": true,
     "timezone": "Asia/Tokyo"
 }
