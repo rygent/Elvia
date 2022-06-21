@@ -1,8 +1,8 @@
 const { Collection } = require('@discordjs/collection');
+const { connect } = require('mongoose');
 const UserData = require('../Schemas/UserData');
 const GuildData = require('../Schemas/GuildData');
 const MemberData = require('../Schemas/MemberData');
-const mongoose = require('mongoose');
 
 module.exports = class Database {
 
@@ -21,12 +21,12 @@ module.exports = class Database {
 
 	async loadDatabases() {
 		try {
-			return mongoose.connect(this.client.mongodb, {
+			return connect(this.client.mongodb, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true
 			});
 		} catch (error) {
-			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`, { error });
+			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`, error);
 		}
 	}
 

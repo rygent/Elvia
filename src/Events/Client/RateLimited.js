@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run(rateLimitData) {
-		const details = [
+		const detail = [
 			`    Route  : ${rateLimitData.route}`,
 			`    Hash   : ${rateLimitData.hash}`,
 			`    Method : ${rateLimitData.method}`,
@@ -20,7 +20,7 @@ module.exports = class extends Event {
 			`    Global : ${rateLimitData.global}`
 		].join('\n');
 
-		this.client.logger.warn(`You are being Rate Limited.\n${details}`);
+		this.client.logger.warn(`This client being Rate Limited.\n${detail}`);
 	}
 
 };

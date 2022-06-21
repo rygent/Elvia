@@ -20,7 +20,7 @@ module.exports = class extends Event {
 
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {
-			if (command.disabled && !this.client.utils.isOwner(interaction.user.id)) {
+			if (command.disabled && !this.client.owners.includes(interaction.user.id)) {
 				return interaction.reply({ content: 'This command is currently inaccessible.', ephemeral: true });
 			}
 
@@ -46,7 +46,7 @@ module.exports = class extends Event {
 				}
 			}
 
-			if (command.ownerOnly && !this.client.utils.isOwner(interaction.user.id)) {
+			if (command.ownerOnly && !this.client.owners.includes(interaction.user.id)) {
 				return interaction.reply({ content: 'This command is only accessible for developers.', ephemeral: true });
 			}
 
@@ -57,11 +57,11 @@ module.exports = class extends Event {
 			const current = Date.now();
 			const cooldown = this.client.cooldown.get(this.getCommandName(interaction));
 
-			if (cooldown.has(interaction.user.id) && !this.client.utils.isOwner(interaction.user.id)) {
+			if (cooldown.has(interaction.user.id) && !this.client.owners.includes(interaction.user.id)) {
 				const expiration = cooldown.get(interaction.user.id) + command.cooldown;
 
 				if (current < expiration) {
-					const time = (expiration - current) / 1000;
+					const time = (expiration - current) / 1e3;
 					return interaction.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.`, ephemeral: true });
 				}
 			}
@@ -72,8 +72,8 @@ module.exports = class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied) return;
-				this.client.logger.error(error.stack, { error });
+				if (error.name === 'DiscordAPIError[10062]') return;
+				this.client.logger.error(error.stack, error);
 
 				const content = [
 					'An error has occured when executing this command.',
@@ -93,21 +93,19 @@ module.exports = class extends Event {
 						.setDisabled(state));
 
 				let reply;
-				if (interaction.deferred) {
-					reply = await interaction.editReply({ content, components: [button(false)] })
-						.then(i => setTimeout(() => i.deleteReply(), 300000));
-				} else {
-					reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
-				}
+				if (interaction.replied) reply = await interaction.followUp({ content, components: [button(false)], ephemeral: true });
+				else if (interaction.deferred) reply = await interaction.editReply({ content, components: [button(false)] });
+				else reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
 
-				const filter = (i) => i.customId === buttonId;
-				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600000 });
+				const filter = (i) => i.user.id === interaction.user.id;
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600e3 });
 
 				const report = new ReportModal(this.client, { collector });
 
-				collector.on('collect', (i) => {
+				collector.on('collect', (i) => report.showModal(i));
+
+				collector.on('ignore', (i) => {
 					if (i.user.id !== interaction.user.id) return i.deferUpdate();
-					return report.showModal(i);
 				});
 
 				collector.on('end', (collected, reason) => {
@@ -126,11 +124,8 @@ module.exports = class extends Event {
 		const subCommand = interaction.options.getSubcommand(false);
 
 		if (subCommand) {
-			if (subCommandGroup) {
-				command = `${commandName}-${subCommandGroup}-${subCommand}`;
-			} else {
-				command = `${commandName}-${subCommand}`;
-			}
+			if (subCommandGroup) command = `${commandName}-${subCommandGroup}-${subCommand}`;
+			else command = `${commandName}-${subCommand}`;
 		} else {
 			command = commandName;
 		}

@@ -1,6 +1,7 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
+const Answer = require('../../../Assets/json/8ball.json');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -12,8 +13,7 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const question = await interaction.options.getString('question', true);
 
-		const answer = require('../../../Assets/json/8ball.json');
-		const choice = answer[Math.floor(Math.random() * answer.length)];
+		const choice = Answer[Math.floor(Math.random() * Answer.length)];
 
 		const content = [
 			`> **${interaction.user.username}**: ${question}`,

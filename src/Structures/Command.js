@@ -11,10 +11,10 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
-		this.cooldown = options.cooldown || 3000;
+		this.cooldown = options.cooldown || 3e3;
+		this.disabled = options.disabled || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
-		this.disabled = options.disabled || false;
 	}
 
 	async run(message, args) { // eslint-disable-line no-unused-vars

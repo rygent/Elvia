@@ -1,7 +1,7 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
-const { AttachmentBuilder, Util } = require('discord.js');
+const Command = require('../../../../Structures/Interaction');
+const { AttachmentBuilder, parseEmoji } = require('discord.js');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -13,14 +13,13 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const emoji = await interaction.options.getString('emoji', true);
 
-		const parseEmoji = Util.parseEmoji(emoji);
-		const emojis = await interaction.guild.emojis.cache.get(parseEmoji.id);
+		const parse = parseEmoji(emoji);
+		const emojis = await interaction.guild.emojis.cache.get(parse.id);
 		if (!emojis.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
-		const buffer = `https://cdn.discordapp.com/emojis/${emojis.id}.${emojis.animated ? 'gif' : 'png'}`;
-
 		const attachment = new AttachmentBuilder()
-			.setFile(buffer);
+			.setFile(emojis.url)
+			.setName(`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`);
 
 		return interaction.reply({ files: [attachment] });
 	}

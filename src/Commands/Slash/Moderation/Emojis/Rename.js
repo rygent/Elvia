@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Util } = require('discord.js');
+const { parseEmoji } = require('discord.js');
 const { nanoid } = require('nanoid');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -19,9 +19,9 @@ module.exports = class extends InteractionCommand {
 		const emoji = await interaction.options.getString('emoji', true);
 		const name = await interaction.options.getString('name', true);
 
-		const parseEmoji = Util.parseEmoji(emoji);
+		const parse = parseEmoji(emoji);
 
-		const emojis = await interaction.guild.emojis.cache.get(parseEmoji.id);
+		const emojis = await interaction.guild.emojis.cache.get(parse.id);
 		if (!emojis.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
 		const [cancelId, confirmId] = ['cancel', 'confirm'].map(type => `${type}-${nanoid()}`);
@@ -38,7 +38,7 @@ module.exports = class extends InteractionCommand {
 		const reply = await interaction.reply({ content: `Are you sure to rename \`:${emojis.name}:\` ${emojis} to \`:${name}:\`?`, components: [button] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60000 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60e3 });
 
 		collector.on('collect', async (i) => {
 			switch (i.customId) {

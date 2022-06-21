@@ -9,6 +9,14 @@ exports.Colors = {
 	Grey: 0xcfcfc4
 };
 
+exports.Credentials = {
+	ImdbApiKey: process.env.IMDB_API_KEY,
+	ImgurClientId: process.env.IMGUR_CLIENT_ID,
+	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
+	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET
+};
+
 exports.Emojis = {
 	Alarm: '<:alarm:950481082191581224>',
 	Info: '<:info:950481046821036082>',
@@ -16,7 +24,8 @@ exports.Emojis = {
 	Idle: '<:idle:712397201955094708>',
 	Dnd: '<:dnd:712397154836283392>',
 	Offline: '<:offline:712397086100029440>',
-	Verified: '<:verified:945933555089952848>'
+	Verified: '<:verified:945933555089952848>',
+	Spotify: '<:spotify:950481019012804659>'
 };
 
 exports.Links = {
@@ -24,12 +33,4 @@ exports.Links = {
 	LoggerWebhook: process.env.LOGGER_WEBHOOK_URL,
 	ReportWebhook: process.env.REPORT_WEBHOOK_URL,
 	GuildWebhook: process.env.GUILD_WEBHOOK_URL
-};
-
-exports.Secrets = {
-	ImdbApiKey: process.env.IMDB_API_KEY,
-	ImgurClientId: process.env.IMGUR_CLIENT_ID,
-	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
-	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
-	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET
 };

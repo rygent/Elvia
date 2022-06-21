@@ -1,7 +1,7 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
-const Function = require('../../../../Utils/Function');
+const Command = require('../../../../Structures/Interaction');
+const { reverse } = require('../../../../Utils/Function');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -13,7 +13,7 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const text = await interaction.options.getString('text', true);
 
-		return interaction.reply({ content: Function.reverseText(text) });
+		return interaction.reply({ content: reverse(text) });
 	}
 
 };

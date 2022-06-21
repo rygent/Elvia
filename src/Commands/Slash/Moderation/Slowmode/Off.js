@@ -1,6 +1,6 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {

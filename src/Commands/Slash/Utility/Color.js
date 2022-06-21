@@ -1,11 +1,11 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
-const { Util } = require('discord.js');
+const { resolveColor } = require('discord.js');
 const Function = require('../../../Utils/Function');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -37,7 +37,7 @@ module.exports = class extends InteractionCommand {
 				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`));
 
 		const embed = new EmbedBuilder()
-			.setColor(Util.resolveColor(response.hex.clean))
+			.setColor(resolveColor(response.hex.clean))
 			.setTitle(response.name.value)
 			.setDescription([
 				`***Hex:*** ${response.hex.value}`,

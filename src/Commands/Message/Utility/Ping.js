@@ -1,6 +1,6 @@
-const MessageCommand = require('../../../Structures/Command');
+const Command = require('../../../Structures/Command');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {

@@ -32,18 +32,15 @@ We'll be very glad if you give this repo a star, so that we grow much faster.
 ## Requirements
 1. [Node.JS v16.9+](https://nodejs.org/en/download) or higher.
 2. [MongoDB v5.0+](https://www.mongodb.com/try/download/community) or higher.
-3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Optional) (Recommended)
+3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Highly recommended)
 
 ## Invite
-
-If you don't want to edit the code of the bot, a permanent online version is available, which you can invite to your own Discord!
-
 [![Discord Bots](https://top.gg/api/widget/614645495779819551.svg)](https://top.gg/bot/614645495779819551)
 
 ## Contributing
 For contributing instructions, or to find out all of the ways you can contribute, read [CONTRIBUTING.md](./.github/CONTRIBUTING.md). All contributions are welcome and encouraged, but please [read the information](./.github/CONTRIBUTING.md) given before doing so.
 
-## Credit
+## Credits
 * <i>[Discord.JS-Template](https://github.com/MenuDocs/discord.js-template)</i> by **MenuDocs**.
 * <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz2091**.
 

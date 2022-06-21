@@ -1,12 +1,12 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const { nanoid } = require('nanoid');
-const KitsuClient = require('kitsu');
+const Kitsu = require('kitsu');
 const moment = require('moment');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -19,26 +19,26 @@ module.exports = class extends InteractionCommand {
 		const search = await interaction.options.getString('search', true);
 		await interaction.deferReply();
 
-		const kitsu = new KitsuClient();
+		const kitsu = new Kitsu();
 
 		const response = await kitsu.get('manga', { params: { filter: { text: search } } }).then(({ data }) => data);
 		if (!response.length) return interaction.editReply({ content: 'Nothing found for this search.' });
 
-		const menuId = `menu-${nanoid()}`;
-		const menu = new ActionRowBuilder()
+		const selectId = `select-${nanoid()}`;
+		const select = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId(menuId)
+				.setCustomId(selectId)
 				.setPlaceholder('Select a manga!')
 				.addOptions(...response.map(data => ({
-					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles)[0], 95) || 'Unknown Name',
+					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles).filter(item => item?.length)[0], 95) || 'Unknown Name',
 					value: data.id,
 					...data.description?.length && { description: this.client.utils.truncateString(data.description, 95) }
 				}))));
 
-		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
+		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
 
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;

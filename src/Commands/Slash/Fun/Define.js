@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,8 +16,8 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const word = await interaction.options.getString('word', true);
 
-		const body = await fetch(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, { method: 'GET' });
-		const response = await body.json().then(({ list }) => list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);
+		const raw = await fetch(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, { method: 'GET' });
+		const response = await raw.json().then(({ list }) => list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { ChannelType } = require('discord-api-types/v10');
-const { Formatters } = require('discord.js');
+const { time, userMention } = require('discord.js');
 const { Colors } = require('../../../Utils/Constants');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -26,11 +26,11 @@ module.exports = class extends InteractionCommand {
 			.setThumbnail(interaction.guild.iconURL({ size: 512 }))
 			.setDescription([
 				`***ID:*** \`${interaction.guildId}\``,
-				`***Owner:*** ${Formatters.userMention(interaction.guild.ownerId)}`,
+				`***Owner:*** ${userMention(interaction.guild.ownerId)}`,
 				`***Boost Status:*** ${interaction.guild.premiumSubscriptionCount} Boosts (\`Level ${interaction.guild.premiumTier}\`)`,
 				`***Explicit Filter:*** ${ContentFilterLevel[interaction.guild.explicitContentFilter]}`,
 				`***Verification:*** ${VerificationLevel[interaction.guild.verificationLevel]}`,
-				`***Created:*** ${Formatters.time(new Date(interaction.guild.createdTimestamp), 'D')} (${Formatters.time(new Date(interaction.guild.createdTimestamp), 'R')})`,
+				`***Created:*** ${time(new Date(interaction.guild.createdTimestamp), 'D')} (${time(new Date(interaction.guild.createdTimestamp), 'R')})`,
 				`***Channels:*** ${channels.filter(({ type }) => ![ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Text / ${channels.filter(({ type }) => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Voice`,
 				`***Online Members:*** ${interaction.guild.members.cache.filter(({ presence }) => ['online', 'idle', 'dnd'].includes(presence?.status)).size.formatNumber()} of ${interaction.guild.memberCount.formatNumber()} Members`
 			].join('\n'))

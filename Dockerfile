@@ -1,8 +1,7 @@
-FROM node:current-alpine3.15
+FROM node:current-alpine3.16
 
 RUN apk add --no-cache=true --update \
-        bash curl git yarn sudo zip \
-        neofetch chromium chromium-chromedriver
+        bash curl git yarn
 
 RUN mkdir /home/container
 
@@ -11,4 +10,4 @@ WORKDIR /home/container
 
 RUN yarn --immutable
 
-CMD ["node", "."]
+CMD ["node", "src/index.js"]

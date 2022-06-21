@@ -1,9 +1,9 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { Colors } = require('../../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -15,8 +15,8 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const member = await interaction.options.getMember('user');
 
-		const body = await fetch(`https://api.waifu.pics/sfw/handhold`, { method: 'GET' });
-		const response = await body.json();
+		const raw = await fetch(`https://api.waifu.pics/sfw/handhold`, { method: 'GET' });
+		const response = await raw.json();
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

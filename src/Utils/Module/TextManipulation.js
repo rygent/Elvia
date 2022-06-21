@@ -43,7 +43,7 @@ exports.regional = (text) => {
 	return finalString.trimEnd();
 };
 
-exports.reverseText = (text) => text.split('').reverse().join('');
+exports.reverse = (text) => text.split('').reverse().join('');
 
 exports.smallcaps = (text) => {
 	let c = '';

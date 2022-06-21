@@ -1,13 +1,13 @@
-const MessageCommand = require('../../../Structures/Command');
+const Command = require('../../../Structures/Command');
 const { EmbedBuilder } = require('@discordjs/builders');
-const { Formatters, version: DJSVersion } = require('discord.js');
+const { time, userMention, version: DJSVersion } = require('discord.js');
 const { version: BOTVersion } = require('../../../../package.json');
 const { Colors, Emojis } = require('../../../Utils/Constants');
 const moment = require('moment');
 const si = require('systeminformation');
 require('moment-duration-format');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -42,12 +42,12 @@ module.exports = class extends MessageCommand {
 			.setThumbnail(this.client.user.displayAvatarURL({ size: 512 }))
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(user => Formatters.userMention(user)))}`,
+				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(user => userMention(user)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${BOTVersion}`,
 				`***Node.JS:*** ${process.version}`,
 				`***Library:*** Discord.JS v${DJSVersion}`,
-				`***Created:*** ${Formatters.time(new Date(this.client.user.createdAt), 'D')} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`
+				`***Created:*** ${time(new Date(this.client.user.createdAt), 'D')} (${time(new Date(this.client.user.createdAt), 'R')})`
 			].join('\n'))
 			.addFields({ name: '__System__', value: [
 				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.release}${sys.osInfo.platform !== 'Windows' ? ` ${sys.osInfo.kernel}` : ''} ${sys.osInfo.arch}`,
@@ -55,7 +55,7 @@ module.exports = class extends MessageCommand {
 				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
 				`***Disk:*** ${this.client.utils.formatBytes(sys.fsSize[0].used)} / ${this.client.utils.formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hours], m [minutes], s [seconds]')}`,
-				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hours], m [minutes], s [seconds]')}`
+				`***Host:*** ${moment.duration(sys.time.uptime * 1e3).format('D [days], H [hours], m [minutes], s [seconds]')}`
 			].join('\n'), inline: false })
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL() });
 

@@ -1,11 +1,11 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const { nanoid } = require('nanoid');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -17,24 +17,24 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const body = await fetch(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { method: 'GET' });
-		const response = await body.json().then(({ items }) => items.filter(({ type }) => type === 'app'));
+		const raw = await fetch(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { method: 'GET' });
+		const response = await raw.json().then(({ items }) => items.filter(({ type }) => type === 'app'));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
-		const menuId = `menu-${nanoid()}`;
-		const menu = new ActionRowBuilder()
+		const selectId = `select-${nanoid()}`;
+		const select = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId(menuId)
+				.setCustomId(selectId)
 				.setPlaceholder('Select a game!')
 				.addOptions(...response.map(data => ({
 					label: data.name,
 					value: data.id.toString()
 				}))));
 
-		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
+		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
 
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;

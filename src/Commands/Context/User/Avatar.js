@@ -1,9 +1,9 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../Utils/Constants');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {

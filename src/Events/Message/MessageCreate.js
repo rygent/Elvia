@@ -22,8 +22,7 @@ module.exports = class extends Event {
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
 
 		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` })
-				.then(m => setTimeout(() => m.delete(), 10000));
+			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` });
 		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
@@ -33,15 +32,14 @@ module.exports = class extends Event {
 
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
-			if (command.disabled && !this.client.utils.isOwner(message.author.id)) return;
+			if (command.disabled && !this.client.owners.includes(message.author.id)) return;
 
 			if (message.inGuild()) {
 				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
-							.then(m => setTimeout(() => m.delete(), 10000));
+						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
@@ -49,21 +47,14 @@ module.exports = class extends Event {
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` })
-							.then(m => setTimeout(() => m.delete(), 10000));
+						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
-				if (command.nsfw && !message.channel.nsfw) {
-					return message.reply({ content: 'This command is only accessible on NSFW channels!' })
-						.then(m => setTimeout(() => m.delete() && message.delete(), 10000));
-				}
+				if (command.nsfw && !message.channel.nsfw) return;
 			}
 
-			if (command.ownerOnly && !this.client.utils.isOwner(message.author.id)) {
-				return message.reply({ content: 'This command is only accessible for developers!' })
-					.then(m => setTimeout(() => m.delete(), 10000));
-			}
+			if (command.ownerOnly && !this.client.owners.includes(message.author.id)) return;
 
 			if (!this.client.cooldown.has(command.name)) {
 				this.client.cooldown.set(command.name, new Collection());
@@ -72,11 +63,11 @@ module.exports = class extends Event {
 			const current = Date.now();
 			const cooldown = this.client.cooldown.get(command.name);
 
-			if (cooldown.has(message.author.id) && !this.client.utils.isOwner(message.author.id)) {
+			if (cooldown.has(message.author.id) && !this.client.owners.includes(message.author.id)) {
 				const expiration = cooldown.get(message.author.id) + command.cooldown;
 
 				if (current < expiration) {
-					const time = (expiration - current) / 1000;
+					const time = (expiration - current) / 1e3;
 					return message.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.` })
 						.then(m => setTimeout(() => m.delete(), expiration - current));
 				}
@@ -89,7 +80,12 @@ module.exports = class extends Event {
 				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
-				this.client.logger.error(error.stack, { error });
+				this.client.logger.error(error.stack, error);
+
+				const content = [
+					'An error has occured when executing this command.',
+					'If the issue persists, please report in our *Support Server*.'
+				].join('\n');
 
 				const buttonId = `button-${nanoid()}`;
 				const button = (state) => new ActionRowBuilder()
@@ -103,19 +99,17 @@ module.exports = class extends Event {
 						.setLabel('Report bug')
 						.setDisabled(state));
 
-				const reply = await message.reply({ content: [
-					'An error has occured when executing this command.',
-					'If the issue persists, please report in our *Support Server*.'
-				].join('\n'), components: [button(false)] });
+				const reply = await message.reply({ content, components: [button(false)] });
 
-				const filter = (i) => i.customId === buttonId;
-				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600000 });
+				const filter = (i) => i.user.id === message.author.id;
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600e3 });
 
 				const report = new ReportModal(this.client, { collector });
 
-				collector.on('collect', (i) => {
+				collector.on('collect', (i) => report.showModal(i));
+
+				collector.on('ignore', (i) => {
 					if (i.user.id !== message.author.id) return i.deferUpdate();
-					return report.showModal(i);
 				});
 
 				collector.on('end', (collected, reason) => {

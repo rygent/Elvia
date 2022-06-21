@@ -1,7 +1,7 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { DiceRoll, NumberGenerator } = require('@dice-roller/rpg-dice-roller');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {

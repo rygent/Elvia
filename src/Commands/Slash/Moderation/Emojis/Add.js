@@ -1,7 +1,7 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
-const { Util } = require('discord.js');
+const Command = require('../../../../Structures/Interaction');
+const { parseEmoji } = require('discord.js');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -18,15 +18,15 @@ module.exports = class extends InteractionCommand {
 
 		const regex = RegExp(/(https?:\/\/[^\s]+)/g);
 
-		const parseEmoji = Util.parseEmoji(emoji);
+		const parse = parseEmoji(emoji);
 
 		try {
 			let emojis;
 			if (emoji.match(regex)) {
-				emojis = await interaction.guild.emojis.create(emoji, name);
-			} else if (parseEmoji.id) {
-				const link = `https://cdn.discordapp.com/emojis/${parseEmoji.id}.${parseEmoji.animated ? 'gif' : 'png'}`;
-				emojis = await interaction.guild.emojis.create(link, name);
+				emojis = await interaction.guild.emojis.create({ attachment: emoji, name });
+			} else if (parse.id) {
+				const link = `https://cdn.discordapp.com/emojis/${parse.id}.${parse.animated ? 'gif' : 'png'}`;
+				emojis = await interaction.guild.emojis.create({ attachment: link, name });
 			}
 
 			return interaction.reply({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully added.` });

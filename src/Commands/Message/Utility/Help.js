@@ -1,10 +1,10 @@
-const MessageCommand = require('../../../Structures/Command');
+const Command = require('../../../Structures/Command');
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ComponentType } = require('discord-api-types/v10');
 const { Colors, Links } = require('../../../Utils/Constants');
 const { nanoid } = require('nanoid');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -34,13 +34,13 @@ module.exports = class extends MessageCommand {
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
 				`***Permission(s):*** ${cmd.memberPermissions.toArray().length > 0 ? `${cmd.memberPermissions.toArray().map(perm => `\`${this.client.utils.formatPermissions(perm)}\``).join(', ')}` : 'No permission required.'}`,
-				`***Cooldown:*** ${cmd.cooldown / 1000} second(s)`,
+				`***Cooldown:*** ${cmd.cooldown / 1e3} second(s)`,
 				`***Usage:*** ${cmd.usage ? `\`${this.client.prefix + cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix + cmd.name}\``}`
 			].join('\n'));
 
 			return message.reply({ embeds: [embed] });
 		} else {
-			const categories = this.client.utils.removeDuplicates(this.client.commands.map(cmd => cmd.category)).map(dir => {
+			const categories = [...new Set(this.client.commands.map(cmd => cmd.category))].map(dir => {
 				const getCommand = this.client.commands.filter(cmd => cmd.category === dir)
 					.map(cmd => ({
 						name: cmd.name
@@ -58,10 +58,10 @@ module.exports = class extends MessageCommand {
 				`The bot prefix is: \`${this.client.prefix}\``
 			].join('\n'));
 
-			const menuId = `menu-${nanoid()}`;
-			const menu = (state) => new ActionRowBuilder()
+			const selectId = `select-${nanoid()}`;
+			const select = (state) => new ActionRowBuilder()
 				.addComponents(new SelectMenuBuilder()
-					.setCustomId(menuId)
+					.setCustomId(selectId)
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
 					.addOptions(...categories.filter(({ directory }) => this.client.utils.filterCategory(directory, { message })).map(({ directory }) => ({
@@ -70,10 +70,10 @@ module.exports = class extends MessageCommand {
 						description: `Shows all the ${directory} Commands`
 					}))));
 
-			const reply = await message.reply({ embeds: [embed], components: [menu(false)] });
+			const reply = await message.reply({ embeds: [embed], components: [select(false)] });
 
 			const filter = (i) => i.user.id === message.author.id;
-			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
+			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
 
 			collector.on('collect', async (i) => {
 				collector.resetTimer();
@@ -85,7 +85,7 @@ module.exports = class extends MessageCommand {
 				embed.setFields({ name: `__Available commands__`, value: category.commands.map(({ name }) => `\`${name}\``).join(' ') });
 				embed.setFooter({ text: `Powered by ${this.client.user.username} | ${category.commands.length} Commands`, iconURL: message.author.avatarURL() });
 
-				return i.update({ embeds: [embed], components: [menu(false)] });
+				return i.update({ embeds: [embed], components: [select(false)] });
 			});
 
 			collector.on('ignore', (i) => {
@@ -94,7 +94,7 @@ module.exports = class extends MessageCommand {
 
 			collector.on('end', (collected, reason) => {
 				if ((!collected.size && reason === 'time') || reason === 'time') {
-					return reply.edit({ components: [menu(true)] });
+					return reply.edit({ components: [select(true)] });
 				}
 			});
 		}

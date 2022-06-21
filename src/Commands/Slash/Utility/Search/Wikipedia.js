@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,10 +16,10 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const body = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { method: 'GET' });
-		if (body.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		const raw = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { method: 'GET' });
+		if (raw.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
-		const response = await body.json();
+		const response = await raw.json();
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

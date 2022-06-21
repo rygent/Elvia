@@ -1,9 +1,9 @@
-const MessageCommand = require('../../../Structures/Command');
-const { Formatters } = require('discord.js');
-const { exec } = require('node:child_process');
-const Function = require('../../../Utils/Function');
+const Command = require('../../../Structures/Command');
+const { codeBlock } = require('discord.js');
+const { splitMessage } = require('../../../Utils/Function');
+const child = require('node:child_process');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -17,9 +17,9 @@ module.exports = class extends MessageCommand {
 	}
 
 	async run(message, args) {
-		exec(args.join(' '), (error, stdout) => {
+		child.exec(args.join(' '), (error, stdout) => {
 			const response = stdout || error;
-			return message.channel.send({ content: Function.splitMessage(Formatters.codeBlock(response)).toString() });
+			return message.channel.send({ content: splitMessage(codeBlock(response)).toString() });
 		});
 	}
 

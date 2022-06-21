@@ -1,9 +1,9 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
 const { Colors } = require('../../../Utils/Constants');
 const translate = require('@iamtraction/google-translate');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {

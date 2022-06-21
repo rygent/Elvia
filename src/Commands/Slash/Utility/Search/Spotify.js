@@ -1,13 +1,14 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
 const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Colors, Secrets } = require('../../../../Utils/Constants');
+const { parseEmoji } = require('discord.js');
+const { Colors, Credentials, Emojis } = require('../../../../Utils/Constants');
 const { nanoid } = require('nanoid');
-const SpotifyClient = require('node-spotify-api');
+const Spotify = require('node-spotify-api');
 const moment = require('moment');
 require('moment-duration-format');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -19,15 +20,15 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const spotify = new SpotifyClient({ id: Secrets.SpotifyClientId, secret: Secrets.SpotifyClientSecret });
+		const spotify = new Spotify({ id: Credentials.SpotifyClientId, secret: Credentials.SpotifyClientSecret });
 
 		const response = await spotify.search({ type: 'track', query: search, limit: 10 }).then(({ tracks }) => tracks.items);
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
-		const menuId = `menu-${nanoid()}`;
-		const menu = new ActionRowBuilder()
+		const selectId = `select-${nanoid()}`;
+		const select = new ActionRowBuilder()
 			.addComponents(new SelectMenuBuilder()
-				.setCustomId(menuId)
+				.setCustomId(selectId)
 				.setPlaceholder('Select a song!')
 				.addOptions(...response.map(data => ({
 					label: this.client.utils.truncateString(data.name, 95),
@@ -35,10 +36,10 @@ module.exports = class extends InteractionCommand {
 					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95).padEnd(1)
 				}))));
 
-		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [menu] });
+		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60000 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
 
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
@@ -47,7 +48,7 @@ module.exports = class extends InteractionCommand {
 			const button = new ActionRowBuilder()
 				.addComponents(new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
-					.setEmoji({ id: '950481019012804659', name: 'spotify', animated: false })
+					.setEmoji(parseEmoji(Emojis.Spotify))
 					.setLabel('Play on Spotify')
 					.setURL(data.external_urls.spotify));
 

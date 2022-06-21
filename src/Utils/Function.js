@@ -1,4 +1,4 @@
-const { Util } = require('discord.js');
+const { verifyString } = require('discord.js');
 
 module.exports = class Function {
 
@@ -6,15 +6,15 @@ module.exports = class Function {
 
 	static regional = require('./Module/TextManipulation').regional;
 
-	static reverseText = require('./Module/TextManipulation').reverseText;
+	static reverse = require('./Module/TextManipulation').reverse;
 
 	static rgbToHex(rgb) {
 		const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
 		return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 	}
 
-	static splitMessage(text, { maxLength = 2000, char = '\n', prepend = '', append = '' } = {}) {
-		text = Util.verifyString(text);
+	static splitMessage(text, { maxLength = 2e3, char = '\n', prepend = '', append = '' } = {}) {
+		text = verifyString(text);
 		if (text.length <= maxLength) return [text];
 		let splitText = [text];
 		if (Array.isArray(char)) {

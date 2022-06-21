@@ -10,7 +10,7 @@ module.exports = class extends Event {
 	}
 
 	async run(error) {
-		this.client.logger.error(error.stack, { error });
+		this.client.logger.error(error.stack, error);
 	}
 
 };

@@ -1,9 +1,9 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 const { EmbedBuilder } = require('@discordjs/builders');
-const { Formatters } = require('discord.js');
+const { time } = require('discord.js');
 const { Badges, Colors, Emojis } = require('../../../Utils/Constants');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -35,8 +35,8 @@ module.exports = class extends InteractionCommand {
 				`***Nickname:*** ${member.nickname || '`N/A`'}`,
 				`***Badges:*** ${userBadges.length ? userBadges.map(item => Badges[item]).join(' ') : '`N/A`'}`,
 				`***Status:*** ${status[member.presence?.status] || status.offline}`,
-				`***Created:*** ${Formatters.time(new Date(member.user.createdTimestamp), 'D')} (${Formatters.time(new Date(member.user.createdTimestamp), 'R')})`,
-				`***Joined:*** ${Formatters.time(new Date(member.joinedAt), 'D')} (${Formatters.time(new Date(member.joinedAt), 'R')})`
+				`***Created:*** ${time(new Date(member.user.createdTimestamp), 'D')} (${time(new Date(member.user.createdTimestamp), 'R')})`,
+				`***Joined:*** ${time(new Date(member.joinedAt), 'D')} (${time(new Date(member.joinedAt), 'R')})`
 			].join('\n'))
 			.addFields({ name: `__Roles__ (${roles.length ? roles.length : 1})`, value: `${roles.length ? roles.join(', ') : `@everyone`}`, inline: false })
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });

@@ -1,6 +1,6 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -25,12 +25,7 @@ module.exports = class extends InteractionCommand {
 		}
 		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.db.findOrCreateGuild({ id: interaction.guildId });
-
 		await interaction.guild.members.ban(user, { deleteMessageDays: days, reason: `${reason ? `${reason} (Banned by ${interaction.user.tag})` : `(Banned by ${interaction.user.tag})`}` });
-
-		guildData.casesCount++;
-		await guildData.save();
 
 		return interaction.reply({ content: [
 			`**${user.tag}** was banned!`,

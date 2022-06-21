@@ -25,7 +25,7 @@ module.exports = class Util {
 		const { interaction, message } = options;
 		switch (category.toLowerCase()) {
 			case 'developer':
-				return this.isOwner(interaction?.user.id || message?.author.id);
+				return this.client.owners.includes(interaction?.user.id || message?.author.id);
 			case 'nsfw':
 				return interaction?.channel.nsfw || message?.channel.nsfw;
 			default:
@@ -58,14 +58,6 @@ module.exports = class Util {
 			.replace(/Use VAD/g, 'Use Voice Activity');
 	}
 
-	isOwner(userId) {
-		return this.client.owners.includes(userId);
-	}
-
-	removeDuplicates(array) {
-		return [...new Set(array)];
-	}
-
 	trimArray(array, maxLen = 10) {
 		if (array.length > maxLen) {
 			const len = array.length - maxLen;
@@ -84,7 +76,7 @@ module.exports = class Util {
 	}
 
 	async loadInteractions() {
-		return glob(`${this.directory}Commands/{Context,Slash}/**/*.js`).then(interactions => {
+		return glob(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
 				delete require.cache[interactionFile];
 				const { name } = path.parse(interactionFile);
@@ -98,7 +90,7 @@ module.exports = class Util {
 	}
 
 	async loadCommands() {
-		return glob(`${this.directory}Commands/Message/**/*.js`).then(commands => {
+		return glob(`${this.directory}Commands/?(Message)/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
 				delete require.cache[commandFile];
 				const { name } = path.parse(commandFile);
@@ -117,7 +109,7 @@ module.exports = class Util {
 	}
 
 	async loadEvents() {
-		return glob(`${this.directory}Events/**/*.js`).then(events => {
+		return glob(`${this.directory}Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
 				delete require.cache[eventFile];
 				const { name } = path.parse(eventFile);

@@ -1,15 +1,19 @@
-const { promisify } = require('node:util');
-const glob = promisify(require('glob'));
-const inquirer = require('inquirer');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
+const { promisify } = require('node:util');
+const path = require('node:path');
+const glob = promisify(require('glob'));
+const inquirer = require('inquirer');
 require('dotenv/config');
 
 (async () => {
+	const directory = `${path.dirname(`${process.cwd()}/src/index.js`) + path.sep}`.replace(/\\/g, '/');
+
 	const commands = [];
-	await glob('src/Interactions/**/*.js').then(interactions => {
-		for (const interactionFiles of interactions) {
-			const interaction = require(`../${interactionFiles}`);
+	await glob(`${directory}Interactions/**/*.js`).then(interactions => {
+		for (const interactionFile of interactions) {
+			delete require.cache[interactionFile];
+			const interaction = require(interactionFile);
 			commands.push(interaction);
 		}
 	});

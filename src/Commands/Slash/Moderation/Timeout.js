@@ -1,8 +1,8 @@
-const InteractionCommand = require('../../../Structures/Interaction');
-const { Formatters } = require('discord.js');
+const Command = require('../../../Structures/Interaction');
+const { time } = require('discord.js');
 const ms = require('ms');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -28,21 +28,16 @@ module.exports = class extends InteractionCommand {
 		}
 		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.db.findOrCreateGuild({ id: interaction.guildId });
-
 		var parsedDuration = ms(duration);
-		if (parsedDuration > 2419200000) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
-		if (parsedDuration > 2418840000 && parsedDuration <= 2419200000) parsedDuration = 2418840000;
+		if (parsedDuration > 2419200e3) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
+		if (parsedDuration > 2418840e3 && parsedDuration <= 2419200e3) parsedDuration = 2418840e3;
 
 		await member.timeout(parsedDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
-
-		guildData.casesCount++;
-		await guildData.save();
 
 		return interaction.reply({ content: [
 			`**${member.user.tag}** was timed out!`,
 			`${reason ? `\n***Reason:*** ${reason}` : ''}`,
-			`\n***Expiration:*** ${Formatters.time(new Date(Date.now() + parsedDuration), 'R')}`
+			`\n***Expiration:*** ${time(new Date(Date.now() + parsedDuration), 'R')}`
 		].join('') });
 	}
 

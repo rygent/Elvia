@@ -1,6 +1,6 @@
-const InteractionCommand = require('../../../Structures/Interaction');
+const Command = require('../../../Structures/Interaction');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -25,12 +25,7 @@ module.exports = class extends InteractionCommand {
 		}
 		if (!member.kickable) return interaction.reply({ content: `I cannot kick a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.db.findOrCreateGuild({ id: interaction.guildId });
-
 		await interaction.guild.members.kick(member, `${reason ? `${reason} (Kicked by ${interaction.user.tag})` : `(Kicked by ${interaction.user.tag})`}`);
-
-		guildData.casesCount++;
-		await guildData.save();
 
 		return interaction.reply({ content: [
 			`**${member.user.tag}** was kicked!`,

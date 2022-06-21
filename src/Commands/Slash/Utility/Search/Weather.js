@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
-const { Colors, Secrets } = require('../../../../Utils/Constants');
+const { Colors, Credentials } = require('../../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,12 +16,12 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const search = await interaction.options.getString('search', true);
 
-		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
-		const body = await fetch(`${endpoint}?q=${encodeURIComponent(search)}&appid=${Secrets.OpenWeatherApiKey}&units=metric`, { method: 'GET' });
-		if (body.status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
-		if (body.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		const API_URI = 'https://api.openweathermap.org/data/2.5/weather';
+		const raw = await fetch(`${API_URI}?q=${encodeURIComponent(search)}&appid=${Credentials.OpenWeatherApiKey}&units=metric`, { method: 'GET' });
+		if (raw.status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
+		if (raw.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
-		const response = await body.json();
+		const response = await raw.json();
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

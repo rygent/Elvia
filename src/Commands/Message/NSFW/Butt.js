@@ -1,25 +1,25 @@
-const MessageCommand = require('../../../Structures/Command');
+const Command = require('../../../Structures/Command');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors } = require('../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: [],
+			name: 'butt',
 			description: 'This command contain explicit content!',
 			category: 'NSFW',
-			cooldown: 10000,
-			nsfw: true,
-			disabled: true
+			cooldown: 10e3,
+			disabled: true,
+			nsfw: true
 		});
 	}
 
 	async run(message) {
-		const body = await fetch('http://api.obutts.ru/butts/0/1/random');
-		const response = await body.json();
+		const raw = await fetch('http://api.obutts.ru/butts/0/1/random');
+		const response = await raw.json();
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

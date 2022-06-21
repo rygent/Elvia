@@ -1,10 +1,10 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
 const { ButtonStyle } = require('discord-api-types/v10');
 const { Colors, Emojis } = require('../../../../Utils/Constants');
 const { fetch } = require('undici');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,10 +16,10 @@ module.exports = class extends InteractionCommand {
 	async run(interaction) {
 		const username = await interaction.options.getString('username', true);
 
-		const body = await fetch(`https://instagram.com/${username}/feed/?__a=1`, { method: 'GET' });
-		if (body.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		const raw = await fetch(`https://instagram.com/${username}/feed/?__a=1`, { method: 'GET' });
+		if (raw.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
-		const response = await body.json().then(({ graphql }) => graphql.user);
+		const response = await raw.json().then(({ graphql }) => graphql.user);
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

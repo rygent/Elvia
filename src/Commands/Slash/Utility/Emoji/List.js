@@ -1,6 +1,6 @@
-const InteractionCommand = require('../../../../Structures/Interaction');
+const Command = require('../../../../Structures/Interaction');
 
-module.exports = class extends InteractionCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -10,20 +10,10 @@ module.exports = class extends InteractionCommand {
 	}
 
 	async run(interaction) {
-		const standardEmoji = [];
-		const animatedEmoji = [];
+		const emoji = interaction.guild.emojis.cache.map(item => item.toString());
+		if (!emoji.length) return interaction.reply({ content: 'There are no emojis in this server.', ephemeral: true });
 
-		await interaction.guild.emojis.cache.forEach(emoji => {
-			if (emoji.animated) {
-				animatedEmoji.push(emoji.toString());
-			} else {
-				standardEmoji.push(emoji.toString());
-			}
-		});
-
-		if (!animatedEmoji.length && !standardEmoji.length) return interaction.reply({ content: 'There are no emojis in this server.', ephemeral: true });
-
-		return interaction.reply({ content: `${standardEmoji.join(' ')} ${animatedEmoji.join(' ')}`, ephemeral: true });
+		return interaction.reply({ content: `${emoji.join(' ')}`, ephemeral: true });
 	}
 
 };

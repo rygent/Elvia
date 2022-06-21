@@ -1,10 +1,10 @@
-const MessageCommand = require('../../../Structures/Command');
-const { AttachmentBuilder, Formatters } = require('discord.js');
+const Command = require('../../../Structures/Command');
+const { AttachmentBuilder, codeBlock, inlineCode } = require('discord.js');
 const { Type } = require('@anishshobith/deeptype');
 const { inspect } = require('node:util');
 const { Emojis } = require('../../../Utils/Constants');
 
-module.exports = class extends MessageCommand {
+module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -30,11 +30,11 @@ module.exports = class extends MessageCommand {
 			}
 			const stop = process.hrtime(start);
 			const response = [
-				`${Formatters.codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}\n`,
-				`${Emojis.Info} ${Formatters.inlineCode(new Type(evaled).is)} `,
-				`${Emojis.Alarm} ${Formatters.inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
+				`${codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}\n`,
+				`${Emojis.Info} ${inlineCode(new Type(evaled).is)} `,
+				`${Emojis.Alarm} ${inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			].join('');
-			if (response.length < 2000) {
+			if (response.length < 2e3) {
 				return message.channel.send({ content: response });
 			} else {
 				const attachment = new AttachmentBuilder()
@@ -44,18 +44,17 @@ module.exports = class extends MessageCommand {
 				return message.channel.send({ files: [attachment] });
 			}
 		} catch (error) {
-			return message.channel.send({ content: `**Error:** ${Formatters.codeBlock('xl', this.clean(error))}` });
+			return message.reply({ content: `**Error:** ${codeBlock('xl', this.clean(error))}` });
 		}
 	}
 
-	clean(text) {
-		if (typeof text === 'string') {
-			text = text
-				.replace(/`/g, `\`${String.fromCharCode(8203)}`)
-				.replace(/@/g, `@${String.fromCharCode(8203)}`)
-				.replace(new RegExp(this.client.token, 'gi'), 'mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0');
-		}
-		return text;
+	clean(content) {
+		if (typeof content !== 'string') return content;
+		const cleaned = content
+			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
+			.replace(/@/g, `@${String.fromCharCode(8203)}`)
+			.replace(new RegExp(this.client.token, 'gi'), 'NO-TOKEN');
+		return cleaned;
 	}
 
 };

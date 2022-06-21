@@ -1,7 +1,7 @@
 const { Client, Partials, PermissionsBitField } = require('discord.js');
-const { Collection } = require('@discordjs/collection');
 const { GatewayIntentBits } = require('discord-api-types/v10');
-const { Secrets } = require('../Utils/Constants');
+const { Collection } = require('@discordjs/collection');
+const { Credentials } = require('../Utils/Constants');
 const Logger = require('../Utils/Logger');
 const Util = require('./Util');
 const Database = require('./Database');
@@ -27,7 +27,7 @@ module.exports = class BaseClient extends Client {
 				repliedUser: false
 			}
 		});
-		this.logger = new Logger(this, { depth: 5 });
+		this.logger = new Logger(this);
 		this.validate(options);
 
 		this.interactions = new Collection();
@@ -37,7 +37,7 @@ module.exports = class BaseClient extends Client {
 		this.cooldown = new Collection();
 
 		this.utils = new Util(this);
-		this.db = new Database(this);
+		this.database = new Database(this);
 
 		String.prototype.toTitleCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
@@ -75,17 +75,17 @@ module.exports = class BaseClient extends Client {
 		if (!options.mongodb) throw new Error('You must pass MongoDB URI for the Client.');
 		this.mongodb = options.mongodb;
 
-		if (!Secrets.ImdbApiKey) this.logger.warn('You must pass IMDb API Key to use "imdb" Command.');
-		if (!Secrets.ImgurClientId) this.logger.warn('You must pass Imgur Client ID to use "imgur" Command.');
-		if (!Secrets.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
-		if (!Secrets.SpotifyClientId || !Secrets.SpotifyClientSecret) this.logger.warn('You must pass Spotify Client ID & Secret to use "spotify" Command.');
+		if (!Credentials.ImdbApiKey) this.logger.warn('You must pass IMDb API Key to use "imdb" Command.');
+		if (!Credentials.ImgurClientId) this.logger.warn('You must pass Imgur Client ID to use "imgur" Command.');
+		if (!Credentials.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
+		if (!Credentials.SpotifyClientId || !Credentials.SpotifyClientSecret) this.logger.warn('You must pass Spotify Client ID & Secret to use "spotify" Command.');
 	}
 
 	async start(token = this.token) {
 		this.utils.loadInteractions();
 		this.utils.loadCommands();
 		this.utils.loadEvents();
-		this.db.loadDatabases();
+		this.database.loadDatabases();
 		super.login(token);
 	}
 
