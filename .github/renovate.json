@@ -1,11 +1,17 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "assignAutomerge": true,
+    "baseBranches": ["main", "canary"],
     "branchConcurrentLimit": 10,
+    "commitMessageTopic": "{{depName}}",
     "dependencyDashboard": true,
+    "enabled": true,
     "labels": ["dependencies"],
     "packageRules": [{
-        "matchUpdateTypes": ["minor", "patch"],
+        "matchDepTypes": ["devDependencies", "optionalDependencies"],
+        "automerge": true
+      }, {
+        "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest"],
+        "assignAutomerge": true,
         "automerge": true
     }],
     "reviewers": ["Rygent"],
