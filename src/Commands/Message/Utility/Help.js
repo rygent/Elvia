@@ -64,7 +64,7 @@ module.exports = class extends Command {
 					.setCustomId(selectId)
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
-					.addOptions(...categories.filter(({ directory }) => this.client.utils.filterCategory(directory, { message })).map(({ directory }) => ({
+					.addOptions(...categories.filter(({ directory }) => this.filterCategory(directory, message)).map(({ directory }) => ({
 						label: directory,
 						value: directory.toLowerCase(),
 						description: `Shows all the ${directory} Commands`
@@ -97,6 +97,17 @@ module.exports = class extends Command {
 					return reply.edit({ components: [select(true)] });
 				}
 			});
+		}
+	}
+
+	filterCategory(category, message) {
+		switch (category.toLowerCase()) {
+			case 'developer':
+				return this.client.owners.includes(message.author.id);
+			case 'nsfw':
+				return message.channel.nsfw;
+			default:
+				return true;
 		}
 	}
 

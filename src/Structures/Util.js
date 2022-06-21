@@ -21,18 +21,6 @@ module.exports = class Util {
 		return `${path.dirname(require.main.filename) + path.sep}`.replace(/\\/g, '/');
 	}
 
-	filterCategory(category, options = {}) {
-		const { interaction, message } = options;
-		switch (category.toLowerCase()) {
-			case 'developer':
-				return this.client.owners.includes(interaction?.user.id || message?.author.id);
-			case 'nsfw':
-				return interaction?.channel.nsfw || message?.channel.nsfw;
-			default:
-				return true;
-		}
-	}
-
 	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
 		return new Intl.ListFormat('en-US', { style, type }).format(array);
 	}
