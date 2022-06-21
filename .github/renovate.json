@@ -16,11 +16,11 @@
         "automerge": true
     }, {
         "matchDepTypes": ["action"],
+        "semanticCommitType": "ci",
         "automerge": true
     }],
-    "prCreation": "status-success",
     "reviewers": ["Rygent"],
-    "schedule": ["* 7 * * 6,0"],
+    "schedule": ["at 09:00am on saturday and sunday"],
     "separateMajorMinor": true,
     "timezone": "Asia/Tokyo"
 }
