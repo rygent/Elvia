@@ -1139,18 +1139,18 @@ keyv@^4.0.0:
     compress-brotli "^1.3.8"
     json-buffer "3.0.1"
 
-kitsu-core@^10.0.0-alpha.23:
-  version "10.0.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.23.tgz#9da57511b62bd8a2206e36c851e1abadee810abc"
-  integrity sha512-J14PGNFkLv7FSmByE7CIcl8pkRuPFlIEMg6fBioj31Q7aefczAA/7i5vOmENMvQwbK6H+Ruwpild684UwgWHFg==
+kitsu-core@^10.0.0-alpha.24:
+  version "10.0.0-alpha.24"
+  resolved "https://registry.yarnpkg.com/kitsu-core/-/kitsu-core-10.0.0-alpha.24.tgz#9b1beea80c0cf3b3dd796b677c50b8fb18eb7bc0"
+  integrity sha512-m3MkPWbJpkT+kPIdj6/2vw9NWBm3C4+uwl/E6a6eYizhWViMZe+5nd8oZ+1B7cQ0wubkGf/SZG9mMWk5H0p0tg==
 
-kitsu@^10.0.0-alpha.23:
-  version "10.0.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.23.tgz#b0ab1e118c1555acd2ee1ae5ae564869fc81fef6"
-  integrity sha512-fneC8P3+hQLxULfXhsPvlPgmmFwSqG6ppZeWSYv9cnEIKrDMvZYwWLunU+GwyPDBU0AO2Uw79yk73tdlRSynBA==
+kitsu@^10.0.0-alpha.24:
+  version "10.0.0-alpha.24"
+  resolved "https://registry.yarnpkg.com/kitsu/-/kitsu-10.0.0-alpha.24.tgz#790942824fd20a03fbe44b1a1f9d2e0efdcec569"
+  integrity sha512-DmhRNc7Lb8lr1zsSoH5w1QSlE7sQNlCU+K/H51zZYlk0w4ScC8zl1TfVibLb+10bbbbAqMxPOpuNoWE0oVgrPQ==
   dependencies:
     axios "^0.27.0"
-    kitsu-core "^10.0.0-alpha.23"
+    kitsu-core "^10.0.0-alpha.24"
     pluralize "^8.0.0"
 
 ky-universal@^0.8.2:
