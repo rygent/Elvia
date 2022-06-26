@@ -25,7 +25,7 @@
     "colorette": "^2.0.19",
     "discord-api-types": "^0.35.0",
     "discord-emoji-convert": "^2.1.2",
-    "discord.js": "^13.8.0",
+    "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
     "emoji-regex": "^10.1.0",
     "figlet": "^1.5.2",

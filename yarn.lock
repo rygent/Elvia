@@ -544,10 +544,10 @@ discord-emoji-convert@^2.1.2:
   resolved "https://registry.yarnpkg.com/discord-emoji-convert/-/discord-emoji-convert-2.1.2.tgz#d589763b3e602587336c47d4d48e222205a74a80"
   integrity sha512-IAGzyA7y0+aBM1T4l80MHbZmRkRJxTHg6uIdcIJRXtPKQ3yi2smw+ENOejBgWTgVnVv9IWBy+3ZB3knNlIWc5A==
 
-discord.js@^13.8.0:
-  version "13.8.0"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.8.0.tgz#4f923f32a7521b3a82083289cf709039a2f2f8a1"
-  integrity sha512-EPAA/2VLycYN5wSzavqa4iJ6qj3UtQFtHw5TH/60Fj29ymfEsCQVn//o1mTpwDxzwb+rPIrWhkxKIGGnjfv0Iw==
+discord.js@^13.8.1:
+  version "13.8.1"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.8.1.tgz#37627154a887ac395ca72dd814bc7366776bb90a"
+  integrity sha512-jOsD+4tEZWWx0RHVyH+FBcqoTrsL+d5Mm5p+ULQOdU0qSaxhLNkWYig+yDHNZoND7nlkXX3qi+BW+gO5erWylg==
   dependencies:
     "@discordjs/builders" "^0.14.0"
     "@discordjs/collection" "^0.7.0"
