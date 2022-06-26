@@ -20,7 +20,7 @@
         "automerge": true
     }],
     "reviewers": ["Rygent"],
-    "schedule": ["at 09:00am on saturday and sunday"],
+    "schedule": ["after 9:00am every weekend"],
     "separateMajorMinor": true,
     "timezone": "Asia/Tokyo"
 }
