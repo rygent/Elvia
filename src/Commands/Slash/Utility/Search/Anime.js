@@ -1,12 +1,12 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Colors } = require('../../../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const Kitsu = require('kitsu');
-const moment = require('moment');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { Colors } from '../../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import Kitsu from 'kitsu';
+import moment from 'moment';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -30,15 +30,15 @@ module.exports = class extends Command {
 				.setCustomId(selectId)
 				.setPlaceholder('Select an anime!')
 				.addOptions(...response.map(data => ({
-					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles).filter(item => item?.length)[0], 95) || 'Unknown Name',
 					value: data.id,
+					label: this.client.utils.truncateString(data.titles.en_jp || Object.values(data.titles).filter(item => item?.length)[0], 95) || 'Unknown Name',
 					...data.description?.length && { description: this.client.utils.truncateString(data.description, 95) }
 				}))));
 
 		const reply = await interaction.editReply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
@@ -53,7 +53,7 @@ module.exports = class extends Command {
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Kitsu', iconURL: 'https://i.imgur.com/YlUX5JD.png', url: 'https://kitsu.io' })
-				.setTitle(data.titles.en_jp || Object.values(data.titles)[0])
+				.setTitle(data.titles.en_jp || Object.values(data.titles).filter(item => item?.length)[0])
 				.setThumbnail(data.posterImage?.original)
 				.addFields({ name: '__Detail__', value: [
 					`***English:*** ${data.titles.en ? data.titles.en : '`N/A`'}`,
@@ -88,4 +88,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

@@ -1,9 +1,9 @@
-const Command = require('../../../Structures/Interaction');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { Colors } = require('../../../Utils/Constants');
-const translate = require('@iamtraction/google-translate');
+import Command from '../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { Colors } from '../../../Utils/Constants.js';
+import translate from '@iamtraction/google-translate';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -42,4 +42,4 @@ module.exports = class extends Command {
 		}
 	}
 
-};
+}

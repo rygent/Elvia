@@ -1,9 +1,9 @@
-const Command = require('../../../Structures/Interaction');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { time } = require('discord.js');
-const { Badges, Colors, Emojis } = require('../../../Utils/Constants');
+import Command from '../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { time } from 'discord.js';
+import { Badges, Colors, Emojis } from '../../../Utils/Constants.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -48,4 +48,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed] });
 	}
 
-};
+}

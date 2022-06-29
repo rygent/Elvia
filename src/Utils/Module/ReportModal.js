@@ -1,10 +1,10 @@
-const { ActionRowBuilder, EmbedBuilder, ModalBuilder, TextInputBuilder } = require('@discordjs/builders');
-const { InteractionType, TextInputStyle } = require('discord-api-types/v10');
-const { InteractionCollector, WebhookClient } = require('discord.js');
-const { Colors, Links } = require('../Constants');
-const { nanoid } = require('nanoid');
+import { ActionRowBuilder, EmbedBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
+import { InteractionCollector, WebhookClient, parseWebhookURL } from 'discord.js';
+import { Colors, Links } from '../Constants.js';
+import { nanoid } from 'nanoid';
 
-module.exports = class ReportModal {
+export default class ReportModal {
 
 	constructor(client, options = {}) {
 		this.client = client;
@@ -20,18 +20,18 @@ module.exports = class ReportModal {
 				.addComponents(new TextInputBuilder()
 					.setCustomId('title')
 					.setStyle(TextInputStyle.Short)
-					.setRequired(true)
 					.setLabel('Title')
 					.setPlaceholder('Bug: <title>')
+					.setRequired(true)
 					.setMaxLength(100)))
 			.addComponents(new ActionRowBuilder()
 				.addComponents(new TextInputBuilder()
 					.setCustomId('describe')
 					.setStyle(TextInputStyle.Paragraph)
-					.setRequired(true)
 					.setLabel('Description')
 					.setPlaceholder('Describe the issue in as much detail as possible.')
-					.setMaxLength(2048)));
+					.setRequired(true)
+					.setMaxLength(4000)));
 
 		await interaction.showModal(modal);
 
@@ -41,16 +41,16 @@ module.exports = class ReportModal {
 		collector.on('collect', async (i) => {
 			const [title, describe] = ['title', 'describe'].map(id => i.fields.getTextInputValue(id));
 
-			await this.sendWebhook(i, { title, describe });
+			await this.webhook(i, { title, describe });
 			return i.reply({ content: 'Thank you, your report has been informed to our developers.', ephemeral: true });
 		});
 
 		collector.on('end', () => this.collector.stop('collected'));
 	}
 
-	async sendWebhook(interaction, { title, describe }) {
+	async webhook(interaction, { title, describe }) {
 		if (!Links.ReportWebhook) return;
-		const webhook = new WebhookClient({ url: Links.ReportWebhook });
+		const webhook = new WebhookClient(parseWebhookURL(Links.ReportWebhook));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
@@ -59,7 +59,7 @@ module.exports = class ReportModal {
 			.setDescription(describe)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() });
 
-		return webhook.send({ embeds: [embed], username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ size: 4096 }) });
+		return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username });
 	}
 
-};
+}

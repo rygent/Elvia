@@ -1,14 +1,14 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { parseEmoji } = require('discord.js');
-const { Colors, Credentials, Emojis } = require('../../../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const Spotify = require('node-spotify-api');
-const moment = require('moment');
-require('moment-duration-format');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { parseEmoji } from 'discord.js';
+import { Colors, Credentials, Emojis } from '../../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import Spotify from 'node-spotify-api';
+import moment from 'moment';
+import 'moment-duration-format';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -31,15 +31,15 @@ module.exports = class extends Command {
 				.setCustomId(selectId)
 				.setPlaceholder('Select a song!')
 				.addOptions(...response.map(data => ({
-					label: this.client.utils.truncateString(data.name, 95),
 					value: data.id,
-					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95).padEnd(1)
+					label: this.client.utils.truncateString(data.name, 95),
+					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95)
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
@@ -81,4 +81,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

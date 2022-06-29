@@ -1,7 +1,7 @@
-const Command = require('../../../../Structures/Interaction');
-const flip = require('flip-text');
+import Command from '../../../../Structures/Interaction.js';
+import flip from 'flip-text';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,4 +16,4 @@ module.exports = class extends Command {
 		return interaction.reply({ content: flip(text) });
 	}
 
-};
+}

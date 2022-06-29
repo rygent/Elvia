@@ -1,9 +1,9 @@
-const Command = require('../../../Structures/Command');
-const { codeBlock } = require('discord.js');
-const { splitMessage } = require('../../../Utils/Function');
-const child = require('node:child_process');
+import Command from '../../../Structures/Command.js';
+import { codeBlock } from 'discord.js';
+import { splitMessage } from '../../../Utils/Function.js';
+import child from 'node:child_process';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -23,4 +23,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

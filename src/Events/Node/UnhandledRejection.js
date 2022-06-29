@@ -1,10 +1,10 @@
-const Event = require('../../Structures/Event');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { WebhookClient, codeBlock, time } = require('discord.js');
-const { Colors, Links } = require('../../Utils/Constants');
-const process = require('node:process');
+import Event from '../../Structures/Event.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { WebhookClient, codeBlock, parseWebhookURL, time } from 'discord.js';
+import { Colors, Links } from '../../Utils/Constants.js';
+import process from 'node:process';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -18,7 +18,7 @@ module.exports = class extends Event {
 		this.client.logger.error(error.stack);
 
 		if (!this.client.isReady() || !Links.LoggerWebhook) return;
-		const webhook = new WebhookClient({ url: Links.LoggerWebhook });
+		const webhook = new WebhookClient(parseWebhookURL(Links.LoggerWebhook));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
@@ -31,7 +31,7 @@ module.exports = class extends Event {
 			].join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() });
 
-		return webhook.send({ embeds: [embed], username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ size: 4096 }) });
+		return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username });
 	}
 
-};
+}

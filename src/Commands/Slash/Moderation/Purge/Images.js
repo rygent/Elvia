@@ -1,6 +1,6 @@
-const Command = require('../../../../Structures/Interaction');
+import Command from '../../../../Structures/Interaction.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -30,11 +30,11 @@ module.exports = class extends Command {
 				} else {
 					await interaction.reply({ content: `Successfully deleted **${message.size}**/**${amount}** messages.` });
 				}
-				setTimeout(() => interaction.deleteReply(), 10e3);
+				setTimeout(() => interaction.deleteReply(), 10_000);
 			});
 		} catch {
 			return interaction.reply({ content: 'You can only delete the messages which are not older than 14 days.', ephemeral: true });
 		}
 	}
 
-};
+}

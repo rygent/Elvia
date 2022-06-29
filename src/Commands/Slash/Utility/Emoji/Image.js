@@ -1,7 +1,7 @@
-const Command = require('../../../../Structures/Interaction');
-const { AttachmentBuilder, parseEmoji } = require('discord.js');
+import Command from '../../../../Structures/Interaction.js';
+import { AttachmentBuilder, parseEmoji } from 'discord.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -24,4 +24,4 @@ module.exports = class extends Command {
 		return interaction.reply({ files: [attachment] });
 	}
 
-};
+}

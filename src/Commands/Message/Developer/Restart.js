@@ -1,9 +1,9 @@
-const Command = require('../../../Structures/Command');
-const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { nanoid } = require('nanoid');
+import Command from '../../../Structures/Command.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { nanoid } from 'nanoid';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -32,7 +32,7 @@ module.exports = class extends Command {
 		const reply = await message.reply({ content: 'Are you sure want to restart the bot ?', components: [button(false)] });
 
 		const filter = (i) => i.user.id === message.author.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15e3 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15_000 });
 
 		collector.on('collect', async (i) => {
 			switch (i.customId) {
@@ -43,7 +43,7 @@ module.exports = class extends Command {
 					setTimeout(async () => {
 						await (reply.delete() && message.delete());
 						return process.exit();
-					}, 5e3);
+					}, 5000);
 					return i.update({ content: 'The bot will restart in 5 seconds.\n*it may take a few minutes for it to boot up again*', components: [] });
 			}
 		});
@@ -59,4 +59,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

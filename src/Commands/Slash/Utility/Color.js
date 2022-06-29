@@ -1,11 +1,11 @@
-const Command = require('../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
-const { resolveColor } = require('discord.js');
-const Function = require('../../../Utils/Function');
-const { fetch } = require('undici');
+import Command from '../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { resolveColor } from 'discord.js';
+import { rgbToHex } from '../../../Utils/Function.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -15,20 +15,20 @@ module.exports = class extends Command {
 	}
 
 	async run(interaction) {
-		let color = await interaction.options.getString('color', true).toLowerCase();
+		let color = await interaction.options.getString('color', true);
 
-		if (color.match(new RegExp(/^#?[0-9a-f]{3,6}$/g))) {
-			color = color; // eslint-disable-line no-self-assign
-		} else if (color.match(new RegExp(/^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$/g))) {
-			color = Function.rgbToHex(color);
-		} else if (color === 'random') {
+		if (color.match(/^#?[0-9a-f]{3,6}$/g)) {
+			color = color.toLowerCase();
+		} else if (color.match(/^(rgb)?\(?([01]?\d\d?|2[0-4]\d|25[0-5])(\W+)([01]?\d\d?|2[0-4]\d|25[0-5])\W+(([01]?\d\d?|2[0-4]\d|25[0-5])\)?)$/g)) {
+			color = rgbToHex(color);
+		} else if (color.match(/random/i)) {
 			color = Math.floor(Math.random() * (0xffffff + 1)).toString(16);
 		} else {
 			return interaction.reply({ content: 'Please provide a valid **hexadecimal**/**rgb** color code. Example: **#77dd77**/**(253, 253, 150)** or **random** to get a random color.', ephemeral: true });
 		}
 
-		const body = await fetch(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, { method: 'GET' });
-		const response = await body.json();
+		const raw = await fetch(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, { method: 'GET' });
+		const response = await raw.json();
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()
@@ -53,4 +53,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
-};
+}

@@ -1,12 +1,12 @@
-const { EmbedBuilder } = require('@discordjs/builders');
-const { WebhookClient, codeBlock, time } = require('discord.js');
-const { Console } = require('node:console');
-const { inspect } = require('node:util');
-const { Colors, Links } = require('./Constants');
-const Colorette = require('colorette');
-const moment = require('moment');
+import { Console } from 'node:console';
+import { EmbedBuilder } from '@discordjs/builders';
+import { WebhookClient, codeBlock, parseWebhookURL, time } from 'discord.js';
+import { Colors, Links } from './Constants.js';
+import { inspect } from 'node:util';
+import * as Colorette from 'colorette';
+import moment from 'moment';
 
-module.exports = class Logger {
+export default class Logger {
 
 	constructor(client, options = {}) {
 		this.client = client;
@@ -19,7 +19,7 @@ module.exports = class Logger {
 	}
 
 	error(content, error) {
-		this.sendWebhook(error);
+		this.webhook(error);
 		return this.write(content, { method: 'error', infix: 'ERROR', color: 'redBright' });
 	}
 
@@ -31,10 +31,10 @@ module.exports = class Logger {
 		return this.write(content, { method: 'debug', infix: 'DEBUG', color: 'blackBright' });
 	}
 
-	sendWebhook(error) {
+	webhook(error) {
 		if (!this.client.isReady()) return;
 		if (!error || !Links.LoggerWebhook) return;
-		const webhook = new WebhookClient({ url: Links.LoggerWebhook });
+		const webhook = new WebhookClient(parseWebhookURL(Links.LoggerWebhook));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
@@ -46,7 +46,7 @@ module.exports = class Logger {
 			].join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() });
 
-		return webhook.send({ embeds: [embed], username: this.client.user.username, avatarURL: this.client.user.displayAvatarURL({ size: 4096 }) });
+		return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username });
 	}
 
 	write(content, options) {
@@ -61,4 +61,4 @@ module.exports = class Logger {
 		return cleaned;
 	}
 
-};
+}

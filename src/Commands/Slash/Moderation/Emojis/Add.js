@@ -1,7 +1,7 @@
-const Command = require('../../../../Structures/Interaction');
-const { parseEmoji } = require('discord.js');
+import Command from '../../../../Structures/Interaction.js';
+import { parseEmoji } from 'discord.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -35,4 +35,4 @@ module.exports = class extends Command {
 		}
 	}
 
-};
+}

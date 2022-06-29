@@ -1,7 +1,7 @@
-const Command = require('../../../../Structures/Interaction');
-const { smallcaps } = require('../../../../Utils/Function');
+import Command from '../../../../Structures/Interaction.js';
+import { smallcaps } from '../../../../Utils/Function.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -16,4 +16,4 @@ module.exports = class extends Command {
 		return interaction.reply({ content: smallcaps(text) });
 	}
 
-};
+}

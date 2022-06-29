@@ -1,6 +1,6 @@
-const { ApplicationCommandType } = require('discord-api-types/v10');
+import { ApplicationCommandType } from 'discord-api-types/v10';
 
-module.exports = {
+export default {
 	name: 'Avatar',
 	type: ApplicationCommandType.User,
 	dm_permission: false

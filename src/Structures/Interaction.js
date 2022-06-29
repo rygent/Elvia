@@ -1,6 +1,6 @@
-const { PermissionsBitField } = require('discord.js');
+import { PermissionsBitField } from 'discord.js';
 
-module.exports = class Interaction {
+export default class Interaction {
 
 	constructor(client, name, options = {}) {
 		this.client = client;
@@ -8,7 +8,7 @@ module.exports = class Interaction {
 		this.description = options.description || 'No description provided';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
-		this.cooldown = options.cooldown || 3e3;
+		this.cooldown = options.cooldown || 3000;
 		this.disabled = options.disabled || false;
 		this.guildOnly = options.guildOnly || false;
 		this.ownerOnly = options.ownerOnly || false;
@@ -18,4 +18,4 @@ module.exports = class Interaction {
 		throw new Error(`Interaction ${this.name} doesn't provide a run method!`);
 	}
 
-};
+}

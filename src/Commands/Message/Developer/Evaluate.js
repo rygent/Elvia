@@ -1,10 +1,10 @@
-const Command = require('../../../Structures/Command');
-const { AttachmentBuilder, codeBlock, inlineCode } = require('discord.js');
-const { Type } = require('@anishshobith/deeptype');
-const { inspect } = require('node:util');
-const { Emojis } = require('../../../Utils/Constants');
+import Command from '../../../Structures/Command.js';
+import { AttachmentBuilder, codeBlock, inlineCode } from 'discord.js';
+import { Type } from '@anishshobith/deeptype';
+import { Emojis } from '../../../Utils/Constants.js';
+import { inspect } from 'node:util';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -34,7 +34,7 @@ module.exports = class extends Command {
 				`${Emojis.Info} ${inlineCode(new Type(evaled).is)} `,
 				`${Emojis.Alarm} ${inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			].join('');
-			if (response.length < 2e3) {
+			if (response.length < 2000) {
 				return message.channel.send({ content: response });
 			} else {
 				const attachment = new AttachmentBuilder()
@@ -53,8 +53,8 @@ module.exports = class extends Command {
 		const cleaned = content
 			.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 			.replace(/@/g, `@${String.fromCharCode(8203)}`)
-			.replace(new RegExp(this.client.token, 'gi'), 'NO-TOKEN');
+			.replace(new RegExp(this.client.token, 'gi'), 'No Token');
 		return cleaned;
 	}
 
-};
+}

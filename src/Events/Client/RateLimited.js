@@ -1,6 +1,6 @@
-const Event = require('../../Structures/Event');
+import Event from '../../Structures/Event.js';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -11,7 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run(rateLimitData) {
-		const detail = [
+		const data = [
 			`    Route  : ${rateLimitData.route}`,
 			`    Hash   : ${rateLimitData.hash}`,
 			`    Method : ${rateLimitData.method}`,
@@ -20,7 +20,7 @@ module.exports = class extends Event {
 			`    Global : ${rateLimitData.global}`
 		].join('\n');
 
-		this.client.logger.warn(`This client being Rate Limited.\n${detail}`);
+		this.client.logger.warn(`This client being Rate Limited.\n${data}`);
 	}
 
-};
+}

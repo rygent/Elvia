@@ -1,11 +1,13 @@
-const path = require('node:path');
-const { promisify } = require('node:util');
-const glob = promisify(require('glob'));
-const Interaction = require('./Interaction');
-const Command = require('./Command');
-const Event = require('./Event');
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
+import path from 'node:path';
+import glob from 'glob';
+import Interaction from './Interaction.js';
+import Command from './Command.js';
+import Event from './Event.js';
+const globber = promisify(glob);
 
-module.exports = class Util {
+export default class Util {
 
 	constructor(client) {
 		this.client = client;
@@ -18,7 +20,8 @@ module.exports = class Util {
 	}
 
 	get directory() {
-		return `${path.dirname(require.main.filename) + path.sep}`.replace(/\\/g, '/');
+		const main = fileURLToPath(new URL('../index.js', import.meta.url));
+		return `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 	}
 
 	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
@@ -64,13 +67,12 @@ module.exports = class Util {
 	}
 
 	async loadInteractions() {
-		return glob(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(interactions => {
+		return globber(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
-				delete require.cache[interactionFile];
 				const { name } = path.parse(interactionFile);
-				const File = require(interactionFile);
+				const { default: File } = await import(pathToFileURL(interactionFile));
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
-				const interaction = new File(this.client, name);
+				const interaction = new File(this.client, name.toLowerCase());
 				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
 				this.client.interactions.set(interaction.name.join('-'), interaction);
 			}
@@ -78,11 +80,10 @@ module.exports = class Util {
 	}
 
 	async loadCommands() {
-		return glob(`${this.directory}Commands/?(Message)/**/*.js`).then(commands => {
+		return globber(`${this.directory}Commands/?(Message)/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
-				delete require.cache[commandFile];
 				const { name } = path.parse(commandFile);
-				const File = require(commandFile);
+				const { default: File } = await import(pathToFileURL(commandFile));
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client, name.toLowerCase());
 				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands directory.`);
@@ -97,11 +98,10 @@ module.exports = class Util {
 	}
 
 	async loadEvents() {
-		return glob(`${this.directory}Events/**/*.js`).then(events => {
+		return globber(`${this.directory}Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
-				delete require.cache[eventFile];
 				const { name } = path.parse(eventFile);
-				const File = require(eventFile);
+				const { default: File } = await import(pathToFileURL(eventFile));
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
 				const event = new File(this.client, name);
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
@@ -111,4 +111,4 @@ module.exports = class Util {
 		});
 	}
 
-};
+}

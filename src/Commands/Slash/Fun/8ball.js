@@ -1,7 +1,7 @@
-const Command = require('../../../Structures/Interaction');
-const Answer = require('../../../Assets/json/8ball.json');
+import Command from '../../../Structures/Interaction.js';
+import Answer from '../../../Assets/json/8ball.json' assert { type: 'json' };
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -23,4 +23,4 @@ module.exports = class extends Command {
 		return interaction.reply({ content });
 	}
 
-};
+}

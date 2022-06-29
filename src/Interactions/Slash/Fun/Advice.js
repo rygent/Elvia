@@ -1,6 +1,6 @@
-const { ApplicationCommandType } = require('discord-api-types/v10');
+import { ApplicationCommandType } from 'discord-api-types/v10';
 
-module.exports = {
+export default {
 	name: 'advice',
 	description: 'Get a random advice.',
 	type: ApplicationCommandType.ChatInput,

@@ -1,6 +1,6 @@
-const { PermissionsBitField } = require('discord.js');
+import { PermissionsBitField } from 'discord.js';
 
-module.exports = class Command {
+export default class Command {
 
 	constructor(client, name, options = {}) {
 		this.client = client;
@@ -11,7 +11,7 @@ module.exports = class Command {
 		this.usage = options.usage || '';
 		this.memberPermissions = new PermissionsBitField(options.memberPermissions).freeze();
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
-		this.cooldown = options.cooldown || 3e3;
+		this.cooldown = options.cooldown || 3000;
 		this.disabled = options.disabled || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
@@ -21,4 +21,4 @@ module.exports = class Command {
 		throw new Error(`Command ${this.name} doesn't provide a run method!`);
 	}
 
-};
+}

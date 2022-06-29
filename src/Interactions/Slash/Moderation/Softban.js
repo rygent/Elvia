@@ -1,7 +1,7 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
-const { PermissionsBitField } = require('discord.js');
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
+import { PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
 	name: 'softban',
 	description: "Softban a user. (Bans and unbans to clear up the user's messages.)",
 	type: ApplicationCommandType.ChatInput,

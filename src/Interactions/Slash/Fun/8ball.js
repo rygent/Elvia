@@ -1,6 +1,6 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
 
-module.exports = {
+export default {
 	name: '8ball',
 	description: 'Ask the magic 8ball a question.',
 	type: ApplicationCommandType.ChatInput,

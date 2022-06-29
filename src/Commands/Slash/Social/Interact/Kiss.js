@@ -1,9 +1,9 @@
-const Command = require('../../../../Structures/Interaction');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { Colors } = require('../../../../Utils/Constants');
-const { fetch } = require('undici');
+import Command from '../../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { Colors } from '../../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -27,4 +27,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed] });
 	}
 
-};
+}

@@ -1,8 +1,8 @@
-const Command = require('../../../Structures/Interaction');
-const { Credentials } = require('../../../Utils/Constants');
-const { fetch } = require('undici');
+import Command from '../../../Structures/Interaction.js';
+import { Credentials } from '../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -27,4 +27,4 @@ module.exports = class extends Command {
 		return interaction.editReply({ content: `Here are your Imgur links:\n<${response.data.link}>` });
 	}
 
-};
+}

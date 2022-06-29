@@ -1,13 +1,13 @@
-const { Client, Partials, PermissionsBitField } = require('discord.js');
-const { GatewayIntentBits } = require('discord-api-types/v10');
-const { Collection } = require('@discordjs/collection');
-const { Credentials } = require('../Utils/Constants');
-const Logger = require('../Utils/Logger');
-const Util = require('./Util');
-const Database = require('./Database');
-const semver = require('semver');
+import { Client, Partials, PermissionsBitField } from 'discord.js';
+import { GatewayIntentBits } from 'discord-api-types/v10';
+import { Collection } from '@discordjs/collection';
+import { Credentials } from '../Utils/Constants.js';
+import Logger from '../Utils/Logger.js';
+import Util from './Util.js';
+import Database from './Database.js';
+import semver from 'semver';
 
-module.exports = class BaseClient extends Client {
+export default class BaseClient extends Client {
 
 	constructor(options = {}) {
 		super({
@@ -54,7 +54,7 @@ module.exports = class BaseClient extends Client {
 
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
-		if (semver.lt(process.versions.node, '16.9.0')) throw new Error('This client requires Node.JS v16.9.0 or higher.');
+		if (semver.lt(process.versions.node, '16.14.0')) throw new Error('This client requires Node.JS v16.14.0 or higher.');
 		this.debug = options.debug;
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
@@ -82,11 +82,11 @@ module.exports = class BaseClient extends Client {
 	}
 
 	async start(token = this.token) {
-		this.utils.loadInteractions();
-		this.utils.loadCommands();
-		this.utils.loadEvents();
-		this.database.loadDatabases();
+		await this.utils.loadInteractions();
+		await this.utils.loadCommands();
+		await this.utils.loadEvents();
+		await this.database.loadDatabases();
 		super.login(token);
 	}
 
-};
+}

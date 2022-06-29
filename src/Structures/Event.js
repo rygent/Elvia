@@ -1,4 +1,4 @@
-module.exports = class Event {
+export default class Event {
 
 	constructor(client, name, options = {}) {
 		this.client = client;
@@ -11,4 +11,4 @@ module.exports = class Event {
 		throw new Error(`The run method has not been implemented in ${this.name}`);
 	}
 
-};
+}

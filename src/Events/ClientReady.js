@@ -1,7 +1,7 @@
-const Event = require('../Structures/Event');
-const Colorette = require('colorette');
+import Event from '../Structures/Event.js';
+import * as Colorette from 'colorette';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -15,4 +15,4 @@ module.exports = class extends Event {
 		this.client.logger.log(`Loaded ${(this.client.commands.size + this.client.interactions.size).formatNumber()} commands & ${this.client.events.size.formatNumber()} events!`);
 	}
 
-};
+}

@@ -1,7 +1,8 @@
-const Event = require('../../Structures/Event');
-const { connection } = require('mongoose');
+import Event from '../../Structures/Event.js';
+import mongoose from 'mongoose';
+const { connection } = mongoose;
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -15,4 +16,4 @@ module.exports = class extends Event {
 		this.client.logger.debug('Reconnecting to MongoDB!');
 	}
 
-};
+}

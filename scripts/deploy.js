@@ -1,19 +1,21 @@
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v10');
-const { promisify } = require('node:util');
-const path = require('node:path');
-const glob = promisify(require('glob'));
-const inquirer = require('inquirer');
-require('dotenv/config');
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v10';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
+import path from 'node:path';
+import glob from 'glob';
+import inquirer from 'inquirer';
+import 'dotenv/config';
+const globber = promisify(glob);
 
-(async () => {
-	const directory = `${path.dirname(`${process.cwd()}/src/index.js`) + path.sep}`.replace(/\\/g, '/');
+export async function deploy() {
+	const main = fileURLToPath(new URL('../src/index.js', import.meta.url));
+	const directory = `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 
 	const commands = [];
-	await glob(`${directory}Interactions/**/*.js`).then(interactions => {
+	await globber(`${directory}Interactions/**/*.js`).then(async (interactions) => {
 		for (const interactionFile of interactions) {
-			delete require.cache[interactionFile];
-			const interaction = require(interactionFile);
+			const { default: interaction } = await import(pathToFileURL(interactionFile));
 			commands.push(interaction);
 		}
 	});
@@ -64,10 +66,10 @@ require('dotenv/config');
 
 		switch (type) {
 			case 'guild':
-				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...commands.values()] });
+				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...commands] });
 				break;
 			case 'global':
-				await rest.put(Routes.applicationCommands(clientId), { body: [...commands.values()] });
+				await rest.put(Routes.applicationCommands(clientId), { body: [...commands] });
 				break;
 		}
 
@@ -75,4 +77,6 @@ require('dotenv/config');
 	} catch (error) {
 		console.error(error);
 	}
-})();
+}
+
+await deploy();

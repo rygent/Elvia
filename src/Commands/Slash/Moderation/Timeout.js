@@ -1,8 +1,8 @@
-const Command = require('../../../Structures/Interaction');
-const { time } = require('discord.js');
-const ms = require('ms');
+import Command from '../../../Structures/Interaction.js';
+import { time } from 'discord.js';
+import ms from 'ms';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -29,8 +29,8 @@ module.exports = class extends Command {
 		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
 
 		var parsedDuration = ms(duration);
-		if (parsedDuration > 2419200e3) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
-		if (parsedDuration > 2418840e3 && parsedDuration <= 2419200e3) parsedDuration = 2418840e3;
+		if (parsedDuration > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
+		if (parsedDuration > 241884e4 && parsedDuration <= 24192e5) parsedDuration = 241884e4;
 
 		await member.timeout(parsedDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
 
@@ -41,4 +41,4 @@ module.exports = class extends Command {
 		].join('') });
 	}
 
-};
+}

@@ -1,8 +1,8 @@
-const moment = require('moment-timezone');
-require('dotenv/config');
+import moment from 'moment-timezone';
+import 'dotenv/config';
 
-const BaseClient = require('./Structures/BaseClient');
-const Configuration = require('./Utils/Configuration');
+import BaseClient from './Structures/BaseClient.js';
+import * as Configuration from './Utils/Configuration.js';
 
 moment.tz.setDefault(Configuration.timezone);
 

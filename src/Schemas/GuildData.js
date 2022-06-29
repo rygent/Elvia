@@ -1,6 +1,7 @@
-const { Schema, model: Model } = require('mongoose');
+import mongoose from 'mongoose';
+const { Schema, model: Model } = mongoose;
 
-module.exports = class GuildData extends Model {
+export default class extends Model {
 
 	constructor() {
 		super('Guild', new Schema({
@@ -14,4 +15,4 @@ module.exports = class GuildData extends Model {
 		}));
 	}
 
-};
+}

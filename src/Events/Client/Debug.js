@@ -1,6 +1,6 @@
-const Event = require('../../Structures/Event');
+import Event from '../../Structures/Event.js';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -14,4 +14,4 @@ module.exports = class extends Event {
 		this.client.logger.debug(info);
 	}
 
-};
+}

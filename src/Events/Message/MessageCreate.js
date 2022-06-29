@@ -1,12 +1,12 @@
-const Event = require('../../Structures/Event');
-const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Collection } = require('@discordjs/collection');
-const { Links } = require('../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const ReportModal = require('../../Utils/Module/ReportModal');
+import Event from '../../Structures/Event.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { Collection } from '@discordjs/collection';
+import { Links } from '../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import ReportModal from '../../Utils/Module/ReportModal.js';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -67,7 +67,7 @@ module.exports = class extends Event {
 				const expiration = cooldown.get(message.author.id) + command.cooldown;
 
 				if (current < expiration) {
-					const time = (expiration - current) / 1e3;
+					const time = (expiration - current) / 1000;
 					return message.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.` })
 						.then(m => setTimeout(() => m.delete(), expiration - current));
 				}
@@ -102,7 +102,7 @@ module.exports = class extends Event {
 				const reply = await message.reply({ content, components: [button(false)] });
 
 				const filter = (i) => i.user.id === message.author.id;
-				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600e3 });
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600_000 });
 
 				const report = new ReportModal(this.client, { collector });
 
@@ -121,4 +121,4 @@ module.exports = class extends Event {
 		}
 	}
 
-};
+}

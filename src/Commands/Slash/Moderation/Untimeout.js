@@ -1,6 +1,6 @@
-const Command = require('../../../Structures/Interaction');
+import Command from '../../../Structures/Interaction.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -31,4 +31,4 @@ module.exports = class extends Command {
 		].join('') });
 	}
 
-};
+}

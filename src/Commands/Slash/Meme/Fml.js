@@ -1,7 +1,7 @@
-const Command = require('../../../Structures/Interaction');
-const { fetch } = require('undici');
+import Command from '../../../Structures/Interaction.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -19,4 +19,4 @@ module.exports = class extends Command {
 		return interaction.reply({ content: response.vdm.content });
 	}
 
-};
+}

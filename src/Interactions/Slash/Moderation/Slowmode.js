@@ -1,7 +1,7 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } = require('discord-api-types/v10');
-const { PermissionsBitField } = require('discord.js');
+import { ApplicationCommandType, ApplicationCommandOptionType, ChannelType } from 'discord-api-types/v10';
+import { PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
 	name: 'slowmode',
 	description: 'Manage slowmode.',
 	type: ApplicationCommandType.ChatInput,

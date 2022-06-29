@@ -11,9 +11,9 @@
 
 ---
 
-<i>**Elvia** is powerful, multipurpose and free Discord bot with a lot of abilities created with [Discord.JS](https://github.com/discordjs/discord.js).
+<i>**Elvia** is powerful, multipurpose and free Discord bot with a lot of abilities created using [Discord.JS](https://github.com/discordjs/discord.js) with ES6 Modules.
 
-We'll be very glad if you give this repo a star, so that we grow much faster.
+We'll be very glad if you give this repository a star, so that we grow much faster.
 </i>
 
 [![Support Server](https://invidget.switchblade.xyz/FD5MMabf8Y)](https://discord.gg/FD5MMabf8Y)
@@ -30,7 +30,7 @@ We'll be very glad if you give this repo a star, so that we grow much faster.
 * Translate message to user setting language in context menu.
 
 ## Requirements
-1. [Node.JS v16.9+](https://nodejs.org/en/download) or higher.
+1. [Node.JS v16.14+](https://nodejs.org/en/download) or higher.
 2. [MongoDB v5.0+](https://www.mongodb.com/try/download/community) or higher.
 3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Highly recommended)
 

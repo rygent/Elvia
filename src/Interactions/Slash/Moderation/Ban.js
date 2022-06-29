@@ -1,7 +1,7 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
-const { PermissionsBitField } = require('discord.js');
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
+import { PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
 	name: 'ban',
 	description: 'Ban a user with optional reason.',
 	type: ApplicationCommandType.ChatInput,

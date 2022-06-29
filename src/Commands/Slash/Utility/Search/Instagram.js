@@ -1,10 +1,10 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
-const { Colors, Emojis } = require('../../../../Utils/Constants');
-const { fetch } = require('undici');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { Colors, Emojis } from '../../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -44,4 +44,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
-};
+}

@@ -1,6 +1,6 @@
-exports.Badges = require('../Assets/js/Badge');
+export * from '../Assets/js/Badge.js';
 
-exports.Colors = {
+export const Colors = {
 	Default: 0x2f3136,
 	Green: 0x77dd77,
 	Yellow: 0xfdfd96,
@@ -9,7 +9,7 @@ exports.Colors = {
 	Grey: 0xcfcfc4
 };
 
-exports.Credentials = {
+export const Credentials = {
 	ImdbApiKey: process.env.IMDB_API_KEY,
 	ImgurClientId: process.env.IMGUR_CLIENT_ID,
 	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
@@ -17,7 +17,7 @@ exports.Credentials = {
 	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET
 };
 
-exports.Emojis = {
+export const Emojis = {
 	Alarm: '<:alarm:950481082191581224>',
 	Info: '<:info:950481046821036082>',
 	Online: '<:online:712397262256472075>',
@@ -28,7 +28,7 @@ exports.Emojis = {
 	Spotify: '<:spotify:950481019012804659>'
 };
 
-exports.Links = {
+export const Links = {
 	SupportServer: process.env.SUPPORT_SERVER_URL,
 	LoggerWebhook: process.env.LOGGER_WEBHOOK_URL,
 	ReportWebhook: process.env.REPORT_WEBHOOK_URL,

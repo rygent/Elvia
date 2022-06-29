@@ -1,10 +1,11 @@
-const { Collection } = require('@discordjs/collection');
-const { connect } = require('mongoose');
-const UserData = require('../Schemas/UserData');
-const GuildData = require('../Schemas/GuildData');
-const MemberData = require('../Schemas/MemberData');
+import { Collection } from '@discordjs/collection';
+import UserData from '../Schemas/UserData.js';
+import GuildData from '../Schemas/GuildData.js';
+import MemberData from '../Schemas/MemberData.js';
+import mongoose from 'mongoose';
+const { connect } = mongoose;
 
-module.exports = class Database {
+export default class Database {
 
 	constructor(client) {
 		this.client = client;
@@ -86,4 +87,4 @@ module.exports = class Database {
 		}
 	}
 
-};
+}

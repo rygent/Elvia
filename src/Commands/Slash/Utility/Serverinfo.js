@@ -1,10 +1,10 @@
-const Command = require('../../../Structures/Interaction');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { ChannelType } = require('discord-api-types/v10');
-const { time, userMention } = require('discord.js');
-const { Colors } = require('../../../Utils/Constants');
+import Command from '../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { ChannelType } from 'discord-api-types/v10';
+import { time, userMention } from 'discord.js';
+import { Colors } from '../../../Utils/Constants.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -40,4 +40,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed] });
 	}
 
-};
+}

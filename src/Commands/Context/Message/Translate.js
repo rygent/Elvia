@@ -1,7 +1,7 @@
-const Command = require('../../../Structures/Interaction');
-const translate = require('@iamtraction/google-translate');
+import Command from '../../../Structures/Interaction.js';
+import translate from '@iamtraction/google-translate';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -21,4 +21,4 @@ module.exports = class extends Command {
 		return interaction.editReply({ content: translated.text });
 	}
 
-};
+}

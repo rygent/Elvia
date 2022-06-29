@@ -1,13 +1,13 @@
-const Command = require('../../../Structures/Command');
-const { EmbedBuilder } = require('@discordjs/builders');
-const { time, userMention, version: DJSVersion } = require('discord.js');
-const { version: BOTVersion } = require('../../../../package.json');
-const { Colors, Emojis } = require('../../../Utils/Constants');
-const moment = require('moment');
-const si = require('systeminformation');
-require('moment-duration-format');
+import Command from '../../../Structures/Command.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { time, userMention, version as DJSVersion } from 'discord.js';
+import { Colors, Emojis } from '../../../Utils/Constants.js';
+import pkg from '../../../../package.json' assert { type: 'json' };
+import si from 'systeminformation';
+import moment from 'moment';
+import 'moment-duration-format';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -44,7 +44,7 @@ module.exports = class extends Command {
 				`***ID:*** \`${this.client.user.id}\``,
 				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(user => userMention(user)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
-				`***Version:*** v${BOTVersion}`,
+				`***Version:*** v${pkg.version}`,
 				`***Node.JS:*** ${process.version}`,
 				`***Library:*** Discord.JS v${DJSVersion}`,
 				`***Created:*** ${time(new Date(this.client.user.createdAt), 'D')} (${time(new Date(this.client.user.createdAt), 'R')})`
@@ -55,11 +55,11 @@ module.exports = class extends Command {
 				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
 				`***Disk:*** ${this.client.utils.formatBytes(sys.fsSize[0].used)} / ${this.client.utils.formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hours], m [minutes], s [seconds]')}`,
-				`***Host:*** ${moment.duration(sys.time.uptime * 1e3).format('D [days], H [hours], m [minutes], s [seconds]')}`
+				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hours], m [minutes], s [seconds]')}`
 			].join('\n'), inline: false })
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: message.author.avatarURL() });
 
 		return message.reply({ embeds: [embed] });
 	}
 
-};
+}

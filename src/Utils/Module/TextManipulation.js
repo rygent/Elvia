@@ -1,6 +1,9 @@
-const Faces = require('../../Assets/json/Faces.json');
+import Faces from '../../Assets/json/Faces.json' assert { type: 'json' };
+import { tinyCapital } from '../../Assets/js/Text.js';
+
 const numWords = ['zero', 'one', 'two', 'three', 'four',
 	'five', 'six', 'seven', 'eight', 'nine'];
+
 const charTable = {
 	'!': 'exclamation',
 	'?': 'question',
@@ -12,15 +15,15 @@ const charTable = {
 	'/': 'heavy_division_sign'
 };
 
-const { tinyCapital } = require('../../Assets/js/Text');
+export function owofy(text) {
+	return text.replace(/[lr]/g, 'w')
+		.replace(/[LR]/g, 'W')
+		.replace(/(n)([aeiou])/gi, '$1y$2')
+		.replace(/ove/g, 'uv')
+		.replace(/!+/g, `! ${Faces[Math.floor(Math.random() * Faces.length)]}`);
+}
 
-exports.owofy = (text) => text.replace(/[lr]/g, 'w')
-	.replace(/[LR]/g, 'W')
-	.replace(/(n)([aeiou])/gi, '$1y$2')
-	.replace(/ove/g, 'uv')
-	.replace(/!+/g, `! ${Faces[Math.floor(Math.random() * Faces.length)]}`);
-
-exports.regional = (text) => {
+export function regional(text) {
 	text = [...text.toLowerCase()];
 	let finalString = '';
 	for (let i = 0; i < text.length; i++) {
@@ -41,11 +44,13 @@ exports.regional = (text) => {
 		finalString += `:${emojiText}: `;
 	}
 	return finalString.trimEnd();
-};
+}
 
-exports.reverse = (text) => text.split('').reverse().join('');
+export function reverse(text) {
+	return text.split('').reverse().join('');
+}
 
-exports.smallcaps = (text) => {
+export function smallcaps(text) {
 	let c = '';
 	let a;
 
@@ -57,8 +62,12 @@ exports.smallcaps = (text) => {
 		c += a;
 	}
 	return c;
-};
+}
 
-exports.spongemock = (text) => text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
+export function spongemock(text) {
+	return text.split('').map((str, i) => i % 2 === 0 ? str.toLowerCase() : str.toUpperCase()).join('');
+}
 
-exports.vaporwave = (text) => text.replace(/[a-zA-Z0-9!\\?\\.'";:\]\\[}{\\)\\(@#\\$%\\^&\\*\-_=\\+`~><]/g, (char) => String.fromCharCode(0xfee0 + char.charCodeAt(0))).replace(/ /g, '　');
+export function vaporwave(text) {
+	return text.replace(/[a-zA-Z0-9!\\?\\.'";:\]\\[}{\\)\\(@#\\$%\\^&\\*\-_=\\+`~><]/g, (char) => String.fromCharCode(0xfee0 + char.charCodeAt(0))).replace(/ /g, '　');
+}

@@ -1,11 +1,11 @@
-const Command = require('../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
-const { resolveColor } = require('discord.js');
-const { Colors } = require('../../../Utils/Constants');
-const { fetch } = require('undici');
+import Command from '../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { resolveColor } from 'discord.js';
+import { Colors } from '../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -25,8 +25,8 @@ module.exports = class extends Command {
 		if (color) {
 			if (!user.hexAccentColor) return interaction.reply({ content: `**${user.tag}**'s has no banner color!`, ephemeral: true });
 
-			const body = await fetch(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, { method: 'GET' });
-			const response = await body.json();
+			const raw = await fetch(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, { method: 'GET' });
+			const response = await raw.json();
 
 			embed.setColor(resolveColor(response.hex.clean));
 			embed.setDescription([
@@ -53,4 +53,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
-};
+}

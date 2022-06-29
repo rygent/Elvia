@@ -1,9 +1,9 @@
-const Command = require('../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
-const { Colors } = require('../../../Utils/Constants');
+import Command from '../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { Colors } from '../../../Utils/Constants.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -30,4 +30,4 @@ module.exports = class extends Command {
 		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
 	}
 
-};
+}

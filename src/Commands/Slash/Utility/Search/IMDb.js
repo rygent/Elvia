@@ -1,12 +1,12 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { time } = require('discord.js');
-const { Colors, Credentials } = require('../../../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const imdb = require('imdb-api');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { time } from 'discord.js';
+import { Colors, Credentials } from '../../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import imdb from 'imdb-api';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -27,15 +27,15 @@ module.exports = class extends Command {
 					.setCustomId(selectId)
 					.setPlaceholder('Select a movies/series!')
 					.addOptions(...response.map(data => ({
-						label: `${data.title} (${data.year})`,
 						value: data.imdbid,
+						label: `${data.title} (${data.year})`,
 						description: data.type.toSentenceCase()
 					}))));
 
 			const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 			const filter = (i) => i.user.id === interaction.user.id;
-			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
+			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				const [ids] = i.values;
@@ -92,4 +92,4 @@ module.exports = class extends Command {
 		}
 	}
 
-};
+}

@@ -1,12 +1,12 @@
-const Event = require('../../Structures/Event');
-const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Collection } = require('@discordjs/collection');
-const { Links } = require('../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const ReportModal = require('../../Utils/Module/ReportModal');
+import Event from '../../Structures/Event.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { Collection } from '@discordjs/collection';
+import { Links } from '../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import ReportModal from '../../Utils/Module/ReportModal.js';
 
-module.exports = class extends Event {
+export default class extends Event {
 
 	constructor(...args) {
 		super(...args, {
@@ -61,7 +61,7 @@ module.exports = class extends Event {
 				const expiration = cooldown.get(interaction.user.id) + command.cooldown;
 
 				if (current < expiration) {
-					const time = (expiration - current) / 1e3;
+					const time = (expiration - current) / 1000;
 					return interaction.reply({ content: `You've to wait **${time.toFixed(2)}** second(s) to continue.`, ephemeral: true });
 				}
 			}
@@ -72,7 +72,7 @@ module.exports = class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (error.name === 'DiscordAPIError[10062]') return;
+				if (interaction.replied || error.name === 'DiscordAPIError[10062]') return;
 				this.client.logger.error(error.stack, error);
 
 				const content = [
@@ -93,12 +93,11 @@ module.exports = class extends Event {
 						.setDisabled(state));
 
 				let reply;
-				if (interaction.replied) reply = await interaction.followUp({ content, components: [button(false)], ephemeral: true });
-				else if (interaction.deferred) reply = await interaction.editReply({ content, components: [button(false)] });
+				if (interaction.deferred) reply = await interaction.editReply({ content, components: [button(false)] });
 				else reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
 
 				const filter = (i) => i.user.id === interaction.user.id;
-				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600e3 });
+				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600_000 });
 
 				const report = new ReportModal(this.client, { collector });
 
@@ -132,4 +131,4 @@ module.exports = class extends Event {
 		return command;
 	}
 
-};
+}

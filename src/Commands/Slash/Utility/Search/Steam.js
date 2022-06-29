@@ -1,11 +1,11 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { Colors } = require('../../../../Utils/Constants');
-const { nanoid } = require('nanoid');
-const { fetch } = require('undici');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { Colors } from '../../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -27,14 +27,14 @@ module.exports = class extends Command {
 				.setCustomId(selectId)
 				.setPlaceholder('Select a game!')
 				.addOptions(...response.map(data => ({
-					label: data.name,
-					value: data.id.toString()
+					value: data.id.toString(),
+					label: data.name
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
@@ -79,4 +79,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

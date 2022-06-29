@@ -1,10 +1,10 @@
-const Command = require('../../../../Structures/Interaction');
-const { ActionRowBuilder, ButtonBuilder } = require('@discordjs/builders');
-const { ButtonStyle, ComponentType } = require('discord-api-types/v10');
-const { parseEmoji } = require('discord.js');
-const { nanoid } = require('nanoid');
+import Command from '../../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { parseEmoji } from 'discord.js';
+import { nanoid } from 'nanoid';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -37,7 +37,7 @@ module.exports = class extends Command {
 		const reply = await interaction.reply({ content: `Are you sure that you want to delete the \`:${emojis.name}:\` ${emojis} emoji?`, components: [button] });
 
 		const filter = (i) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60e3 });
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60_000 });
 
 		collector.on('collect', async (i) => {
 			switch (i.customId) {
@@ -61,4 +61,4 @@ module.exports = class extends Command {
 		});
 	}
 
-};
+}

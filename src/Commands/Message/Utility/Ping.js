@@ -1,6 +1,6 @@
-const Command = require('../../../Structures/Command');
+import Command from '../../../Structures/Command.js';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -21,4 +21,4 @@ module.exports = class extends Command {
 		return message.reply({ content });
 	}
 
-};
+}

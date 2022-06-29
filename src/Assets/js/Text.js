@@ -1,4 +1,4 @@
-exports.tinyCapital = {
+export const tinyCapital = {
 	A: '\u1d00',
 	B: '\u0299',
 	C: '\u1d04',

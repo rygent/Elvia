@@ -1,6 +1,6 @@
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord-api-types/v10');
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
 
-module.exports = {
+export default {
 	name: 'roll',
 	description: 'Roll random number with optional minimum and maximum numbers or using a dice.',
 	type: ApplicationCommandType.ChatInput,

@@ -1,10 +1,10 @@
-const Command = require('../../../Structures/Command');
-const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('@discordjs/builders');
-const { ComponentType } = require('discord-api-types/v10');
-const { Colors, Links } = require('../../../Utils/Constants');
-const { nanoid } = require('nanoid');
+import Command from '../../../Structures/Command.js';
+import { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
+import { ComponentType } from 'discord-api-types/v10';
+import { Colors, Links } from '../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
@@ -34,7 +34,7 @@ module.exports = class extends Command {
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
 				`***Permission(s):*** ${cmd.memberPermissions.toArray().length > 0 ? `${cmd.memberPermissions.toArray().map(perm => `\`${this.client.utils.formatPermissions(perm)}\``).join(', ')}` : 'No permission required.'}`,
-				`***Cooldown:*** ${cmd.cooldown / 1e3} second(s)`,
+				`***Cooldown:*** ${cmd.cooldown / 1000} second(s)`,
 				`***Usage:*** ${cmd.usage ? `\`${this.client.prefix + cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix + cmd.name}\``}`
 			].join('\n'));
 
@@ -65,15 +65,15 @@ module.exports = class extends Command {
 					.setPlaceholder('Select a category!')
 					.setDisabled(state)
 					.addOptions(...categories.filter(({ directory }) => this.filterCategory(directory, message)).map(({ directory }) => ({
-						label: directory,
 						value: directory.toLowerCase(),
+						label: directory,
 						description: `Shows all the ${directory} Commands`
 					}))));
 
 			const reply = await message.reply({ embeds: [embed], components: [select(false)] });
 
 			const filter = (i) => i.user.id === message.author.id;
-			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60e3 });
+			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
 			collector.on('collect', async (i) => {
 				collector.resetTimer();
@@ -111,4 +111,4 @@ module.exports = class extends Command {
 		}
 	}
 
-};
+}

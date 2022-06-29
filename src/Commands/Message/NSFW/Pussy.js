@@ -1,17 +1,17 @@
-const Command = require('../../../Structures/Command');
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { ButtonStyle } = require('discord-api-types/v10');
-const { Colors } = require('../../../Utils/Constants');
-const { fetch } = require('undici');
+import Command from '../../../Structures/Command.js';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ButtonStyle } from 'discord-api-types/v10';
+import { Colors } from '../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
-module.exports = class extends Command {
+export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			name: 'pussy',
 			description: 'This command contain explicit content!',
 			category: 'NSFW',
-			cooldown: 10e3,
+			cooldown: 10_000,
 			disabled: true,
 			nsfw: true
 		});
@@ -35,4 +35,4 @@ module.exports = class extends Command {
 		return message.reply({ embeds: [embed], components: [button] });
 	}
 
-};
+}
