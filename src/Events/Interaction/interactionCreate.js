@@ -29,7 +29,7 @@ module.exports = class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied) return;
+				if (interaction.replied || error.name === 'DiscordAPIError[10062]') return;
 				this.client.logger.error(error.stack);
 
 				if (interaction.deferred) {
