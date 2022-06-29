@@ -1,14 +1,11 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "branchConcurrentLimit": 10,
+    "commitMessageAction": "Bump",
     "commitMessageTopic": "{{depName}}",
     "dependencyDashboard": true,
-    "enabled": true,
     "labels": ["dependencies"],
     "packageRules": [{
-        "matchUpdateTypes": ["major"],
-        "dependencyDashboardApproval": true
-    }, {
         "matchUpdateTypes": ["minor", "patch"],
         "automerge": true
     }, {
