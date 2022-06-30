@@ -1044,11 +1044,6 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.6.tgz#022e9218c637f9f3fc9c35ab9c9193f05add60b2"
   integrity sha512-0sQoMh9s0BYsm+12Huy/rkKxVu4R1+r96YX5cG44rHV0pQ6iC3Q+mkoMFaGWObMFYQxCVT+ssG1ksneA2MI9KQ==
 
-flip-text@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/flip-text/-/flip-text-1.2.0.tgz#c26e4218d7d115d1a0d7433c32097c6d7de77193"
-  integrity sha512-6gZynclke4Cwl1VCUXDjryfqYZIIYwZnlYHOsUF5Btrax2+6VndQdsdwDiPyKE4Uv2qYFFxzM4XYPjF7DfdBhw==
-
 follow-redirects@^1.14.9:
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"

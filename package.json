@@ -33,7 +33,6 @@
     "discord.js": "^14.0.0-dev.1656547803-27d8deb",
     "dotenv": "^16.0.1",
     "emoji-regex": "^10.1.0",
-    "flip-text": "^1.2.0",
     "glob": "^8.0.3",
     "imdb-api": "^4.4.1",
     "kitsu": "^10.0.0-alpha.24",

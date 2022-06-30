@@ -1,5 +1,23 @@
-import { charTable, numberWords, tinyCapital } from '../../Assets/js/TextData.js';
+import { charTable, flipTable, numberWords, tinyCapital } from '../../Assets/js/TextData.js';
 import Faces from '../../Assets/json/Faces.json' assert { type: 'json' };
+
+Object.keys(flipTable).forEach((key) => {
+	var value = flipTable[key];
+	if (!flipTable[value]) {
+		flipTable[value] = key;
+	}
+});
+
+export function flip(text) {
+	var result = '',
+		c = text.length,
+		ch = '';
+	for (; c >= 0; --c) {
+		ch = text.charAt(c);
+		result += flipTable[ch] || flipTable[ch.toLowerCase()] || ch;
+	}
+	return result;
+}
 
 export function owofy(text) {
 	return text.replace(/[lr]/g, 'w')
