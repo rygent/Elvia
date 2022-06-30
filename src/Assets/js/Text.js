@@ -1,3 +1,19 @@
+export const charTable = {
+	'!': 'exclamation',
+	'?': 'question',
+	'+': 'heavy_plus_sign',
+	'-': 'heavy_minus_sign',
+	'×': 'heavy_multiplication_x',
+	'*': 'asterisk',
+	$: 'heavy_dollar_sign',
+	'/': 'heavy_division_sign'
+};
+
+export const numberWords = [
+	'zero', 'one', 'two', 'three', 'four',
+	'five', 'six', 'seven', 'eight', 'nine'
+];
+
 export const tinyCapital = {
 	A: '\u1d00',
 	B: '\u0299',

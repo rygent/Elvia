@@ -1,19 +1,5 @@
+import { charTable, numberWords, tinyCapital } from '../../Assets/js/Text.js';
 import Faces from '../../Assets/json/Faces.json' assert { type: 'json' };
-import { tinyCapital } from '../../Assets/js/Text.js';
-
-const numWords = ['zero', 'one', 'two', 'three', 'four',
-	'five', 'six', 'seven', 'eight', 'nine'];
-
-const charTable = {
-	'!': 'exclamation',
-	'?': 'question',
-	'+': 'heavy_plus_sign',
-	'-': 'heavy_minus_sign',
-	'×': 'heavy_multiplication_x',
-	'*': 'asterisk',
-	'$': 'heavy_dollar_sign', // eslint-disable-line quote-props
-	'/': 'heavy_division_sign'
-};
 
 export function owofy(text) {
 	return text.replace(/[lr]/g, 'w')
@@ -32,7 +18,7 @@ export function regional(text) {
 		if (rawChar.match(/[a-z]/i)) {
 			emojiText = `regional_indicator_${rawChar}`;
 		} else if (rawChar.match(/[0-9]/i)) {
-			emojiText = `${numWords[parseInt(rawChar)]}`;
+			emojiText = `${numberWords[parseInt(rawChar)]}`;
 		} else if (rawChar !== ' ') {
 			const symbol = charTable[rawChar];
 			if (!symbol) continue;
