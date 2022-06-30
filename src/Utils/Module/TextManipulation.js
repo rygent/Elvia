@@ -1,4 +1,4 @@
-import { charTable, numberWords, tinyCapital } from '../../Assets/js/Text.js';
+import { charTable, numberWords, tinyCapital } from '../../Assets/js/TextData.js';
 import Faces from '../../Assets/json/Faces.json' assert { type: 'json' };
 
 export function owofy(text) {
