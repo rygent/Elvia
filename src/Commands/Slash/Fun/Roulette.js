@@ -10,7 +10,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const title = await interaction.options.getString('title', true);
+		const title = interaction.options.getString('title', true);
 
 		const member = await interaction.guild.members.cache.filter(({ user }) => !user.bot).random();
 

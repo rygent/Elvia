@@ -13,7 +13,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const amount = await interaction.options.getInteger('amount');
+		const amount = interaction.options.getInteger('amount');
 
 		const customemoji = RegExp(/(<a?)?:\w+:(\d{18}>)?/g);
 		const unifiedemoji = emojiregex();

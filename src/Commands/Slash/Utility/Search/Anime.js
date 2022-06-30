@@ -16,7 +16,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 		await interaction.deferReply();
 
 		const kitsu = new Kitsu();

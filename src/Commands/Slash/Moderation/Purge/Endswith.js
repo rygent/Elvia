@@ -12,8 +12,8 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const content = await interaction.options.getString('content', true);
-		const amount = await interaction.options.getInteger('amount');
+		const content = interaction.options.getString('content', true);
+		const amount = interaction.options.getInteger('amount');
 
 		const fetch = await interaction.channel.messages.fetch({ limit: amount });
 		const data = [];

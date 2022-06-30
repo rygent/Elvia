@@ -14,7 +14,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 
 		const raw = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { method: 'GET' });
 		if (raw.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });

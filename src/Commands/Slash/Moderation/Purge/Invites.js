@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const amount = await interaction.options.getInteger('amount');
+		const amount = interaction.options.getInteger('amount');
 		const regex = RegExp(/(discord\.(gg|io|me|li)\/.+|(discord|discordapp)\.com\/invite\/.+)/i);
 
 		const fetch = await interaction.channel.messages.fetch({ limit: amount });

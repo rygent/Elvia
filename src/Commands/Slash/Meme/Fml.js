@@ -11,7 +11,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const language = await interaction.options.getString('language') || 'en';
+		const language = interaction.options.getString('language') || 'en';
 
 		const raw = await fetch(`https://blague.xyz/api/vdm/random?lang=${language}`, { method: 'GET' });
 		const response = await raw.json();

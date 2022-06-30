@@ -11,7 +11,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const text = await interaction.options.getString('text', true);
+		const text = interaction.options.getString('text', true);
 
 		return interaction.reply({ content: reverse(text) });
 	}

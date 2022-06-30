@@ -14,7 +14,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 
 		const API_URI = 'https://api.openweathermap.org/data/2.5/weather';
 		const raw = await fetch(`${API_URI}?q=${encodeURIComponent(search)}&appid=${Credentials.OpenWeatherApiKey}&units=metric`, { method: 'GET' });

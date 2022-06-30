@@ -18,7 +18,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 
 		const spotify = new Spotify({ id: Credentials.SpotifyClientId, secret: Credentials.SpotifyClientSecret });
 

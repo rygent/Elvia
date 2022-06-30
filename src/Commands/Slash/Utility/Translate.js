@@ -13,9 +13,9 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const text = await interaction.options.getString('text', true);
-		const fromLanguage = await interaction.options.getString('from');
-		const toLanguage = await interaction.options.getString('to');
+		const text = interaction.options.getString('text', true);
+		const fromLanguage = interaction.options.getString('from');
+		const toLanguage = interaction.options.getString('to');
 
 		let locale;
 		if (!interaction.inGuild()) locale = !['zh-CN', 'zh-TW'].includes(interaction.locale) ? new Intl.Locale(interaction.locale).language : interaction.locale;

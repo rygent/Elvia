@@ -10,7 +10,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const message = await interaction.options.getMessage('message', true);
+		const message = interaction.options.getMessage('message', true);
 		await interaction.deferReply({ ephemeral: true });
 
 		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });

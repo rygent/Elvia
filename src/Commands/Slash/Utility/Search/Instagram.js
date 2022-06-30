@@ -14,7 +14,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const username = await interaction.options.getString('username', true);
+		const username = interaction.options.getString('username', true);
 
 		const raw = await fetch(`https://instagram.com/${username}/feed/?__a=1`, { method: 'GET' });
 		if (raw.status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });

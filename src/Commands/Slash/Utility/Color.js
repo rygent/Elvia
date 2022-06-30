@@ -15,7 +15,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		let color = await interaction.options.getString('color', true);
+		let color = interaction.options.getString('color', true);
 
 		if (color.match(/^#?[0-9a-f]{3,6}$/g)) {
 			color = color.toLowerCase();

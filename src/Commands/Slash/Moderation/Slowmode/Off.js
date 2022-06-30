@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const channel = await interaction.options.getChannel('channel') || interaction.channel;
+		const channel = interaction.options.getChannel('channel') || interaction.channel;
 
 		await channel.setRateLimitPerUser(0);
 

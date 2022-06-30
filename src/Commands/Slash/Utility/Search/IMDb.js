@@ -16,7 +16,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 
 		try {
 			const response = await imdb.search({ name: search }, { apiKey: Credentials.ImdbApiKey }, 1).then(({ results }) => results);

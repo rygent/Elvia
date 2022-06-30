@@ -85,7 +85,7 @@ export default class BaseClient extends Client {
 		await this.utils.loadInteractions();
 		await this.utils.loadCommands();
 		await this.utils.loadEvents();
-		await this.database.loadDatabases();
+		this.database.loadDatabases();
 		super.login(token);
 	}
 

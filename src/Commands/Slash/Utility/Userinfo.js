@@ -13,7 +13,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('user') || interaction.member;
+		const member = interaction.options.getMember('user') || interaction.member;
 
 		const status = {
 			online: `${Emojis.Online} Online`,

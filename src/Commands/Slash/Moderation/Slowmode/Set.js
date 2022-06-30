@@ -15,8 +15,8 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const duration = await interaction.options.getString('duration', true);
-		const channel = await interaction.options.getChannel('channel') || interaction.channel;
+		const duration = interaction.options.getString('duration', true);
+		const channel = interaction.options.getChannel('channel') || interaction.channel;
 
 		const parsedDuration = ms(duration) / 1000;
 		if (parsedDuration < 1 || parsedDuration > 21600) return interaction.reply({ content: 'Slowmode time must be a number between 1 second and 6 hours.', ephemeral: true });

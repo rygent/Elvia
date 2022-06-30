@@ -15,7 +15,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const search = await interaction.options.getString('search', true);
+		const search = interaction.options.getString('search', true);
 
 		const raw = await fetch(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, { method: 'GET' });
 		const response = await raw.json().then(({ items }) => items.filter(({ type }) => type === 'app'));

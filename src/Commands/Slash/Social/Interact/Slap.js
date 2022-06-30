@@ -13,7 +13,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('user');
+		const member = interaction.options.getMember('user');
 
 		const raw = await fetch(`https://nekos.life/api/v2/img/slap`, { method: 'GET' });
 		const response = await raw.json();

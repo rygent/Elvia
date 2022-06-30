@@ -12,8 +12,8 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const user = await interaction.options.getUser('member', true);
-		const reason = await interaction.options.getString('reason');
+		const user = interaction.options.getUser('member', true);
+		const reason = interaction.options.getString('reason');
 
 		const member = await interaction.guild.members.cache.get(user.id);
 		if (!member) return interaction.reply({ content: 'Member not found, please verify that this user is a server member.', ephemeral: true });

@@ -11,9 +11,9 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const minValue = await interaction.options.getInteger('min');
-		const maxValue = await interaction.options.getInteger('max');
-		const dice = await interaction.options.getString('dice');
+		const minValue = interaction.options.getInteger('min');
+		const maxValue = interaction.options.getInteger('max');
+		const dice = interaction.options.getString('dice');
 
 		if (dice) {
 			const roll = new DiceRoll(dice);

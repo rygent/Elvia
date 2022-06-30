@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const media = await interaction.options.getAttachment('media', true);
+		const media = interaction.options.getAttachment('media', true);
 		await interaction.deferReply({ ephemeral: true });
 
 		const stream = await fetch(media.attachment, { method: 'GET' });

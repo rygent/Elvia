@@ -14,7 +14,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const word = await interaction.options.getString('word', true);
+		const word = interaction.options.getString('word', true);
 
 		const raw = await fetch(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, { method: 'GET' });
 		const response = await raw.json().then(({ list }) => list.sort((a, b) => b.thumbs_up - a.thumbs_up)[0]);

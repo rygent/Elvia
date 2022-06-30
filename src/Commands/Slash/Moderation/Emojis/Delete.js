@@ -16,7 +16,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const emoji = await interaction.options.getString('emoji', true);
+		const emoji = interaction.options.getString('emoji', true);
 
 		const parse = parseEmoji(emoji);
 

@@ -12,9 +12,9 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const user = await interaction.options.getUser('user', true);
-		const reason = await interaction.options.getString('reason');
-		const days = await interaction.options.getInteger('days');
+		const user = interaction.options.getUser('user', true);
+		const reason = interaction.options.getString('reason');
+		const days = interaction.options.getInteger('days');
 
 		if (user.id === interaction.user.id) return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
 		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });

@@ -12,8 +12,8 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const user = await interaction.options.getString('user', true);
-		const reason = await interaction.options.getString('reason');
+		const user = interaction.options.getString('user', true);
+		const reason = interaction.options.getString('reason');
 
 		const banned = await interaction.guild.bans.fetch();
 

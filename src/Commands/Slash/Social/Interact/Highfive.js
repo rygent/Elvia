@@ -13,7 +13,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('user');
+		const member = interaction.options.getMember('user');
 
 		const raw = await fetch(`https://api.waifu.pics/sfw/highfive`, { method: 'GET' });
 		const response = await raw.json();

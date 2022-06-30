@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const member = await interaction.options.getMember('user');
+		const member = interaction.options.getMember('user');
 
 		const button = new ActionRowBuilder()
 			.addComponents(new ButtonBuilder()

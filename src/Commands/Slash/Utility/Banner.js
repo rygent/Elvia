@@ -16,7 +16,7 @@ export default class extends Command {
 
 	async run(interaction) {
 		const user = await this.client.users.fetch(interaction.options.getUser('user') || interaction.user, { force: true });
-		const color = await interaction.options.getBoolean('color');
+		const color = interaction.options.getBoolean('color');
 
 		const embed = new EmbedBuilder()
 			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })

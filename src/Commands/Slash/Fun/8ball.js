@@ -11,7 +11,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const question = await interaction.options.getString('question', true);
+		const question = interaction.options.getString('question', true);
 
 		const choice = Answer[Math.floor(Math.random() * Answer.length)];
 

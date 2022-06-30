@@ -13,8 +13,8 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const name = await interaction.options.getString('name', true);
-		const emoji = await interaction.options.getString('emoji', true);
+		const name = interaction.options.getString('name', true);
+		const emoji = interaction.options.getString('emoji', true);
 
 		const regex = RegExp(/(https?:\/\/[^\s]+)/g);
 

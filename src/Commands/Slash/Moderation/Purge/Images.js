@@ -12,7 +12,7 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const amount = await interaction.options.getInteger('amount');
+		const amount = interaction.options.getInteger('amount');
 		const regex = RegExp(/image\/(avif|gif|jpeg|png|svg\+xml)/g);
 
 		const fetch = await interaction.channel.messages.fetch({ limit: amount });
