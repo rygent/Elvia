@@ -1,6 +1,6 @@
 import { verifyString } from 'discord.js';
 
-export * from './Module/TextManipulation.js';
+export * from './Module/TextGenerator.js';
 
 export function rgbToHex(rgb) {
 	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
