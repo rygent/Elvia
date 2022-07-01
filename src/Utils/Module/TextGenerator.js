@@ -1,13 +1,6 @@
 import { charTable, flipTable, numberWords, tinyCapital } from '../../Assets/js/TextData.js';
 import Faces from '../../Assets/json/Faces.json' assert { type: 'json' };
 
-Object.keys(flipTable).forEach((key) => {
-	var value = flipTable[key];
-	if (!flipTable[value]) {
-		flipTable[value] = key;
-	}
-});
-
 export function flip(text) {
 	var result = '',
 		c = text.length,
