@@ -1,7 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import moment from 'moment';
-import ms from 'ms';
-import 'moment-duration-format';
+import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
 export default class extends Command {
 
@@ -18,12 +16,12 @@ export default class extends Command {
 		const duration = interaction.options.getString('duration', true);
 		const channel = interaction.options.getChannel('channel') || interaction.channel;
 
-		const parsedDuration = ms(duration) / 1000;
-		if (parsedDuration < 1 || parsedDuration > 21600) return interaction.reply({ content: 'Slowmode time must be a number between 1 second and 6 hours.', ephemeral: true });
+		const parseDuration = new Duration(duration).offset / 1000;
+		if (parseDuration < 1 || parseDuration > 21600) return interaction.reply({ content: 'Slowmode time must be a number between 1 second and 6 hours.', ephemeral: true });
 
-		await channel.setRateLimitPerUser(parsedDuration);
+		await channel.setRateLimitPerUser(parseDuration);
 
-		return interaction.reply({ content: `Channel slowmode was updated, it is now set to **${moment.duration(parsedDuration * 1000).format('H [hours], m [minutes], s [seconds]', { trim: 'both' })}**.` });
+		return interaction.reply({ content: `Channel slowmode was updated, it is now set to **${new DurationFormatter().format(parseDuration * 1000)}**.` });
 	}
 
 }

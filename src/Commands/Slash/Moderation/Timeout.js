@@ -1,6 +1,6 @@
 import Command from '../../../Structures/Interaction.js';
 import { time } from 'discord.js';
-import ms from 'ms';
+import { Duration } from '@sapphire/time-utilities';
 
 export default class extends Command {
 
@@ -28,11 +28,11 @@ export default class extends Command {
 		}
 		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		var parsedDuration = ms(duration);
-		if (parsedDuration > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
-		if (parsedDuration > 241884e4 && parsedDuration <= 24192e5) parsedDuration = 241884e4;
+		let parseDuration = new Duration(duration).offset;
+		if (parseDuration > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
+		else if (parseDuration > 241884e4 && parseDuration <= 24192e5) parseDuration = 241884e4;
 
-		await member.timeout(parsedDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
+		await member.timeout(parseDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
 
 		return interaction.reply({ content: [
 			`**${member.user.tag}** was timed out!`,
