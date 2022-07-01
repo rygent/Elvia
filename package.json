@@ -29,7 +29,7 @@
     "@discordjs/rest": "^0.6.0-dev.1656547798-27d8deb",
     "@iamtraction/google-translate": "^1.1.2",
     "colorette": "^2.0.19",
-    "discord-api-types": "^0.35.0",
+    "discord-api-types": "^0.36.0",
     "discord.js": "^14.0.0-dev.1656547803-27d8deb",
     "dotenv": "^16.0.1",
     "emoji-regex": "^10.1.0",
