@@ -29,8 +29,8 @@ export default class extends Command {
 
 		return interaction.reply({ content: [
 			`**${member.user.tag}** was kicked!`,
-			`${reason ? `\n***Reason:*** ${reason}` : ''}`
-		].join('') });
+			...reason ? [`***Reason:*** ${reason}`] : []
+		].join('\n') });
 	}
 
 }

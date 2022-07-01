@@ -24,8 +24,8 @@ export default class extends Command {
 
 		return interaction.reply({ content: [
 			`**${target.tag}** was unbanned!`,
-			`${reason ? `\n***Reason:*** ${reason}` : ''}`
-		].join('') });
+			...reason ? [`***Reason:*** ${reason}`] : []
+		].join('\n') });
 	}
 
 }

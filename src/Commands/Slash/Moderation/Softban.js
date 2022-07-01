@@ -30,8 +30,8 @@ export default class extends Command {
 
 		return interaction.reply({ content: [
 			`**${user.tag}** was softbanned!`,
-			`${reason ? `\n***Reason:*** ${reason}` : ''}`
-		].join('') });
+			...reason ? [`***Reason:*** ${reason}`] : []
+		].join('\n') });
 	}
 
 }

@@ -58,19 +58,19 @@ export default class extends Command {
 					.setThumbnail(data.poster)
 					.setDescription(data.plot)
 					.addFields({ name: '__Detail__', value: [
-						`***Genre:*** ${data.genres ? data.genres : '`N/A`'}\n`,
-						`***Rating:*** ${rating ? `${rating.value}${data.votes ? ` (by ${data.votes} users)` : ''}` : '`N/A`'}\n`,
-						`***Tomatometer:*** ${tomatometer ? `${tomatometer.value} from [Rotten Tomatoes](https://rottentomatoes.com/)` : '`N/A`'}\n`,
-						`***Metascores:*** ${metascore ? `${metascore.value} from [Metacritic](https://metacritic.com/)` : '`N/A`'}\n`,
-						`***Released:*** ${data.released ? time(new Date(data.released), 'D') : '`N/A`'}\n`,
-						`***Rated:*** ${data.rated ? data.rated : '`N/A`'}\n`,
-						`***Type:*** ${data.type ? data.type.toTitleCase() : '`N/A`'}\n`,
-						`***Runtime:*** ${data.runtime !== 'N/A' ? data.runtime : '`N/A`'}\n`,
-						`${data.series ? `***Total Seasons:*** ${data.totalseasons ? data.totalseasons : '`N/A`'}\n` : ''}`,
-						`***Director:*** ${data.director !== 'N/A' ? data.director : '`N/A`'}\n`,
+						`***Genre:*** ${data.genres ? data.genres : '`N/A`'}`,
+						`***Rating:*** ${rating ? `${rating.value}${data.votes ? ` (by ${data.votes} users)` : ''}` : '`N/A`'}`,
+						`***Tomatometer:*** ${tomatometer ? `${tomatometer.value} from [Rotten Tomatoes](https://rottentomatoes.com/)` : '`N/A`'}`,
+						`***Metascores:*** ${metascore ? `${metascore.value} from [Metacritic](https://metacritic.com/)` : '`N/A`'}`,
+						`***Released:*** ${data.released ? time(new Date(data.released), 'D') : '`N/A`'}`,
+						`***Rated:*** ${data.rated ? data.rated : '`N/A`'}`,
+						`***Type:*** ${data.type ? data.type.toTitleCase() : '`N/A`'}`,
+						`***Runtime:*** ${data.runtime !== 'N/A' ? data.runtime : '`N/A`'}`,
+						...data.series ? [`***Total Seasons:*** ${data.totalseasons ? data.totalseasons : '`N/A`'}`] : [],
+						`***Director:*** ${data.director !== 'N/A' ? data.director : '`N/A`'}`,
 						`***Cast:*** ${data.actors !== 'N/A' ? data.actors : '`N/A`'}`,
-						`${data.awards !== 'N/A' ? `\n***Awards:*** ${data.awards}` : ''}`
-					].join(''), inline: false })
+						...data.awards !== 'N/A' ? [`***Awards:*** ${data.awards}`] : []
+					].join('\n'), inline: false })
 					.setFooter({ text: 'Powered by IMDb', iconURL: interaction.user.avatarURL() });
 
 				return i.update({ content: null, embeds: [embed], components: [button] });

@@ -36,9 +36,9 @@ export default class extends Command {
 
 		return interaction.reply({ content: [
 			`**${member.user.tag}** was timed out!`,
-			`${reason ? `\n***Reason:*** ${reason}` : ''}`,
-			`\n***Expiration:*** ${time(new Date(Date.now() + parsedDuration), 'R')}`
-		].join('') });
+			...reason ? [`***Reason:*** ${reason}`] : [],
+			`***Expiration:*** ${time(new Date(Date.now() + parseDuration), 'R')}`
+		].join('\n') });
 	}
 
 }
