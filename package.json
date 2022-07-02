@@ -42,7 +42,7 @@
     "nanoid": "^3.3.4",
     "node-spotify-api": "^1.1.1",
     "openweather-apis": "^4.4.2",
-    "owofy": "^1.0.2",
+    "owofy": "^2.0.0",
     "simple-youtube-api": "^5.2.1",
     "spongemock": "^0.0.8",
     "systeminformation": "^5.11.22"
