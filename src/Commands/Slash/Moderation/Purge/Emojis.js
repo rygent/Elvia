@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import emojiregex from 'emoji-regex';
+import { FormattedCustomEmoji, TwemojiRegex } from '@sapphire/discord-utilities';
 
 export default class extends Command {
 
@@ -22,7 +22,7 @@ export default class extends Command {
 		const data = [];
 
 		fetch.map(m => m).forEach(message => {
-			if ((unifiedemoji.test(message.content) || customemoji.test(message.content)) && !message.pinned) return data.push(message);
+			if ((TwemojiRegex.test(message.content) || FormattedCustomEmoji.test(message.content)) && !message.pinned) return data.push(message);
 		});
 
 		try {
