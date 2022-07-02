@@ -333,10 +333,10 @@
   resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.3.1.tgz#9d861e626dbffae02d808e13f823d4510e450a78"
   integrity sha512-FFTlPOWZX1kDj9xCAsRzH5xEJfawg1lNoYAA+ecOWJMHOfiZYb1uXOI3ne9U4UILSEPwfE68p3T9wUHwIQfR0g==
 
-"@sapphire/discord-utilities@^2.11.2":
-  version "2.11.2"
-  resolved "https://registry.yarnpkg.com/@sapphire/discord-utilities/-/discord-utilities-2.11.2.tgz#e30c82449f877bd9d99df05d986416e41325d54e"
-  integrity sha512-avkmhAw8kvKogYuTx3QSAnoYhQfJ5/fMHVOtM+7QztDz81y2VXMYySLOp4azboXqhR76XOk5lyHi/+Ho+FIqmQ==
+"@sapphire/discord-utilities@^2.11.4":
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/@sapphire/discord-utilities/-/discord-utilities-2.11.4.tgz#e246ce80f9f1d0500f8eba50595c2b316d88e326"
+  integrity sha512-tybHvY+UUAtDHD1tfAESVfINzhtw5cNKAnpS33enF9gzT2qtGxzvjwPy0AopbuHTS+GLnId0EoG1ko8UAGqyCQ==
 
 "@sapphire/shapeshift@^3.2.0":
   version "3.4.0"
