@@ -15,9 +15,6 @@ export default class extends Command {
 	async run(interaction) {
 		const amount = interaction.options.getInteger('amount');
 
-		const customemoji = RegExp(/(<a?)?:\w+:(\d{18}>)?/g);
-		const unifiedemoji = emojiregex();
-
 		const fetch = await interaction.channel.messages.fetch({ limit: amount });
 		const data = [];
 
