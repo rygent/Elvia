@@ -12,28 +12,29 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const user = interaction.options.getUser('user', true);
+		const member = interaction.options.getUser('user', true);
 		const amount = interaction.options.getInteger('amount');
+		await interaction.deferReply({ ephemeral: true });
 
-		const fetch = await interaction.channel.messages.fetch({ limit: amount });
-		const data = [];
+		const messages = await interaction.channel.messages.fetch({ limit: 100, cache: true });
+		const filter = messages.filter(m => m.author.id === member.id && !m.pinned);
+		const data = Array.from(filter.values());
 
-		fetch.map(m => m).forEach(message => {
-			if (message.author.id === user.id && !message.pinned) return data.push(message);
-		});
+		const deleted = await interaction.channel.bulkDelete(data.slice(0, amount || 1), true);
 
-		try {
-			return interaction.channel.bulkDelete(data.length ? data : 1, true).then(async (message) => {
-				if (!amount) {
-					await interaction.reply({ content: `Successfully deleted **${message.size}** messages.` });
-				} else {
-					await interaction.reply({ content: `Successfully deleted **${message.size}**/**${amount}** messages.` });
-				}
-				setTimeout(() => interaction.deleteReply(), 10_000);
-			});
-		} catch {
-			return interaction.reply({ content: 'You can only delete the messages which are not older than 14 days.', ephemeral: true });
+		const results = {};
+		for (const [, message] of deleted) {
+			const user = message.author.tag;
+			if (!results[user]) results[user] = 0;
+			results[user]++;
 		}
+
+		const replies = [
+			`***${deleted.size}*** message(s) have been successfully deleted!`,
+			`${Object.entries(results).map(([user, size]) => `*${user}:* ***${size}***`).join('\n')}`
+		].join('\n\n');
+
+		return interaction.editReply({ content: replies });
 	}
 
 }
