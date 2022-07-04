@@ -1,6 +1,9 @@
 import Command from '../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
 import { Duration } from '@sapphire/time-utilities';
+import { nanoid } from 'nanoid';
 
 export default class extends Command {
 
@@ -32,13 +35,46 @@ export default class extends Command {
 		if (parseDuration > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
 		else if (parseDuration > 241884e4 && parseDuration <= 24192e5) parseDuration = 241884e4;
 
-		await member.timeout(parseDuration, `${reason ? `${reason} (Timed out by ${interaction.user.tag})` : `(Timed out by ${interaction.user.tag})`}`);
+		const [cancelId, executeId] = ['cancel', 'execute'].map(type => `${type}-${nanoid()}`);
+		const button = new ActionRowBuilder()
+			.addComponents(new ButtonBuilder()
+				.setCustomId(cancelId)
+				.setStyle(ButtonStyle.Secondary)
+				.setLabel('Cancel'))
+			.addComponents(new ButtonBuilder()
+				.setCustomId(executeId)
+				.setStyle(ButtonStyle.Danger)
+				.setLabel('Timeout'));
 
-		return interaction.reply({ content: [
-			`**${member.user.tag}** was timed out!`,
-			...reason ? [`***Reason:*** ${reason}`] : [],
-			`***Expiration:*** ${time(new Date(Date.now() + parseDuration), 'R')}`
-		].join('\n') });
+		const reply = await interaction.reply({ content: `Do you really want to timeout **${member.user.tag}** ?`, components: [button], ephemeral: true });
+
+		const filter = (i) => i.user.id === interaction.user.id;
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15_000, max: 1 });
+
+		collector.on('collect', async (i) => {
+			if (i.customId === cancelId) {
+				return i.update({ content: `Cancelled timeout for user **${member.user.tag}**.`, components: [] });
+			} else if (i.customId === executeId) {
+				await member.timeout(parseDuration, reason);
+
+				const replies = [
+					`**${member.user.tag}** was timed out!`,
+					...reason ? [`***Reason:*** ${reason}`] : [],
+					`***Expiration:*** ${time(new Date(Date.now() + parseDuration), 'R')}`
+				].join('\n');
+
+				interaction.channel.send({ content: replies });
+				return i.update({ content: `Successfully timed out **${member.user.tag}**.`, components: [] });
+			}
+		});
+
+		collector.on('ignore', (i) => i.deferUpdate());
+
+		collector.on('end', (collected) => {
+			if (!collected.size) {
+				return interaction.editReply({ content: 'Action timer ran out.', components: [] });
+			}
+		});
 	}
 
 }

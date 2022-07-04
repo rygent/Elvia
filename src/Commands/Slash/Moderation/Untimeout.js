@@ -1,4 +1,7 @@
 import Command from '../../../Structures/Interaction.js';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { nanoid } from 'nanoid';
 
 export default class extends Command {
 
@@ -23,12 +26,45 @@ export default class extends Command {
 		}
 		if (!member.moderatable) return interaction.reply({ content: `I cannot remove a timeout from a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		await member.timeout(null, `${reason ? `${reason} (Time out removed by ${interaction.user.tag})` : `(Time out removed by ${interaction.user.tag})`}`);
+		const [cancelId, executeId] = ['cancel', 'execute'].map(type => `${type}-${nanoid()}`);
+		const button = new ActionRowBuilder()
+			.addComponents(new ButtonBuilder()
+				.setCustomId(cancelId)
+				.setStyle(ButtonStyle.Secondary)
+				.setLabel('Cancel'))
+			.addComponents(new ButtonBuilder()
+				.setCustomId(executeId)
+				.setStyle(ButtonStyle.Danger)
+				.setLabel('Remove'));
 
-		return interaction.reply({ content: [
-			`**${member.user.tag}** is no longer timed out!`,
-			...reason ? [`***Reason:*** ${reason}`] : []
-		].join('\n') });
+		const reply = await interaction.reply({ content: `Do you really want to remove timeout **${member.user.tag}** ?`, components: [button], ephemeral: true });
+
+		const filter = (i) => i.user.id === interaction.user.id;
+		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15_000, max: 1 });
+
+		collector.on('collect', async (i) => {
+			if (i.customId === cancelId) {
+				return i.update({ content: `Cancelled remove timeout for user **${member.user.tag}**.`, components: [] });
+			} else if (i.customId === executeId) {
+				await member.timeout(null, reason);
+
+				const replies = [
+					`**${member.user.tag}** is no longer timed out!`,
+					...reason ? [`***Reason:*** ${reason}`] : []
+				].join('\n');
+
+				interaction.channel.send({ content: replies });
+				return i.update({ content: `Successfully removed timeout **${member.user.tag}**.`, components: [] });
+			}
+		});
+
+		collector.on('ignore', (i) => i.deferUpdate());
+
+		collector.on('end', (collected) => {
+			if (!collected.size) {
+				return interaction.editReply({ content: 'Action timer ran out.', components: [] });
+			}
+		});
 	}
 
 }
