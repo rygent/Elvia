@@ -18,10 +18,33 @@ export default {
 		required: false
 	}, {
 		name: 'days',
-		description: 'Number of days to delete messages for. (0-7)',
+		description: 'Number of days to delete messages for.',
 		type: ApplicationCommandOptionType.Integer,
-		min_value: 0,
-		max_value: 7,
+		choices: [{
+			name: '0 days',
+			value: 0
+		}, {
+			name: '1 day (default)',
+			value: 1
+		}, {
+			name: '2 days',
+			value: 2
+		}, {
+			name: '3 days',
+			value: 3
+		}, {
+			name: '4 days',
+			value: 4
+		}, {
+			name: '5 days',
+			value: 5
+		}, {
+			name: '6 days',
+			value: 6
+		}, {
+			name: '7 days',
+			value: 7
+		}],
 		required: false
 	}],
 	default_member_permissions: new PermissionsBitField(['BanMembers']).bitfield.toString(),
