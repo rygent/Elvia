@@ -8,6 +8,7 @@ export default {
 		name: 'text',
 		description: 'Text to translate.',
 		type: ApplicationCommandOptionType.String,
+		max_length: 2000,
 		required: true
 	}, {
 		name: 'from',

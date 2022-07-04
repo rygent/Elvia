@@ -14,6 +14,7 @@ export default {
 		name: 'reason',
 		description: 'Reason of the softban.',
 		type: ApplicationCommandOptionType.String,
+		max_length: 500,
 		required: false
 	}, {
 		name: 'days',

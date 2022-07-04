@@ -13,6 +13,8 @@ export default {
 			name: 'name',
 			description: 'The name of the emoji.',
 			type: ApplicationCommandOptionType.String,
+			min_length: 2,
+			max_length: 32,
 			required: true
 		}, {
 			name: 'emoji',
@@ -43,6 +45,8 @@ export default {
 			name: 'name',
 			description: 'The new name of the emoji.',
 			type: ApplicationCommandOptionType.String,
+			min_length: 2,
+			max_length: 32,
 			required: true
 		}]
 	}],

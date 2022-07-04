@@ -8,6 +8,7 @@ export default {
 		name: 'question',
 		description: 'Question to ask.',
 		type: ApplicationCommandOptionType.String,
+		max_length: 1000,
 		required: true
 	}],
 	dm_permission: true

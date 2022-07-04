@@ -14,6 +14,7 @@ export default {
 		name: 'reason',
 		description: 'Reason of the unban.',
 		type: ApplicationCommandOptionType.String,
+		max_length: 500,
 		required: false
 	}],
 	default_member_permissions: new PermissionsBitField(['BanMembers']).bitfield.toString(),
