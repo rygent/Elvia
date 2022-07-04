@@ -28,7 +28,7 @@
     "@sapphire/discord-utilities": "^2.11.4",
     "@sapphire/time-utilities": "^1.7.4",
     "colorette": "^2.0.19",
-    "discord.js": "^14.0.0-dev.1656720731-d95197c",
+    "discord.js": "^14.0.0-dev.1656864763-c7a205f",
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
     "imdb-api": "^4.4.1",
