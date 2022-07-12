@@ -8,7 +8,7 @@
     "deploy": "node scripts/deploy.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
-    "update": "yarn upgrade-interactive --latest"
+    "update": "yarn upgrade-interactive"
   },
   "author": "Rygent",
   "license": "GPL-3.0",
@@ -45,5 +45,6 @@
   "optionalDependencies": {
     "bufferutil": "^4.0.6",
     "utf-8-validate": "^5.0.9"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
