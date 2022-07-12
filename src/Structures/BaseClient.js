@@ -1,5 +1,5 @@
 import { Client, Partials, PermissionsBitField } from 'discord.js';
-import { GatewayIntentBits } from 'discord-api-types/v10';
+import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { Credentials } from '../Utils/Constants.js';
 import Logger from '../Utils/Logger.js';
@@ -23,7 +23,10 @@ export default class BaseClient extends Client {
 				Partials.Channel
 			],
 			allowedMentions: {
-				parse: ['users', 'roles'],
+				parse: [
+					AllowedMentionsTypes.User,
+					AllowedMentionsTypes.Role
+				],
 				repliedUser: false
 			}
 		});
