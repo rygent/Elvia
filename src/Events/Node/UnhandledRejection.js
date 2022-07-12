@@ -2,7 +2,6 @@ import Event from '../../Structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, codeBlock, parseWebhookURL, time } from 'discord.js';
 import { Colors, Links } from '../../Utils/Constants.js';
-import { inspect } from 'node:util';
 import process from 'node:process';
 
 export default class extends Event {
@@ -25,7 +24,7 @@ export default class extends Event {
 			.setColor(Colors.Red)
 			.setTitle('Unhandled Rejection')
 			.setDescription([
-				`${codeBlock('ts', inspect(error.stack, { depth: 2 }))}`,
+				`${codeBlock('ts', error.stack)}`,
 				`***Name:*** ${error.name}`,
 				`***Message:*** ${error.message}`,
 				`***Date:*** ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
