@@ -33,7 +33,7 @@
     "glob": "^8.0.3",
     "imdb-api": "^4.4.1",
     "kitsu": "^10.0.0-alpha.24",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.34",
     "mongoose": "^6.4.2",
