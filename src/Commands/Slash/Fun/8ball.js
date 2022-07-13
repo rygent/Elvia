@@ -1,5 +1,7 @@
 import Command from '../../../Structures/Interaction.js';
-import Answer from '../../../Assets/json/8ball.json' assert { type: 'json' };
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const Answer = require('../../../Assets/json/8ball.json');
 
 export default class extends Command {
 

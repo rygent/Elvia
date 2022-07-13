@@ -1,11 +1,13 @@
 import Command from '../../../Structures/Command.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { time, userMention, version as DJSVersion } from 'discord.js';
+import { createRequire } from 'node:module';
 import { Colors, Emojis } from '../../../Utils/Constants.js';
-import pkg from '../../../../package.json' assert { type: 'json' };
 import si from 'systeminformation';
 import moment from 'moment';
 import 'moment-duration-format';
+const require = createRequire(import.meta.url);
+const { version: BOTVersion } = require('../../../../package.json');
 
 export default class extends Command {
 
@@ -44,7 +46,7 @@ export default class extends Command {
 				`***ID:*** \`${this.client.user.id}\``,
 				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(user => userMention(user)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
-				`***Version:*** v${pkg.version}`,
+				`***Version:*** v${BOTVersion}`,
 				`***Node.JS:*** ${process.version}`,
 				`***Library:*** Discord.JS v${DJSVersion}`,
 				`***Created:*** ${time(new Date(this.client.user.createdAt), 'D')} (${time(new Date(this.client.user.createdAt), 'R')})`
