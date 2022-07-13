@@ -4,8 +4,7 @@
         "node": true,
         "es2022": true
     },
-    "extends": ["eslint:recommended"],
-	"plugins": ["import"],
+    "extends": "eslint:recommended",
     "parser": "@babel/eslint-parser",
     "parserOptions": {
         "ecmaVersion": 2022,
@@ -34,12 +33,6 @@
         "func-names": ["error", "never"],
         "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
         "handle-callback-err": "error",
-		"import/order": ["error", {
-			"groups": ["builtin", "external", "internal", "index", "sibling", "parent"],
-			"alphabetize": {
-				"order": "asc"
-			}
-		}],
         "indent": ["error", "tab", { "SwitchCase": 1 }],
         "key-spacing": "error",
         "keyword-spacing": ["error", {
