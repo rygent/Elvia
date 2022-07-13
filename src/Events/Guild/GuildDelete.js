@@ -1,6 +1,6 @@
-import Event from '../../Structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, parseWebhookURL } from 'discord.js';
+import Event from '../../Structures/Event.js';
 import { Colors, Links } from '../../Utils/Constants.js';
 
 export default class extends Event {

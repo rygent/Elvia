@@ -1,5 +1,5 @@
-import Command from '../../../../Structures/Interaction.js';
 import { parseEmoji } from 'discord.js';
+import Command from '../../../../Structures/Interaction.js';
 
 export default class extends Command {
 

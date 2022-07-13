@@ -1,5 +1,5 @@
-import Command from '../../../Structures/Interaction.js';
 import { DiceRoll, NumberGenerator } from '@dice-roller/rpg-dice-roller';
+import Command from '../../../Structures/Interaction.js';
 
 export default class extends Command {
 

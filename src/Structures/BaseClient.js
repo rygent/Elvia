@@ -1,11 +1,11 @@
-import { Client, Partials, PermissionsBitField } from 'discord.js';
-import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
+import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
+import { Client, Partials, PermissionsBitField } from 'discord.js';
+import semver from 'semver';
+import Database from './Database.js';
+import Util from './Util.js';
 import { Credentials } from '../Utils/Constants.js';
 import Logger from '../Utils/Logger.js';
-import Util from './Util.js';
-import Database from './Database.js';
-import semver from 'semver';
 
 export default class BaseClient extends Client {
 

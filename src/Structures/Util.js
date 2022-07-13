@@ -1,10 +1,10 @@
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import path from 'node:path';
 import glob from 'glob';
-import Interaction from './Interaction.js';
 import Command from './Command.js';
 import Event from './Event.js';
+import Interaction from './Interaction.js';
 const globber = promisify(glob);
 
 export default class Util {

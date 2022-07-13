@@ -1,5 +1,5 @@
-import Command from '../../../Structures/Interaction.js';
 import { fetch } from 'undici';
+import Command from '../../../Structures/Interaction.js';
 
 export default class extends Command {
 

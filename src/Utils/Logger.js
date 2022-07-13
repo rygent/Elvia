@@ -1,10 +1,10 @@
 import { Console } from 'node:console';
-import { EmbedBuilder } from '@discordjs/builders';
-import { WebhookClient, codeBlock, parseWebhookURL, time } from 'discord.js';
-import { Colors, Links } from './Constants.js';
 import { inspect } from 'node:util';
+import { EmbedBuilder } from '@discordjs/builders';
 import * as Colorette from 'colorette';
+import { WebhookClient, codeBlock, parseWebhookURL, time } from 'discord.js';
 import moment from 'moment';
+import { Colors, Links } from './Constants.js';
 
 export default class Logger {
 

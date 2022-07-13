@@ -1,8 +1,8 @@
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v10';
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import path from 'node:path';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v10';
 import glob from 'glob';
 import inquirer from 'inquirer';
 import 'dotenv/config';

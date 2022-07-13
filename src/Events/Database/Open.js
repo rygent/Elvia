@@ -1,5 +1,5 @@
-import Event from '../../Structures/Event.js';
 import mongoose from 'mongoose';
+import Event from '../../Structures/Event.js';
 const { connection } = mongoose;
 
 export default class extends Event {

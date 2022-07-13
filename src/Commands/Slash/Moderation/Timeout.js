@@ -1,9 +1,9 @@
-import Command from '../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { Duration } from '@sapphire/time-utilities';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
-import { Duration } from '@sapphire/time-utilities';
 import { nanoid } from 'nanoid';
+import Command from '../../../Structures/Interaction.js';
 
 export default class extends Command {
 

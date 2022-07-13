@@ -1,7 +1,7 @@
-import Command from '../../../Structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChannelType } from 'discord-api-types/v10';
 import { time, userMention } from 'discord.js';
+import Command from '../../../Structures/Interaction.js';
 import { Colors } from '../../../Utils/Constants.js';
 
 export default class extends Command {

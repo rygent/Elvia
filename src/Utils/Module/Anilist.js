@@ -1,5 +1,5 @@
-import { fetch } from 'undici';
 import he from 'he';
+import { fetch } from 'undici';
 
 export default class Anilist {
 

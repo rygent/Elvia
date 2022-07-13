@@ -1,5 +1,5 @@
-import Event from '../Structures/Event.js';
 import * as Colorette from 'colorette';
+import Event from '../Structures/Event.js';
 
 export default class extends Event {
 

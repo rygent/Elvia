@@ -1,8 +1,8 @@
-import Command from '../../../Structures/Command.js';
 import { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ComponentType } from 'discord-api-types/v10';
-import { Colors, Links } from '../../../Utils/Constants.js';
 import { nanoid } from 'nanoid';
+import Command from '../../../Structures/Command.js';
+import { Colors, Links } from '../../../Utils/Constants.js';
 
 export default class extends Command {
 

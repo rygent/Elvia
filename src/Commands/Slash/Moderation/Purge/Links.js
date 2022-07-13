@@ -1,5 +1,5 @@
-import Command from '../../../../Structures/Interaction.js';
 import { HttpUrlRegex } from '@sapphire/discord-utilities';
+import Command from '../../../../Structures/Interaction.js';
 
 export default class extends Command {
 

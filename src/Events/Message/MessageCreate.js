@@ -1,9 +1,9 @@
-import Event from '../../Structures/Event.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
-import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
-import { Links } from '../../Utils/Constants.js';
+import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { nanoid } from 'nanoid';
+import Event from '../../Structures/Event.js';
+import { Links } from '../../Utils/Constants.js';
 import ReportModal from '../../Utils/Module/ReportModal.js';
 
 export default class extends Event {
