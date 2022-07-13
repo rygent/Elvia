@@ -1,5 +1,5 @@
-import { FormattedCustomEmoji, TwemojiRegex } from '@sapphire/discord-utilities';
 import Command from '../../../../Structures/Interaction.js';
+import { FormattedCustomEmoji, TwemojiRegex } from '@sapphire/discord-utilities';
 
 export default class extends Command {
 

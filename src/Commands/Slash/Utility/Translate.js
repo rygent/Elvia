@@ -1,7 +1,7 @@
-import { EmbedBuilder } from '@discordjs/builders';
-import translate from '@iamtraction/google-translate';
 import Command from '../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
 import { Colors } from '../../../Utils/Constants.js';
+import translate from '@iamtraction/google-translate';
 
 export default class extends Command {
 

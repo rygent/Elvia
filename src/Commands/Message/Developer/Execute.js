@@ -1,7 +1,7 @@
-import child from 'node:child_process';
-import { codeBlock } from 'discord.js';
 import Command from '../../../Structures/Command.js';
+import { codeBlock } from 'discord.js';
 import { splitMessage } from '../../../Utils/Function.js';
+import child from 'node:child_process';
 
 export default class extends Command {
 

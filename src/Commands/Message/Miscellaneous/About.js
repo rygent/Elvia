@@ -1,10 +1,10 @@
+import Command from '../../../Structures/Command.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { time, userMention, version as DJSVersion } from 'discord.js';
-import moment from 'moment';
-import si from 'systeminformation';
-import pkg from '../../../../package.json' assert { type: 'json' };
-import Command from '../../../Structures/Command.js';
 import { Colors, Emojis } from '../../../Utils/Constants.js';
+import pkg from '../../../../package.json' assert { type: 'json' };
+import si from 'systeminformation';
+import moment from 'moment';
 import 'moment-duration-format';
 
 export default class extends Command {

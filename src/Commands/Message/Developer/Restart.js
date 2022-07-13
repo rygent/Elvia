@@ -1,7 +1,7 @@
+import Command from '../../../Structures/Command.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { nanoid } from 'nanoid';
-import Command from '../../../Structures/Command.js';
 
 export default class extends Command {
 

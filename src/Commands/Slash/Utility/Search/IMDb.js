@@ -1,10 +1,10 @@
+import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
-import imdb from 'imdb-api';
-import { nanoid } from 'nanoid';
-import Command from '../../../../Structures/Interaction.js';
 import { Colors, Credentials } from '../../../../Utils/Constants.js';
+import { nanoid } from 'nanoid';
+import imdb from 'imdb-api';
 
 export default class extends Command {
 

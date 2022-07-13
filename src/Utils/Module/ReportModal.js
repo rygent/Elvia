@@ -1,8 +1,8 @@
 import { ActionRowBuilder, EmbedBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import { InteractionCollector, WebhookClient, parseWebhookURL } from 'discord.js';
-import { nanoid } from 'nanoid';
 import { Colors, Links } from '../Constants.js';
+import { nanoid } from 'nanoid';
 
 export default class ReportModal {
 

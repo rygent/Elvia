@@ -1,5 +1,5 @@
-import { DiscordInviteLinkRegex } from '@sapphire/discord-utilities';
 import Command from '../../../../Structures/Interaction.js';
+import { DiscordInviteLinkRegex } from '@sapphire/discord-utilities';
 
 export default class extends Command {
 

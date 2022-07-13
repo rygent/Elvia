@@ -1,8 +1,8 @@
 import { Collection } from '@discordjs/collection';
-import mongoose from 'mongoose';
+import UserData from '../Schemas/UserData.js';
 import GuildData from '../Schemas/GuildData.js';
 import MemberData from '../Schemas/MemberData.js';
-import UserData from '../Schemas/UserData.js';
+import mongoose from 'mongoose';
 const { connect } = mongoose;
 
 export default class Database {

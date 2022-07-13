@@ -1,5 +1,5 @@
-import Answer from '../../../Assets/json/8ball.json' assert { type: 'json' };
 import Command from '../../../Structures/Interaction.js';
+import Answer from '../../../Assets/json/8ball.json' assert { type: 'json' };
 
 export default class extends Command {
 

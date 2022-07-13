@@ -1,9 +1,9 @@
+import Command from '../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { resolveColor } from 'discord.js';
-import { fetch } from 'undici';
-import Command from '../../../Structures/Interaction.js';
 import { rgbToHex } from '../../../Utils/Function.js';
+import { fetch } from 'undici';
 
 export default class extends Command {
 

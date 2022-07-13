@@ -1,13 +1,13 @@
+import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
-import { DurationFormatter } from '@sapphire/time-utilities';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
-import moment from 'moment';
-import { nanoid } from 'nanoid';
-import Command from '../../../../Structures/Interaction.js';
+import { DurationFormatter } from '@sapphire/time-utilities';
+import Anilist, { parseDescription } from '../../../../Utils/Module/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
 import { isRestrictedChannel } from '../../../../Utils/Function.js';
-import Anilist, { parseDescription } from '../../../../Utils/Module/Anilist.js';
+import { nanoid } from 'nanoid';
+import moment from 'moment';
 
 export default class extends Command {
 

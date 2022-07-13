@@ -1,5 +1,5 @@
-import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 import Command from '../../../../Structures/Interaction.js';
+import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
 export default class extends Command {
 

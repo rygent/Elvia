@@ -1,7 +1,7 @@
-import { EmbedBuilder } from '@discordjs/builders';
-import { fetch } from 'undici';
 import Command from '../../../Structures/Interaction.js';
+import { EmbedBuilder } from '@discordjs/builders';
 import { Colors } from '../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
 export default class extends Command {
 

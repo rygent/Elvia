@@ -1,5 +1,5 @@
-import { AttachmentBuilder, parseEmoji } from 'discord.js';
 import Command from '../../../../Structures/Interaction.js';
+import { AttachmentBuilder, parseEmoji } from 'discord.js';
 
 export default class extends Command {
 

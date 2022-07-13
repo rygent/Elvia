@@ -1,6 +1,6 @@
-import { fetch } from 'undici';
 import Command from '../../../Structures/Interaction.js';
 import { Credentials } from '../../../Utils/Constants.js';
+import { fetch } from 'undici';
 
 export default class extends Command {
 
