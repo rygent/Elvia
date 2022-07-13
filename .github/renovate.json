@@ -5,13 +5,12 @@
     "timezone": "Asia/Tokyo",
     "schedule": ["after 9:00am every weekend"],
     "reviewers": ["Rygent"],
-    "branchConcurrentLimit": 10,
     "lockFileMaintenance": {
         "enabled": true,
         "schedule": ["after 3:00pm on sunday"]
     },
     "vulnerabilityAlerts": {
-        "labels": ["dependencies", "security"]
+        "addLabels": ["security"]
     },
     "packageRules": [{
         "matchUpdateTypes": ["major"],
@@ -34,7 +33,8 @@
         "semanticCommitScope": "deps-dev"
     }, {
         "matchDepTypes": ["action"],
-        "labels": ["dependencies", "ci"],
-        "semanticCommitType": "ci"
+        "semanticCommitType": "ci",
+        "addLabels": ["ci"],
+        "automerge": true
     }]
 }
