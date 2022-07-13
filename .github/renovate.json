@@ -8,9 +8,10 @@
     "branchConcurrentLimit": 10,
     "lockFileMaintenance": {
         "enabled": true,
-        "recreateClosed": true,
-        "rebaseWhen": "behind-base-branch",
         "schedule": ["after 3:00pm on sunday"]
+    },
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
     },
     "packageRules": [{
         "matchUpdateTypes": ["major"],
@@ -24,8 +25,7 @@
         "commitMessageAction": "Bump",
         "commitMessageTopic": "{{depName}}",
         "rangeStrategy": "bump",
-        "recreateClosed": true,
-        "rebaseWhen": "behind-base-branch"
+        "recreateClosed": true
     }, {
         "matchDepTypes": ["dependencies", "require"],
         "semanticCommitType": "chore"
@@ -34,6 +34,7 @@
         "semanticCommitScope": "deps-dev"
     }, {
         "matchDepTypes": ["action"],
+        "labels": ["ci"],
         "semanticCommitType": "ci"
     }]
 }
