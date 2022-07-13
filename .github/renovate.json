@@ -1,15 +1,13 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:base"],
+    "extends": ["config:base", ":semanticPrefixChore"],
     "labels": ["dependencies"],
-    "semanticCommitType": "chore",
     "commitMessageAction": "Bump",
     "commitMessageTopic": "{{depName}}",
     "timezone": "Asia/Tokyo",
     "schedule": ["after 9:00am every weekend"],
     "reviewers": ["Rygent"],
     "branchConcurrentLimit": 10,
-    "rangeStrategy": "replace",
     "packageRules": [{
         "matchUpdateTypes": ["major"],
         "dependencyDashboardApproval": true
