@@ -1,7 +1,7 @@
 import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
-import Anilist, { parseDescription } from '../../../../Utils/Module/Anilist.js';
+import Anilist, { parseDescription } from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
 import { isRestrictedChannel } from '../../../../Utils/Function.js';
 import { nanoid } from 'nanoid';

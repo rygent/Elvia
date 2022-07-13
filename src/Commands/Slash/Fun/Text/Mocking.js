@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import { spongemock } from '../../../../Utils/Function.js';
+import { spongemock } from '../../../../Modules/TextGenerator.js';
 
 export default class extends Command {
 

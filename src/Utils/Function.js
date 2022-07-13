@@ -1,8 +1,6 @@
 import { ChannelType } from 'discord-api-types/v10';
 import { verifyString } from 'discord.js';
 
-export * from './Module/TextGenerator.js';
-
 export function isRestrictedChannel(channel) {
 	if (!channel) return false;
 	switch (channel.type) {

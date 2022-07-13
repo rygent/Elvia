@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import { flip } from '../../../../Utils/Function.js';
+import { flip } from '../../../../Modules/TextGenerator.js';
 
 export default class extends Command {
 

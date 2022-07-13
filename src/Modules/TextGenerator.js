@@ -1,7 +1,7 @@
-import { charTable, flipTable, numberWords, tinyCapital } from '../../Assets/js/TextData.js';
+import { charTable, flipTable, numberWords, tinyCapital } from '../Assets/js/TextData.js';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const Faces = require('../../Assets/json/Faces.json');
+const Faces = require('../Assets/json/Faces.json');
 
 export function flip(text) {
 	var result = '',

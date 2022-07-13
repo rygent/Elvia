@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import { regional } from '../../../../Utils/Function.js';
+import { regional } from '../../../../Modules/TextGenerator.js';
 
 export default class extends Command {
 

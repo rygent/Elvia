@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import { smallcaps } from '../../../../Utils/Function.js';
+import { smallcaps } from '../../../../Modules/TextGenerator.js';
 
 export default class extends Command {
 

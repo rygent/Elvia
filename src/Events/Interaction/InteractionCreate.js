@@ -4,7 +4,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { Links } from '../../Utils/Constants.js';
 import { nanoid } from 'nanoid';
-import ReportModal from '../../Utils/Module/ReportModal.js';
+import ReportModal from '../../Modules/ReportModal.js';
 
 export default class extends Event {
 

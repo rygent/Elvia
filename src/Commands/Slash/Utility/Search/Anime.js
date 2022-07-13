@@ -3,7 +3,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
-import Anilist, { parseDescription } from '../../../../Utils/Module/Anilist.js';
+import Anilist, { parseDescription } from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
 import { isRestrictedChannel } from '../../../../Utils/Function.js';
 import { nanoid } from 'nanoid';

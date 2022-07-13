@@ -1,5 +1,5 @@
 import Command from '../../../../Structures/Interaction.js';
-import { owofy } from '../../../../Utils/Function.js';
+import { owofy } from '../../../../Modules/TextGenerator.js';
 
 export default class extends Command {
 
