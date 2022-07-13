@@ -2,6 +2,7 @@ import Command from '../../../Structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { time } from 'discord.js';
 import { Badges, Colors, Emojis } from '../../../Utils/Constants.js';
+import { formatArray, formatPermissions } from '../../../Structures/Util.js';
 
 export default class extends Command {
 
@@ -42,7 +43,7 @@ export default class extends Command {
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		if (permissions.length) {
-			embed.addFields({ name: '__Permission(s)__', value: `${this.client.utils.formatArray(permissions.map(perm => this.client.utils.formatPermissions(perm)))}`, inline: false });
+			embed.addFields({ name: '__Permission(s)__', value: `${formatArray(permissions.map(perm => formatPermissions(perm)))}`, inline: false });
 		}
 
 		return interaction.reply({ embeds: [embed] });

@@ -3,6 +3,7 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { Links } from '../../Utils/Constants.js';
+import { formatArray, formatPermissions } from '../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import ReportModal from '../../Modules/ReportModal.js';
 
@@ -33,7 +34,7 @@ export default class extends Event {
 				if (memberPermCheck) {
 					const missing = interaction.channel.permissionsFor(interaction.member).missing(memberPermCheck);
 					if (missing.length) {
-						return interaction.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+						return interaction.reply({ content: `You lack the ${formatArray(missing.map(perms => `***${formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
 
@@ -41,7 +42,7 @@ export default class extends Event {
 				if (clientPermCheck) {
 					const missing = interaction.channel.permissionsFor(interaction.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
-						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+						return interaction.reply({ content: `I lack the ${formatArray(missing.map(perms => `***${formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
 			}

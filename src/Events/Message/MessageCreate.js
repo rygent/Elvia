@@ -3,6 +3,7 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { Links } from '../../Utils/Constants.js';
+import { formatArray, formatPermissions, isRestrictedChannel } from '../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import ReportModal from '../../Modules/ReportModal.js';
 
@@ -39,7 +40,7 @@ export default class extends Event {
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `You lack the ${formatArray(missing.map(perms => `***${formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
@@ -47,11 +48,11 @@ export default class extends Event {
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.members.me).missing(clientPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `I lack the ${formatArray(missing.map(perms => `***${formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
-				if (command.nsfw && !message.channel.nsfw) return;
+				if (command.nsfw && !isRestrictedChannel(message.channel)) return;
 			}
 
 			if (command.ownerOnly && !this.client.owners.includes(message.author.id)) return;

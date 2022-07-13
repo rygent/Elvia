@@ -1,6 +1,7 @@
 import Command from '../../../Structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Colors } from '../../../Utils/Constants.js';
+import { formatLanguage } from '../../../Structures/Util.js';
 import translate from '@iamtraction/google-translate';
 
 export default class extends Command {
@@ -31,7 +32,7 @@ export default class extends Command {
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Google Translate', iconURL: 'https://i.imgur.com/1JS81kv.png', url: 'https://translate.google.com/' })
 				.setDescription(translated.text)
-				.addFields({ name: '\u200B', value: `Translation from ***${this.client.utils.formatLanguage(from)}*** to ***${this.client.utils.formatLanguage(target)}***`, inline: false })
+				.addFields({ name: '\u200B', value: `Translation from ***${formatLanguage(from)}*** to ***${formatLanguage(target)}***`, inline: false })
 				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL() });
 
 			return interaction.reply({ embeds: [embed] });

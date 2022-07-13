@@ -3,7 +3,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import Anilist, { parseDescription } from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
-import { isRestrictedChannel } from '../../../../Utils/Function.js';
+import { formatArray, isRestrictedChannel, truncate } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
@@ -33,8 +33,8 @@ export default class extends Command {
 				.setPlaceholder('Select a manga!')
 				.addOptions(...response.map(data => ({
 					value: data.id.toString(),
-					label: this.client.utils.truncateString(Object.values(data.title).filter(title => title?.length)[0], 95) || 'Unknown Name',
-					...data.description?.length && { description: this.client.utils.truncateString(parseDescription(data.description), 95) }
+					label: truncate(Object.values(data.title).filter(title => title?.length)[0], 95) || 'Unknown Name',
+					...data.description?.length && { description: truncate(parseDescription(data.description), 95) }
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
@@ -76,11 +76,11 @@ export default class extends Command {
 				.setFooter({ text: 'Powered by AniList', iconURL: interaction.user.avatarURL() });
 
 			if (data.description?.length) {
-				embed.setDescription(this.client.utils.truncateString(parseDescription(data.description), 512));
+				embed.setDescription(truncate(parseDescription(data.description), 512));
 			}
 
 			if (data.characters.nodes?.length) {
-				embed.addFields({ name: '__Characters__', value: this.client.utils.formatArray(data.characters.nodes.map(({ name }) => name.full)), inline: false });
+				embed.addFields({ name: '__Characters__', value: formatArray(data.characters.nodes.map(({ name }) => name.full)), inline: false });
 			}
 
 			if (data.externalLinks.filter(({ type }) => type === 'STREAMING')?.length) {

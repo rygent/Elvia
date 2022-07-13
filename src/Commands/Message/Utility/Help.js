@@ -2,6 +2,7 @@ import Command from '../../../Structures/Command.js';
 import { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ComponentType } from 'discord-api-types/v10';
 import { Colors, Links } from '../../../Utils/Constants.js';
+import { formatPermissions, isRestrictedChannel } from '../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {
@@ -33,7 +34,7 @@ export default class extends Command {
 				`***Aliases:*** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No aliases.'}`,
 				`***Description:*** ${cmd.description}`,
 				`***Category:*** ${cmd.category}`,
-				`***Permission(s):*** ${cmd.memberPermissions.toArray().length > 0 ? `${cmd.memberPermissions.toArray().map(perm => `\`${this.client.utils.formatPermissions(perm)}\``).join(', ')}` : 'No permission required.'}`,
+				`***Permission(s):*** ${cmd.memberPermissions.toArray().length > 0 ? `${cmd.memberPermissions.toArray().map(perm => `\`${formatPermissions(perm)}\``).join(', ')}` : 'No permission required.'}`,
 				`***Cooldown:*** ${cmd.cooldown / 1000} second(s)`,
 				`***Usage:*** ${cmd.usage ? `\`${this.client.prefix + cmd.name} ${cmd.usage}\`` : `\`${this.client.prefix + cmd.name}\``}`
 			].join('\n'));
@@ -105,7 +106,7 @@ export default class extends Command {
 			case 'developer':
 				return this.client.owners.includes(message.author.id);
 			case 'nsfw':
-				return message.channel.nsfw;
+				return isRestrictedChannel(message.channel);
 			default:
 				return true;
 		}

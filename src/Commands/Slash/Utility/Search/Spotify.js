@@ -3,6 +3,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { parseEmoji } from 'discord.js';
 import { Colors, Credentials, Emojis } from '../../../../Utils/Constants.js';
+import { formatArray, truncate } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import Spotify from 'node-spotify-api';
 import moment from 'moment';
@@ -32,8 +33,8 @@ export default class extends Command {
 				.setPlaceholder('Select a song!')
 				.addOptions(...response.map(data => ({
 					value: data.id,
-					label: this.client.utils.truncateString(data.name, 95),
-					description: this.client.utils.truncateString(this.client.utils.formatArray(data.artists.map(({ name }) => name)), 95)
+					label: truncate(data.name, 95),
+					description: truncate(formatArray(data.artists.map(({ name }) => name)), 95)
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
@@ -57,7 +58,7 @@ export default class extends Command {
 				.setAuthor({ name: 'Spotify', iconURL: 'https://i.imgur.com/9xO7toS.png', url: 'https://www.spotify.com/' })
 				.setTitle(data.name)
 				.setDescription([
-					`***Artists:*** ${this.client.utils.formatArray(data.artists.map(({ name }) => name))}`,
+					`***Artists:*** ${formatArray(data.artists.map(({ name }) => name))}`,
 					`***Album:*** ${data.album.name}`,
 					`***Tracks:*** ${data.track_number.formatNumber()} of ${data.album.total_tracks.formatNumber()}`,
 					`***Released:*** ${moment(data.album.release_date).format('MMMM D, YYYY')}`,

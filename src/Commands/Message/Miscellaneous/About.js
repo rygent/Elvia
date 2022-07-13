@@ -1,8 +1,9 @@
 import Command from '../../../Structures/Command.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { time, userMention, version as DJSVersion } from 'discord.js';
-import { createRequire } from 'node:module';
 import { Colors, Emojis } from '../../../Utils/Constants.js';
+import { formatArray, formatBytes } from '../../../Structures/Util.js';
+import { createRequire } from 'node:module';
 import si from 'systeminformation';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -44,7 +45,7 @@ export default class extends Command {
 			.setThumbnail(this.client.user.displayAvatarURL({ size: 512 }))
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Developer:*** ${this.client.utils.formatArray(this.client.owners.map(user => userMention(user)))}`,
+				`***Developer:*** ${formatArray(this.client.owners.map(user => userMention(user)))}`,
 				`***Status:*** ${status[this.client.user.presence.status]}`,
 				`***Version:*** v${BOTVersion}`,
 				`***Node.JS:*** ${process.version}`,
@@ -54,8 +55,8 @@ export default class extends Command {
 			.addFields({ name: '__System__', value: [
 				`***OS:*** ${sys.osInfo.distro} ${sys.osInfo.release}${sys.osInfo.platform !== 'Windows' ? ` ${sys.osInfo.kernel}` : ''} ${sys.osInfo.arch}`,
 				`***CPU:*** ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speed}Ghz${isNaN(sys.cpu.speedMax) ? '' : ` ${sys.cpu.speedMax}Ghz`} ${sys.cpu.cores} Cores`,
-				`***Memory:*** ${this.client.utils.formatBytes(sys.mem.used)} / ${this.client.utils.formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
-				`***Disk:*** ${this.client.utils.formatBytes(sys.fsSize[0].used)} / ${this.client.utils.formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
+				`***Memory:*** ${formatBytes(sys.mem.used)} / ${formatBytes(sys.mem.total)} (${((sys.mem.used / sys.mem.total) * 100).toFixed(2)}%)`,
+				`***Disk:*** ${formatBytes(sys.fsSize[0].used)} / ${formatBytes(sys.fsSize[0].size)} (${((sys.fsSize[0].used / sys.fsSize[0].size) * 100).toFixed(2)}%)`,
 				`***Uptime:*** ${moment.duration(this.client.uptime).format('D [days], H [hours], m [minutes], s [seconds]')}`,
 				`***Host:*** ${moment.duration(sys.time.uptime * 1000).format('D [days], H [hours], m [minutes], s [seconds]')}`
 			].join('\n'), inline: false })
