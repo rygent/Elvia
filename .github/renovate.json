@@ -11,7 +11,7 @@
         "schedule": ["after 3:00pm on sunday"]
     },
     "vulnerabilityAlerts": {
-        "labels": ["security"]
+        "labels": ["dependencies", "security"]
     },
     "packageRules": [{
         "matchUpdateTypes": ["major"],
@@ -34,7 +34,7 @@
         "semanticCommitScope": "deps-dev"
     }, {
         "matchDepTypes": ["action"],
-        "labels": ["ci"],
+        "labels": ["dependencies", "ci"],
         "semanticCommitType": "ci"
     }]
 }
