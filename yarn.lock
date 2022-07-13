@@ -1289,7 +1289,7 @@ __metadata:
     node-spotify-api: "github:rygent/node-spotify-api"
     semver: ^7.3.7
     systeminformation: ^5.12.0
-    undici: ^5.6.1
+    undici: ^5.7.0
     utf-8-validate: ^5.0.9
   dependenciesMeta:
     bufferutil:
@@ -3171,10 +3171,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.5.1, undici@npm:^5.6.0, undici@npm:^5.6.1":
-  version: 5.6.1
-  resolution: "undici@npm:5.6.1"
-  checksum: 0e993519815964ce8dbb627b8a6bc2078c921e1e575d4d5c6a9cff51bb7b78716edfe9f8b619ce8fe7879a334d7fcd503aae548eeb10020967555f9a8b1bebff
+"undici@npm:^5.5.1, undici@npm:^5.6.0, undici@npm:^5.7.0":
+  version: 5.7.0
+  resolution: "undici@npm:5.7.0"
+  checksum: 3a8133697ee7124f4998c01dcb2255206a85bdf99cc75e97d2535d752bc853a9b39e149e7292479c6c170602947c7c77403081ced10ffbffcbe9fb077e40c6fb
   languageName: node
   linkType: hard
 
