@@ -2,20 +2,15 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:base"],
     "labels": ["dependencies"],
-    "commitMessageAction": "Bump",
-    "commitMessageTopic": "{{depName}}",
     "timezone": "Asia/Tokyo",
     "schedule": ["after 9:00am every weekend"],
     "reviewers": ["Rygent"],
     "branchConcurrentLimit": 10,
-    "rangeStrategy": "bump",
-    "recreateClosed": true,
-    "rebaseWhen": "behind-base-branch",
     "lockFileMaintenance": {
         "enabled": true,
         "recreateClosed": true,
         "rebaseWhen": "behind-base-branch",
-        "schedule": ["before 9:00am every friday"]
+        "schedule": ["after 3:00pm on sunday"]
     },
     "packageRules": [{
         "matchUpdateTypes": ["major"],
@@ -24,6 +19,14 @@
         "matchUpdateTypes": ["minor", "patch", "digest", "lockFileMaintenance"],
         "automerge": true
     }, {
+        "matchPackagePatterns": ["*"],
+        "semanticCommitType": "chore",
+        "commitMessageAction": "Bump",
+        "commitMessageTopic": "{{depName}}",
+        "rangeStrategy": "bump",
+        "recreateClosed": true,
+        "rebaseWhen": "behind-base-branch"
+    }, {
         "matchDepTypes": ["dependencies", "require"],
         "semanticCommitType": "chore"
     }, {
@@ -31,7 +34,6 @@
         "semanticCommitScope": "deps-dev"
     }, {
         "matchDepTypes": ["action"],
-        "semanticCommitType": "ci",
-        "automerge": true
+        "semanticCommitType": "ci"
     }]
 }
