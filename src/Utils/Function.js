@@ -55,23 +55,23 @@ export function rgbToHex(rgb) {
 export function splitMessage(text, { maxLength = 2000, char = '\n', prepend = '', append = '' } = {}) {
 	text = verifyString(text);
 	if (text.length <= maxLength) return [text];
-	let splitText = [text];
+	let splitString = [text];
 	if (Array.isArray(char)) {
-		while (char.length > 0 && splitText.some(elem => elem.length > maxLength)) {
+		while (char.length > 0 && splitString.some(elem => elem.length > maxLength)) {
 			const currentChar = char.shift();
 			if (currentChar instanceof RegExp) {
-				splitText = splitText.flatMap(chunk => chunk.match(currentChar));
+				splitString = splitString.flatMap(chunk => chunk.match(currentChar));
 			} else {
-				splitText = splitText.flatMap(chunk => chunk.split(currentChar));
+				splitString = splitString.flatMap(chunk => chunk.split(currentChar));
 			}
 		}
 	} else {
-		splitText = text.split(char);
+		splitString = text.split(char);
 	}
-	if (splitText.some(elem => elem.length > maxLength)) throw new RangeError('SPLIT_MAX_LEN');
+	if (splitString.some(elem => elem.length > maxLength)) throw new RangeError('SPLIT_MAX_LEN');
 	const messages = [];
 	let msg = '';
-	for (const chunk of splitText) {
+	for (const chunk of splitString) {
 		if (msg && (msg + char + chunk + append).length > maxLength) {
 			messages.push(msg + append);
 			msg = prepend;
@@ -81,19 +81,24 @@ export function splitMessage(text, { maxLength = 2000, char = '\n', prepend = ''
 	return messages.concat(msg).filter(m => m);
 }
 
-export function trimArray(array, maxLen = 10) {
-	if (array.length > maxLen) {
-		const len = array.length - maxLen;
-		array = array.slice(0, maxLen);
+export function splitText(str, length, char = ' ') {
+	const x = str.substring(0, length).lastIndexOf(char);
+	const pos = x === -1 ? length : x;
+	return str.substring(0, pos);
+}
+
+export function trimArray(array, length = 10) {
+	if (array.length > length) {
+		const len = array.length - length;
+		array = array.slice(0, length);
 		array.push(`${len} more...`);
 	}
 	return array;
 }
 
-export function truncate(string, maxLen = 100) {
-	let i = string?.lastIndexOf(' ', maxLen);
-	if (i > maxLen - 3) {
-		i = string?.lastIndexOf(' ', i - 1);
-	}
-	return string?.length > maxLen ? `${string.slice(0, i)}...` : string;
+export function cutText(str, length) {
+	if (str.length < length) return str;
+	const cut = splitText(str, length - 3);
+	if (cut.length < length - 3) return `${cut}...`;
+	return `${cut.slice(0, length - 3)}...`;
 }

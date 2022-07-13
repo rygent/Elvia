@@ -5,7 +5,7 @@ import { time } from 'discord.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import Anilist, { parseDescription } from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray, isRestrictedChannel, truncate } from '../../../../Structures/Util.js';
+import { formatArray, isRestrictedChannel, cutText } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
@@ -35,8 +35,8 @@ export default class extends Command {
 				.setPlaceholder('Select an anime!')
 				.addOptions(...response.map(data => ({
 					value: data.id.toString(),
-					label: truncate(Object.values(data.title).filter(title => title?.length)[0], 95) || 'Unknown Name',
-					...data.description?.length && { description: truncate(parseDescription(data.description), 95) }
+					label: cutText(Object.values(data.title).filter(title => title?.length)[0], 100) || 'Unknown Name',
+					...data.description?.length && { description: cutText(parseDescription(data.description), 100) }
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
@@ -78,7 +78,7 @@ export default class extends Command {
 				.setFooter({ text: 'Powered by AniList', iconURL: interaction.user.avatarURL() });
 
 			if (data.description?.length) {
-				embed.setDescription(truncate(parseDescription(data.description), 512));
+				embed.setDescription(cutText(parseDescription(data.description), 512));
 			}
 
 			if (data.characters.nodes?.length) {
