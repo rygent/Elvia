@@ -1,6 +1,28 @@
+import { ChannelType } from 'discord-api-types/v10';
 import { verifyString } from 'discord.js';
 
 export * from './Module/TextGenerator.js';
+
+export function isRestrictedChannel(channel) {
+	if (!channel) return false;
+	switch (channel.type) {
+		case ChannelType.GuildText:
+			return channel.nsfw;
+		case ChannelType.DM:
+			return true;
+		case ChannelType.GuildVoice:
+		case ChannelType.GroupDM:
+		case ChannelType.GuildCategory:
+		case ChannelType.GuildNews:
+		case ChannelType.GuildNewsThread:
+		case ChannelType.GuildPublicThread:
+			return Boolean(channel.parent?.nsfw);
+		case ChannelType.GuildPrivateThread:
+		case ChannelType.GuildStageVoice:
+		case ChannelType.GuildDirectory:
+		case ChannelType.GuildForum:
+	}
+}
 
 export function rgbToHex(rgb) {
 	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
