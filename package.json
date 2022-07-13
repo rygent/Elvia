@@ -32,7 +32,7 @@
     "flip-text": "^1.2.0",
     "glob": "^8.0.3",
     "imdb-api": "^4.4.1",
-    "inquirer": "^8.2.3",
+    "inquirer": "^8.2.4",
     "kitsu": "^10.0.0-alpha.24",
     "moment": "^2.29.3",
     "moment-duration-format": "^2.3.2",
