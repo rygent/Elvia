@@ -5,6 +5,12 @@ const webhook = new WebhookClient({ url: Access.GuildLogWebhook });
 
 module.exports = class extends Event {
 
+	constructor(...args) {
+		super(...args, {
+			name: 'guildCreate'
+		});
+	}
+
 	async run(guild) {
 		if (!guild.available) return;
 		if (!webhook) return;

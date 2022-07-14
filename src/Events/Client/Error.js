@@ -4,12 +4,11 @@ module.exports = class extends Event {
 
 	constructor(...args) {
 		super(...args, {
-			emitter: process
+			name: 'error'
 		});
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	async run(error, promise) {
+	async run(error) {
 		this.client.logger.error(error.stack);
 	}
 

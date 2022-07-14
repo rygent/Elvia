@@ -2,6 +2,12 @@ const Event = require('../../Structures/Event');
 
 module.exports = class extends Event {
 
+	constructor(...args) {
+		super(...args, {
+			name: 'interactionCreate'
+		});
+	}
+
 	async run(interaction) {
 		if (!interaction.inGuild()) return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 		if (!interaction.isCommand() && !interaction.isContextMenu()) return;

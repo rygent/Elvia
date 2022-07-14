@@ -2,6 +2,12 @@ const Event = require('../../Structures/Event');
 
 module.exports = class extends Event {
 
+	constructor(...args) {
+		super(...args, {
+			name: 'messageCreate'
+		});
+	}
+
 	async run(message) {
 		if (!message.inGuild() || message.author.bot) return;
 
