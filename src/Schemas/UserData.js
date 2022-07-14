@@ -1,7 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model: Model } = require('mongoose');
 
-module.exports = model('User', new Schema({
-	id: { type: String },
-	registeredAt: { type: Number, default: Date.now() },
-	reminds: { type: Array, default: [] }
-}));
+module.exports = class UserData extends Model {
+
+	constructor() {
+		super('User', new Schema({
+			id: { type: String },
+			registeredAt: { type: Number, default: Date.now() },
+			reminds: { type: Array, default: [] }
+		}));
+	}
+
+};

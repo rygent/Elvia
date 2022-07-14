@@ -28,7 +28,7 @@ module.exports = class extends Interaction {
 		}
 		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		const guildData = await this.client.findOrCreateGuild({ id: interaction.guildId });
+		const guildData = await this.client.database.findOrCreateGuild({ id: interaction.guildId });
 
 		var parsedDuration = ms(duration);
 		if (parsedDuration > 2419200000) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
