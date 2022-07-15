@@ -5,12 +5,12 @@
     "timezone": "Asia/Tokyo",
     "schedule": ["after 9:00am every weekend"],
     "reviewers": ["Rygent"],
-    "branchConcurrentLimit": 10,
     "lockFileMaintenance": {
         "enabled": true,
-        "recreateClosed": true,
-        "rebaseWhen": "behind-base-branch",
         "schedule": ["after 3:00pm on sunday"]
+    },
+    "vulnerabilityAlerts": {
+        "addLabels": ["security"]
     },
     "packageRules": [{
         "matchUpdateTypes": ["major"],
@@ -24,8 +24,7 @@
         "commitMessageAction": "Bump",
         "commitMessageTopic": "{{depName}}",
         "rangeStrategy": "bump",
-        "recreateClosed": true,
-        "rebaseWhen": "behind-base-branch"
+        "recreateClosed": true
     }, {
         "matchDepTypes": ["dependencies", "require"],
         "semanticCommitType": "chore"
@@ -34,6 +33,8 @@
         "semanticCommitScope": "deps-dev"
     }, {
         "matchDepTypes": ["action"],
-        "semanticCommitType": "ci"
+        "semanticCommitType": "ci",
+        "addLabels": ["ci"],
+        "automerge": true
     }]
 }
