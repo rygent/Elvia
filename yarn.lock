@@ -777,7 +777,7 @@ __metadata:
     glob: ^8.0.3
     imdb-api: ^4.4.1
     inquirer: ^8.2.4
-    kitsu: ^10.0.0-alpha.24
+    kitsu: ^10.0.0-alpha.25
     moment: ^2.29.3
     moment-duration-format: ^2.3.2
     moment-timezone: ^0.5.34
@@ -1539,21 +1539,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kitsu-core@npm:^10.0.0-alpha.24":
-  version: 10.0.0-alpha.24
-  resolution: "kitsu-core@npm:10.0.0-alpha.24"
-  checksum: 96f03c88306cd5604d7bef8c17d8267a3fbb00c5e1291cfb1ecaf4854b3fbdd97c4d63a2a0751dfa7f2a4f05c26d502d670af930c7b02d29b03b84453d5e91d2
+"kitsu-core@npm:^10.0.0-alpha.25":
+  version: 10.0.0-alpha.25
+  resolution: "kitsu-core@npm:10.0.0-alpha.25"
+  checksum: 949aa80ca573b497091fe590345642c87104e9e8da8c19c8aefce1f33a62d8a3faa7a06211ba3ff74b26470917c3512321c94bee68b87ecba3bff6be29b80468
   languageName: node
   linkType: hard
 
-"kitsu@npm:^10.0.0-alpha.24":
-  version: 10.0.0-alpha.24
-  resolution: "kitsu@npm:10.0.0-alpha.24"
+"kitsu@npm:^10.0.0-alpha.25":
+  version: 10.0.0-alpha.25
+  resolution: "kitsu@npm:10.0.0-alpha.25"
   dependencies:
     axios: ^0.27.0
-    kitsu-core: ^10.0.0-alpha.24
+    kitsu-core: ^10.0.0-alpha.25
     pluralize: ^8.0.0
-  checksum: 115fddfa8bca113b72b94617e98cdabdbc11793c98ba06e7deb76ecb321d47a407716f7d40315171a7c196bfea534775654951a394c7755b96750d394bfae83c
+  checksum: 872e57cc133b7e2ac720755388114ea7dc1fd0435a9c1be44c631c8eb84bba26d187a98a1a180481f10092f890c8c8e5cbbaa4c39e309979ccdf91febf1c2b8f
   languageName: node
   linkType: hard
 
