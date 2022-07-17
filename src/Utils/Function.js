@@ -1,5 +1,4 @@
 import { ChannelType } from 'discord-api-types/v10';
-import { verifyString } from 'discord.js';
 
 export function formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
 	return new Intl.ListFormat('en-US', { style, type }).format(array);
@@ -50,35 +49,6 @@ export function isRestrictedChannel(channel) {
 export function rgbToHex(rgb) {
 	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
 	return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-
-export function splitMessage(text, { maxLength = 2000, char = '\n', prepend = '', append = '' } = {}) {
-	text = verifyString(text);
-	if (text.length <= maxLength) return [text];
-	let splitString = [text];
-	if (Array.isArray(char)) {
-		while (char.length > 0 && splitString.some(elem => elem.length > maxLength)) {
-			const currentChar = char.shift();
-			if (currentChar instanceof RegExp) {
-				splitString = splitString.flatMap(chunk => chunk.match(currentChar));
-			} else {
-				splitString = splitString.flatMap(chunk => chunk.split(currentChar));
-			}
-		}
-	} else {
-		splitString = text.split(char);
-	}
-	if (splitString.some(elem => elem.length > maxLength)) throw new RangeError('SPLIT_MAX_LEN');
-	const messages = [];
-	let msg = '';
-	for (const chunk of splitString) {
-		if (msg && (msg + char + chunk + append).length > maxLength) {
-			messages.push(msg + append);
-			msg = prepend;
-		}
-		msg += (msg && msg !== prepend ? char : '') + chunk;
-	}
-	return messages.concat(msg).filter(m => m);
 }
 
 export function splitText(str, length, char = ' ') {
