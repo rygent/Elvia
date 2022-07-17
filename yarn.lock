@@ -870,7 +870,7 @@ __metadata:
     glob: ^8.0.3
     he: ^1.2.0
     imdb-api: ^4.4.1
-    inquirer: ^9.0.0
+    inquirer: ^9.0.1
     moment: ^2.29.4
     moment-duration-format: ^2.3.2
     moment-timezone: ^0.5.34
@@ -1474,9 +1474,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "inquirer@npm:9.0.0"
+"inquirer@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "inquirer@npm:9.0.1"
   dependencies:
     ansi-escapes: ^5.0.0
     chalk: ^5.0.1
@@ -1486,14 +1486,14 @@ __metadata:
     figures: ^4.0.1
     lodash: ^4.17.21
     mute-stream: 0.0.8
-    ora: ^6.1.0
+    ora: ^6.1.2
     run-async: ^2.4.0
-    rxjs: ^7.5.5
+    rxjs: ^7.5.6
     string-width: ^5.1.2
     strip-ansi: ^7.0.1
     through: ^2.3.6
     wrap-ansi: ^8.0.1
-  checksum: ea131492517bfc875cbdce1cfcd5c40f203938a4ae93dd95120c9a734b60628db2de6f2050ef156e899f7cbf6156c48d972a134fa00b30d6c7e78620690a473a
+  checksum: 5e4272ecab950d4154442f804a8b9f69d5a39c89ea514901199bc309fea654c4c5ebaa91efb00baeca9331c3990a2fe4a77ef283dd573e2d3bd460fac487a857
   languageName: node
   linkType: hard
 
@@ -2111,7 +2111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ora@npm:^6.1.0":
+"ora@npm:^6.1.2":
   version: 6.1.2
   resolution: "ora@npm:6.1.2"
   dependencies:
@@ -2312,7 +2312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.5":
+"rxjs@npm:^7.5.6":
   version: 7.5.6
   resolution: "rxjs@npm:7.5.6"
   dependencies:
