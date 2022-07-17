@@ -164,16 +164,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/time-utilities@npm:^1.7.4":
-  version: 1.7.4
-  resolution: "@sapphire/time-utilities@npm:1.7.4"
+"@sapphire/time-utilities@npm:^1.7.5":
+  version: 1.7.5
+  resolution: "@sapphire/time-utilities@npm:1.7.5"
   dependencies:
-    "@sapphire/utilities": ^3.6.2
-  checksum: fb4a32d81fd99966297912cd41c751a8bb792f401e92d538c2611922c535da79683d1918ed897e7daf0880f7c139a03100922fb128ca27a596163e6c5bcead8c
+    "@sapphire/utilities": ^3.7.0
+  checksum: a83f505ff0e5eac7b8b316c7fa207f52ae2c07dd223f651d7dcb3f9a3e61b86b6168dac746455d1d1a2a4732d4865ab7526332f3f463db31048d8b1e5ba9d6cb
   languageName: node
   linkType: hard
 
-"@sapphire/utilities@npm:^3.6.2":
+"@sapphire/utilities@npm:^3.7.0":
   version: 3.7.0
   resolution: "@sapphire/utilities@npm:3.7.0"
   checksum: 3b574586242f015859e913123a5311774ad2d6cb79241c2a3d447a585282bdb04cddcd8e086f757a8ae5d2c49f4a25b4f848d63cebe605c7641364b51c3cfa11
@@ -860,7 +860,7 @@ __metadata:
     "@dice-roller/rpg-dice-roller": ^5.1.0
     "@iamtraction/google-translate": ^1.1.2
     "@sapphire/discord-utilities": ^2.11.4
-    "@sapphire/time-utilities": ^1.7.4
+    "@sapphire/time-utilities": ^1.7.5
     bufferutil: ^4.0.6
     colorette: ^2.0.19
     discord.js: ^14.0.0-dev.1657671090-1ed605e
