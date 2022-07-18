@@ -1,5 +1,4 @@
 import { fetch } from 'undici';
-import he from 'he';
 
 export default class Anilist {
 
@@ -123,26 +122,3 @@ export const getManga = gql`
 		}
 	}
 `;
-
-const excessiveNewLinesRegex = /\n{3,}/g;
-
-const htmlEntityRegex = /<\/?(i|b|br)>/g;
-
-const htmlEntityReplacements = Object.freeze({
-	i: '',
-	em: '',
-	var: '',
-	b: '',
-	br: '\n',
-	code: '',
-	pre: '',
-	mark: '',
-	kbd: '',
-	s: '',
-	wbr: '',
-	u: ''
-});
-
-export function parseDescription(description) {
-	return he.decode(description?.replace(htmlEntityRegex, (_, type) => htmlEntityReplacements[type])).replace(excessiveNewLinesRegex, '\n\n');
-}

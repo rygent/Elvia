@@ -1,9 +1,9 @@
 import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
-import Anilist, { parseDescription } from '../../../../Modules/Anilist.js';
+import Anilist from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray, isRestrictedChannel, cutText } from '../../../../Structures/Util.js';
+import { formatArray, isRestrictedChannel, cutText, parseHTMLEntity } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
@@ -34,7 +34,7 @@ export default class extends Command {
 				.addOptions(...response.map(data => ({
 					value: data.id.toString(),
 					label: cutText(Object.values(data.title).filter(title => title?.length)[0], 100) || 'Unknown Name',
-					...data.description?.length && { description: cutText(parseDescription(data.description), 100) }
+					...data.description?.length && { description: cutText(parseHTMLEntity(data.description), 100) }
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
@@ -76,7 +76,7 @@ export default class extends Command {
 				.setFooter({ text: 'Powered by AniList', iconURL: interaction.user.avatarURL() });
 
 			if (data.description?.length) {
-				embed.setDescription(cutText(parseDescription(data.description), 512));
+				embed.setDescription(cutText(parseHTMLEntity(data.description), 512));
 			}
 
 			if (data.characters.nodes?.length) {
