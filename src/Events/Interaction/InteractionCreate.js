@@ -73,10 +73,11 @@ export default class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied || error.name === 'DiscordAPIError[10062]') return;
+				if (interaction.replied) return;
+				if (error.name === 'DiscordAPIError[10062]') return;
 				this.client.logger.error(error.stack, error);
 
-				const content = [
+				const replies = [
 					'An error has occured when executing this command.',
 					'If the issue persists, please report in our *Support Server*.'
 				].join('\n');
@@ -94,19 +95,16 @@ export default class extends Event {
 						.setDisabled(state));
 
 				let reply;
-				if (interaction.deferred) reply = await interaction.editReply({ content, components: [button(false)] });
-				else reply = await interaction.reply({ content, components: [button(false)], ephemeral: true });
+				if (interaction.deferred) reply = await interaction.editReply({ content: replies, components: [button(false)] });
+				else reply = await interaction.reply({ content: replies, components: [button(false)], ephemeral: true });
 
 				const filter = (i) => i.user.id === interaction.user.id;
 				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600_000 });
 
 				const report = new ReportModal(this.client, { collector });
 
+				collector.on('ignore', (i) => i.deferUpdate());
 				collector.on('collect', (i) => report.showModal(i));
-
-				collector.on('ignore', (i) => {
-					if (i.user.id !== interaction.user.id) return i.deferUpdate();
-				});
 
 				collector.on('end', (collected, reason) => {
 					if (reason === 'time' || reason === 'collected') {

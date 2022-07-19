@@ -1,5 +1,3 @@
-export * from '../Assets/js/Badge.js';
-
 export const Colors = {
 	Default: 0x2f3136,
 	Green: 0x77dd77,

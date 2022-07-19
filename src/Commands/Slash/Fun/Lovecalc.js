@@ -16,12 +16,12 @@ export default class extends Command {
 		const loveIndex = Math.floor(love / 10);
 		const loveLevel = '💖'.repeat(loveIndex) + '💔'.repeat(10 - loveIndex);
 
-		const content = [
+		const replies = [
 			`**${user1.displayName}** is ${Math.floor(love)}% in love with **${user2.displayName}**`,
 			`${loveLevel}`
 		].join('\n');
 
-		return interaction.reply({ content });
+		return interaction.reply({ content: replies });
 	}
 
 }

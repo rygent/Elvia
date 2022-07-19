@@ -6,7 +6,7 @@ export default {
 	type: ApplicationCommandType.ChatInput,
 	options: [{
 		name: 'anime',
-		description: 'Search for an Anime on AniList.',
+		description: 'Search for an Anime on Anilist.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'search',
@@ -36,7 +36,7 @@ export default {
 		}]
 	}, {
 		name: 'manga',
-		description: 'Search for a Manga on AniList.',
+		description: 'Search for a Manga on Anilist.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'search',

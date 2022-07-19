@@ -10,12 +10,12 @@ export default class extends Command {
 	}
 
 	async run(interaction) {
-		const content = [
+		const replies = [
 			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
 			`***Latency:*** \`${Math.round(Date.now() - interaction.createdTimestamp)}ms\``
 		].join('\n');
 
-		return interaction.reply({ content });
+		return interaction.reply({ content: replies });
 	}
 
 }

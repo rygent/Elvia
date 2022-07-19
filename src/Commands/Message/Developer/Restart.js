@@ -34,6 +34,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === message.author.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15_000 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			switch (i.customId) {
 				case cancelId:
@@ -46,10 +47,6 @@ export default class extends Command {
 					}, 5000);
 					return i.update({ content: 'The bot will restart in 5 seconds.\n*it may take a few minutes for it to boot up again*', components: [] });
 			}
-		});
-
-		collector.on('ignore', (i) => {
-			if (i.user.id !== message.author.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {

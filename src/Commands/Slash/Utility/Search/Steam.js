@@ -37,6 +37,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
 			const data = await fetch(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, { method: 'GET' })
@@ -67,10 +68,6 @@ export default class extends Command {
 				.setFooter({ text: 'Powered by Steam', iconURL: interaction.user.avatarURL() });
 
 			return i.update({ content: null, embeds: [embed], components: [button] });
-		});
-
-		collector.on('ignore', (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {

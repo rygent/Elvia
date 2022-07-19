@@ -42,6 +42,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 			const data = response.find(item => item.id === selected);
@@ -69,10 +70,6 @@ export default class extends Command {
 				.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL() });
 
 			return i.update({ content: null, embeds: [embed], components: [button] });
-		});
-
-		collector.on('ignore', (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {

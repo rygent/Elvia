@@ -17,12 +17,12 @@ export default class extends Command {
 
 		const choice = Answer[Math.floor(Math.random() * Answer.length)];
 
-		const content = [
+		const replies = [
 			`> **${interaction.user.username}**: ${question}`,
 			`🎱 ${choice}`
 		].join('\n');
 
-		return interaction.reply({ content });
+		return interaction.reply({ content: replies });
 	}
 
 }

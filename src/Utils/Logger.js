@@ -40,7 +40,7 @@ export default class Logger {
 			.setColor(Colors.Red)
 			.setTitle(error.name)
 			.setDescription([
-				`${codeBlock('ts', this.clean(error.stack, { depth: 2 }))}`,
+				`${codeBlock('xl', this.clean(error.stack, { depth: 2 }))}`,
 				`***Message:*** ${error.message}`,
 				`***Date:*** ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
 			].join('\n'))

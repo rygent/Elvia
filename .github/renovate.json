@@ -4,7 +4,8 @@
     "labels": ["dependencies"],
     "timezone": "Asia/Tokyo",
     "schedule": ["after 9:00am every weekend"],
-    "reviewers": ["rygent"],
+    "assignAutomerge": true,
+    "reviewers": ["Rygent"],
     "lockFileMaintenance": {
         "enabled": true,
         "schedule": ["after 3:00pm on sunday"]

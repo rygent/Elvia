@@ -12,7 +12,7 @@ export default {
 			name: 'text',
 			description: 'Text to flip.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -23,7 +23,7 @@ export default {
 			name: 'text',
 			description: 'Text to mocking.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -34,7 +34,7 @@ export default {
 			name: 'text',
 			description: 'Text to transform.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -45,7 +45,7 @@ export default {
 			name: 'text',
 			description: 'Text to transform.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -56,7 +56,7 @@ export default {
 			name: 'text',
 			description: 'Text to reverse.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -67,7 +67,7 @@ export default {
 			name: 'text',
 			description: 'Text to transform.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}, {
@@ -78,7 +78,7 @@ export default {
 			name: 'text',
 			description: 'Text to transform.',
 			type: ApplicationCommandOptionType.String,
-			max_length: 1000,
+			max_length: 256,
 			required: true
 		}]
 	}],

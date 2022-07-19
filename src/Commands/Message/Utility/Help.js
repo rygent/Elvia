@@ -76,6 +76,7 @@ export default class extends Command {
 			const filter = (i) => i.user.id === message.author.id;
 			const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
+			collector.on('ignore', (i) => i.deferUpdate());
 			collector.on('collect', async (i) => {
 				collector.resetTimer();
 
@@ -87,10 +88,6 @@ export default class extends Command {
 				embed.setFooter({ text: `Powered by ${this.client.user.username} | ${category.commands.length} Commands`, iconURL: message.author.avatarURL() });
 
 				return i.update({ embeds: [embed], components: [select(false)] });
-			});
-
-			collector.on('ignore', (i) => {
-				if (i.user.id !== message.author.id) return i.deferUpdate();
 			});
 
 			collector.on('end', (collected, reason) => {

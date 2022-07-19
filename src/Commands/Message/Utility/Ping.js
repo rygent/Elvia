@@ -13,12 +13,12 @@ export default class extends Command {
 	}
 
 	async run(message) {
-		const content = [
+		const replies = [
 			`***Websocket:*** \`${Math.round(this.client.ws.ping)}ms\``,
 			`***Latency:*** \`${Math.round(Date.now() - message.createdTimestamp)}ms\``
 		].join('\n');
 
-		return message.reply({ content });
+		return message.reply({ content: replies });
 	}
 
 }

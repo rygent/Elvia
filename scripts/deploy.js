@@ -1,6 +1,6 @@
+import { URL, fileURLToPath, pathToFileURL } from 'node:url';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
-import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import glob from 'glob';

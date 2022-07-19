@@ -83,7 +83,7 @@ export default class extends Event {
 			} catch (error) {
 				this.client.logger.error(error.stack, error);
 
-				const content = [
+				const replies = [
 					'An error has occured when executing this command.',
 					'If the issue persists, please report in our *Support Server*.'
 				].join('\n');
@@ -100,18 +100,15 @@ export default class extends Event {
 						.setLabel('Report bug')
 						.setDisabled(state));
 
-				const reply = await message.reply({ content, components: [button(false)] });
+				const reply = await message.reply({ content: replies, components: [button(false)] });
 
 				const filter = (i) => i.user.id === message.author.id;
 				const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 600_000 });
 
 				const report = new ReportModal(this.client, { collector });
 
+				collector.on('ignore', (i) => i.deferUpdate());
 				collector.on('collect', (i) => report.showModal(i));
-
-				collector.on('ignore', (i) => {
-					if (i.user.id !== message.author.id) return i.deferUpdate();
-				});
 
 				collector.on('end', (collected, reason) => {
 					if (reason === 'time' || reason === 'collected') {

@@ -1,6 +1,13 @@
 import { ChannelType } from 'discord-api-types/v10';
 import he from 'he';
 
+export function cutText(string, length) {
+	if (string.length < length) return string;
+	const cut = splitText(string, length - 3);
+	if (cut.length < length - 3) return `${cut}...`;
+	return `${cut.slice(0, length - 3)}...`;
+}
+
 export function formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
 	return new Intl.ListFormat('en-US', { style, type }).format(array);
 }
@@ -34,16 +41,13 @@ export function isRestrictedChannel(channel) {
 		case ChannelType.DM:
 			return true;
 		case ChannelType.GuildVoice:
-		case ChannelType.GroupDM:
-		case ChannelType.GuildCategory:
-		case ChannelType.GuildNews:
-		case ChannelType.GuildNewsThread:
+			return channel.nsfw;
 		case ChannelType.GuildPublicThread:
-			return Boolean(channel.parent?.nsfw);
+			return channel.parent?.nsfw;
 		case ChannelType.GuildPrivateThread:
-		case ChannelType.GuildStageVoice:
-		case ChannelType.GuildDirectory:
-		case ChannelType.GuildForum:
+			return channel.parent?.nsfw;
+		default:
+			return false;
 	}
 }
 
@@ -73,10 +77,10 @@ export function rgbToHex(rgb) {
 	return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-export function splitText(str, length, char = ' ') {
-	const x = str.substring(0, length).lastIndexOf(char);
+export function splitText(string, length, char = ' ') {
+	const x = string.substring(0, length).lastIndexOf(char);
 	const pos = x === -1 ? length : x;
-	return str.substring(0, pos);
+	return string.substring(0, pos);
 }
 
 export function trimArray(array, length = 10) {
@@ -86,11 +90,4 @@ export function trimArray(array, length = 10) {
 		array.push(`${len} more...`);
 	}
 	return array;
-}
-
-export function cutText(str, length) {
-	if (str.length < length) return str;
-	const cut = splitText(str, length - 3);
-	if (cut.length < length - 3) return `${cut}...`;
-	return `${cut.slice(0, length - 3)}...`;
 }

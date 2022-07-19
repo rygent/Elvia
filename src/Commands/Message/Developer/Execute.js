@@ -17,8 +17,10 @@ export default class extends Command {
 
 	async run(message, args) {
 		child.exec(args.join(' '), (error, stdout) => {
-			const response = stdout || error;
-			return message.channel.send({ content: codeBlock(response).toString() });
+			const replies = stdout || error;
+			if (replies.length <= 2000) {
+				return message.channel.send({ content: codeBlock(replies).toString() });
+			}
 		});
 	}
 

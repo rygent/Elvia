@@ -1,7 +1,8 @@
 import Command from '../../../Structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { time } from 'discord.js';
-import { Badges, Colors, Emojis } from '../../../Utils/Constants.js';
+import { Badges } from '../../../Assets/js/Badge.js';
+import { Colors, Emojis } from '../../../Utils/Constants.js';
 import { formatArray, formatPermissions } from '../../../Structures/Util.js';
 
 export default class extends Command {

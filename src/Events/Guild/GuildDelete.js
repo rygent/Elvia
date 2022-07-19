@@ -13,7 +13,9 @@ export default class extends Event {
 	}
 
 	async run(guild) {
-		if (!guild.available || !Links.GuildWebhook) return;
+		if (!guild.available) return;
+		if (!Links.GuildWebhook) return;
+
 		const webhook = new WebhookClient(parseWebhookURL(Links.GuildWebhook));
 		const guildOwner = await guild.fetchOwner();
 

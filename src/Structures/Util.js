@@ -1,4 +1,4 @@
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { URL, fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import glob from 'glob';

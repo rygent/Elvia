@@ -40,6 +40,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60_000 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			switch (i.customId) {
 				case cancelId:
@@ -49,10 +50,6 @@ export default class extends Command {
 					await emojis.edit({ name });
 					return i.update({ content: `Emoji \`:${emojis.name}:\` ${emojis} was successfully renamed.`, components: [] });
 			}
-		});
-
-		collector.on('ignore', (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {

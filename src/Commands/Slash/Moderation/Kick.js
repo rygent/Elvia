@@ -44,6 +44,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 15_000, max: 1 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			if (i.customId === cancelId) {
 				return i.update({ content: `Cancelled kick on **${member.user.tag}**.`, components: [] });
@@ -59,8 +60,6 @@ export default class extends Command {
 				return i.update({ content: `Successfully kicked **${member.user.tag}**.`, components: [] });
 			}
 		});
-
-		collector.on('ignore', (i) => i.deferUpdate());
 
 		collector.on('end', (collected) => {
 			if (!collected.size) {

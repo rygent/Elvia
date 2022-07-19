@@ -2,11 +2,11 @@ import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
-import { DurationFormatter } from '@sapphire/time-utilities';
-import Anilist from '../../../../Modules/Anilist.js';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray, isRestrictedChannel, cutText, parseHTMLEntity } from '../../../../Structures/Util.js';
+import { DurationFormatter } from '@sapphire/time-utilities';
+import { cutText, formatArray, isRestrictedChannel, parseHTMLEntity } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
+import Anilist from '../../../../Modules/Anilist.js';
 import moment from 'moment';
 
 export default class extends Command {
@@ -44,6 +44,7 @@ export default class extends Command {
 		const filter = (i) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 60_000 });
 
+		collector.on('ignore', (i) => i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 			const data = response.find(item => item.id.toString() === selected);
@@ -59,23 +60,23 @@ export default class extends Command {
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
-				.setAuthor({ name: 'AniList', iconURL: 'https://i.imgur.com/B48olfM.png', url: 'https://anilist.co/' })
+				.setAuthor({ name: 'Anilist', iconURL: 'https://i.imgur.com/B48olfM.png', url: 'https://anilist.co/' })
 				.setTitle(Object.values(data.title).filter(title => title?.length)[0])
 				.addFields({ name: '__Detail__', value: [
 					...data.title.romaji ? [`***Romaji:*** ${data.title.romaji}`] : [],
 					...data.title.english ? [`***English:*** ${data.title.english}`] : [],
 					...data.title.native ? [`***Native:*** ${data.title.native}`] : [],
 					`***Type:*** ${this.getType(data.format)}`,
-					...data.episodes && data.format !== 'MOVIE' ? [`***Episodes:*** ${data.episodes} ${this.getNextEpisode(data.nextAiringEpisode)}`] : [],
 					`***Status:*** ${data.status.replace(/_/g, ' ').toTitleCase()}`,
 					`***Source:*** ${data.source.replace(/_/g, ' ').toTitleCase()}`,
 					...startDate ? [`***Aired:*** ${this.getDate(startDate, endDate)}`] : [],
 					...data.duration ? [`***Length:*** ${this.getDurationLength(data.duration, data.episodes, data.format)}`] : [],
+					...data.nextAiringEpisode ? [`***Next episodes:*** ${time(data.nextAiringEpisode.airingAt, 'R')} (episode ${data.nextAiringEpisode.episode})`] : [],
 					...data.isAdult ? [`***Explicit content:*** ${data.isAdult ? 'Yes' : 'No'}`] : [],
 					`***Popularity:*** ${data.popularity.formatNumber()}`
 				].join('\n'), inline: false })
 				.setImage(`https://img.anili.st/media/${data.id}`)
-				.setFooter({ text: 'Powered by AniList', iconURL: interaction.user.avatarURL() });
+				.setFooter({ text: 'Powered by Anilist', iconURL: interaction.user.avatarURL() });
 
 			if (data.description?.length) {
 				embed.setDescription(cutText(parseHTMLEntity(data.description), 512));
@@ -90,10 +91,6 @@ export default class extends Command {
 			}
 
 			return i.update({ content: null, embeds: [embed], components: [button] });
-		});
-
-		collector.on('ignore', (i) => {
-			if (i.user.id !== interaction.user.id) return i.deferUpdate();
 		});
 
 		collector.on('end', (collected, reason) => {
@@ -120,11 +117,6 @@ export default class extends Command {
 		if (startDate === endDate) return moment(new Date(startDate)).format('MMM D, YYYY');
 		else if (startDate && !endDate) return `${moment(new Date(startDate)).format('MMM D, YYYY')} to ?`;
 		else return `${moment(new Date(startDate)).format('MMM D, YYYY')} to ${moment(new Date(endDate)).format('MMM D, YYYY')}`;
-	}
-
-	getNextEpisode(nextAiringEpisode) {
-		if (!nextAiringEpisode) return '';
-		return `(episode ${nextAiringEpisode.episode} ${time(nextAiringEpisode.airingAt, 'R')})`;
 	}
 
 }

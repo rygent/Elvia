@@ -29,13 +29,13 @@ export default class extends Command {
 				evaled = await evaled;
 			}
 			const stop = process.hrtime(start);
-			const response = [
+			const replies = [
 				`${codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}\n`,
 				`${Emojis.Info} ${inlineCode(new Type(evaled).is)} `,
 				`${Emojis.Alarm} ${inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			].join('');
-			if (response.length < 2000) {
-				return message.channel.send({ content: response });
+			if (replies.length <= 2000) {
+				return message.channel.send({ content: replies });
 			} else {
 				const attachment = new AttachmentBuilder()
 					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 0 }))))

@@ -8,7 +8,7 @@ export default {
 		name: 'title',
 		description: 'The title of the winner.',
 		type: ApplicationCommandOptionType.String,
-		max_length: 100,
+		max_length: 256,
 		required: true
 	}],
 	dm_permission: false

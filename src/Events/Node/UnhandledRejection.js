@@ -17,14 +17,15 @@ export default class extends Event {
 	async run(error, promise) { // eslint-disable-line no-unused-vars
 		this.client.logger.error(error.stack);
 
-		if (!this.client.isReady() || !Links.LoggerWebhook) return;
+		if (!this.client.isReady()) return;
+		if (!Links.LoggerWebhook) return;
 		const webhook = new WebhookClient(parseWebhookURL(Links.LoggerWebhook));
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
 			.setTitle('Unhandled Rejection')
 			.setDescription([
-				`${codeBlock('ts', error.stack)}`,
+				`${codeBlock('xl', error.stack)}`,
 				`***Name:*** ${error.name}`,
 				`***Message:*** ${error.message}`,
 				`***Date:*** ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
