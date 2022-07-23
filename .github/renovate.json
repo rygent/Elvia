@@ -6,10 +6,6 @@
     "schedule": ["after 9:00am every weekend"],
     "assignAutomerge": true,
     "reviewers": ["Rygent"],
-    "lockFileMaintenance": {
-        "enabled": true,
-        "schedule": ["after 3:00pm on sunday"]
-    },
     "vulnerabilityAlerts": {
         "addLabels": ["security"]
     },
