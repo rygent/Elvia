@@ -22,7 +22,7 @@
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.0",
     "@iamtraction/google-translate": "^1.1.2",
-    "@sapphire/discord-utilities": "^2.11.4",
+    "@sapphire/discord-utilities": "^2.11.5",
     "@sapphire/time-utilities": "^1.7.5",
     "colorette": "^2.0.19",
     "discord.js": "^14.0.2",
