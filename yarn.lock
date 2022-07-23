@@ -2070,11 +2070,11 @@ __metadata:
   linkType: hard
 
 "node-spotify-api@github:rygent/node-spotify-api":
-  version: 2.1.2
-  resolution: "node-spotify-api@https://github.com/rygent/node-spotify-api.git#commit=b00dce5de422ab7e87dba3cbe8d74318f4bd2d9c"
+  version: 2.1.3
+  resolution: "node-spotify-api@https://github.com/rygent/node-spotify-api.git#commit=71b9072fa39975c60305e6c976d1507ff4fc1c79"
   dependencies:
-    undici: ^5.5.1
-  checksum: 777de71ff690870906c248826cd2adec56377ad5e2f0fa2212e16ab7486ac0bd2d11483a87ddf2483082eac6848c472016594c0973196e577607027760e216a2
+    undici: ^5.8.0
+  checksum: cd31d7bd51858c5354720a7a899157efd09f7dd797be339e32092dd4265f27a2026f46967d2344005ae4dafd97eba89847d31419e8bae642bc6f09da6374557d
   languageName: node
   linkType: hard
 
@@ -2682,7 +2682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.5.1, undici@npm:^5.7.0, undici@npm:^5.8.0":
+"undici@npm:^5.7.0, undici@npm:^5.8.0":
   version: 5.8.0
   resolution: "undici@npm:5.8.0"
   checksum: 7b486ad064da00628d3906e140b86223023cd3494c811da8d7aa1375c2392fe6a6ac421af236c056fd3d3136bba3a91b99e0505dde071dd946070946eb0718b8
