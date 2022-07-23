@@ -11,6 +11,7 @@
         "schedule": ["after 3:00pm on sunday"]
     },
     "vulnerabilityAlerts": {
+        "enabled": true,
         "addLabels": ["security"]
     },
     "packageRules": [{
