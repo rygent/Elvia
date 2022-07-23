@@ -45,5 +45,5 @@
     "utf-8-validate": "^5.0.9",
     "zlib-sync": "^0.1.7"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.2"
 }
