@@ -821,9 +821,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.0.2":
-  version: 14.0.2
-  resolution: "discord.js@npm:14.0.2"
+"discord.js@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "discord.js@npm:14.0.3"
   dependencies:
     "@discordjs/builders": ^1.0.0
     "@discordjs/collection": ^1.0.0
@@ -834,9 +834,9 @@ __metadata:
     fast-deep-equal: ^3.1.3
     lodash.snakecase: ^4.1.1
     tslib: ^2.4.0
-    undici: ^5.7.0
+    undici: ^5.8.0
     ws: ^8.8.1
-  checksum: 70fae5110df3ca7652d962a4a2d513b453738a7ed18f343dffd0bec7cc982a66bdd451bb50fafc592457105adc4edf40024ab066fb70130909f1c02fe881120a
+  checksum: 63c61ab94e056d09fcb85514f9c8f729db5c942407e3fbb7d546fc559ae124be363b1cdf1d71a652d3d6f4f17594b5cd0b8768aabf5e234bbc2fd0ee71f5d704
   languageName: node
   linkType: hard
 
@@ -874,7 +874,7 @@ __metadata:
     "@sapphire/time-utilities": ^1.7.5
     bufferutil: ^4.0.6
     colorette: ^2.0.19
-    discord.js: ^14.0.2
+    discord.js: ^14.0.3
     dotenv: ^16.0.1
     erlpack: ^0.1.4
     eslint: ^8.20.0
