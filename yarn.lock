@@ -805,7 +805,7 @@ __metadata:
     moment: ^2.29.4
     moment-duration-format: ^2.3.2
     moment-timezone: ^0.5.34
-    mongoose: ^6.4.5
+    mongoose: ^6.4.6
     ms: ^2.1.3
     nanoid: ^3.3.4
     node-spotify-api: ^1.1.1
@@ -1816,9 +1816,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.4.5":
-  version: 6.4.5
-  resolution: "mongoose@npm:6.4.5"
+"mongoose@npm:^6.4.6":
+  version: 6.4.6
+  resolution: "mongoose@npm:6.4.6"
   dependencies:
     bson: ^4.6.2
     kareem: 2.4.1
@@ -1827,7 +1827,7 @@ __metadata:
     mquery: 4.0.3
     ms: 2.1.3
     sift: 16.0.0
-  checksum: 5a6c2bb6dc84fc6cb40ddc447464d9f86b046c8ed38bb128a81883763e977b314e85a1a2028f453479f91eba89ec0a0cd1d31d839aacafe64dc45c989406644a
+  checksum: afe568aca87fcd89b0b2fc2c9539825ceac97b3e49910bd4209a72a4628a871155724c15d420874f867985708c4c081aa0c40da97b783de6ae03661cedc87efe
   languageName: node
   linkType: hard
 
