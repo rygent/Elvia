@@ -40,9 +40,7 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.6",
-    "erlpack": "^0.1.4",
-    "utf-8-validate": "^5.0.9",
-    "zlib-sync": "^0.1.7"
+    "utf-8-validate": "^5.0.9"
   },
   "packageManager": "yarn@3.2.2"
 }
