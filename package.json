@@ -29,7 +29,6 @@
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
     "he": "^1.2.0",
-    "imdb-api": "^4.4.1",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.34",

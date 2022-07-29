@@ -74,7 +74,7 @@ export default class BaseClient extends Client {
 		if (!options.mongodb) throw new Error('You must pass MongoDB URI for the Client.');
 		this.mongodb = options.mongodb;
 
-		if (!Credentials.ImdbApiKey) this.logger.warn('You must pass IMDb API Key to use "imdb" Command.');
+		if (!Credentials.TmdbApiKey) this.logger.warn('You must pass TMDb API Key to use "movie & series" Command.');
 		if (!Credentials.ImgurClientId) this.logger.warn('You must pass Imgur Client ID to use "imgur" Command.');
 		if (!Credentials.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
 		if (!Credentials.SpotifyClientId || !Credentials.SpotifyClientSecret) this.logger.warn('You must pass Spotify Client ID & Secret to use "spotify" Command.');

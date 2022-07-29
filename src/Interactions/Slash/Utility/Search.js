@@ -15,16 +15,6 @@ export default {
 			required: true
 		}]
 	}, {
-		name: 'imdb',
-		description: 'Search for something on IMDb.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'search',
-			description: 'Your search.',
-			type: ApplicationCommandOptionType.String,
-			required: true
-		}]
-	}, {
 		name: 'instagram',
 		description: 'Search for user on Instagram.',
 		type: ApplicationCommandOptionType.Subcommand,
@@ -37,6 +27,26 @@ export default {
 	}, {
 		name: 'manga',
 		description: 'Search for a Manga on Anilist.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'search',
+			description: 'Your search.',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}]
+	}, {
+		name: 'movie',
+		description: 'Search for a Movie on TMDb.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'search',
+			description: 'Your search.',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}]
+	}, {
+		name: 'show',
+		description: 'Search for a TV Show on TMDb.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'search',

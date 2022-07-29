@@ -8,11 +8,11 @@ export const Colors = {
 };
 
 export const Credentials = {
-	ImdbApiKey: process.env.IMDB_API_KEY,
 	ImgurClientId: process.env.IMGUR_CLIENT_ID,
 	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
 	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
-	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET
+	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+	TmdbApiKey: process.env.TMDB_API_KEY
 };
 
 export const Emojis = {
