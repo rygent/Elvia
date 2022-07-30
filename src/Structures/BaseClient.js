@@ -4,7 +4,6 @@ import { Collection } from '@discordjs/collection';
 import { Credentials } from '../Utils/Constants.js';
 import Logger from '../Utils/Logger.js';
 import Util from './Util.js';
-import Database from './Database.js';
 import semver from 'semver';
 
 export default class BaseClient extends Client {
@@ -36,7 +35,6 @@ export default class BaseClient extends Client {
 		this.cooldown = new Collection();
 
 		this.utils = new Util(this);
-		this.database = new Database(this);
 
 		String.prototype.toTitleCase = function () {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
@@ -71,9 +69,6 @@ export default class BaseClient extends Client {
 		if (!Array.isArray(options.defaultPermissions)) throw new TypeError('Permission(s) should be a type of Array<String>.');
 		this.defaultPermissions = new PermissionsBitField(options.defaultPermissions).freeze();
 
-		if (!options.mongodb) throw new Error('You must pass MongoDB URI for the Client.');
-		this.mongodb = options.mongodb;
-
 		if (!Credentials.TmdbApiKey) this.logger.warn('You must pass TMDb API Key to use "movie & series" Command.');
 		if (!Credentials.ImgurClientId) this.logger.warn('You must pass Imgur Client ID to use "imgur" Command.');
 		if (!Credentials.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
@@ -84,7 +79,6 @@ export default class BaseClient extends Client {
 		await this.utils.loadInteractions();
 		await this.utils.loadCommands();
 		await this.utils.loadEvents();
-		this.database.loadDatabases();
 		super.login(token);
 	}
 

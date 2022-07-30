@@ -1,3 +1,7 @@
 {
-    "recommendations": ["mikestead.dotenv", "dbaeumer.vscode-eslint"]
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "mikestead.dotenv",
+        "prisma.prisma"
+    ]
 }
