@@ -861,11 +861,7 @@ __metadata:
   dependenciesMeta:
     bufferutil:
       optional: true
-    erlpack:
-      optional: true
     utf-8-validate:
-      optional: true
-    zlib-sync:
       optional: true
   languageName: unknown
   linkType: soft
