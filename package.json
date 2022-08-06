@@ -36,7 +36,7 @@
     "nanoid": "^4.0.0",
     "node-spotify-api": "github:rygent/node-spotify-api",
     "systeminformation": "^5.12.1",
-    "undici": "^5.8.0"
+    "undici": "^5.8.1"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.6",
