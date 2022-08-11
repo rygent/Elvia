@@ -14,20 +14,20 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.20.0",
-    "inquirer": "^9.0.2",
-    "prisma": "^4.1.1",
+    "eslint": "^8.21.0",
+    "inquirer": "^9.1.0",
+    "prisma": "^4.2.1",
     "semver": "^7.3.7"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.0",
     "@iamtraction/google-translate": "^1.1.2",
-    "@prisma/client": "^4.1.1",
+    "@prisma/client": "^4.2.1",
     "@sapphire/discord-utilities": "^2.11.5",
     "@sapphire/time-utilities": "^1.7.5",
     "colorette": "^2.0.19",
-    "discord.js": "^14.1.1",
+    "discord.js": "^14.1.2",
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
     "he": "^1.2.0",
@@ -36,8 +36,8 @@
     "moment-timezone": "^0.5.34",
     "nanoid": "^4.0.0",
     "node-spotify-api": "github:rygent/node-spotify-api",
-    "systeminformation": "^5.12.1",
-    "undici": "^5.8.0"
+    "systeminformation": "^5.12.3",
+    "undici": "^5.8.1"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.6",
