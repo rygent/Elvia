@@ -914,7 +914,7 @@ __metadata:
     nanoid: ^4.0.0
     node-spotify-api: "github:rygent/node-spotify-api"
     semver: ^7.3.7
-    systeminformation: ^5.12.3
+    systeminformation: ^5.12.5
     undici: ^5.8.2
     utf-8-validate: ^5.0.9
   dependenciesMeta:
@@ -2685,12 +2685,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.12.3":
-  version: 5.12.3
-  resolution: "systeminformation@npm:5.12.3"
+"systeminformation@npm:^5.12.5":
+  version: 5.12.5
+  resolution: "systeminformation@npm:5.12.5"
   bin:
     systeminformation: lib/cli.js
-  checksum: 94a192c139153693db36e16371bc4b8f8b66d8b0cacb08539a780cc901b04b645f021e22dc8b2ecd70780dbaa6e89669c607be16692c76dad9d93cd409518850
+  checksum: 41b26420ea25a2f6068e6b63e7ea6ca5e090b815a70008f66a8c867f1b7320a3707f918142f91a642f720095e17b8ce691a46cd76e877ed7f6ae30b3b2a330dd
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
