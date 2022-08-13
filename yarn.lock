@@ -910,7 +910,7 @@ __metadata:
     moment: ^2.29.4
     moment-duration-format: ^2.3.2
     moment-timezone: ^0.5.34
-    mongoose: ^6.5.1
+    mongoose: ^6.5.2
     nanoid: ^4.0.0
     node-spotify-api: "github:rygent/node-spotify-api"
     semver: ^7.3.7
@@ -2014,9 +2014,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.5.1":
-  version: 6.5.1
-  resolution: "mongoose@npm:6.5.1"
+"mongoose@npm:^6.5.2":
+  version: 6.5.2
+  resolution: "mongoose@npm:6.5.2"
   dependencies:
     bson: ^4.6.5
     kareem: 2.4.1
@@ -2025,7 +2025,7 @@ __metadata:
     mquery: 4.0.3
     ms: 2.1.3
     sift: 16.0.0
-  checksum: 6ddf3d5826a6127664fb8e7caeea0071a9fdf99b03c565822b589e06fe9f828147c844f9d43ffc12919cbc47a031dd1bd0ad5d13c8fe379791695fe2c2523204
+  checksum: b3e1bc762af0aec2eb2d39e30326fd8c63446241b4e38576f80f1496fdeb863d4ec34831fc506d0441a09ddfe4b72525386e7ea59eecaa0684c6bcd91e2d240a
   languageName: node
   linkType: hard
 
