@@ -15,6 +15,16 @@ export default {
 			required: true
 		}]
 	}, {
+		name: 'google',
+		description: 'Search for something on Google.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'search',
+			description: 'Your search.',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}]
+	}, {
 		name: 'lmgtfy',
 		description: 'Let Me Google That For You.',
 		type: ApplicationCommandOptionType.Subcommand,
