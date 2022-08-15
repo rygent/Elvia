@@ -15,16 +15,6 @@ export default {
 			required: true
 		}]
 	}, {
-		name: 'instagram',
-		description: 'Search for user on Instagram.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'username',
-			description: 'Username to search.',
-			type: ApplicationCommandOptionType.String,
-			required: true
-		}]
-	}, {
 		name: 'manga',
 		description: 'Search for a Manga on Anilist.',
 		type: ApplicationCommandOptionType.Subcommand,

@@ -22,7 +22,6 @@ export const Emojis = {
 	Idle: '<:idle:712397201955094708>',
 	Dnd: '<:dnd:712397154836283392>',
 	Offline: '<:offline:712397086100029440>',
-	Verified: '<:verified:945933555089952848>',
 	Spotify: '<:spotify:950481019012804659>'
 };
 
