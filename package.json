@@ -32,7 +32,7 @@
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.37",
-    "mongoose": "^6.5.3",
+    "mongoose": "^6.5.4",
     "nanoid": "^4.0.0",
     "node-spotify-api": "github:rygent/node-spotify-api",
     "systeminformation": "^5.12.6",
