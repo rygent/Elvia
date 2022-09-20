@@ -73,8 +73,8 @@ export default class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied) return;
 				if (error.name === 'DiscordAPIError[10062]') return;
+				if (interaction.replied) return;
 				this.client.logger.error(error.stack, error);
 
 				const replies = [

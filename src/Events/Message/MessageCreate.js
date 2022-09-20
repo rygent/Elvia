@@ -19,12 +19,7 @@ export default class extends Event {
 	async run(message) {
 		if (message.author.bot || !message.inGuild()) return;
 
-		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
-
-		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` });
-		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
 		if (!message.content.startsWith(prefix)) return;
