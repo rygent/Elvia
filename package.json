@@ -14,7 +14,7 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.23.1",
+    "eslint": "^8.24.0",
     "inquirer": "^9.1.2",
     "semver": "^7.3.7"
   },
