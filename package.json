@@ -27,7 +27,7 @@
     "@sapphire/type": "^2.2.4",
     "colorette": "^2.0.19",
     "discord.js": "^14.5.0",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "glob": "^8.0.3",
     "he": "^1.2.0",
     "moment": "^2.29.4",
