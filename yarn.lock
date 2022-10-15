@@ -1020,7 +1020,7 @@ __metadata:
     mongoose: ^6.6.5
     nanoid: ^4.0.0
     semver: ^7.3.8
-    systeminformation: ^5.12.6
+    systeminformation: ^5.12.7
     undici: ^5.11.0
     utf-8-validate: ^5.0.9
   dependenciesMeta:
@@ -2865,12 +2865,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.12.6":
-  version: 5.12.6
-  resolution: "systeminformation@npm:5.12.6"
+"systeminformation@npm:^5.12.7":
+  version: 5.12.7
+  resolution: "systeminformation@npm:5.12.7"
   bin:
     systeminformation: lib/cli.js
-  checksum: ae112148530bc31c4c43c4966b8f56822c874caa93daa1f146ea2372ec32738b315f10c58fb968611d082d9614bac054a9a3740b7e7df1201a2a581c73f3306c
+  checksum: 8b0443d128d3254279ba2082eb20e42501ec121bca0b44f87533df237a90e6086f4c31c6ec10720f16bc220ba5e0e7f458badb47eb4079bc6a08db026b4a8b3b
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
