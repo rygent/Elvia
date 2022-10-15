@@ -36,7 +36,7 @@
     "moment-timezone": "^0.5.37",
     "mongoose": "^6.6.5",
     "nanoid": "^4.0.0",
-    "systeminformation": "^5.12.6",
+    "systeminformation": "^5.12.7",
     "undici": "^5.11.0"
   },
   "optionalDependencies": {
