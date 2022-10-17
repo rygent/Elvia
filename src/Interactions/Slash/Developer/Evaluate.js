@@ -1,4 +1,5 @@
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
+import { PermissionsBitField } from 'discord.js';
 
 export default {
 	name: 'evaluate',
@@ -20,5 +21,6 @@ export default {
 		type: ApplicationCommandOptionType.Boolean,
 		required: false
 	}],
+	default_member_permissions: new PermissionsBitField(['Administrator']).bitfield.toString(),
 	dm_permission: false
 };
