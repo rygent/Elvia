@@ -58,7 +58,7 @@ export default class extends Command {
 				const stop = process.hrtime(start);
 				const replies = [
 					`${codeBlock('js', this.clean(inspect(evaled, { depth })))}\n`,
-					`${Emojis.Info} ${inlineCode(new Type(evaled))} `,
+					`${Emojis.Info} ${inlineCode(new Type(evaled).is)} `,
 					`${Emojis.Alarm} ${inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 				].join('');
 
@@ -74,7 +74,7 @@ export default class extends Command {
 			} catch (error) {
 				const replies = [
 					`${codeBlock('xl', error)}`,
-					`${Emojis.Info} ${inlineCode(new Type(error))}`
+					`${Emojis.Info} ${inlineCode(new Type(error).is)}`
 				].join('\n');
 
 				return i.editReply({ content: replies });

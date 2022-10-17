@@ -19,7 +19,6 @@
     "semver": "^7.3.8"
   },
   "dependencies": {
-    "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.1",
     "@iamtraction/google-translate": "^2.0.0",
     "@rygent/spotify": "^1.0.1",

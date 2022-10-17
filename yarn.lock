@@ -5,13 +5,6 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@anishshobith/deeptype@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@anishshobith/deeptype@npm:1.1.0"
-  checksum: 9d8d93a0195da35a5dc1edafcab59f3292b8eb46fa939d22d1f6a90efec1c9c1ad931bf4a6c691cda0e3aeabc3e7ae5eedc71d5c27ddde1bfc27eb35257cb545
-  languageName: node
-  linkType: hard
-
 "@babel/runtime@npm:^7.19.0":
   version: 7.19.0
   resolution: "@babel/runtime@npm:7.19.0"
@@ -885,7 +878,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "elvia@workspace:."
   dependencies:
-    "@anishshobith/deeptype": ^1.1.0
     "@dice-roller/rpg-dice-roller": ^5.1.1
     "@iamtraction/google-translate": ^2.0.0
     "@rygent/spotify": ^1.0.1
