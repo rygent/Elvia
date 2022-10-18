@@ -2,7 +2,7 @@ import Command from '../../../Structures/Interaction.js';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import { AttachmentBuilder, InteractionCollector, codeBlock, inlineCode } from 'discord.js';
-import { Type } from '@sapphire/type';
+import { Type } from '@anishshobith/deeptype';
 import { Emojis } from '../../../Utils/Constants.js';
 import { inspect } from 'node:util';
 import { nanoid } from 'nanoid';

@@ -19,13 +19,13 @@
     "semver": "^7.3.8"
   },
   "dependencies": {
+    "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.1.1",
     "@iamtraction/google-translate": "^2.0.0",
     "@rygent/anilist": "^1.0.1",
     "@rygent/spotify": "^1.0.1",
     "@sapphire/discord-utilities": "^2.11.6",
     "@sapphire/time-utilities": "^1.7.8",
-    "@sapphire/type": "^2.2.4",
     "colorette": "^2.0.19",
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",

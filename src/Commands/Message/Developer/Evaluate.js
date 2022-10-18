@@ -1,6 +1,6 @@
 import Command from '../../../Structures/Command.js';
 import { AttachmentBuilder, codeBlock, inlineCode } from 'discord.js';
-import { Type } from '@sapphire/type';
+import { Type } from '@anishshobith/deeptype';
 import { Emojis } from '../../../Utils/Constants.js';
 import { inspect } from 'node:util';
 
