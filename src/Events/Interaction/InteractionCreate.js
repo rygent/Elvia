@@ -75,7 +75,8 @@ export default class extends Event {
 			} catch (error) {
 				if (error.name === 'DiscordAPIError[10062]') return;
 				if (interaction.replied) return;
-				this.client.logger.error(error.stack, error);
+				this.client.logger.error(`${error.name}: ${error.message}`, error);
+				this.client.logger.webhook(error);
 
 				const replies = [
 					'An error has occured when executing this command.',

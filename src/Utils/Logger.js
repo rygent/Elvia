@@ -5,6 +5,7 @@ import { Colors, Links } from './Constants.js';
 import { inspect } from 'node:util';
 import * as Colorette from 'colorette';
 import moment from 'moment';
+import fs from 'node:fs';
 
 export default class Logger {
 
@@ -14,21 +15,25 @@ export default class Logger {
 		this.depth = options.depth || 5;
 	}
 
-	log(content, { infix, color } = {}) {
-		return this.write(content, { method: 'log', infix: infix || 'INFO', color: color || 'blueBright' });
+	log(content) {
+		return this.write(content, { type: 'log', level: 'SYSLOG' });
 	}
 
 	error(content, error) {
-		this.webhook(error);
-		return this.write(content, { method: 'error', infix: 'ERROR', color: 'redBright' });
+		this.printErr(error);
+		return this.write(content, { type: 'error', level: 'SYSERR' });
 	}
 
 	warn(content) {
-		return this.write(content, { method: 'warn', infix: 'WARN', color: 'yellowBright' });
+		return this.write(content, { type: 'warn', level: 'WARN' });
+	}
+
+	info(content) {
+		return this.write(content, { type: 'info', level: 'INFO' });
 	}
 
 	debug(content) {
-		return this.write(content, { method: 'debug', infix: 'DEBUG', color: 'blackBright' });
+		return this.write(content, { type: 'debug', level: 'DEBUG' });
 	}
 
 	webhook(error) {
@@ -50,9 +55,18 @@ export default class Logger {
 	}
 
 	write(content, options) {
-		const timestamp = Colorette.dim(moment().format('DD/MM/YYYY HH:mm:ss z'));
-		const infix = `[\u200B${Colorette.bold(Colorette[options.color](options.infix))}\u200B]`;
-		return this.console[options.method](timestamp, infix, this.clean(content));
+		const timestamp = Colorette.cyanBright(moment().format('DD/MM/YYYY HH:mm:ss z'));
+		const level = `${Colorette.bold(getLevel(options.level))} :`;
+		return this.console[options.type](timestamp, level, this.clean(content));
+	}
+
+	printErr(error) {
+		const date = moment().format('yyyyMMDD.HHmmss');
+		const dirname = `${process.cwd()}\\logs\\`.replace(/\\/g, '/');
+		if (!fs.existsSync(dirname)) {
+			fs.mkdirSync(dirname);
+		}
+		return fs.writeFileSync(`${dirname}report.${date}.log`, Buffer.from(error.stack));
 	}
 
 	clean(content, { depth = this.depth } = {}) {
@@ -61,4 +75,18 @@ export default class Logger {
 		return cleaned;
 	}
 
+}
+
+const levels = {
+	SYSLOG: Colorette.gray('[SYSLOG]'),
+	SYSERR: Colorette.redBright('[SYSERR]'),
+	WARN: Colorette.yellowBright('[WARN]'),
+	INFO: Colorette.blueBright('[INFO]'),
+	DEBUG: Colorette.magentaBright('[DEBUG]')
+};
+
+const levelLength = Math.max(...Object.values(levels).map(text => text.length));
+
+function getLevel(level) {
+	return `${levels[level]}${' '.repeat(levelLength - levels[level].length)}`;
 }

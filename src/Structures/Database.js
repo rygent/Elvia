@@ -27,7 +27,8 @@ export default class Database {
 				useUnifiedTopology: true
 			});
 		} catch (error) {
-			this.client.logger.error(`Unable to connect MongoDB:\n${error.stack}`, error);
+			this.client.logger.error('Unable to connect MongoDB.', error);
+			this.client.logger.webhook(error);
 		}
 	}
 
