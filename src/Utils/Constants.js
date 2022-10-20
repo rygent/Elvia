@@ -22,7 +22,12 @@ export const Emojis = {
 	Idle: '<:idle:712397201955094708>',
 	Dnd: '<:dnd:712397154836283392>',
 	Offline: '<:offline:712397086100029440>',
-	Spotify: '<:spotify:950481019012804659>'
+	Spotify: '<:spotify:950481019012804659>',
+	Backward: '<:backward:1032617403965771786>',
+	Previous: '<:previous:1032617521586651186>',
+	Next: '<:next:1032617635122257961>',
+	Forward: '<:forward:1032617724922314782>',
+	Reply: '<:reply:1032616748081500260>'
 };
 
 export const Links = {
