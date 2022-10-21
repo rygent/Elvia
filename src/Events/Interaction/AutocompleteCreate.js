@@ -28,6 +28,19 @@ export default class extends Event {
 				return interaction.respond(choices.filter(({ hoisted }) => hoisted).map(({ name, value }) => ({ name, value })));
 			}
 		}
+
+		if (interaction.commandName === 'translate') {
+			const focused = interaction.options.getFocused(true);
+
+			const raw = require('../../Assets/json/languages.json');
+			const choices = raw.filter(({ name }) => name.toLowerCase().startsWith(focused.value.toLowerCase()));
+
+			if (focused.value.length) {
+				return interaction.respond(choices.map(({ name, value }) => ({ name, value })).slice(0, 25));
+			} else {
+				return interaction.respond(choices.filter(({ hoisted }) => hoisted).map(({ name, value }) => ({ name, value })));
+			}
+		}
 	}
 
 }
