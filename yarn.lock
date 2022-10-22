@@ -216,10 +216,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/discord-utilities@npm:^2.11.6":
-  version: 2.11.6
-  resolution: "@sapphire/discord-utilities@npm:2.11.6"
-  checksum: aaabbb3558fa9255ab7fd874c6dba845caa6b5b2cbfccc96c6365d828888fc50b95c4fc9cb5f4aa6a7c904d7d9a95e61b80018a90e55bcc5d3779f2fb57926f1
+"@sapphire/discord-utilities@npm:^2.11.7":
+  version: 2.11.7
+  resolution: "@sapphire/discord-utilities@npm:2.11.7"
+  checksum: 6e8dfb3353c54c37c8be0f50ed60e89b312ccd93d84d93979fc98cf1fb152ed9004f5b753a7c71cc6615b11ef59388ba2585f0966e94e99ed4bdfb3b16133832
   languageName: node
   linkType: hard
 
@@ -836,7 +836,7 @@ __metadata:
     "@iamtraction/google-translate": ^2.0.0
     "@rygent/anilist": ^1.0.1
     "@rygent/spotify": ^1.0.1
-    "@sapphire/discord-utilities": ^2.11.6
+    "@sapphire/discord-utilities": ^2.11.7
     "@sapphire/time-utilities": ^1.7.8
     bufferutil: ^4.0.7
     colorette: ^2.0.19
