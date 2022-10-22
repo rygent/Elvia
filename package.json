@@ -32,7 +32,7 @@
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.38",
-    "mongoose": "^6.6.5",
+    "mongoose": "^6.6.7",
     "nanoid": "^4.0.0",
     "semver": "^7.3.8",
     "systeminformation": "^5.12.7",
