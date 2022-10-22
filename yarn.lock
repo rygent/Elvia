@@ -180,14 +180,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rygent/anilist@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@rygent/anilist@npm:1.0.1"
+"@rygent/anilist@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@rygent/anilist@npm:1.1.0"
   dependencies:
     graphql: ^16.6.0
     he: ^1.2.0
     undici: ^5.11.0
-  checksum: de78fdce885a409e1e16fb76562e4960c6c798b8e31cdf12a86253f5be781bf9e66c40802f3922e71a74c5bc1d720dc45065e4a29c7451b94e5ee6b3a3337eb3
+  checksum: 8ea099b9c78fb4762a0e6b136469eb77b6361f2bdcc9dbda6f99cfe70ecc8abd454d28ae140f560df5b944137ea53449fc94a996ef530eb687b59676466594dd
   languageName: node
   linkType: hard
 
@@ -834,7 +834,7 @@ __metadata:
     "@anishshobith/deeptype": ^1.1.0
     "@dice-roller/rpg-dice-roller": ^5.1.1
     "@iamtraction/google-translate": ^2.0.0
-    "@rygent/anilist": ^1.0.1
+    "@rygent/anilist": ^1.1.0
     "@rygent/spotify": ^1.0.1
     "@sapphire/discord-utilities": ^2.11.7
     "@sapphire/time-utilities": ^1.7.8
