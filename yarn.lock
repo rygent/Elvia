@@ -191,12 +191,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rygent/spotify@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@rygent/spotify@npm:1.0.1"
+"@rygent/spotify@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@rygent/spotify@npm:1.0.2"
   dependencies:
     undici: ^5.11.0
-  checksum: 4f364e40234110c5ebedba522a1ba982b62d61957f88ed51b906bc20e6918891a0466b631e746c337df4ccaeebf248d68c03f1a7a1fdd4f2436070738642b18e
+  checksum: 0e7b61241377e53b7c3293df95638935368b823a5b7824bbec2cf0f4191c95852581a4fd162e60eb652b657c9797b8eb3ce54b6c65c8e497e32b56b38102ff0c
   languageName: node
   linkType: hard
 
@@ -835,7 +835,7 @@ __metadata:
     "@dice-roller/rpg-dice-roller": ^5.1.1
     "@iamtraction/google-translate": ^2.0.0
     "@rygent/anilist": ^1.1.0
-    "@rygent/spotify": ^1.0.1
+    "@rygent/spotify": ^1.0.2
     "@sapphire/discord-utilities": ^2.11.7
     "@sapphire/time-utilities": ^1.7.8
     bufferutil: ^4.0.7
