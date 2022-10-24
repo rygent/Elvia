@@ -35,6 +35,16 @@ export default {
 			required: true
 		}]
 	}, {
+		name: 'bang',
+		description: 'Bang someone.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'user',
+			description: 'User to interact with.',
+			type: ApplicationCommandOptionType.User,
+			required: true
+		}]
+	}, {
 		name: 'bite',
 		description: 'Bite someone.',
 		type: ApplicationCommandOptionType.Subcommand,
@@ -55,8 +65,8 @@ export default {
 			required: true
 		}]
 	}, {
-		name: 'confused',
-		description: 'Someone made you confused.',
+		name: 'bored',
+		description: 'Someone made you bored.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'user',
@@ -105,6 +115,16 @@ export default {
 			required: true
 		}]
 	}, {
+		name: 'laugh',
+		description: 'Someone made you laugh.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'user',
+			description: 'User to interact with.',
+			type: ApplicationCommandOptionType.User,
+			required: true
+		}]
+	}, {
 		name: 'slap',
 		description: 'Slap someone.',
 		type: ApplicationCommandOptionType.Subcommand,
@@ -135,6 +155,16 @@ export default {
 			required: true
 		}]
 	}, {
+		name: 'wink',
+		description: 'Wink someone.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'user',
+			description: 'User to interact with.',
+			type: ApplicationCommandOptionType.User,
+			required: true
+		}]
+	}, {
 		name: 'stare',
 		description: 'Stare at someone.',
 		type: ApplicationCommandOptionType.Subcommand,
@@ -157,6 +187,16 @@ export default {
 	}, {
 		name: 'punch',
 		description: 'Punch someone.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'user',
+			description: 'User to interact with.',
+			type: ApplicationCommandOptionType.User,
+			required: true
+		}]
+	}, {
+		name: 'pout',
+		description: 'Pout someone.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'user',

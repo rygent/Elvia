@@ -3,7 +3,7 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { Links } from '../../Utils/Constants.js';
-import { formatArray, formatPermissions } from '../../Structures/Util.js';
+import { formatArray, formatPermissions, isRestrictedChannel } from '../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import ReportModal from '../../Modules/ReportModal.js';
 
@@ -45,6 +45,10 @@ export default class extends Event {
 						return interaction.reply({ content: `I lack the ${formatArray(missing.map(perms => `***${formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
 					}
 				}
+
+				if (command.nsfw && !isRestrictedChannel(interaction.channel)) {
+					return interaction.reply({ content: 'This command is only accessible on **Age-Restricted** channels.', ephemeral: true });
+				}
 			}
 
 			if (command.ownerOnly && !this.client.owners.includes(interaction.user.id)) {
@@ -73,9 +77,10 @@ export default class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied) return;
 				if (error.name === 'DiscordAPIError[10062]') return;
-				this.client.logger.error(error.stack, error);
+				if (interaction.replied) return;
+				this.client.logger.error(`${error.name}: ${error.message}`, error);
+				this.client.logger.webhook(error);
 
 				const replies = [
 					'An error has occured when executing this command.',

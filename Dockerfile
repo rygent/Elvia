@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16
+FROM node:19-alpine3.16
 
 RUN apk add --no-cache=true --update \
         bash curl git yarn

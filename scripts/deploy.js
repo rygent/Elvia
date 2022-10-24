@@ -1,4 +1,5 @@
 import { URL, fileURLToPath, pathToFileURL } from 'node:url';
+import { SnowflakeRegex, TokenRegex } from '@sapphire/discord-utilities';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
 import { promisify } from 'node:util';
@@ -13,65 +14,62 @@ export async function deploy() {
 	const directory = `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 
 	const commands = [];
-	await globber(`${directory}Interactions/**/*.js`).then(async (interactions) => {
+	await globber(`${directory}Interactions/?(Context|Slash)/!(Developer)/**/*.js`).then(async (interactions) => {
 		for (const interactionFile of interactions) {
 			const { default: interaction } = await import(pathToFileURL(interactionFile));
 			commands.push(interaction);
 		}
 	});
 
-	// eslint-disable-next-line prefer-const
-	let { type, clientId, guildId, token } = await inquirer.prompt([{
-		type: 'rawlist',
-		name: 'type',
-		message: 'Select register type:',
-		choices: [{
-			name: 'Guild',
-			value: 'guild'
-		}, {
-			name: 'Global',
-			value: 'global'
-		}]
-	}, {
+	const devCommands = [];
+	await globber(`${directory}Interactions/?(Context|Slash)/?(Developer)/**/*.js`).then(async (interactions) => {
+		for (const interactionFile of interactions) {
+			const { default: interaction } = await import(pathToFileURL(interactionFile));
+			devCommands.push(interaction);
+		}
+	});
+
+	let { clientId, guildId, token } = await inquirer.prompt([{
 		type: 'input',
 		name: 'clientId',
-		message: 'Enter the client id:',
-		default: process.env.CLIENT_ID,
+		message: 'Input here the client id:',
+		when: () => !process.env.CLIENT_ID,
 		validate: (value) => {
-			if (!value) return 'Please enter a client id';
-			return true;
+			if (SnowflakeRegex.test(value)) return true;
+			else return 'Please input a valid client id!';
 		}
 	}, {
 		type: 'input',
 		name: 'guildId',
-		message: 'Enter the guild id:',
-		when: (answer) => answer.type === 'guild',
+		message: 'Input here the guild id:',
+		when: () => !process.env.GUILD_ID,
 		validate: (value) => {
-			if (!value) return 'Please enter a guild id';
-			return true;
+			if (SnowflakeRegex.test(value)) return true;
+			else return 'Please input a valid guild id!';
 		}
 	}, {
 		type: 'password',
 		name: 'token',
-		message: 'Enter the bot token:',
+		message: 'Input here the bot token:',
 		mask: '*',
-		when: () => !process.env.DISCORD_TOKEN
+		when: () => !process.env.DISCORD_TOKEN,
+		validate: (value) => {
+			if (TokenRegex.test(value)) return true;
+			else return 'Please input a valid token!';
+		}
 	}]);
 
+	if (!clientId) clientId = process.env.CLIENT_ID;
+	if (!guildId) guildId = process.env.GUILD_ID;
 	if (!token) token = process.env.DISCORD_TOKEN;
+
 	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		switch (type) {
-			case 'guild':
-				await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...commands] });
-				break;
-			case 'global':
-				await rest.put(Routes.applicationCommands(clientId), { body: [...commands] });
-				break;
-		}
+		await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...devCommands] });
+		await rest.put(Routes.applicationCommands(clientId), { body: [...commands] });
 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {

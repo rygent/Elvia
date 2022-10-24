@@ -7,21 +7,21 @@ export default class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			name: ['interact', 'confused'],
-			description: 'Someone made you confused.'
+			name: ['interact', 'pout'],
+			description: 'Pout someone.'
 		});
 	}
 
 	async run(interaction) {
 		const member = interaction.options.getMember('user');
 
-		const raw = await fetch(`https://anime-reactions.uzairashraf.dev/api/reactions/random?category=confused`, { method: 'GET' });
-		const response = await raw.json();
+		const raw = await fetch(`https://nekos.best/api/v2/pout`, { method: 'GET' });
+		const response = await raw.json().then(({ results }) => results[0]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
-			.setDescription(`${member.toString()} made ${interaction.user.toString()} confused.`)
-			.setImage(response.reaction)
+			.setDescription(`${interaction.user.toString()} pouts at ${member.toString()}.`)
+			.setImage(response.url)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });
 
 		return interaction.reply({ embeds: [embed] });

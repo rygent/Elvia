@@ -1,5 +1,4 @@
 import { ChannelType } from 'discord-api-types/v10';
-import he from 'he';
 
 export function cutText(string, length) {
 	if (string.length < length) return string;
@@ -49,27 +48,6 @@ export function isRestrictedChannel(channel) {
 		default:
 			return false;
 	}
-}
-
-export function parseHTMLEntity(string) {
-	const excessiveNewLinesRegex = /\n{3,}/g;
-	const htmlEntityRegex = /<\/?(i|b|br)>/g;
-	const htmlEntityReplacements = Object.freeze({
-		i: '',
-		em: '',
-		var: '',
-		b: '',
-		br: '\n',
-		code: '',
-		pre: '',
-		mark: '',
-		kbd: '',
-		s: '',
-		wbr: '',
-		u: ''
-	});
-	return he.decode(string?.replace(htmlEntityRegex, (_, type) => htmlEntityReplacements[type]))
-		.replace(excessiveNewLinesRegex, '\n\n');
 }
 
 export function rgbToHex(rgb) {

@@ -4,9 +4,9 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
 import { Colors } from '../../../../Utils/Constants.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
-import { cutText, formatArray, isRestrictedChannel, parseHTMLEntity } from '../../../../Structures/Util.js';
+import { Anilist, parseDescription } from '@rygent/anilist';
+import { cutText, formatArray, isRestrictedChannel } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
-import Anilist from '../../../../Modules/Anilist.js';
 import moment from 'moment';
 
 export default class extends Command {
@@ -22,7 +22,7 @@ export default class extends Command {
 		const search = interaction.options.getString('search', true);
 
 		const anilist = new Anilist();
-		const raw = await anilist.search('anime', { search }).then(({ media }) => media);
+		const raw = await anilist.search({ type: 'anime', search }).then(({ data: { Page: { media } } }) => media);
 		if (!raw.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const response = isRestrictedChannel(interaction.channel) ? raw : raw.filter(({ isAdult }) => !isAdult);
@@ -36,7 +36,7 @@ export default class extends Command {
 				.addOptions(...response.map(data => ({
 					value: data.id.toString(),
 					label: cutText(Object.values(data.title).filter(title => title?.length)[0], 100) || 'Unknown Name',
-					...data.description?.length && { description: cutText(parseHTMLEntity(data.description), 100) }
+					...data.description?.length && { description: cutText(parseDescription(data.description), 100) }
 				}))));
 
 		const reply = await interaction.reply({ content: `I found **${response.length}** possible matches, please select one of the following:`, components: [select] });
@@ -79,7 +79,7 @@ export default class extends Command {
 				.setFooter({ text: 'Powered by Anilist', iconURL: interaction.user.avatarURL() });
 
 			if (data.description?.length) {
-				embed.setDescription(cutText(parseHTMLEntity(data.description), 512));
+				embed.setDescription(cutText(parseDescription(data.description), 512));
 			}
 
 			if (data.characters.nodes?.length) {

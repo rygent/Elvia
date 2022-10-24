@@ -4,8 +4,8 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { parseEmoji } from 'discord.js';
 import { Colors, Credentials, Emojis } from '../../../../Utils/Constants.js';
 import { formatArray, cutText } from '../../../../Structures/Util.js';
+import { Spotify } from '@rygent/spotify';
 import { nanoid } from 'nanoid';
-import Spotify from 'node-spotify-api';
 import moment from 'moment';
 import 'moment-duration-format';
 
@@ -22,7 +22,6 @@ export default class extends Command {
 		const search = interaction.options.getString('search', true);
 
 		const spotify = new Spotify({ id: Credentials.SpotifyClientId, secret: Credentials.SpotifyClientSecret });
-
 		const response = await spotify.search({ type: 'track', query: search, limit: 10 }).then(({ tracks }) => tracks.items);
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 

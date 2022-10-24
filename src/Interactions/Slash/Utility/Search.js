@@ -15,12 +15,22 @@ export default {
 			required: true
 		}]
 	}, {
-		name: 'instagram',
-		description: 'Search for user on Instagram.',
+		name: 'google',
+		description: 'Search for something on Google.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
-			name: 'username',
-			description: 'Username to search.',
+			name: 'search',
+			description: 'Your search.',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}]
+	}, {
+		name: 'lmgtfy',
+		description: 'Let Me Google That For You.',
+		type: ApplicationCommandOptionType.Subcommand,
+		options: [{
+			name: 'search',
+			description: 'Your search.',
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}]

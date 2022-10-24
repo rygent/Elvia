@@ -15,8 +15,8 @@ export default class extends Command {
 	async run(interaction) {
 		const member = interaction.options.getMember('user');
 
-		const raw = await fetch(`https://nekoapi.vanillank2006.repl.co/api/action/stare`, { method: 'GET' });
-		const response = await raw.json();
+		const raw = await fetch(`https://nekos.best/api/v2/stare`, { method: 'GET' });
+		const response = await raw.json().then(({ results }) => results[0]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

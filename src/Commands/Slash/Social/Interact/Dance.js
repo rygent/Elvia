@@ -15,8 +15,8 @@ export default class extends Command {
 	async run(interaction) {
 		const member = interaction.options.getMember('user');
 
-		const raw = await fetch(`https://api.waifu.pics/sfw/dance`, { method: 'GET' });
-		const response = await raw.json();
+		const raw = await fetch(`https://nekos.best/api/v2/dance`, { method: 'GET' });
+		const response = await raw.json().then(({ results }) => results[0]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

@@ -12,6 +12,7 @@ export default class Interaction {
 		this.disabled = options.disabled || false;
 		this.guildOnly = options.guildOnly || false;
 		this.ownerOnly = options.ownerOnly || false;
+		this.nsfw = options.nsfw || false;
 	}
 
 	async run(interaction) { // eslint-disable-line no-unused-vars

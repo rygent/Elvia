@@ -14,11 +14,13 @@ export default {
 		name: 'from',
 		description: 'Source language. (Defaults to auto)',
 		type: ApplicationCommandOptionType.String,
+		autocomplete: true,
 		required: false
 	}, {
 		name: 'to',
 		description: 'Destination language. (Defaults to server language)',
 		type: ApplicationCommandOptionType.String,
+		autocomplete: true,
 		required: false
 	}],
 	dm_permission: true

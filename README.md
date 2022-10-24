@@ -30,7 +30,7 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 * Translate message to user setting language in context menu.
 
 ## Requirements
-1. [Node.JS v16.14+](https://nodejs.org/en/download) or higher.
+1. [Node.JS v16.9+](https://nodejs.org/en/download) or higher.
 2. [MongoDB v5.0+](https://www.mongodb.com/try/download/community) or higher.
 3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Highly recommended)
 

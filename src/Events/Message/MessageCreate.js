@@ -19,12 +19,7 @@ export default class extends Event {
 	async run(message) {
 		if (message.author.bot || !message.inGuild()) return;
 
-		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
-
-		if (message.content.match(mentionRegex)) {
-			return message.reply({ content: `My prefix here is \`${this.client.prefix}\`.` });
-		}
 
 		const prefix = message.content.match(mentionRegexPrefix) ? message.content.match(mentionRegexPrefix)[0] : this.client.prefix;
 		if (!message.content.startsWith(prefix)) return;
@@ -81,7 +76,8 @@ export default class extends Event {
 				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
-				this.client.logger.error(error.stack, error);
+				this.client.logger.error(`${error.name}: ${error.message}`, error);
+				this.client.logger.webhook(error);
 
 				const replies = [
 					'An error has occured when executing this command.',

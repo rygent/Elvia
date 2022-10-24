@@ -1,6 +1,6 @@
 {
   "name": "elvia",
-  "version": "5.0.0-canary",
+  "version": "5.0.0",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -14,34 +14,34 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.21.0",
-    "inquirer": "^9.1.0",
-    "prisma": "^4.2.1",
-    "semver": "^7.3.7"
+    "eslint": "^8.26.0",
+    "inquirer": "^9.1.4",
+    "prisma": "^4.5.0"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
-    "@dice-roller/rpg-dice-roller": "^5.1.0",
-    "@iamtraction/google-translate": "^1.1.2",
-    "@prisma/client": "^4.2.1",
-    "@sapphire/discord-utilities": "^2.11.5",
-    "@sapphire/time-utilities": "^1.7.5",
+    "@dice-roller/rpg-dice-roller": "^5.1.1",
+    "@iamtraction/google-translate": "^2.0.0",
+    "@prisma/client": "^4.5.0",
+    "@rygent/anilist": "^1.1.0",
+    "@rygent/spotify": "^1.0.2",
+    "@sapphire/discord-utilities": "^2.11.7",
+    "@sapphire/time-utilities": "^1.7.8",
     "colorette": "^2.0.19",
-    "discord.js": "^14.1.2",
-    "dotenv": "^16.0.1",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
     "glob": "^8.0.3",
-    "he": "^1.2.0",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.38",
     "nanoid": "^4.0.0",
-    "node-spotify-api": "github:rygent/node-spotify-api",
-    "systeminformation": "^5.12.3",
-    "undici": "^5.8.1"
+    "semver": "^7.3.8",
+    "systeminformation": "^5.12.8",
+    "undici": "^5.11.0"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.6",
-    "utf-8-validate": "^5.0.9"
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^5.0.10"
   },
-  "packageManager": "yarn@3.2.2"
+  "packageManager": "yarn@3.2.4"
 }

@@ -41,10 +41,15 @@ export default class extends Command {
 					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 0 }))))
 					.setName('output.txt');
 
-				return message.channel.send({ files: [attachment] });
+				return message.channel.send({ content: 'Output was too long! The result has been sent as a file.', files: [attachment] });
 			}
 		} catch (error) {
-			return message.reply({ content: `**Error:** ${codeBlock('xl', this.clean(error))}` });
+			const replies = [
+				`${codeBlock('xl', error)}`,
+				`${Emojis.Info} ${inlineCode(new Type(error).is)}`
+			].join('\n');
+
+			return message.reply({ content: replies });
 		}
 	}
 

@@ -15,7 +15,8 @@ export default class extends Event {
 	}
 
 	async run(error, promise) { // eslint-disable-line no-unused-vars
-		this.client.logger.error(error.stack);
+		if (error.name === 'DiscordAPIError[10062]') return;
+		this.client.logger.error(`${error.name}: ${error.message}`, error);
 
 		if (!this.client.isReady()) return;
 		if (!Links.LoggerWebhook) return;

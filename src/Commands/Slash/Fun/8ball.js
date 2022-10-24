@@ -1,7 +1,5 @@
 import Command from '../../../Structures/Interaction.js';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const Answer = require('../../../Assets/json/8ball.json');
+import { fetch } from 'undici';
 
 export default class extends Command {
 
@@ -15,11 +13,12 @@ export default class extends Command {
 	async run(interaction) {
 		const question = interaction.options.getString('question', true);
 
-		const choice = Answer[Math.floor(Math.random() * Answer.length)];
+		const raw = await fetch(`https://8ball.delegator.com/magic/JSON/${encodeURIComponent(question)}`, { method: 'GET' });
+		const response = await raw.json().then(({ magic }) => magic);
 
 		const replies = [
-			`> **${interaction.user.username}**: ${question}`,
-			`🎱 ${choice}`
+			`> **${interaction.user.username}**: ${response.question}`,
+			`🎱 ${response.answer}`
 		].join('\n');
 
 		return interaction.reply({ content: replies });
