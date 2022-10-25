@@ -1,10 +1,12 @@
 import { Client, Partials, PermissionsBitField } from 'discord.js';
 import { GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
+import { PrismaClient } from '@prisma/client';
 import { Credentials } from '../Utils/Constants.js';
 import Logger from '../Utils/Logger.js';
 import Util from './Util.js';
 import semver from 'semver';
+const prisma = new PrismaClient();
 
 export default class BaseClient extends Client {
 
@@ -79,6 +81,7 @@ export default class BaseClient extends Client {
 		await this.utils.loadInteractions();
 		await this.utils.loadCommands();
 		await this.utils.loadEvents();
+		await prisma.$connect();
 		super.login(token);
 	}
 

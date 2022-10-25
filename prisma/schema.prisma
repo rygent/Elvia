@@ -8,8 +8,7 @@ datasource db {
 }
 
 model Guild {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  guildId   String   @unique
+  guildId   String   @id @map("_id") @db.String
   caseCount Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
