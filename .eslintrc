@@ -36,7 +36,7 @@
         "key-spacing": "error",
         "keyword-spacing": ["error", {
             "overrides": {
-                "if": { 
+                "if": {
                     "after": true
                 },
                 "for": {
