@@ -2,7 +2,7 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord-ap
 
 export default {
 	name: 'nsfw',
-	description: 'Display explicit content, from given categories.',
+	description: 'Displays explicit content.',
 	type: ApplicationCommandType.ChatInput,
 	options: [{
 		name: 'category',
