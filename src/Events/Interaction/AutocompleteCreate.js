@@ -16,13 +16,13 @@ export default class extends Event {
 		if (!interaction.isAutocomplete()) return;
 
 		if (interaction.commandName === 'nsfw') {
-			const category = interaction.options.getFocused();
+			const focused = interaction.options.getFocused();
 			if (!isRestrictedChannel(interaction.channel)) return interaction.respond([]);
 
-			const data = require('../../Assets/json/nsfw.json');
-			const choices = data.filter(choice => choice.value.includes(category));
+			const raw = require('../../Assets/json/nsfw.json');
+			const choices = raw.filter(({ value }) => value.includes(focused));
 
-			if (category.length) {
+			if (focused.length) {
 				return interaction.respond(choices.map(({ name, value }) => ({ name, value })));
 			} else {
 				return interaction.respond(choices.filter(({ hoisted }) => hoisted).map(({ name, value }) => ({ name, value })));

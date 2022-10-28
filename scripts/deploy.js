@@ -79,4 +79,4 @@ export async function deploy() {
 	}
 }
 
-await deploy();
+deploy();

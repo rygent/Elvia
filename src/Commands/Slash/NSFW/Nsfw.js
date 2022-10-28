@@ -27,7 +27,7 @@ export default class extends Command {
 
 		await interaction.deferReply({ ephemeral });
 
-		const raw = await fetch(`https://nekobot.xyz/api/image?type=${category}`);
+		const raw = await fetch(`https://nekobot.xyz/api/image?type=${category}`, { method: 'GET' });
 		const response = await raw.json();
 
 		const button = new ActionRowBuilder()
