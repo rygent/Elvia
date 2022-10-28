@@ -76,8 +76,7 @@ export default class extends Event {
 				await message.channel.sendTyping();
 				await command.run(message, args);
 			} catch (error) {
-				this.client.logger.error(`${error.name}: ${error.message}`, error);
-				this.client.logger.webhook(error);
+				this.client.logger.error(`${error.name}: ${error.message}`, error, true);
 
 				const replies = [
 					'An error has occured when executing this command.',

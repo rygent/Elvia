@@ -3,7 +3,7 @@ import { GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { PrismaClient } from '@prisma/client';
 import { Credentials } from '../Utils/Constants.js';
-import Logger from '../Utils/Logger.js';
+import { Logger } from '@rygent/logger';
 import Util from './Util.js';
 import semver from 'semver';
 const prisma = new PrismaClient();

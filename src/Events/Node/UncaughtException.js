@@ -15,7 +15,7 @@ export default class extends Event {
 	}
 
 	async run(error, origin) { // eslint-disable-line no-unused-vars
-		this.client.logger.error(`${error.name}: ${error.message}`, error);
+		this.client.logger.error(`${error.name}: ${error.message}`, error, false);
 
 		if (!this.client.isReady()) return;
 		if (!Links.LoggerWebhook) return;

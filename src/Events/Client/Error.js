@@ -10,8 +10,7 @@ export default class extends Event {
 	}
 
 	async run(error) {
-		this.client.logger.error(`${error.name}: ${error.message}`, error);
-		this.client.logger.webhook(error);
+		this.client.logger.error(`${error.name}: ${error.message}`, error, true);
 	}
 
 }

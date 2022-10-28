@@ -3,11 +3,13 @@ import { SnowflakeRegex, TokenRegex } from '@sapphire/discord-utilities';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
 import { promisify } from 'node:util';
+import { Logger } from '@rygent/logger';
 import path from 'node:path';
 import glob from 'glob';
 import inquirer from 'inquirer';
 import 'dotenv/config';
 const globber = promisify(glob);
+const logger = new Logger();
 
 export async function deploy() {
 	const main = fileURLToPath(new URL('../src/index.js', import.meta.url));
@@ -66,14 +68,14 @@ export async function deploy() {
 	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {
-		console.log('Started refreshing application (/) commands.');
+		logger.debug('Started refreshing application (/) commands.');
 
 		await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [...devCommands] });
 		await rest.put(Routes.applicationCommands(clientId), { body: [...commands] });
 
-		console.log('Successfully reloaded application (/) commands.');
+		logger.debug('Successfully reloaded application (/) commands.');
 	} catch (error) {
-		console.error(error);
+		logger.error(`${error.name}: ${error.message}`, error, false);
 	}
 }
 
