@@ -7,12 +7,14 @@
     "lint": "eslint . --ext cjs,mjs,js --fix",
     "start": "node src/index.js",
     "deploy": "node scripts/deploy.js",
-    "update": "yarn upgrade-interactive"
+    "update": "yarn upgrade-interactive",
+    "bump": "cliff-jumper"
   },
   "author": "Rygent",
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
+    "@favware/cliff-jumper": "^1.8.8",
     "eslint": "^8.26.0",
     "inquirer": "^9.1.4",
     "prisma": "^4.5.0",
