@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
-    "@dice-roller/rpg-dice-roller": "^5.1.1",
+    "@dice-roller/rpg-dice-roller": "^5.2.1",
     "@iamtraction/google-translate": "^2.0.0",
     "@prisma/client": "^4.5.0",
     "@rygent/anilist": "^1.1.0",

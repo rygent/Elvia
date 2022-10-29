@@ -66,13 +66,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dice-roller/rpg-dice-roller@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "@dice-roller/rpg-dice-roller@npm:5.1.1"
+"@dice-roller/rpg-dice-roller@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "@dice-roller/rpg-dice-roller@npm:5.2.1"
   dependencies:
     mathjs: ^11.2.1
     random-js: ^2.1.0
-  checksum: 81aa0760f31bd9bbf09d994af1674fe7b9750fe691bf1fe19d5cbd71f815b9a99534d45f82e85e2f22adbf251b116ac71601be4e342d5279a3fdf702213e7022
+  checksum: cb7bab16ea6ff4d016667e8a05913d1de94938a3585a951648ec106a1602127811d5cfa36ee4bf32926a8ca98ba35033def2c0bfa3c52ed0d022a1b54679dc74
   languageName: node
   linkType: hard
 
@@ -1155,7 +1155,7 @@ __metadata:
   resolution: "elvia@workspace:."
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
-    "@dice-roller/rpg-dice-roller": ^5.1.1
+    "@dice-roller/rpg-dice-roller": ^5.2.1
     "@favware/cliff-jumper": ^1.8.8
     "@iamtraction/google-translate": ^2.0.0
     "@prisma/client": ^4.5.0
