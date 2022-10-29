@@ -5,7 +5,7 @@
     "editor.insertSpaces": false,
     "editor.detectIndentation": false,
     "[json]": {
-        "editor.insertSpaces": true,
+        "editor.insertSpaces": true
     },
     "search.exclude": {
         "**/node_modules": true,
