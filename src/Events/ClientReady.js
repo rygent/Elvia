@@ -18,9 +18,9 @@ export default class extends Event {
 
 		const guilds = this.client.guilds.cache.map(({ id }) => id);
 		guilds.forEach(async (id) => {
-			const exist = await prisma.guild.findFirst({ where: { guildId: id } });
+			const exist = await prisma.guild.findFirst({ where: { id } });
 			if (!exist) {
-				await prisma.guild.create({ data: { guildId: id } });
+				await prisma.guild.create({ data: { id } });
 			}
 		});
 	}

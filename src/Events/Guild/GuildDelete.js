@@ -16,7 +16,7 @@ export default class extends Event {
 
 	async run(guild) {
 		if (!guild.available) return;
-		await prisma.guild.delete({ where: { guildId: guild.id } });
+		await prisma.guild.delete({ where: { id: guild.id } });
 
 		if (Links.GuildWebhook) {
 			const webhook = new WebhookClient(parseWebhookURL(Links.GuildWebhook));

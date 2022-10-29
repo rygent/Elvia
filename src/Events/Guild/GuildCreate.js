@@ -16,7 +16,7 @@ export default class extends Event {
 
 	async run(guild) {
 		if (!guild.available) return;
-		await prisma.guild.create({ data: { guildId: guild.id } });
+		await prisma.guild.create({ data: { id: guild.id } });
 
 		if (Links.GuildWebhook) {
 			const webhook = new WebhookClient(parseWebhookURL(Links.GuildWebhook));
