@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "deploy": "node scripts/deploy.js",
     "update": "yarn upgrade-interactive",
-    "bump": "cliff-jumper"
+    "bump": "cliff-jumper -n \"elvia\" -p \".\""
   },
   "author": "Rygent",
   "license": "GPL-3.0",
