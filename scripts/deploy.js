@@ -35,7 +35,7 @@ export async function deploy() {
 		type: 'input',
 		name: 'clientId',
 		message: 'Input here the client id:',
-		when: () => !process.env.CLIENT_ID,
+		when: () => !process.env.DISCORD_CLIENT_ID,
 		validate: (value) => {
 			if (SnowflakeRegex.test(value)) return true;
 			else return 'Please input a valid client id!';
@@ -44,7 +44,7 @@ export async function deploy() {
 		type: 'input',
 		name: 'guildId',
 		message: 'Input here the guild id:',
-		when: () => !process.env.GUILD_ID,
+		when: () => !process.env.DISCORD_GUILD_ID,
 		validate: (value) => {
 			if (SnowflakeRegex.test(value)) return true;
 			else return 'Please input a valid guild id!';
@@ -61,8 +61,8 @@ export async function deploy() {
 		}
 	}]);
 
-	if (!clientId) clientId = process.env.CLIENT_ID;
-	if (!guildId) guildId = process.env.GUILD_ID;
+	if (!clientId) clientId = process.env.DISCORD_CLIENT_ID;
+	if (!guildId) guildId = process.env.DISCORD_GUILD_ID;
 	if (!token) token = process.env.DISCORD_TOKEN;
 
 	const rest = new REST({ version: '10' }).setToken(token);
