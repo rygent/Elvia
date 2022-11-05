@@ -30,7 +30,7 @@ export default class extends Command {
 			}
 			const stop = process.hrtime(start);
 			const replies = [
-				`${codeBlock('js', this.clean(inspect(evaled, { depth: 0 })))}\n`,
+				`${codeBlock('js', this.clean(inspect(evaled, { depth: 2 })))}\n`,
 				`${Emojis.Info} ${inlineCode(new Type(evaled).is)} `,
 				`${Emojis.Alarm} ${inlineCode(`${(((stop[0] * 1e9) + stop[1])) / 1e6}ms`)}`
 			].join('');
@@ -38,7 +38,7 @@ export default class extends Command {
 				return message.channel.send({ content: replies });
 			} else {
 				const attachment = new AttachmentBuilder()
-					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 0 }))))
+					.setFile(Buffer.from(this.clean(inspect(evaled, { depth: 2 }))))
 					.setName('output.txt');
 
 				return message.channel.send({ content: 'Output was too long! The result has been sent as a file.', files: [attachment] });
