@@ -2,7 +2,6 @@ import { Client, Partials, PermissionsBitField } from 'discord.js';
 import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { PrismaClient } from '@prisma/client';
-import { Credentials } from '../Utils/Constants.js';
 import { Logger } from '@rygent/logger';
 import Util from './Util.js';
 import semver from 'semver';
@@ -57,7 +56,7 @@ export default class BaseClient extends Client {
 		};
 	}
 
-	validate(options) {
+	async validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 		if (semver.lt(process.versions.node, '16.9.0')) throw new Error('This client requires Node.JS v16.9.0 or higher.');
 		this.debug = options.debug;
@@ -77,10 +76,7 @@ export default class BaseClient extends Client {
 		if (!Array.isArray(options.defaultPermissions)) throw new TypeError('Permission(s) should be a type of Array<String>.');
 		this.defaultPermissions = new PermissionsBitField(options.defaultPermissions).freeze();
 
-		if (!Credentials.TmdbApiKey) this.logger.warn('You must pass TMDb API Key to use "movie & series" Command.');
-		if (!Credentials.ImgurClientId) this.logger.warn('You must pass Imgur Client ID to use "imgur" Command.');
-		if (!Credentials.OpenWeatherApiKey) this.logger.warn('You must pass OpenWeather API Key to use "weather" Command.');
-		if (!Credentials.SpotifyClientId || !Credentials.SpotifyClientSecret) this.logger.warn('You must pass Spotify Client ID & Secret to use "spotify" Command.');
+		await import('../Utils/Validation.js');
 	}
 
 	async start(token = this.token) {
