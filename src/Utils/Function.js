@@ -41,9 +41,9 @@ export function isRestrictedChannel(channel) {
 			return true;
 		case ChannelType.GuildVoice:
 			return channel.nsfw;
-		case ChannelType.GuildPublicThread:
+		case ChannelType.PublicThread:
 			return channel.parent?.nsfw;
-		case ChannelType.GuildPrivateThread:
+		case ChannelType.PrivateThread:
 			return channel.parent?.nsfw;
 		default:
 			return false;
