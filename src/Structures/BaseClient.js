@@ -1,5 +1,5 @@
 import { Client, Partials, PermissionsBitField } from 'discord.js';
-import { GatewayIntentBits } from 'discord-api-types/v10';
+import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { PrismaClient } from '@prisma/client';
 import { Credentials } from '../Utils/Constants.js';
@@ -25,6 +25,12 @@ export default class BaseClient extends Client {
 			allowedMentions: {
 				parse: ['users', 'roles'],
 				repliedUser: false
+			},
+			presence: {
+				activities: [{
+					name: '/help',
+					type: ActivityType.Listening
+				}]
 			}
 		});
 		this.logger = new Logger(this);
