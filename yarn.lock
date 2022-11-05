@@ -321,10 +321,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/discord-utilities@npm:^2.11.7":
-  version: 2.11.7
-  resolution: "@sapphire/discord-utilities@npm:2.11.7"
-  checksum: 6e8dfb3353c54c37c8be0f50ed60e89b312ccd93d84d93979fc98cf1fb152ed9004f5b753a7c71cc6615b11ef59388ba2585f0966e94e99ed4bdfb3b16133832
+"@sapphire/discord-utilities@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "@sapphire/discord-utilities@npm:2.12.0"
+  dependencies:
+    discord-api-types: ^0.36.3
+  checksum: a699d8cca46033a0eafa42dc44651f1e72ccb2a5eb8e94710dbe4b7f154aed0d7729c7eba515bcdfe1592a0b0c8181f2712a43939188a44603b940e877fa81a7
   languageName: node
   linkType: hard
 
@@ -1091,6 +1093,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord-api-types@npm:^0.36.3":
+  version: 0.36.3
+  resolution: "discord-api-types@npm:0.36.3"
+  checksum: 3089c0fb37425dc5df03c76d82988d43fcc272699b06a02fc830d0a3bef550009aaebdf6d646529e8a7ccea76ae3f43b099d736ea5ef37a0be143142ab49871d
+  languageName: node
+  linkType: hard
+
 "discord-api-types@npm:^0.37.12":
   version: 0.37.14
   resolution: "discord-api-types@npm:0.37.14"
@@ -1162,7 +1171,7 @@ __metadata:
     "@rygent/anilist": ^1.1.0
     "@rygent/logger": ^1.0.0
     "@rygent/spotify": ^1.0.2
-    "@sapphire/discord-utilities": ^2.11.7
+    "@sapphire/discord-utilities": ^2.12.0
     "@sapphire/time-utilities": ^1.7.8
     bufferutil: ^4.0.7
     colorette: ^2.0.19
