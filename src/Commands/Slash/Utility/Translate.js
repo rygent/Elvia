@@ -1,7 +1,8 @@
 import Command from '../../../Structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
+import { cutText } from '@sapphire/utilities';
 import { Colors } from '../../../Utils/Constants.js';
-import { cutText, formatLanguage } from '../../../Structures/Util.js';
+import { formatLanguage } from '../../../Structures/Util.js';
 import translate from '@iamtraction/google-translate';
 
 export default class extends Command {

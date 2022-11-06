@@ -2,10 +2,11 @@ import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { time } from 'discord.js';
-import { Colors } from '../../../../Utils/Constants.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { Anilist, parseDescription } from '@rygent/anilist';
-import { cutText, formatArray, isRestrictedChannel } from '../../../../Structures/Util.js';
+import { cutText } from '@sapphire/utilities';
+import { Colors } from '../../../../Utils/Constants.js';
+import { formatArray, isRestrictedChannel } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 

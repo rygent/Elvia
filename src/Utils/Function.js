@@ -1,12 +1,5 @@
 import { ChannelType } from 'discord-api-types/v10';
 
-export function cutText(string, length) {
-	if (string.length < length) return string;
-	const cut = splitText(string, length - 3);
-	if (cut.length < length - 3) return `${cut}...`;
-	return `${cut.slice(0, length - 3)}...`;
-}
-
 export function formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
 	return new Intl.ListFormat('en-US', { style, type }).format(array);
 }
@@ -53,12 +46,6 @@ export function isRestrictedChannel(channel) {
 export function rgbToHex(rgb) {
 	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
 	return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-
-export function splitText(string, length, char = ' ') {
-	const x = string.substring(0, length).lastIndexOf(char);
-	const pos = x === -1 ? length : x;
-	return string.substring(0, pos);
 }
 
 export function trimArray(array, length = 10) {
