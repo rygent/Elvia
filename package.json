@@ -15,7 +15,7 @@
   "private": true,
   "devDependencies": {
     "@favware/cliff-jumper": "^1.8.8",
-    "eslint": "^8.26.0",
+    "eslint": "^8.27.0",
     "inquirer": "^9.1.4",
     "prisma": "^4.5.0",
     "semver": "^7.3.8"
