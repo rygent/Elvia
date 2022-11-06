@@ -3,7 +3,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { ChannelType } from 'discord-api-types/v10';
 import { time, userMention } from 'discord.js';
 import { Colors } from '../../../Utils/Constants.js';
-import { trimArray } from '../../../Structures/Util.js';
+import { formatNumber, trimArray } from '../../../Structures/Util.js';
 
 export default class extends Command {
 
@@ -32,8 +32,8 @@ export default class extends Command {
 				`***Explicit Filter:*** ${ContentFilterLevel[interaction.guild.explicitContentFilter]}`,
 				`***Verification:*** ${VerificationLevel[interaction.guild.verificationLevel]}`,
 				`***Created:*** ${time(new Date(interaction.guild.createdTimestamp), 'D')} (${time(new Date(interaction.guild.createdTimestamp), 'R')})`,
-				`***Channels:*** ${channels.filter(({ type }) => ![ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Text / ${channels.filter(({ type }) => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size.formatNumber()} Voice`,
-				`***Online Members:*** ${interaction.guild.members.cache.filter(({ presence }) => ['online', 'idle', 'dnd'].includes(presence?.status)).size.formatNumber()} of ${interaction.guild.memberCount.formatNumber()} Members`
+				`***Channels:*** ${formatNumber(channels.filter(({ type }) => ![ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size)} Text / ${formatNumber(channels.filter(({ type }) => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(type)).size)} Voice`,
+				`***Online Members:*** ${formatNumber(interaction.guild.members.cache.filter(({ presence }) => ['online', 'idle', 'dnd'].includes(presence?.status)).size)} of ${formatNumber(interaction.guild.memberCount)} Members`
 			].join('\n'))
 			.addFields({ name: `__Roles__ (${roles.length})`, value: `${roles.length ? trimArray(roles, 15).join(', ') : 'None'}`, inline: false })
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() });

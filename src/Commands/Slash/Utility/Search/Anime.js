@@ -6,7 +6,7 @@ import { DurationFormatter } from '@sapphire/time-utilities';
 import { Anilist, parseDescription } from '@rygent/anilist';
 import { cutText } from '@sapphire/utilities';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray, isRestrictedChannel } from '../../../../Structures/Util.js';
+import { formatArray, formatNumber, isRestrictedChannel, titleCase } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
@@ -68,13 +68,13 @@ export default class extends Command {
 					...data.title.english ? [`***English:*** ${data.title.english}`] : [],
 					...data.title.native ? [`***Native:*** ${data.title.native}`] : [],
 					`***Type:*** ${this.getType(data.format)}`,
-					`***Status:*** ${data.status.replace(/_/g, ' ').toTitleCase()}`,
-					`***Source:*** ${data.source.replace(/_/g, ' ').toTitleCase()}`,
+					`***Status:*** ${titleCase(data.status.replace(/_/g, ' '))}`,
+					`***Source:*** ${titleCase(data.source.replace(/_/g, ' '))}`,
 					...startDate ? [`***Aired:*** ${this.getDate(startDate, endDate)}`] : [],
 					...data.duration ? [`***Length:*** ${this.getDurationLength(data.duration, data.episodes, data.format)}`] : [],
 					...data.nextAiringEpisode ? [`***Next episodes:*** ${time(data.nextAiringEpisode.airingAt, 'R')} (episode ${data.nextAiringEpisode.episode})`] : [],
 					...data.isAdult ? [`***Explicit content:*** ${data.isAdult ? 'Yes' : 'No'}`] : [],
-					`***Popularity:*** ${data.popularity.formatNumber()}`
+					`***Popularity:*** ${formatNumber(data.popularity)}`
 				].join('\n'), inline: false })
 				.setImage(`https://img.anili.st/media/${data.id}`)
 				.setFooter({ text: 'Powered by Anilist', iconURL: interaction.user.avatarURL() });
@@ -104,7 +104,7 @@ export default class extends Command {
 	getType(format) {
 		if (['TV', 'OVA', 'ONA'].includes(format)) return format;
 		else if (format === 'TV_SHORT') return 'TV Short';
-		else return format.replace(/_/g, ' ').toTitleCase();
+		else return titleCase(format.replace(/_/g, ' '));
 	}
 
 	getDurationLength(duration, episodes, format) {

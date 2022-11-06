@@ -4,7 +4,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { Colors, Credentials } from '../../../../Utils/Constants.js';
-import { formatArray } from '../../../../Structures/Util.js';
+import { formatArray, formatNumber } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import { fetch } from 'undici';
 import moment from 'moment';
@@ -61,7 +61,7 @@ export default class extends Command {
 				.setThumbnail(`https://image.tmdb.org/t/p/original${data.poster_path}`)
 				.addFields({ name: '__Detail__', value: [
 					`***Genre:*** ${formatArray(data.genres.map(({ name }) => name))}`,
-					...data.vote_average ? [`***Rating:*** ${data.vote_average.toFixed(2)} (by ${data.vote_count.formatNumber()} users)`] : [],
+					...data.vote_average ? [`***Rating:*** ${data.vote_average.toFixed(2)} (by ${formatNumber(data.vote_count)} users)`] : [],
 					`***Status:*** ${data.status}`,
 					...data.release_date ? [`***Released:*** ${moment(new Date(data.release_date)).format('MMM D, YYYY')}`] : [],
 					...data.runtime ? [`***Runtime:*** ${this.getRuntime(data.runtime)}`] : [],

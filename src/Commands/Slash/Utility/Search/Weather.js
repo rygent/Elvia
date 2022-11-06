@@ -2,6 +2,7 @@ import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { Colors, Credentials } from '../../../../Utils/Constants.js';
+import { sentenceCase } from '../../../../Structures/Util.js';
 import { fetch } from 'undici';
 
 export default class extends Command {
@@ -35,7 +36,7 @@ export default class extends Command {
 			.setTitle(`:flag_${response.sys.country.toLowerCase()}: ${response.name} - ${response.weather[0].main}`)
 			.setThumbnail(`https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
 			.setDescription([
-				`${response.weather[0].description.toSentenceCase()} (${response.clouds.all}% clouds)\n`,
+				`${sentenceCase(response.weather[0].description)} (${response.clouds.all}% clouds)\n`,
 				`***Temperature:*** ${response.main.temp}°C | ${((response.main.temp * 1.8) + 32).toFixed(2)}°F`,
 				`***Feels Like:*** ${response.main.feels_like}°C | ${((response.main.feels_like * 1.8) + 32).toFixed(2)}°F`,
 				`***Humidity:*** ${response.main.humidity}%`,

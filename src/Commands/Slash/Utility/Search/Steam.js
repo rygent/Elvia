@@ -2,7 +2,7 @@ import Command from '../../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, SelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray } from '../../../../Structures/Util.js';
+import { formatArray, titleCase } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import { fetch } from 'undici';
 
@@ -58,7 +58,7 @@ export default class extends Command {
 					`***Release Date:*** ${data.release_date.coming_soon ? 'Coming soon' : data.release_date.date}`,
 					`***Price:*** \`${data.price_overview ? data.price_overview.final_formatted : 'Free'}\``,
 					`***Genres:*** ${data.genres.map(({ description }) => description).join(', ')}`,
-					`***Platform:*** ${data.platforms ? formatArray(Object.keys(data.platforms).filter(item => data.platforms[item])).toTitleCase().replace(/And/g, 'and') : '`N/A`'}`,
+					`***Platform:*** ${data.platforms ? titleCase(formatArray(Object.keys(data.platforms).filter(item => data.platforms[item]))).replace(/And/g, 'and') : '`N/A`'}`,
 					`***Metascores:*** ${data.metacritic ? `${data.metacritic.score} from [metacritic](${data.metacritic.url})` : '`N/A`'}`,
 					`***Developers:*** ${data.developers.join(', ')}`,
 					`***Publishers:*** ${data.publishers.join(', ')}`,

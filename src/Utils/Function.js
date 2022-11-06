@@ -15,6 +15,10 @@ export function formatLanguage(string, { type = 'language', languageDisplay = 's
 	return new Intl.DisplayNames('en-US', { type, languageDisplay }).of(string);
 }
 
+export function formatNumber(number) {
+	return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
+
 export function formatPermissions(permissions) {
 	return permissions.replace(/(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])/g, ' $1')
 		.replace(/To|And|In\b/g, (txt) => txt.toLowerCase())
@@ -43,9 +47,12 @@ export function isRestrictedChannel(channel) {
 	}
 }
 
-export function rgbToHex(rgb) {
-	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
-	return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+export function sentenceCase(string) {
+	return string.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (txt) => txt.toUpperCase());
+}
+
+export function titleCase(string) {
+	return string.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
 }
 
 export function trimArray(array, length = 10) {

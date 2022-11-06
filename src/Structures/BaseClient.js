@@ -42,18 +42,6 @@ export default class BaseClient extends Client {
 		this.cooldown = new Collection();
 
 		this.utils = new Util(this);
-
-		String.prototype.toTitleCase = function () {
-			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
-		};
-
-		String.prototype.toSentenceCase = function () {
-			return this.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (txt) => txt.toUpperCase());
-		};
-
-		Number.prototype.formatNumber = function () {
-			return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-		};
 	}
 
 	async validate(options) {

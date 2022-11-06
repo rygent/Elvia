@@ -5,7 +5,7 @@ import { parseEmoji } from 'discord.js';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';
 import { Colors, Credentials, Emojis } from '../../../../Utils/Constants.js';
-import { formatArray } from '../../../../Structures/Util.js';
+import { formatArray, formatNumber } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -61,10 +61,10 @@ export default class extends Command {
 				.setDescription([
 					`***Artists:*** ${formatArray(data.artists.map(({ name }) => name))}`,
 					`***Album:*** ${data.album.name}`,
-					`***Tracks:*** ${data.track_number.formatNumber()} of ${data.album.total_tracks.formatNumber()}`,
+					`***Tracks:*** ${formatNumber(data.track_number)} of ${formatNumber(data.album.total_tracks)}`,
 					`***Released:*** ${moment(data.album.release_date).format('MMMM D, YYYY')}`,
 					`***Duration:*** ${moment.duration(data.duration_ms).format('HH:mm:ss')}`,
-					`***Popularity:*** ${data.popularity.formatNumber()}`
+					`***Popularity:*** ${formatNumber(data.popularity)}`
 				].join('\n'))
 				.setImage(data.album.images[0].url)
 				.setFooter({ text: `Powered by Spotify`, iconURL: interaction.user.avatarURL() });

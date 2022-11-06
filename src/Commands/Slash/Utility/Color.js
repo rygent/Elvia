@@ -2,7 +2,6 @@ import Command from '../../../Structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { resolveColor } from 'discord.js';
-import { rgbToHex } from '../../../Structures/Util.js';
 import { fetch } from 'undici';
 
 export default class extends Command {
@@ -53,4 +52,9 @@ export default class extends Command {
 		return interaction.reply({ embeds: [embed], components: [button] });
 	}
 
+}
+
+function rgbToHex(rgb) {
+	const [r, g, b] = rgb.match(/\d+/g).map(num => +num);
+	return ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }

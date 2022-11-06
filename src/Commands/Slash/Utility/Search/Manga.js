@@ -4,7 +4,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { Anilist, parseDescription } from '@rygent/anilist';
 import { cutText } from '@sapphire/utilities';
 import { Colors } from '../../../../Utils/Constants.js';
-import { formatArray, isRestrictedChannel } from '../../../../Structures/Util.js';
+import { formatArray, formatNumber, isRestrictedChannel, titleCase } from '../../../../Structures/Util.js';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
@@ -66,13 +66,13 @@ export default class extends Command {
 					...data.title.english ? [`***English:*** ${data.title.english}`] : [],
 					...data.title.native ? [`***Native:*** ${data.title.native}`] : [],
 					`***Type:*** ${this.getType(data.format, data.countryOfOrigin)}`,
-					`***Status:*** ${data.status.replace(/_/g, ' ').toTitleCase()}`,
-					`***Source:*** ${data.source.replace(/_/g, ' ').toTitleCase()}`,
+					`***Status:*** ${titleCase(data.status.replace(/_/g, ' '))}`,
+					`***Source:*** ${titleCase(data.source.replace(/_/g, ' '))}`,
 					...startDate ? [`***Published:*** ${this.getDate(startDate, endDate)}`] : [],
 					...data.volumes ? [`***Volumes:*** ${data.volumes}`] : [],
 					...data.chapters ? [`***Chapters:*** ${data.chapters}`] : [],
 					...data.isAdult ? [`***Explicit content:*** ${data.isAdult ? 'Yes' : 'No'}`] : [],
-					`***Popularity:*** ${data.popularity.formatNumber()}`
+					`***Popularity:*** ${formatNumber(data.popularity)}`
 				].join('\n'), inline: false })
 				.setImage(`https://img.anili.st/media/${data.id}`)
 				.setFooter({ text: 'Powered by Anilist', iconURL: interaction.user.avatarURL() });
@@ -103,7 +103,7 @@ export default class extends Command {
 		if (format === 'MANGA' && countryOfOrigin === 'KR') return 'Manhwa';
 		else if (format === 'MANGA' && countryOfOrigin === 'CN') return 'Manhua';
 		else if (format === 'NOVEL') return 'Light Novel';
-		else return format.replace(/_/g, ' ').toTitleCase();
+		else return titleCase(format.replace(/_/g, ' '));
 	}
 
 	getDate(startDate, endDate) {
