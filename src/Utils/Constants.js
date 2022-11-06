@@ -16,6 +16,7 @@ export const Credentials = {
 };
 
 export const Emojis = {
+	Bot: '<:bot:1038606332900675624>',
 	Alarm: '<:alarm:950481082191581224>',
 	Info: '<:info:950481046821036082>',
 	Online: '<:online:712397262256472075>',
