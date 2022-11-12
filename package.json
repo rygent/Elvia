@@ -17,14 +17,14 @@
     "@favware/cliff-jumper": "^1.8.8",
     "eslint": "^8.27.0",
     "inquirer": "^9.1.4",
-    "prisma": "^4.5.0",
+    "prisma": "^4.6.1",
     "semver": "^7.3.8"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.2.1",
     "@iamtraction/google-translate": "^2.0.0",
-    "@prisma/client": "^4.5.0",
+    "@prisma/client": "^4.6.1",
     "@rygent/anilist": "^1.1.0",
     "@rygent/logger": "^1.0.0",
     "@rygent/spotify": "^1.0.2",
