@@ -1,37 +1,42 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:base"],
-    "labels": ["dependencies"],
-    "timezone": "Asia/Tokyo",
-    "schedule": ["after 9:00am every weekend"],
-    "assignAutomerge": true,
-    "reviewers": ["Rygent"],
-    "vulnerabilityAlerts": {
-        "addLabels": ["security"]
-    },
-    "packageRules": [{
-        "matchUpdateTypes": ["major"],
-        "dependencyDashboardApproval": true
-    }, {
-        "matchUpdateTypes": ["minor", "patch", "digest", "lockFileMaintenance"],
-        "automerge": true
-    }, {
-        "matchPackagePatterns": ["*"],
-        "semanticCommitType": "chore",
-        "commitMessageAction": "Bump",
-        "commitMessageTopic": "{{depName}}",
-        "rangeStrategy": "bump",
-        "recreateClosed": true
-    }, {
-        "matchDepTypes": ["dependencies", "require"],
-        "semanticCommitType": "chore"
-    }, {
-        "matchDepTypes": ["devDependencies"],
-        "semanticCommitScope": "deps-dev"
-    }, {
-        "matchDepTypes": ["action"],
-        "semanticCommitType": "ci",
-        "addLabels": ["ci"],
-        "automerge": true
-    }]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "packageRules": [{
+    "matchUpdateTypes": ["major"],
+    "dependencyDashboardApproval": true
+  }, {
+    "matchUpdateTypes": ["minor", "patch", "digest", "lockFileMaintenance"],
+    "automerge": true
+  }, {
+    "matchPackagePatterns": ["*"],
+    "semanticCommitType": "chore",
+    "commitMessageAction": "Bump",
+    "commitMessageTopic": "{{depName}}",
+    "rangeStrategy": "bump",
+    "recreateClosed": true
+  }, {
+    "matchDepTypes": ["dependencies", "require"],
+    "semanticCommitType": "chore"
+  }, {
+    "matchDepTypes": ["devDependencies"],
+    "semanticCommitScope": "deps-dev"
+  }, {
+    "matchDepTypes": ["action"],
+    "semanticCommitType": "ci",
+    "semanticCommitScope": null,
+    "addLabels": ["ci"],
+    "automerge": true
+  }],
+  "schedule": ["after 9:00am every weekend"],
+  "timezone": "Asia/Tokyo",
+  "vulnerabilityAlerts": {
+    "schedule": [],
+    "stabilityDays": 0,
+    "rangeStrategy": "update-lockfile",
+    "commitMessageSuffix": "[SECURITY]",
+    "branchTopic": "{{{datasource}}}-{{{depName}}}-vulnerability",
+    "prCreation": "immediate",
+    "addLabels": ["security"]
+  }
 }
