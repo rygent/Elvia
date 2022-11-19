@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint . --ext cjs,mjs,js --fix",
     "start": "node src/index.js",
-    "deploy": "node scripts/deploy.js",
+    "register": "node scripts/register.js",
     "bump": "cliff-jumper -n \"elvia\" -p \".\"",
     "update": "yarn upgrade-interactive"
   },
@@ -15,8 +15,8 @@
   "private": true,
   "devDependencies": {
     "@favware/cliff-jumper": "^1.8.8",
+    "commander": "^9.4.1",
     "eslint": "^8.28.0",
-    "inquirer": "^9.1.4",
     "prisma": "^4.6.1",
     "semver": "^7.3.8"
   },
