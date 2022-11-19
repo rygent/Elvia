@@ -137,23 +137,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@favware/cliff-jumper@npm:^1.8.8":
-  version: 1.8.8
-  resolution: "@favware/cliff-jumper@npm:1.8.8"
+"@favware/cliff-jumper@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@favware/cliff-jumper@npm:1.9.0"
   dependencies:
-    "@sapphire/result": ^2.5.0
-    "@sapphire/utilities": ^3.9.3
+    "@sapphire/result": ^2.6.0
+    "@sapphire/utilities": 3.11.0
     colorette: ^2.0.19
     commander: ^9.4.1
     conventional-changelog-angular: ^5.0.13
     conventional-recommended-bump: ^6.1.0
     js-yaml: ^4.1.0
-    semver: ^7.3.7
+    semver: ^7.3.8
     typescript: ^4.8.4
   bin:
     cj: ./dist/cli.js
     cliff-jumper: ./dist/cli.js
-  checksum: 1e82daac8d975b7835b7326db794502d0aebd4f141dd18fdf5ccb80d4e2566050272bf2be5d82d918ea81a2a5a0245c71cb6738f366142e4da8d95403c08ab3e
+  checksum: 4218704159a44b25fed0bbe71babc37d26b63231b72343f580fa22cd132e5d1dba6717bd6d53365b49b1e8acd8906f1d391d6b8cc0fe0b59541c43d3aa82765e
   languageName: node
   linkType: hard
 
@@ -337,7 +337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/result@npm:^2.5.0":
+"@sapphire/result@npm:^2.6.0":
   version: 2.6.0
   resolution: "@sapphire/result@npm:2.6.0"
   checksum: bab9e963c85c7ea0a410c36617b7d32fca8749739b7fbb61bf7a2eff566d002af78606c379b1a71f2857bf9c04d3f5f1af67f02278da75ac660f2f6ddfef26b5
@@ -387,7 +387,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/utilities@npm:^3.11.0, @sapphire/utilities@npm:^3.9.3":
+"@sapphire/utilities@npm:3.11.0, @sapphire/utilities@npm:^3.11.0, @sapphire/utilities@npm:^3.9.3":
   version: 3.11.0
   resolution: "@sapphire/utilities@npm:3.11.0"
   checksum: 3c8521038b8879524e8114f39eefc8b3b06cf825995f709684238b5cb14bd7df06d232a26a88f79160df290a66f9aa3133f5ce4ff8e2398033db9f301ad31e0d
@@ -1054,7 +1054,7 @@ __metadata:
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
     "@dice-roller/rpg-dice-roller": ^5.2.1
-    "@favware/cliff-jumper": ^1.8.8
+    "@favware/cliff-jumper": ^1.9.0
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.6.1
     "@rygent/anilist": ^1.1.0
@@ -2695,7 +2695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
+"semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
