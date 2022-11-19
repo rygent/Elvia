@@ -7,8 +7,8 @@
     "lint": "eslint . --ext cjs,mjs,js --fix",
     "start": "node src/index.js",
     "deploy": "node scripts/deploy.js",
-    "update": "yarn upgrade-interactive",
-    "bump": "cliff-jumper -n \"elvia\" -p \".\""
+    "bump": "cliff-jumper -n \"elvia\" -p \".\"",
+    "update": "yarn upgrade-interactive"
   },
   "author": "Rygent",
   "license": "GPL-3.0",

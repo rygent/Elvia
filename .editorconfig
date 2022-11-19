@@ -13,7 +13,15 @@ block_comment_start = /*
 block_comment = *
 block_comment_end = */
 
-[*.{yml,yaml,json,prisma}]
+[*.json]
+indent_size = 2
+indent_style = space
+
+[*.prisma]
+indent_size = 2
+indent_style = space
+
+[*.{yml,yaml}]
 indent_size = 2
 indent_style = space
 
