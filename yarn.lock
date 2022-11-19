@@ -189,12 +189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iamtraction/google-translate@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@iamtraction/google-translate@npm:2.0.0"
+"@iamtraction/google-translate@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@iamtraction/google-translate@npm:2.0.1"
   dependencies:
-    undici: ^5.11.0
-  checksum: 1bad3a9a0de482bd64818551350bacd22e705f2bb6c5206fad4b3bdcd212b2908e00ab36ec966fa2ecfa150ea6808922530e097a7e6903b09446ecb0ceff5cba
+    undici: ^5.12.0
+  checksum: 19514f9c3517a77570d9545729a590bbeb8ca53680fd8ed863d1d66aad18f2b853c0017da54c127175a17d801bf2b77c6e0b0fbdb59964a9e36328727f7dc7a3
   languageName: node
   linkType: hard
 
@@ -1173,7 +1173,7 @@ __metadata:
     "@anishshobith/deeptype": ^1.1.0
     "@dice-roller/rpg-dice-roller": ^5.2.1
     "@favware/cliff-jumper": ^1.8.8
-    "@iamtraction/google-translate": ^2.0.0
+    "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.6.1
     "@rygent/anilist": ^1.1.0
     "@rygent/logger": ^1.0.0

@@ -23,7 +23,7 @@
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
     "@dice-roller/rpg-dice-roller": "^5.2.1",
-    "@iamtraction/google-translate": "^2.0.0",
+    "@iamtraction/google-translate": "^2.0.1",
     "@prisma/client": "^4.6.1",
     "@rygent/anilist": "^1.1.0",
     "@rygent/logger": "^1.0.0",
