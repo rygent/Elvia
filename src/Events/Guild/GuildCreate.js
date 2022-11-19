@@ -21,6 +21,7 @@ export default class extends Event {
 
 		if (Links.GuildWebhook) {
 			const webhook = new WebhookClient(parseWebhookURL(Links.GuildWebhook));
+			const threadId = new URL(Links.GuildWebhook).searchParams.get('thread_id');
 			const guildOwner = await guild.fetchOwner();
 
 			const embed = new EmbedBuilder()
@@ -35,7 +36,7 @@ export default class extends Event {
 				].join('\n'))
 				.setFooter({ text: `${formatNumber(this.client.guilds.cache.size)} guilds | ${formatNumber(this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0))} users`, iconURL: this.client.user.avatarURL() });
 
-			return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username });
+			return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username, threadId });
 		}
 	}
 

@@ -51,6 +51,7 @@ export default class ReportModal {
 	async webhook(interaction, { title, describe }) {
 		if (!Links.ReportWebhook) return;
 		const webhook = new WebhookClient(parseWebhookURL(Links.ReportWebhook));
+		const threadId = new URL(Links.ReportWebhook).searchParams.get('thread_id');
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
@@ -59,7 +60,7 @@ export default class ReportModal {
 			.setDescription(describe)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() });
 
-		return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username });
+		return webhook.send({ embeds: [embed], avatarURL: this.client.user.displayAvatarURL({ size: 4096 }), username: this.client.user.username, threadId });
 	}
 
 }
