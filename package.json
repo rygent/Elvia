@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "register": "node scripts/register.js",
     "bump": "cliff-jumper -n \"elvia\" -p \".\"",
-    "update": "yarn upgrade-interactive"
+    "update": "yarn upgrade-interactive",
+    "postinstall": "prisma generate"
   },
   "author": "Rygent",
   "license": "GPL-3.0",
