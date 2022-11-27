@@ -3,12 +3,10 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
 import { Logger } from '@rygent/logger';
 import { Command } from 'commander';
-import { promisify } from 'node:util';
+import { globby } from 'globby';
 import path from 'node:path';
-import glob from 'glob';
 import 'dotenv/config';
 
-const globber = promisify(glob);
 const logger = new Logger();
 const program = new Command();
 
@@ -34,7 +32,7 @@ async function loadCommands(developer = false) {
 	const commands = [];
 	const routes = developer ? '?(Developer)' : '!(Developer)';
 
-	await globber(`${directory}Interactions/?(Context|Slash)/${routes}/**/*.js`).then(async (interactions) => {
+	await globby(`${directory}Interactions/?(Context|Slash)/${routes}/**/*.js`).then(async (interactions) => {
 		for (const interactionFile of interactions) {
 			const { default: interaction } = await import(pathToFileURL(interactionFile));
 			commands.push(interaction);
@@ -72,6 +70,6 @@ async function registerCommands(developer = false) {
 }
 
 const options = program.opts();
+if (!options.global && !options.dev) console.log(program.helpInformation());
 if (options.global) await registerCommands(false);
 if (options.dev) await registerCommands(true);
-else await registerCommands(false);

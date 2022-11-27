@@ -1,12 +1,10 @@
 import { URL, fileURLToPath, pathToFileURL } from 'node:url';
-import { promisify } from 'node:util';
+import { globby } from 'globby';
 import path from 'node:path';
-import glob from 'glob';
 import Interaction from './Interaction.js';
 import Command from './Command.js';
 import Event from './Event.js';
 export * from '../Utils/Function.js';
-const globber = promisify(glob);
 
 export default class Util {
 
@@ -26,7 +24,7 @@ export default class Util {
 	}
 
 	async loadInteractions() {
-		return globber(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
+		return globby(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
 				const { name } = path.parse(interactionFile);
 				const { default: File } = await import(pathToFileURL(interactionFile));
@@ -39,7 +37,7 @@ export default class Util {
 	}
 
 	async loadCommands() {
-		return globber(`${this.directory}Commands/?(Message)/**/*.js`).then(async (commands) => {
+		return globby(`${this.directory}Commands/?(Message)/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
 				const { name } = path.parse(commandFile);
 				const { default: File } = await import(pathToFileURL(commandFile));
@@ -57,7 +55,7 @@ export default class Util {
 	}
 
 	async loadEvents() {
-		return globber(`${this.directory}Events/**/*.js`).then(async (events) => {
+		return globby(`${this.directory}Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
 				const { name } = path.parse(eventFile);
 				const { default: File } = await import(pathToFileURL(eventFile));
