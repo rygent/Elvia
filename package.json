@@ -40,7 +40,7 @@
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.39",
     "nanoid": "^4.0.0",
-    "systeminformation": "^5.14.4",
+    "systeminformation": "^5.16.0",
     "undici": "^5.13.0"
   },
   "optionalDependencies": {
