@@ -41,7 +41,7 @@
     "moment-timezone": "^0.5.39",
     "nanoid": "^4.0.0",
     "systeminformation": "^5.16.5",
-    "undici": "^5.13.0"
+    "undici": "^5.14.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",
