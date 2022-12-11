@@ -38,7 +38,7 @@
     "globby": "^13.1.2",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "moment-timezone": "^0.5.39",
+    "moment-timezone": "^0.5.40",
     "nanoid": "^4.0.0",
     "systeminformation": "^5.16.5",
     "undici": "^5.14.0"
