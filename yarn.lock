@@ -273,14 +273,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rygent/anilist@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@rygent/anilist@npm:1.1.0"
+"@rygent/anilist@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@rygent/anilist@npm:1.2.0"
   dependencies:
     graphql: ^16.6.0
     he: ^1.2.0
-    undici: ^5.11.0
-  checksum: 8ea099b9c78fb4762a0e6b136469eb77b6361f2bdcc9dbda6f99cfe70ecc8abd454d28ae140f560df5b944137ea53449fc94a996ef530eb687b59676466594dd
+    undici: ^5.14.0
+  checksum: c9ea6c932c85372d35a6f96d02e2673a453ff4a6e14599ad8a2f5fe8c5bdbf54e4b9023d425b5e805059258df66a8cbd7d548524ec719e3915d5c2343ce4ce15
   languageName: node
   linkType: hard
 
@@ -1075,7 +1075,7 @@ __metadata:
     "@favware/cliff-jumper": ^1.9.0
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.7.1
-    "@rygent/anilist": ^1.1.0
+    "@rygent/anilist": ^1.2.0
     "@rygent/logger": ^1.0.0
     "@rygent/spotify": ^1.0.2
     "@sapphire/discord-utilities": ^2.12.0

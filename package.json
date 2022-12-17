@@ -26,7 +26,7 @@
     "@dice-roller/rpg-dice-roller": "^5.2.1",
     "@iamtraction/google-translate": "^2.0.1",
     "@prisma/client": "^4.7.1",
-    "@rygent/anilist": "^1.1.0",
+    "@rygent/anilist": "^1.2.0",
     "@rygent/logger": "^1.0.0",
     "@rygent/spotify": "^1.0.2",
     "@sapphire/discord-utilities": "^2.12.0",
