@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+# [5.1.0](https://github.com/Rygent/ElviaBot/compare/v5.0.0...v5.1.0) - (2022-12-17)
+
+## Bug Fixes
+
+- Fix deprecated `ChannelType` ([7ac54cd](https://github.com/Rygent/ElviaBot/commit/7ac54cd656a1b51483a3658c5e9e5139e57a9059))
+- Autocomplete result ([d24e873](https://github.com/Rygent/ElviaBot/commit/d24e87370b37ccf8a814bba7dec823696e7671f1))
+
+## Features
+
+- Allow to send webhook in forum ([5da804f](https://github.com/Rygent/ElviaBot/commit/5da804f9b9ac948694da57bd520e950893f0a9f3))
+- Add invite command ([9e2dfe2](https://github.com/Rygent/ElviaBot/commit/9e2dfe28ac391cb39ae5fec986a91498dd99d884))
+- Add execute slash command ([be6ea16](https://github.com/Rygent/ElviaBot/commit/be6ea1608bcaef4e6a9e71fc491b085443fe7863))
+- **Execute:** Send as file if output was too long ([7e63109](https://github.com/Rygent/ElviaBot/commit/7e631099b3450f590cfb2bcd0409f28e9762c1aa))
+- Add version command ([3334cea](https://github.com/Rygent/ElviaBot/commit/3334cea2eb8a440fb9abb8e00fd3eea584ae64b7))
+- Set default activity ([0ba16b7](https://github.com/Rygent/ElviaBot/commit/0ba16b7d389184b33a08b6e50d0c3a9a308b34ad))
+- Use `winston` logger ([8aee028](https://github.com/Rygent/ElviaBot/commit/8aee02843b4b6cdd4ff2e794cc28aae5d9a4a56d))
+- Use prisma instead mongoose (#198) ([3c0e8ba](https://github.com/Rygent/ElviaBot/commit/3c0e8baef839f6371a59152f25cd941bfe1c1a06))
+- **interact:** Change api source and add new command ([4bac78d](https://github.com/Rygent/ElviaBot/commit/4bac78d5769c747a686623864b3e4032c8447a68))
+- **translate:** Add autocomplete languages ([05375e2](https://github.com/Rygent/ElviaBot/commit/05375e20f1a781a670e2c242c4f43de1bfd290d6))
+- Add nsfw command ([792ef71](https://github.com/Rygent/ElviaBot/commit/792ef7172831aac82224febab5d7b296bc9fd5a6))
+- Add help command ([8770cef](https://github.com/Rygent/ElviaBot/commit/8770cefeb7cac27ed0fa4b7a00b4f0196f6efbe0))
+- Better logger style ([5b21df3](https://github.com/Rygent/ElviaBot/commit/5b21df3e20250ba193736220f7bc2296e5850613))
+
+## Refactor
+
+- Use globby instead ([8cef994](https://github.com/Rygent/ElviaBot/commit/8cef994322e025e85edbd6273eab2820bb789453))
+- **register:** Use `commander` instead ([d9f3178](https://github.com/Rygent/ElviaBot/commit/d9f3178a0b8297aad20cfe59fe8f6cfb887633eb))
+- Use top-level function instead ([162ebba](https://github.com/Rygent/ElviaBot/commit/162ebbabb3d645315c4df5509a567d039baca8b0))
+- Use `@sapphire/utilities` instead ([81460b5](https://github.com/Rygent/ElviaBot/commit/81460b5b50ed5837cd4ba52c94ad30f287caa3cb))
+- Change env name ([120b917](https://github.com/Rygent/ElviaBot/commit/120b917f67f430faf37ba8137b0f1ecdcb5aa1b9))
+- Separate env validation ([4561467](https://github.com/Rygent/ElviaBot/commit/4561467c001a2e3cb35a574bb5eaf0225c8cb525))
+- **Evaluate:** Set `default_member_permissions` to `0` ([371fb62](https://github.com/Rygent/ElviaBot/commit/371fb6277e0261e3b992198dd827e4bb107e756a))
+- **Evaluate:** Set depth to `2` ([f19ba82](https://github.com/Rygent/ElviaBot/commit/f19ba822518a64a0d3725b555796bf3c5ed6e4d7))
+- Remove unused command ([331c480](https://github.com/Rygent/ElviaBot/commit/331c480866143638cc34ae3057c30d32c3792fad))
+- **prisma:** Prefer `id` instead `guildId` ([f484a8d](https://github.com/Rygent/ElviaBot/commit/f484a8d81049559d7cab97b0b35962c1570dfac4))
+- Change description and fix undefined category ([6a2a6d4](https://github.com/Rygent/ElviaBot/commit/6a2a6d4db1e10ba42e5a9b77b4a50bef5dc0e545))
+- **8ball:** Remove local respond ([c2bb7ad](https://github.com/Rygent/ElviaBot/commit/c2bb7add30588b5d64d974e3879ff90d21ec9023))
+- Replace with `@rygent/anilist` ([1b90eff](https://github.com/Rygent/ElviaBot/commit/1b90effe245cb62513ae8177aeaae9e6820bd0ef))
+
 # [5.0.0](https://github.com/Rygent/ElviaBot/compare/v4.6.0...v5.0.0) - (2022-10-17)
 
 ## Bug Fixes
