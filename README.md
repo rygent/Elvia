@@ -3,7 +3,7 @@
 # Elvia
 
 [![Library](https://img.shields.io/badge/library-discord.js-5865f2?style=for-the-badge)](https://discord.js.org/#/)
-[![Build](https://img.shields.io/github/workflow/status/Rygent/ElviaBot/Lint?logo=github&style=for-the-badge)](https://github.com/Rygent/ElviaBot/actions/workflows/lint.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/Rygent/ElviaBot/continuous-integration.yml?logo=github&style=for-the-badge)](https://github.com/Rygent/ElviaBot/actions/workflows/continuous-integration.yml)
 [![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/ElviaBot/dashboard)
 [![License](https://img.shields.io/github/license/Rygent/ElviaBot?style=for-the-badge)](./LICENSE)
 [![Language](https://img.shields.io/github/languages/top/Rygent/ElviaBot?color=f0db4f&logoColor=white&style=for-the-badge)]()
