@@ -1094,7 +1094,7 @@ __metadata:
     nanoid: ^4.0.0
     prisma: ^4.7.1
     semver: ^7.3.8
-    systeminformation: ^5.16.6
+    systeminformation: ^5.16.9
     undici: ^5.14.0
     utf-8-validate: ^5.0.10
   dependenciesMeta:
@@ -3026,12 +3026,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.16.6":
-  version: 5.16.6
-  resolution: "systeminformation@npm:5.16.6"
+"systeminformation@npm:^5.16.9":
+  version: 5.16.9
+  resolution: "systeminformation@npm:5.16.9"
   bin:
     systeminformation: lib/cli.js
-  checksum: da61c7170d1c46bd4ba48920df66ce1bbaaf73d4e026e14a2d8a8d493fa04c824c53c419443e45d4540e68472613352efd15988c652fc83bed375510ca10ee70
+  checksum: e590134391ba727b4988ae828483344ae90ee03551ffb578defd3d6d489a8faa519aee563df18fea5f98c2b9e74ca55d29f1ad096d3a70933672338b9a78f03c
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
