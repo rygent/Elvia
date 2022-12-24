@@ -47,5 +47,5 @@
     "bufferutil": "^4.0.7",
     "utf-8-validate": "^5.0.10"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.1"
 }
