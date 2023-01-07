@@ -819,6 +819,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^9.5.0":
+  version: 9.5.0
+  resolution: "commander@npm:9.5.0"
+  checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
+  languageName: node
+  linkType: hard
+
 "compare-func@npm:^2.0.0":
   version: 2.0.0
   resolution: "compare-func@npm:2.0.0"
@@ -1083,7 +1090,7 @@ __metadata:
     "@sapphire/utilities": ^3.11.0
     bufferutil: ^4.0.7
     colorette: ^2.0.19
-    commander: ^9.4.1
+    commander: ^9.5.0
     discord.js: ^14.7.1
     dotenv: ^16.0.3
     eslint: ^8.31.0
