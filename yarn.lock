@@ -137,23 +137,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@favware/cliff-jumper@npm:^1.9.0":
-  version: 1.9.0
-  resolution: "@favware/cliff-jumper@npm:1.9.0"
+"@favware/cliff-jumper@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@favware/cliff-jumper@npm:1.10.0"
   dependencies:
+    "@favware/conventional-changelog-angular": ^5.0.14
     "@sapphire/result": ^2.6.0
     "@sapphire/utilities": 3.11.0
     colorette: ^2.0.19
-    commander: ^9.4.1
-    conventional-changelog-angular: ^5.0.13
+    commander: ^9.5.0
     conventional-recommended-bump: ^6.1.0
     js-yaml: ^4.1.0
     semver: ^7.3.8
-    typescript: ^4.8.4
+    typescript: ^4.9.4
   bin:
     cj: ./dist/cli.js
     cliff-jumper: ./dist/cli.js
-  checksum: 4218704159a44b25fed0bbe71babc37d26b63231b72343f580fa22cd132e5d1dba6717bd6d53365b49b1e8acd8906f1d391d6b8cc0fe0b59541c43d3aa82765e
+  checksum: 27cf33b0e363dd5ba1f7087dea167114aa70e95e92592c4b0bc4225ad14c91be17eb9a177c9c2a57d8ffa30cab9df8eb4d09b2a39e139e3bcd25f055e9cc6f06
+  languageName: node
+  linkType: hard
+
+"@favware/conventional-changelog-angular@npm:^5.0.14":
+  version: 5.0.14
+  resolution: "@favware/conventional-changelog-angular@npm:5.0.14"
+  dependencies:
+    compare-func: ^2.0.0
+    q: ^1.5.1
+  checksum: 32293091dff8a3dc3b3dadd2cb9697efdef51e05165d5c22255b72d6202c3ac156fcbf9526dc073001450343885b39f597ddb7304c9eb37ffc512445a9f10d99
   languageName: node
   linkType: hard
 
@@ -812,13 +822,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.4.1":
-  version: 9.4.1
-  resolution: "commander@npm:9.4.1"
-  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
-  languageName: node
-  linkType: hard
-
 "commander@npm:^9.5.0":
   version: 9.5.0
   resolution: "commander@npm:9.5.0"
@@ -866,16 +869,6 @@ __metadata:
   version: 1.1.0
   resolution: "console-control-strings@npm:1.1.0"
   checksum: 8755d76787f94e6cf79ce4666f0c5519906d7f5b02d4b884cf41e11dcd759ed69c57da0670afd9236d229a46e0f9cf519db0cd829c6dca820bb5a5c3def584ed
-  languageName: node
-  linkType: hard
-
-"conventional-changelog-angular@npm:^5.0.13":
-  version: 5.0.13
-  resolution: "conventional-changelog-angular@npm:5.0.13"
-  dependencies:
-    compare-func: ^2.0.0
-    q: ^1.5.1
-  checksum: 6ed4972fce25a50f9f038c749cc9db501363131b0fb2efc1fccecba14e4b1c80651d0d758d4c350a609f32010c66fa343eefd49c02e79e911884be28f53f3f90
   languageName: node
   linkType: hard
 
@@ -1079,7 +1072,7 @@ __metadata:
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
     "@dice-roller/rpg-dice-roller": ^5.2.1
-    "@favware/cliff-jumper": ^1.9.0
+    "@favware/cliff-jumper": ^1.10.0
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.8.1
     "@rygent/anilist": ^1.2.0
@@ -3199,23 +3192,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.4":
-  version: 4.9.3
-  resolution: "typescript@npm:4.9.3"
+"typescript@npm:^4.9.4":
+  version: 4.9.4
+  resolution: "typescript@npm:4.9.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 17b8f816050b412403e38d48eef0e893deb6be522d6dc7caf105e54a72e34daf6835c447735fd2b28b66784e72bfbf87f627abb4818a8e43d1fa8106396128dc
+  checksum: e782fb9e0031cb258a80000f6c13530288c6d63f1177ed43f770533fdc15740d271554cdae86701c1dd2c83b082cea808b07e97fd68b38a172a83dbf9e0d0ef9
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
-  version: 4.9.3
-  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"
+"typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
+  version: 4.9.4
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 67ca21a387c0572f1c04936e638dde7782c5aa520c3754aadc7cc9b7c915da9ebc3e27c601bfff4ccb7d7264e82dce6d277ada82ec09dc75024349e0ef64926d
+  checksum: 1caaea6cb7f813e64345190fddc4e6c924d0b698ab81189b503763c4a18f7f5501c69362979d36e19c042d89d936443e768a78b0675690b35eb663d19e0eae71
   languageName: node
   linkType: hard
 
