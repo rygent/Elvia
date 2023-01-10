@@ -10,8 +10,6 @@
   color: '0025ff'
 - name: 'discussion'
   color: 'b6b1f9'
-- name: 'discord'
-  color: '5663e9'
 - name: 'documentation'
   color: '0075ca'
 - name: 'duplicate'
