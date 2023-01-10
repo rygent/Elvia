@@ -1,5 +1,5 @@
 {
-  "eslint.validate": ["javascript"],
+  "eslint.validate": ["typescript"],
   "search.exclude": {
     "**/node_modules": true,
     "**/.yarn": true,

@@ -1,13 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:base", ":enableVulnerabilityAlerts"],
   "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "extends": [":dependencyDashboardApproval"],
+    "enabled": true,
+    "recreateClosed": true,
+    "rebaseStalePrs": true,
+    "branchTopic": "lock-file-maintenance",
+    "commitMessageAction": "Lockfile maintenance",
+    "schedule": ["before 6am on sunday"],
+    "prBodyDefinitions": {
+      "Change": "All locks refreshed"
+    }
+  },
   "packageRules": [{
     "matchUpdateTypes": ["major"],
     "dependencyDashboardApproval": true
-  }, {
-    "matchUpdateTypes": ["minor", "patch", "digest", "lockFileMaintenance"],
-    "automerge": true
   }, {
     "matchPackagePatterns": ["*"],
     "semanticCommitType": "chore",
@@ -28,15 +37,16 @@
     "addLabels": ["ci"],
     "automerge": true
   }],
-  "schedule": ["after 9:00am every weekend"],
-  "timezone": "Asia/Tokyo",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 5,
+  "schedule": ["every weekend"],
   "vulnerabilityAlerts": {
-    "schedule": [],
+    "schedule": ["at any time"],
+    "addLabels": ["security"],
     "stabilityDays": 0,
     "rangeStrategy": "update-lockfile",
     "commitMessageSuffix": "[SECURITY]",
     "branchTopic": "{{{datasource}}}-{{{depName}}}-vulnerability",
-    "prCreation": "immediate",
-    "addLabels": ["security"]
+    "prCreation": "immediate"
   }
 }

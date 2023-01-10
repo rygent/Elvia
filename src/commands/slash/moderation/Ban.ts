@@ -1,0 +1,61 @@
+import type BaseClient from '../../../lib/BaseClient.js';
+import Command from '../../../lib/structures/Interaction.js';
+import type { ChatInputCommandInteraction } from 'discord.js';
+import { bold, italic } from '@discordjs/formatters';
+
+export default class extends Command {
+	public constructor(client: BaseClient) {
+		super(client, {
+			name: 'ban',
+			description: 'Ban a user with optional reason.',
+			category: 'Moderation',
+			memberPermissions: ['BanMembers'],
+			clientPermissions: ['BanMembers'],
+			guildOnly: true
+		});
+	}
+
+	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
+		const user = interaction.options.getUser('user', true);
+		const reason = interaction.options.getString('reason');
+		const days = interaction.options.getInteger('days') ?? 0;
+		const notify = interaction.options.getString('notify');
+		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+
+		if (user.id === interaction.user.id) return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
+		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });
+
+		const members = await interaction.guild?.members.fetch();
+		const member = members?.get(user.id);
+		if (member && member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
+			return interaction.reply({ content: 'You cannot ban a member who has a higher or equal role than yours.', ephemeral: true });
+		}
+		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
+
+		await interaction.deferReply({ ephemeral });
+		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
+
+		if (notify) {
+			if (notify !== 'dont-notify') {
+				if (!user.bot) {
+					const replies = [
+						`You've been banned from ${bold(interaction.guild?.name)}`
+					];
+
+					if (reason && notify === 'notify-with-reason') {
+						replies.splice(1, 0, `${bold(italic('Reason:'))} ${reason}`);
+					}
+
+					await user.send({ content: replies.join('\n') }).catch(() => {});
+				}
+			}
+		}
+
+		const replies = [
+			`${bold(user.tag)} was banned!`,
+			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : []
+		].join('\n');
+
+		return interaction.editReply({ content: replies });
+	}
+}
