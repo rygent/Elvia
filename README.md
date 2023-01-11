@@ -6,7 +6,7 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/Rygent/ElviaBot/continuous-integration.yml?logo=github&style=for-the-badge)](https://github.com/Rygent/ElviaBot/actions/workflows/continuous-integration.yml)
 [![Codacy grade](https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge)](https://app.codacy.com/gh/Rygent/ElviaBot/dashboard)
 [![License](https://img.shields.io/github/license/Rygent/ElviaBot?style=for-the-badge)](./LICENSE)
-[![Language](https://img.shields.io/github/languages/top/Rygent/ElviaBot?color=f0db4f&logoColor=white&style=for-the-badge)]()
+[![Language](https://img.shields.io/github/languages/top/Rygent/ElviaBot?color=3178c6&logoColor=white&style=for-the-badge)]()
 [![Version](https://img.shields.io/github/package-json/v/Rygent/ElviaBot/main?label=version&color=ff4949&style=for-the-badge)](./package.json)
 
 ---
@@ -30,7 +30,7 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 * Translate message to user setting language in context menu.
 
 ## Requirements
-1. [Node.JS v16.9+](https://nodejs.org/en/download) or higher.
+1. [Node.JS v16.14+](https://nodejs.org/en/download) or higher.
 2. [MongoDB v5.0+](https://www.mongodb.com/try/download/community) or higher.
 3. [Yarn v1.22+](https://yarnpkg.com/en/docs/install) or higher. (Highly recommended)
 
@@ -39,10 +39,6 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 
 ## Contributing
 For contributing instructions, or to find out all of the ways you can contribute, read [CONTRIBUTING.md](./.github/CONTRIBUTING.md). All contributions are welcome and encouraged, but please [read the information](./.github/CONTRIBUTING.md) given before doing so.
-
-## Credits
-* <i>[Discord.JS-Template](https://github.com/MenuDocs/discord.js-template)</i> by **MenuDocs**.
-* <i>[AtlantaBot](https://github.com/Androz2091/AtlantaBot)</i> by **Androz2091**.
 
 ## License
 This project is licensed under the GPL 3.0 license. See the file [`LICENSE`](./LICENSE) for more information.
