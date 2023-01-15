@@ -26,7 +26,7 @@
     "commander": "^9.5.0",
     "eslint": "^8.31.0",
     "prisma": "^4.8.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.5",
     "semver": "^7.3.8",
     "typescript": "^4.9.4"
   },
