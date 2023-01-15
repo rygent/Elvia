@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "commander": "^10.0.0",
-    "eslint": "^8.31.0",
+    "eslint": "^8.32.0",
     "prisma": "^4.8.1",
     "rimraf": "^4.0.5",
     "semver": "^7.3.8",
