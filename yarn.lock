@@ -1790,7 +1790,7 @@ __metadata:
     moment-timezone: ^0.5.40
     nanoid: ^4.0.0
     prisma: ^4.8.1
-    rimraf: ^4.0.5
+    rimraf: ^4.0.7
     semver: ^7.3.8
     systeminformation: ^5.17.3
     typescript: ^4.9.4
@@ -4069,12 +4069,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "rimraf@npm:4.0.5"
+"rimraf@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "rimraf@npm:4.0.7"
   bin:
     rimraf: dist/cjs/src/bin.js
-  checksum: e99139d6460d4460125288565698ff43f5cb8734feda83694187a029b21bdd6e63c063a1cb899ae8deaccc4345fbb69fa45e655329b2fb93f21ad809da1948eb
+  checksum: 294ae526198eadac7b57e7b43782aaa0be5d5c2a606ee65c26d9cd2fdddc320d80cc43c3c1c0b9562e88aa265f67c4c00f70af2b4d065e76ce03d9d7a2a5c901
   languageName: node
   linkType: hard
 
