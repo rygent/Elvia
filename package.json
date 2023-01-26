@@ -49,7 +49,7 @@
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.40",
     "nanoid": "^4.0.0",
-    "systeminformation": "^5.17.3",
+    "systeminformation": "^5.17.4",
     "undici": "^5.16.0",
     "winston": "^3.8.2"
   },
