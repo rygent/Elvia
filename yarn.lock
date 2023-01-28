@@ -1795,7 +1795,7 @@ __metadata:
     systeminformation: ^5.17.4
     typescript: ^4.9.4
     undici: ^5.16.0
-    utf-8-validate: ^6.0.1
+    utf-8-validate: ^6.0.2
     winston: ^3.8.2
   dependenciesMeta:
     bufferutil:
@@ -4798,13 +4798,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"utf-8-validate@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "utf-8-validate@npm:6.0.1"
+"utf-8-validate@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "utf-8-validate@npm:6.0.2"
   dependencies:
     node-gyp: latest
     node-gyp-build: ^4.3.0
-  checksum: 4a8f4305981bbd049384102712516aa82e8618dd3f456d46b22e6929c2b7239cff5deade01305b2a66e7582ae1da7ce4264e677afd955a89962065628e2f7c79
+  checksum: 40565d04dfca2bd9c30e50a1866b77fbad8a25859f93152183ce13250d4c9997cb61f76832052f269b9351336dd46cbf8dd2e87a7d821f88a00a9c7ab61fcb62
   languageName: node
   linkType: hard
 
