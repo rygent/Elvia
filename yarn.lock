@@ -1627,7 +1627,7 @@ __metadata:
     moment: ^2.29.4
     moment-duration-format: ^2.3.2
     moment-timezone: ^0.5.40
-    nanoid: ^4.0.0
+    nanoid: ^4.0.1
     prisma: ^4.9.0
     rimraf: ^4.1.2
     semver: ^7.3.8
@@ -3105,12 +3105,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "nanoid@npm:4.0.0"
+"nanoid@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "nanoid@npm:4.0.1"
   bin:
     nanoid: bin/nanoid.js
-  checksum: 7d5946df5c6d383694195b781ae7b5067c149d164ec71e910d6b06676309c3459b68af570b944fb5ecd5065d19df464f05700d141d70bb712ff8ca06642fd8df
+  checksum: 21022a7910aa690cb05872c07f0c4a317dfe2aa79cc2b5e4ab41d17476e23d973d24c683206d6fa7e1b56bf657cf5dfbc0f1cac7d596bcd2dea0f49635316628
   languageName: node
   linkType: hard
 
