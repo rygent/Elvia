@@ -1626,7 +1626,7 @@ __metadata:
     semver: ^7.3.8
     systeminformation: ^5.17.8
     typescript: ^4.9.5
-    undici: ^5.16.0
+    undici: ^5.18.0
     utf-8-validate: ^6.0.2
     winston: ^3.8.2
   dependenciesMeta:
@@ -4282,12 +4282,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.16.0":
-  version: 5.16.0
-  resolution: "undici@npm:5.16.0"
+"undici@npm:^5.18.0":
+  version: 5.18.0
+  resolution: "undici@npm:5.18.0"
   dependencies:
     busboy: ^1.6.0
-  checksum: bc22e797cbf469351713c88af33e65e21952a75f431b78b0e75fb2411426ab38b888ec0761d4b81eadf8f6e8872ed23fb75641cc7319c6a7f08bd083899fa1cc
+  checksum: 74e0f357c376c745fcca612481a5742866ae36086ad387e626255f4c4a15fc5357d9d0fa4355271b6a633d50f5556c3e85720844680c44861c66e23afca7245f
   languageName: node
   linkType: hard
 
