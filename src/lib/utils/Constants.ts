@@ -1,7 +1,6 @@
 export { Colors, Emojis } from './Enums.js';
 
 export const Credentials = {
-	GeniusApiKey: process.env.GENIUS_API_KEY as string,
 	ImgurClientId: process.env.IMGUR_CLIENT_ID as string,
 	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY as string,
 	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID as string,

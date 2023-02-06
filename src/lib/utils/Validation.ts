@@ -3,10 +3,6 @@ import { italic, underline } from 'colorette';
 const logger = new Logger();
 
 function validation() {
-	if (!process.env.GENIUS_API_KEY) {
-		logger.warn(`${underline('GENIUS_API_KEY')} is required to use ${italic('search lyrics')} command.`);
-	}
-
 	if (!process.env.IMGUR_CLIENT_ID) {
 		logger.warn(`${underline('IMGUR_CLIENT_ID')} is required to use ${italic('imgur')} command.`);
 	}

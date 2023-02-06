@@ -45,16 +45,6 @@ export default {
 			required: true
 		}]
 	}, {
-		name: 'lyrics',
-		description: 'Search for a lyrics on Genius.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'search',
-			description: 'Your search.',
-			type: ApplicationCommandOptionType.String,
-			required: true
-		}]
-	}, {
 		name: 'manga',
 		description: 'Search for a Manga on Anilist.',
 		type: ApplicationCommandOptionType.Subcommand,
