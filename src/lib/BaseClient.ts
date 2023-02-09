@@ -93,7 +93,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		await this.utils.loadInteractions();
 		await this.utils.loadCommands();
 		await this.utils.loadEvents();
-		void prisma.$connect();
+		await prisma.$connect();
 		void super.login(token as string);
 	}
 }
