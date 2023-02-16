@@ -8,7 +8,6 @@ import type Event from './structures/Event.js';
 import Logger from '../lib/modules/Logger.js';
 import Util from './structures/Util.js';
 import semver from 'semver';
-const prisma = new PrismaClient();
 
 export default class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public interactions: Collection<string, Interaction>;
@@ -17,6 +16,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 	public events: Collection<string, Event>;
 	public cooldowns: Collection<string, Collection<string, number>>;
 
+	public prisma: PrismaClient;
 	public logger: Logger;
 	public utils: Util;
 
@@ -62,6 +62,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		this.events = new Collection();
 		this.cooldowns = new Collection();
 
+		this.prisma = new PrismaClient();
 		this.logger = new Logger(this);
 		this.utils = new Util(this);
 
@@ -95,7 +96,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		await this.utils.loadInteractions();
 		await this.utils.loadCommands();
 		await this.utils.loadEvents();
-		await prisma.$connect();
+		await this.prisma.$connect();
 		void super.login(token as string);
 	}
 }

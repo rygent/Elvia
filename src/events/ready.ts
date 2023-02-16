@@ -2,9 +2,7 @@ import type BaseClient from '../lib/BaseClient.js';
 import Event from '../lib/structures/Event.js';
 import { ActivityType } from 'discord-api-types/v10';
 import { formatNumber } from '../lib/utils/Function.js';
-import { PrismaClient } from '@prisma/client';
 import { redBright, underline } from 'colorette';
-const prisma = new PrismaClient();
 
 export default class extends Event {
 	public constructor(client: BaseClient) {
@@ -20,9 +18,9 @@ export default class extends Event {
 
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {
-			const exist = await prisma.guild.findFirst({ where: { id: guild.id } });
+			const exist = await this.client.prisma.guild.findFirst({ where: { id: guild.id } });
 			if (!exist) {
-				await prisma.guild.create({ data: { id: guild.id } });
+				await this.client.prisma.guild.create({ data: { id: guild.id } });
 			}
 		}
 
