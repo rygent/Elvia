@@ -317,7 +317,7 @@ export default class extends Command {
 		});
 	}
 
-	public override autocomplete(interaction: AutocompleteInteraction) {
+	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
 		const focused = interaction.options.getFocused();
 
 		const choices = this.client.interactions.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()))
