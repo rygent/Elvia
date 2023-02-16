@@ -38,7 +38,7 @@ export default {
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'emoji',
-			description: 'The emoji to delete.',
+			description: 'The emoji to rename.',
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}, {
