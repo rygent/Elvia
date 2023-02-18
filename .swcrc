@@ -14,5 +14,6 @@
     "experimental": {
       "keepImportAssertions": true
     }
-  }
+  },
+  "exclude": ["^src\/lib\/types\/.*.ts$"]
 }

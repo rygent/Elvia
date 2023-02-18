@@ -1,6 +1,5 @@
 import type BaseClient from '../BaseClient.js';
-import type { Client, ClientEvents } from 'discord.js';
-import type { RestEvents } from '@discordjs/rest';
+import type { EventOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 import type { EventEmitter } from 'node:events';
 
@@ -21,12 +20,4 @@ export default abstract class Event {
 	}
 
 	public abstract run(...args: unknown[]): Awaitable<unknown>;
-}
-
-type EventNames = keyof ClientEvents | keyof RestEvents | 'uncaughtException' | 'unhandledRejection';
-
-interface EventOptions {
-	name: EventNames;
-	once?: boolean;
-	emitter?: keyof Client | EventEmitter;
 }

@@ -2,6 +2,7 @@ import { BitField, Client, Options, Partials, PermissionsBitField, PermissionsSt
 import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import { PrismaClient } from '@prisma/client';
+import type { ClientOptions } from './types/Global.js';
 import type Interaction from './structures/Interaction.js';
 import type Command from './structures/Command.js';
 import type Event from './structures/Event.js';
@@ -99,13 +100,4 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		await this.prisma.$connect();
 		void super.login(token as string);
 	}
-}
-
-interface ClientOptions {
-	token: any;
-	version: string;
-	prefix: string;
-	owners: string[] | undefined;
-	debug: boolean;
-	defaultPermissions: PermissionsString[];
 }

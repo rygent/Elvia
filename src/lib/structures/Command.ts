@@ -1,5 +1,6 @@
 import type BaseClient from '../BaseClient.js';
 import { BitField, Message, PermissionsBitField, PermissionsString } from 'discord.js';
+import type { MessageCommandOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 
 export default abstract class Command {
@@ -32,18 +33,4 @@ export default abstract class Command {
 	}
 
 	public abstract execute(message: Message, args?: string[]): Awaitable<unknown>;
-}
-
-interface MessageCommandOptions {
-	name: string;
-	aliases?: string[];
-	description?: string;
-	category?: string;
-	usage?: string;
-	memberPermissions?: PermissionsString[];
-	clientPermissions?: PermissionsString[];
-	cooldown?: number;
-	nsfw?: boolean;
-	ownerOnly?: boolean;
-	disabled?: boolean;
 }
