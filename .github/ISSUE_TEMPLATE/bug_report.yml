@@ -22,20 +22,16 @@ body:
         4. see error logs below
     validations:
       required: true
-  - type: input
-    id: djs-version
+  - type: textarea
+    id: expected
     attributes:
-      label: Discord.JS version
-      description: Which version of Discord.JS are you using? Run `yarn info discord.js` in your project directory and paste the output.
-      placeholder: Discord.JS version 14.x.x
-    validations:
-      required: true
+      label: Expected behavior
+      description: A clear and concise description of what you want to happen.
   - type: input
     id: node-version
     attributes:
-      label: Node.JS version
-      description: Which version of Node.JS are you using? Run `node --version` in your project directory and paste the output.
-      placeholder: Node.JS version 16.14+
+      label: Node.js version
+      description: Which version of Node.js are you using? Run `node --version` in your project directory and paste the output.
     validations:
       required: true
   - type: input
@@ -54,3 +50,8 @@ body:
         - High (immediate attention needed)
     validations:
       required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Other context
+      description: Any other context, screenshots, or file uploads that help us understand your issue.
