@@ -12,7 +12,7 @@ export default class extends Event {
 	}
 
 	public run(rateLimitInfo: RateLimitData) {
-		const data = [
+		const info = [
 			`    Route  : ${rateLimitInfo.route}`,
 			`    Hash   : ${rateLimitInfo.hash}`,
 			`    Method : ${rateLimitInfo.method}`,
@@ -21,6 +21,6 @@ export default class extends Event {
 			`    Global : ${rateLimitInfo.global.toString()}`
 		].join('\n');
 
-		this.client.logger.warn(`This client being Rate Limited.\n${data}`);
+		this.client.logger.warn(`Discord API client is rate-limited.\n${info}`);
 	}
 }
