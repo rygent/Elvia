@@ -18,10 +18,11 @@ export default class extends Event {
 
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {
-			const exist = await this.client.prisma.guild.findFirst({ where: { id: guild.id } });
-			if (!exist) {
-				await this.client.prisma.guild.create({ data: { id: guild.id } });
-			}
+			await this.client.prisma.guild.upsert({
+				where: { id: guild.id },
+				create: { id: guild.id },
+				update: {}
+			});
 		}
 
 		const activities = [
