@@ -26,8 +26,8 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		const filtered = prisma?.tags.find(({ slug }) => slug === name);
-		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
@@ -53,7 +53,7 @@ export default class extends Command {
 					collector.stop();
 					return void i.update({ content: 'Cancelation of the deletion.', components: [] });
 				case deleteId:
-					await this.client.prisma.tag.delete({ where: { id: filtered.id } });
+					await this.client.prisma.tag.delete({ where: { id: tag.id } });
 
 					return void i.update({ content: `Tag ${inlineCode(name)} has been deleted.`, components: [] });
 			}

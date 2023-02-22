@@ -26,8 +26,8 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		const filtered = prisma?.tags.find(({ slug }) => slug === name);
-		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -38,7 +38,7 @@ export default class extends Command {
 					.setCustomId('content')
 					.setStyle(TextInputStyle.Paragraph)
 					.setLabel('Content')
-					.setValue(filtered.content)
+					.setValue(tag.content)
 					.setRequired(true)
 					.setMaxLength(2000)));
 
@@ -51,7 +51,7 @@ export default class extends Command {
 			const content = i.fields.getTextInputValue('content');
 
 			await this.client.prisma.tag.update({
-				where: { id: filtered.id },
+				where: { id: tag.id },
 				data: { content }
 			});
 

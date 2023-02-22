@@ -26,8 +26,8 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		const filtered = prisma?.tags.find(({ slug }) => slug === name);
-		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -38,7 +38,7 @@ export default class extends Command {
 					.setCustomId('title')
 					.setStyle(TextInputStyle.Short)
 					.setLabel('Title')
-					.setValue(filtered.name)
+					.setValue(tag.name)
 					.setRequired(true)
 					.setMaxLength(100)));
 
@@ -50,11 +50,11 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			const title = i.fields.getTextInputValue('title');
 
-			const exist = prisma?.tags.some(({ slug }) => slug === slugify(title));
-			if (exist) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
+			const tags = prisma?.tags.some(({ slug }) => slug === slugify(title));
+			if (tags) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
 
 			await this.client.prisma.tag.update({
-				where: { id: filtered.id },
+				where: { id: tag.id },
 				data: {
 					slug: slugify(title),
 					name: title

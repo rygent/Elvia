@@ -52,8 +52,8 @@ export default class extends Command {
 			const title = i.fields.getTextInputValue('title');
 			const content = i.fields.getTextInputValue('content');
 
-			const exist = prisma?.tags.some(({ slug }) => slug === slugify(title));
-			if (exist) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
+			const tags = prisma?.tags.some(({ slug }) => slug === slugify(title));
+			if (tags) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
 
 			await this.client.prisma.tag.create({
 				data: {

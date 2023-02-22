@@ -23,14 +23,14 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		const filtered = prisma?.tags.find(({ slug }) => slug === name);
-		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
-		const pinned = prisma?.tags.filter(({ hoisted }) => hoisted);
-		if (pinned!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
+		const pins = prisma?.tags.filter(({ hoisted }) => hoisted);
+		if (pins!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
 
 		await this.client.prisma.tag.update({
-			where: { id: filtered.id },
+			where: { id: tag.id },
 			data: { hoisted: true }
 		});
 

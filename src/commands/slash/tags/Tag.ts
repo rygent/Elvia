@@ -20,10 +20,10 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		const filtered = prisma?.tags.find(({ slug }) => slug === name);
-		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
-		return interaction.reply({ content: filtered.content });
+		return interaction.reply({ content: tag.content });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
