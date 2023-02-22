@@ -37,6 +37,11 @@ export default class extends Command {
 		let { offset } = new Duration(duration);
 		if (offset > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
 		else if (offset > 241884e4 && offset <= 24192e5) offset = 241884e4;
+		else if (isNaN(offset)) return interaction.reply({ content: `You need to specify a duration for the timeout.`, ephemeral: true });
+
+		if (Date.now() <= Number(member.communicationDisabledUntilTimestamp)) {
+			return interaction.reply({ content: `${bold(member.user.tag)} is already timed out.`, ephemeral: true });
+		}
 
 		await interaction.deferReply({ ephemeral });
 		await member.timeout(offset, reason as string);
