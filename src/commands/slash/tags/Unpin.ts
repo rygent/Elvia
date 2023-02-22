@@ -1,15 +1,15 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '../../../lib/BaseClient.js';
+import Command from '../../../lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '../../../../lib/utils/Function.js';
+import { shuffleArray } from '../../../lib/utils/Function.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'tags pin',
-			description: 'Pin a server tag.',
-			category: 'Manage',
+			name: 'tags unpin',
+			description: 'Unpin a server tag.',
+			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
 		});
@@ -26,15 +26,12 @@ export default class extends Command {
 		const filtered = prisma?.tags.find(({ slug }) => slug === name);
 		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
-		const pinned = prisma?.tags.filter(({ hoisted }) => hoisted);
-		if (pinned!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
-
 		await this.client.prisma.tag.update({
 			where: { id: filtered.id },
-			data: { hoisted: true }
+			data: { hoisted: false }
 		});
 
-		return interaction.reply({ content: `Tag ${inlineCode(name)} has been pinned.`, ephemeral: true });
+		return interaction.reply({ content: `Tag ${inlineCode(name)} has been unpinned.`, ephemeral: true });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {

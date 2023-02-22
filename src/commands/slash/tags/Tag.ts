@@ -1,16 +1,13 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '../../../lib/BaseClient.js';
+import Command from '../../../lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '../../../../lib/utils/Function.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'tags unpin',
-			description: 'Unpin a server tag.',
-			category: 'Manage',
-			memberPermissions: ['ManageGuild'],
+			name: 'tag',
+			description: 'Send a server tag.',
+			category: 'Tags',
 			guildOnly: true
 		});
 	}
@@ -26,12 +23,7 @@ export default class extends Command {
 		const filtered = prisma?.tags.find(({ slug }) => slug === name);
 		if (!filtered) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
-		await this.client.prisma.tag.update({
-			where: { id: filtered.id },
-			data: { hoisted: false }
-		});
-
-		return interaction.reply({ content: `Tag ${inlineCode(name)} has been unpinned.`, ephemeral: true });
+		return interaction.reply({ content: filtered.content });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
@@ -45,8 +37,14 @@ export default class extends Command {
 		const choices = prisma?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
-		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
+		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name, slug }) => ({ name, value: slug }));
 
-		return interaction.respond(shuffleArray(respond.slice(0, 25)));
+		if (focused.length) {
+			respond = choices.map(({ name, slug }) => ({ name, value: slug }));
+
+			return interaction.respond(respond.slice(0, 25));
+		}
+
+		return interaction.respond(respond.slice(0, 25));
 	}
 }
