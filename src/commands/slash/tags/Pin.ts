@@ -26,6 +26,8 @@ export default class extends Command {
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
 		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
+		if (tag.hoisted) return interaction.reply({ content: 'This tag is already pinned.', ephemeral: true });
+
 		const pins = prisma?.tags.filter(({ hoisted }) => hoisted);
 		if (pins!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
 

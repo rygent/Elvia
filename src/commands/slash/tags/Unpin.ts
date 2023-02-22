@@ -26,6 +26,8 @@ export default class extends Command {
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
 		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
 
+		if (!tag.hoisted) return interaction.reply({ content: 'This tag is already unpinned.', ephemeral: true });
+
 		await this.client.prisma.tag.update({
 			where: { id: tag.id },
 			data: { hoisted: false }
