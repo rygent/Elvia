@@ -22,7 +22,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const depth = interaction.options.getInteger('depth');
 		const async = interaction.options.getBoolean('async') ?? false;
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -45,7 +45,7 @@ export default class extends Command {
 				.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 			let evaled;
 
-			await i.deferReply({ ephemeral });
+			await i.deferReply({ ephemeral: !visible });
 
 			if (async) {
 				const indentedCode = code.split('\n').map((codeLine: string) => `  ${codeLine}`).join('\n');

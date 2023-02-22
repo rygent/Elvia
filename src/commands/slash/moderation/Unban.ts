@@ -19,14 +19,14 @@ export default class extends Command {
 		const user = interaction.options.getUser('user', true);
 		const reason = interaction.options.getString('reason');
 		const notify = interaction.options.getString('notify');
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const banned = await interaction.guild?.bans.fetch();
 
 		const target = banned?.find(member => member.user.id.includes(user.id) || member.user.tag.includes(user.tag))?.user;
 		if (!target) return interaction.reply({ content: 'This user is not banned on this server.', ephemeral: true });
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 		await interaction.guild?.members.unban(target, reason as string);
 
 		if (notify) {

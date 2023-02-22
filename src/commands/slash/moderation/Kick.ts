@@ -19,7 +19,7 @@ export default class extends Command {
 		const user = interaction.options.getUser('member', true);
 		const reason = interaction.options.getString('reason');
 		const notify = interaction.options.getString('notify');
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
@@ -32,7 +32,7 @@ export default class extends Command {
 		}
 		if (!member.kickable) return interaction.reply({ content: `I cannot kick a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 		await interaction.guild?.members.kick(member, reason as string);
 
 		if (notify) {

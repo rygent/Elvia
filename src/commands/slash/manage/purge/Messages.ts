@@ -17,9 +17,9 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const amount = interaction.options.getInteger('amount') ?? 1;
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		const reply = await interaction.deferReply({ ephemeral, fetchReply: true });
+		const reply = await interaction.deferReply({ ephemeral: !visible, fetchReply: true });
 
 		const messages = await interaction.channel?.messages.fetch({ limit: 1e2, cache: true, before: reply.id });
 		const filter = messages?.filter(m => !m.pinned);

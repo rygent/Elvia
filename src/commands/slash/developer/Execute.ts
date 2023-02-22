@@ -16,9 +16,9 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const bash = interaction.options.getString('bash', true);
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 
 		exec(bash, (error, stdout) => {
 			const replies = codeBlock('console', stdout ?? error).toString();

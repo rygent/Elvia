@@ -20,14 +20,14 @@ export default class extends Command {
 		const duration = interaction.options.getString('duration', true);
 		const channel = interaction.options.getChannel('channel') as TextChannel | VoiceChannel | ForumChannel ?? interaction.channel;
 		const reason = interaction.options.getString('reason');
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const { offset } = new Duration(duration);
 		if (offset > 216e5) {
 			return interaction.reply({ content: 'Slowmode time must be a number between 0 second and 6 hours.', ephemeral: true });
 		}
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 		await channel?.setRateLimitPerUser(offset / 1e3, reason as string);
 
 		const time = new DurationFormatter();

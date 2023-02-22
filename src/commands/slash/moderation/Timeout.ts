@@ -21,7 +21,7 @@ export default class extends Command {
 		const duration = interaction.options.getString('duration', true);
 		const reason = interaction.options.getString('reason');
 		const notify = interaction.options.getString('notify');
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
@@ -43,7 +43,7 @@ export default class extends Command {
 			return interaction.reply({ content: `${bold(member.user.tag)} is already timed out.`, ephemeral: true });
 		}
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 		await member.timeout(offset, reason as string);
 
 		if (notify) {

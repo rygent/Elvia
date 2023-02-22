@@ -16,9 +16,9 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const media = interaction.options.getAttachment('media', true);
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 
 		const { body } = await request(media.url, { method: 'GET' });
 		const buffer = Buffer.from(await body.arrayBuffer()).toString('base64');

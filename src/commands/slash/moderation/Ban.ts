@@ -20,7 +20,7 @@ export default class extends Command {
 		const reason = interaction.options.getString('reason');
 		const days = interaction.options.getInteger('days') ?? 0;
 		const notify = interaction.options.getString('notify');
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		if (user.id === interaction.user.id) return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
 		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });
@@ -32,7 +32,7 @@ export default class extends Command {
 		}
 		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
 
-		await interaction.deferReply({ ephemeral });
+		await interaction.deferReply({ ephemeral: !visible });
 		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
 
 		if (notify) {

@@ -15,8 +15,8 @@ export default {
 		type: ApplicationCommandOptionType.Boolean,
 		required: false
 	}, {
-		name: 'ephemeral',
-		description: 'Whether the replies should be visible privately.',
+		name: 'visible',
+		description: 'Whether the replies should be visible in the channel.',
 		type: ApplicationCommandOptionType.Boolean,
 		required: false
 	}] as APIApplicationCommandOption[],

@@ -17,8 +17,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -39,8 +39,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -56,8 +56,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -73,8 +73,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -90,8 +90,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -107,8 +107,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -124,8 +124,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -141,8 +141,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -158,8 +158,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -175,8 +175,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -192,8 +192,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -209,8 +209,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -231,8 +231,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -253,8 +253,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]
@@ -275,8 +275,8 @@ export default {
 			max_value: 100,
 			required: false
 		}, {
-			name: 'ephemeral',
-			description: 'Whether the replies should be visible privately.',
+			name: 'visible',
+			description: 'Whether the replies should be visible in the channel.',
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}]

@@ -21,7 +21,7 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const category = interaction.options.getString('category', true);
-		const ephemeral = interaction.options.getBoolean('ephemeral') ?? false;
+		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		try {
 			const raw = await request(`https://nekobot.xyz/api/image?type=${category}`, { method: 'GET' });
@@ -38,7 +38,7 @@ export default class extends Command {
 				.setImage(response.message)
 				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
-			return await interaction.reply({ embeds: [embed], components: [button], ephemeral });
+			return await interaction.reply({ embeds: [embed], components: [button], ephemeral: !visible });
 		} catch {
 			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 		}
