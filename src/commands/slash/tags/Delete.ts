@@ -79,6 +79,6 @@ export default class extends Command {
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
 
-		return interaction.respond(shuffleArray(respond.slice(0, 25)));
+		return interaction.respond(shuffleArray(respond).slice(0, 25));
 	}
 }
