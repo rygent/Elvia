@@ -11,7 +11,7 @@ export default {
 		type: ApplicationCommandOptionType.Subcommand
 	}, {
 		name: 'delete',
-		description: 'Delete a server tag.',
+		description: 'Delete an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'name',
@@ -22,7 +22,7 @@ export default {
 		}]
 	}, {
 		name: 'edit',
-		description: 'Edit a server tag.',
+		description: 'Edit an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'name',
@@ -33,7 +33,7 @@ export default {
 		}]
 	}, {
 		name: 'pin',
-		description: 'Pin a server tag.',
+		description: 'Pin an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'name',
@@ -44,7 +44,7 @@ export default {
 		}]
 	}, {
 		name: 'rename',
-		description: 'Rename a server tag.',
+		description: 'Rename an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'name',
@@ -55,7 +55,7 @@ export default {
 		}]
 	}, {
 		name: 'unpin',
-		description: 'Unpin a server tag.',
+		description: 'Unpin an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
 		options: [{
 			name: 'name',

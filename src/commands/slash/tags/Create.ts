@@ -30,16 +30,17 @@ export default class extends Command {
 			.setTitle('Create a new server tag')
 			.addComponents(new ActionRowBuilder<TextInputBuilder>()
 				.setComponents(new TextInputBuilder()
-					.setCustomId('title')
+					.setCustomId('name')
 					.setStyle(TextInputStyle.Short)
-					.setLabel('Title')
+					.setLabel('What\'s the name?')
 					.setRequired(true)
 					.setMaxLength(100)))
 			.addComponents(new ActionRowBuilder<TextInputBuilder>()
 				.setComponents(new TextInputBuilder()
 					.setCustomId('content')
 					.setStyle(TextInputStyle.Paragraph)
-					.setLabel('Content')
+					.setLabel('What\'s the content?')
+					.setPlaceholder('PRO TIP: can use discord markdown syntax.')
 					.setRequired(true)
 					.setMaxLength(2000)));
 
@@ -49,22 +50,22 @@ export default class extends Command {
 		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, max: 1 });
 
 		collector.on('collect', async (i) => {
-			const title = i.fields.getTextInputValue('title');
+			const names = i.fields.getTextInputValue('name');
 			const content = i.fields.getTextInputValue('content');
 
-			const tags = prisma?.tags.some(({ slug }) => slug === slugify(title));
-			if (tags) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
+			const tags = prisma?.tags.some(({ slug }) => slug === slugify(names));
+			if (tags) return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
 
 			await this.client.prisma.tag.create({
 				data: {
 					guildId: interaction.guildId,
-					slug: slugify(title),
-					name: title,
+					slug: slugify(names),
+					name: names,
 					content
 				}
 			});
 
-			return void i.reply({ content: `Tag ${inlineCode(slugify(title))} has been created.`, ephemeral: true });
+			return void i.reply({ content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`, ephemeral: true });
 		});
 	}
 }

@@ -11,7 +11,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags rename',
-			description: 'Rename a server tag.',
+			description: 'Rename an existing server tag.',
 			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
@@ -27,7 +27,7 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -35,10 +35,9 @@ export default class extends Command {
 			.setTitle('Rename a server tag')
 			.setComponents(new ActionRowBuilder<TextInputBuilder>()
 				.setComponents(new TextInputBuilder()
-					.setCustomId('title')
+					.setCustomId('name')
 					.setStyle(TextInputStyle.Short)
-					.setLabel('Title')
-					.setValue(tag.name)
+					.setLabel('What\'s the new name?')
 					.setRequired(true)
 					.setMaxLength(100)));
 
@@ -48,20 +47,20 @@ export default class extends Command {
 		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, max: 1 });
 
 		collector.on('collect', async (i) => {
-			const title = i.fields.getTextInputValue('title');
+			const names = i.fields.getTextInputValue('name');
 
-			const tags = prisma?.tags.some(({ slug }) => slug === slugify(title));
-			if (tags) return void i.reply({ content: 'A tag with that name already exists.', ephemeral: true });
+			const tags = prisma?.tags.some(({ slug }) => slug === slugify(names));
+			if (tags) return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
 
 			await this.client.prisma.tag.update({
 				where: { id: tag.id },
 				data: {
-					slug: slugify(title),
-					name: title
+					slug: slugify(names),
+					name: names
 				 }
 			});
 
-			return void i.reply({ content: `Tag ${inlineCode(name)} has been renamed to ${inlineCode(slugify(title))}.`, ephemeral: true });
+			return void i.reply({ content: `Successfully renamed the tag ${inlineCode(name)} to ${inlineCode(slugify(names))}.`, ephemeral: true });
 		});
 	}
 

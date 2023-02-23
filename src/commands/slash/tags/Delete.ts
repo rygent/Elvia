@@ -11,7 +11,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags delete',
-			description: 'Delete a server tag.',
+			description: 'Delete an existing server tag.',
 			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
@@ -27,7 +27,7 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
@@ -55,7 +55,7 @@ export default class extends Command {
 				case deleteId:
 					await this.client.prisma.tag.delete({ where: { id: tag.id } });
 
-					return void i.update({ content: `Tag ${inlineCode(name)} has been deleted.`, components: [] });
+					return void i.update({ content: `Successfully deleted the tag ${inlineCode(name)}.`, components: [] });
 			}
 		});
 

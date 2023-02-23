@@ -11,7 +11,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags edit',
-			description: 'Edit a server tag.',
+			description: 'Edit an existing server tag.',
 			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
@@ -27,7 +27,7 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -37,7 +37,8 @@ export default class extends Command {
 				.setComponents(new TextInputBuilder()
 					.setCustomId('content')
 					.setStyle(TextInputStyle.Paragraph)
-					.setLabel('Content')
+					.setLabel('What\'s the new content?')
+					.setPlaceholder('PRO TIP: can use discord markdown syntax.')
 					.setValue(tag.content)
 					.setRequired(true)
 					.setMaxLength(2000)));
@@ -55,7 +56,7 @@ export default class extends Command {
 				data: { content }
 			});
 
-			return void i.reply({ content: `Tag ${inlineCode(name)} has been edited.`, ephemeral: true });
+			return void i.reply({ content: `Successfully edited the tag ${inlineCode(name)}.`, ephemeral: true });
 		});
 	}
 

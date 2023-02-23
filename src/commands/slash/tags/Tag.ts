@@ -1,12 +1,13 @@
 import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
+import { inlineCode } from '@discordjs/formatters';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tag',
-			description: 'Send a server tag.',
+			description: 'Send an existing server tag.',
 			category: 'Tags',
 			guildOnly: true
 		});
@@ -21,7 +22,7 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		return interaction.reply({ content: tag.content });
 	}

@@ -2,7 +2,7 @@ import { APIApplicationCommand, APIApplicationCommandOption, ApplicationCommandO
 
 export default {
 	name: 'tag',
-	description: 'Send a server tag.',
+	description: 'Send an existing server tag.',
 	type: ApplicationCommandType.ChatInput,
 	options: [{
 		name: 'name',

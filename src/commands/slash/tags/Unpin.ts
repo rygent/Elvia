@@ -8,7 +8,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags unpin',
-			description: 'Unpin a server tag.',
+			description: 'Unpin an existing server tag.',
 			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
@@ -24,16 +24,16 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
-		if (!tag.hoisted) return interaction.reply({ content: 'This tag is already unpinned.', ephemeral: true });
+		if (!tag.hoisted) return interaction.reply({ content: `The tag ${inlineCode(name)} already unpinned.`, ephemeral: true });
 
 		await this.client.prisma.tag.update({
 			where: { id: tag.id },
 			data: { hoisted: false }
 		});
 
-		return interaction.reply({ content: `Tag ${inlineCode(name)} has been unpinned.`, ephemeral: true });
+		return interaction.reply({ content: `Successfully unpinned the tag ${inlineCode(name)}.`, ephemeral: true });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {

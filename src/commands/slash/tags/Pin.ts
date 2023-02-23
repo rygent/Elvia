@@ -8,7 +8,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags pin',
-			description: 'Pin a server tag.',
+			description: 'Pin an existing server tag.',
 			category: 'Tags',
 			memberPermissions: ['ManageGuild'],
 			guildOnly: true
@@ -24,9 +24,9 @@ export default class extends Command {
 		});
 
 		const tag = prisma?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: 'The tag name doesn\'t exist.', ephemeral: true });
+		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
-		if (tag.hoisted) return interaction.reply({ content: 'This tag is already pinned.', ephemeral: true });
+		if (tag.hoisted) return interaction.reply({ content: `The tag ${inlineCode(name)} already pinned.`, ephemeral: true });
 
 		const pins = prisma?.tags.filter(({ hoisted }) => hoisted);
 		if (pins!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
@@ -36,7 +36,7 @@ export default class extends Command {
 			data: { hoisted: true }
 		});
 
-		return interaction.reply({ content: `Tag ${inlineCode(name)} has been pinned.`, ephemeral: true });
+		return interaction.reply({ content: `Successfully pinned the tag ${inlineCode(name)}.`, ephemeral: true });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
