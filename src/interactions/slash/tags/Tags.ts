@@ -54,6 +54,10 @@ export default {
 			required: true
 		}]
 	}, {
+		name: 'reset',
+		description: 'Reset all server tags.',
+		type: ApplicationCommandOptionType.Subcommand
+	}, {
 		name: 'unpin',
 		description: 'Unpin an existing server tag.',
 		type: ApplicationCommandOptionType.Subcommand,
