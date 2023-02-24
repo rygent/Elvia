@@ -8,10 +8,10 @@ import path from 'node:path';
 import moment from 'moment-timezone';
 import 'dotenv/config';
 
-moment.tz.setDefault(process.env.TIMEZONE);
-
 const logger = new Logger();
 const program = new Command();
+
+moment.tz.setDefault(process.env.TIMEZONE);
 
 program.option('-g, --global', 'register global commands');
 program.option('-d, --dev', 'register developer commands');
@@ -45,25 +45,28 @@ async function loadCommands(developer: boolean): Promise<object[]> {
 	return commands;
 }
 
-async function registerCommands(developer: boolean): Promise<void> {
+async function registerCommands(): Promise<void> {
+	const options = program.opts();
+	if (!options.global && !options.dev) return void logger.info(program.helpInformation());
+
 	const guildId = process.env.DISCORD_GUILD_ID as string;
-	if (!guildId && developer) {
+	if (!guildId && options.dev) {
 		throw new Error('The DISCORD_GUILD_ID environment variable is required.');
 	}
 
-	const commands = await loadCommands(developer);
 	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {
 		logger.debug('Started refreshing application (/) commands.');
 
-		switch (developer) {
-			case true:
-				await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: commands });
-				break;
-			case false:
-				await rest.put(Routes.applicationCommands(applicationId), { body: commands });
-				break;
+		if (options.global) {
+			const commands = await loadCommands(false);
+			await rest.put(Routes.applicationCommands(applicationId), { body: commands });
+		}
+
+		if (options.dev) {
+			const commands = await loadCommands(true);
+			await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: commands });
 		}
 
 		logger.debug('Successfully reloaded application (/) commands.');
@@ -72,7 +75,4 @@ async function registerCommands(developer: boolean): Promise<void> {
 	}
 }
 
-const options = program.opts();
-if (!options.global && !options.dev) console.log(program.helpInformation());
-if (options.global) await registerCommands(false);
-if (options.dev) await registerCommands(true);
+void registerCommands();
