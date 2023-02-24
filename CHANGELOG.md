@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+# [5.2.0](https://github.com/Rygent/ElviaBot/compare/v5.1.0...v5.2.0) - (2023-02-24)
+
+## Bug Fixes
+
+- **register:** Sending multiple logs message ([6322c3e](https://github.com/Rygent/ElviaBot/commit/6322c3eb781ba10d372ad0435e82e40e23b8a1dd))
+- **Emojis:** Correct description ([f8f9374](https://github.com/Rygent/ElviaBot/commit/f8f9374e951cf562e339b3cea34124935ac84faf))
+
+## Features
+
+- Change `ephemeral` option to `visible` ([1b1611f](https://github.com/Rygent/ElviaBot/commit/1b1611fb14cbe98ae4377158db977d864977b0ce))
+- **Timeout:** Check member timeout and invalid duration ([23a1c25](https://github.com/Rygent/ElviaBot/commit/23a1c254abbf9903d73c7fd7d4226681fbd519bc))
+- **ready:** Use `upsert()` instead manual checking ([51bf7c9](https://github.com/Rygent/ElviaBot/commit/51bf7c91511fffcd560b05b4bdefc284b50903bb))
+- Single instance of prisma client ([7eb8954](https://github.com/Rygent/ElviaBot/commit/7eb89543974e4c729d3502983268f43e1a74ce43))
+- **autocompleteCreate:** Ignore error code `10062` ([c84102b](https://github.com/Rygent/ElviaBot/commit/c84102b5064f33665531a6cd36ee635da4ffcf22))
+- Wait database connected before login ([226e635](https://github.com/Rygent/ElviaBot/commit/226e6350f13505cd21803cedaaf0d1bc96ecb328))
+
+## Refactor
+
+- **rateLimited:** Change warn message ([bb770fe](https://github.com/Rygent/ElviaBot/commit/bb770fe65c43853f4d0127518b6b6910baa7c101))
+- Remove lyrics command ([722dc4d](https://github.com/Rygent/ElviaBot/commit/722dc4de53bd67589233af91c55de16fa9b907e6))
+- ***:** Typescript rewrite (#290) ([1e408d4](https://github.com/Rygent/ElviaBot/commit/1e408d433ed2ac4e6fc7d0cc10f0fd58b6281d25))
+
+## Typings
+
+- Separate interface from main file ([04042ad](https://github.com/Rygent/ElviaBot/commit/04042ad66020e227050903223b9f5df2707c0d55))
+- **Help:** Missing generic types ([7f31596](https://github.com/Rygent/ElviaBot/commit/7f31596bfc298e155bfd1ade06b496623af36fe3))
+
 # [5.1.0](https://github.com/Rygent/ElviaBot/compare/v5.0.0...v5.1.0) - (2022-12-17)
 
 ## Bug Fixes
