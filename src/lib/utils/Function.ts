@@ -65,6 +65,25 @@ export function sentenceCase(input: string): string {
 	return input.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, txt => txt.toUpperCase());
 }
 
+export function shuffleArray(input: any[]): any[] {
+	for (let i = input.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[input[i], input[j]] = [input[j], input[i]];
+	}
+	return input;
+}
+
+export function slugify(input: string): string {
+	return input.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.replace(/\s+/g, '-')
+		.replace(/&/g, '-and-')
+		.replace(/[^\w\\-]+/g, '')
+		.replace(/\\-\\-+/g, '-')
+		.replace(/^-+/, '')
+		.replace(/-+$/, '');
+}
+
 export function titleCase(input: string): string {
 	return input.replace(/([^\W_]+[^\s-]*) */g, txt => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
 }
