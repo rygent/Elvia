@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
     "eslint": "^8.35.0",
-    "prisma": "^4.10.1",
+    "prisma": "^4.11.0",
     "rimraf": "^4.1.2",
     "typescript": "^4.9.5"
   },
@@ -32,7 +32,7 @@
     "@anishshobith/deeptype": "^1.1.0",
     "@discordjs/formatters": "^0.1.0",
     "@iamtraction/google-translate": "^2.0.1",
-    "@prisma/client": "^4.10.1",
+    "@prisma/client": "^4.11.0",
     "@rygent/anilist": "^1.3.0",
     "@rygent/spotify": "^1.1.0",
     "@sapphire/discord-utilities": "^3.0.0",
