@@ -78,12 +78,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/formatters@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@discordjs/formatters@npm:0.1.0"
+"@discordjs/formatters@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@discordjs/formatters@npm:0.2.0"
   dependencies:
-    discord-api-types: ^0.37.20
-  checksum: 1a6a59ba44c1b3e2a9263f46c38909e9ded931f3a3550fef4c2b3a6a714ea4a63fcf3b6fffd69085574a45667ad333b6c87c097cf6e3e2d577d01e6221e7d89d
+    discord-api-types: ^0.37.35
+  checksum: cc721d1904501910288b48ae4c20df5fb1beff78f2463f780463f7fa7efe661bb739e324fb9e8b2c09aded3ce7cfcc2f58cd3793c0d61da96f87c50f666bf998
   languageName: node
   linkType: hard
 
@@ -1482,6 +1482,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord-api-types@npm:^0.37.35":
+  version: 0.37.35
+  resolution: "discord-api-types@npm:0.37.35"
+  checksum: 0a65234eefb9675c6faf82f42be6b0a4ee75bf8b2c901eecefea6ca539cd4e2a501b7fc195415884912fdb5040c98727dbd0c5a1f6bc15951948be37d1be162b
+  languageName: node
+  linkType: hard
+
 "discord.js@npm:^14.7.1":
   version: 14.7.1
   resolution: "discord.js@npm:14.7.1"
@@ -1532,7 +1539,7 @@ __metadata:
   resolution: "elvia@workspace:."
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
-    "@discordjs/formatters": ^0.1.0
+    "@discordjs/formatters": ^0.2.0
     "@favware/cliff-jumper": ^2.0.0
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.11.0
