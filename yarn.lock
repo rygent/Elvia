@@ -326,12 +326,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rygent/spotify@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@rygent/spotify@npm:1.1.0"
+"@rygent/spotify@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@rygent/spotify@npm:1.1.1"
   dependencies:
-    undici: ^5.14.0
-  checksum: 9182784b48334e5816bfc9c1cf96cc71dea7876ae557c9687c7ff248c85e59ee20bc7c6dbb27a16c601739516b2c3e2c5c30674c85a5b264877decbcac308f5a
+    undici: ^5.21.0
+  checksum: de3d0fe018e259d2ff4b33615ca7e8098a1da046426431b3587b94e1780c64f58ad7371459876ae0a38c43a47e3d579d7f34930b4116871b7c0ae87a7d9b4002
   languageName: node
   linkType: hard
 
@@ -1531,7 +1531,7 @@ __metadata:
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.11.0
     "@rygent/anilist": ^1.3.1
-    "@rygent/spotify": ^1.1.0
+    "@rygent/spotify": ^1.1.1
     "@sapphire/discord-utilities": ^3.0.0
     "@sapphire/time-utilities": ^1.7.8
     "@sapphire/utilities": ^3.11.0
@@ -4224,7 +4224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.12.0, undici@npm:^5.14.0, undici@npm:^5.20.0, undici@npm:^5.21.0":
+"undici@npm:^5.12.0, undici@npm:^5.20.0, undici@npm:^5.21.0":
   version: 5.21.0
   resolution: "undici@npm:5.21.0"
   dependencies:
