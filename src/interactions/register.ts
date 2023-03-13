@@ -15,6 +15,7 @@ moment.tz.setDefault(process.env.TIMEZONE);
 
 program.option('-g, --global', 'register global commands');
 program.option('-d, --dev', 'register developer commands');
+program.option('-r, --reset', 'reset registered commands');
 
 program.parse(process.argv);
 
@@ -47,7 +48,7 @@ async function loadCommands(developer: boolean): Promise<object[]> {
 
 async function registerCommands(): Promise<void> {
 	const options = program.opts();
-	if (!options.global && !options.dev) return void logger.info(program.helpInformation());
+	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
 
 	const guildId = process.env.DISCORD_GUILD_ID as string;
 	if (!guildId && options.dev) {
@@ -58,6 +59,13 @@ async function registerCommands(): Promise<void> {
 
 	try {
 		logger.debug('Started refreshing application (/) commands.');
+
+		if (options.reset) {
+			await rest.put(Routes.applicationCommands(applicationId), { body: [] });
+			if (guildId) {
+				await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: [] });
+			}
+		}
 
 		if (options.global) {
 			const commands = await loadCommands(false);
