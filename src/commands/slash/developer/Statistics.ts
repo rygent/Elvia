@@ -12,9 +12,10 @@ import typescript from 'typescript';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'about',
-			description: 'Get information of the bot.',
-			category: 'General'
+			name: 'statistics',
+			description: 'Get statistics of the bot.',
+			category: 'Developer',
+			ownerOnly: true
 		});
 	}
 

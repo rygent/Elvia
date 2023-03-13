@@ -1,8 +1,9 @@
 import { APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
 
 export default {
-	name: 'about',
-	description: 'Get information of the bot.',
+	name: 'statistics',
+	description: 'Get statistics of the bot.',
 	type: ApplicationCommandType.ChatInput,
-	dm_permission: true
+	default_member_permissions: '0',
+	dm_permission: false
 } as APIApplicationCommand;
