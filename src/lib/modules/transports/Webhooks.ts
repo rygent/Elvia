@@ -2,7 +2,7 @@ import type BaseClient from '../../BaseClient.js';
 import TransportStream from 'winston-transport';
 import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
-import { WebhookClient, WebhookCreateMessageOptions } from 'discord.js';
+import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors, Links } from '../../utils/Constants.js';
 import { isColorSupported } from 'colorette';
@@ -36,7 +36,7 @@ export class Webhook extends TransportStream {
 		const profile = {
 			avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),
 			username: this.client.user?.username
-		} as WebhookCreateMessageOptions;
+		} as WebhookMessageCreateOptions;
 
 		await webhook.send({ embeds: [embed], threadId, ...profile });
 

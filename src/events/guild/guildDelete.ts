@@ -1,7 +1,7 @@
 import type BaseClient from '../../lib/BaseClient.js';
 import Event from '../../lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
-import { Guild, WebhookClient, WebhookCreateMessageOptions } from 'discord.js';
+import { Guild, WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors, Links } from '../../lib/utils/Constants.js';
 import { formatNumber } from '../../lib/utils/Function.js';
@@ -40,7 +40,7 @@ export default class extends Event {
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),
 				username: this.client.user?.username
-			} as WebhookCreateMessageOptions;
+			} as WebhookMessageCreateOptions;
 
 			return webhook.send({ embeds: [embed], threadId, ...profile });
 		}
