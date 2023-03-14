@@ -5,6 +5,7 @@ import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import { AutocompleteInteraction, ChatInputCommandInteraction, InteractionCollector, ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { shuffleArray } from '../../../lib/utils/Function.js';
+import { prisma } from '../../../lib/utils/Prisma.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {
@@ -21,12 +22,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const name = interaction.options.getString('name', true);
 
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		const tag = database?.tags.find(({ slug }) => slug === name);
 		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		const modalId = nanoid();
@@ -51,7 +52,7 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			const content = i.fields.getTextInputValue('content');
 
-			await this.client.prisma.tag.update({
+			await prisma.tag.update({
 				where: { id: tag.id },
 				data: { content }
 			});
@@ -63,12 +64,12 @@ export default class extends Command {
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
 		const focused = interaction.options.getFocused();
 
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		const choices = prisma?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));

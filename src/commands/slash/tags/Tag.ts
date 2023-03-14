@@ -2,6 +2,7 @@ import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
+import { prisma } from '../../../lib/utils/Prisma.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
@@ -16,12 +17,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const name = interaction.options.getString('name', true);
 
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		const tag = prisma?.tags.find(({ slug }) => slug === name);
+		const tag = database?.tags.find(({ slug }) => slug === name);
 		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
 		return interaction.reply({ content: tag.content });
@@ -30,12 +31,12 @@ export default class extends Command {
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
 		const focused = interaction.options.getFocused();
 
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		const choices = prisma?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name, slug }) => ({ name, value: slug }));

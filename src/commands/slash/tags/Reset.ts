@@ -3,6 +3,7 @@ import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
+import { prisma } from '../../../lib/utils/Prisma.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {
@@ -17,12 +18,12 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		if (!prisma?.tags.length) return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
+		if (!database?.tags.length) return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
 
 		const cancelId = nanoid();
 		const resetId = nanoid();
@@ -48,7 +49,7 @@ export default class extends Command {
 					collector.stop();
 					return void i.update({ content: 'Cancelation of the resetting.', components: [] });
 				case resetId:
-					await this.client.prisma.tag.deleteMany({ where: { guildId: interaction.guildId } });
+					await prisma.tag.deleteMany({ where: { guildId: interaction.guildId } });
 
 					return void i.update({ content: 'All tags have been successfully removed from this server.', components: [] });
 			}

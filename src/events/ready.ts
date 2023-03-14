@@ -2,6 +2,7 @@ import type BaseClient from '../lib/BaseClient.js';
 import Event from '../lib/structures/Event.js';
 import { ActivityType } from 'discord-api-types/v10';
 import { formatNumber } from '../lib/utils/Function.js';
+import { prisma } from '../lib/utils/Prisma.js';
 import { redBright, underline } from 'colorette';
 
 export default class extends Event {
@@ -18,7 +19,7 @@ export default class extends Event {
 
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {
-			await this.client.prisma.guild.upsert({
+			await prisma.guild.upsert({
 				where: { id: guild.id },
 				create: { id: guild.id },
 				update: {}

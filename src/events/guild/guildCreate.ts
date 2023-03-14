@@ -5,6 +5,7 @@ import { Guild, WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors, Links } from '../../lib/utils/Constants.js';
 import { formatNumber } from '../../lib/utils/Function.js';
+import { prisma } from '../../lib/utils/Prisma.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {
@@ -16,7 +17,7 @@ export default class extends Event {
 
 	public async run(guild: Guild) {
 		if (!guild.available) return;
-		await this.client.prisma.guild.create({ data: { id: guild.id } });
+		await prisma.guild.create({ data: { id: guild.id } });
 
 		if (Links.GuildWebhook) {
 			const webhook = new WebhookClient({ url: Links.GuildWebhook });

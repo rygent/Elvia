@@ -5,6 +5,7 @@ import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, InteractionCollector, ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { slugify } from '../../../lib/utils/Function.js';
+import { prisma } from '../../../lib/utils/Prisma.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {
@@ -19,7 +20,7 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		const prisma = await this.client.prisma.guild.findFirst({
+		const database = await prisma.guild.findFirst({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
@@ -53,10 +54,10 @@ export default class extends Command {
 			const names = i.fields.getTextInputValue('name');
 			const content = i.fields.getTextInputValue('content');
 
-			const tags = prisma?.tags.some(({ slug }) => slug === slugify(names));
+			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
 			if (tags) return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
 
-			await this.client.prisma.tag.create({
+			await prisma.tag.create({
 				data: {
 					guildId: interaction.guildId,
 					slug: slugify(names),
