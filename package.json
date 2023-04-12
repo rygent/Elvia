@@ -36,7 +36,7 @@
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.0.1",
     "@sapphire/time-utilities": "^1.7.9",
-    "@sapphire/utilities": "^3.11.0",
+    "@sapphire/utilities": "^3.11.1",
     "colorette": "^2.0.19",
     "commander": "^10.0.0",
     "discord.js": "^14.9.0",
