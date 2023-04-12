@@ -1,4 +1,4 @@
-import { APIApplicationCommand, APIApplicationCommandOption, ApplicationCommandOptionType, ApplicationCommandType, ChannelType } from 'discord-api-types/v10';
+import { type APIApplicationCommand, type APIApplicationCommandOption, ApplicationCommandOptionType, ApplicationCommandType, ChannelType } from 'discord-api-types/v10';
 import { PermissionsBitField } from 'discord.js';
 
 export default {

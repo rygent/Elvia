@@ -1,6 +1,6 @@
 import { ChannelType } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, Channel, CommandInteraction, ThreadChannel } from 'discord.js';
-import { isNullish, Nullish } from '@sapphire/utilities';
+import { isNullish, type Nullish } from '@sapphire/utilities';
 
 export function formatArray(input: string[], options: { style?: Intl.ListFormatStyle; type?: Intl.ListFormatType } = {}): string {
 	const { style = 'short', type = 'conjunction' } = options;

@@ -1,5 +1,5 @@
 import type BaseClient from '../BaseClient.js';
-import { BitField, Message, PermissionsBitField, PermissionsString } from 'discord.js';
+import { BitField, Message, PermissionsBitField, type PermissionsString } from 'discord.js';
 import type { MessageCommandOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 

@@ -2,7 +2,7 @@ import type BaseClient from '../../BaseClient.js';
 import TransportStream from 'winston-transport';
 import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
-import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
+import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors, Links } from '../../utils/Constants.js';
 import { isColorSupported } from 'colorette';

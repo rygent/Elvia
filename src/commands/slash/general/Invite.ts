@@ -1,7 +1,7 @@
 import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
-import { APIMessageComponentEmoji, ButtonStyle, OAuth2Scopes, PermissionFlagsBits } from 'discord-api-types/v10';
+import { type APIMessageComponentEmoji, ButtonStyle, OAuth2Scopes, PermissionFlagsBits } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { Emojis } from '../../../lib/utils/Constants.js';
 

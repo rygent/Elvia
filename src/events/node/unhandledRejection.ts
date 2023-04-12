@@ -2,7 +2,7 @@ import type BaseClient from '../../lib/BaseClient.js';
 import Event from '../../lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { DiscordAPIError } from '@discordjs/rest';
-import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
+import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors, Links } from '../../lib/utils/Constants.js';
 

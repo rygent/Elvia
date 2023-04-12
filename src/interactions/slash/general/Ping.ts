@@ -1,4 +1,4 @@
-import { APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
+import { type APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
 
 export default {
 	name: 'ping',

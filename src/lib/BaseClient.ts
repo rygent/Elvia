@@ -1,4 +1,4 @@
-import { BitField, Client, Options, Partials, PermissionsBitField, PermissionsString } from 'discord.js';
+import { BitField, Client, Options, Partials, PermissionsBitField, type PermissionsString } from 'discord.js';
 import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
 import type { ClientOptions } from './types/Global.js';
