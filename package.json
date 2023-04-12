@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint . --ext mjs,js,ts --fix",
-    "build": "rimraf ./dist && swc ./src --out-dir ./dist --copy-files",
+    "build": "rimraf ./dist && tsc --noEmit && swc ./src --out-dir ./dist --copy-files",
     "start": "node --no-warnings ./dist/index.js",
     "register": "node ./dist/interactions/register.js",
     "bump": "cliff-jumper -n \"elvia\" -p \".\"",
