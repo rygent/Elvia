@@ -37,7 +37,7 @@
     "@sapphire/discord-utilities": "^3.0.2",
     "@sapphire/time-utilities": "^1.7.9",
     "@sapphire/utilities": "^3.11.1",
-    "colorette": "^2.0.19",
+    "colorette": "^2.0.20",
     "commander": "^10.0.1",
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
