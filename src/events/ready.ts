@@ -1,6 +1,5 @@
 import type BaseClient from '../lib/BaseClient.js';
 import Event from '../lib/structures/Event.js';
-import { ActivityType } from 'discord-api-types/v10';
 import { formatNumber } from '../lib/utils/Function.js';
 import { prisma } from '../lib/utils/Prisma.js';
 import { redBright, underline } from 'colorette';
@@ -25,18 +24,5 @@ export default class extends Event {
 				update: {}
 			});
 		}
-
-		const activities = [
-			{ name: `v${this.client.version}`, type: ActivityType.Playing },
-			{ name: '/help', type: ActivityType.Listening }
-		];
-
-		let i = 0;
-		setInterval(() => {
-			activities.splice(2, 1, { name: `${formatNumber(this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0))} users`, type: ActivityType.Watching });
-			activities.splice(3, 1, { name: `${formatNumber(this.client.guilds.cache.size)} servers`, type: ActivityType.Competing });
-
-			this.client.user.setActivity((activities as any)[i++ % activities.length]);
-		}, 6e4);
 	}
 }
