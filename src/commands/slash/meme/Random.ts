@@ -3,7 +3,7 @@ import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '../../../lib/utils/Constants.js';
+import { Advances, Colors } from '../../../lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -29,7 +29,12 @@ export default class extends Command {
 
 		const random_subreddit = Math.floor(Math.random() * subreddit.length);
 
-		const raw = await request(`https://www.reddit.com/r/${subreddit[random_subreddit]}/random/.json`, { method: 'GET', maxRedirections: 1 });
+		const raw = await request(`https://www.reddit.com/r/${subreddit[random_subreddit]}/random/.json`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		const response = await raw.body.json();
 
 		const post = response[0].data.children

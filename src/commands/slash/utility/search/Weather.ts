@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors, Credentials } from '../../../../lib/utils/Constants.js';
+import { Advances, Colors, Credentials } from '../../../../lib/utils/Constants.js';
 import { sentenceCase } from '../../../../lib/utils/Function.js';
 import { request } from 'undici';
 
@@ -20,8 +20,13 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const API = 'https://api.openweathermap.org/data/2.5/weather';
-		const raw = await request(`${API}?q=${encodeURIComponent(search)}&appid=${Credentials.OpenWeatherApiKey}&units=metric`, { method: 'GET' });
+		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
+		const raw = await request(`${endpoint}?q=${encodeURIComponent(search)}&appid=${Credentials.OpenWeatherApiKey}&units=metric`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		if (raw.statusCode === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
 		if (raw.statusCode === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 		const response = await raw.body.json();

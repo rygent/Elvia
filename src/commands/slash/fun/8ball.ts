@@ -2,6 +2,7 @@ import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, quote } from '@discordjs/formatters';
+import { Advances } from '../../../lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -16,7 +17,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const question = interaction.options.getString('question', true);
 
-		const raw = await request(`https://eightballapi.com/api?question=${encodeURIComponent(question)}`, { method: 'GET', maxRedirections: 1 });
+		const raw = await request(`https://eightballapi.com/api?question=${encodeURIComponent(question)}`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		const response = await raw.body.json();
 
 		const replies = [

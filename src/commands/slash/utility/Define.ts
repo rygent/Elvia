@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { italic, underscore } from '@discordjs/formatters';
-import { Colors } from '../../../lib/utils/Constants.js';
+import { Advances, Colors } from '../../../lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -19,7 +19,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const word = interaction.options.getString('word', true);
 
-		const raw = await request(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, { method: 'GET' });
+		const raw = await request(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		const response = await raw.body.json().then(({ list }) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
 
 		const button = new ActionRowBuilder<ButtonBuilder>()

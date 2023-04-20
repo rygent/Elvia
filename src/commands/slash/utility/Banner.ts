@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '../../../lib/utils/Constants.js';
+import { Advances, Colors } from '../../../lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -27,7 +27,12 @@ export default class extends Command {
 		if (color) {
 			if (!user.hexAccentColor) return interaction.reply({ content: `${bold(user.tag)}'s has no banner color!`, ephemeral: true });
 
-			const raw = await request(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, { method: 'GET' });
+			const raw = await request(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, {
+				method: 'GET',
+				headers: { 'User-Agent': Advances.UserAgent },
+				maxRedirections: 20
+			});
+
 			const response = await raw.body.json();
 
 			embed.setColor(resolveColor(response.hex.clean));

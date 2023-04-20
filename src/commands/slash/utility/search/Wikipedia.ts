@@ -3,7 +3,7 @@ import Command from '../../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '../../../../lib/utils/Constants.js';
+import { Advances, Colors } from '../../../../lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -18,7 +18,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const raw = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, { method: 'GET', maxRedirections: 1 });
+		const raw = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		if (raw.statusCode === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const response = await raw.body.json();

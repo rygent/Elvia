@@ -1,3 +1,7 @@
+export const Advances = {
+	UserAgent: process.env.USER_AGENT as string
+} as const;
+
 export const enum Colors {
 	Default = 0x2f3136,
 	Green = 0x77dd77,

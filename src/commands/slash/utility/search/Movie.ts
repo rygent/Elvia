@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder 
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, italic, underscore } from '@discordjs/formatters';
-import { Colors, Credentials } from '../../../../lib/utils/Constants.js';
+import { Advances, Colors, Credentials } from '../../../../lib/utils/Constants.js';
 import { formatArray, formatNumber } from '../../../../lib/utils/Function.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
@@ -24,7 +24,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const raw = await request(`https://api.themoviedb.org/3/search/movie?api_key=${Credentials.TmdbApiKey}&query=${search}`, { method: 'GET' });
+		const raw = await request(`https://api.themoviedb.org/3/search/movie?api_key=${Credentials.TmdbApiKey}&query=${search}`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		const response = await raw.body.json().then(({ results }) => results.slice(0, 10));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
@@ -47,8 +52,11 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
-			const data = await request(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Credentials.TmdbApiKey}`, { method: 'GET' })
-				.then(({ body }) => body.json());
+			const data = await request(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Credentials.TmdbApiKey}`, {
+				method: 'GET',
+				headers: { 'User-Agent': Advances.UserAgent },
+				maxRedirections: 20
+			}).then(({ body }) => body.json());
 
 			const button = new ActionRowBuilder<ButtonBuilder>()
 				.setComponents(new ButtonBuilder()

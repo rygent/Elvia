@@ -3,7 +3,7 @@ import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '../../../lib/utils/Constants.js';
+import { Advances, Colors } from '../../../lib/utils/Constants.js';
 import { isNsfwChannel } from '../../../lib/utils/Function.js';
 import { request } from 'undici';
 import nsfw from '../../../assets/json/nsfw.json' assert { type: 'json' };
@@ -24,7 +24,12 @@ export default class extends Command {
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		try {
-			const raw = await request(`https://nekobot.xyz/api/image?type=${category}`, { method: 'GET' });
+			const raw = await request(`https://nekobot.xyz/api/image?type=${category}`, {
+				method: 'GET',
+				headers: { 'User-Agent': Advances.UserAgent },
+				maxRedirections: 20
+			});
+
 			const response = await raw.body.json();
 
 			const button = new ActionRowBuilder<ButtonBuilder>()

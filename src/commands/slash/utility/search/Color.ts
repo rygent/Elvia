@@ -5,6 +5,7 @@ import { ButtonStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { request } from 'undici';
+import { Advances } from '../../../../lib/utils/Constants.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
@@ -28,7 +29,12 @@ export default class extends Command {
 			return interaction.reply({ content: `Please provide a valid ${bold('hexadecimal')}/${bold('rgb')} color code. Example: ${bold('#77dd77')}/${bold('(253, 253, 150)')} or ${bold('random')} to get a random color.`, ephemeral: true });
 		}
 
-		const raw = await request(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, { method: 'GET' });
+		const raw = await request(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, {
+			method: 'GET',
+			headers: { 'User-Agent': Advances.UserAgent },
+			maxRedirections: 20
+		});
+
 		const response = await raw.body.json();
 
 		const button = new ActionRowBuilder<ButtonBuilder>()
