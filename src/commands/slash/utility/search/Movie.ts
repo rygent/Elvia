@@ -35,7 +35,7 @@ export default class extends Command {
 				.setPlaceholder('Select a movies')
 				.setOptions(...response.map((data: any) => ({
 					value: data.id.toString(),
-					label: `${data.title} ${data.release_date ? `(${new Date(data.release_date).getFullYear()})` : ''}`,
+					label: `${cutText(data.title, 97)} ${data.release_date ? `(${new Date(data.release_date).getFullYear()})` : ''}`,
 					...data.overview && { description: cutText(data.overview, 1e2) }
 				}))));
 

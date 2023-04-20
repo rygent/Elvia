@@ -35,7 +35,7 @@ export default class extends Command {
 				.setPlaceholder('Select a shows')
 				.setOptions(...response.map((data: any) => ({
 					value: data.id.toString(),
-					label: `${data.name} ${data.first_air_date ? `(${new Date(data.first_air_date).getFullYear()})` : ''}`,
+					label: `${cutText(data.name, 97)} ${data.first_air_date ? `(${new Date(data.first_air_date).getFullYear()})` : ''}`,
 					...data.overview && { description: cutText(data.overview, 1e2) }
 				}))));
 
