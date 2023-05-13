@@ -1,2 +1,4 @@
-node_modules/
+.vscode/
+.yarn/
 dist/
+node_modules/
