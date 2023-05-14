@@ -7,7 +7,7 @@ export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'softban',
-			description: 'Softban a user. (Bans and unbans to clear up the user\'s messages.)',
+			description: "Softban a user. (Bans and unbans to clear up the user's messages.)",
 			category: 'Moderation',
 			memberPermissions: ['BanMembers'],
 			clientPermissions: ['BanMembers'],
@@ -22,15 +22,25 @@ export default class extends Command {
 		const notify = interaction.options.getString('notify');
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		if (user.id === interaction.user.id) return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
+		if (user.id === interaction.user.id) {
+			return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
+		}
 		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
 		if (member && member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
-			return interaction.reply({ content: 'You cannot ban a member who has a higher or equal role than yours.', ephemeral: true });
+			return interaction.reply({
+				content: 'You cannot ban a member who has a higher or equal role than yours.',
+				ephemeral: true
+			});
 		}
-		if (member && !member.bannable) return interaction.reply({ content: `I cannot ban a member who has a higher or equal role than mine.`, ephemeral: true });
+		if (member && !member.bannable) {
+			return interaction.reply({
+				content: `I cannot ban a member who has a higher or equal role than mine.`,
+				ephemeral: true
+			});
+		}
 
 		await interaction.deferReply({ ephemeral: !visible });
 		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
@@ -39,9 +49,7 @@ export default class extends Command {
 		if (notify) {
 			if (notify !== 'dont-notify') {
 				if (!user.bot) {
-					const replies = [
-						`You've been banned from ${bold(interaction.guild?.name)}`
-					];
+					const replies = [`You've been banned from ${bold(interaction.guild?.name)}`];
 
 					if (reason && notify === 'notify-with-reason') {
 						replies.splice(1, 0, `${bold(italic('Reason:'))} ${reason}`);
@@ -54,7 +62,7 @@ export default class extends Command {
 
 		const replies = [
 			`${bold(user.tag)} was softbanned!`,
-			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : []
+			...(reason ? [`${bold(italic('Reason:'))} ${reason}`] : [])
 		].join('\n');
 
 		return interaction.editReply({ content: replies });

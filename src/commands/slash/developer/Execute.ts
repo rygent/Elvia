@@ -25,10 +25,12 @@ export default class extends Command {
 			if (replies.length <= 2e3) {
 				return interaction.editReply({ content: replies });
 			}
-			const attachment = new AttachmentBuilder(Buffer.from((stdout ?? error).toString()))
-				.setName('output.txt');
+			const attachment = new AttachmentBuilder(Buffer.from((stdout ?? error).toString())).setName('output.txt');
 
-			return interaction.editReply({ content: 'Output was too long! The result has been sent as a file.', files: [attachment] });
+			return interaction.editReply({
+				content: 'Output was too long! The result has been sent as a file.',
+				files: [attachment]
+			});
 		});
 	}
 }

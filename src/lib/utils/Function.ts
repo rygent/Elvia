@@ -2,7 +2,10 @@ import { ChannelType } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, Channel, CommandInteraction, ThreadChannel } from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
 
-export function formatArray(input: string[], options: { style?: Intl.ListFormatStyle; type?: Intl.ListFormatType } = {}): string {
+export function formatArray(
+	input: string[],
+	options: { style?: Intl.ListFormatStyle; type?: Intl.ListFormatType } = {}
+): string {
 	const { style = 'short', type = 'conjunction' } = options;
 	return new Intl.ListFormat('en-US', { style, type }).format(input);
 }
@@ -21,7 +24,7 @@ export function formatNumber(input: number): string {
 export function formatPermissions(input: string): string {
 	return input
 		.replace(/(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])/g, ' $1')
-		.replace(/To|And|In\b/g, txt => txt.toLowerCase())
+		.replace(/To|And|In\b/g, (txt) => txt.toLowerCase())
 		.replace(/ Instant| Embedded/g, '')
 		.replace(/Guild/g, 'Server')
 		.replace(/Moderate/g, 'Timeout')
@@ -45,7 +48,9 @@ export function isNsfwChannel(channel: Channel | Nullish): boolean {
 	}
 }
 
-export function resolveCommandName(interaction: CommandInteraction<'cached' | 'raw'> | AutocompleteInteraction<'cached' | 'raw'>): string {
+export function resolveCommandName(
+	interaction: CommandInteraction<'cached' | 'raw'> | AutocompleteInteraction<'cached' | 'raw'>
+): string {
 	if (!interaction.isChatInputCommand() && !interaction.isAutocomplete()) return interaction.commandName;
 
 	const topLevelCommand = interaction.commandName;
@@ -62,7 +67,7 @@ export function resolveCommandName(interaction: CommandInteraction<'cached' | 'r
 }
 
 export function sentenceCase(input: string): string {
-	return input.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, txt => txt.toUpperCase());
+	return input.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (txt) => txt.toUpperCase());
 }
 
 export function shuffleArray(input: any[]): any[] {
@@ -74,7 +79,10 @@ export function shuffleArray(input: any[]): any[] {
 }
 
 export function slugify(input: string): string {
-	return input.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+	return input
+		.toString()
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
 		.toLowerCase()
 		.replace(/\s+/g, '-')
 		.replace(/&/g, '-and-')
@@ -85,7 +93,7 @@ export function slugify(input: string): string {
 }
 
 export function titleCase(input: string): string {
-	return input.replace(/([^\W_]+[^\s-]*) */g, txt => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
+	return input.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
 }
 
 export function trimArray(input: any[], options: { length?: number } = {}): any[] {

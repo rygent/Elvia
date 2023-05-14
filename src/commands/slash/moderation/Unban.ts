@@ -23,7 +23,9 @@ export default class extends Command {
 
 		const banned = await interaction.guild?.bans.fetch();
 
-		const target = banned?.find(member => member.user.id.includes(user.id) || member.user.tag.includes(user.tag))?.user;
+		const target = banned?.find(
+			(member) => member.user.id.includes(user.id) || member.user.tag.includes(user.tag)
+		)?.user;
 		if (!target) return interaction.reply({ content: 'This user is not banned on this server.', ephemeral: true });
 
 		await interaction.deferReply({ ephemeral: !visible });
@@ -32,9 +34,7 @@ export default class extends Command {
 		if (notify) {
 			if (notify !== 'dont-notify') {
 				if (!user.bot) {
-					const replies = [
-						`You've been unbanned from ${bold(interaction.guild?.name)}`
-					];
+					const replies = [`You've been unbanned from ${bold(interaction.guild?.name)}`];
 
 					if (reason && notify === 'notify-with-reason') {
 						replies.splice(1, 0, `${bold(italic('Reason:'))} ${reason}`);
@@ -47,7 +47,7 @@ export default class extends Command {
 
 		const replies = [
 			`${bold(user.tag)} was unbanned!`,
-			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : []
+			...(reason ? [`${bold(italic('Reason:'))} ${reason}`] : [])
 		].join('\n');
 
 		return interaction.editReply({ content: replies });

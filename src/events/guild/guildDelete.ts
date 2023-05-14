@@ -32,11 +32,16 @@ export default class extends Event {
 				.setColor(Colors.Red)
 				.setTitle(`${this.client.user.username} left a Server!`)
 				.setThumbnail(guild.iconURL({ size: 512 }))
-				.setDescription([
-					`${bold(italic('Server:'))} ${guild.name} (${inlineCode(guild.id)})`,
-					`${bold(italic('Owner:'))} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`
-				].join('\n'))
-				.setFooter({ text: `${guildCount} guilds | ${userCount} users`, iconURL: this.client.user.avatarURL() as string });
+				.setDescription(
+					[
+						`${bold(italic('Server:'))} ${guild.name} (${inlineCode(guild.id)})`,
+						`${bold(italic('Owner:'))} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`
+					].join('\n')
+				)
+				.setFooter({
+					text: `${guildCount} guilds | ${userCount} users`,
+					iconURL: this.client.user.avatarURL() as string
+				});
 
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),

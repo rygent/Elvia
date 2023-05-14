@@ -25,25 +25,29 @@ export default class extends Command {
 			const results = kDice20RegExp.exec(dice)!;
 
 			const amount = typeof results[1] === 'undefined' ? 1 : Number(results[1]);
-			if (amount < 1 || amount > 1024) return interaction.reply({ content: 'Amount of rolls must be a number between 1 and 1024.', ephemeral: true });
+			if (amount < 1 || amount > 1024) {
+				return interaction.reply({ content: 'Amount of rolls must be a number between 1 and 1024.', ephemeral: true });
+			}
 
 			const dices = Number(results[2]);
-			if (dices < 3 || dices > 1024) return interaction.reply({ content: 'Amount of sides must be a number between 3 and 1024.', ephemeral: true });
+			if (dices < 3 || dices > 1024) {
+				return interaction.reply({ content: 'Amount of sides must be a number between 3 and 1024.', ephemeral: true });
+			}
 
 			let result = generateNumber(amount, amount * dices);
-			if ((results[3]!).length > 0) result = processModifiers(result, (results[3]!));
+			if (results[3]!.length > 0) result = processModifiers(result, results[3]!);
 
 			return interaction.reply({ content: `🎲 ${bold(dice)}\n${bold(italic('Result:'))} ${result}` });
 		}
 
-		const result = generateNumber(minValue ??= 1, maxValue ??= minValue < 60 ? 100 : minValue + 100);
+		const result = generateNumber((minValue ??= 1), (maxValue ??= minValue < 60 ? 100 : minValue + 100));
 
 		return interaction.reply({ content: `You rolled ${bold(formatNumber(result))}!` });
 	}
 }
 
 function generateNumber(minimum: number, maximum: number) {
-	return Math.floor((Math.random() * (maximum - minimum + 1)) + minimum);
+	return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
 }
 
 function processModifiers(output: number, modifiers: string) {

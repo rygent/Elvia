@@ -23,24 +23,29 @@ export default class extends Command {
 			select: { tags: true }
 		});
 
-		if (!database?.tags.length) return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
+		if (!database?.tags.length) {
+			return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
+		}
 
 		const cancelId = nanoid();
 		const resetId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder()
-				.setCustomId(cancelId)
-				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel'))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(resetId)
-				.setStyle(ButtonStyle.Danger)
-				.setLabel('Reset'));
+			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
+			.addComponents(new ButtonBuilder().setCustomId(resetId).setStyle(ButtonStyle.Danger).setLabel('Reset'));
 
-		const reply = await interaction.reply({ content: `Are you sure that you want to reset all server tags?`, components: [button], ephemeral: true });
+		const reply = await interaction.reply({
+			content: `Are you sure that you want to reset all server tags?`,
+			components: [button],
+			ephemeral: true
+		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 6e4, max: 1 });
+		const collector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.Button,
+			time: 6e4,
+			max: 1
+		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
@@ -51,7 +56,10 @@ export default class extends Command {
 				case resetId:
 					await prisma.tag.deleteMany({ where: { guildId: interaction.guildId } });
 
-					return void i.update({ content: 'All tags have been successfully removed from this server.', components: [] });
+					return void i.update({
+						content: 'All tags have been successfully removed from this server.',
+						components: []
+					});
 			}
 		});
 

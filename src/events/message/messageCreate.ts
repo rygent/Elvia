@@ -26,7 +26,9 @@ export default class extends Event {
 
 		const [cmd, ...args] = message.content.slice(prefix?.length).trim().split(/ +/g);
 
-		const command = this.client.commands.get(cmd!.toLowerCase()) ?? this.client.commands.get(this.client.aliases.get(cmd!.toLowerCase()) as string);
+		const command =
+			this.client.commands.get(cmd!.toLowerCase()) ??
+			this.client.commands.get(this.client.aliases.get(cmd!.toLowerCase()) as string);
 
 		if (command) {
 			if (command.disabled && !this.client.owners?.includes(message.author.id)) return;
@@ -37,10 +39,14 @@ export default class extends Event {
 					: this.client.defaultPermissions;
 
 				if (memberPermCheck) {
-					const missing = message.channel.permissionsFor(message.member as GuildMember).missing(memberPermCheck) as string[];
+					const missing = message.channel
+						.permissionsFor(message.member as GuildMember)
+						.missing(memberPermCheck) as string[];
 
 					if (missing.length) {
-						const replies = `You lack the ${formatArray(missing.map(item => underscore(italic(formatPermissions(item)))))} permission(s) to continue.`;
+						const replies = `You lack the ${formatArray(
+							missing.map((item) => underscore(italic(formatPermissions(item))))
+						)} permission(s) to continue.`;
 
 						return message.reply({ content: replies });
 					}
@@ -51,11 +57,14 @@ export default class extends Event {
 					: this.client.defaultPermissions;
 
 				if (clientPermCheck) {
-					const missing = message.channel.permissionsFor(message.guild.members.me as GuildMember)
+					const missing = message.channel
+						.permissionsFor(message.guild.members.me as GuildMember)
 						.missing(clientPermCheck) as string[];
 
 					if (missing.length) {
-						const replies = `I lack the ${formatArray(missing.map(item => underscore(italic(formatPermissions(item)))))} permission(s) to continue.`;
+						const replies = `I lack the ${formatArray(
+							missing.map((item) => underscore(italic(formatPermissions(item))))
+						)} permission(s) to continue.`;
 
 						return message.reply({ content: replies });
 					}
@@ -74,12 +83,13 @@ export default class extends Event {
 			const cooldown = this.client.cooldowns.get(command.name);
 
 			if (cooldown?.has(message.author.id) && !this.client.owners?.includes(message.author.id)) {
-				const expired = cooldown.get(message.author.id) as number + command.cooldown;
+				const expired = (cooldown.get(message.author.id) as number) + command.cooldown;
 
 				if (now < expired) {
 					const duration = (expired - now) / 1e3;
-					return message.reply({ content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.` })
-						.then(m => setTimeout(() => m.delete(), expired - now));
+					return message
+						.reply({ content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.` })
+						.then((m) => setTimeout(() => m.delete(), expired - now));
 				}
 			}
 
@@ -90,7 +100,7 @@ export default class extends Event {
 				await message.channel.sendTyping();
 				await command.execute(message, args);
 			} catch (e: unknown) {
-				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, (e as Error), true);
+				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, true);
 
 				const replies = [
 					'An error has occured when executing this command, our developers have been informed.',

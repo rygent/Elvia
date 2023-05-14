@@ -25,17 +25,21 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await raw.body.json().then(({ list }) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
+		const response = await raw.body
+			.json()
+			.then(({ list }) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(response.permalink));
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.permalink)
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
-			.setAuthor({ name: 'Urban Dictionary', iconURL: 'https://i.imgur.com/qjkcwXu.png', url: 'https://urbandictionary.com/' })
+			.setAuthor({
+				name: 'Urban Dictionary',
+				iconURL: 'https://i.imgur.com/qjkcwXu.png',
+				url: 'https://urbandictionary.com/'
+			})
 			.setTitle(response.word)
 			.setDescription(response.definition)
 			.addFields({ name: underscore(italic('Example')), value: response.example, inline: false })

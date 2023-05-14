@@ -36,11 +36,13 @@ export default class extends Command {
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
 			.setThumbnail('https://twemoji.maxcdn.com/72x72/1f49e.png')
-			.setDescription([
-				`${user1} is ${estimated}% in love with ${user2}`,
-				`${inlineCode('█'.repeat(Math.round(percentage * 30)).padEnd(30, '\u00A0'))}\n`,
-				`${bold(italic('Result:'))} ${result}`
-			].join('\n'))
+			.setDescription(
+				[
+					`${user1} is ${estimated}% in love with ${user2}`,
+					`${inlineCode('█'.repeat(Math.round(percentage * 30)).padEnd(30, '\u00A0'))}\n`,
+					`${bold(italic('Result:'))} ${result}`
+				].join('\n')
+			)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
 		return interaction.reply({ embeds: [embed] });

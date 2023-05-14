@@ -19,12 +19,25 @@ export default class extends Command {
 }
 
 const faces = [
-	'(*^ω^)', '(◕‿◕✿)', '(◕ᴥ◕)', 'ʕ•ᴥ•ʔ', 'ʕ￫ᴥ￩ʔ', '(*^.^*)', 'owo',
-	'(｡♥‿♥｡)', 'uwu', '(*￣з￣)', '>w<', '^w^', '(つ✧ω✧)つ', '(/ =ω=)/'
+	'(*^ω^)',
+	'(◕‿◕✿)',
+	'(◕ᴥ◕)',
+	'ʕ•ᴥ•ʔ',
+	'ʕ￫ᴥ￩ʔ',
+	'(*^.^*)',
+	'owo',
+	'(｡♥‿♥｡)',
+	'uwu',
+	'(*￣з￣)',
+	'>w<',
+	'^w^',
+	'(つ✧ω✧)つ',
+	'(/ =ω=)/'
 ];
 
 function owofy(input: string): string {
-	return input.replace(/[lr]/g, 'w')
+	return input
+		.replace(/[lr]/g, 'w')
 		.replace(/[LR]/g, 'W')
 		.replace(/(n)([aeiou])/gi, '$1y$2')
 		.replace(/ove/g, 'uv')

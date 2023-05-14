@@ -24,15 +24,16 @@ export default class extends Command {
 
 		setTimeout(async () => {
 			if (args.includes('--force')) {
-				await (await reply.delete() && message.delete());
+				await ((await reply.delete()) && message.delete());
 				return process.exit();
 			}
 
 			this.client.destroy();
 			await this.client.login(process.env.DISCORD_TOKEN);
 
-			return reply.edit({ content: 'Restart complete!' })
-				.then((m) => setTimeout(async () => (await m.delete() && message.delete()), 3e3));
+			return reply
+				.edit({ content: 'Restart complete!' })
+				.then((m) => setTimeout(async () => (await m.delete()) && message.delete(), 3e3));
 		}, 5e3);
 	}
 }

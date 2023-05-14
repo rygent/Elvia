@@ -25,10 +25,7 @@ export default class extends Command {
 
 		const response = await raw.body.json();
 
-		const replies = [
-			quote(`${bold(interaction.user.username)}: ${question}`),
-			`🎱 ${response.reading}`
-		].join('\n');
+		const replies = [quote(`${bold(interaction.user.username)}: ${question}`), `🎱 ${response.reading}`].join('\n');
 
 		return interaction.reply({ content: replies });
 	}

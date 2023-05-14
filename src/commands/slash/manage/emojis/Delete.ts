@@ -30,19 +30,21 @@ export default class extends Command {
 		const cancelId = nanoid();
 		const deleteId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder()
-				.setCustomId(cancelId)
-				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel'))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(deleteId)
-				.setStyle(ButtonStyle.Danger)
-				.setLabel('Delete'));
+			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
+			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
 
-		const reply = await interaction.reply({ content: `Are you sure that you want to delete the ${inlineCode(`:${emojis?.name}:`)} ${emojis} emoji?`, components: [button] });
+		const reply = await interaction.reply({
+			content: `Are you sure that you want to delete the ${inlineCode(`:${emojis?.name}:`)} ${emojis} emoji?`,
+			components: [button]
+		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 6e4, max: 1 });
+		const collector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.Button,
+			time: 6e4,
+			max: 1
+		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
@@ -52,7 +54,10 @@ export default class extends Command {
 					return void i.update({ content: 'Cancelation of the deletion of the emoji.', components: [] });
 				case deleteId:
 					await emojis.delete();
-					return void i.update({ content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully removed.`, components: [] });
+					return void i.update({
+						content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully removed.`,
+						components: []
+					});
 			}
 		});
 

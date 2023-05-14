@@ -32,16 +32,17 @@ export default class extends Command {
 
 			const response = await raw.body.json();
 
-			const button = new ActionRowBuilder<ButtonBuilder>()
-				.setComponents(new ButtonBuilder()
-					.setStyle(ButtonStyle.Link)
-					.setLabel('Open in Browser')
-					.setURL(response.message));
+			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+				new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.message)
+			);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setImage(response.message)
-				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+				.setFooter({
+					text: `Powered by ${this.client.user.username}`,
+					iconURL: interaction.user.avatarURL() as string
+				});
 
 			return await interaction.reply({ embeds: [embed], components: [button], ephemeral: !visible });
 		} catch {

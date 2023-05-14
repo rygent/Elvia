@@ -14,7 +14,11 @@ export default class extends Event {
 
 	public async run() {
 		this.client.logger.log(`Logged in as ${redBright(underline(`${this.client.user.tag}`))}`);
-		this.client.logger.log(`Loaded ${formatNumber(this.client.commands.size + this.client.interactions.size)} commands & ${formatNumber(this.client.events.size)} events!`);
+		this.client.logger.log(
+			`Loaded ${formatNumber(this.client.commands.size + this.client.interactions.size)} commands & ${formatNumber(
+				this.client.events.size
+			)} events!`
+		);
 
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {

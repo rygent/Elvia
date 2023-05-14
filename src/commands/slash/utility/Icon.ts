@@ -17,13 +17,16 @@ export default class extends Command {
 	}
 
 	public execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		if (!interaction.guild?.iconURL()) return interaction.reply({ content: 'This server has no icon.', ephemeral: true });
+		if (!interaction.guild?.iconURL()) {
+			return interaction.reply({ content: 'This server has no icon.', ephemeral: true });
+		}
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(interaction.guild.iconURL({ extension: 'png', size: 4096 }) as string));
+				.setURL(interaction.guild.iconURL({ extension: 'png', size: 4096 }) as string)
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

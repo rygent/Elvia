@@ -17,7 +17,9 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const user = await this.client.users.fetch(interaction.options.getUser('user') ?? interaction.user, { force: true });
+		const user = await this.client.users.fetch(interaction.options.getUser('user') ?? interaction.user, {
+			force: true
+		});
 		const color = interaction.options.getBoolean('color') ?? false;
 
 		const embed = new EmbedBuilder()
@@ -25,7 +27,9 @@ export default class extends Command {
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
 		if (color) {
-			if (!user.hexAccentColor) return interaction.reply({ content: `${bold(user.tag)}'s has no banner color!`, ephemeral: true });
+			if (!user.hexAccentColor) {
+				return interaction.reply({ content: `${bold(user.tag)}'s has no banner color!`, ephemeral: true });
+			}
 
 			const raw = await request(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, {
 				method: 'GET',
@@ -36,10 +40,9 @@ export default class extends Command {
 			const response = await raw.body.json();
 
 			embed.setColor(resolveColor(response.hex.clean));
-			embed.setDescription([
-				`${bold(italic('ID:'))} ${inlineCode(user.id)}`,
-				`${bold(italic('Hex:'))} ${response.hex.value}`
-			].join('\n'));
+			embed.setDescription(
+				[`${bold(italic('ID:'))} ${inlineCode(user.id)}`, `${bold(italic('Hex:'))} ${response.hex.value}`].join('\n')
+			);
 			embed.setImage(`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`);
 
 			return interaction.reply({ embeds: [embed] });
@@ -47,11 +50,12 @@ export default class extends Command {
 
 		if (!user.banner) return interaction.reply({ content: `${bold(user.tag)}'s has no banner!`, ephemeral: true });
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(user.bannerURL({ extension: 'png', size: 4096 }) as string));
+				.setURL(user.bannerURL({ extension: 'png', size: 4096 }) as string)
+		);
 
 		embed.setColor(Colors.Default);
 		embed.setDescription(`${bold(italic('ID:'))} ${inlineCode(user.id)}`);

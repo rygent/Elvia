@@ -18,36 +18,65 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		const member = interaction.options.getMember('user') as GuildMember ?? interaction.member;
+		const member = (interaction.options.getMember('user') as GuildMember) ?? interaction.member;
 
 		const userFlags = member.user.flags?.toArray();
-		const badges = userFlags!.map(item => flags[item]).filter(value => value !== '');
+		const badges = userFlags!.map((item) => flags[item]).filter((value) => value !== '');
 
 		const banner = await member.user.fetch(true);
-		const roles = member.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString()).slice(0, -1);
+		const roles = member.roles.cache
+			.sort((a, b) => b.position - a.position)
+			.map((role) => role.toString())
+			.slice(0, -1);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)
 			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL() as string })
 			.setThumbnail(member.user.displayAvatarURL({ size: 512 }))
-			.setDescription([
-				`${bold(italic('ID:'))} ${inlineCode(member.id)}`,
-				`${bold(italic('Nickname:'))} ${member.nickname ?? inlineCode('N/A')}`,
-				`${bold(italic('Badges:'))} ${badges.length ? userFlags!.map(item => flags[item]).join(' ') : inlineCode('N/A')}`,
-				`${bold(italic('Pending:'))} ${member.pending ? 'Yes' : 'No'}`,
-				`${bold(italic('Created:'))} ${time(new Date(member.user.createdTimestamp), 'D')} (${time(new Date(member.user.createdTimestamp), 'R')})`,
-				`${bold(italic('Joined:'))} ${time(new Date(member.joinedAt as Date), 'D')} (${time(new Date(member.joinedAt as Date), 'R')})`
-			].join('\n'))
-			.addFields({ name: underscore(italic(`Roles [${roles.length ? roles.length : 1}]`)), value: `${roles.length ? formatArray(trimArray(roles, { length: 10 })) : 'None'}`, inline: false })
+			.setDescription(
+				[
+					`${bold(italic('ID:'))} ${inlineCode(member.id)}`,
+					`${bold(italic('Nickname:'))} ${member.nickname ?? inlineCode('N/A')}`,
+					`${bold(italic('Badges:'))} ${
+						badges.length ? userFlags!.map((item) => flags[item]).join(' ') : inlineCode('N/A')
+					}`,
+					`${bold(italic('Pending:'))} ${member.pending ? 'Yes' : 'No'}`,
+					`${bold(italic('Created:'))} ${time(new Date(member.user.createdTimestamp), 'D')} (${time(
+						new Date(member.user.createdTimestamp),
+						'R'
+					)})`,
+					`${bold(italic('Joined:'))} ${time(new Date(member.joinedAt as Date), 'D')} (${time(
+						new Date(member.joinedAt as Date),
+						'R'
+					)})`
+				].join('\n')
+			)
+			.addFields({
+				name: underscore(italic(`Roles [${roles.length ? roles.length : 1}]`)),
+				value: `${roles.length ? formatArray(trimArray(roles, { length: 10 })) : 'None'}`,
+				inline: false
+			})
 			.setImage(banner.bannerURL({ size: 4096 }) as string)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
 		if (resolvePermissions(member)?.length) {
-			embed.addFields({ name: underscore(italic('Key Permissions')), value: `${formatArray(resolvePermissions(member)!.map(item => formatPermissions(item)).sort((a, b) => a.localeCompare(b)))}`, inline: false });
+			embed.addFields({
+				name: underscore(italic('Key Permissions')),
+				value: `${formatArray(
+					resolvePermissions(member)!
+						.map((item) => formatPermissions(item))
+						.sort((a, b) => a.localeCompare(b))
+				)}`,
+				inline: false
+			});
 		}
 
 		if (resolveAcknowledgements(interaction.guild, member)) {
-			embed.addFields({ name: underscore(italic('Acknowledgements')), value: resolveAcknowledgements(interaction.guild, member) as string, inline: false });
+			embed.addFields({
+				name: underscore(italic('Acknowledgements')),
+				value: resolveAcknowledgements(interaction.guild, member) as string,
+				inline: false
+			});
 		}
 
 		return interaction.reply({ embeds: [embed] });
@@ -56,15 +85,27 @@ export default class extends Command {
 
 function resolvePermissions(member: GuildMember): PermissionsString[] | undefined {
 	const list = [
-		'Administrator', 'BanMembers', 'DeafenMembers', 'KickMembers', 'ManageChannels',
-		'ManageEmojisAndStickers', 'ManageEvents', 'ManageGuild', 'ManageMessages', 'ManageNicknames',
-		'ManageRoles', 'ManageThreads', 'ManageWebhooks', 'ModerateMembers', 'MuteMembers'
+		'Administrator',
+		'BanMembers',
+		'DeafenMembers',
+		'KickMembers',
+		'ManageChannels',
+		'ManageEmojisAndStickers',
+		'ManageEvents',
+		'ManageGuild',
+		'ManageMessages',
+		'ManageNicknames',
+		'ManageRoles',
+		'ManageThreads',
+		'ManageWebhooks',
+		'ModerateMembers',
+		'MuteMembers'
 	] as PermissionsString[];
 
 	const permissions = member.permissions.toArray();
 
-	if (list.some(item => permissions.includes(item))) {
-		return permissions.filter(item => list.includes(item));
+	if (list.some((item) => permissions.includes(item))) {
+		return permissions.filter((item) => list.includes(item));
 	}
 }
 

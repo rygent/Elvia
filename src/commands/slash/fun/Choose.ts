@@ -13,9 +13,10 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const requiredChoice = ['1st', '2nd'].map(name => interaction.options.getString(name, true));
-		const optionalChoice = ['3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th']
-			.map(name => interaction.options.getString(name));
+		const requiredChoice = ['1st', '2nd'].map((name) => interaction.options.getString(name, true));
+		const optionalChoice = ['3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'].map((name) =>
+			interaction.options.getString(name)
+		);
 
 		const options = [...requiredChoice, ...optionalChoice];
 

@@ -45,11 +45,12 @@ export default class extends Command {
 
 		const random_post = Math.floor(Math.random() * post.length);
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(`https://reddit.com${post[random_post].data.permalink}`));
+				.setURL(`https://reddit.com${post[random_post].data.permalink}`)
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

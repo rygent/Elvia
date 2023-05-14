@@ -29,33 +29,45 @@ export default class extends Command {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Create a new server tag')
-			.addComponents(new ActionRowBuilder<TextInputBuilder>()
-				.setComponents(new TextInputBuilder()
-					.setCustomId('name')
-					.setStyle(TextInputStyle.Short)
-					.setLabel('What\'s the name?')
-					.setRequired(true)
-					.setMaxLength(100)))
-			.addComponents(new ActionRowBuilder<TextInputBuilder>()
-				.setComponents(new TextInputBuilder()
-					.setCustomId('content')
-					.setStyle(TextInputStyle.Paragraph)
-					.setLabel('What\'s the content?')
-					.setPlaceholder('PRO TIP: can use discord markdown syntax.')
-					.setRequired(true)
-					.setMaxLength(2000)));
+			.addComponents(
+				new ActionRowBuilder<TextInputBuilder>().setComponents(
+					new TextInputBuilder()
+						.setCustomId('name')
+						.setStyle(TextInputStyle.Short)
+						.setLabel("What's the name?")
+						.setRequired(true)
+						.setMaxLength(100)
+				)
+			)
+			.addComponents(
+				new ActionRowBuilder<TextInputBuilder>().setComponents(
+					new TextInputBuilder()
+						.setCustomId('content')
+						.setStyle(TextInputStyle.Paragraph)
+						.setLabel("What's the content?")
+						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
+						.setRequired(true)
+						.setMaxLength(2000)
+				)
+			);
 
 		await interaction.showModal(modal);
 
 		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, max: 1 });
+		const collector = new InteractionCollector(this.client, {
+			filter,
+			interactionType: InteractionType.ModalSubmit,
+			max: 1
+		});
 
 		collector.on('collect', async (i) => {
 			const names = i.fields.getTextInputValue('name');
 			const content = i.fields.getTextInputValue('content');
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
-			if (tags) return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+			if (tags) {
+				return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+			}
 
 			await prisma.tag.create({
 				data: {
@@ -66,7 +78,10 @@ export default class extends Command {
 				}
 			});
 
-			return void i.reply({ content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`, ephemeral: true });
+			return void i.reply({
+				content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`,
+				ephemeral: true
+			});
 		});
 	}
 }

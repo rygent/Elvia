@@ -28,9 +28,14 @@ export default class extends Command {
 
 			const emojis = await interaction.guild?.emojis.create({ attachment: emoji, name });
 
-			return await interaction.reply({ content: `Emoji ${inlineCode(`:${emojis?.name}:`)} ${emojis} was successfully added.` });
+			return await interaction.reply({
+				content: `Emoji ${inlineCode(`:${emojis?.name}:`)} ${emojis} was successfully added.`
+			});
 		} catch {
-			return interaction.reply({ content: 'The emoji are invalid or you don\'t have more space on your server!', ephemeral: true });
+			return interaction.reply({
+				content: "The emoji are invalid or you don't have more space on your server!",
+				ephemeral: true
+			});
 		}
 	}
 }

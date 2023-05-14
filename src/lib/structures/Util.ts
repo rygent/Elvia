@@ -14,9 +14,9 @@ export default class Util {
 	}
 
 	private isClass(input: unknown): boolean {
-		return typeof input === 'function' &&
-		typeof input.prototype === 'object' &&
-		input.toString().slice(0, 5) === 'class';
+		return (
+			typeof input === 'function' && typeof input.prototype === 'object' && input.toString().slice(0, 5) === 'class'
+		);
 	}
 
 	private get directory(): string {
@@ -31,7 +31,9 @@ export default class Util {
 				const { default: File } = await import(pathToFileURL(interactionFile).toString());
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name.toLowerCase());
-				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in interactions directory.`);
+				if (!(interaction instanceof Interaction)) {
+					throw new TypeError(`Interaction ${name} doesn't belong in interactions directory.`);
+				}
 				this.client.interactions.set(interaction.name, interaction);
 			}
 		});

@@ -19,5 +19,8 @@ export default class extends Command {
 }
 
 function spongemock(input: string): string {
-	return input.split('').map((char, i) => i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()).join('');
+	return input
+		.split('')
+		.map((char, i) => (i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()))
+		.join('');
 }

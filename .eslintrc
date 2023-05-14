@@ -2,6 +2,7 @@
   "root": true,
   "extends": [
     "eslint:recommended",
+    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
@@ -42,7 +43,6 @@
     "@typescript-eslint/explicit-member-accessibility": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/func-call-spacing": ["error", "never"],
-    "@typescript-eslint/indent": ["error", "tab", { "SwitchCase": 1 }],
     "@typescript-eslint/init-declarations": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/keyword-spacing": ["error", {
@@ -177,11 +177,9 @@
     "func-name-matching": ["warn", "always"],
     "func-names": ["warn", "as-needed"],
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "function-paren-newline": ["error", "consistent"],
     "guard-for-in": "warn",
     "generator-star-spacing": ["error", "before"],
     "handle-callback-err": "error",
-    "indent": "off",
     "jsx-quotes": ["error", "prefer-double"],
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "strict" }],
     "keyword-spacing": "off",
@@ -238,7 +236,6 @@
     "no-label-var": "error",
     "no-lone-blocks": "error",
     "no-lonely-if": "error",
-    "no-mixed-operators": "error",
     "no-mixed-requires": "error",
     "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
     "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
@@ -313,11 +310,6 @@
     "prefer-rest-params": "warn",
     "prefer-spread": "error",
     "prefer-template": "warn",
-    "quote-props": ["error", "consistent-as-needed", {
-      "keywords": true,
-      "unnecessary": true,
-      "numbers": false
-    }],
     "quotes": "off",
     "radix": "error",
     "require-await": "off",

@@ -1,86 +1,113 @@
-import { type APIApplicationCommand, type APIApplicationCommandOption, ApplicationCommandOptionType, ApplicationCommandType } from 'discord-api-types/v10';
+import {
+	type APIApplicationCommand,
+	type APIApplicationCommandOption,
+	ApplicationCommandOptionType,
+	ApplicationCommandType
+} from 'discord-api-types/v10';
 
 export default {
 	name: 'text',
 	description: 'Manipulate your text.',
 	type: ApplicationCommandType.ChatInput,
-	options: [{
-		name: 'flip',
-		description: 'Flip your text.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to flip.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'mocking',
-		description: 'Applies spongemock effect to your text.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to mocking.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'owofy',
-		description: 'Transform your text into owo and uwu.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to transform.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'regional',
-		description: 'Transform your text to regional indicators.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to transform.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'reverse',
-		description: 'Reverse your text.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to reverse.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'smallcaps',
-		description: 'Transform your text into small caps.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to transform.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}, {
-		name: 'vaporwave',
-		description: 'Transform your text into vaporwave.',
-		type: ApplicationCommandOptionType.Subcommand,
-		options: [{
-			name: 'text',
-			description: 'Text to transform.',
-			type: ApplicationCommandOptionType.String,
-			max_length: 256,
-			required: true
-		}]
-	}] as APIApplicationCommandOption[],
+	options: [
+		{
+			name: 'flip',
+			description: 'Flip your text.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to flip.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'mocking',
+			description: 'Applies spongemock effect to your text.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to mocking.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'owofy',
+			description: 'Transform your text into owo and uwu.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to transform.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'regional',
+			description: 'Transform your text to regional indicators.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to transform.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'reverse',
+			description: 'Reverse your text.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to reverse.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'smallcaps',
+			description: 'Transform your text into small caps.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to transform.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		},
+		{
+			name: 'vaporwave',
+			description: 'Transform your text into vaporwave.',
+			type: ApplicationCommandOptionType.Subcommand,
+			options: [
+				{
+					name: 'text',
+					description: 'Text to transform.',
+					type: ApplicationCommandOptionType.String,
+					max_length: 256,
+					required: true
+				}
+			]
+		}
+	] as APIApplicationCommandOption[],
 	dm_permission: true
 } as APIApplicationCommand;

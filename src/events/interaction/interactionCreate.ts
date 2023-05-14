@@ -34,11 +34,14 @@ export default class extends Event {
 					: this.client.defaultPermissions;
 
 				if (memberPermCheck) {
-					const missing = interaction.channel?.permissionsFor(interaction.member as GuildMember)
+					const missing = interaction.channel
+						?.permissionsFor(interaction.member as GuildMember)
 						?.missing(memberPermCheck) as string[];
 
 					if (missing.length) {
-						const replies = `You lack the ${formatArray(missing.map(item => underscore(italic(formatPermissions(item)))))} permission(s) to continue.`;
+						const replies = `You lack the ${formatArray(
+							missing.map((item) => underscore(italic(formatPermissions(item))))
+						)} permission(s) to continue.`;
 
 						return interaction.reply({ content: replies, ephemeral: true });
 					}
@@ -49,11 +52,14 @@ export default class extends Event {
 					: this.client.defaultPermissions;
 
 				if (clientPermCheck) {
-					const missing = interaction.channel?.permissionsFor(interaction.guild?.members.me as GuildMember)
+					const missing = interaction.channel
+						?.permissionsFor(interaction.guild?.members.me as GuildMember)
 						?.missing(clientPermCheck) as string[];
 
 					if (missing.length) {
-						const replies = `I lack the ${formatArray(missing.map(item => underscore(italic(formatPermissions(item)))))} permission(s) to continue.`;
+						const replies = `I lack the ${formatArray(
+							missing.map((item) => underscore(italic(formatPermissions(item))))
+						)} permission(s) to continue.`;
 
 						return interaction.reply({ content: replies, ephemeral: true });
 					}
@@ -78,11 +84,12 @@ export default class extends Event {
 			const cooldown = this.client.cooldowns.get(resolveCommandName(interaction));
 
 			if (cooldown?.has(interaction.user.id) && !this.client.owners?.includes(interaction.user.id)) {
-				const expired = cooldown.get(interaction.user.id) as number + command.cooldown;
+				const expired = (cooldown.get(interaction.user.id) as number) + command.cooldown;
 
 				if (now < expired) {
 					const duration = (expired - now) / 1e3;
-					return interaction.reply({ content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.`, ephemeral: true })
+					return interaction
+						.reply({ content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.`, ephemeral: true })
 						.then(() => setTimeout(() => interaction.deleteReply(), expired - now));
 				}
 			}
@@ -95,11 +102,14 @@ export default class extends Event {
 			} catch (e: unknown) {
 				if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 				if (interaction.replied) return;
-				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, (e as Error), true);
+				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, true);
 
 				const replies = [
 					'An error has occured when executing this command, our developers have been informed.',
-					`If the issue persists, please contact us in our ${hyperlink('Support Server', hideLinkEmbed(Links.SupportServer))}.`
+					`If the issue persists, please contact us in our ${hyperlink(
+						'Support Server',
+						hideLinkEmbed(Links.SupportServer)
+					)}.`
 				].join('\n');
 
 				if (interaction.deferred) return interaction.editReply({ content: replies });

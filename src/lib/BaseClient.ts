@@ -34,15 +34,9 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 				GatewayIntentBits.GuildMessages,
 				GatewayIntentBits.MessageContent
 			],
-			partials: [
-				Partials.Message,
-				Partials.Channel
-			],
+			partials: [Partials.Message, Partials.Channel],
 			allowedMentions: {
-				parse: [
-					AllowedMentionsTypes.User,
-					AllowedMentionsTypes.Role
-				],
+				parse: [AllowedMentionsTypes.User, AllowedMentionsTypes.Role],
 				repliedUser: false
 			},
 			sweepers: {
@@ -70,7 +64,9 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 
 	private async validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
-		if (semver.lt(process.versions.node, '16.14.0')) throw new Error('This client requires Node.JS v16.14.0 or higher.');
+		if (semver.lt(process.versions.node, '16.14.0')) {
+			throw new Error('This client requires Node.JS v16.14.0 or higher.');
+		}
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
 		this.token = options.token;
@@ -84,7 +80,9 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		this.owners = options.owners;
 
 		if (!options.defaultPermissions.length) throw new Error('You must pass default permission(s) for the Client.');
-		if (!Array.isArray(options.defaultPermissions)) throw new TypeError('Permission(s) should be a type of Array<String>.');
+		if (!Array.isArray(options.defaultPermissions)) {
+			throw new TypeError('Permission(s) should be a type of Array<String>.');
+		}
 		this.defaultPermissions = new PermissionsBitField(options.defaultPermissions).freeze();
 
 		await import('./utils/Validation.js');

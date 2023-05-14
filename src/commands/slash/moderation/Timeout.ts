@@ -25,19 +25,43 @@ export default class extends Command {
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
-		if (!member) return interaction.reply({ content: 'Member not found, please verify that this user is a server member.', ephemeral: true });
-
-		if (member.user.id === interaction.user.id) return interaction.reply({ content: `You can't timeout yourself.`, ephemeral: true });
-		if (member.user.id === this.client.user.id) return interaction.reply({ content: `You cannot timeout me!`, ephemeral: true });
-		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
-			return interaction.reply({ content: 'You cannot timeout a member who has a higher or equal role than yours.', ephemeral: true });
+		if (!member) {
+			return interaction.reply({
+				content: 'Member not found, please verify that this user is a server member.',
+				ephemeral: true
+			});
 		}
-		if (!member.moderatable) return interaction.reply({ content: `I cannot timeout a member who has a higher or equal role than mine.`, ephemeral: true });
+
+		if (member.user.id === interaction.user.id) {
+			return interaction.reply({ content: `You can't timeout yourself.`, ephemeral: true });
+		}
+		if (member.user.id === this.client.user.id) {
+			return interaction.reply({ content: `You cannot timeout me!`, ephemeral: true });
+		}
+		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
+			return interaction.reply({
+				content: 'You cannot timeout a member who has a higher or equal role than yours.',
+				ephemeral: true
+			});
+		}
+		if (!member.moderatable) {
+			return interaction.reply({
+				content: `I cannot timeout a member who has a higher or equal role than mine.`,
+				ephemeral: true
+			});
+		}
 
 		let { offset } = new Duration(duration);
-		if (offset > 24192e5) return interaction.reply({ content: 'The duration is too long. The maximum duration is 28 days.', ephemeral: true });
-		else if (offset > 241884e4 && offset <= 24192e5) offset = 241884e4;
-		else if (isNaN(offset)) return interaction.reply({ content: `You need to specify a duration for the timeout.`, ephemeral: true });
+		if (offset > 24192e5) {
+			return interaction.reply({
+				content: 'The duration is too long. The maximum duration is 28 days.',
+				ephemeral: true
+			});
+		} else if (offset > 241884e4 && offset <= 24192e5) {
+			offset = 241884e4;
+		} else if (isNaN(offset)) {
+			return interaction.reply({ content: `You need to specify a duration for the timeout.`, ephemeral: true });
+		}
 
 		if (Date.now() <= Number(member.communicationDisabledUntilTimestamp)) {
 			return interaction.reply({ content: `${bold(member.user.tag)} is already timed out.`, ephemeral: true });
@@ -65,7 +89,7 @@ export default class extends Command {
 
 		const replies = [
 			`${bold(member.user.tag)} was timed out!`,
-			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : [],
+			...(reason ? [`${bold(italic('Reason:'))} ${reason}`] : []),
 			`${bold(italic('Expiration:'))} ${time(new Date(Date.now() + offset), 'R')}`
 		].join('\n');
 

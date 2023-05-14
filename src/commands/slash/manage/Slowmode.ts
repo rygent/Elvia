@@ -18,13 +18,17 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const duration = interaction.options.getString('duration', true);
-		const channel = interaction.options.getChannel('channel') as TextChannel | VoiceChannel | ForumChannel ?? interaction.channel;
+		const channel =
+			(interaction.options.getChannel('channel') as TextChannel | VoiceChannel | ForumChannel) ?? interaction.channel;
 		const reason = interaction.options.getString('reason');
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const { offset } = new Duration(duration);
 		if (offset > 216e5) {
-			return interaction.reply({ content: 'Slowmode time must be a number between 0 second and 6 hours.', ephemeral: true });
+			return interaction.reply({
+				content: 'Slowmode time must be a number between 0 second and 6 hours.',
+				ephemeral: true
+			});
 		}
 
 		await interaction.deferReply({ ephemeral: !visible });
@@ -35,7 +39,7 @@ export default class extends Command {
 		const replies = [
 			`${channelMention(channel.id)} slowmode was updated,`,
 			`it is now set to ${bold(time.format(offset))}.`,
-			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : []
+			...(reason ? [`${bold(italic('Reason:'))} ${reason}`] : [])
 		].join('\n');
 
 		return interaction.editReply({ content: replies });

@@ -32,7 +32,7 @@ export default class extends Command {
 		const { body } = await request(`https://api.imgur.com/3/upload`, {
 			method: 'POST',
 			headers: {
-				'Authorization': `Client-ID ${Credentials.ImgurClientId}`,
+				Authorization: `Client-ID ${Credentials.ImgurClientId}`,
 				'Content-Type': 'application/json',
 				'User-Agent': Advances.UserAgent
 			},
@@ -42,10 +42,7 @@ export default class extends Command {
 
 		const response = await body.json();
 
-		const replies = [
-			'Here are your Imgur links:',
-			`${hideLinkEmbed(response.data.link)}`
-		].join('\n');
+		const replies = ['Here are your Imgur links:', `${hideLinkEmbed(response.data.link)}`].join('\n');
 
 		return interaction.editReply({ content: replies });
 	}

@@ -24,15 +24,18 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		if (raw.statusCode === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (raw.statusCode === 404) {
+			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		}
 
 		const response = await raw.body.json();
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(response.content_urls.desktop.page));
+				.setURL(response.content_urls.desktop.page)
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

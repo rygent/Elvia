@@ -17,11 +17,12 @@ export default class extends Command {
 	public execute(interaction: ContextMenuCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(member.displayAvatarURL({ extension: 'png', size: 4096 })));
+				.setURL(member.displayAvatarURL({ extension: 'png', size: 4096 }))
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

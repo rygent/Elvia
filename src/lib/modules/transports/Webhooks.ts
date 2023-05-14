@@ -26,11 +26,13 @@ export class Webhook extends TransportStream {
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)
 			.setTitle(this.error.name)
-			.setDescription([
-				`${codeBlock('xl', clean(this.error.stack as string))}`,
-				`${bold(italic('Message:'))} ${this.error.message}`,
-				`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
-			].join('\n'))
+			.setDescription(
+				[
+					`${codeBlock('xl', clean(this.error.stack as string))}`,
+					`${bold(italic('Message:'))} ${this.error.message}`,
+					`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
+				].join('\n')
+			)
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() as string });
 
 		const profile = {

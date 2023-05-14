@@ -19,9 +19,32 @@ export default class extends Command {
 }
 
 const smallcapsTable = {
-	A: 'ᴀ', B: 'ʙ', C: 'ᴄ', D: 'ᴅ', E: 'ᴇ', F: 'ꜰ', G: 'ɢ', H: 'ʜ', I: 'ɪ', J: 'ᴊ',
-	K: 'ᴋ', L: 'ʟ', M: 'ᴍ', N: 'ɴ', O: 'ᴏ', P: 'ᴘ', Q: 'ǫ', R: 'ʀ', S: 's', T: 'ᴛ',
-	U: 'ᴜ', V: 'ᴠ', W: 'ᴡ', X: 'x', Y: 'ʏ', Z: 'ᴢ'
+	A: 'ᴀ',
+	B: 'ʙ',
+	C: 'ᴄ',
+	D: 'ᴅ',
+	E: 'ᴇ',
+	F: 'ꜰ',
+	G: 'ɢ',
+	H: 'ʜ',
+	I: 'ɪ',
+	J: 'ᴊ',
+	K: 'ᴋ',
+	L: 'ʟ',
+	M: 'ᴍ',
+	N: 'ɴ',
+	O: 'ᴏ',
+	P: 'ᴘ',
+	Q: 'ǫ',
+	R: 'ʀ',
+	S: 's',
+	T: 'ᴛ',
+	U: 'ᴜ',
+	V: 'ᴠ',
+	W: 'ᴡ',
+	X: 'x',
+	Y: 'ʏ',
+	Z: 'ᴢ'
 };
 
 function smallcaps(input: string): string {

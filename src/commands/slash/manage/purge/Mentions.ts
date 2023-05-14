@@ -22,12 +22,14 @@ export default class extends Command {
 		const reply = await interaction.deferReply({ ephemeral: !visible, fetchReply: true });
 
 		const messages = await interaction.channel?.messages.fetch({ limit: 1e2, cache: true, before: reply.id });
-		const filter = messages?.filter(m => (
-			m.mentions.users.first() ||
-			m.mentions.members.first() ||
-			m.mentions.channels.first() ||
-			m.mentions.roles.first()
-		) && !m.pinned);
+		const filter = messages?.filter(
+			(m) =>
+				(m.mentions.users.first() ||
+					m.mentions.members.first() ||
+					m.mentions.channels.first() ||
+					m.mentions.roles.first()) &&
+				!m.pinned
+		);
 
 		const message = Array.from(filter!.values());
 		const deleted = await interaction.channel?.bulkDelete(message.slice(0, amount), true);
@@ -41,7 +43,9 @@ export default class extends Command {
 
 		const replies = [
 			`${bold(italic(deleted!.size.toString()))} message(s) have been successfully deleted!`,
-			`${Object.entries(results).map(([user, size]) => `${italic(`${user}:`)} ${bold(italic(size))}`).join('\n')}`
+			`${Object.entries(results)
+				.map(([user, size]) => `${italic(`${user}:`)} ${bold(italic(size))}`)
+				.join('\n')}`
 		].join('\n\n');
 
 		return interaction.editReply({ content: replies });

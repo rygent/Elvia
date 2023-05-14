@@ -35,10 +35,7 @@ export default class extends Command {
 				PermissionFlagsBits.UseExternalEmojis,
 				PermissionFlagsBits.AddReactions
 			],
-			scopes: [
-				OAuth2Scopes.ApplicationsCommands,
-				OAuth2Scopes.Bot
-			]
+			scopes: [OAuth2Scopes.ApplicationsCommands, OAuth2Scopes.Bot]
 		});
 
 		const replies = [
@@ -46,12 +43,13 @@ export default class extends Command {
 			`Just click on the button below.`
 		].join('\n');
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setEmoji(parseEmoji(Emojis.Bot) as APIMessageComponentEmoji)
 				.setLabel('Add to Server')
-				.setURL(link));
+				.setURL(link)
+		);
 
 		return interaction.reply({ content: replies, components: [button], ephemeral: true });
 	}

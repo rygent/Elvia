@@ -19,5 +19,9 @@ export default class extends Command {
 }
 
 function vaporwave(input: string): string {
-	return input.replace(/[a-zA-Z0-9!\\?\\.'";:\]\\[}{\\)\\(@#\\$%\\^&\\*\-_=\\+`~><]/g, (char) => String.fromCharCode(0xfee0 + char.charCodeAt(0))).replace(/ /g, '　');
+	return input
+		.replace(/[a-zA-Z0-9!\\?\\.'";:\]\\[}{\\)\\(@#\\$%\\^&\\*\-_=\\+`~><]/g, (char) =>
+			String.fromCharCode(0xfee0 + char.charCodeAt(0))
+		)
+		.replace(/ /g, '　');
 }

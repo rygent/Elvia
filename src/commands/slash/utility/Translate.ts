@@ -29,17 +29,28 @@ export default class extends Command {
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
-				.setAuthor({ name: 'Google Translate', iconURL: 'https://i.imgur.com/1JS81kv.png', url: 'https://translate.google.com/' })
-				.setDescription([
-					`${cutText(translated.text, 3950)}\n`,
-					`Translation from ${bold(italic(resolveLanguage(translated.from.language.iso)))} to ${bold(italic(resolveLanguage(target)))}.`
-				].join('\n'))
+				.setAuthor({
+					name: 'Google Translate',
+					iconURL: 'https://i.imgur.com/1JS81kv.png',
+					url: 'https://translate.google.com/'
+				})
+				.setDescription(
+					[
+						`${cutText(translated.text, 3950)}\n`,
+						`Translation from ${bold(italic(resolveLanguage(translated.from.language.iso)))} to ${bold(
+							italic(resolveLanguage(target))
+						)}.`
+					].join('\n')
+				)
 				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL() as string });
 
 			return await interaction.reply({ embeds: [embed] });
 		} catch (error: any) {
 			if (error.code === 400) {
-				const replies = `Please send valid ${hyperlink('ISO 639-1', hideLinkEmbed('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes'))} languages codes.`;
+				const replies = `Please send valid ${hyperlink(
+					'ISO 639-1',
+					hideLinkEmbed('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes')
+				)} languages codes.`;
 
 				return interaction.reply({ content: replies, ephemeral: true });
 			}

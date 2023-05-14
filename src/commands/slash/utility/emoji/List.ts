@@ -15,7 +15,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const fetched = await interaction.guild?.emojis.fetch();
 
-		const emoji = fetched?.map(item => item.toString());
+		const emoji = fetched?.map((item) => item.toString());
 		if (!emoji?.length) return interaction.reply({ content: 'There are no emojis in this server.', ephemeral: true });
 
 		return interaction.reply({ content: `${emoji.join(' ')}`, ephemeral: true });

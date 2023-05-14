@@ -27,7 +27,9 @@ export default class extends Command {
 		const tag = database?.tags.find(({ slug }) => slug === name);
 		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
 
-		if (!tag.hoisted) return interaction.reply({ content: `The tag ${inlineCode(name)} already unpinned.`, ephemeral: true });
+		if (!tag.hoisted) {
+			return interaction.reply({ content: `The tag ${inlineCode(name)} already unpinned.`, ephemeral: true });
+		}
 
 		await prisma.tag.update({
 			where: { id: tag.id },

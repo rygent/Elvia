@@ -18,11 +18,12 @@ export default class extends Command {
 	public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const user = interaction.options.getUser('user') ?? interaction.user;
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.setComponents(new ButtonBuilder()
+		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+			new ButtonBuilder()
 				.setStyle(ButtonStyle.Link)
 				.setLabel('Open in Browser')
-				.setURL(user.displayAvatarURL({ extension: 'png', size: 4096 })));
+				.setURL(user.displayAvatarURL({ extension: 'png', size: 4096 }))
+		);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

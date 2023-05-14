@@ -79,7 +79,7 @@ async function registerCommands(): Promise<void> {
 
 		logger.debug('Successfully reloaded application (/) commands.');
 	} catch (e: unknown) {
-		logger.error(`${(e as Error).name}: ${(e as Error).message}`, (e as Error), false);
+		logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, false);
 	}
 }
 

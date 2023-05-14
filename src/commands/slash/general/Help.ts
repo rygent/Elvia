@@ -2,7 +2,13 @@ import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
-import { AutocompleteInteraction, ChatInputCommandInteraction, parseEmoji, ButtonInteraction, StringSelectMenuInteraction } from 'discord.js';
+import {
+	AutocompleteInteraction,
+	ChatInputCommandInteraction,
+	parseEmoji,
+	ButtonInteraction,
+	StringSelectMenuInteraction
+} from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
 import { Colors, Emojis, Links } from '../../../lib/utils/Constants.js';
 import { formatPermissions, isNsfwChannel } from '../../../lib/utils/Function.js';
@@ -24,7 +30,7 @@ export default class extends Command {
 
 		if (command) {
 			const cmd = this.client.interactions.get(command);
-			const cmdId = app_command.find(item => item.name === cmd?.name.split(' ')[0])?.id;
+			const cmdId = app_command.find((item) => item.name === cmd?.name.split(' ')[0])?.id;
 
 			const permissions = cmd?.memberPermissions.toArray();
 
@@ -33,13 +39,22 @@ export default class extends Command {
 				.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: this.client.user.displayAvatarURL() })
 				.setTitle(`${chatInputApplicationCommandMention(cmd!.name, cmdId!)}`)
 				.setThumbnail('https://i.imgur.com/YxoUvH8.png')
-				.setDescription([
-					`${cmd?.description}`,
-					`${bold(italic('Category:'))} ${cmd?.category}`,
-					`${bold(italic('Permissions:'))} ${permissions?.length ? permissions.map(item => `\`${formatPermissions(item)}\``).join(', ') : 'No permission required.'}`,
-					`${bold(italic('Cooldown:'))} ${cmd!.cooldown / 1e3} second(s)`
-				].join('\n'))
-				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+				.setDescription(
+					[
+						`${cmd?.description}`,
+						`${bold(italic('Category:'))} ${cmd?.category}`,
+						`${bold(italic('Permissions:'))} ${
+							permissions?.length
+								? permissions.map((item) => `\`${formatPermissions(item)}\``).join(', ')
+								: 'No permission required.'
+						}`,
+						`${bold(italic('Cooldown:'))} ${cmd!.cooldown / 1e3} second(s)`
+					].join('\n')
+				)
+				.setFooter({
+					text: `Powered by ${this.client.user.username}`,
+					iconURL: interaction.user.avatarURL() as string
+				});
 
 			return interaction.reply({ embeds: [embed] });
 		}
@@ -48,36 +63,44 @@ export default class extends Command {
 		let i1 = 8;
 		let page = 1;
 
-		const commands = this.client.interactions.filter(({ context, ownerOnly }) => !context && !ownerOnly)
-			.map(item => ({
-				id: app_command.find(i => i.name === item.name.split(' ')[0])?.id,
+		const commands = this.client.interactions
+			.filter(({ context, ownerOnly }) => !context && !ownerOnly)
+			.map((item) => ({
+				id: app_command.find((i) => i.name === item.name.split(' ')[0])?.id,
 				...item
 			}));
 
 		const category = commands
-			.filter((value, index, self) => index === self.findIndex(item => item.category === value.category))
-			.filter(item => {
+			.filter((value, index, self) => index === self.findIndex((item) => item.category === value.category))
+			.filter((item) => {
 				if (item.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
 				return true;
 			})
-			.map(item => ({ category: item.category }));
+			.map((item) => ({ category: item.category }));
 
-		let selectedCommands = commands.filter(cmd => {
-			if (cmd.guildOnly && !interaction.inGuild()) return false;
-			return true;
-		}).filter(cmd => cmd.category === 'General');
+		let selectedCommands = commands
+			.filter((cmd) => {
+				if (cmd.guildOnly && !interaction.inGuild()) return false;
+				return true;
+			})
+			.filter((cmd) => cmd.category === 'General');
 
 		const selectId = nanoid();
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>()
-			.setComponents(new StringSelectMenuBuilder()
+		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+			new StringSelectMenuBuilder()
 				.setCustomId(selectId)
 				.setMinValues(0)
 				.setMaxValues(category.length)
-				.setOptions(category.map(item => ({
-					value: item.category.toLowerCase(),
-					label: item.category,
-					...item.category === 'General' && { 'default': true }
-				})).sort((a, b) => a.label.localeCompare(b.label))));
+				.setOptions(
+					category
+						.map((item) => ({
+							value: item.category.toLowerCase(),
+							label: item.category,
+							...(item.category === 'General' && { default: true })
+						}))
+						.sort((a, b) => a.label.localeCompare(b.label))
+				)
+		);
 
 		const firstId = nanoid();
 		const previousId = nanoid();
@@ -85,36 +108,48 @@ export default class extends Command {
 		const nextId = nanoid();
 		const lastId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder()
-				.setCustomId(firstId)
-				.setStyle(ButtonStyle.Secondary)
-				.setEmoji(parseEmoji(Emojis.First) as APIMessageComponentEmoji)
-				.setDisabled(true))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(previousId)
-				.setStyle(ButtonStyle.Secondary)
-				.setEmoji(parseEmoji(Emojis.Previous) as APIMessageComponentEmoji)
-				.setDisabled(true))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(pageId)
-				.setStyle(ButtonStyle.Secondary)
-				.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`)
-				.setDisabled(true))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(nextId)
-				.setStyle(ButtonStyle.Secondary)
-				.setEmoji(parseEmoji(Emojis.Next) as APIMessageComponentEmoji))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(lastId)
-				.setStyle(ButtonStyle.Secondary)
-				.setEmoji(parseEmoji(Emojis.Last) as APIMessageComponentEmoji));
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId(firstId)
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji(parseEmoji(Emojis.First) as APIMessageComponentEmoji)
+					.setDisabled(true)
+			)
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId(previousId)
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji(parseEmoji(Emojis.Previous) as APIMessageComponentEmoji)
+					.setDisabled(true)
+			)
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId(pageId)
+					.setStyle(ButtonStyle.Secondary)
+					.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`)
+					.setDisabled(true)
+			)
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId(nextId)
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji(parseEmoji(Emojis.Next) as APIMessageComponentEmoji)
+			)
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId(lastId)
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji(parseEmoji(Emojis.Last) as APIMessageComponentEmoji)
+			);
 
 		const description = [
 			`Welcome to help menu, here is the list of commands!`,
 			`Need more help? Come join our ${hyperlink('support server', Links.SupportServer)}.\n`,
-			selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-				.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-				.slice(i0, i1).join('\n')
+			selectedCommands
+				.sort((a, b) => a.name.localeCompare(b.name))
+				.map((cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
+				.slice(i0, i1)
+				.join('\n')
 		];
 
 		if (selectedCommands.length <= 8) {
@@ -132,8 +167,15 @@ export default class extends Command {
 		const reply = await interaction.reply({ embeds: [embed], components: [select, button], fetchReply: true });
 
 		const filter = (i: StringSelectMenuInteraction | ButtonInteraction) => i.user.id === interaction.user.id;
-		const selectCollector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect });
-		const buttonCollector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 3e5 });
+		const selectCollector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.StringSelect
+		});
+		const buttonCollector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.Button,
+			time: 3e5
+		});
 
 		selectCollector.on('ignore', (i) => void i.deferUpdate());
 		selectCollector.on('collect', (i) => {
@@ -145,31 +187,35 @@ export default class extends Command {
 
 			const selected = i.values;
 			if (!selected.length) {
-				selectedCommands = commands.filter(cmd => {
-					if (cmd.guildOnly && !interaction.inGuild()) return false;
-					return true;
-				}).filter(cmd => cmd.category === 'General');
+				selectedCommands = commands
+					.filter((cmd) => {
+						if (cmd.guildOnly && !interaction.inGuild()) return false;
+						return true;
+					})
+					.filter((cmd) => cmd.category === 'General');
 
 				select.components[0]?.options
-					.filter(options => options.data.value === 'general')
-					.forEach(options => options.setDefault(true));
+					.filter((options) => options.data.value === 'general')
+					.forEach((options) => options.setDefault(true));
 				select.components[0]?.options
-					.filter(options => options.data.value !== 'general')
-					.forEach(options => options.setDefault(false));
+					.filter((options) => options.data.value !== 'general')
+					.forEach((options) => options.setDefault(false));
 			}
 
 			if (selected.length) {
-				selectedCommands = commands.filter(cmd => {
-					if (cmd.guildOnly && !interaction.inGuild()) return false;
-					return true;
-				}).filter(cmd => selected.includes(cmd.category.toLowerCase()));
+				selectedCommands = commands
+					.filter((cmd) => {
+						if (cmd.guildOnly && !interaction.inGuild()) return false;
+						return true;
+					})
+					.filter((cmd) => selected.includes(cmd.category.toLowerCase()));
 
 				select.components[0]?.options
-					.filter(options => selected.includes(options.data.value as string))
-					.forEach(options => options.setDefault(true));
+					.filter((options) => selected.includes(options.data.value as string))
+					.forEach((options) => options.setDefault(true));
 				select.components[0]?.options
-					.filter(options => !selected.includes(options.data.value as string))
-					.forEach(options => options.setDefault(false));
+					.filter((options) => !selected.includes(options.data.value as string))
+					.forEach((options) => options.setDefault(false));
 			}
 
 			if (page === 1) {
@@ -187,9 +233,15 @@ export default class extends Command {
 				button.components[4]?.setDisabled(false);
 			}
 
-			description.splice(2, description.length, selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-				.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-				.slice(i0, i1).join('\n'));
+			description.splice(
+				2,
+				description.length,
+				selectedCommands
+					.sort((a, b) => a.name.localeCompare(b.name))
+					.map((cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
+					.slice(i0, i1)
+					.join('\n')
+			);
 
 			embed.setDescription(description.join('\n'));
 
@@ -218,9 +270,17 @@ export default class extends Command {
 						button.components[4]?.setDisabled(false);
 					}
 
-					description.splice(2, description.length, selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-						.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-						.slice(i0, i1).join('\n'));
+					description.splice(
+						2,
+						description.length,
+						selectedCommands
+							.sort((a, b) => a.name.localeCompare(b.name))
+							.map(
+								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+							)
+							.slice(i0, i1)
+							.join('\n')
+					);
 
 					embed.setDescription(description.join('\n'));
 
@@ -242,9 +302,17 @@ export default class extends Command {
 						button.components[4]?.setDisabled(false);
 					}
 
-					description.splice(2, description.length, selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-						.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-						.slice(i0, i1).join('\n'));
+					description.splice(
+						2,
+						description.length,
+						selectedCommands
+							.sort((a, b) => a.name.localeCompare(b.name))
+							.map(
+								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+							)
+							.slice(i0, i1)
+							.join('\n')
+					);
 
 					embed.setDescription(description.join('\n'));
 
@@ -266,9 +334,17 @@ export default class extends Command {
 						button.components[4]?.setDisabled(true);
 					}
 
-					description.splice(2, description.length, selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-						.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-						.slice(i0, i1).join('\n'));
+					description.splice(
+						2,
+						description.length,
+						selectedCommands
+							.sort((a, b) => a.name.localeCompare(b.name))
+							.map(
+								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+							)
+							.slice(i0, i1)
+							.join('\n')
+					);
 
 					embed.setDescription(description.join('\n'));
 
@@ -290,9 +366,17 @@ export default class extends Command {
 						button.components[4]?.setDisabled(true);
 					}
 
-					description.splice(2, description.length, selectedCommands.sort((a, b) => a.name.localeCompare(b.name))
-						.map(cmd => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
-						.slice(i0, i1).join('\n'));
+					description.splice(
+						2,
+						description.length,
+						selectedCommands
+							.sort((a, b) => a.name.localeCompare(b.name))
+							.map(
+								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+							)
+							.slice(i0, i1)
+							.join('\n')
+					);
 
 					embed.setDescription(description.join('\n'));
 
@@ -320,16 +404,18 @@ export default class extends Command {
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
 		const focused = interaction.options.getFocused();
 
-		const choices = this.client.interactions.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()))
-			.map(commands => ({ ...commands }));
+		const choices = this.client.interactions
+			.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()))
+			.map((commands) => ({ ...commands }));
 
-		const respond = choices.sort((a, b) => a.name.localeCompare(b.name))
-			.filter(cmd => !cmd.context && !cmd.ownerOnly)
-			.filter(cmd => {
+		const respond = choices
+			.sort((a, b) => a.name.localeCompare(b.name))
+			.filter((cmd) => !cmd.context && !cmd.ownerOnly)
+			.filter((cmd) => {
 				if (cmd.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
 				return true;
 			})
-			.filter(cmd => {
+			.filter((cmd) => {
 				if (cmd.guildOnly && !interaction.inGuild()) return false;
 				return true;
 			})

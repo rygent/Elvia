@@ -33,19 +33,22 @@ export default class extends Command {
 		const cancelId = nanoid();
 		const deleteId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder()
-				.setCustomId(cancelId)
-				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel'))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(deleteId)
-				.setStyle(ButtonStyle.Danger)
-				.setLabel('Delete'));
+			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
+			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
 
-		const reply = await interaction.reply({ content: `Are you sure that you want to delete ${inlineCode(name)}?`, components: [button], ephemeral: true });
+		const reply = await interaction.reply({
+			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
+			components: [button],
+			ephemeral: true
+		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 6e4, max: 1 });
+		const collector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.Button,
+			time: 6e4,
+			max: 1
+		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {

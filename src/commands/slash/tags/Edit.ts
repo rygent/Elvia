@@ -2,7 +2,12 @@ import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
-import { AutocompleteInteraction, ChatInputCommandInteraction, InteractionCollector, ModalSubmitInteraction } from 'discord.js';
+import {
+	AutocompleteInteraction,
+	ChatInputCommandInteraction,
+	InteractionCollector,
+	ModalSubmitInteraction
+} from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { shuffleArray } from '../../../lib/utils/Function.js';
 import { prisma } from '../../../lib/utils/Prisma.js';
@@ -34,20 +39,27 @@ export default class extends Command {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Edit a server tag')
-			.setComponents(new ActionRowBuilder<TextInputBuilder>()
-				.setComponents(new TextInputBuilder()
-					.setCustomId('content')
-					.setStyle(TextInputStyle.Paragraph)
-					.setLabel('What\'s the new content?')
-					.setPlaceholder('PRO TIP: can use discord markdown syntax.')
-					.setValue(tag.content)
-					.setRequired(true)
-					.setMaxLength(2000)));
+			.setComponents(
+				new ActionRowBuilder<TextInputBuilder>().setComponents(
+					new TextInputBuilder()
+						.setCustomId('content')
+						.setStyle(TextInputStyle.Paragraph)
+						.setLabel("What's the new content?")
+						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
+						.setValue(tag.content)
+						.setRequired(true)
+						.setMaxLength(2000)
+				)
+			);
 
 		await interaction.showModal(modal);
 
 		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, max: 1 });
+		const collector = new InteractionCollector(this.client, {
+			filter,
+			interactionType: InteractionType.ModalSubmit,
+			max: 1
+		});
 
 		collector.on('collect', async (i) => {
 			const content = i.fields.getTextInputValue('content');

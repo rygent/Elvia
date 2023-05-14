@@ -1,5 +1,11 @@
 import type BaseClient from '../BaseClient.js';
-import { AutocompleteInteraction, BitField, CommandInteraction, PermissionsBitField, type PermissionsString } from 'discord.js';
+import {
+	AutocompleteInteraction,
+	BitField,
+	CommandInteraction,
+	PermissionsBitField,
+	type PermissionsString
+} from 'discord.js';
 import type { InteractionCommandOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 

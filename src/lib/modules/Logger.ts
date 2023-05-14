@@ -1,7 +1,16 @@
 import type BaseClient from '../BaseClient.js';
 import { createLogger, format, transports } from 'winston';
 import { Webhook } from './transports/Webhooks.js';
-import { blackBright, blueBright, cyanBright, greenBright, isColorSupported, magentaBright, redBright, yellowBright } from 'colorette';
+import {
+	blackBright,
+	blueBright,
+	cyanBright,
+	greenBright,
+	isColorSupported,
+	magentaBright,
+	redBright,
+	yellowBright
+} from 'colorette';
 import { inspect } from 'node:util';
 import moment from 'moment';
 

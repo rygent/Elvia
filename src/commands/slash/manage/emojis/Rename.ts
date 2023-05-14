@@ -31,29 +31,34 @@ export default class extends Command {
 		const cancelId = nanoid();
 		const renameId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder()
-				.setCustomId(cancelId)
-				.setStyle(ButtonStyle.Secondary)
-				.setLabel('Cancel'))
-			.addComponents(new ButtonBuilder()
-				.setCustomId(renameId)
-				.setStyle(ButtonStyle.Success)
-				.setLabel('Rename'));
+			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
+			.addComponents(new ButtonBuilder().setCustomId(renameId).setStyle(ButtonStyle.Success).setLabel('Rename'));
 
-		const reply = await interaction.reply({ content: `Are you sure to rename ${inlineCode(`:${emojis?.name}:`)} ${emojis} to ${inlineCode(`:${name}:`)}?`, components: [button] });
+		const reply = await interaction.reply({
+			content: `Are you sure to rename ${inlineCode(`:${emojis?.name}:`)} ${emojis} to ${inlineCode(`:${name}:`)}?`,
+			components: [button]
+		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 6e4, max: 1 });
+		const collector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.Button,
+			time: 6e4,
+			max: 1
+		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			switch (i.customId) {
 				case cancelId:
 					collector.stop();
-					return void i.update({ content: 'Cancelation of the emoji\'s name change.', components: [] });
+					return void i.update({ content: "Cancelation of the emoji's name change.", components: [] });
 				case renameId:
 					await emojis.edit({ name });
-					return void i.update({ content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully renamed.`, components: [] });
+					return void i.update({
+						content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully renamed.`,
+						components: []
+					});
 			}
 		});
 

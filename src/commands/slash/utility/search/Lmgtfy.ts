@@ -15,6 +15,8 @@ export default class extends Command {
 	public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		return interaction.reply({ content: hideLinkEmbed(`https://letmegooglethat.com/?q=${encodeURIComponent(search)}`) });
+		return interaction.reply({
+			content: hideLinkEmbed(`https://letmegooglethat.com/?q=${encodeURIComponent(search)}`)
+		});
 	}
 }

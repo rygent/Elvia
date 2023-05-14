@@ -31,19 +31,30 @@ export default class extends Command {
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const selectId = nanoid();
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>()
-			.setComponents(new StringSelectMenuBuilder()
+		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+			new StringSelectMenuBuilder()
 				.setCustomId(selectId)
 				.setPlaceholder('Select a game')
-				.setOptions(...response.map((data: any) => ({
-					value: data.id.toString(),
-					label: data.name
-				}))));
+				.setOptions(
+					...response.map((data: any) => ({
+						value: data.id.toString(),
+						label: data.name
+					}))
+				)
+		);
 
-		const reply = await interaction.reply({ content: `I found ${bold(response.length)} possible matches, please select one of the following:`, components: [select] });
+		const reply = await interaction.reply({
+			content: `I found ${bold(response.length)} possible matches, please select one of the following:`,
+			components: [select]
+		});
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({ filter, componentType: ComponentType.StringSelect, time: 6e4, max: 1 });
+		const collector = reply.createMessageComponentCollector({
+			filter,
+			componentType: ComponentType.StringSelect,
+			time: 6e4,
+			max: 1
+		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
@@ -52,13 +63,14 @@ export default class extends Command {
 				method: 'GET',
 				headers: { 'User-Agent': Advances.UserAgent },
 				maxRedirections: 20
-			}).then(res => res.body.json().then(item => item[ids!].data));
+			}).then((res) => res.body.json().then((item) => item[ids!].data));
 
-			const button = new ActionRowBuilder<ButtonBuilder>()
-				.setComponents(new ButtonBuilder()
+			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
+				new ButtonBuilder()
 					.setStyle(ButtonStyle.Link)
 					.setLabel('Open in Browser')
-					.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`));
+					.setURL(`https://store.steampowered.com/app/${data.steam_appid}/`)
+			);
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
@@ -68,14 +80,33 @@ export default class extends Command {
 				.addFields({
 					name: underscore(italic('Detail')),
 					value: [
-						`${bold(italic('Release Date:'))} ${data.release_date.coming_soon ? 'Coming soon' : data.release_date.date}`,
-						`${bold(italic('Price:'))} ${inlineCode(data.price_overview ? data.price_overview.final_formatted : 'Free')}`,
+						`${bold(italic('Release Date:'))} ${
+							data.release_date.coming_soon ? 'Coming soon' : data.release_date.date
+						}`,
+						`${bold(italic('Price:'))} ${inlineCode(
+							data.price_overview ? data.price_overview.final_formatted : 'Free'
+						)}`,
 						`${bold(italic('Genres:'))} ${data.genres.map(({ description }: any) => description).join(', ')}`,
-						...data.platforms ? [`${bold(italic('Platform:'))} ${titleCase(formatArray(Object.keys(data.platforms).filter(item => data.platforms[item]))).replace(/And/g, 'and')}`] : [],
-						...data.metacritic ? [`${bold(italic('Metascores:'))} ${data.metacritic.score} from ${hyperlink('metacritic', data.metacritic.url)}`] : [],
+						...(data.platforms
+							? [
+									`${bold(italic('Platform:'))} ${titleCase(
+										formatArray(Object.keys(data.platforms).filter((item) => data.platforms[item]))
+									).replace(/And/g, 'and')}`
+							  ]
+							: []),
+						...(data.metacritic
+							? [
+									`${bold(italic('Metascores:'))} ${data.metacritic.score} from ${hyperlink(
+										'metacritic',
+										data.metacritic.url
+									)}`
+							  ]
+							: []),
 						`${bold(italic('Developers:'))} ${data.developers.join(', ')}`,
 						`${bold(italic('Publishers:'))} ${data.publishers.join(', ')}`,
-						...data.content_descriptors?.notes ? [`\n${italic(data.content_descriptors.notes.replace(/\r|\n/g, ''))}`] : []
+						...(data.content_descriptors?.notes
+							? [`\n${italic(data.content_descriptors.notes.replace(/\r|\n/g, ''))}`]
+							: [])
 					].join('\n'),
 					inline: false
 				})

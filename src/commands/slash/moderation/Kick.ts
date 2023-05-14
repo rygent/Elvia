@@ -23,14 +23,31 @@ export default class extends Command {
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
-		if (!member) return interaction.reply({ content: 'Member not found, please verify that this user is a server member.', ephemeral: true });
-
-		if (member.user.id === interaction.user.id) return interaction.reply({ content: `You can't kick yourself.`, ephemeral: true });
-		if (member.user.id === this.client.user.id) return interaction.reply({ content: `You cannot kick me!`, ephemeral: true });
-		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
-			return interaction.reply({ content: 'You cannot kick a member who has a higher or equal role than yours.', ephemeral: true });
+		if (!member) {
+			return interaction.reply({
+				content: 'Member not found, please verify that this user is a server member.',
+				ephemeral: true
+			});
 		}
-		if (!member.kickable) return interaction.reply({ content: `I cannot kick a member who has a higher or equal role than mine.`, ephemeral: true });
+
+		if (member.user.id === interaction.user.id) {
+			return interaction.reply({ content: `You can't kick yourself.`, ephemeral: true });
+		}
+		if (member.user.id === this.client.user.id) {
+			return interaction.reply({ content: `You cannot kick me!`, ephemeral: true });
+		}
+		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
+			return interaction.reply({
+				content: 'You cannot kick a member who has a higher or equal role than yours.',
+				ephemeral: true
+			});
+		}
+		if (!member.kickable) {
+			return interaction.reply({
+				content: `I cannot kick a member who has a higher or equal role than mine.`,
+				ephemeral: true
+			});
+		}
 
 		await interaction.deferReply({ ephemeral: !visible });
 		await interaction.guild?.members.kick(member, reason as string);
@@ -38,9 +55,7 @@ export default class extends Command {
 		if (notify) {
 			if (notify !== 'dont-notify') {
 				if (!user.bot) {
-					const replies = [
-						`You've been kicked from ${bold(interaction.guild?.name)}`
-					];
+					const replies = [`You've been kicked from ${bold(interaction.guild?.name)}`];
 
 					if (reason && notify === 'notify-with-reason') {
 						replies.splice(1, 0, `${bold(italic('Reason:'))} ${reason}`);
@@ -51,10 +66,9 @@ export default class extends Command {
 			}
 		}
 
-		const replies = [
-			`${bold(user.tag)} was kicked!`,
-			...reason ? [`${bold(italic('Reason:'))} ${reason}`] : []
-		].join('\n');
+		const replies = [`${bold(user.tag)} was kicked!`, ...(reason ? [`${bold(italic('Reason:'))} ${reason}`] : [])].join(
+			'\n'
+		);
 
 		return interaction.editReply({ content: replies });
 	}

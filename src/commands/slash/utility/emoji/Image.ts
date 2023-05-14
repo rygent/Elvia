@@ -20,8 +20,7 @@ export default class extends Command {
 		const emojis = fetched?.get(parseEmoji(emoji)?.id as string);
 		if (!emojis?.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
-		const attachment = new AttachmentBuilder(emojis.url)
-			.setName(`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`);
+		const attachment = new AttachmentBuilder(emojis.url).setName(`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`);
 
 		return interaction.reply({ files: [attachment] });
 	}

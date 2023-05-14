@@ -26,8 +26,7 @@ export default class extends Command {
 				return message.channel.send({ content: replies });
 			}
 
-			const attachment = new AttachmentBuilder(Buffer.from((stdout ?? error).toString()))
-				.setName('output.txt');
+			const attachment = new AttachmentBuilder(Buffer.from((stdout ?? error).toString())).setName('output.txt');
 
 			return message.channel.send({
 				content: 'Output was too long! The result has been sent as a file.',

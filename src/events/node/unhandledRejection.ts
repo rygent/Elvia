@@ -27,13 +27,18 @@ export default class extends Event {
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Red)
 				.setTitle('Unhandled Rejection')
-				.setDescription([
-					`${codeBlock('xl', error.stack as string)}`,
-					`${bold(italic('Name:'))} ${error.name}`,
-					`${bold(italic('Message:'))} ${error.message}`,
-					`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
-				].join('\n'))
-				.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: this.client.user.avatarURL() as string });
+				.setDescription(
+					[
+						`${codeBlock('xl', error.stack as string)}`,
+						`${bold(italic('Name:'))} ${error.name}`,
+						`${bold(italic('Message:'))} ${error.message}`,
+						`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
+					].join('\n')
+				)
+				.setFooter({
+					text: `Powered by ${this.client.user.username}`,
+					iconURL: this.client.user.avatarURL() as string
+				});
 
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),

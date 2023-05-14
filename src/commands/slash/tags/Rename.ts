@@ -2,7 +2,12 @@ import type BaseClient from '../../../lib/BaseClient.js';
 import Command from '../../../lib/structures/Interaction.js';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
-import { AutocompleteInteraction, ChatInputCommandInteraction, InteractionCollector, ModalSubmitInteraction } from 'discord.js';
+import {
+	AutocompleteInteraction,
+	ChatInputCommandInteraction,
+	InteractionCollector,
+	ModalSubmitInteraction
+} from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { shuffleArray, slugify } from '../../../lib/utils/Function.js';
 import { prisma } from '../../../lib/utils/Prisma.js';
@@ -34,34 +39,46 @@ export default class extends Command {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Rename a server tag')
-			.setComponents(new ActionRowBuilder<TextInputBuilder>()
-				.setComponents(new TextInputBuilder()
-					.setCustomId('name')
-					.setStyle(TextInputStyle.Short)
-					.setLabel('What\'s the new name?')
-					.setRequired(true)
-					.setMaxLength(100)));
+			.setComponents(
+				new ActionRowBuilder<TextInputBuilder>().setComponents(
+					new TextInputBuilder()
+						.setCustomId('name')
+						.setStyle(TextInputStyle.Short)
+						.setLabel("What's the new name?")
+						.setRequired(true)
+						.setMaxLength(100)
+				)
+			);
 
 		await interaction.showModal(modal);
 
 		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, { filter, interactionType: InteractionType.ModalSubmit, max: 1 });
+		const collector = new InteractionCollector(this.client, {
+			filter,
+			interactionType: InteractionType.ModalSubmit,
+			max: 1
+		});
 
 		collector.on('collect', async (i) => {
 			const names = i.fields.getTextInputValue('name');
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
-			if (tags) return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+			if (tags) {
+				return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+			}
 
 			await prisma.tag.update({
 				where: { id: tag.id },
 				data: {
 					slug: slugify(names),
 					name: names
-				 }
+				}
 			});
 
-			return void i.reply({ content: `Successfully renamed the tag ${inlineCode(name)} to ${inlineCode(slugify(names))}.`, ephemeral: true });
+			return void i.reply({
+				content: `Successfully renamed the tag ${inlineCode(name)} to ${inlineCode(slugify(names))}.`,
+				ephemeral: true
+			});
 		});
 	}
 

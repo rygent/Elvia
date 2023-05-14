@@ -34,21 +34,34 @@ export default class extends Command {
 			.setColor(Colors.Default)
 			.setAuthor({ name: this.client.user.tag, iconURL: this.client.user.displayAvatarURL() })
 			.setThumbnail(this.client.user.displayAvatarURL({ size: 512 }))
-			.setDescription([
-				`${bold(italic('ID:'))} ${inlineCode(this.client.user.id)}`,
-				`${bold(italic('Developer:'))} ${formatArray(this.client.owners!.map(user => this.client.users.cache.get(user)?.tag as string))}`,
-				`${bold(italic('Version:'))} v${this.client.version}`,
-				`${bold(italic('Node.JS:'))} ${process.version}`,
-				`${bold(italic('TypeScript:'))} v${typescript.version}`,
-				`${bold(italic('Library:'))} Discord.JS v${version}`,
-				`${bold(italic('Created:'))} ${time(new Date(this.client.user.createdAt), 'D')} (${time(new Date(this.client.user.createdAt), 'R')})`
-			].join('\n'))
+			.setDescription(
+				[
+					`${bold(italic('ID:'))} ${inlineCode(this.client.user.id)}`,
+					`${bold(italic('Developer:'))} ${formatArray(
+						this.client.owners!.map((user) => this.client.users.cache.get(user)?.tag as string)
+					)}`,
+					`${bold(italic('Version:'))} v${this.client.version}`,
+					`${bold(italic('Node.JS:'))} ${process.version}`,
+					`${bold(italic('TypeScript:'))} v${typescript.version}`,
+					`${bold(italic('Library:'))} Discord.JS v${version}`,
+					`${bold(italic('Created:'))} ${time(new Date(this.client.user.createdAt), 'D')} (${time(
+						new Date(this.client.user.createdAt),
+						'R'
+					)})`
+				].join('\n')
+			)
 			.addFields({
 				name: underscore(italic('System')),
 				value: [
-					`${bold(italic('OS:'))} ${sys.osInfo.distro} ${sys.osInfo.release}${sys.osInfo.platform === 'Windows' ? '' : ` ${sys.osInfo.kernel}`} ${sys.osInfo.arch}`,
-					`${bold(italic('CPU:'))} ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speed}Ghz${isNaN(sys.cpu.speedMax) ? '' : ` ${sys.cpu.speedMax}Ghz`} ${sys.cpu.cores} Cores`,
-					`${bold(italic('Memory:'))} ${formatBytes(process.memoryUsage().heapUsed)} / ${formatBytes(process.memoryUsage().heapTotal)} (${formatBytes(sys.mem.total)})`,
+					`${bold(italic('OS:'))} ${sys.osInfo.distro} ${sys.osInfo.release}${
+						sys.osInfo.platform === 'Windows' ? '' : ` ${sys.osInfo.kernel}`
+					} ${sys.osInfo.arch}`,
+					`${bold(italic('CPU:'))} ${sys.cpu.manufacturer} ${sys.cpu.brand} @ ${sys.cpu.speed}Ghz${
+						isNaN(sys.cpu.speedMax) ? '' : ` ${sys.cpu.speedMax}Ghz`
+					} ${sys.cpu.cores} Cores`,
+					`${bold(italic('Memory:'))} ${formatBytes(process.memoryUsage().heapUsed)} / ${formatBytes(
+						process.memoryUsage().heapTotal
+					)} (${formatBytes(sys.mem.total)})`,
 					`${bold(italic('Uptime:'))} ${duration.format(this.client.uptime, undefined, { right: ', ' })}`,
 					`${bold(italic('Host:'))} ${duration.format(sys.time.uptime * 1e3, undefined, { right: ', ' })}`
 				].join('\n'),

@@ -31,13 +31,18 @@ export default class extends Event {
 				.setColor(Colors.Green)
 				.setTitle(`${this.client.user.username} was added to a new Server!`)
 				.setThumbnail(guild.iconURL({ size: 512 }))
-				.setDescription([
-					`${bold(italic('Server:'))} ${guild.name} (${inlineCode(guild.id)})`,
-					`${bold(italic('Owner:'))} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`,
-					`${bold(italic('Channels:'))} ${formatNumber(guild.channels.cache.size)}`,
-					`${bold(italic('Members:'))} ${formatNumber(guild.memberCount)}`
-				].join('\n'))
-				.setFooter({ text: `${guildCount} guilds | ${userCount} users`, iconURL: this.client.user.avatarURL() as string });
+				.setDescription(
+					[
+						`${bold(italic('Server:'))} ${guild.name} (${inlineCode(guild.id)})`,
+						`${bold(italic('Owner:'))} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`,
+						`${bold(italic('Channels:'))} ${formatNumber(guild.channels.cache.size)}`,
+						`${bold(italic('Members:'))} ${formatNumber(guild.memberCount)}`
+					].join('\n')
+				)
+				.setFooter({
+					text: `${guildCount} guilds | ${userCount} users`,
+					iconURL: this.client.user.avatarURL() as string
+				});
 
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),
