@@ -1,6 +1,6 @@
 import type BaseClient from '../BaseClient.js';
 import { BitField, Message, PermissionsBitField, type PermissionsString } from 'discord.js';
-import type { Awaitable } from '@sapphire/utilities';
+import type { Awaitable } from '@discordjs/util';
 
 export default abstract class Command {
 	public client: BaseClient<true>;

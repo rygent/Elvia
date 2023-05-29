@@ -1,5 +1,5 @@
 import type BaseClient from '../BaseClient.js';
-import type { Awaitable } from '@sapphire/utilities';
+import type { Awaitable } from '@discordjs/util';
 import type { EventEmitter } from 'node:events';
 
 export default abstract class Event {

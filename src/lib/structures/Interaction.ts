@@ -6,7 +6,7 @@ import {
 	PermissionsBitField,
 	type PermissionsString
 } from 'discord.js';
-import type { Awaitable } from '@sapphire/utilities';
+import type { Awaitable } from '@discordjs/util';
 
 export default abstract class Interaction {
 	public client: BaseClient<true>;
