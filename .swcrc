@@ -15,5 +15,5 @@
       "keepImportAssertions": true
     }
   },
-  "exclude": ["^src\/lib\/types\/.*.ts$"]
+  "exclude": ["^src\/types\/.*.ts$"]
 }
