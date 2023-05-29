@@ -1,5 +1,4 @@
 import type BaseClient from '../BaseClient.js';
-import type { EventOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 import type { EventEmitter } from 'node:events';
 
@@ -9,6 +8,7 @@ export default abstract class Event {
 	public type: 'once' | 'on';
 	public emitter: EventEmitter;
 
+	// eslint-disable-next-line no-undef
 	public constructor(client: BaseClient, options: EventOptions) {
 		this.client = client;
 		this.name = options.name;

@@ -1,7 +1,6 @@
 import { BitField, Client, Options, Partials, PermissionsBitField, type PermissionsString } from 'discord.js';
 import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
-import type { ClientOptions } from './types/Global.js';
 import type Interaction from './structures/Interaction.js';
 import type Command from './structures/Command.js';
 import type Event from './structures/Event.js';
@@ -26,6 +25,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 	public owners: string[] | undefined;
 	public defaultPermissions!: Readonly<BitField<PermissionsString, bigint>>;
 
+	// eslint-disable-next-line no-undef
 	public constructor(options: ClientOptions) {
 		super({
 			intents: [
@@ -62,6 +62,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		this.debug = options.debug;
 	}
 
+	// eslint-disable-next-line no-undef
 	private async validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 		if (semver.lt(process.versions.node, '16.14.0')) {

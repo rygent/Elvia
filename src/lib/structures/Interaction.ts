@@ -6,7 +6,6 @@ import {
 	PermissionsBitField,
 	type PermissionsString
 } from 'discord.js';
-import type { InteractionCommandOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 
 export default abstract class Interaction {
@@ -23,6 +22,7 @@ export default abstract class Interaction {
 	public readonly ownerOnly: boolean;
 	public readonly nsfw: boolean;
 
+	// eslint-disable-next-line no-undef
 	public constructor(client: BaseClient, options: InteractionCommandOptions) {
 		this.client = client;
 		this.name = options.name;

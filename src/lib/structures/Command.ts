@@ -1,6 +1,5 @@
 import type BaseClient from '../BaseClient.js';
 import { BitField, Message, PermissionsBitField, type PermissionsString } from 'discord.js';
-import type { MessageCommandOptions } from '../types/Global.js';
 import type { Awaitable } from '@sapphire/utilities';
 
 export default abstract class Command {
@@ -17,6 +16,7 @@ export default abstract class Command {
 	public readonly ownerOnly: boolean;
 	public readonly nsfw: boolean;
 
+	// eslint-disable-next-line no-undef
 	public constructor(client: BaseClient, options: MessageCommandOptions) {
 		this.client = client;
 		this.name = options.name;
