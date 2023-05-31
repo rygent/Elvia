@@ -170,24 +170,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@favware/cliff-jumper@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@favware/cliff-jumper@npm:2.0.0"
+"@favware/cliff-jumper@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@favware/cliff-jumper@npm:2.0.1"
   dependencies:
     "@favware/conventional-changelog-angular": ^5.0.15
-    "@sapphire/result": ^2.6.0
-    "@sapphire/utilities": 3.11.0
-    colorette: ^2.0.19
-    commander: ^10.0.0
+    "@sapphire/result": ^2.6.4
+    "@sapphire/utilities": 3.11.2
+    colorette: ^2.0.20
+    commander: ^10.0.1
     conventional-recommended-bump: ^6.1.0
-    git-cliff: ^1.1.2
+    git-cliff: ^1.2.0
     js-yaml: ^4.1.0
-    semver: ^7.3.8
-    typescript: ^4.9.5
+    semver: ^7.5.1
   bin:
     cj: ./dist/cli.js
     cliff-jumper: ./dist/cli.js
-  checksum: 432257b5a0ba4dd1b8a784c309d9b48cecb0d8761fe7bc393742a9788c3107c2c5dabfe29ac28ac9ab7ce9bd429a2d5826c837e577813bb5576af3dee7ba04ea
+  checksum: 2c802a490dc9d2b39efd344056442533f55e1c1fb2cd9e472ccabd412446b783958c49ba58a928500e20c3ed2249d532d9f895e1cced486105ad2ac3442d31da
   languageName: node
   linkType: hard
 
@@ -412,7 +411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/result@npm:^2.6.0":
+"@sapphire/result@npm:^2.6.4":
   version: 2.6.4
   resolution: "@sapphire/result@npm:2.6.4"
   checksum: 37d8af05544bf6fcb9b10cf4aa4d60ab0f0798c4e302f4e401f63b1347602b89b10cbbf6fe789681dc2060ad15c3093c96f86dfbee6ac463dba060cb731d7208
@@ -462,14 +461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/utilities@npm:3.11.0":
-  version: 3.11.0
-  resolution: "@sapphire/utilities@npm:3.11.0"
-  checksum: 3c8521038b8879524e8114f39eefc8b3b06cf825995f709684238b5cb14bd7df06d232a26a88f79160df290a66f9aa3133f5ce4ff8e2398033db9f301ad31e0d
-  languageName: node
-  linkType: hard
-
-"@sapphire/utilities@npm:^3.11.0, @sapphire/utilities@npm:^3.11.2":
+"@sapphire/utilities@npm:3.11.2, @sapphire/utilities@npm:^3.11.0, @sapphire/utilities@npm:^3.11.2":
   version: 3.11.2
   resolution: "@sapphire/utilities@npm:3.11.2"
   checksum: af06b3f52156af397a3be564f992bedefd728ea2d44fee8ffdc00242de0454075e722091cc213d4ad2fb4ef5c3b78740bf5e7f75242851d31a56206f51a8f403
@@ -1323,7 +1315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:^2.0.19, colorette@npm:^2.0.20":
+"colorette@npm:^2.0.20":
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
   checksum: 0c016fea2b91b733eb9f4bcdb580018f52c0bc0979443dad930e5037a968237ac53d9beb98e218d2e9235834f8eebce7f8e080422d6194e957454255bde71d3d
@@ -1340,7 +1332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^10.0.0, commander@npm:^10.0.1":
+"commander@npm:^10.0.1":
   version: 10.0.1
   resolution: "commander@npm:10.0.1"
   checksum: 436901d64a818295803c1996cd856621a74f30b9f9e28a588e726b2b1670665bccd7c1a77007ebf328729f0139838a88a19265858a0fa7a8728c4656796db948
@@ -1620,7 +1612,7 @@ __metadata:
   resolution: "elvia@workspace:."
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
-    "@favware/cliff-jumper": ^2.0.0
+    "@favware/cliff-jumper": ^2.0.1
     "@iamtraction/google-translate": ^2.0.1
     "@prisma/client": ^4.14.1
     "@rygent/anilist": ^1.3.1
@@ -2242,7 +2234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-cliff@npm:^1.1.2":
+"git-cliff@npm:^1.2.0":
   version: 1.2.0
   resolution: "git-cliff@npm:1.2.0"
   dependencies:
@@ -4411,16 +4403,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.5":
-  version: 4.9.5
-  resolution: "typescript@npm:4.9.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^5.0.4":
   version: 5.0.4
   resolution: "typescript@npm:5.0.4"
@@ -4428,16 +4410,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 82b94da3f4604a8946da585f7d6c3025fff8410779e5bde2855ab130d05e4fd08938b9e593b6ebed165bda6ad9292b230984f10952cf82f0a0ca07bbeaa08172
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
-  version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
