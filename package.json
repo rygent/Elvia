@@ -54,7 +54,7 @@
     "semver": "^7.5.1",
     "systeminformation": "^5.17.12",
     "undici": "^5.22.1",
-    "winston": "^3.8.2"
+    "winston": "^3.9.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",
