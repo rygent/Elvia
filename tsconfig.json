@@ -10,8 +10,10 @@
     "removeComments": true,
     "importHelpers": true,
     "downlevelIteration": true,
+    "preserveConstEnums": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -31,6 +33,6 @@
     "allowUnreachableCode": false,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist/**/*"]
 }

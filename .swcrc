@@ -9,11 +9,12 @@
     "parser": {
       "syntax": "typescript",
       "tsx": false,
-      "dts": false
+      "decorators": false,
+      "dynamicImport": false
     },
     "experimental": {
       "keepImportAssertions": true
     }
   },
-  "exclude": ["^src\/types\/.*.ts$"]
+  "exclude": ["^src/types/.*.ts$"]
 }
