@@ -30,7 +30,7 @@
     "prettier-plugin-prisma": "^4.13.0",
     "prisma": "^4.15.0",
     "rimraf": "^5.0.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
