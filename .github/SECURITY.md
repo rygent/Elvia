@@ -6,8 +6,8 @@ If you find a vulnerability in Elvia's codebase please report it immediately. If
 by Elvia's users in any shape or form please join the [Support Server][discord server]. In case the vulnerability is not exploitable you are free
 to either:
 
-- Use the GitHub issue tracker to report the issue
-- Report the issue in the Discord server
+-   Use the GitHub issue tracker to report the issue
+-   Report the issue in the Discord server
 
 <!-- LINKS -->
 

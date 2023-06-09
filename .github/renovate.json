@@ -14,29 +14,35 @@
       "Change": "All locks refreshed"
     }
   },
-  "packageRules": [{
-    "matchUpdateTypes": ["major"],
-    "dependencyDashboardApproval": true
-  }, {
-    "matchPackagePatterns": ["*"],
-    "semanticCommitType": "chore",
-    "commitMessageAction": "Bump",
-    "commitMessageTopic": "{{depName}}",
-    "rangeStrategy": "bump",
-    "recreateClosed": true
-  }, {
-    "matchDepTypes": ["dependencies", "require"],
-    "semanticCommitType": "chore"
-  }, {
-    "matchDepTypes": ["devDependencies"],
-    "semanticCommitScope": "deps-dev"
-  }, {
-    "matchDepTypes": ["action"],
-    "semanticCommitType": "ci",
-    "semanticCommitScope": null,
-    "addLabels": ["ci"],
-    "automerge": true
-  }],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "semanticCommitType": "chore",
+      "commitMessageAction": "Bump",
+      "commitMessageTopic": "{{depName}}",
+      "rangeStrategy": "bump",
+      "recreateClosed": true
+    },
+    {
+      "matchDepTypes": ["dependencies", "require"],
+      "semanticCommitType": "chore"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchDepTypes": ["action"],
+      "semanticCommitType": "ci",
+      "semanticCommitScope": null,
+      "addLabels": ["ci"],
+      "automerge": true
+    }
+  ],
   "prConcurrentLimit": 10,
   "prHourlyLimit": 5,
   "schedule": ["every weekend"],

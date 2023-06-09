@@ -20,30 +20,35 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 
 ## Features
 
-* Slash command based.
-* Server, Emoji and User info.
-* Powerful Message Pruning.
-* Easy Moderation `ban`, `kick`, `timeout`, etc.
-* Fun commands `choose`, `lovecalc`, `roulette`, etc.
-* Search commands `anime`, `manga`, `spotify`, etc.
-* Interact commands `kiss`, `hug`, `cuddle`, etc.
-* Translate message to user setting language in context menu.
+-   Slash command based.
+-   Server, Emoji and User info.
+-   Powerful Message Pruning.
+-   Easy Moderation `ban`, `kick`, `timeout`, etc.
+-   Fun commands `choose`, `lovecalc`, `roulette`, etc.
+-   Search commands `anime`, `manga`, `spotify`, etc.
+-   Interact commands `kiss`, `hug`, `cuddle`, etc.
+-   Translate message to user setting language in context menu.
 
 ## Requirements
+
 1. [Node.JS v16.14+][node.js] or higher.
 2. [MongoDB v5.0+][mongodb] or higher.
 3. [Yarn v1.22+][yarn] or higher. (Highly recommended)
 
 ## Invite
+
 [![Discord bot][discord bot]][top.gg]
 
 ## Contributing
+
 For contributing instructions, or to find out all of the ways you can contribute, read [`CONTRIBUTING`][contributing]. All contributions are welcome and encouraged, but please [read the information][code of conduct] given before doing so.
 
 ## License
+
 This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][license] for more information.
 
 ---
+
 <i>This is not an official Discord product. It is not affiliated with nor endorsed by Discord Inc.</i>
 
 <!-- LINKS -->
@@ -52,11 +57,9 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 [continuous integration]: https://github.com/Rygent/ElviaBot/actions/workflows/continuous-integration.yml
 [codacy]: https://app.codacy.com/gh/Rygent/ElviaBot/dashboard
 [license]: ./LICENSE
-
 [node.js]: https://nodejs.org/en/download
 [mongodb]: https://www.mongodb.com/try/download/community
 [yarn]: https://yarnpkg.com/en/docs/install
-
 [discord.js github]: https://github.com/discordjs/discord.js
 [discord server]: https://discord.gg/FD5MMabf8Y
 [top.gg]: https://top.gg/bot/614645495779819551
