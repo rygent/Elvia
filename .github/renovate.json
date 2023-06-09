@@ -1,10 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":enableVulnerabilityAlerts"],
+  "extends": ["config:base"],
   "labels": ["dependencies"],
   "lockFileMaintenance": {
-    "extends": [":dependencyDashboardApproval"],
     "enabled": true,
+    "dependencyDashboardApproval": true,
     "recreateClosed": true,
     "rebaseStalePrs": true,
     "branchTopic": "lock-file-maintenance",
@@ -47,6 +47,7 @@
   "prHourlyLimit": 5,
   "schedule": ["every weekend"],
   "vulnerabilityAlerts": {
+    "enabled": true,
     "schedule": ["at any time"],
     "addLabels": ["security"],
     "stabilityDays": 0,
