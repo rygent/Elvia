@@ -1,5 +1,5 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import {
@@ -10,8 +10,8 @@ import {
 	StringSelectMenuInteraction
 } from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
-import { Colors, Emojis, Links } from '../../../lib/utils/Constants.js';
-import { formatPermissions, isNsfwChannel } from '../../../lib/utils/Function.js';
+import { Colors, Emojis, Links } from '#lib/utils/Constants.js';
+import { formatPermissions, isNsfwChannel } from '#lib/utils/Function.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {

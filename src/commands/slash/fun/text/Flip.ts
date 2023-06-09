@@ -1,5 +1,5 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 
 export default class extends Command {

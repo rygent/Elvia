@@ -1,5 +1,5 @@
-import type BaseClient from '../../lib/BaseClient.js';
-import Event from '../../lib/structures/Event.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Event from '#lib/structures/Event.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

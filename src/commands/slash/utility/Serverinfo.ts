@@ -1,10 +1,10 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore, userMention } from '@discordjs/formatters';
-import { Colors } from '../../../lib/utils/Constants.js';
-import { formatArray, formatNumber, trimArray } from '../../../lib/utils/Function.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { formatArray, formatNumber, trimArray } from '#lib/utils/Function.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {

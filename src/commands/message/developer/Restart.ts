@@ -1,5 +1,5 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Command.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Command.js';
 import type { Message } from 'discord.js';
 import { italic, underscore } from '@discordjs/formatters';
 

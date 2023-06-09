@@ -4,6 +4,15 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "Node",
+    "baseUrl": "./",
+    "paths": {
+      "#assets/*": ["./src/assets/*"],
+      "#commands/*": ["./src/commands/*"],
+      "#events/*": ["./src/events/*"],
+      "#interactions/*": ["./src/interactions/*"],
+      "#lib/*": ["./src/lib/*"],
+      "#types/*": ["./src/types/*"]
+    },
     "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "./dist",

@@ -1,11 +1,11 @@
-import type BaseClient from '../../lib/BaseClient.js';
-import Event from '../../lib/structures/Event.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Event from '#lib/structures/Event.js';
 import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import type { CommandInteraction, GuildMember } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic, underscore } from '@discordjs/formatters';
-import { Links } from '../../lib/utils/Constants.js';
-import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '../../lib/utils/Function.js';
+import { Links } from '#lib/utils/Constants.js';
+import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Function.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

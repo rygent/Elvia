@@ -1,11 +1,11 @@
-import type BaseClient from '../../lib/BaseClient.js';
-import Event from '../../lib/structures/Event.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Event from '#lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors, Links } from '../../lib/utils/Constants.js';
-import { formatNumber } from '../../lib/utils/Function.js';
-import { prisma } from '../../lib/utils/Prisma.js';
+import { Colors, Links } from '#lib/utils/Constants.js';
+import { formatNumber } from '#lib/utils/Function.js';
+import { prisma } from '#lib/utils/Prisma.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

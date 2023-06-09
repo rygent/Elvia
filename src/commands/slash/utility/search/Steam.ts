@@ -1,11 +1,11 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, inlineCode, italic, underscore } from '@discordjs/formatters';
-import { Advances, Colors } from '../../../../lib/utils/Constants.js';
-import { formatArray, titleCase } from '../../../../lib/utils/Function.js';
+import { Advances, Colors } from '#lib/utils/Constants.js';
+import { formatArray, titleCase } from '#lib/utils/Function.js';
 import { nanoid } from 'nanoid';
 import { request } from 'undici';
 

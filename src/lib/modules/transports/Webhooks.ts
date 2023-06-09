@@ -1,10 +1,10 @@
-import type BaseClient from '../../BaseClient.js';
+import type BaseClient from '#lib/BaseClient.js';
 import TransportStream from 'winston-transport';
 import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Colors, Links } from '../../utils/Constants.js';
+import { Colors, Links } from '#lib/utils/Constants.js';
 import { isColorSupported } from 'colorette';
 import { inspect } from 'node:util';
 

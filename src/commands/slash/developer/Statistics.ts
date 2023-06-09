@@ -1,10 +1,10 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, version } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
-import { Colors } from '../../../lib/utils/Constants.js';
-import { formatArray, formatBytes } from '../../../lib/utils/Function.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { formatArray, formatBytes } from '#lib/utils/Function.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import systeminformation from 'systeminformation';
 import typescript from 'typescript';

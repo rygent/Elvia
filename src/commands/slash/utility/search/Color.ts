@@ -1,11 +1,11 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { request } from 'undici';
-import { Advances } from '../../../../lib/utils/Constants.js';
+import { Advances } from '#lib/utils/Constants.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {

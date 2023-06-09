@@ -1,5 +1,5 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import type { ContextMenuCommandInteraction } from 'discord.js';
 import translate from '@iamtraction/google-translate';
 

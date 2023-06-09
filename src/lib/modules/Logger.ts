@@ -1,6 +1,6 @@
-import type BaseClient from '../BaseClient.js';
+import type BaseClient from '#lib/BaseClient.js';
 import { createLogger, format, transports } from 'winston';
-import { Webhook } from './transports/Webhooks.js';
+import { Webhook } from '#lib/modules/transports/Webhooks.js';
 import {
 	blackBright,
 	blueBright,

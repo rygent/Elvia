@@ -1,4 +1,4 @@
-import type BaseClient from '../lib/BaseClient.js';
+import type BaseClient from '#lib/BaseClient.js';
 import type { PermissionsString } from 'discord.js';
 import type { EventEmitter } from 'node:events';
 

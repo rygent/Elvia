@@ -1,5 +1,5 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Command.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Command.js';
 import { AttachmentBuilder, Message } from 'discord.js';
 import { codeBlock } from '@discordjs/formatters';
 import { exec } from 'node:child_process';

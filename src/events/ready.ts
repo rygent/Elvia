@@ -1,7 +1,7 @@
-import type BaseClient from '../lib/BaseClient.js';
-import Event from '../lib/structures/Event.js';
-import { formatNumber } from '../lib/utils/Function.js';
-import { prisma } from '../lib/utils/Prisma.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Event from '#lib/structures/Event.js';
+import { formatNumber } from '#lib/utils/Function.js';
+import { prisma } from '#lib/utils/Prisma.js';
 import { redBright, underline } from 'colorette';
 
 export default class extends Event {

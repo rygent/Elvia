@@ -1,4 +1,4 @@
-import Logger from '../modules/Logger.js';
+import Logger from '#lib/modules/Logger.js';
 import { italic, underline } from 'colorette';
 const logger = new Logger();
 

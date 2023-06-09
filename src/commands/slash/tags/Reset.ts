@@ -1,9 +1,9 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { prisma } from '../../../lib/utils/Prisma.js';
+import { prisma } from '#lib/utils/Prisma.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {

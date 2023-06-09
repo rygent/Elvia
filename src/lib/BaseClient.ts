@@ -1,11 +1,11 @@
 import { BitField, Client, Options, Partials, PermissionsBitField, type PermissionsString } from 'discord.js';
 import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
-import type Interaction from './structures/Interaction.js';
-import type Command from './structures/Command.js';
-import type Event from './structures/Event.js';
-import Logger from '../lib/modules/Logger.js';
-import Util from './structures/Util.js';
+import type Interaction from '#lib/structures/Interaction.js';
+import type Command from '#lib/structures/Command.js';
+import type Event from '#lib/structures/Event.js';
+import Logger from '#lib/modules/Logger.js';
+import Util from '#lib/structures/Util.js';
 import semver from 'semver';
 
 export default class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
@@ -86,7 +86,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 		}
 		this.defaultPermissions = new PermissionsBitField(options.defaultPermissions).freeze();
 
-		await import('./utils/Validation.js');
+		await import('#lib/utils/Validation.js');
 	}
 
 	public async start(token = this.token) {

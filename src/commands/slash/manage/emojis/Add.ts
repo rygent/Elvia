@@ -1,5 +1,5 @@
-import type BaseClient from '../../../../lib/BaseClient.js';
-import Command from '../../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { HttpUrlRegex } from '@sapphire/discord-utilities';

@@ -3,7 +3,7 @@ import { Routes } from 'discord-api-types/v10';
 import { Command } from 'commander';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
-import Logger from '../lib/modules/Logger.js';
+import Logger from '#lib/modules/Logger.js';
 import path from 'node:path';
 import moment from 'moment-timezone';
 import 'dotenv/config';

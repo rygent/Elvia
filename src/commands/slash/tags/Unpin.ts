@@ -1,9 +1,9 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '../../../lib/utils/Function.js';
-import { prisma } from '../../../lib/utils/Prisma.js';
+import { shuffleArray } from '#lib/utils/Function.js';
+import { prisma } from '#lib/utils/Prisma.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {

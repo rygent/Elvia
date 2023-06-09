@@ -1,11 +1,11 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, InteractionCollector, ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { slugify } from '../../../lib/utils/Function.js';
-import { prisma } from '../../../lib/utils/Prisma.js';
+import { slugify } from '#lib/utils/Function.js';
+import { prisma } from '#lib/utils/Prisma.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {

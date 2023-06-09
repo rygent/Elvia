@@ -1,4 +1,4 @@
-import type BaseClient from '../BaseClient.js';
+import type BaseClient from '#lib/BaseClient.js';
 import { BitField, Message, PermissionsBitField, type PermissionsString } from 'discord.js';
 import type { Awaitable } from '@discordjs/util';
 

@@ -1,11 +1,11 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ContextMenuCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
-import { Colors } from '../../../lib/utils/Constants.js';
-import { formatArray, formatPermissions, trimArray } from '../../../lib/utils/Function.js';
-import flags from '../../../assets/ts/Badges.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { formatArray, formatPermissions, trimArray } from '#lib/utils/Function.js';
+import flags from '#assets/ts/Badges.js';
 
 export default class extends Command {
 	public constructor(client: BaseClient) {

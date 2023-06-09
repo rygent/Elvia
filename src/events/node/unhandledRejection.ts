@@ -1,10 +1,10 @@
-import type BaseClient from '../../lib/BaseClient.js';
-import Event from '../../lib/structures/Event.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Event from '#lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { DiscordAPIError } from '@discordjs/rest';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Colors, Links } from '../../lib/utils/Constants.js';
+import { Colors, Links } from '#lib/utils/Constants.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

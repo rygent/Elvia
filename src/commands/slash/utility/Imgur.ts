@@ -1,8 +1,8 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Interaction.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { hideLinkEmbed } from '@discordjs/formatters';
-import { Advances, Credentials } from '../../../lib/utils/Constants.js';
+import { Advances, Credentials } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {

@@ -1,8 +1,8 @@
-import type BaseClient from '../../../lib/BaseClient.js';
-import Command from '../../../lib/structures/Command.js';
+import type BaseClient from '#lib/BaseClient.js';
+import Command from '#lib/structures/Command.js';
 import { AttachmentBuilder, Message } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
-import { Emojis } from '../../../lib/utils/Constants.js';
+import { Emojis } from '#lib/utils/Constants.js';
 import { Type } from '@anishshobith/deeptype';
 import { inspect } from 'node:util';
 
