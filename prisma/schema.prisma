@@ -18,7 +18,7 @@ model Guild {
 model Tag {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   guild     Guild    @relation(fields: [guildId], references: [id])
-  guildId   String   @db.String
+  guildId   String   @db.String @unique
   slug      String
   name      String
   content   String
