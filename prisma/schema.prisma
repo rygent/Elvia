@@ -8,21 +8,21 @@ datasource db {
 }
 
 model Guild {
-  id           String   @id @map("_id") @db.String
+  id           String    @id @map("_id") @db.String
   tags         Tag[]
-  caseCount    Int      @default(0)
-  registeredAt DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  caseCount    Int?      @default(0)
+  registeredAt DateTime? @default(now())
+  updatedAt    DateTime? @updatedAt
 }
 
 model Tag {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  guild     Guild    @relation(fields: [guildId], references: [id])
-  guildId   String   @db.String @unique
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  guild     Guild     @relation(fields: [guildId], references: [id])
+  guildId   String    @unique @db.String
   slug      String
   name      String
   content   String
-  hoisted   Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  hoisted   Boolean?  @default(false)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
