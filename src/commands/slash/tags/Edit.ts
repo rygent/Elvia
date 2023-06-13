@@ -65,7 +65,7 @@ export default class extends Command {
 			const content = i.fields.getTextInputValue('content');
 
 			await prisma.tag.update({
-				where: { id: tag.id, guildId: interaction.guildId },
+				where: { id: tag.id },
 				data: { content }
 			});
 

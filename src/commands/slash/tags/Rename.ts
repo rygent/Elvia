@@ -68,7 +68,7 @@ export default class extends Command {
 			}
 
 			await prisma.tag.update({
-				where: { id: tag.id, guildId: interaction.guildId },
+				where: { id: tag.id },
 				data: {
 					slug: slugify(names),
 					name: names

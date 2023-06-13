@@ -35,7 +35,7 @@ export default class extends Command {
 		if (pins!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
 
 		await prisma.tag.update({
-			where: { id: tag.id, guildId: interaction.guildId },
+			where: { id: tag.id },
 			data: { hoisted: true }
 		});
 
