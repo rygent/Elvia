@@ -5,7 +5,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'emoji list',
+			name: 'server emoji list',
 			description: 'List server emojis.',
 			category: 'Utility',
 			guildOnly: true

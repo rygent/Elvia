@@ -5,7 +5,7 @@ import { AttachmentBuilder, ChatInputCommandInteraction, parseEmoji } from 'disc
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'emoji image',
+			name: 'server emoji image',
 			description: 'Get the full size image of an emoji.',
 			category: 'Utility',
 			guildOnly: true

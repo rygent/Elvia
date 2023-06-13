@@ -18,6 +18,31 @@ export default {
 			name: 'icon',
 			description: 'Display the server icon.',
 			type: ApplicationCommandOptionType.Subcommand
+		},
+		{
+			name: 'emoji',
+			description: 'Emoji commands group.',
+			type: ApplicationCommandOptionType.SubcommandGroup,
+			options: [
+				{
+					name: 'image',
+					description: 'Get the full size image of an emoji.',
+					type: ApplicationCommandOptionType.Subcommand,
+					options: [
+						{
+							name: 'emoji',
+							description: 'The emoji to get.',
+							type: ApplicationCommandOptionType.String,
+							required: true
+						}
+					]
+				},
+				{
+					name: 'list',
+					description: 'List server emojis.',
+					type: ApplicationCommandOptionType.Subcommand
+				}
+			]
 		}
 	],
 	dm_permission: false
