@@ -9,7 +9,7 @@ import { formatArray, formatNumber, trimArray } from '#lib/utils/Function.js';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'serverinfo',
+			name: 'server information',
 			description: 'Get server information.',
 			category: 'Utility',
 			guildOnly: true

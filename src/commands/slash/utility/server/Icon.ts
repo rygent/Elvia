@@ -9,7 +9,7 @@ import { Colors } from '#lib/utils/Constants.js';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'icon',
+			name: 'server icon',
 			description: 'Display the server icon.',
 			category: 'Utility',
 			guildOnly: true
