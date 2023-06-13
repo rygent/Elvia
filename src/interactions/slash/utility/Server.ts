@@ -10,16 +10,6 @@ export default {
 	type: ApplicationCommandType.ChatInput,
 	options: [
 		{
-			name: 'information',
-			description: 'Get server information.',
-			type: ApplicationCommandOptionType.Subcommand
-		},
-		{
-			name: 'icon',
-			description: 'Display the server icon.',
-			type: ApplicationCommandOptionType.Subcommand
-		},
-		{
 			name: 'emoji',
 			description: 'Emoji commands group.',
 			type: ApplicationCommandOptionType.SubcommandGroup,
@@ -43,6 +33,16 @@ export default {
 					type: ApplicationCommandOptionType.Subcommand
 				}
 			]
+		},
+		{
+			name: 'icon',
+			description: 'Display the server icon.',
+			type: ApplicationCommandOptionType.Subcommand
+		},
+		{
+			name: 'information',
+			description: 'Get server information.',
+			type: ApplicationCommandOptionType.Subcommand
 		}
 	],
 	dm_permission: false
