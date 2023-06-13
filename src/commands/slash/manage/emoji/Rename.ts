@@ -9,8 +9,8 @@ import { nanoid } from 'nanoid';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'emojis delete',
-			description: 'Delete a server emoji.',
+			name: 'emoji rename',
+			description: 'Rename a server emoji.',
 			category: 'Manage',
 			clientPermissions: ['ManageEmojisAndStickers'],
 			memberPermissions: ['ManageEmojisAndStickers'],
@@ -20,6 +20,7 @@ export default class extends Command {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const emoji = interaction.options.getString('emoji', true);
+		const name = interaction.options.getString('name', true);
 
 		const fetched = await interaction.guild?.emojis.fetch();
 
@@ -28,13 +29,13 @@ export default class extends Command {
 		if (!emojis?.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
 
 		const cancelId = nanoid();
-		const deleteId = nanoid();
+		const renameId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
 			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
+			.addComponents(new ButtonBuilder().setCustomId(renameId).setStyle(ButtonStyle.Success).setLabel('Rename'));
 
 		const reply = await interaction.reply({
-			content: `Are you sure that you want to delete the ${inlineCode(`:${emojis?.name}:`)} ${emojis} emoji?`,
+			content: `Are you sure to rename ${inlineCode(`:${emojis?.name}:`)} ${emojis} to ${inlineCode(`:${name}:`)}?`,
 			components: [button]
 		});
 
@@ -51,11 +52,11 @@ export default class extends Command {
 			switch (i.customId) {
 				case cancelId:
 					collector.stop();
-					return void i.update({ content: 'Cancelation of the deletion of the emoji.', components: [] });
-				case deleteId:
-					await emojis.delete();
+					return void i.update({ content: "Cancelation of the emoji's name change.", components: [] });
+				case renameId:
+					await emojis.edit({ name });
 					return void i.update({
-						content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully removed.`,
+						content: `Emoji ${inlineCode(`:${emojis?.name}:`)} was successfully renamed.`,
 						components: []
 					});
 			}

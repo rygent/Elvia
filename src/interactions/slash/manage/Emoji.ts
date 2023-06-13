@@ -7,7 +7,7 @@ import {
 import { PermissionsBitField } from 'discord.js';
 
 export default {
-	name: 'emojis',
+	name: 'emoji',
 	description: 'Manage server emojis.',
 	type: ApplicationCommandType.ChatInput,
 	options: [

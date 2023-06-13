@@ -7,7 +7,7 @@ import { HttpUrlRegex } from '@sapphire/discord-utilities';
 export default class extends Command {
 	public constructor(client: BaseClient) {
 		super(client, {
-			name: 'emojis add',
+			name: 'emoji add',
 			description: 'Add an emoji to the server.',
 			category: 'Manage',
 			clientPermissions: ['ManageEmojisAndStickers'],
