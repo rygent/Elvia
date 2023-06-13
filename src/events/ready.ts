@@ -25,7 +25,7 @@ export default class extends Event {
 			await prisma.guild.upsert({
 				where: { guildId: guild.id },
 				create: { guildId: guild.id },
-				update: { guildId: guild.id }
+				update: {}
 			});
 		}
 	}
