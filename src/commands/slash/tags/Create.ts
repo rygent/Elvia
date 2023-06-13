@@ -20,8 +20,8 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		const database = await prisma.guild.findFirst({
-			where: { id: interaction.guildId },
+		const database = await prisma.guild.findUnique({
+			where: { guildId: interaction.guildId },
 			select: { tags: true }
 		});
 

@@ -27,8 +27,8 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const name = interaction.options.getString('name', true);
 
-		const database = await prisma.guild.findFirst({
-			where: { id: interaction.guildId },
+		const database = await prisma.guild.findUnique({
+			where: { guildId: interaction.guildId },
 			select: { tags: true }
 		});
 
@@ -68,7 +68,7 @@ export default class extends Command {
 			}
 
 			await prisma.tag.update({
-				where: { id: tag.id },
+				where: { id: tag.id, guildId: interaction.guildId },
 				data: {
 					slug: slugify(names),
 					name: names
@@ -85,8 +85,8 @@ export default class extends Command {
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
 		const focused = interaction.options.getFocused();
 
-		const database = await prisma.guild.findFirst({
-			where: { id: interaction.guildId },
+		const database = await prisma.guild.findUnique({
+			where: { guildId: interaction.guildId },
 			select: { tags: true }
 		});
 
