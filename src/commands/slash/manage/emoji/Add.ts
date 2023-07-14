@@ -2,7 +2,8 @@ import type BaseClient from '#lib/BaseClient.js';
 import Command from '#lib/structures/Interaction.js';
 import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { HttpUrlRegex } from '@sapphire/discord-utilities';
+
+const ImageUrlRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)($|\?.*$)/;
 
 export default class extends Command {
 	public constructor(client: BaseClient) {
@@ -21,7 +22,7 @@ export default class extends Command {
 		let emoji = interaction.options.getString('emoji', true);
 
 		try {
-			if (!HttpUrlRegex.test(emoji)) {
+			if (!ImageUrlRegex.test(emoji)) {
 				const parse = parseEmoji(emoji);
 				emoji = `https://cdn.discordapp.com/emojis/${parse?.id}.${parse?.animated ? 'gif' : 'png'}`;
 			}
