@@ -1826,7 +1826,7 @@ __metadata:
     prisma: ^4.16.2
     rimraf: ^5.0.1
     semver: ^7.5.4
-    systeminformation: ^5.18.6
+    systeminformation: ^5.18.7
     typescript: ^5.1.6
     undici: ^5.22.1
     utf-8-validate: ^6.0.3
@@ -5084,12 +5084,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.18.6":
-  version: 5.18.6
-  resolution: "systeminformation@npm:5.18.6"
+"systeminformation@npm:^5.18.7":
+  version: 5.18.7
+  resolution: "systeminformation@npm:5.18.7"
   bin:
     systeminformation: lib/cli.js
-  checksum: c7bd43bd55c8cb8f95e4d209f6bcf1979c86e0a5a26d4dda2cb439bfdbfd11e8d48b64a5d519198cacf43446e1489f2b6252ff49885ccc8846eeee0f2cdc3543
+  checksum: 05c540fef599e899cfc5c9e7c81f622914619c0c1dcf8be8641a3f1ddc7df0c7f885cf2783c021a1261d80b57eca50d51dff13b00b3c70a06fa935a784839dd3
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
