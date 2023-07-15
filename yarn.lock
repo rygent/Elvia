@@ -355,10 +355,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/prisma-fmt-wasm@npm:4.13.0-52.integration-mobc-upstream-d100a9299fcb9cffb064301998e9a94ce2722c49":
-  version: 4.13.0-52.integration-mobc-upstream-d100a9299fcb9cffb064301998e9a94ce2722c49
-  resolution: "@prisma/prisma-fmt-wasm@npm:4.13.0-52.integration-mobc-upstream-d100a9299fcb9cffb064301998e9a94ce2722c49"
-  checksum: d3eb49f6c7fb2ad108bd124b80ac3a37b445ac44825f4e342089ea29a871e0ec5de4fe36515bcf8a642810fe2b019a5adfe0cabfa4b24cdda87af738ed7dd6e4
+"@prisma/prisma-fmt-wasm@npm:4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085":
+  version: 4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085
+  resolution: "@prisma/prisma-fmt-wasm@npm:4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
+  checksum: 0f1d8821dbe82769d047610456dbc55aff73ce493470664e3c1b99bde20ada8c16657d7358d9be5ba07f7f3c598bddc79dfd5fcd58c4b6b7cb4f18d7f16086e7
   languageName: node
   linkType: hard
 
@@ -1822,7 +1822,7 @@ __metadata:
     moment-timezone: ^0.5.43
     nanoid: ^4.0.2
     prettier: ^3.0.0
-    prettier-plugin-prisma: ^4.13.0
+    prettier-plugin-prisma: ^4.17.0
     prisma: ^4.16.2
     rimraf: ^5.0.1
     semver: ^7.5.4
@@ -4348,14 +4348,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-prisma@npm:^4.13.0":
-  version: 4.13.0
-  resolution: "prettier-plugin-prisma@npm:4.13.0"
+"prettier-plugin-prisma@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "prettier-plugin-prisma@npm:4.17.0"
   dependencies:
-    "@prisma/prisma-fmt-wasm": 4.13.0-52.integration-mobc-upstream-d100a9299fcb9cffb064301998e9a94ce2722c49
+    "@prisma/prisma-fmt-wasm": 4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085
   peerDependencies:
-    prettier: ">=2"
-  checksum: 1e12802cba05e7c7fc3217dc5ef79658c08d6df868505e5184dc7223bf160c121a932a98f4fd823c3e8f33d0e99d0af8d12cdfca83a660166f12eab448854952
+    prettier: ">=2 || >=3"
+  checksum: a5f2d971d578bcf940f36dbbaf99e6f0d1100e4da4e421d3f1de97c2505c3f3dd856e2726516a1e72ac13e01af3efe16f654eec82d3a320ec312c020c0af1e45
   languageName: node
   linkType: hard
 
