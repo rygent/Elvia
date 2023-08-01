@@ -28,7 +28,7 @@ export default class extends Command {
 				return process.exit();
 			}
 
-			this.client.destroy();
+			await this.client.destroy();
 			await this.client.login(process.env.DISCORD_TOKEN);
 
 			return reply
