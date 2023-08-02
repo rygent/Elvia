@@ -1,5 +1,5 @@
 export const enum Colors {
-	Default = 0x2f3136,
+	Default = 0x2b2d31,
 	Green = 0x77dd77,
 	Yellow = 0xfdfd96,
 	Orange = 0xffb347,
