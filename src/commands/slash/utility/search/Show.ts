@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder 
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic, underscore } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
+import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { Env } from '#lib/utils/Env.js';
 import { formatArray, formatNumber } from '#lib/utils/Function.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
@@ -27,7 +27,7 @@ export default class extends Command {
 
 		const raw = await request(`https://api.themoviedb.org/3/search/tv?api_key=${Env.TmdbApiKey}&query=${search}`, {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 
@@ -68,7 +68,7 @@ export default class extends Command {
 			const [ids] = i.values;
 			const data = await request(`https://api.themoviedb.org/3/tv/${ids}?api_key=${Env.TmdbApiKey}`, {
 				method: 'GET',
-				headers: { 'User-Agent': Env.UserAgent },
+				headers: { 'User-Agent': UserAgent },
 				maxRedirections: 20
 			}).then(({ body }) => body.json());
 

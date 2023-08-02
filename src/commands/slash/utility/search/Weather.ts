@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
+import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { Env } from '#lib/utils/Env.js';
 import { sentenceCase } from '#lib/utils/Function.js';
 import { request } from 'undici';
@@ -26,7 +26,7 @@ export default class extends Command {
 			`${endpoint}?q=${encodeURIComponent(search)}&appid=${Env.OpenWeatherApiKey}&units=metric`,
 			{
 				method: 'GET',
-				headers: { 'User-Agent': Env.UserAgent },
+				headers: { 'User-Agent': UserAgent },
 				maxRedirections: 20
 			}
 		);

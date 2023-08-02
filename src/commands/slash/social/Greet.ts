@@ -2,8 +2,7 @@ import type BaseClient from '#lib/BaseClient.js';
 import Command from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '#lib/utils/Constants.js';
-import { Env } from '#lib/utils/Env.js';
+import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -21,7 +20,7 @@ export default class extends Command {
 
 		const raw = await request(`https://nekos.best/api/v2/wave`, {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 

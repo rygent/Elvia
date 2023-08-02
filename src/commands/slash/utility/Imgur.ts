@@ -2,6 +2,7 @@ import type BaseClient from '#lib/BaseClient.js';
 import Command from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { hideLinkEmbed } from '@discordjs/formatters';
+import { UserAgent } from '#lib/utils/Constants.js';
 import { Env } from '#lib/utils/Env.js';
 import { request } from 'undici';
 
@@ -22,7 +23,7 @@ export default class extends Command {
 
 		const raw = await request(media.url, {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 
@@ -34,7 +35,7 @@ export default class extends Command {
 			headers: {
 				Authorization: `Client-ID ${Env.ImgurClientId}`,
 				'Content-Type': 'application/json',
-				'User-Agent': Env.UserAgent
+				'User-Agent': UserAgent
 			},
 			body: payload,
 			maxRedirections: 20

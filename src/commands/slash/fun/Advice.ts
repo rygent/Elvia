@@ -1,7 +1,7 @@
 import type BaseClient from '#lib/BaseClient.js';
 import Command from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Env } from '#lib/utils/Env.js';
+import { UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -16,7 +16,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const raw = await request('https://api.adviceslip.com/advice', {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 

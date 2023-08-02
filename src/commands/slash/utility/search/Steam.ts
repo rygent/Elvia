@@ -4,8 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder 
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, inlineCode, italic, underscore } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
-import { Env } from '#lib/utils/Env.js';
+import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { formatArray, titleCase } from '#lib/utils/Function.js';
 import { nanoid } from 'nanoid';
 import { request } from 'undici';
@@ -24,7 +23,7 @@ export default class extends Command {
 
 		const raw = await request(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 
@@ -62,7 +61,7 @@ export default class extends Command {
 			const [ids] = i.values;
 			const data = await request(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, {
 				method: 'GET',
-				headers: { 'User-Agent': Env.UserAgent },
+				headers: { 'User-Agent': UserAgent },
 				maxRedirections: 20
 			}).then((res) => res.body.json().then((item) => item[ids!].data));
 

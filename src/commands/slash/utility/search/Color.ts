@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Env } from '#lib/utils/Env.js';
+import { UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -40,7 +40,7 @@ export default class extends Command {
 
 		const raw = await request(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, {
 			method: 'GET',
-			headers: { 'User-Agent': Env.UserAgent },
+			headers: { 'User-Agent': UserAgent },
 			maxRedirections: 20
 		});
 
