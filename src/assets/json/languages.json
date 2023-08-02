@@ -17,6 +17,7 @@
   {
     "name": "Arabic",
     "value": "ar",
+    "flag": "🇸🇦",
     "hoisted": true
   },
   {
@@ -42,6 +43,7 @@
   {
     "name": "Bengali",
     "value": "bn",
+    "flag": "🇧🇩",
     "hoisted": true
   },
   {
@@ -72,11 +74,13 @@
   {
     "name": "Chinese (China)",
     "value": "zh-cn",
+    "flag": "🇨🇳",
     "hoisted": true
   },
   {
     "name": "Chinese (Taiwan)",
     "value": "zh-tw",
+    "flag": "🇹🇼",
     "hoisted": true
   },
   {
@@ -107,6 +111,7 @@
   {
     "name": "English",
     "value": "en",
+    "flag": "🇬🇧",
     "hoisted": true
   },
   {
@@ -132,6 +137,7 @@
   {
     "name": "French",
     "value": "fr",
+    "flag": "🇫🇷",
     "hoisted": true
   },
   {
@@ -187,6 +193,7 @@
   {
     "name": "Hindi",
     "value": "hi",
+    "flag": "🇮🇳",
     "hoisted": true
   },
   {
@@ -212,6 +219,7 @@
   {
     "name": "Indonesian",
     "value": "id",
+    "flag": "🇮🇩",
     "hoisted": true
   },
   {
@@ -227,6 +235,7 @@
   {
     "name": "Japanese",
     "value": "ja",
+    "flag": "🇯🇵",
     "hoisted": true
   },
   {
@@ -252,6 +261,7 @@
   {
     "name": "Korean",
     "value": "ko",
+    "flag": "🇰🇷",
     "hoisted": true
   },
   {
@@ -362,6 +372,7 @@
   {
     "name": "Portuguese",
     "value": "pt",
+    "flag": "🇵🇹",
     "hoisted": true
   },
   {
@@ -377,6 +388,7 @@
   {
     "name": "Russian",
     "value": "ru",
+    "flag": "🇷🇺",
     "hoisted": true
   },
   {
@@ -432,6 +444,7 @@
   {
     "name": "Spanish",
     "value": "es",
+    "flag": "🇪🇸",
     "hoisted": true
   },
   {
@@ -472,6 +485,7 @@
   {
     "name": "Turkish",
     "value": "tr",
+    "flag": "🇹🇷",
     "hoisted": true
   },
   {
@@ -492,6 +506,7 @@
   {
     "name": "Vietnamese",
     "value": "vi",
+    "flag": "🇻🇳",
     "hoisted": true
   },
   {
