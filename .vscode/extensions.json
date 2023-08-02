@@ -2,7 +2,6 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "bungcip.better-toml",
     "mikestead.dotenv",
     "prisma.prisma"
   ]
