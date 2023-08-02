@@ -2,7 +2,7 @@ import type BaseClient from '#lib/BaseClient.js';
 import Command from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, quote } from '@discordjs/formatters';
-import { Advances } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -19,7 +19,7 @@ export default class extends Command {
 
 		const raw = await request(`https://eightballapi.com/api?question=${encodeURIComponent(question)}`, {
 			method: 'GET',
-			headers: { 'User-Agent': Advances.UserAgent },
+			headers: { 'User-Agent': Env.UserAgent },
 			maxRedirections: 20
 		});
 

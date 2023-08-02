@@ -4,7 +4,7 @@ import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import type { CommandInteraction, GuildMember } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic, underscore } from '@discordjs/formatters';
-import { Links } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Function.js';
 
 export default class extends Event {
@@ -108,7 +108,7 @@ export default class extends Event {
 					'An error has occured when executing this command, our developers have been informed.',
 					`If the issue persists, please contact us in our ${hyperlink(
 						'Support Server',
-						hideLinkEmbed(Links.SupportServer)
+						hideLinkEmbed(Env.SupportServerUrl)
 					)}.`
 				].join('\n');
 

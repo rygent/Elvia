@@ -63,7 +63,7 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 	}
 
 	// eslint-disable-next-line no-undef
-	private async validate(options: ClientOptions) {
+	private validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 		if (semver.lt(process.versions.node, '18.12.0')) {
 			throw new Error('This client requires Node.JS v18.12.0 or higher.');
@@ -85,8 +85,6 @@ export default class BaseClient<Ready extends boolean = boolean> extends Client<
 			throw new TypeError('Permission(s) should be a type of Array<String>.');
 		}
 		this.defaultPermissions = new PermissionsBitField(options.defaultPermissions).freeze();
-
-		await import('#lib/utils/Validation.js');
 	}
 
 	public async start(token = this.token) {

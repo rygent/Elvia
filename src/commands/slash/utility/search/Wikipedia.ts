@@ -3,7 +3,8 @@ import Command from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Advances, Colors } from '#lib/utils/Constants.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -20,7 +21,7 @@ export default class extends Command {
 
 		const raw = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, {
 			method: 'GET',
-			headers: { 'User-Agent': Advances.UserAgent },
+			headers: { 'User-Agent': Env.UserAgent },
 			maxRedirections: 20
 		});
 

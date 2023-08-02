@@ -1,9 +1,10 @@
 import type { PermissionsString } from 'discord.js';
+import { Env } from '#lib/utils/Env.js';
 import pkg from '../../package.json' assert { type: 'json' };
 
-export const token = process.env.DISCORD_TOKEN as string;
-export const version = (process.env.CLIENT_VERSION ??= pkg.version);
-export const prefix = process.env.CLIENT_PREFIX as string;
-export const owners = process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length) as string[];
-export const debug = process.env.DEBUG_MODE === 'true';
+export const token = Env.DiscordToken;
+export const version = (Env.ClientVersion ??= pkg.version);
+export const prefix = Env.ClientPrefix;
+export const owners = Env.ClientOwners;
+export const debug = Env.DebugMode;
 export const defaultPermissions = ['SendMessages', 'ViewChannel'] as PermissionsString[];

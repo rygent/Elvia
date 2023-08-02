@@ -10,7 +10,8 @@ import {
 	StringSelectMenuInteraction
 } from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
-import { Colors, Emojis, Links } from '#lib/utils/Constants.js';
+import { Colors, Emojis } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { formatPermissions, isNsfwChannel } from '#lib/utils/Function.js';
 import { nanoid } from 'nanoid';
 
@@ -144,7 +145,7 @@ export default class extends Command {
 
 		const description = [
 			`Welcome to help menu, here is the list of commands!`,
-			`Need more help? Come join our ${hyperlink('support server', Links.SupportServer)}.\n`,
+			`Need more help? Come join our ${hyperlink('support server', Env.SupportServerUrl)}.\n`,
 			selectedCommands
 				.sort((a, b) => a.name.localeCompare(b.name))
 				.map((cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)

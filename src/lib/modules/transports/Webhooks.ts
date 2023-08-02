@@ -4,7 +4,8 @@ import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Colors, Links } from '#lib/utils/Constants.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { isColorSupported } from 'colorette';
 import { inspect } from 'node:util';
 
@@ -20,8 +21,8 @@ export class Webhook extends TransportStream {
 
 	public override async log(info: LogEntry, callback: LogCallback) {
 		if (!this.client.isReady()) return;
-		const webhook = new WebhookClient({ url: Links.LoggerWebhook });
-		const threadId = new URL(Links.LoggerWebhook).searchParams.get('thread_id') as string;
+		const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });
+		const threadId = new URL(Env.LoggerWebhookUrl).searchParams.get('thread_id') as string;
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Red)

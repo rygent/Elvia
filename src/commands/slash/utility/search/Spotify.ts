@@ -4,7 +4,8 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder 
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors, Credentials, Emojis } from '#lib/utils/Constants.js';
+import { Colors, Emojis } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { formatArray, formatNumber } from '#lib/utils/Function.js';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';
@@ -24,7 +25,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const spotify = new Spotify({ id: Credentials.SpotifyClientId, secret: Credentials.SpotifyClientSecret });
+		const spotify = new Spotify({ id: Env.SpotifyClientId, secret: Env.SpotifyClientSecret });
 		const response = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);

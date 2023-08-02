@@ -3,15 +3,15 @@ import { Routes } from 'discord-api-types/v10';
 import { Command } from 'commander';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
+import { Env } from '#lib/utils/Env.js';
 import Logger from '#lib/modules/Logger.js';
 import path from 'node:path';
 import moment from 'moment-timezone';
-import 'dotenv/config';
 
 const logger = new Logger();
 const program = new Command();
 
-moment.tz.setDefault(process.env.TIMEZONE);
+moment.tz.setDefault(Env.Timezone);
 
 program.option('-g, --global', 'register global commands');
 program.option('-d, --dev', 'register developer commands');
@@ -19,12 +19,12 @@ program.option('-r, --reset', 'reset registered commands');
 
 program.parse(process.argv);
 
-const token = process.env.DISCORD_TOKEN as string;
+const token = Env.DiscordToken;
 if (!token) {
 	throw new Error('The DISCORD_TOKEN environment variable is required.');
 }
 
-const applicationId = process.env.DISCORD_APPLICATION_ID as string;
+const applicationId = Env.DiscordApplicationId;
 if (!applicationId) {
 	throw new Error('The DISCORD_APPLICATION_ID environment variable is required.');
 }
@@ -50,7 +50,7 @@ async function registerCommands(): Promise<void> {
 	const options = program.opts();
 	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
 
-	const guildId = process.env.DISCORD_GUILD_ID as string;
+	const guildId = Env.DiscordGuildId;
 	if (!guildId && options.dev) {
 		throw new Error('The DISCORD_GUILD_ID environment variable is required.');
 	}

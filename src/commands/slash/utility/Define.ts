@@ -4,7 +4,8 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { italic, underscore } from '@discordjs/formatters';
-import { Advances, Colors } from '#lib/utils/Constants.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { request } from 'undici';
 
 export default class extends Command {
@@ -21,7 +22,7 @@ export default class extends Command {
 
 		const raw = await request(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, {
 			method: 'GET',
-			headers: { 'User-Agent': Advances.UserAgent },
+			headers: { 'User-Agent': Env.UserAgent },
 			maxRedirections: 20
 		});
 

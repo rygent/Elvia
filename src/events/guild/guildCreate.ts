@@ -3,7 +3,8 @@ import Event from '#lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors, Links } from '#lib/utils/Constants.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { formatNumber } from '#lib/utils/Function.js';
 import { prisma } from '#lib/utils/Prisma.js';
 
@@ -19,9 +20,9 @@ export default class extends Event {
 		if (!guild.available) return;
 		await prisma.guild.create({ data: { guildId: guild.id } });
 
-		if (Links.GuildWebhook) {
-			const webhook = new WebhookClient({ url: Links.GuildWebhook });
-			const threadId = new URL(Links.GuildWebhook).searchParams.get('thread_id') as string;
+		if (Env.GuildWebhookUrl) {
+			const webhook = new WebhookClient({ url: Env.GuildWebhookUrl });
+			const threadId = new URL(Env.GuildWebhookUrl).searchParams.get('thread_id') as string;
 			const guildOwner = await guild.fetchOwner();
 
 			const guildCount = formatNumber(this.client.guilds.cache.size);

@@ -4,7 +4,8 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Advances, Colors, Credentials } from '#lib/utils/Constants.js';
+import { Colors } from '#lib/utils/Constants.js';
+import { Env } from '#lib/utils/Env.js';
 import { sentenceCase } from '#lib/utils/Function.js';
 import { request } from 'undici';
 
@@ -22,10 +23,10 @@ export default class extends Command {
 
 		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
 		const raw = await request(
-			`${endpoint}?q=${encodeURIComponent(search)}&appid=${Credentials.OpenWeatherApiKey}&units=metric`,
+			`${endpoint}?q=${encodeURIComponent(search)}&appid=${Env.OpenWeatherApiKey}&units=metric`,
 			{
 				method: 'GET',
-				headers: { 'User-Agent': Advances.UserAgent },
+				headers: { 'User-Agent': Env.UserAgent },
 				maxRedirections: 20
 			}
 		);
