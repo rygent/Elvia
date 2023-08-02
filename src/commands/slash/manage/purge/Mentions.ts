@@ -24,9 +24,9 @@ export default class extends Command {
 		const messages = await interaction.channel?.messages.fetch({ limit: 1e2, cache: true, before: reply.id });
 		const filter = messages?.filter(
 			(m) =>
-				(m.mentions.users.first() ||
-					m.mentions.members.first() ||
-					m.mentions.channels.first() ||
+				(m.mentions.users.first() ??
+					m.mentions.members.first() ??
+					m.mentions.channels.first() ??
 					m.mentions.roles.first()) &&
 				!m.pinned
 		);
