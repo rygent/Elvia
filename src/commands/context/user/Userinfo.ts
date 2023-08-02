@@ -34,6 +34,7 @@ export default class extends Command {
 			.setDescription(
 				[
 					`${bold(italic('ID:'))} ${inlineCode(member.id)}`,
+					`${bold(italic('Display Name:'))} ${member.user.globalName ?? inlineCode('N/A')}`,
 					`${bold(italic('Nickname:'))} ${member.nickname ?? inlineCode('N/A')}`,
 					`${bold(italic('Badges:'))} ${
 						badges.length ? userFlags.map((item) => flags[item]).join(' ') : inlineCode('N/A')
