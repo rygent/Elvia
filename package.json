@@ -34,7 +34,7 @@
     "moment-timezone": "^0.5.43",
     "nanoid": "^4.0.2",
     "semver": "^7.5.4",
-    "systeminformation": "^5.18.10",
+    "systeminformation": "^5.18.15",
     "undici": "^5.22.1",
     "winston": "^3.10.0"
   },
