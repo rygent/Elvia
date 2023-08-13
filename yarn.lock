@@ -1512,9 +1512,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.12.1":
-  version: 14.12.1
-  resolution: "discord.js@npm:14.12.1"
+"discord.js@npm:14.13.0-dev.1691885390-9ed1b59df.0":
+  version: 14.13.0-dev.1691885390-9ed1b59df.0
+  resolution: "discord.js@npm:14.13.0-dev.1691885390-9ed1b59df.0"
   dependencies:
     "@discordjs/builders": ^1.6.4
     "@discordjs/collection": ^1.5.2
@@ -1530,7 +1530,7 @@ __metadata:
     tslib: ^2.6.1
     undici: ^5.22.1
     ws: ^8.13.0
-  checksum: 059c6c2fdec22319e8aa8d5f54392db0066e959a7418440d1dab3b0e7814b0c4a7311ed15500147e959f9409e63e2dbe0b1f159f9c2693d8cd321a216b92fdaf
+  checksum: b880b84654877c5b54b754c1655da1eb0e13f226daf7328386148420f62e7380f1d63fba5d0ed25e3ae90f2dbfe4501e957fa31372757f05dee227297051d8db
   languageName: node
   linkType: hard
 
@@ -1588,7 +1588,7 @@ __metadata:
     bufferutil: ^4.0.7
     colorette: ^2.0.20
     commander: ^11.0.0
-    discord.js: ^14.12.1
+    discord.js: 14.13.0-dev.1691885390-9ed1b59df.0
     dotenv: ^16.3.1
     eslint: ^8.47.0
     eslint-config-prettier: ^9.0.0
