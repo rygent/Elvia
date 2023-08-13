@@ -44,7 +44,7 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await raw.body.json();
+		const response: any = await raw.body.json();
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

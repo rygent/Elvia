@@ -27,7 +27,7 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await raw.body.json().then(({ items }) => items.filter((item: any) => item.type === 'app'));
+		const response = await raw.body.json().then(({ items }: any) => items.filter((item: any) => item.type === 'app'));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const selectId = nanoid();
@@ -63,7 +63,7 @@ export default class extends Command {
 				method: 'GET',
 				headers: { 'User-Agent': UserAgent },
 				maxRedirections: 20
-			}).then((res) => res.body.json().then((item) => item[ids!].data));
+			}).then((res) => res.body.json().then((item: any) => item[ids!].data));
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 				new ButtonBuilder()

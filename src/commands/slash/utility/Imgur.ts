@@ -41,7 +41,7 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await body.json();
+		const response: any = await body.json();
 
 		const replies = ['Here are your Imgur links:', `${hideLinkEmbed(response.data.link)}`].join('\n');
 

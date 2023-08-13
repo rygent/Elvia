@@ -24,7 +24,7 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await raw.body.json().then(({ results }) => results[0]);
+		const response = await raw.body.json().then(({ results }: any) => results[0]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

@@ -35,7 +35,7 @@ export default class extends Command {
 		if (raw.statusCode === 404) {
 			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 		}
-		const response = await raw.body.json();
+		const response: any = await raw.body.json();
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

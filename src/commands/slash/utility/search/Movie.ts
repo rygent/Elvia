@@ -31,7 +31,7 @@ export default class extends Command {
 			maxRedirections: 20
 		});
 
-		const response = await raw.body.json().then(({ results }) => results.slice(0, 10));
+		const response = await raw.body.json().then(({ results }: any) => results.slice(0, 10));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const selectId = nanoid();
@@ -66,7 +66,7 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
-			const data = await request(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Env.TmdbApiKey}`, {
+			const data: any = await request(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Env.TmdbApiKey}`, {
 				method: 'GET',
 				headers: { 'User-Agent': UserAgent },
 				maxRedirections: 20

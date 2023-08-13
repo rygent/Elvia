@@ -27,7 +27,7 @@ export default class extends Command {
 
 		const response = await raw.body
 			.json()
-			.then(({ list }) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
+			.then(({ list }: any) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.permalink)
