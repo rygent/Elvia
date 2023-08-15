@@ -1,0 +1,12 @@
+apps:bot:
+  - apps/bot/*
+  - apps/bot/**/*
+packages:database:
+  - packages/database/*
+  - packages/database/**/*
+packages:env:
+  - packages/env/*
+  - packages/env/**/*
+packages:logger:
+  - packages/logger/*
+  - packages/logger/**/*

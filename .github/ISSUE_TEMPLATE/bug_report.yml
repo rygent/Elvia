@@ -5,7 +5,20 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use Discord for questions: https://discord.gg/FD5MMabf8Y
+        Thank you for filing an issue! If you are here to ask a question, use Discord instead: https://discord.gg/FD5MMabf8Y
+
+        This issue form is for Aviana, including other packages.
+  - type: dropdown
+    id: package
+    attributes:
+      label: Which package is this bug report for?
+      options:
+        - bot
+        - database
+        - env
+        - logger
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
@@ -32,8 +45,6 @@ body:
     attributes:
       label: Node.js version
       description: Which version of Node.js are you using? Run `node --version` in your project directory and paste the output.
-    validations:
-      required: true
   - type: input
     id: os
     attributes:

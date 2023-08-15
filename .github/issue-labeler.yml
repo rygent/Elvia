@@ -1,0 +1,12 @@
+apps:bot:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nbot\\n"
+packages:database:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\ndatabase\\n"
+packages:env:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nenv\\n"
+packages:logger:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nlogger\\n"

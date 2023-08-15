@@ -1,0 +1,40 @@
+{
+  "name": "@aviana/env",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "lint": "eslint src --ext ts -c ../../.eslintrc --format=pretty",
+    "format": "prettier --write .",
+    "build": "tsup"
+  },
+  "license": "GPL-3.0",
+  "private": true,
+  "dependencies": {
+    "@sapphire/utilities": "^3.13.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "eslint": "^8.47.0",
+    "eslint-formatter-pretty": "^5.0.0",
+    "prettier": "^3.0.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6"
+  },
+  "files": [
+    "./dist/**/*.js*",
+    "./dist/**/*.mjs*",
+    "./dist/**/*.d*"
+  ],
+  "engines": {
+    "node": ">=v18.12.0"
+  },
+  "packageManager": "yarn@3.6.1"
+}

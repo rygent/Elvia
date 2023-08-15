@@ -2,17 +2,16 @@ name: Continuous Integration
 
 on:
   push:
-    branches: ['main']
   pull_request:
 
 jobs:
-  Linting:
-    name: Linting
+  testing:
+    name: Testing
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Project
+      - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Use Node.js v20
+      - name: Install Node.js v20
         uses: actions/setup-node@v3
         with:
           node-version: 20
@@ -20,22 +19,10 @@ jobs:
           registry-url: https://registry.yarnpkg.org/
       - name: Install Dependencies
         run: yarn --immutable
-      - name: Run ESLint
-        run: yarn lint --fix=false
-
-  Building:
-    name: Compile source code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Project
-        uses: actions/checkout@v3
-      - name: Use Node.js v20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: yarn
-          registry-url: https://registry.yarnpkg.org/
-      - name: Install Dependencies
-        run: yarn --immutable
-      - name: Compile Projects
+      - name: Build Projects
         run: yarn build
+      - name: Run ESLint
+        run: yarn lint
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}

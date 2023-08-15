@@ -4,18 +4,8 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "Node",
-    "baseUrl": "./",
-    "paths": {
-      "#assets/*": ["./src/assets/*"],
-      "#commands/*": ["./src/commands/*"],
-      "#events/*": ["./src/events/*"],
-      "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"],
-      "#types/*": ["./src/types/*"]
-    },
     "resolveJsonModule": true,
     "sourceMap": true,
-    "outDir": "./dist",
     "removeComments": true,
     "importHelpers": true,
     "downlevelIteration": true,
@@ -40,8 +30,8 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "pretty": true
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist/**/*"]
+  "exclude": ["node_modules"]
 }

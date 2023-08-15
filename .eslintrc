@@ -9,12 +9,12 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.eslint.json",
-    "sourceType": "module",
+    "project": ["./tsconfig.eslint.json", "./apps/*/tsconfig.eslint.json", "./packages/*/tsconfig.eslint.json"],
     "ecmaVersion": 2022
   },
   "env": {
     "browser": true,
+    "commonjs": true,
     "es6": true,
     "node": true
   },

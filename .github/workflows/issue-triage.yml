@@ -1,0 +1,17 @@
+name: Issue Labeler
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue-triage:
+    name: Issue Triage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: github/issue-labeler@v3.2
+        with:
+          configuration-path: .github/issue-labeler.yml
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          not-before: 2023-08-08T00:00:00.000Z
+          enable-versioned-regex: 0

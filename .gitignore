@@ -48,6 +48,9 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
+# Turbo cache
+.turbo/
+
 # Optional npm cache directory
 .npm
 
@@ -62,6 +65,9 @@ web_modules/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
+
+# Miscellaneous file
+.DS_Store
 
 # Optional REPL history
 .node_repl_history

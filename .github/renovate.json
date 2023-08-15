@@ -1,7 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "labels": ["dependencies"],
   "lockFileMaintenance": {
     "enabled": true,
     "dependencyDashboardApproval": true,
@@ -25,7 +24,8 @@
       "commitMessageAction": "Bump",
       "commitMessageTopic": "{{depName}}",
       "rangeStrategy": "bump",
-      "recreateClosed": true
+      "recreateClosed": true,
+      "addLabels": ["dependencies"]
     },
     {
       "matchDepTypes": ["dependencies", "require"],
@@ -41,6 +41,16 @@
       "semanticCommitScope": null,
       "addLabels": ["ci"],
       "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "semanticCommitScope": null
+    },
+    {
+      "matchPackageNames": ["node"],
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["engines"],
+      "enabled": false
     }
   ],
   "prConcurrentLimit": 10,
