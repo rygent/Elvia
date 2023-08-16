@@ -1,7 +1,7 @@
-import { type APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
+import { ApplicationCommandType, type RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
 
 export default {
 	name: 'Translate',
 	type: ApplicationCommandType.Message,
 	dm_permission: true
-} as APIApplicationCommand;
+} as RESTPostAPIApplicationCommandsJSONBody;

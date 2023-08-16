@@ -1,8 +1,7 @@
 import {
-	type APIApplicationCommand,
-	type APIApplicationCommandOption,
 	ApplicationCommandOptionType,
-	ApplicationCommandType
+	ApplicationCommandType,
+	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
 import { PermissionsBitField } from 'discord.js';
 
@@ -50,7 +49,7 @@ export default {
 			type: ApplicationCommandOptionType.Boolean,
 			required: false
 		}
-	] as APIApplicationCommandOption[],
+	],
 	default_member_permissions: new PermissionsBitField(['BanMembers']).bitfield.toString(),
 	dm_permission: false
-} as APIApplicationCommand;
+} as RESTPostAPIApplicationCommandsJSONBody;

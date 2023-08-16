@@ -1,8 +1,7 @@
 import {
-	type APIApplicationCommand,
-	type APIApplicationCommandOption,
 	ApplicationCommandOptionType,
-	ApplicationCommandType
+	ApplicationCommandType,
+	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
 
 export default {
@@ -22,6 +21,6 @@ export default {
 			type: ApplicationCommandOptionType.User,
 			required: true
 		}
-	] as APIApplicationCommandOption[],
+	],
 	dm_permission: false
-} as APIApplicationCommand;
+} as RESTPostAPIApplicationCommandsJSONBody;

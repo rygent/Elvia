@@ -1,4 +1,4 @@
-import { type APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
+import { ApplicationCommandType, type RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
 
 export default {
 	name: 'statistics',
@@ -6,4 +6,4 @@ export default {
 	type: ApplicationCommandType.ChatInput,
 	default_member_permissions: '0',
 	dm_permission: false
-} as APIApplicationCommand;
+} as RESTPostAPIApplicationCommandsJSONBody;

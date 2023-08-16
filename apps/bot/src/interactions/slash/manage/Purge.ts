@@ -1,8 +1,7 @@
 import {
-	type APIApplicationCommand,
-	type APIApplicationCommandOption,
 	ApplicationCommandOptionType,
-	ApplicationCommandType
+	ApplicationCommandType,
+	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
 import { PermissionsBitField } from 'discord.js';
 
@@ -350,7 +349,7 @@ export default {
 				}
 			]
 		}
-	] as APIApplicationCommandOption[],
+	],
 	default_member_permissions: new PermissionsBitField(['ManageMessages']).bitfield.toString(),
 	dm_permission: false
-} as APIApplicationCommand;
+} as RESTPostAPIApplicationCommandsJSONBody;
