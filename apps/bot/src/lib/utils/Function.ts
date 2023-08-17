@@ -1,6 +1,17 @@
-import { ChannelType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ButtonStyle, ChannelType } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, Channel, CommandInteraction, ThreadChannel } from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
+
+export function disableAllButtons(row: ActionRowBuilder<ButtonBuilder>): ActionRowBuilder<ButtonBuilder> {
+	for (const button of row.components) {
+		if (button.data.style === ButtonStyle.Primary) {
+			button.setStyle(ButtonStyle.Secondary);
+		}
+		button.setDisabled(true);
+	}
+	return row;
+}
 
 export function formatArray(
 	input: string[],
