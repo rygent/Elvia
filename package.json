@@ -8,6 +8,7 @@
     "build": "turbo run build --no-daemon",
     "lint": "turbo run lint --parallel",
     "format": "turbo run format --parallel",
+    "register": "yarn workspace @aviana/bot register",
     "generate": "yarn workspace @aviana/database prisma:generate",
     "push": "yarn workspace @aviana/database prisma:push",
     "update": "yarn upgrade-interactive"
