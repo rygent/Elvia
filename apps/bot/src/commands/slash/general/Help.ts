@@ -31,25 +31,29 @@ export default class extends Command {
 
 		if (command) {
 			const cmd = this.client.interactions.get(command);
-			const cmdId = app_command.find((item) => item.name === cmd?.name.split(' ')[0])?.id;
+			if (!cmd) {
+				return interaction.reply({ content: 'This command does not seem to exist.', ephemeral: true });
+			}
 
-			const permissions = cmd?.memberPermissions.toArray();
+			const cmdId = app_command.find((item) => item.name === cmd.name.split(' ')[0])?.id;
+
+			const permissions = cmd.memberPermissions.toArray();
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: this.client.user.displayAvatarURL() })
-				.setTitle(`${chatInputApplicationCommandMention(cmd!.name, cmdId!)}`)
+				.setTitle(`${chatInputApplicationCommandMention(cmd.name, cmdId as string)}`)
 				.setThumbnail('https://i.imgur.com/YxoUvH8.png')
 				.setDescription(
 					[
-						`${cmd?.description}`,
-						`${bold(italic('Category:'))} ${cmd?.category}`,
+						`${cmd.description}`,
+						`${bold(italic('Category:'))} ${cmd.category}`,
 						`${bold(italic('Permissions:'))} ${
 							permissions?.length
 								? permissions.map((item) => `\`${formatPermissions(item)}\``).join(', ')
 								: 'No permission required.'
 						}`,
-						`${bold(italic('Cooldown:'))} ${cmd!.cooldown / 1e3} second(s)`
+						`${bold(italic('Cooldown:'))} ${cmd.cooldown / 1e3} second(s)`
 					].join('\n')
 				)
 				.setFooter({
