@@ -25,7 +25,7 @@
     "@sapphire/utilities": "^3.13.0",
     "colorette": "^2.0.20",
     "commander": "^11.0.0",
-    "discord.js": "14.13.0-dev.1691885390-9ed1b59df.0",
+    "discord.js": "14.13.0",
     "dotenv": "^16.3.1",
     "globby": "^13.2.2",
     "moment": "^2.29.4",
