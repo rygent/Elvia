@@ -32,5 +32,5 @@
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.2"
 }
