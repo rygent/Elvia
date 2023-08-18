@@ -16,10 +16,15 @@
   },
   "license": "GPL-3.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/Rygent/AvianaBot",
+    "directory": "packages/logger"
+  },
   "dependencies": {
     "@aviana/env": "workspace:^",
     "colorette": "^2.0.20",
-    "discord.js": "14.13.0",
+    "discord.js": "^14.13.0",
     "moment": "^2.29.4",
     "winston": "^3.10.0"
   },

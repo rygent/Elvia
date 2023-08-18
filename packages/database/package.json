@@ -18,6 +18,11 @@
   },
   "license": "GPL-3.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/Rygent/AvianaBot",
+    "directory": "packages/database"
+  },
   "dependencies": {
     "@prisma/client": "^5.1.1"
   },
