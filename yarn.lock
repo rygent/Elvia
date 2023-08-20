@@ -73,6 +73,7 @@ __metadata:
     eslint: ^8.47.0
     eslint-formatter-pretty: ^5.0.0
     prettier: ^3.0.2
+    prettier-plugin-prisma: ^5.0.0
     prisma: ^5.1.1
     tsup: ^7.2.0
     typescript: ^5.1.6
@@ -586,6 +587,13 @@ __metadata:
   version: 5.1.1
   resolution: "@prisma/engines@npm:5.1.1"
   checksum: 561c85def110279eb7c764e7c1ea1f8f54d9a2948ed5e5db9b11321c2bef362d178b756e39e7e022ee27cb2be5ac8d9b835967ce341ad8f6a1e8502f988140ee
+  languageName: node
+  linkType: hard
+
+"@prisma/prisma-schema-wasm@npm:4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584":
+  version: 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
+  resolution: "@prisma/prisma-schema-wasm@npm:4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584"
+  checksum: c0dffdde7b9e59cecea1c581829b1ebb55a934b8b5e7abf30d1e3d498cf3fcc6da39a3c320e1c52f9edb5e5cb08ff7f9bdd24e3ea97546ba4803d03bda5de066
   languageName: node
   linkType: hard
 
@@ -4268,6 +4276,17 @@ __metadata:
   dependencies:
     fast-diff: ^1.1.2
   checksum: 00ce8011cf6430158d27f9c92cfea0a7699405633f7f1d4a45f07e21bf78e99895911cbcdc3853db3a824201a7c745bd49bfea8abd5fb9883e765a90f74f8392
+  languageName: node
+  linkType: hard
+
+"prettier-plugin-prisma@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "prettier-plugin-prisma@npm:5.0.0"
+  dependencies:
+    "@prisma/prisma-schema-wasm": 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
+  peerDependencies:
+    prettier: ">=2 || >=3"
+  checksum: 158b258de981fe3e21de844f155e5a89af77aa223ddb3ed6f743d861c07d608ec0043603236b4d859d36d28027945598e40f3a089ca0358074b3b42eefcd06a8
   languageName: node
   linkType: hard
 

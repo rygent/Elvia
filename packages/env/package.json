@@ -10,8 +10,8 @@
     "types": "./dist/index.d.ts"
   },
   "scripts": {
-    "lint": "eslint src --ext ts -c ../../.eslintrc --format=pretty",
-    "format": "prettier --write .",
+    "lint": "eslint src --ext ts --format=pretty",
+    "format": "prettier . --write --ignore-path=../../.prettierignore",
     "build": "tsup"
   },
   "license": "GPL-3.0",
