@@ -7,11 +7,9 @@
       "outputMode": "errors-only"
     },
     "lint": {
-      "cache": false,
       "outputMode": "errors-only"
     },
     "format": {
-      "cache": false,
       "outputMode": "errors-only"
     }
   }

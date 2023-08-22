@@ -48,9 +48,6 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
-# Turbo cache
-.turbo/
-
 # Optional npm cache directory
 .npm
 
@@ -59,6 +56,9 @@ web_modules/
 
 # Optional stylelint cache
 .stylelintcache
+
+# Optional turbo cache
+.turbo
 
 # Microbundle cache
 .rpt2_cache/
