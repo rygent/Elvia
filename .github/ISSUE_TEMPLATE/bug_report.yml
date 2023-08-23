@@ -14,9 +14,6 @@ body:
       label: Which package is this bug report for?
       options:
         - bot
-        - database
-        - env
-        - logger
     validations:
       required: true
   - type: textarea

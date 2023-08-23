@@ -32,12 +32,6 @@
   color: 'e4e669'
 - name: 'need repro'
   color: 'c66037'
-- name: packages:database
-  color: fbca04
-- name: packages:env
-  color: fbca04
-- name: packages:logger
-  color: fbca04
 - name: 'performance'
   color: '80c042'
 - name: 'priority:critical'
