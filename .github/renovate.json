@@ -22,6 +22,7 @@
       "matchPackagePatterns": ["*"],
       "semanticCommitType": "chore",
       "commitMessageAction": "Bump",
+      "commitMessageExtra": "to v{{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if newValue}}{{{newVersion}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}",
       "commitMessageTopic": "{{depName}}",
       "rangeStrategy": "bump",
       "recreateClosed": true,
