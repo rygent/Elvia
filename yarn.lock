@@ -1095,7 +1095,7 @@ __metadata:
     prisma: ^4.8.1
     semver: ^7.3.8
     systeminformation: ^5.17.1
-    undici: ^5.14.0
+    undici: ^5.19.1
     utf-8-validate: ^5.0.10
   dependenciesMeta:
     bufferutil:
@@ -3227,6 +3227,15 @@ __metadata:
   dependencies:
     busboy: ^1.6.0
   checksum: 7a076e44d84b25844b4eb657034437b8b9bb91f17d347de474fdea1d4263ce7ae9406db79cd30de5642519277b4893f43073258bcc8fed420b295da3fdd11b26
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.19.1":
+  version: 5.23.0
+  resolution: "undici@npm:5.23.0"
+  dependencies:
+    busboy: ^1.6.0
+  checksum: 906ca4fb1d47163d2cee2ecbbc664a1d92508a2cdf1558146621109f525c983a83597910b36e6ba468240e95259be5939cea6babc99fc0c36360b16630f66784
   languageName: node
   linkType: hard
 
