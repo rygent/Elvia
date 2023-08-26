@@ -1,8 +1,5 @@
 import { s } from '@sapphire/shapeshift';
-import dotenv from 'dotenv';
-import { resolve } from 'node:path';
-
-dotenv.config({ path: resolve(process.cwd(), '../../.env') });
+import 'dotenv/config';
 
 const schema = s.object({
 	DiscordToken: s.string,

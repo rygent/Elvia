@@ -1,8 +1,6 @@
 import moment from 'moment-timezone';
-import dotenv from 'dotenv';
-import { resolve } from 'node:path';
+import 'dotenv/config';
 
-dotenv.config({ path: resolve(process.cwd(), '../../.env') });
 moment.tz.setDefault(process.env.TIMEZONE);
 
 import BaseClient from '#lib/BaseClient.js';
