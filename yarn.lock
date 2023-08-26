@@ -1093,7 +1093,7 @@ __metadata:
     moment-timezone: ^0.5.40
     nanoid: ^4.0.0
     prisma: ^4.8.1
-    semver: ^7.3.8
+    semver: ^7.5.2
     systeminformation: ^5.17.1
     undici: ^5.14.0
     utf-8-validate: ^5.0.10
@@ -2803,6 +2803,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: ba9c7cbbf2b7884696523450a61fee1a09930d888b7a8d7579025ad93d459b2d1949ee5bbfeb188b2be5f4ac163544c5e98491ad6152df34154feebc2cc337c1
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.5.2":
+  version: 7.5.4
+  resolution: "semver@npm:7.5.4"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: 12d8ad952fa353b0995bf180cdac205a4068b759a140e5d3c608317098b3575ac2f1e09182206bf2eb26120e1c0ed8fb92c48c592f6099680de56bb071423ca3
   languageName: node
   linkType: hard
 

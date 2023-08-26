@@ -19,7 +19,7 @@
     "commander": "^9.5.0",
     "eslint": "^8.31.0",
     "prisma": "^4.8.1",
-    "semver": "^7.3.8"
+    "semver": "^7.5.2"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
