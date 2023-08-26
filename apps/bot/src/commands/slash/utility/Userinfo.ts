@@ -91,7 +91,7 @@ function resolvePermissions(member: GuildMember): PermissionsString[] | undefine
 		'DeafenMembers',
 		'KickMembers',
 		'ManageChannels',
-		'ManageEmojisAndStickers',
+		'ManageGuildExpressions',
 		'ManageEvents',
 		'ManageGuild',
 		'ManageMessages',

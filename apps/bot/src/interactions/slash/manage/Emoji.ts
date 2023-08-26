@@ -66,6 +66,6 @@ export default {
 			]
 		}
 	],
-	default_member_permissions: new PermissionsBitField(['ManageEmojisAndStickers']).bitfield.toString(),
+	default_member_permissions: new PermissionsBitField(['ManageGuildExpressions']).bitfield.toString(),
 	dm_permission: false
 } as RESTPostAPIApplicationCommandsJSONBody;

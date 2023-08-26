@@ -35,7 +35,7 @@ export function formatNumber(input: number): string {
 export function formatPermissions(input: string): string {
 	return input
 		.replace(/(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z])/g, ' $1')
-		.replace(/To|And|In\b/g, (txt) => txt.toLowerCase())
+		.replace(/To|In\b/g, (txt) => txt.toLowerCase())
 		.replace(/ Instant| Embedded/g, '')
 		.replace(/Guild/g, 'Server')
 		.replace(/Moderate/g, 'Timeout')

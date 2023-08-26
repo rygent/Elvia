@@ -11,8 +11,8 @@ export default class extends Command {
 			name: 'emoji add',
 			description: 'Add an emoji to the server.',
 			category: 'Manage',
-			clientPermissions: ['ManageEmojisAndStickers'],
-			memberPermissions: ['ManageEmojisAndStickers'],
+			clientPermissions: ['ManageGuildExpressions'],
+			memberPermissions: ['ManageGuildExpressions'],
 			guildOnly: true
 		});
 	}

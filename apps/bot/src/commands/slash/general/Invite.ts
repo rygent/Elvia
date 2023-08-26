@@ -23,7 +23,7 @@ export default class extends Command {
 				PermissionFlagsBits.KickMembers,
 				PermissionFlagsBits.BanMembers,
 				PermissionFlagsBits.CreateInstantInvite,
-				PermissionFlagsBits.ManageEmojisAndStickers,
+				PermissionFlagsBits.ManageGuildExpressions,
 				PermissionFlagsBits.ViewChannel,
 				PermissionFlagsBits.ModerateMembers,
 				PermissionFlagsBits.SendMessages,

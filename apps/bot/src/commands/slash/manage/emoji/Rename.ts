@@ -12,8 +12,8 @@ export default class extends Command {
 			name: 'emoji rename',
 			description: 'Rename a server emoji.',
 			category: 'Manage',
-			clientPermissions: ['ManageEmojisAndStickers'],
-			memberPermissions: ['ManageEmojisAndStickers'],
+			clientPermissions: ['ManageGuildExpressions'],
+			memberPermissions: ['ManageGuildExpressions'],
 			guildOnly: true
 		});
 	}
