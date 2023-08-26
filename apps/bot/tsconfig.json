@@ -7,11 +7,10 @@
       "#commands/*": ["./src/commands/*"],
       "#events/*": ["./src/events/*"],
       "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"],
-      "#types/*": ["./src/types/*"]
+      "#lib/*": ["./src/lib/*"]
     },
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "./types/**/*.ts"],
   "exclude": ["./dist/**/*"]
 }
