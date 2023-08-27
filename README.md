@@ -54,8 +54,8 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 <!-- LINKS -->
 
 [discord.js docs]: https://discord.js.org/#/
-[continuous integration]: https://github.com/Rygent/AvianaBot/actions/workflows/continuous-integration.yml
-[codacy]: https://app.codacy.com/gh/Rygent/AvianaBot/dashboard
+[continuous integration]: https://github.com/Rygent/Aviana/actions/workflows/continuous-integration.yml
+[codacy]: https://app.codacy.com/gh/Rygent/Aviana/dashboard
 [license]: ./LICENSE
 [node.js]: https://nodejs.org/en/download
 [mongodb]: https://www.mongodb.com/try/download/community
@@ -69,10 +69,10 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 <!-- BADGES -->
 
 [library]: https://img.shields.io/badge/library-discord.js-5865f2?style=for-the-badge
-[build]: https://img.shields.io/github/actions/workflow/status/Rygent/AvianaBot/continuous-integration.yml?logo=github&style=for-the-badge
+[build]: https://img.shields.io/github/actions/workflow/status/Rygent/Aviana/continuous-integration.yml?logo=github&style=for-the-badge
 [codacy grade]: https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge
-[license badge]: https://img.shields.io/github/license/Rygent/AvianaBot?style=for-the-badge
-[language]: https://img.shields.io/github/languages/top/Rygent/AvianaBot?color=3178c6&logoColor=white&style=for-the-badge
-[version]: https://img.shields.io/github/package-json/v/Rygent/AvianaBot/main?label=version&color=ff4949&style=for-the-badge
+[license badge]: https://img.shields.io/github/license/Rygent/Aviana?style=for-the-badge
+[language]: https://img.shields.io/github/languages/top/Rygent/Aviana?color=3178c6&logoColor=white&style=for-the-badge
+[version]: https://img.shields.io/github/package-json/v/Rygent/Aviana?filename=apps%2Fbot%2Fpackage.json&style=for-the-badge&label=version&color=ff4949
 [support server]: https://invidget.switchblade.xyz/FD5MMabf8Y
 [discord bot]: https://top.gg/api/widget/614645495779819551.svg

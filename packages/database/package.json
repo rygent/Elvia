@@ -20,7 +20,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/Rygent/AvianaBot",
+    "url": "https://gihub.com/Rygent/Aviana.git",
     "directory": "packages/database"
   },
   "dependencies": {

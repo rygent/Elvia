@@ -26,7 +26,7 @@ To get ready to work on the codebase, please do the following:
 
 <!-- LINKS -->
 
-[pr]: https://github.com/Rygent/AvianaBot/pulls
+[pr]: https://github.com/Rygent/Aviana/pulls
 [eslint]: https://eslint.org/
 [commit message conventions]: https://conventionalcommits.org/en/v1.0.0/
 [discord server]: https://discord.gg/FD5MMabf8Y
