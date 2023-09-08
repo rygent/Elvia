@@ -6,12 +6,9 @@ import { globby } from 'globby';
 import { Env } from '@aviana/env';
 import { Logger } from '@aviana/logger';
 import path from 'node:path';
-import moment from 'moment-timezone';
 
 const logger = new Logger();
 const program = new Command();
-
-moment.tz.setDefault(Env.Timezone);
 
 program.option('-g, --global', 'register global commands');
 program.option('-d, --dev', 'register developer commands');
