@@ -1,10 +1,10 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { AttachmentBuilder, ChatInputCommandInteraction } from 'discord.js';
 import { codeBlock } from '@discordjs/formatters';
 import { exec } from 'node:child_process';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'execute',

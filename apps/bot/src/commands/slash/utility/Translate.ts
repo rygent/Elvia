@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic } from '@discordjs/formatters';
@@ -8,7 +8,7 @@ import { cutText } from '@sapphire/utilities';
 import translate from '@iamtraction/google-translate';
 import languages from '#assets/json/languages.json' assert { type: 'json' };
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'translate',

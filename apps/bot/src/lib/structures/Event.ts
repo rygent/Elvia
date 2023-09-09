@@ -1,8 +1,8 @@
-import type BaseClient from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/BaseClient.js';
 import type { Awaitable } from '@discordjs/util';
 import type { EventEmitter } from 'node:events';
 
-export default abstract class Event {
+export abstract class Event {
 	public client: BaseClient<true>;
 	public name: string;
 	public type: 'once' | 'on';

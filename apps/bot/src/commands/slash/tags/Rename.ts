@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
 import {
@@ -13,7 +13,7 @@ import { shuffleArray, slugify } from '#lib/utils/Function.js';
 import { prisma } from '@aviana/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'tags rename',

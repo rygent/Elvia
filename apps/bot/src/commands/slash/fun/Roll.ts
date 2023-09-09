@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { formatNumber } from '#lib/utils/Function.js';
@@ -7,7 +7,7 @@ import { formatNumber } from '#lib/utils/Function.js';
 const kDice20RegExp = /^(\d+)?\s*d\s*(\d+)\s*(.*?)$/;
 const kDice20TrailRegExp = /([+-x*])\s*(\d+)/g;
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'roll',

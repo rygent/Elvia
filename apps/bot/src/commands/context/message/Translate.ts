@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ComponentType } from 'discord-api-types/v10';
 import { parseEmoji, type ContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
@@ -7,7 +7,7 @@ import translate from '@iamtraction/google-translate';
 import languages from '#assets/json/languages.json' assert { type: 'json' };
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'Translate',

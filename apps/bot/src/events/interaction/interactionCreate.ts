@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Event from '#lib/structures/Event.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Event } from '#lib/structures/Event.js';
 import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import type { CommandInteraction, GuildMember } from 'discord.js';

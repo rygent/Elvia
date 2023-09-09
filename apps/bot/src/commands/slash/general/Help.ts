@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import {
@@ -15,7 +15,7 @@ import { formatPermissions, isNsfwChannel } from '#lib/utils/Function.js';
 import { Env } from '@aviana/env';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'help',

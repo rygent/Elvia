@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, version } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
@@ -9,7 +9,7 @@ import { DurationFormatter } from '@sapphire/time-utilities';
 import systeminformation from 'systeminformation';
 import typescript from 'typescript';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'statistics',

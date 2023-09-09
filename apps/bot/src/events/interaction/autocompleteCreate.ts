@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Event from '#lib/structures/Event.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Event } from '#lib/structures/Event.js';
 import type { DiscordAPIError } from '@discordjs/rest';
 import type { AutocompleteInteraction } from 'discord.js';
 import { resolveCommandName } from '#lib/utils/Function.js';

@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Event from '#lib/structures/Event.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Event } from '#lib/structures/Event.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';

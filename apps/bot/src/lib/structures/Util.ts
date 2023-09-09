@@ -1,12 +1,12 @@
-import type BaseClient from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/BaseClient.js';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
-import Interaction from '#lib/structures/Interaction.js';
-import Command from '#lib/structures/Command.js';
-import Event from '#lib/structures/Event.js';
+import { Interaction } from '#lib/structures/Interaction.js';
+import { Command } from '#lib/structures/Command.js';
+import { Event } from '#lib/structures/Event.js';
 import path from 'node:path';
 
-export default class Util {
+export class Util {
 	public client: BaseClient<true>;
 
 	public constructor(client: BaseClient) {

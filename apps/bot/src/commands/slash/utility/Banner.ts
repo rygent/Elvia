@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
@@ -7,7 +7,7 @@ import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'banner',

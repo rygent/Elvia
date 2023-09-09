@@ -1,14 +1,14 @@
 import { BitField, Client, Options, Partials, PermissionsBitField, type PermissionsString } from 'discord.js';
 import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
-import type Interaction from '#lib/structures/Interaction.js';
-import type Command from '#lib/structures/Command.js';
-import type Event from '#lib/structures/Event.js';
-import Util from '#lib/structures/Util.js';
+import type { Interaction } from '#lib/structures/Interaction.js';
+import type { Command } from '#lib/structures/Command.js';
+import type { Event } from '#lib/structures/Event.js';
+import { Util } from '#lib/structures/Util.js';
 import { Logger } from '@aviana/logger';
 import semver from 'semver';
 
-export default class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
+export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public interactions: Collection<string, Interaction>;
 	public commands: Collection<string, Command>;
 	public aliases: Collection<string, string>;

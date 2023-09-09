@@ -1,8 +1,8 @@
-import type BaseClient from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/BaseClient.js';
 import { BitField, Message, PermissionsBitField, type PermissionsString } from 'discord.js';
 import type { Awaitable } from '@discordjs/util';
 
-export default abstract class Command {
+export abstract class Command {
 	public client: BaseClient<true>;
 	public readonly name: string;
 	public readonly aliases: string[];

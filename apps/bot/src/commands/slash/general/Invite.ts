@@ -1,11 +1,11 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ButtonStyle, OAuth2Scopes, PermissionFlagsBits } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { Emojis } from '#lib/utils/Constants.js';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'invite',

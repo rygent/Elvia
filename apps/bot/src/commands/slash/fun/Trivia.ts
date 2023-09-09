@@ -1,5 +1,5 @@
-import type BaseClient from '#lib/BaseClient.js';
-import Command from '#lib/structures/Interaction.js';
+import type { BaseClient } from '#lib/BaseClient.js';
+import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
@@ -9,7 +9,7 @@ import { disableAllButtons, sentenceCase, shuffleArray } from '#lib/utils/Functi
 import { request } from 'undici';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
+export default class extends Interaction {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: 'trivia',
