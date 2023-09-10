@@ -53,7 +53,7 @@ __metadata:
     semver: ^7.5.4
     systeminformation: ^5.21.4
     typescript: ^5.2.2
-    undici: ^5.23.0
+    undici: ^5.24.0
     utf-8-validate: ^6.0.3
   dependenciesMeta:
     bufferutil:
@@ -6502,12 +6502,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.12.0, undici@npm:^5.21.0, undici@npm:^5.23.0":
+"undici@npm:^5.12.0, undici@npm:^5.21.0":
   version: 5.23.0
   resolution: "undici@npm:5.23.0"
   dependencies:
     busboy: ^1.6.0
   checksum: 906ca4fb1d47163d2cee2ecbbc664a1d92508a2cdf1558146621109f525c983a83597910b36e6ba468240e95259be5939cea6babc99fc0c36360b16630f66784
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.24.0":
+  version: 5.24.0
+  resolution: "undici@npm:5.24.0"
+  dependencies:
+    busboy: ^1.6.0
+  checksum: 0795b69e0f7e1b2b162bce0d1670e6b44c968960e519f5b450df5196fd9c5102e0838ed854e68e61588f3c2436a3dc3d4390f9bf4a24b04eeb03926fe0eaa599
   languageName: node
   linkType: hard
 
