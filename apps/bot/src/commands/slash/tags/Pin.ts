@@ -53,7 +53,7 @@ export default class extends Interaction {
 		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
-		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
+		const respond = choices.filter(({ hoisted }) => !hoisted).map(({ name, slug }) => ({ name, value: slug }));
 
 		return interaction.respond(shuffleArray(respond).slice(0, 25));
 	}
