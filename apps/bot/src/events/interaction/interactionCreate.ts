@@ -4,7 +4,7 @@ import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import type { CommandInteraction, GuildMember } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic, underscore } from '@discordjs/formatters';
-import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Function.js';
+import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Functions.js';
 import { Env } from '@aviana/env';
 
 export default class extends Event {

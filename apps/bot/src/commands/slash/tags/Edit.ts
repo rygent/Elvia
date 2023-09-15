@@ -9,7 +9,7 @@ import {
 	ModalSubmitInteraction
 } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '#lib/utils/Function.js';
+import { shuffleArray } from '#lib/utils/Functions.js';
 import { prisma } from '@aviana/database';
 import { nanoid } from 'nanoid';
 

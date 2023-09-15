@@ -5,7 +5,7 @@ import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'disco
 import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber } from '#lib/utils/Function.js';
+import { formatArray, formatNumber } from '#lib/utils/Functions.js';
 import { Env } from '@aviana/env';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';

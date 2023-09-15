@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import { ButtonStyle } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { isNsfwChannel } from '#lib/utils/Function.js';
+import { isNsfwChannel } from '#lib/utils/Functions.js';
 import { request } from 'undici';
 import nsfw from '#assets/json/nsfw.json' assert { type: 'json' };
 

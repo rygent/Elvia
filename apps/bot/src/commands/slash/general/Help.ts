@@ -11,7 +11,7 @@ import {
 } from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '#lib/utils/Constants.js';
-import { formatPermissions, isNsfwChannel } from '#lib/utils/Function.js';
+import { formatPermissions, isNsfwChannel } from '#lib/utils/Functions.js';
 import { Env } from '@aviana/env';
 import { nanoid } from 'nanoid';
 

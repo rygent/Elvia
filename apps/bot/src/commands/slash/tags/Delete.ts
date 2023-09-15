@@ -4,7 +4,7 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '#lib/utils/Function.js';
+import { shuffleArray } from '#lib/utils/Functions.js';
 import { prisma } from '@aviana/database';
 import { nanoid } from 'nanoid';
 

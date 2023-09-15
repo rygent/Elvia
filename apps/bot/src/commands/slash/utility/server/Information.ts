@@ -4,7 +4,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore, userMention } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber, trimArray } from '#lib/utils/Function.js';
+import { formatArray, formatNumber, trimArray } from '#lib/utils/Functions.js';
 
 export default class extends Interaction {
 	public constructor(client: BaseClient) {

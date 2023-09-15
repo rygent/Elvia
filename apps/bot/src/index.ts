@@ -1,6 +1,6 @@
 import { BaseClient } from '#lib/structures/BaseClient.js';
-import * as Configuration from '#lib/Configuration.js';
+import * as Config from '#lib/Configs.js';
 import 'dotenv/config';
 
-const client = new BaseClient(Configuration);
+const client = new BaseClient(Config);
 void client.start();

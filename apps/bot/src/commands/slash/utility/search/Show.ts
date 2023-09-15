@@ -5,7 +5,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic, underscore } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber } from '#lib/utils/Function.js';
+import { formatArray, formatNumber } from '#lib/utils/Functions.js';
 import { Env } from '@aviana/env';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';

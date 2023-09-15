@@ -4,7 +4,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, version } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatBytes } from '#lib/utils/Function.js';
+import { formatArray, formatBytes } from '#lib/utils/Functions.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import systeminformation from 'systeminformation';
 import typescript from 'typescript';

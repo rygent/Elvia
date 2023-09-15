@@ -5,7 +5,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { disableAllButtons, sentenceCase, shuffleArray } from '#lib/utils/Function.js';
+import { disableAllButtons, sentenceCase, shuffleArray } from '#lib/utils/Functions.js';
 import { request } from 'undici';
 import { nanoid } from 'nanoid';
 

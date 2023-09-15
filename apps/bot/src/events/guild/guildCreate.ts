@@ -4,7 +4,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
-import { formatNumber } from '#lib/utils/Function.js';
+import { formatNumber } from '#lib/utils/Functions.js';
 import { Env } from '@aviana/env';
 import { prisma } from '@aviana/database';
 

@@ -5,7 +5,7 @@ import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, inlineCode, italic, underscore } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { formatArray, titleCase } from '#lib/utils/Function.js';
+import { formatArray, titleCase } from '#lib/utils/Functions.js';
 import { nanoid } from 'nanoid';
 import { request } from 'undici';
 

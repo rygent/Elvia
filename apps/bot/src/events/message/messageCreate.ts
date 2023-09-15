@@ -3,7 +3,7 @@ import { Event } from '#lib/structures/Event.js';
 import { Collection } from '@discordjs/collection';
 import type { GuildMember, Message } from 'discord.js';
 import { bold, italic, underscore } from '@discordjs/formatters';
-import { formatArray, formatPermissions, isNsfwChannel } from '#lib/utils/Function.js';
+import { formatArray, formatPermissions, isNsfwChannel } from '#lib/utils/Functions.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

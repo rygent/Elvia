@@ -4,7 +4,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import type { ContextMenuCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatPermissions, trimArray } from '#lib/utils/Function.js';
+import { formatArray, formatPermissions, trimArray } from '#lib/utils/Functions.js';
 import flags from '#assets/ts/Badges.js';
 
 export default class extends Interaction {
