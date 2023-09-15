@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';

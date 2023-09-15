@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Command } from '#lib/structures/Command.js';
 import { AttachmentBuilder, Message } from 'discord.js';
 import { codeBlock } from '@discordjs/formatters';

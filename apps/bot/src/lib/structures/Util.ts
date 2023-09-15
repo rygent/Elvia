@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
 import { Interaction } from '#lib/structures/Interaction.js';

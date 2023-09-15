@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Event } from '#lib/structures/Event.js';
 import { ActivityType } from 'discord-api-types/v10';
 import { formatNumber } from '#lib/utils/Function.js';

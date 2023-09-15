@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Event } from '#lib/structures/Event.js';
 import { Collection } from '@discordjs/collection';
 import type { GuildMember, Message } from 'discord.js';

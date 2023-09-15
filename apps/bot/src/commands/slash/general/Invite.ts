@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ButtonStyle, OAuth2Scopes, PermissionFlagsBits } from 'discord-api-types/v10';

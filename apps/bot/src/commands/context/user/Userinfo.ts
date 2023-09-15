@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/BaseClient.js';
+import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ContextMenuCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
