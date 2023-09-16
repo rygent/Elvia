@@ -10,6 +10,7 @@ const schema = s.object({
 	ClientVersion: s.string.nullable,
 	DatabaseUrl: s.string,
 
+	CustomStatus: s.string.nullable,
 	DebugMode: s.boolean,
 	Timezone: s.string,
 	SupportServerUrl: s.string.url(),
@@ -32,6 +33,7 @@ const data = {
 	ClientVersion: process.env.CLIENT_VERSION?.length ? process.env.CLIENT_VERSION : null,
 	DatabaseUrl: process.env.DATABASE_URL,
 
+	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',
 	Timezone: process.env.TIMEZONE,
 	SupportServerUrl: process.env.SUPPORT_SERVER_URL,
