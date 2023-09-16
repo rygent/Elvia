@@ -42,8 +42,8 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 			sweepers: {
 				...Options.DefaultSweeperSettings,
 				messages: {
-					interval: 18e1,
-					lifetime: 9e2
+					interval: 3e2,
+					lifetime: 432e2
 				}
 			}
 		});
