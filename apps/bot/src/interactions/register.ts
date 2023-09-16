@@ -47,7 +47,7 @@ async function registerCommands(): Promise<void> {
 	const options = program.opts();
 	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
 
-	const guildId = Env.DiscordGuildId;
+	const guildId = Env.DeveloperGuildId;
 	if (!guildId && options.dev) {
 		throw new Error('The DISCORD_GUILD_ID environment variable is required.');
 	}
