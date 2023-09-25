@@ -51,7 +51,7 @@ __metadata:
     prettier: ^3.0.3
     rimraf: ^5.0.1
     semver: ^7.5.4
-    systeminformation: ^5.21.8
+    systeminformation: ^5.21.9
     typescript: ^5.2.2
     undici: ^5.25.2
     utf-8-validate: ^6.0.3
@@ -6069,12 +6069,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.21.8":
-  version: 5.21.8
-  resolution: "systeminformation@npm:5.21.8"
+"systeminformation@npm:^5.21.9":
+  version: 5.21.9
+  resolution: "systeminformation@npm:5.21.9"
   bin:
     systeminformation: lib/cli.js
-  checksum: 302b8b430a5b0a7009be95c086b1bc43db3ecfd6ecab6cf654ae3312240f616823505f15a080a70f2335a9e5aab45d789aaba018843c9a9f8f18117aa32dce8a
+  checksum: 33f8ee313f4e15d5dfde98e071110c5ee377dace8e34d5a4775224efd4cc1005771898a99a4f20ef4948c5249ad4ad961c10f10f235a11c3042399e879677b87
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
