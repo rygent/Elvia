@@ -18,7 +18,7 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
+    "@commitlint/cli": "^17.7.2",
     "@commitlint/config-angular": "^17.7.0",
     "@types/node": "^20.6.5",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
