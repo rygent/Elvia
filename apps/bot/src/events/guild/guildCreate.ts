@@ -5,7 +5,7 @@ import { Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
 import { formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { prisma } from '@aviana/database';
 
 export default class extends Event {

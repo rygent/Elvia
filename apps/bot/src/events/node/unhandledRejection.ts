@@ -5,7 +5,7 @@ import type { DiscordAPIError } from '@discordjs/rest';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

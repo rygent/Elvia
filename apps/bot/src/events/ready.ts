@@ -2,7 +2,7 @@ import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Event } from '#lib/structures/Event.js';
 import { ActivityType } from 'discord-api-types/v10';
 import { formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { prisma } from '@aviana/database';
 import { redBright, underline } from 'colorette';
 

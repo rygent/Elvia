@@ -5,7 +5,7 @@ import type { DiscordAPIError } from '@discordjs/rest';
 import type { CommandInteraction, GuildMember } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic, underscore } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient) {

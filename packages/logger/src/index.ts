@@ -2,11 +2,12 @@ import type { Client } from 'discord.js';
 import { createLogger, format, transports } from 'winston';
 import { Webhook } from '#lib/transports/Webhook.js';
 import { clean, resolveLevel, resolveShardId, resolveTimestamp } from '#lib/util.js';
-import { Env } from '@aviana/env';
 import moment from 'moment';
 import 'moment-timezone';
+import 'dotenv/config';
 
-moment.tz.setDefault(Env.Timezone);
+const timezone = process.env.TIMEZONE;
+moment.tz.setDefault(timezone);
 
 export class Logger {
 	private readonly client: Client<true> | undefined;

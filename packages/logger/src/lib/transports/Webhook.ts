@@ -3,7 +3,6 @@ import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
 import { type Client, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Env } from '@aviana/env';
 import { color } from '#lib/constants.js';
 import { clean } from '#lib/util.js';
 
@@ -18,9 +17,11 @@ export class Webhook extends TransportStream {
 	}
 
 	public override async log(info: LogEntry, callback: LogCallback) {
-		if (!this.client.isReady()) return;
-		const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });
-		const threadId = new URL(Env.LoggerWebhookUrl).searchParams.get('thread_id') as string;
+		const webhookUrl = process.env.LOGGER_WEBHOOK_URL;
+
+		if (!this.client.isReady() || !webhookUrl) return;
+		const webhook = new WebhookClient({ url: webhookUrl });
+		const threadId = new URL(webhookUrl).searchParams.get('thread_id') as string;
 
 		const embed = new EmbedBuilder()
 			.setColor(color.red)

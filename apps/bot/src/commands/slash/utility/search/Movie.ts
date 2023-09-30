@@ -6,7 +6,7 @@ import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'd
 import { bold, hyperlink, italic, underscore } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { formatArray, formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';

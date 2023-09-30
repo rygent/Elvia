@@ -6,7 +6,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { sentenceCase } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { request } from 'undici';
 
 export default class extends Interaction {

@@ -3,7 +3,7 @@ import { Routes } from 'discord-api-types/v10';
 import { Command } from 'commander';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { Logger } from '@aviana/logger';
 import path from 'node:path';
 

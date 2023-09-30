@@ -25,7 +25,6 @@ __metadata:
   dependencies:
     "@anishshobith/deeptype": ^1.1.0
     "@aviana/database": "workspace:^"
-    "@aviana/env": "workspace:^"
     "@aviana/logger": "workspace:^"
     "@iamtraction/google-translate": ^2.0.1
     "@rygent/anilist": ^1.3.1
@@ -79,29 +78,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aviana/env@workspace:^, @aviana/env@workspace:packages/env":
-  version: 0.0.0-use.local
-  resolution: "@aviana/env@workspace:packages/env"
-  dependencies:
-    "@sapphire/utilities": ^3.13.0
-    "@types/node": ^20.8.0
-    dotenv: ^16.3.1
-    eslint: ^8.50.0
-    eslint-formatter-pretty: ^5.0.0
-    prettier: ^3.0.3
-    tsup: ^7.2.0
-    typescript: ^5.2.2
-  languageName: unknown
-  linkType: soft
-
 "@aviana/logger@workspace:^, @aviana/logger@workspace:packages/logger":
   version: 0.0.0-use.local
   resolution: "@aviana/logger@workspace:packages/logger"
   dependencies:
-    "@aviana/env": "workspace:^"
     "@types/node": ^20.8.0
     colorette: ^2.0.20
     discord.js: ^14.13.0
+    dotenv: ^16.3.1
     eslint: ^8.50.0
     eslint-formatter-pretty: ^5.0.0
     moment: ^2.29.4

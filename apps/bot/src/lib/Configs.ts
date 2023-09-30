@@ -1,5 +1,5 @@
 import type { PermissionsString } from 'discord.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import packageJson from '../../package.json' assert { type: 'json' };
 
 export const token = Env.DiscordToken;

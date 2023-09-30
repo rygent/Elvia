@@ -6,7 +6,7 @@ import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } 
 import { bold, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '#lib/utils/Constants.js';
 import { formatArray, formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '@aviana/env';
+import { Env } from '#lib/Env.js';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
