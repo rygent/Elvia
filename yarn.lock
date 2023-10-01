@@ -52,7 +52,7 @@ __metadata:
     semver: ^7.5.4
     systeminformation: ^5.21.9
     typescript: ^5.2.2
-    undici: ^5.25.2
+    undici: ^5.25.3
     utf-8-validate: ^6.0.3
   dependenciesMeta:
     bufferutil:
@@ -621,6 +621,13 @@ __metadata:
   version: 8.50.0
   resolution: "@eslint/js@npm:8.50.0"
   checksum: 302478f2acaaa7228729ec6a04f56641590185e1d8cd1c836a6db8a6b8009f80a57349341be9fbb9aa1721a7a569d1be3ffc598a33300d22816f11832095386c
+  languageName: node
+  linkType: hard
+
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@fastify/busboy@npm:2.0.0"
+  checksum: 41879937ce1dee6421ef9cd4da53239830617e1f0bb7a0e843940772cd72827205d05e518af6adabe6e1ea19301285fff432b9d11bad01a531e698bea95c781b
   languageName: node
   linkType: hard
 
@@ -6546,12 +6553,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.12.0, undici@npm:^5.21.0, undici@npm:^5.25.2":
+"undici@npm:^5.12.0, undici@npm:^5.21.0":
   version: 5.25.2
   resolution: "undici@npm:5.25.2"
   dependencies:
     busboy: ^1.6.0
   checksum: 1177a9c4fc9a1ddb765508d0f69ae61c166559badce8d797aaa92beef70ec5ac8fdc420b643f5d8d40b9a37891ba5536e2070d86a9c54a128aec67ad0c862d06
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.25.3":
+  version: 5.25.3
+  resolution: "undici@npm:5.25.3"
+  dependencies:
+    "@fastify/busboy": ^2.0.0
+  checksum: 65b814b7d8b06dab2d41c250d123663fe94edb78cf1a891cf3476569ea66dc425c7d4ba52b91d6f8ed6eba24613dd28e4a5070c372063532c3b997cd343ccc96
   languageName: node
   linkType: hard
 
