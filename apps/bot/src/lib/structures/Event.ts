@@ -16,7 +16,7 @@ export abstract class Event {
 		this.emitter =
 			(typeof options.emitter === 'string'
 				? (Reflect.get(this.client, options.emitter) as EventEmitter)
-				: options.emitter) ?? this.client;
+				: (options.emitter as EventEmitter)) ?? this.client;
 	}
 
 	public abstract run(...args: unknown[]): Awaitable<unknown>;
