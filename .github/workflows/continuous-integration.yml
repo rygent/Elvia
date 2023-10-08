@@ -19,10 +19,10 @@ jobs:
           registry-url: https://registry.yarnpkg.org/
       - name: Install Dependencies
         run: yarn --immutable
-      - name: Building Projects
-        run: yarn build
       - name: Linting Projects
         run: yarn lint
+      - name: Building Projects
+        run: yarn build
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
