@@ -1,3 +1,9 @@
 apps:bot:
   - apps/bot/*
   - apps/bot/**/*
+packages:database:
+  - packages/database/*
+  - packages/database/**/*
+packages:logger:
+  - packages/logger/*
+  - packages/logger/**/*
