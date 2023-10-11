@@ -1173,12 +1173,12 @@ __metadata:
   linkType: hard
 
 "@types/eslint@npm:^8.0.0":
-  version: 8.44.3
-  resolution: "@types/eslint@npm:8.44.3"
+  version: 8.44.4
+  resolution: "@types/eslint@npm:8.44.4"
   dependencies:
     "@types/estree": "*"
     "@types/json-schema": "*"
-  checksum: 3a0d152785400cb83a887a646d9c8877468e686b6fb439635c64856b70dbe91019e588d2b32bc923cd60642bf5dca7f70b2cf61eb431cf25fbdf2932f6e13dd3
+  checksum: 15bafdaba800e2995f38d3a2a929d8e9303035315e8d3535523a21cd719b6769a45884afa955f0b845ffa545a4150429b0178e2c44feeedf59ebb285eeae9825
   languageName: node
   linkType: hard
 
@@ -1235,10 +1235,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 20.8.2
-  resolution: "@types/node@npm:20.8.2"
-  checksum: 3da73e25d821bfcdb7de98589027e08bb4848e55408671c4a83ec0341e124b5313a0b20e1e4b4eff1168ea17a86f622ad73fcb04b761abd77496b9a27cbd5de5
+"@types/node@npm:*, @types/node@npm:^20.8.4":
+  version: 20.8.4
+  resolution: "@types/node@npm:20.8.4"
+  dependencies:
+    undici-types: ~5.25.1
+  checksum: 2106b9ef9750297cac68249428d7067c4d22c26908854165b70a164e34e900f4c34bb9bf3887c9391206b500d3e87171d03b1846e25788925236a0354390d278
   languageName: node
   linkType: hard
 
@@ -1246,15 +1248,6 @@ __metadata:
   version: 20.5.1
   resolution: "@types/node@npm:20.5.1"
   checksum: 3dbe611cd67afa987102c8558ee70f848949c5dcfee5f60abc073e55c0d7b048e391bf06bb1e0dc052cb7210ca97136ac496cbaf6e89123c989de6bd125fde82
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^20.8.4":
-  version: 20.8.4
-  resolution: "@types/node@npm:20.8.4"
-  dependencies:
-    undici-types: ~5.25.1
-  checksum: 2106b9ef9750297cac68249428d7067c4d22c26908854165b70a164e34e900f4c34bb9bf3887c9391206b500d3e87171d03b1846e25788925236a0354390d278
   languageName: node
   linkType: hard
 
@@ -1289,11 +1282,11 @@ __metadata:
   linkType: hard
 
 "@types/ws@npm:^8.5.5":
-  version: 8.5.6
-  resolution: "@types/ws@npm:8.5.6"
+  version: 8.5.7
+  resolution: "@types/ws@npm:8.5.7"
   dependencies:
     "@types/node": "*"
-  checksum: 7addb0c5fa4e7713d5209afb8a90f1852b12c02cb537395adf7a05fbaf21205dc5f7c110fd5ad6f3dbf147112cbff33fb11d8633059cb344f0c14f595b1ea1fb
+  checksum: 4502085c0f7ae6b36d5419c0fc6ce4b9002ee5e997a8708d6ed10b393e97091e1b986e8038ec604945c194f14aac150e74d6596629a2775628d122f552009c35
   languageName: node
   linkType: hard
 
@@ -3133,17 +3126,17 @@ __metadata:
   linkType: hard
 
 "flat-cache@npm:^3.0.4":
-  version: 3.1.0
-  resolution: "flat-cache@npm:3.1.0"
+  version: 3.1.1
+  resolution: "flat-cache@npm:3.1.1"
   dependencies:
-    flatted: ^3.2.7
+    flatted: ^3.2.9
     keyv: ^4.5.3
     rimraf: ^3.0.2
-  checksum: 99312601d5b90f44aef403f17f056dc09be7e437703740b166cdc9386d99e681f74e6b6e8bd7d010bda66904ea643c9527276b1b80308a2119741d94108a4d8f
+  checksum: 4958cfe0f46acf84953d4e16676ef5f0d38eab3a92d532a1e8d5f88f11eea8b36d5d598070ff2aeae15f1fde18f8d7d089eefaf9db10b5a587cc1c9072325c7a
   languageName: node
   linkType: hard
 
-"flatted@npm:^3.2.7":
+"flatted@npm:^3.2.9":
   version: 3.2.9
   resolution: "flatted@npm:3.2.9"
   checksum: f14167fbe26a9d20f6fca8d998e8f1f41df72c8e81f9f2c9d61ed2bea058248f5e1cbd05e7f88c0e5087a6a0b822a1e5e2b446e879f3cfbe0b07ba2d7f80b026
@@ -4181,11 +4174,11 @@ __metadata:
   linkType: hard
 
 "keyv@npm:^4.0.0, keyv@npm:^4.5.3":
-  version: 4.5.3
-  resolution: "keyv@npm:4.5.3"
+  version: 4.5.4
+  resolution: "keyv@npm:4.5.4"
   dependencies:
     json-buffer: 3.0.1
-  checksum: 3ffb4d5b72b6b4b4af443bbb75ca2526b23c750fccb5ac4c267c6116888b4b65681015c2833cb20d26cf3e6e32dac6b988c77f7f022e1a571b7d90f1442257da
+  checksum: 74a24395b1c34bd44ad5cb2b49140d087553e170625240b86755a6604cd65aa16efdbdeae5cdb17ba1284a0fbb25ad06263755dbc71b8d8b06f74232ce3cdd72
   languageName: node
   linkType: hard
 
@@ -5422,28 +5415,28 @@ __metadata:
   linkType: hard
 
 "resolve@npm:^1.10.0, resolve@npm:^1.22.4":
-  version: 1.22.6
-  resolution: "resolve@npm:1.22.6"
+  version: 1.22.8
+  resolution: "resolve@npm:1.22.8"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: d13bf66d4e2ee30d291491f16f2fa44edd4e0cefb85d53249dd6f93e70b2b8c20ec62f01b18662e3cd40e50a7528f18c4087a99490048992a3bb954cf3201a5b
+  checksum: f8a26958aa572c9b064562750b52131a37c29d072478ea32e129063e2da7f83e31f7f11e7087a18225a8561cfe8d2f0df9dbea7c9d331a897571c0a2527dbb4c
   languageName: node
   linkType: hard
 
 "resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
-  version: 1.22.6
-  resolution: "resolve@patch:resolve@npm%3A1.22.6#~builtin<compat/resolve>::version=1.22.6&hash=c3c19d"
+  version: 1.22.8
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: 9d3b3c67aefd12cecbe5f10ca4d1f51ea190891096497c43f301b086883b426466918c3a64f1bbf1788fabb52b579d58809614006c5d0b49186702b3b8fb746a
+  checksum: 5479b7d431cacd5185f8db64bfcb7286ae5e31eb299f4c4f404ad8aa6098b77599563ac4257cb2c37a42f59dfc06a1bec2bcf283bb448f319e37f0feb9a09847
   languageName: node
   linkType: hard
 
@@ -6539,16 +6532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.12.0, undici@npm:^5.21.0":
-  version: 5.25.4
-  resolution: "undici@npm:5.25.4"
-  dependencies:
-    "@fastify/busboy": ^2.0.0
-  checksum: 654da161687de893127a685be61a19cb5bae42f4595c316ebf633929d871ac3bcd33edcb74156cea90655dfcd100bfe9b53a4f4749d52fc6ad2232f49a6ca8ab
-  languageName: node
-  linkType: hard
-
-"undici@npm:^5.26.3":
+"undici@npm:^5.12.0, undici@npm:^5.21.0, undici@npm:^5.26.3":
   version: 5.26.3
   resolution: "undici@npm:5.26.3"
   dependencies:
