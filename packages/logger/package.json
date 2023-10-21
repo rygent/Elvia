@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.8.6",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-formatter-pretty": "^5.0.0",
     "prettier": "^3.0.3",
     "tsup": "^7.2.0",
