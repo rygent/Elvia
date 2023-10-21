@@ -35,7 +35,7 @@ __metadata:
     "@swc/cli": ^0.1.62
     "@swc/core": ^1.3.94
     "@types/moment-duration-format": ^2.2.5
-    "@types/node": ^20.8.6
+    "@types/node": ^20.8.7
     bufferutil: ^4.0.8
     colorette: ^2.0.20
     commander: ^11.1.0
@@ -67,7 +67,7 @@ __metadata:
   resolution: "@aviana/database@workspace:packages/database"
   dependencies:
     "@prisma/client": ^5.4.2
-    "@types/node": ^20.8.6
+    "@types/node": ^20.8.7
     eslint: ^8.52.0
     eslint-formatter-pretty: ^5.0.0
     prettier: ^3.0.3
@@ -82,7 +82,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aviana/logger@workspace:packages/logger"
   dependencies:
-    "@types/node": ^20.8.6
+    "@types/node": ^20.8.7
     colorette: ^2.0.20
     discord.js: ^14.13.0
     dotenv: ^16.3.1
@@ -1251,12 +1251,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.8.6":
-  version: 20.8.6
-  resolution: "@types/node@npm:20.8.6"
+"@types/node@npm:^20.8.7":
+  version: 20.8.7
+  resolution: "@types/node@npm:20.8.7"
   dependencies:
     undici-types: ~5.25.1
-  checksum: ccfb7ac482c5a96edeb239893c5c099f5257fcc2ed9ae62fefdfbc782b79e16dbc2af9a85b379665237bf759904b44ca2be68e75d239e0297882aad42f61905c
+  checksum: 2173c0c03daefcb60c03a61b1371b28c8fe412e7a40dc6646458b809d14a85fbc7aeb369d957d57f0aaaafd99964e77436f29b3b579232d8f2b20c58abbd1d25
   languageName: node
   linkType: hard
 
@@ -5529,7 +5529,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^18.0.0
     "@commitlint/config-angular": ^18.0.0
-    "@types/node": ^20.8.6
+    "@types/node": ^20.8.7
     "@typescript-eslint/eslint-plugin": ^6.8.0
     "@typescript-eslint/parser": ^6.8.0
     eslint: ^8.52.0
