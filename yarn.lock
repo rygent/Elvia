@@ -35,7 +35,7 @@ __metadata:
     "@swc/cli": ^0.1.62
     "@swc/core": ^1.3.95
     "@types/moment-duration-format": ^2.2.5
-    "@types/node": ^20.8.7
+    "@types/node": ^20.8.9
     bufferutil: ^4.0.8
     colorette: ^2.0.20
     commander: ^11.1.0
@@ -67,7 +67,7 @@ __metadata:
   resolution: "@aviana/database@workspace:packages/database"
   dependencies:
     "@prisma/client": ^5.5.2
-    "@types/node": ^20.8.7
+    "@types/node": ^20.8.9
     eslint: ^8.52.0
     eslint-formatter-pretty: ^5.0.0
     prettier: ^3.0.3
@@ -82,7 +82,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aviana/logger@workspace:packages/logger"
   dependencies:
-    "@types/node": ^20.8.7
+    "@types/node": ^20.8.9
     colorette: ^2.0.20
     discord.js: ^14.13.0
     dotenv: ^16.3.1
@@ -1179,7 +1179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.8.7":
+"@types/node@npm:*":
   version: 20.8.7
   resolution: "@types/node@npm:20.8.7"
   dependencies:
@@ -1192,6 +1192,15 @@ __metadata:
   version: 18.18.6
   resolution: "@types/node@npm:18.18.6"
   checksum: a847639b8455fd3dfa6dbc2917274c82c9db789f1d41aaf69f94ac6c9e54c3c1dd29be6e1e1ccd7c17e54db3d78d7011bc4e70544c6447ceca253dccc0a187e1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.8.9":
+  version: 20.8.9
+  resolution: "@types/node@npm:20.8.9"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 0c05f3502a9507ff27e91dd6fd574fa6f391b3fafedcfe8e0c8d33351fb22d02c0121f854e5b6b3ecb9a8a468407ddf6e7ac0029fb236d4c7e1361ffc758a01f
   languageName: node
   linkType: hard
 
@@ -5442,7 +5451,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^18.2.0
     "@commitlint/config-angular": ^18.1.0
-    "@types/node": ^20.8.7
+    "@types/node": ^20.8.9
     "@typescript-eslint/eslint-plugin": ^6.9.0
     "@typescript-eslint/parser": ^6.9.0
     eslint: ^8.52.0
@@ -6438,6 +6447,13 @@ __metadata:
   version: 5.25.3
   resolution: "undici-types@npm:5.25.3"
   checksum: ec9d2cc36520cbd9fbe3b3b6c682a87fe5be214699e1f57d1e3d9a2cb5be422e62735f06e0067dc325fd3dd7404c697e4d479f9147dc8a804e049e29f357f2ff
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
   languageName: node
   linkType: hard
 
