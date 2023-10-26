@@ -37,7 +37,7 @@
     "nanoid": "^5.0.2",
     "semver": "^7.5.4",
     "systeminformation": "^5.21.13",
-    "undici": "^5.26.4"
+    "undici": "^5.27.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",
