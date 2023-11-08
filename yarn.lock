@@ -34,7 +34,7 @@ __metadata:
     "@sapphire/utilities": "npm:^3.13.0"
     "@swc/cli": "npm:^0.1.62"
     "@swc/core": "npm:^1.3.96"
-    "@types/moment-duration-format": "npm:^2.2.5"
+    "@types/moment-duration-format": "npm:^2.2.6"
     "@types/node": "npm:^20.8.10"
     bufferutil: "npm:^4.0.8"
     colorette: "npm:^2.0.20"
@@ -1176,12 +1176,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/moment-duration-format@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "@types/moment-duration-format@npm:2.2.5"
+"@types/moment-duration-format@npm:^2.2.6":
+  version: 2.2.6
+  resolution: "@types/moment-duration-format@npm:2.2.6"
   dependencies:
     moment: "npm:>=2.14.0"
-  checksum: 0955cf6a71106ce1a23c5e61016217b61c8c1f9bd17ef923a4c1079affd2c53b5e23f659348403144f3bbc2f4ab67c9356814a22d330f3c7161e2ffaacd92012
+  checksum: 5cb7a81104c5d7e714a6a370d0d3857991a83fd986e150fef2719f342eaabea4372b82825ef39a4a224ec66068dfe0cab4a4771b4eabbd8d8e1fc3cb88c51bf9
   languageName: node
   linkType: hard
 
