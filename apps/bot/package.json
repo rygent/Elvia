@@ -4,7 +4,7 @@
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint src --ext ts --format=pretty",
+    "lint": "eslint src --ext ts",
     "format": "prettier . --write --ignore-path=../../.prettierignore",
     "build": "rimraf ./dist && tsc --noEmit && swc ./src --out-dir ./dist --copy-files",
     "start": "node --no-warnings ./dist/index.js",
@@ -45,7 +45,6 @@
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^20.9.0",
     "eslint": "^8.53.0",
-    "eslint-formatter-pretty": "^5.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2"

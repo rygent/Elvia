@@ -10,7 +10,7 @@
     "types": "./dist/index.d.ts"
   },
   "scripts": {
-    "lint": "eslint src --ext ts --format=pretty",
+    "lint": "eslint src --ext ts",
     "format": "prettier . --write --ignore-path=../../.prettierignore",
     "build": "tsup",
     "prisma:generate": "prisma generate",
@@ -29,7 +29,6 @@
   "devDependencies": {
     "@types/node": "^20.9.0",
     "eslint": "^8.53.0",
-    "eslint-formatter-pretty": "^5.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.5.2",
