@@ -36,7 +36,7 @@
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.3",
     "semver": "^7.5.4",
-    "systeminformation": "^5.21.16",
+    "systeminformation": "^5.21.17",
     "undici": "^5.27.2"
   },
   "devDependencies": {
