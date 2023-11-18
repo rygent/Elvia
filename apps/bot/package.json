@@ -4,9 +4,9 @@
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint src --ext ts",
-    "format": "prettier . --write --ignore-path=../../.prettierignore",
     "build": "rimraf ./dist && tsc --noEmit && swc ./src --out-dir ./dist --copy-files",
+    "lint": "eslint src --ext ts",
+    "format": "prettier . --write",
     "start": "node --no-warnings ./dist/index.js",
     "register": "node ./dist/interactions/register.js"
   },

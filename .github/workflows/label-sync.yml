@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  syncing:
-    name: Syncing
+  synchronization:
+    name: Synchronization
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
       - name: Synchronize
         uses: crazy-max/ghaction-github-labeler@v5

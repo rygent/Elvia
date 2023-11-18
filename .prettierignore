@@ -1,5 +1,3 @@
 .turbo/
-.vscode/
 .yarn/
-dist/
 node_modules/

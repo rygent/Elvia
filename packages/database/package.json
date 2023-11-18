@@ -5,14 +5,19 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs",
-    "types": "./dist/index.d.ts"
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "scripts": {
-    "lint": "eslint src --ext ts",
-    "format": "prettier . --write --ignore-path=../../.prettierignore",
     "build": "tsup",
+    "lint": "eslint src --ext ts",
+    "format": "prettier . --write",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push --skip-generate"
   },
