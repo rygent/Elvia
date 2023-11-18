@@ -29,7 +29,7 @@ __metadata:
     "@iamtraction/google-translate": "npm:^2.0.1"
     "@rygent/anilist": "npm:^1.4.0"
     "@rygent/spotify": "npm:^1.1.1"
-    "@sapphire/discord-utilities": "npm:^3.1.1"
+    "@sapphire/discord-utilities": "npm:^3.2.0"
     "@sapphire/time-utilities": "npm:^1.7.10"
     "@sapphire/utilities": "npm:^3.13.0"
     "@swc/cli": "npm:^0.1.62"
@@ -864,12 +864,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/discord-utilities@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@sapphire/discord-utilities@npm:3.1.1"
+"@sapphire/discord-utilities@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@sapphire/discord-utilities@npm:3.2.0"
   dependencies:
-    discord-api-types: "npm:^0.37.55"
-  checksum: 4178fe2e6e1ec6068e86c41a1553dbf968b5cd22622d282e7325d0b8919967e8637a7b4028c1ccff13a9c32f94ee7f5e3eaa07322f64a858bf67f7e7b215483c
+    discord-api-types: "npm:^0.37.63"
+  checksum: e9ab094080ac9f0cc93ea045f4e59abbafdf301c0a6f8a16c6094eaef8f174a1d59899b28822947aee00a78a9f4cadabdf40fae671660af885ade8056bbd63b7
   languageName: node
   linkType: hard
 
@@ -2279,7 +2279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.55":
+"discord-api-types@npm:^0.37.63":
   version: 0.37.63
   resolution: "discord-api-types@npm:0.37.63"
   checksum: 37b35be2ce97f6cff6fe05ebdc88edebdcc5ac5c81f24b9c9f0639da7d235ebc7e13a24e9e55ae513bb84984dcb18e439694e449f2841b899b0a9030f9fee2c8

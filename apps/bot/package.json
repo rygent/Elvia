@@ -24,7 +24,7 @@
     "@iamtraction/google-translate": "^2.0.1",
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.1.1",
-    "@sapphire/discord-utilities": "^3.1.1",
+    "@sapphire/discord-utilities": "^3.2.0",
     "@sapphire/time-utilities": "^1.7.10",
     "@sapphire/utilities": "^3.13.0",
     "colorette": "^2.0.20",
