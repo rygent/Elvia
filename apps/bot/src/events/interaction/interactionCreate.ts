@@ -8,7 +8,7 @@ import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } fro
 import { Env } from '#lib/Env.js';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'interactionCreate',
 			once: false

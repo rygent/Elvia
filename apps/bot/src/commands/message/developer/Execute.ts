@@ -5,7 +5,7 @@ import { codeBlock } from '@discordjs/formatters';
 import { exec } from 'node:child_process';
 
 export default class extends Command {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'execute',
 			aliases: ['exec'],

@@ -4,7 +4,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'purge text',
 			description: 'Purge messages that contain text in the channel.',

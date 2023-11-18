@@ -10,7 +10,7 @@ import systeminformation from 'systeminformation';
 import typescript from 'typescript';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'statistics',
 			description: 'Get statistics of the bot.',

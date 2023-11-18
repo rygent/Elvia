@@ -10,7 +10,7 @@ import { Env } from '#lib/Env.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search weather',
 			description: 'Search for weather forecast.',

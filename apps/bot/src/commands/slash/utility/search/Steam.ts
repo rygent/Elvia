@@ -10,7 +10,7 @@ import { nanoid } from 'nanoid';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search steam',
 			description: 'Search for a Games on Steam.',

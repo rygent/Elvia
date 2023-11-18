@@ -6,7 +6,7 @@ import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { Emojis } from '#lib/utils/Constants.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'invite',
 			description: 'Add the bot to another server.',

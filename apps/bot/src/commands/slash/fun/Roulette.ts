@@ -4,7 +4,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold } from '@discordjs/formatters';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'roulette',
 			description: 'Get a random winner from the roulette.',

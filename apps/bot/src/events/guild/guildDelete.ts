@@ -9,7 +9,7 @@ import { Env } from '#lib/Env.js';
 import { prisma } from '@aviana/database';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'guildDelete',
 			once: false

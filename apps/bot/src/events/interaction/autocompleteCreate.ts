@@ -5,7 +5,7 @@ import type { AutocompleteInteraction } from 'discord.js';
 import { resolveCommandName } from '#lib/utils/Functions.js';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'interactionCreate',
 			once: false

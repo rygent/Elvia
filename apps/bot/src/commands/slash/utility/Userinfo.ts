@@ -8,7 +8,7 @@ import { formatArray, formatPermissions, trimArray } from '#lib/utils/Functions.
 import flags from '#assets/ts/Badges.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'userinfo',
 			description: 'Get user information.',

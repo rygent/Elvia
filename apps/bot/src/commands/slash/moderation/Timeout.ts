@@ -5,7 +5,7 @@ import { bold, italic, time } from '@discordjs/formatters';
 import { Duration } from '@sapphire/time-utilities';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'timeout',
 			description: 'Timeout a member with duration and optional reason.',

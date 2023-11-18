@@ -7,9 +7,9 @@ import { Event } from '#lib/structures/Event.js';
 import path from 'node:path';
 
 export class Util {
-	public client: BaseClient<true>;
+	public client: BaseClient<boolean>;
 
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<boolean>) {
 		this.client = client;
 	}
 

@@ -9,7 +9,7 @@ export abstract class Event {
 	public emitter: EventEmitter;
 
 	// eslint-disable-next-line no-undef
-	public constructor(client: BaseClient, options: EventOptions) {
+	public constructor(client: BaseClient<true>, options: EventOptions) {
 		this.client = client;
 		this.name = options.name;
 		this.type = options.once ? 'once' : 'on';

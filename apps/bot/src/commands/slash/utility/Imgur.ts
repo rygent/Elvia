@@ -7,7 +7,7 @@ import { Env } from '#lib/Env.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'imgur',
 			description: 'Upload a media to Imgur.',

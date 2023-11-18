@@ -14,7 +14,7 @@ import { request } from 'undici';
 import moment from 'moment';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search movie',
 			description: 'Search for a Movie on TMDb.',

@@ -14,7 +14,7 @@ import moment from 'moment';
 import 'moment-duration-format';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search spotify',
 			description: 'Search for a song on Spotify.',

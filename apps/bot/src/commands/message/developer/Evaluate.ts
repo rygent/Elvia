@@ -7,7 +7,7 @@ import { Type } from '@anishshobith/deeptype';
 import { inspect } from 'node:util';
 
 export default class extends Command {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'evaluate',
 			aliases: ['eval'],

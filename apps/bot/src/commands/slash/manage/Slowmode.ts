@@ -5,7 +5,7 @@ import { bold, channelMention, italic } from '@discordjs/formatters';
 import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'slowmode',
 			description: 'Applies a slowmode to a channel.',

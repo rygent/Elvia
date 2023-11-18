@@ -16,7 +16,7 @@ import { Env } from '#lib/Env.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'help',
 			description: 'Shows help information and commands.',

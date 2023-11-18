@@ -9,7 +9,7 @@ import translate from '@iamtraction/google-translate';
 import languages from '#assets/json/languages.json' assert { type: 'json' };
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'translate',
 			description: 'Translate your text.',

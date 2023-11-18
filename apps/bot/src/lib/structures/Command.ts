@@ -17,7 +17,7 @@ export abstract class Command {
 	public readonly nsfw: boolean;
 
 	// eslint-disable-next-line no-undef
-	public constructor(client: BaseClient, options: MessageCommandOptions) {
+	public constructor(client: BaseClient<true>, options: MessageCommandOptions) {
 		this.client = client;
 		this.name = options.name;
 		this.aliases = options.aliases ?? [];

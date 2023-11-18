@@ -3,7 +3,7 @@ import { Interaction } from '#lib/structures/Interaction.js';
 import { AttachmentBuilder, ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'server emoji image',
 			description: 'Get the full size image of an emoji.',

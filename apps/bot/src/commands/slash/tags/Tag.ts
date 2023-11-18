@@ -5,7 +5,7 @@ import { inlineCode } from '@discordjs/formatters';
 import { prisma } from '@aviana/database';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'tag',
 			description: 'Send an existing server tag.',

@@ -7,7 +7,7 @@ import { inlineCode } from '@discordjs/formatters';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'emoji delete',
 			description: 'Delete a server emoji.',

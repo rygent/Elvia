@@ -5,7 +5,7 @@ import { bold, italic } from '@discordjs/formatters';
 import { HttpUrlRegex } from '@sapphire/discord-utilities';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'purge links',
 			description: 'Purge messages that contain links in the channel.',

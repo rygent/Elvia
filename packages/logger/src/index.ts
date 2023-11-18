@@ -10,7 +10,7 @@ const timezone = process.env.TIMEZONE;
 moment.tz.setDefault(timezone);
 
 export class Logger {
-	private readonly client: Client<true> | undefined;
+	private readonly client: Client | undefined;
 
 	private readonly level = {
 		syslog: 0,

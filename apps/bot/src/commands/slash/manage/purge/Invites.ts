@@ -5,7 +5,7 @@ import { bold, italic } from '@discordjs/formatters';
 import { DiscordInviteLinkRegex } from '@sapphire/discord-utilities';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'purge invites',
 			description: 'Purge messages that contain invite links in the channel.',

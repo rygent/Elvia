@@ -10,7 +10,7 @@ import { request } from 'undici';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'trivia',
 			description: 'Plays a quick trivia game.',

@@ -23,7 +23,7 @@ export abstract class Interaction {
 	public readonly nsfw: boolean;
 
 	// eslint-disable-next-line no-undef
-	public constructor(client: BaseClient, options: InteractionCommandOptions) {
+	public constructor(client: BaseClient<true>, options: InteractionCommandOptions) {
 		this.client = client;
 		this.name = options.name;
 		this.description = options.description ?? 'No description provided';

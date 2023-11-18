@@ -7,7 +7,7 @@ import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search wikipedia',
 			description: 'Search for something on Wikipedia.',

@@ -6,7 +6,7 @@ import { inlineCode } from '@discordjs/formatters';
 const ImageUrlRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)($|\?.*$)/;
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'emoji add',
 			description: 'Add an emoji to the server.',

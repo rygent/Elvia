@@ -14,7 +14,7 @@ import { prisma } from '@aviana/database';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'tags rename',
 			description: 'Rename an existing server tag.',

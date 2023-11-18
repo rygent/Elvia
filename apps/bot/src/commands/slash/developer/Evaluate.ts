@@ -15,7 +15,7 @@ import { inspect } from 'node:util';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'evaluate',
 			description: 'Evaluates any JavaScript code.',

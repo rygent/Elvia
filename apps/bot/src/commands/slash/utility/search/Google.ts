@@ -4,7 +4,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 import { hideLinkEmbed } from '@discordjs/formatters';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'search google',
 			description: 'Search for something on Google.',

@@ -7,7 +7,7 @@ import { Colors } from '#lib/utils/Constants.js';
 import { Env } from '#lib/Env.js';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'uncaughtException',
 			once: false,

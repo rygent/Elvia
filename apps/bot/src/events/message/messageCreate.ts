@@ -6,7 +6,7 @@ import { bold, italic, underscore } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel } from '#lib/utils/Functions.js';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'messageCreate',
 			once: false

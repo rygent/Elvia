@@ -7,7 +7,7 @@ import { prisma } from '@aviana/database';
 import { redBright, underline } from 'colorette';
 
 export default class extends Event {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'ready',
 			once: true

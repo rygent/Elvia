@@ -7,7 +7,7 @@ import { color } from '#lib/constants.js';
 import { clean } from '#lib/util.js';
 
 export class Webhook extends TransportStream {
-	private readonly client: Client<true>;
+	private readonly client: Client;
 	private readonly error: Error;
 
 	public constructor(client: Client, error: Error) {

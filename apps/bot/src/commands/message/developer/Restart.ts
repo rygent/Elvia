@@ -4,7 +4,7 @@ import type { Message } from 'discord.js';
 import { italic, underscore } from '@discordjs/formatters';
 
 export default class extends Command {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'restart',
 			aliases: ['reboot'],

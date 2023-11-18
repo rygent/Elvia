@@ -7,7 +7,7 @@ import { Colors } from '#lib/utils/Constants.js';
 import { formatArray, formatNumber, trimArray } from '#lib/utils/Functions.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'server information',
 			description: 'Get server information.',

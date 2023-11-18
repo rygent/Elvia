@@ -4,7 +4,7 @@ import type { Message } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 
 export default class extends Command {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'ping',
 			aliases: ['pong'],

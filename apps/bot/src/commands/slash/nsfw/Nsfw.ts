@@ -9,7 +9,7 @@ import { request } from 'undici';
 import nsfw from '#assets/json/nsfw.json' assert { type: 'json' };
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'nsfw',
 			description: 'Displays explicit content.',

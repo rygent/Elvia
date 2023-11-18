@@ -5,7 +5,7 @@ import { bold, italic } from '@discordjs/formatters';
 const ImageMimeTypeRegex = /image\/(avif|gif|jpeg|png|svg\+xml)/g;
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'purge images',
 			description: 'Purge messages that contain images in the channel.',

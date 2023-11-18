@@ -5,7 +5,7 @@ import { UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'meme fml',
 			description: 'Get a random F My Life story.',

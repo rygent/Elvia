@@ -8,7 +8,7 @@ const kDice20RegExp = /^(\d+)?\s*d\s*(\d+)\s*(.*?)$/;
 const kDice20TrailRegExp = /([+-x*])\s*(\d+)/g;
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'roll',
 			description: 'Roll random number with optional minimum and maximum numbers or using a dice.',

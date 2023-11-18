@@ -3,7 +3,7 @@ import { Interaction } from '#lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'text smallcaps',
 			description: 'Transform your text into small caps.',

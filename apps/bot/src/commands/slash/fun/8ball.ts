@@ -6,7 +6,7 @@ import { UserAgent } from '#lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: '8ball',
 			description: 'Ask magic 8ball.',

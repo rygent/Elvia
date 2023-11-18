@@ -6,7 +6,7 @@ import { shuffleArray } from '#lib/utils/Functions.js';
 import { prisma } from '@aviana/database';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'tags unpin',
 			description: 'Unpin an existing server tag.',

@@ -6,7 +6,7 @@ import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'love',
 			description: 'Calculate love percentage between two users.',

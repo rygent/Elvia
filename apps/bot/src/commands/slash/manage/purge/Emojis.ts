@@ -5,7 +5,7 @@ import { bold, italic } from '@discordjs/formatters';
 import { FormattedCustomEmoji, TwemojiRegex } from '@sapphire/discord-utilities';
 
 export default class extends Interaction {
-	public constructor(client: BaseClient) {
+	public constructor(client: BaseClient<true>) {
 		super(client, {
 			name: 'purge emojis',
 			description: 'Purge messages that contain emojis in the channel.',
