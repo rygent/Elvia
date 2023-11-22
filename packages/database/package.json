@@ -37,7 +37,7 @@
     "prettier": "^3.1.0",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.6.0",
-    "tsup": "^8.0.0",
+    "tsup": "^8.0.1",
     "typescript": "^5.2.2"
   },
   "files": [
