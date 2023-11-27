@@ -5,6 +5,7 @@ import type { Interaction } from '#lib/structures/Interaction.js';
 import type { Command } from '#lib/structures/Command.js';
 import type { Event } from '#lib/structures/Event.js';
 import { Util } from '#lib/structures/Util.js';
+import type { ClientOptions } from '#types/types.js';
 import { Logger } from '@aviana/logger';
 import semver from 'semver';
 
@@ -25,7 +26,6 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public owners: string[] | undefined;
 	public defaultPermissions!: Readonly<BitField<PermissionsString, bigint>>;
 
-	// eslint-disable-next-line no-undef
 	public constructor(options: ClientOptions) {
 		super({
 			intents: [
@@ -62,7 +62,6 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 		this.debug = options.debug;
 	}
 
-	// eslint-disable-next-line no-undef
 	private validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 		if (semver.lt(process.versions.node, '18.12.0')) {

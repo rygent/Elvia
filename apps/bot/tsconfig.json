@@ -8,10 +8,11 @@
       "#commands/*": ["./src/commands/*"],
       "#events/*": ["./src/events/*"],
       "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"]
+      "#lib/*": ["./src/lib/*"],
+      "#types/*": ["./src/types/*"]
     },
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts", "./types/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["./dist/**/*"]
 }

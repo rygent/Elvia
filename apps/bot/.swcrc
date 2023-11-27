@@ -18,11 +18,13 @@
       "#commands/*": ["./src/commands/*"],
       "#events/*": ["./src/events/*"],
       "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"]
+      "#lib/*": ["./src/lib/*"],
+      "#types/*": ["./src/types/*"]
     },
     "experimental": {
       "keepImportAttributes": true,
       "emitAssertForImportAttributes": true
     }
-  }
+  },
+  "exclude": ["^src/types/.*.ts$"]
 }

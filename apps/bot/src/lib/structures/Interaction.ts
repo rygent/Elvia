@@ -7,6 +7,7 @@ import {
 	type PermissionsString
 } from 'discord.js';
 import type { Awaitable } from '@discordjs/util';
+import type { InteractionCommandOptions } from '#types/types.js';
 
 export abstract class Interaction {
 	public client: BaseClient<true>;
@@ -22,7 +23,6 @@ export abstract class Interaction {
 	public readonly ownerOnly: boolean;
 	public readonly nsfw: boolean;
 
-	// eslint-disable-next-line no-undef
 	public constructor(client: BaseClient<true>, options: InteractionCommandOptions) {
 		this.client = client;
 		this.name = options.name;
