@@ -40,8 +40,5 @@ export abstract class Interaction {
 
 	public abstract execute(interaction: CommandInteraction<'cached' | 'raw'>): Awaitable<unknown>;
 
-	// @ts-expect-error
-	public autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown> {
-		throw new Error(`${this.name} doesn't provide a autocomplete method!`);
-	}
+	public autocomplete?(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown>;
 }
