@@ -18,7 +18,7 @@ export default class extends Event {
 		const command = this.client.interactions.get(resolveCommandName(interaction));
 		if (command) {
 			try {
-				await command.autocomplete(interaction);
+				await command.autocomplete!(interaction);
 			} catch (e: unknown) {
 				if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, true);
