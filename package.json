@@ -32,7 +32,7 @@
     "prettier": "^3.1.0",
     "tsup": "^8.0.1",
     "turbo": "^1.10.16",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
