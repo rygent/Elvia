@@ -30,7 +30,7 @@ __metadata:
     "@rygent/anilist": "npm:^1.4.0"
     "@rygent/spotify": "npm:^1.1.1"
     "@sapphire/discord-utilities": "npm:^3.2.1"
-    "@sapphire/time-utilities": "npm:^1.7.10"
+    "@sapphire/time-utilities": "npm:^1.7.11"
     "@sapphire/utilities": "npm:^3.13.0"
     "@swc/cli": "npm:^0.1.63"
     "@swc/core": "npm:^1.3.100"
@@ -946,12 +946,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/cron@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@sapphire/cron@npm:1.1.1"
+"@sapphire/cron@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@sapphire/cron@npm:1.1.2"
   dependencies:
-    "@sapphire/utilities": "npm:^3.13.0"
-  checksum: 9413f82ea495174b6b8475b49a88e2a66a4c9d42e45ae4de724369dc38d574aadcc784d09d73f9ea96f9abd933e3899806affbf55707a43024d5a9ca8463fe2c
+    "@sapphire/utilities": "npm:^3.14.0"
+  checksum: 4ecb4e57fb6cb4ff5940aba6396081112091439fe2dd75b42166122d4d4987f5174f320a84b304f59970be1e62a0460a45f539eca6928762769d67f2a0c6d7a1
   languageName: node
   linkType: hard
 
@@ -964,10 +964,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/duration@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@sapphire/duration@npm:1.1.0"
-  checksum: 7ee5366a7fa0c0d682e9e183a7fda3d5f4596f97e0915bd3fb6e9d5e51667b562141644d54472803f95ee9100bc70c35069557f94292aed14a6afc63a2c037d3
+"@sapphire/duration@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@sapphire/duration@npm:1.1.1"
+  checksum: 5aa7a2973efe7bf3417c615baf034672ba8c9dbe78c5e2c552c7f162834e0e17838e3b74889d14494ad4daffd619144f4ea63f8e5db2f79bcd0d69c5c7137829
   languageName: node
   linkType: hard
 
@@ -988,29 +988,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/time-utilities@npm:^1.7.10":
-  version: 1.7.10
-  resolution: "@sapphire/time-utilities@npm:1.7.10"
+"@sapphire/time-utilities@npm:^1.7.11":
+  version: 1.7.11
+  resolution: "@sapphire/time-utilities@npm:1.7.11"
   dependencies:
-    "@sapphire/cron": "npm:^1.1.1"
-    "@sapphire/duration": "npm:^1.1.0"
-    "@sapphire/timer-manager": "npm:^1.0.0"
-    "@sapphire/timestamp": "npm:^1.0.1"
-  checksum: bee89dfa54d17d084e5a09b9ebf72f84603cdd631b3655f9014b94545c8ba2891edf05a6e1cf8d07dfcebc8ec551abd147d2dff52fcbcc8bc98010bbdc0c5d54
+    "@sapphire/cron": "npm:^1.1.2"
+    "@sapphire/duration": "npm:^1.1.1"
+    "@sapphire/timer-manager": "npm:^1.0.1"
+    "@sapphire/timestamp": "npm:^1.0.2"
+  checksum: c1c2211021d6f86f7306bcdb49281e94ac9f07dd87ef36af713923781573f4b9dd396f5a9b4c954f84e46873cca7484a75437c0061f063831996dc2a008f61bd
   languageName: node
   linkType: hard
 
-"@sapphire/timer-manager@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@sapphire/timer-manager@npm:1.0.0"
-  checksum: 88ad0837e1ecf593769db4aa97ef66a59af963dda5c773ddc24a52096c1cf04099a0e3ac7319a277291075ca047e6b267fbe60be612c240866b4f6a7600dfdea
-  languageName: node
-  linkType: hard
-
-"@sapphire/timestamp@npm:^1.0.1":
+"@sapphire/timer-manager@npm:^1.0.1":
   version: 1.0.1
-  resolution: "@sapphire/timestamp@npm:1.0.1"
-  checksum: 03474e6bc32559c2528b4aa2e4966ec9647b7e0bb960126579cb4feadbdf654680747aa5edf7a8373a064ce13ebaef000ca4fa47a28ed4645cbd436d4d852362
+  resolution: "@sapphire/timer-manager@npm:1.0.1"
+  checksum: 40e210cbbc05579bb41633e8cd798627273c83377bdc5168961d974c3dd898534a2795b0401692a45ecfd980a441adfb31992230f98e341c000336aab0fec455
+  languageName: node
+  linkType: hard
+
+"@sapphire/timestamp@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@sapphire/timestamp@npm:1.0.2"
+  checksum: 54d1d2fd99e6ba64b7562942c484b1b78078ea7b4eed972d5ad29721bc39e57b0eb4e64537395e7f1d86f7f1f4a60a9ef090abff90cbd26cff1dbe7792706e8c
   languageName: node
   linkType: hard
 
@@ -1018,6 +1018,13 @@ __metadata:
   version: 3.13.0
   resolution: "@sapphire/utilities@npm:3.13.0"
   checksum: cf34a7294ff31ff9049527880cf273d61c07131d41a8d8c211a99baae213a1aaab9c2774a2e934173582243f79f755afd17542996159d1b99309c91524d30b9d
+  languageName: node
+  linkType: hard
+
+"@sapphire/utilities@npm:^3.14.0":
+  version: 3.14.0
+  resolution: "@sapphire/utilities@npm:3.14.0"
+  checksum: 5740c05b130ee7e8d34fa53a96370cac87c36ad272760c0f5029fc4578279bf7850e4517e56f8ea66d9eb21978076a9e1d0808e1e16feac451e79541c97083e1
   languageName: node
   linkType: hard
 
