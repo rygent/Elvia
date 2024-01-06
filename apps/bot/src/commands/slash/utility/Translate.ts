@@ -6,7 +6,7 @@ import { bold, hideLinkEmbed, hyperlink, italic } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
 import { cutText } from '@sapphire/utilities';
 import translate from '@iamtraction/google-translate';
-import languages from '#assets/json/languages.json' assert { type: 'json' };
+import languages from '#assets/json/languages.json' with { type: 'json' };
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {

@@ -31,7 +31,7 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 
 ## Requirements
 
-1. [Node.JS v18.12+][node.js] or higher.
+1. [Node.JS v20.10+][node.js] or higher.
 2. [MongoDB v5.0+][mongodb] or higher.
 3. [Yarn v1.22+][yarn] or higher. (Highly recommended)
 

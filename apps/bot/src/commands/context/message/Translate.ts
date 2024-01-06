@@ -4,7 +4,7 @@ import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ComponentType } from 'discord-api-types/v10';
 import { parseEmoji, type ContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import translate from '@iamtraction/google-translate';
-import languages from '#assets/json/languages.json' assert { type: 'json' };
+import languages from '#assets/json/languages.json' with { type: 'json' };
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {

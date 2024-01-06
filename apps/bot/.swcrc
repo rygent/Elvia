@@ -23,7 +23,7 @@
     },
     "experimental": {
       "keepImportAttributes": true,
-      "emitAssertForImportAttributes": true
+      "emitAssertForImportAttributes": false
     }
   },
   "exclude": ["^src/types/.*.ts$"]

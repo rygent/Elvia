@@ -6,7 +6,7 @@ import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'disco
 import { Colors, UserAgent } from '#lib/utils/Constants.js';
 import { isNsfwChannel } from '#lib/utils/Functions.js';
 import { request } from 'undici';
-import nsfw from '#assets/json/nsfw.json' assert { type: 'json' };
+import nsfw from '#assets/json/nsfw.json' with { type: 'json' };
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {

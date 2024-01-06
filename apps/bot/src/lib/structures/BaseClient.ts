@@ -64,8 +64,8 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 	private validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
-		if (semver.lt(process.versions.node, '18.12.0')) {
-			throw new Error('This client requires Node.JS v18.12.0 or higher.');
+		if (semver.lt(process.versions.node, '20.10.0')) {
+			throw new Error('This client requires Node.JS v20.10.0 or higher.');
 		}
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
