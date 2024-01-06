@@ -107,7 +107,7 @@ export default class extends Interaction {
 									`${bold(italic('Next episodes:'))} ${time(data.nextAiringEpisode.airingAt, 'R')} (episode ${
 										data.nextAiringEpisode.episode
 									})`
-							  ]
+								]
 							: []),
 						...(data.isAdult ? [`${bold(italic('Explicit content:'))} ${data.isAdult ? 'Yes' : 'No'}`] : []),
 						`${bold(italic('Popularity:'))} ${formatNumber(data.popularity!)}`

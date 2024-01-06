@@ -98,7 +98,7 @@ export default class extends Interaction {
 									`${bold(italic('Rating:'))} ${data.vote_average.toFixed(2)} (by ${formatNumber(
 										data.vote_count
 									)} users)`
-							  ]
+								]
 							: []),
 						`${bold(italic('Status:'))} ${data.status}`,
 						...(data.first_air_date

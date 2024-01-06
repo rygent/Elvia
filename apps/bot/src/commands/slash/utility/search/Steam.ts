@@ -92,7 +92,7 @@ export default class extends Interaction {
 									`${bold(italic('Platform:'))} ${titleCase(
 										formatArray(Object.keys(data.platforms).filter((item) => data.platforms[item]))
 									).replace(/And/g, 'and')}`
-							  ]
+								]
 							: []),
 						...(data.metacritic
 							? [
@@ -100,7 +100,7 @@ export default class extends Interaction {
 										'metacritic',
 										data.metacritic.url
 									)}`
-							  ]
+								]
 							: []),
 						`${bold(italic('Developers:'))} ${data.developers.join(', ')}`,
 						`${bold(italic('Publishers:'))} ${data.publishers.join(', ')}`,
