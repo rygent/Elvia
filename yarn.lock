@@ -43,7 +43,7 @@ __metadata:
     dotenv: "npm:^16.3.1"
     eslint: "npm:^8.56.0"
     globby: "npm:^14.0.0"
-    moment: "npm:^2.29.4"
+    moment: "npm:^2.30.1"
     moment-duration-format: "npm:^2.3.2"
     nanoid: "npm:^5.0.4"
     prettier: "npm:^3.1.1"
@@ -85,7 +85,7 @@ __metadata:
     discord.js: "npm:^14.14.1"
     dotenv: "npm:^16.3.1"
     eslint: "npm:^8.56.0"
-    moment: "npm:^2.29.4"
+    moment: "npm:^2.30.1"
     moment-timezone: "npm:^0.5.44"
     prettier: "npm:^3.1.1"
     tsup: "npm:^8.0.1"
@@ -4500,6 +4500,13 @@ __metadata:
   version: 2.29.4
   resolution: "moment@npm:2.29.4"
   checksum: 844c6f3ce42862ac9467c8ca4f5e48a00750078682cc5bda1bc0e50cc7ca88e2115a0f932d65a06e4a90e26cb78892be9b3ca3dd6546ca2c4d994cebb787fc2b
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.30.1":
+  version: 2.30.1
+  resolution: "moment@npm:2.30.1"
+  checksum: 865e4279418c6de666fca7786607705fd0189d8a7b7624e2e56be99290ac846f90878a6f602e34b4e0455c549b85385b1baf9966845962b313699e7cb847543a
   languageName: node
   linkType: hard
 
