@@ -51,7 +51,7 @@ __metadata:
     semver: "npm:^7.5.4"
     systeminformation: "npm:^5.21.22"
     typescript: "npm:^5.3.3"
-    undici: "npm:^6.2.1"
+    undici: "npm:^6.3.0"
     utf-8-validate: "npm:^6.0.3"
   dependenciesMeta:
     bufferutil:
@@ -6289,12 +6289,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "undici@npm:6.2.1"
+"undici@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "undici@npm:6.3.0"
   dependencies:
     "@fastify/busboy": "npm:^2.0.0"
-  checksum: 3e7a3a6013bb9058961b5e635183003ea2771b7409c544e20aa2f06408cc98bef0bf27e3df465e7f40bcdd0c4c8195404ae3babe0d5a3548a92c75ebfe7e2c6c
+  checksum: dd532c3371b0a7b098ee7f0d6cdfb988fcf883059c4d3d72fa6eb858836dd039b5ff8ca207c10f9c93edc3fb0ba5e3f9a4f6982efc73e4c516076f59d6859417
   languageName: node
   linkType: hard
 
