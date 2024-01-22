@@ -25,7 +25,7 @@
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.2.2",
-    "@sapphire/time-utilities": "^1.7.11",
+    "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/utilities": "^3.15.3",
     "colorette": "^2.0.20",
     "commander": "^11.1.0",
