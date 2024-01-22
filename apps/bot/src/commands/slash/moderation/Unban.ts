@@ -23,8 +23,9 @@ export default class extends Interaction {
 
 		const banned = await interaction.guild?.bans.fetch();
 
-		const target = banned?.find((member) => member.user.id.includes(user.id) || member.user.tag.includes(user.tag))
-			?.user;
+		const target = banned?.find(
+			(member) => member.user.id.includes(user.id) || member.user.tag.includes(user.tag)
+		)?.user;
 		if (!target) return interaction.reply({ content: 'This user is not banned on this server.', ephemeral: true });
 
 		await interaction.deferReply({ ephemeral: !visible });
