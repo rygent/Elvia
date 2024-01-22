@@ -49,7 +49,7 @@ __metadata:
     prettier: "npm:^3.1.1"
     rimraf: "npm:^5.0.5"
     semver: "npm:^7.5.4"
-    systeminformation: "npm:^5.21.22"
+    systeminformation: "npm:^5.21.24"
     typescript: "npm:^5.3.3"
     undici: "npm:^6.4.0"
     utf-8-validate: "npm:^6.0.3"
@@ -5874,12 +5874,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.21.22":
-  version: 5.21.22
-  resolution: "systeminformation@npm:5.21.22"
+"systeminformation@npm:^5.21.24":
+  version: 5.21.24
+  resolution: "systeminformation@npm:5.21.24"
   bin:
     systeminformation: lib/cli.js
-  checksum: 483141ce10cd3e7e8f6734d9f7a63557ead5646530a955b2ed42057790b3338964eb365f89cbdf733a16192680de31a4f4f4a80b079d07ea093cb0d7fdb7967c
+  checksum: 395ea78d7d3028d42a55cd33b8b8fe73df246b84110f84b2ca801dd487af91bb35d1ae70ddfb738d37f6d7dbd56a7cca5a0b46575b21c6a34ab11a551115125c
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
