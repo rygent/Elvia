@@ -1,14 +1,14 @@
 {
   "name": "@aviana/bot",
   "version": "5.4.0",
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "type": "module",
   "scripts": {
     "build": "rimraf ./dist && tsc --noEmit && swc ./src --out-dir ./dist --copy-files",
     "lint": "eslint src --ext ts",
     "format": "prettier . --write",
     "start": "node --no-warnings ./dist/index.js",
-    "register": "node ./dist/interactions/register.js"
+    "register": "node ./dist/src/interactions/register.js"
   },
   "license": "GPL-3.0",
   "private": true,

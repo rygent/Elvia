@@ -3,7 +3,7 @@ module.exports = {
 		{
 			name: '@aviana/bot',
 			cwd: './apps/bot',
-			script: './dist/index.js',
+			script: './dist/src/index.js',
 			interpreter: 'node',
 			env: {
 				NODE_ENV: 'development'
