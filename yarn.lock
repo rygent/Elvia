@@ -51,7 +51,7 @@ __metadata:
     semver: "npm:^7.6.0"
     systeminformation: "npm:^5.22.7"
     typescript: "npm:^5.4.5"
-    undici: "npm:^6.14.1"
+    undici: "npm:^6.15.0"
     utf-8-validate: "npm:^6.0.3"
   dependenciesMeta:
     bufferutil:
@@ -6293,10 +6293,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^6.14.1":
-  version: 6.14.1
-  resolution: "undici@npm:6.14.1"
-  checksum: 10c0/1d0e2607c29d975d8d6b1ef81feb3ef5b8e262df95d66b17a5df7e1bbb96f84e5d85e2737b5a23c811254fe5e537ebbfb45ce3ebe6f2b9100f5ec911d08e3ec5
+"undici@npm:^6.15.0":
+  version: 6.15.0
+  resolution: "undici@npm:6.15.0"
+  checksum: 10c0/1bba3b415ec9c7a6e0f5fb74c0fc1ce02a6325bf806326987edd0c2b3080434d5cfba79a0f1d90c14d47ac68f707670ab9ff806da137966f18004ff3f752d33c
   languageName: node
   linkType: hard
 
