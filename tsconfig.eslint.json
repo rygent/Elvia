@@ -5,5 +5,5 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["apps/**/*.ts", "packages/**/*.ts", "ecosystem.config.cjs", "tsup.config.ts"]
+  "include": ["apps/**/*.ts", "packages/**/*.ts", "eslint.config.js", "ecosystem.config.cjs", "tsup.config.ts"]
 }

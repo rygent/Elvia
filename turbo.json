@@ -11,7 +11,7 @@
     "lint": {
       "dependsOn": ["^build"],
       "inputs": [
-        "../../.eslintrc.json",
+        "../../eslint.config.js",
         "../../.prettierrc.json",
         "../../tsconfig.eslint.json",
         ".prettierrc.cjs",
@@ -25,7 +25,7 @@
     "format": {
       "dependsOn": ["^build"],
       "inputs": [
-        "../../.eslintrc.json",
+        "../../eslint.config.js",
         "../../.prettierrc.json",
         "../../tsconfig.eslint.json",
         ".prettierrc.cjs",

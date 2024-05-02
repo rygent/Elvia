@@ -15,6 +15,7 @@ export default class extends Event {
 		});
 	}
 
+	// eslint-disable-next-line complexity
 	public async run(interaction: CommandInteraction<'cached' | 'raw'>) {
 		if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return;
 

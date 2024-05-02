@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint src",
     "format": "prettier . --write",
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",

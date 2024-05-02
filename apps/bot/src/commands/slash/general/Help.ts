@@ -152,7 +152,10 @@ export default class extends Interaction {
 			`Need more help? Come join our ${hyperlink('support server', Env.SupportServerUrl)}.\n`,
 			selectedCommands
 				.sort((a, b) => a.name.localeCompare(b.name))
-				.map((cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
+				.map(
+					(cmd) =>
+						`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+				)
 				.slice(i0, i1)
 				.join('\n')
 		];
@@ -243,7 +246,10 @@ export default class extends Interaction {
 				description.length,
 				selectedCommands
 					.sort((a, b) => a.name.localeCompare(b.name))
-					.map((cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`)
+					.map(
+						(cmd) =>
+							`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+					)
 					.slice(i0, i1)
 					.join('\n')
 			);
@@ -281,7 +287,8 @@ export default class extends Interaction {
 						selectedCommands
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map(
-								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+								(cmd) =>
+									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -313,7 +320,8 @@ export default class extends Interaction {
 						selectedCommands
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map(
-								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+								(cmd) =>
+									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -345,7 +353,8 @@ export default class extends Interaction {
 						selectedCommands
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map(
-								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+								(cmd) =>
+									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -377,7 +386,8 @@ export default class extends Interaction {
 						selectedCommands
 							.sort((a, b) => a.name.localeCompare(b.name))
 							.map(
-								(cmd) => `${chatInputApplicationCommandMention(cmd.name, cmd.id!)}\n${Emojis.Branch} ${cmd.description}`
+								(cmd) =>
+									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
