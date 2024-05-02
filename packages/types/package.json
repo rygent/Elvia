@@ -1,0 +1,10 @@
+{
+  "name": "@aviana/types",
+  "version": "0.0.1",
+  "license": "GPL-3.0",
+  "private": true,
+  "devDependencies": {
+    "@aviana/database": "workspace:^"
+  },
+  "packageManager": "yarn@4.1.1"
+}

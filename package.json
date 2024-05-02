@@ -9,8 +9,8 @@
     "lint": "turbo run lint --concurrency=3",
     "format": "turbo run format --concurrency=3",
     "register": "yarn workspace @aviana/bot register",
-    "generate": "yarn workspace @aviana/database prisma:generate",
-    "push": "yarn workspace @aviana/database prisma:push",
+    "generate": "turbo run db:generate",
+    "push": "turbo run db:push",
     "postinstall": "is-ci || husky install",
     "update": "yarn upgrade-interactive"
   },
@@ -33,9 +33,6 @@
     "tsup": "^8.0.2",
     "turbo": "^1.13.2",
     "typescript": "^5.4.5"
-  },
-  "prisma": {
-    "schema": "packages/database/prisma/schema.prisma"
   },
   "packageManager": "yarn@4.1.1"
 }

@@ -18,8 +18,9 @@
     "build": "tsup",
     "lint": "eslint src --ext ts",
     "format": "prettier . --write",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push --skip-generate"
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "db:format": "prisma format"
   },
   "license": "GPL-3.0",
   "private": true,

@@ -3,7 +3,7 @@
   "globalDependencies": ["tsconfig.json"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "@aviana/database#db:generate"],
       "inputs": ["src/**", ".swcrc", "package.json", "tsconfig.json", "tsup.config.ts"],
       "outputs": ["dist/**"],
       "outputMode": "errors-only"
@@ -35,6 +35,14 @@
       ],
       "outputs": [],
       "outputMode": "errors-only"
+    },
+    "db:generate": {
+      "cache": false,
+      "outputMode": "none"
+    },
+    "db:push": {
+      "cache": false,
+      "outputMode": "none"
     }
   }
 }

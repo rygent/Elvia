@@ -94,6 +94,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@aviana/types@workspace:packages/types":
+  version: 0.0.0-use.local
+  resolution: "@aviana/types@workspace:packages/types"
+  dependencies:
+    "@aviana/database": "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "@babel/code-frame@npm:^7.0.0":
   version: 7.24.2
   resolution: "@babel/code-frame@npm:7.24.2"
