@@ -33,7 +33,7 @@
     "@prisma/client": "^5.13.0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.8",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "prettier-plugin-prisma": "^5.0.0",
