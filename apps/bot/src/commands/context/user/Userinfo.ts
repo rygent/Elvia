@@ -1,7 +1,7 @@
 import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
-import type { ContextMenuCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
+import type { Guild, GuildMember, PermissionsString, UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
 import { formatArray, formatPermissions, trimArray } from '#lib/utils/Functions.js';
@@ -15,7 +15,7 @@ export default class extends Interaction {
 		});
 	}
 
-	public async execute(interaction: ContextMenuCommandInteraction<'cached'>) {
+	public async execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
 		const userFlags = member.user.flags!.toArray();

@@ -2,7 +2,7 @@ import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ButtonStyle } from 'discord-api-types/v10';
-import type { ContextMenuCommandInteraction, GuildMember } from 'discord.js';
+import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '#lib/utils/Constants.js';
 
@@ -14,7 +14,7 @@ export default class extends Interaction {
 		});
 	}
 
-	public execute(interaction: ContextMenuCommandInteraction<'cached'>) {
+	public execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

@@ -2,7 +2,7 @@ import type { BaseClient } from '#lib/structures/BaseClient.js';
 import { Interaction } from '#lib/structures/Interaction.js';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { type APIMessageComponentEmoji, ComponentType } from 'discord-api-types/v10';
-import { parseEmoji, type ContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
+import { type MessageContextMenuCommandInteraction, parseEmoji, type StringSelectMenuInteraction } from 'discord.js';
 import translate from '@iamtraction/google-translate';
 import languages from '#assets/json/languages.json' with { type: 'json' };
 import { nanoid } from 'nanoid';
@@ -15,7 +15,7 @@ export default class extends Interaction {
 		});
 	}
 
-	public async execute(interaction: ContextMenuCommandInteraction<'cached' | 'raw'>) {
+	public async execute(interaction: MessageContextMenuCommandInteraction<'cached' | 'raw'>) {
 		const message = interaction.options.getMessage('message', true);
 		await interaction.deferReply({ ephemeral: true });
 
