@@ -35,7 +35,7 @@
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
-    "semver": "^7.6.0",
+    "semver": "^7.6.2",
     "systeminformation": "^5.22.7",
     "undici": "^6.15.0"
   },
