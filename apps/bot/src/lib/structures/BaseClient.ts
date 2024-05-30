@@ -30,9 +30,10 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 		super({
 			intents: [
 				GatewayIntentBits.Guilds,
-				GatewayIntentBits.GuildMembers,
+				// GatewayIntentBits.GuildMembers,
+				// eslint-disable-next-line prettier/prettier
 				GatewayIntentBits.GuildMessages,
-				GatewayIntentBits.MessageContent
+				// GatewayIntentBits.MessageContent
 			],
 			partials: [Partials.Message, Partials.Channel],
 			allowedMentions: {
