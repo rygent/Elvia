@@ -22,6 +22,7 @@
     "@aviana/database": "workspace:^",
     "@aviana/logger": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
+    "@prisma/client": "^5.13.0",
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.2.3",

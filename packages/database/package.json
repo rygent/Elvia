@@ -29,7 +29,7 @@
     "url": "https://gihub.com/Rygent/Aviana.git",
     "directory": "packages/database"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@prisma/client": "^5.13.0"
   },
   "devDependencies": {

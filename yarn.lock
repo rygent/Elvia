@@ -20,6 +20,7 @@ __metadata:
     "@aviana/database": "workspace:^"
     "@aviana/logger": "workspace:^"
     "@iamtraction/google-translate": "npm:^2.0.1"
+    "@prisma/client": "npm:^5.13.0"
     "@rygent/anilist": "npm:^1.4.0"
     "@rygent/spotify": "npm:^1.1.1"
     "@sapphire/discord-utilities": "npm:^3.2.3"
@@ -58,7 +59,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aviana/database@workspace:packages/database"
   dependencies:
-    "@prisma/client": "npm:^5.13.0"
     "@types/node": "npm:^20.12.12"
     eslint: "npm:^8.57.0"
     prettier: "npm:^3.2.5"
@@ -66,6 +66,8 @@ __metadata:
     prisma: "npm:^5.13.0"
     tsup: "npm:^8.0.2"
     typescript: "npm:^5.4.5"
+  peerDependencies:
+    "@prisma/client": ^5.13.0
   languageName: unknown
   linkType: soft
 
@@ -75,7 +77,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:^20.12.12"
     colorette: "npm:^2.0.20"
-    discord.js: "npm:^14.15.2"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8.57.0"
     moment: "npm:^2.30.1"
@@ -84,6 +85,8 @@ __metadata:
     tsup: "npm:^8.0.2"
     typescript: "npm:^5.4.5"
     winston: "npm:^3.13.0"
+  peerDependencies:
+    discord.js: ^14.15.2
   languageName: unknown
   linkType: soft
 
