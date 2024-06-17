@@ -1,7 +1,7 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { UserAgent } from '#lib/utils/Constants.js';
+import { UserAgent } from '@/lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Interaction {

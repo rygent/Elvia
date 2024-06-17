@@ -7,7 +7,7 @@ body:
       value: |
         Thank you for filing an issue! If you are here to ask a question, use Discord instead: https://discord.gg/FD5MMabf8Y
 
-        This issue form is for Aviana, including other packages.
+        This issue form is for Elvia, including other packages.
   - type: dropdown
     id: package
     attributes:

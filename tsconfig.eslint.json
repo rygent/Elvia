@@ -5,5 +5,13 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["apps/**/*.ts", "packages/**/*.ts", "eslint.config.js", "ecosystem.config.cjs", "tsup.config.ts"]
+  "include": [
+    "apps/**/*.ts",
+    "packages/**/*.ts",
+    "commitlint.config.js",
+    "ecosystem.config.cjs",
+    "eslint.config.js",
+    "prettier.config.js",
+    "tsup.config.ts"
+  ]
 }

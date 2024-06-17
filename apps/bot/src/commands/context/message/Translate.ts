@@ -1,10 +1,10 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
+import { ComponentType, type APIMessageComponentEmoji } from 'discord-api-types/v10';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
-import { type APIMessageComponentEmoji, ComponentType } from 'discord-api-types/v10';
-import { type MessageContextMenuCommandInteraction, parseEmoji, type StringSelectMenuInteraction } from 'discord.js';
+import { parseEmoji, type MessageContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
+import languages from '@/assets/json/languages.json' with { type: 'json' };
 import translate from '@iamtraction/google-translate';
-import languages from '#assets/json/languages.json' with { type: 'json' };
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {

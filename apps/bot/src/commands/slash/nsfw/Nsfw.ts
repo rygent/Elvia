@@ -1,12 +1,12 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { isNsfwChannel } from '#lib/utils/Functions.js';
+import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { isNsfwChannel } from '@/lib/utils/Functions.js';
+import nsfw from '@/assets/json/nsfw.json' with { type: 'json' };
 import { request } from 'undici';
-import nsfw from '#assets/json/nsfw.json' with { type: 'json' };
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {

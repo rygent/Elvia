@@ -3,8 +3,8 @@ import { Routes } from 'discord-api-types/v10';
 import { Command } from 'commander';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { globby } from 'globby';
-import { Env } from '#lib/Env.js';
-import { Logger } from '@aviana/logger';
+import { Env } from '@/lib/Env.js';
+import { Logger } from '@elvia/logger';
 import path from 'node:path';
 
 const logger = new Logger();
@@ -76,7 +76,7 @@ async function registerCommands(): Promise<void> {
 
 		logger.debug('Successfully reloaded application (/) commands.');
 	} catch (e: unknown) {
-		logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, false);
+		logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
 	}
 }
 

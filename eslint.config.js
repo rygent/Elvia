@@ -108,7 +108,7 @@ export default tseslint.config(
 			'@typescript-eslint/no-non-null-assertion': 'off',
 			'@typescript-eslint/no-redeclare': 'error',
 			'@typescript-eslint/no-require-imports': 'error',
-			'@typescript-eslint/no-shadow': 'error',
+			'@typescript-eslint/no-shadow': 'warn',
 			'@typescript-eslint/no-throw-literal': 'error',
 			'@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
 			'@typescript-eslint/no-unnecessary-qualifier': 'error',
@@ -130,7 +130,7 @@ export default tseslint.config(
 				}
 			],
 			'@typescript-eslint/no-use-before-define': [
-				'error',
+				'warn',
 				{
 					functions: false,
 					typedefs: false
@@ -154,7 +154,7 @@ export default tseslint.config(
 			'@typescript-eslint/promise-function-async': 'off',
 			'@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
 			'@typescript-eslint/require-array-sort-compare': 'error',
-			'@typescript-eslint/require-await': 'error',
+			'@typescript-eslint/require-await': 'warn',
 			'@typescript-eslint/return-await': 'warn',
 			'@typescript-eslint/restrict-plus-operands': 'off',
 			'@typescript-eslint/restrict-template-expressions': 'off',
@@ -262,7 +262,7 @@ export default tseslint.config(
 			'no-floating-decimal': 'error',
 			'no-implicit-coercion': 'error',
 			'no-implied-eval': 'off',
-			'no-inline-comments': 'error',
+			'no-inline-comments': 'warn',
 			'no-invalid-regexp': 'warn',
 			'no-invalid-this': 'off',
 			'no-irregular-whitespace': [

@@ -1,39 +1,23 @@
+import { relative, resolve as resolveDir } from 'node:path';
 import { defineConfig, type Options } from 'tsup';
 
-export function createTsupConfig({
-	format = ['esm', 'cjs'],
-	target = 'es2022',
-	sourcemap = true,
-	splitting = true,
-	bundle = true,
-	dts = true,
-	esbuildOptions = (options, context) => {
-		if (context.format === 'cjs') {
-			options.banner = {
-				js: '"use strict";'
-			};
-		}
-	}
-}: ConfigOptions = {}) {
+export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 	return defineConfig({
-		bundle,
+		bundle: options.bundle ?? true,
 		clean: true,
-		dts,
-		entry: ['src/index.ts'],
-		esbuildOptions,
-		format,
+		dts: options.dts ?? true,
+		entry: options.entry ?? ['src/index.ts'],
+		format: options.format ?? ['esm', 'cjs'],
 		keepNames: true,
 		minify: false,
 		platform: 'node',
 		skipNodeModulesBundle: true,
-		sourcemap,
-		splitting,
-		target,
-		treeshake: true
+		sourcemap: options.sourcemap ?? true,
+		splitting: options.splitting ?? true,
+		target: options.target ?? 'es2022',
+		treeshake: true,
+		tsconfig: relative(__dirname, resolveDir(process.cwd(), 'tsconfig.json'))
 	});
 }
 
-type ConfigOptions = Pick<
-	Options,
-	'format' | 'target' | 'sourcemap' | 'splitting' | 'bundle' | 'dts' | 'esbuildOptions'
->;
+type EnhancedTsupOptions = Pick<Options, 'bundle' | 'dts' | 'entry' | 'format' | 'sourcemap' | 'splitting' | 'target'>;

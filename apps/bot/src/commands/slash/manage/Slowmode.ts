@@ -1,5 +1,5 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction, ForumChannel, TextChannel, VoiceChannel } from 'discord.js';
 import { bold, channelMention, italic } from '@discordjs/formatters';
 import { Duration, DurationFormatter } from '@sapphire/time-utilities';

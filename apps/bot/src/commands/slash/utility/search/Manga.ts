@@ -1,11 +1,11 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
-import { bold, italic, underscore } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber, isNsfwChannel, titleCase } from '#lib/utils/Functions.js';
+import { bold, italic, underline } from '@discordjs/formatters';
+import { Colors } from '@/lib/utils/Constants.js';
+import { formatArray, formatNumber, isNsfwChannel, titleCase } from '@/lib/utils/Functions.js';
 import { Anilist, parseDescription } from '@rygent/anilist';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
@@ -89,7 +89,7 @@ export default class extends Interaction {
 				.setAuthor({ name: 'Anilist', iconURL: 'https://i.imgur.com/B48olfM.png', url: 'https://anilist.co/' })
 				.setTitle(Object.values(data.title!).filter((title) => title?.length)[0])
 				.addFields({
-					name: underscore(italic('Detail')),
+					name: underline(italic('Detail')),
 					value: [
 						...(data.title?.romaji ? [`${bold(italic('Romaji:'))} ${data.title.romaji}`] : []),
 						...(data.title?.english ? [`${bold(italic('English:'))} ${data.title.english}`] : []),
@@ -114,7 +114,7 @@ export default class extends Interaction {
 
 			if (data.characters?.nodes?.length) {
 				embed.addFields({
-					name: underscore(italic('Characters')),
+					name: underline(italic('Characters')),
 					value: formatArray(data.characters.nodes.map((item) => item!.name!.full!)),
 					inline: false
 				});
@@ -122,7 +122,7 @@ export default class extends Interaction {
 
 			if (data.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length) {
 				embed.addFields({
-					name: underscore(italic('Networks')),
+					name: underline(italic('Networks')),
 					value: data.externalLinks
 						.filter((item) => item?.type === 'STREAMING')
 						.map((item) => `[${item?.site}](${item?.url})`)

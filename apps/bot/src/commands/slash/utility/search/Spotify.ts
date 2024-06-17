@@ -1,12 +1,12 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors, Emojis } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '#lib/Env.js';
+import { Colors, Emojis } from '@/lib/utils/Constants.js';
+import { formatArray, formatNumber } from '@/lib/utils/Functions.js';
+import { Env } from '@/lib/Env.js';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';

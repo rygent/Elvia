@@ -1,12 +1,16 @@
 {
-  "name": "@aviana/bot",
-  "version": "5.4.0",
-  "main": "./dist/index.js",
+  "name": "@elvia/bot",
+  "version": "5.5.0",
   "type": "module",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc --noEmit && swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
-    "lint": "eslint src",
+    "build": "rimraf ./dist && yarn build:check && yarn build:swc",
+    "build:check": "tsc --noEmit",
+    "build:swc": "swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "start": "node --no-warnings ./dist/index.js",
     "register": "node ./dist/interactions/register.js"
   },
@@ -14,13 +18,13 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/Rygent/Aviana.git",
+    "url": "https://gihub.com/Rygent/Elvia.git",
     "directory": "apps/bot"
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
-    "@aviana/database": "workspace:^",
-    "@aviana/logger": "workspace:^",
+    "@elvia/database": "workspace:^",
+    "@elvia/logger": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
     "@prisma/client": "^5.13.0",
     "@rygent/anilist": "^1.4.0",
@@ -36,7 +40,6 @@
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
-    "semver": "^7.6.2",
     "systeminformation": "^5.22.7",
     "undici": "^6.16.1"
   },

@@ -1,15 +1,15 @@
 apps:bot:
-- changed-files:
-  - any-glob-to-any-file:
-    - apps/bot/*
-    - apps/bot/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - apps/bot/*
+          - apps/bot/**/*
 packages:database:
-- changed-files:
-  - any-glob-to-any-file:
-    - packages/database/*
-    - packages/database/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/database/*
+          - packages/database/**/*
 packages:logger:
-- changed-files:
-  - any-glob-to-any-file:
-    - packages/logger/*
-    - packages/logger/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/logger/*
+          - packages/logger/**/*

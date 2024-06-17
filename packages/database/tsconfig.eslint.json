@@ -4,5 +4,6 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true
-  }
+  },
+  "include": ["./prisma/**/*.prisma", "./src/**/*.ts", "prettier.config.js", "tsup.config.ts"]
 }

@@ -1,11 +1,11 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Event } from '#lib/structures/Event.js';
-import { EmbedBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Event } from '@/lib/structures/Event.js';
 import type { DiscordAPIError } from '@discordjs/rest';
+import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
-import { Env } from '#lib/Env.js';
+import { Colors } from '@/lib/utils/Constants.js';
+import { Env } from '@/lib/Env.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient<true>) {
@@ -16,10 +16,10 @@ export default class extends Event {
 		});
 	}
 
-	// @ts-expect-error
+	// @ts-expect-error TS6133: 'promise' is declared but its value is never read.
 	public run(error: Error, promise: Promise<unknown>) {
 		if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-		this.client.logger.error(`${error.name}: ${error.message}`, error, false);
+		this.client.logger.error(`${error.name}: ${error.message}`, error);
 
 		if (this.client.isReady() && Env.LoggerWebhookUrl) {
 			const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });

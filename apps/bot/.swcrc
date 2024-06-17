@@ -14,17 +14,12 @@
     },
     "baseUrl": "./",
     "paths": {
-      "#assets/*": ["./src/assets/*"],
-      "#commands/*": ["./src/commands/*"],
-      "#events/*": ["./src/events/*"],
-      "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"],
-      "#types/*": ["./src/types/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     },
     "experimental": {
       "keepImportAttributes": true,
       "emitAssertForImportAttributes": false
     }
-  },
-  "exclude": ["^src/types/.*.ts$"]
+  }
 }

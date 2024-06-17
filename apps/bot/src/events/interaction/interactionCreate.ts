@@ -1,11 +1,11 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Event } from '#lib/structures/Event.js';
-import { Collection } from '@discordjs/collection';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Event } from '@/lib/structures/Event.js';
 import type { DiscordAPIError } from '@discordjs/rest';
+import { Collection } from '@discordjs/collection';
 import type { CommandInteraction, GuildMember } from 'discord.js';
-import { bold, hideLinkEmbed, hyperlink, italic, underscore } from '@discordjs/formatters';
-import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '#lib/utils/Functions.js';
-import { Env } from '#lib/Env.js';
+import { bold, hideLinkEmbed, hyperlink, italic, underline } from '@discordjs/formatters';
+import { formatArray, formatPermissions, isNsfwChannel, resolveCommandName } from '@/lib/utils/Functions.js';
+import { Env } from '@/lib/Env.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient<true>) {
@@ -41,7 +41,7 @@ export default class extends Event {
 
 					if (missing.length) {
 						const replies = `You lack the ${formatArray(
-							missing.map((item) => underscore(italic(formatPermissions(item))))
+							missing.map((item) => underline(italic(formatPermissions(item))))
 						)} permission(s) to continue.`;
 
 						return interaction.reply({ content: replies, ephemeral: true });
@@ -59,7 +59,7 @@ export default class extends Event {
 
 					if (missing.length) {
 						const replies = `I lack the ${formatArray(
-							missing.map((item) => underscore(italic(formatPermissions(item))))
+							missing.map((item) => underline(italic(formatPermissions(item))))
 						)} permission(s) to continue.`;
 
 						return interaction.reply({ content: replies, ephemeral: true });
@@ -103,7 +103,7 @@ export default class extends Event {
 			} catch (e: unknown) {
 				if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 				if (interaction.replied) return;
-				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error, true);
+				this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
 
 				const replies = [
 					'An error has occured when executing this command, our developers have been informed.',

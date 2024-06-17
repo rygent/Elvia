@@ -1,7 +1,7 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Command } from '#lib/structures/Command.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Command } from '@/lib/structures/Command.js';
 import type { Message } from 'discord.js';
-import { italic, underscore } from '@discordjs/formatters';
+import { italic, underline } from '@discordjs/formatters';
 
 export default class extends Command {
 	public constructor(client: BaseClient<true>) {
@@ -17,7 +17,7 @@ export default class extends Command {
 	public async execute(message: Message<false>, args: string[]) {
 		const replies = [
 			'The bot will restart in 5 seconds.',
-			`${underscore(italic('it may take a few minutes for it to boot up again'))}`
+			`${underline(italic('it may take a few minutes for it to boot up again'))}`
 		].join('\n');
 
 		const reply = await message.reply({ content: replies });

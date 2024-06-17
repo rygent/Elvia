@@ -1,12 +1,12 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
-import { bold, italic, underscore } from '@discordjs/formatters';
-import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { formatArray, formatNumber } from '#lib/utils/Functions.js';
-import { Env } from '#lib/Env.js';
+import { bold, italic, underline } from '@discordjs/formatters';
+import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { formatArray, formatNumber } from '@/lib/utils/Functions.js';
+import { Env } from '@/lib/Env.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
@@ -90,7 +90,7 @@ export default class extends Interaction {
 				.setDescription(data.overview ? cutText(data.overview, 512) : null)
 				.setThumbnail(`https://image.tmdb.org/t/p/original${data.poster_path}`)
 				.addFields({
-					name: underscore(italic('Detail')),
+					name: underline(italic('Detail')),
 					value: [
 						`${bold(italic('Genre:'))} ${formatArray(data.genres.map(({ name }: any) => name.replace(/ &/, ',')))}`,
 						...(data.vote_average

@@ -1,8 +1,8 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { prisma } from '@aviana/database';
+import { prisma } from '@elvia/database';
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {

@@ -1,4 +1,4 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
 import {
 	AutocompleteInteraction,
 	BitField,
@@ -7,7 +7,7 @@ import {
 	type PermissionsString
 } from 'discord.js';
 import type { Awaitable } from '@discordjs/util';
-import type { InteractionCommandOptions } from '#types/types.js';
+import type { InteractionCommandOptions } from '@/types/types.js';
 
 export abstract class Interaction {
 	public client: BaseClient<true>;

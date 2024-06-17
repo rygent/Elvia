@@ -1,23 +1,29 @@
 {
-  "name": "@aviana/database",
+  "name": "@elvia/database",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "require": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "scripts": {
     "build": "tsup",
-    "lint": "eslint src",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",
     "db:format": "prisma format"
@@ -26,11 +32,11 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/Rygent/Aviana.git",
+    "url": "https://gihub.com/Rygent/Elvia.git",
     "directory": "packages/database"
   },
   "peerDependencies": {
-    "@prisma/client": "^5.13.0"
+    "@prisma/client": "*"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
@@ -42,9 +48,7 @@
     "typescript": "^5.4.5"
   },
   "files": [
-    "./dist/**/*.js*",
-    "./dist/**/*.mjs*",
-    "./dist/**/*.d*"
+    "./dist/"
   ],
   "engines": {
     "node": ">=v20.10.0"

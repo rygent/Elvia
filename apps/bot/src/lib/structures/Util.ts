@@ -1,10 +1,10 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Command } from '@/lib/structures/Command.js';
+import { Event } from '@/lib/structures/Event.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { globby } from 'globby';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { Command } from '#lib/structures/Command.js';
-import { Event } from '#lib/structures/Event.js';
 import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export class Util {
 	public client: BaseClient;

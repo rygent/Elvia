@@ -1,8 +1,8 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { formatNumber } from '#lib/utils/Functions.js';
+import { formatNumber } from '@/lib/utils/Functions.js';
 
 const kDice20RegExp = /^(\d+)?\s*d\s*(\d+)\s*(.*?)$/;
 const kDice20TrailRegExp = /([+-x*])\s*(\d+)/g;

@@ -1,6 +1,6 @@
-<img width="160" height="160" align="left" style="float: left; margin: 0 10px 10px 0;" src="https://cdn.discordapp.com/avatars/614645495779819551/5a9c058af52f8824daf58ed06d4ccac7.png?size=4096">
+<img width="160" height="160" align="left" style="float: left; margin: 0 10px 10px 0;" src="https://cdn.discordapp.com/avatars/614645495779819551/76591a09f5502e58c47ea40cb096f5fc.png?size=4096">
 
-# Aviana
+# Elvia
 
 [![Library][library]][discord.js docs]
 [![Build][build]][continuous integration]
@@ -11,7 +11,7 @@
 
 ---
 
-<i>**Aviana** is powerful, multipurpose and free Discord bot with a lot of abilities created using [Discord.JS][discord.js github] with ES6 Modules.
+<i>**Elvia** is powerful, multipurpose and free Discord bot with a lot of abilities created using [Discord.JS][discord.js github] with ES6 Modules.
 
 We'll be very glad if you give this repository a star, so that we grow much faster.
 </i>
@@ -54,8 +54,8 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 <!-- LINKS -->
 
 [discord.js docs]: https://discord.js.org/#/
-[continuous integration]: https://github.com/Rygent/Aviana/actions/workflows/continuous-integration.yml
-[codacy]: https://app.codacy.com/gh/Rygent/Aviana/dashboard
+[continuous integration]: https://github.com/Rygent/Elvia/actions/workflows/continuous-integration.yml
+[codacy]: https://app.codacy.com/gh/Rygent/Elvia/dashboard
 [license]: ./LICENSE
 [node.js]: https://nodejs.org/en/download
 [mongodb]: https://www.mongodb.com/try/download/community
@@ -69,10 +69,10 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 <!-- BADGES -->
 
 [library]: https://img.shields.io/badge/library-discord.js-5865f2?style=for-the-badge
-[build]: https://img.shields.io/github/actions/workflow/status/Rygent/Aviana/continuous-integration.yml?logo=github&style=for-the-badge
+[build]: https://img.shields.io/github/actions/workflow/status/Rygent/Elvia/continuous-integration.yml?logo=github&style=for-the-badge
 [codacy grade]: https://img.shields.io/codacy/grade/f7c237153ea545059c7d0521e59def69/main?logo=codacy&style=for-the-badge
-[license badge]: https://img.shields.io/github/license/Rygent/Aviana?style=for-the-badge
-[language]: https://img.shields.io/github/languages/top/Rygent/Aviana?color=3178c6&logoColor=white&style=for-the-badge
-[version]: https://img.shields.io/github/package-json/v/Rygent/Aviana?filename=apps%2Fbot%2Fpackage.json&style=for-the-badge&label=version&color=ff4949
+[license badge]: https://img.shields.io/github/license/Rygent/Elvia?style=for-the-badge
+[language]: https://img.shields.io/github/languages/top/Rygent/Elvia?color=3178c6&logoColor=white&style=for-the-badge
+[version]: https://img.shields.io/github/package-json/v/Rygent/Elvia?filename=apps%2Fbot%2Fpackage.json&style=for-the-badge&label=version&color=ff4949
 [support server]: https://invidget.switchblade.xyz/FD5MMabf8Y
 [discord bot]: https://top.gg/api/widget/614645495779819551.svg

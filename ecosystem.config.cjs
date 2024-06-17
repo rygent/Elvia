@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: '@aviana/bot',
+			name: '@elvia/bot',
 			cwd: './apps/bot',
 			script: './dist/index.js',
 			interpreter: 'node',

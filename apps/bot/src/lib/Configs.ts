@@ -1,5 +1,5 @@
 import type { PermissionsString } from 'discord.js';
-import { Env } from '#lib/Env.js';
+import { Env } from '@/lib/Env.js';
 import packageJson from '../../package.json' with { type: 'json' };
 
 export const token = Env.DiscordToken;

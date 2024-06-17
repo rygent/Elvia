@@ -1,46 +1,32 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
+  "$schema": "https://turborepo.org/schema.v1.json",
   "globalDependencies": ["tsconfig.json"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "@aviana/database#db:generate"],
-      "inputs": ["src/**", ".swcrc", "package.json", "tsconfig.json", "tsup.config.ts"],
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "outputMode": "errors-only"
+    },
+    "@elvia/bot#build": {
+      "dependsOn": ["^build", "@elvia/database#db:generate"],
       "outputs": ["dist/**"],
       "outputMode": "errors-only"
     },
     "lint": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "../../eslint.config.js",
-        "../../.prettierrc.json",
-        "../../tsconfig.eslint.json",
-        ".prettierrc.cjs",
-        "src/**",
-        "package.json",
-        "tsconfig.eslint.json"
-      ],
       "outputs": [],
       "outputMode": "errors-only"
     },
     "format": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "../../eslint.config.js",
-        "../../.prettierrc.json",
-        "../../tsconfig.eslint.json",
-        ".prettierrc.cjs",
-        "src/**",
-        "package.json",
-        "tsconfig.eslint.json"
-      ],
       "outputs": [],
       "outputMode": "errors-only"
     },
-    "db:generate": {
+    "@elvia/database#db:generate": {
       "cache": false,
       "outputMode": "none"
     },
-    "db:push": {
+    "@elvia/database#db:push": {
       "cache": false,
       "outputMode": "none"
     }

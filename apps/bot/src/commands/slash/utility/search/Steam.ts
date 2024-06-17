@@ -1,11 +1,11 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
-import { bold, hyperlink, inlineCode, italic, underscore } from '@discordjs/formatters';
-import { Colors, UserAgent } from '#lib/utils/Constants.js';
-import { formatArray, titleCase } from '#lib/utils/Functions.js';
+import { bold, hyperlink, inlineCode, italic, underline } from '@discordjs/formatters';
+import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { formatArray, titleCase } from '@/lib/utils/Functions.js';
 import { nanoid } from 'nanoid';
 import { request } from 'undici';
 
@@ -78,7 +78,7 @@ export default class extends Interaction {
 				.setTitle(data.name)
 				.setDescription(data.short_description)
 				.addFields({
-					name: underscore(italic('Detail')),
+					name: underline(italic('Detail')),
 					value: [
 						`${bold(italic('Release Date:'))} ${
 							data.release_date.coming_soon ? 'Coming soon' : data.release_date.date

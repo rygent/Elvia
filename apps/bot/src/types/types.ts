@@ -1,9 +1,9 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
 import type { PermissionsString } from 'discord.js';
 import type { EventEmitter } from 'node:events';
 
 export interface ClientOptions {
-	token: any;
+	token: string;
 	version: string;
 	prefix: string;
 	owners: string[] | undefined;

@@ -1,10 +1,10 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, version } from 'discord.js';
-import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatBytes } from '#lib/utils/Functions.js';
+import { bold, inlineCode, italic, time, underline } from '@discordjs/formatters';
+import { Colors } from '@/lib/utils/Constants.js';
+import { formatArray, formatBytes } from '@/lib/utils/Functions.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import systeminformation from 'systeminformation';
 import typescript from 'typescript';
@@ -51,7 +51,7 @@ export default class extends Interaction {
 				].join('\n')
 			)
 			.addFields({
-				name: underscore(italic('System')),
+				name: underline(italic('System')),
 				value: [
 					`${bold(italic('OS:'))} ${sys.osInfo.distro} ${sys.osInfo.release}${
 						sys.osInfo.platform === 'Windows' ? '' : ` ${sys.osInfo.kernel}`

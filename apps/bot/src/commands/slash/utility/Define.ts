@@ -1,10 +1,10 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { italic, underscore } from '@discordjs/formatters';
-import { Colors, UserAgent } from '#lib/utils/Constants.js';
+import { italic, underline } from '@discordjs/formatters';
+import { Colors, UserAgent } from '@/lib/utils/Constants.js';
 import { request } from 'undici';
 
 export default class extends Interaction {
@@ -42,7 +42,7 @@ export default class extends Interaction {
 			})
 			.setTitle(response.word)
 			.setDescription(response.definition)
-			.addFields({ name: underscore(italic('Example')), value: response.example, inline: false })
+			.addFields({ name: underline(italic('Example')), value: response.example, inline: false })
 			.setFooter({ text: `Powered by Urban Dictionary`, iconURL: interaction.user.avatarURL() as string });
 
 		return interaction.reply({ embeds: [embed], components: [button] });

@@ -1,15 +1,15 @@
 {
-  "name": "root-monorepo",
+  "name": "@elvia/root",
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "type": "module",
   "scripts": {
     "build": "turbo run build --concurrency=3",
     "lint": "turbo run lint --concurrency=3",
     "format": "turbo run format --concurrency=3",
-    "register": "yarn workspace @aviana/bot register",
+    "register": "yarn workspace @elvia/bot register",
     "generate": "turbo run db:generate",
     "push": "turbo run db:push",
     "postinstall": "is-ci || husky install",
@@ -34,6 +34,14 @@
     "turbo": "^1.13.3",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0"
+  },
+  "lint-staged": {
+    "**/*.{js,ts}": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "packageManager": "yarn@4.2.2"
 }

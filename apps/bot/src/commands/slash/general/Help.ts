@@ -1,7 +1,7 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { type APIMessageComponentEmoji, ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
@@ -10,9 +10,9 @@ import {
 	StringSelectMenuInteraction
 } from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
-import { Colors, Emojis } from '#lib/utils/Constants.js';
-import { formatPermissions, isNsfwChannel } from '#lib/utils/Functions.js';
-import { Env } from '#lib/Env.js';
+import { Colors, Emojis } from '@/lib/utils/Constants.js';
+import { formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
+import { Env } from '@/lib/Env.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {

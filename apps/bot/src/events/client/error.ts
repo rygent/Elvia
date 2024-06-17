@@ -1,5 +1,5 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Event } from '#lib/structures/Event.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Event } from '@/lib/structures/Event.js';
 
 export default class extends Event {
 	public constructor(client: BaseClient<true>) {
@@ -10,6 +10,6 @@ export default class extends Event {
 	}
 
 	public run(error: Error) {
-		this.client.logger.error(`${error.name}: ${error.message}`, error, true);
+		this.client.logger.error(`${error.name}: ${error.message}`, error);
 	}
 }

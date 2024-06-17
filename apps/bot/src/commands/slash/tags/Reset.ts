@@ -1,9 +1,9 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { ButtonStyle, ComponentType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { prisma } from '@aviana/database';
+import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {

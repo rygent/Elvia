@@ -1,11 +1,11 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
-import { bold, inlineCode, italic, time, underscore } from '@discordjs/formatters';
-import { Colors } from '#lib/utils/Constants.js';
-import { formatArray, formatPermissions, trimArray } from '#lib/utils/Functions.js';
-import flags from '#assets/ts/Badges.js';
+import { bold, inlineCode, italic, time, underline } from '@discordjs/formatters';
+import { Colors } from '@/lib/utils/Constants.js';
+import { formatArray, formatPermissions, trimArray } from '@/lib/utils/Functions.js';
+import flags from '@/assets/ts/Badges.js';
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {
@@ -53,7 +53,7 @@ export default class extends Interaction {
 				].join('\n')
 			)
 			.addFields({
-				name: underscore(italic(`Roles [${roles.length ? roles.length : 1}]`)),
+				name: underline(italic(`Roles [${roles.length ? roles.length : 1}]`)),
 				value: `${roles.length ? formatArray(trimArray(roles, { length: 10 })) : 'None'}`,
 				inline: false
 			})
@@ -62,7 +62,7 @@ export default class extends Interaction {
 
 		if (resolvePermissions(member)?.length) {
 			embed.addFields({
-				name: underscore(italic('Key Permissions')),
+				name: underline(italic('Key Permissions')),
 				value: `${formatArray(
 					resolvePermissions(member)!
 						.map((item) => formatPermissions(item))
@@ -74,7 +74,7 @@ export default class extends Interaction {
 
 		if (resolveAcknowledgements(interaction.guild, member)) {
 			embed.addFields({
-				name: underscore(italic('Acknowledgements')),
+				name: underline(italic('Acknowledgements')),
 				value: resolveAcknowledgements(interaction.guild, member) as string,
 				inline: false
 			});

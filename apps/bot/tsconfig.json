@@ -4,15 +4,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "#assets/*": ["./src/assets/*"],
-      "#commands/*": ["./src/commands/*"],
-      "#events/*": ["./src/events/*"],
-      "#interactions/*": ["./src/interactions/*"],
-      "#lib/*": ["./src/lib/*"],
-      "#types/*": ["./src/types/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     },
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "./src/**/*.json"],
   "exclude": ["./dist/**/*"]
 }

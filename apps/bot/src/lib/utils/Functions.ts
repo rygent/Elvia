@@ -1,5 +1,5 @@
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonStyle, ChannelType } from 'discord-api-types/v10';
+import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, Channel, CommandInteraction, ThreadChannel } from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
 

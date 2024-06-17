@@ -1,6 +1,6 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
 import type { Awaitable } from '@discordjs/util';
-import type { EventOptions } from '#types/types.js';
+import type { EventOptions } from '@/types/types.js';
 import type { EventEmitter } from 'node:events';
 
 export abstract class Event {

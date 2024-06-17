@@ -1,13 +1,13 @@
+import { ActivityType, AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { BitField, Client, Options, Partials, PermissionsBitField, type PermissionsString } from 'discord.js';
-import { AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Collection } from '@discordjs/collection';
-import type { Interaction } from '#lib/structures/Interaction.js';
-import type { Command } from '#lib/structures/Command.js';
-import type { Event } from '#lib/structures/Event.js';
-import { Util } from '#lib/structures/Util.js';
-import type { ClientOptions } from '#types/types.js';
-import { Logger } from '@aviana/logger';
-import semver from 'semver';
+import type { Command } from '@/lib/structures/Command.js';
+import type { Event } from '@/lib/structures/Event.js';
+import type { Interaction } from '@/lib/structures/Interaction.js';
+import { Util } from '@/lib/structures/Util.js';
+import { Env } from '@/lib/Env.js';
+import type { ClientOptions } from '@/types/types.js';
+import { Logger } from '@elvia/logger';
 
 export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public interactions: Collection<string, Interaction>;
@@ -30,15 +30,17 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 		super({
 			intents: [
 				GatewayIntentBits.Guilds,
-				// GatewayIntentBits.GuildMembers,
-				// eslint-disable-next-line prettier/prettier
-				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.GuildMembers,
+				GatewayIntentBits.GuildMessages
 				// GatewayIntentBits.MessageContent
 			],
 			partials: [Partials.Message, Partials.Channel],
 			allowedMentions: {
 				parse: [AllowedMentionsTypes.User, AllowedMentionsTypes.Role],
 				repliedUser: false
+			},
+			presence: {
+				activities: [...(Env.CustomStatus ? [{ name: Env.CustomStatus, type: ActivityType.Custom }] : [])]
 			},
 			sweepers: {
 				...Options.DefaultSweeperSettings,
@@ -65,11 +67,9 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 	private validate(options: ClientOptions) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
-		if (semver.lt(process.versions.node, '20.10.0')) {
-			throw new Error('This client requires Node.JS v20.10.0 or higher.');
-		}
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
+		// @ts-expect-error TS2322: Type 'string' is not assignable to type 'If<Ready, string, string | null>'.
 		this.token = options.token;
 
 		if (!options.prefix) throw new Error('You must pass a prefix for the Client.');

@@ -1,7 +1,7 @@
 import type { Client } from 'discord.js';
 import { createLogger, format, transports } from 'winston';
-import { Webhook } from '#lib/transports/Webhook.js';
-import { clean, resolveLevel, resolveShardId, resolveTimestamp } from '#lib/util.js';
+import { Discord } from '@/transports/discord.js';
+import { clean, resolveLevel, resolveShardId, resolveTimestamp } from '@/lib/util.js';
 import moment from 'moment';
 import 'moment-timezone';
 import 'dotenv/config';
@@ -42,7 +42,7 @@ export class Logger {
 		return logger.log({ level: 'syslog', message });
 	}
 
-	public error(message: string, error: Error, webhook?: boolean) {
+	public error(message: string, error: Error) {
 		const logger = createLogger({
 			level: 'syserr',
 			levels: this.level,
@@ -53,7 +53,7 @@ export class Logger {
 					dirname: `${process.cwd()}/logs`,
 					format: format.combine(format.printf(() => clean(error.stack as string)))
 				}),
-				...(webhook ? [new Webhook(this.client as Client, error)] : [])
+				new Discord({ ...(this.client && { client: this.client }), error })
 			]
 		});
 

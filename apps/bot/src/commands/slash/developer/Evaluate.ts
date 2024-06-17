@@ -1,7 +1,7 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
+import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	AttachmentBuilder,
 	ChatInputCommandInteraction,
@@ -9,10 +9,10 @@ import {
 	ModalSubmitInteraction
 } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
-import { Emojis } from '#lib/utils/Constants.js';
+import { Emojis } from '@/lib/utils/Constants.js';
 import { Type } from '@anishshobith/deeptype';
-import { inspect } from 'node:util';
 import { nanoid } from 'nanoid';
+import { inspect } from 'node:util';
 
 export default class extends Interaction {
 	public constructor(client: BaseClient<true>) {

@@ -1,7 +1,7 @@
-import type { BaseClient } from '#lib/structures/BaseClient.js';
-import { Interaction } from '#lib/structures/Interaction.js';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import type { BaseClient } from '@/lib/structures/BaseClient.js';
+import { Interaction } from '@/lib/structures/Interaction.js';
 import { InteractionType, TextInputStyle } from 'discord-api-types/v10';
+import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
@@ -9,8 +9,8 @@ import {
 	ModalSubmitInteraction
 } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '#lib/utils/Functions.js';
-import { prisma } from '@aviana/database';
+import { shuffleArray } from '@/lib/utils/Functions.js';
+import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
 export default class extends Interaction {

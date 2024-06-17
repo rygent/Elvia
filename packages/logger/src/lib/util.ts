@@ -1,7 +1,7 @@
 import { inspect } from 'node:util';
 import { blackBright, cyanBright, isColorSupported } from 'colorette';
 import moment from 'moment';
-import { levels } from '#lib/constants.js';
+import { levels } from '@/lib/constants.js';
 
 const levelLength = Math.max(...Object.values(levels).map((text) => text.length));
 
