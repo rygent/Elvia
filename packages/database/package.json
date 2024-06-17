@@ -43,7 +43,7 @@
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "prettier-plugin-prisma": "^5.0.0",
-    "prisma": "^5.13.0",
+    "prisma": "^5.15.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   },
