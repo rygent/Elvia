@@ -1,34 +1,34 @@
 {
-  "$schema": "https://turborepo.org/schema.v1.json",
+  "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": ["tsconfig.json"],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "@elvia/bot#build": {
       "dependsOn": ["^build", "@elvia/database#db:generate"],
       "outputs": ["dist/**"],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "lint": {
       "dependsOn": ["^build"],
       "outputs": [],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "format": {
       "dependsOn": ["^build"],
       "outputs": [],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "@elvia/database#db:generate": {
       "cache": false,
-      "outputMode": "none"
+      "outputLogs": "none"
     },
     "@elvia/database#db:push": {
       "cache": false,
-      "outputMode": "none"
+      "outputLogs": "none"
     }
   }
 }
