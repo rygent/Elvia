@@ -30,39 +30,41 @@ export default class extends Event {
 			}
 
 			if (interaction.inGuild()) {
-				const memberPermCheck = command.memberPermissions
-					? this.client.defaultPermissions.add(command.memberPermissions)
-					: this.client.defaultPermissions;
+				if (interaction.inCachedGuild()) {
+					const memberPermCheck = command.memberPermissions
+						? this.client.defaultPermissions.add(command.memberPermissions)
+						: this.client.defaultPermissions;
 
-				if (memberPermCheck) {
-					const missing = interaction.channel
-						?.permissionsFor(interaction.member as GuildMember)
-						?.missing(memberPermCheck) as string[];
+					if (memberPermCheck) {
+						const missing = interaction.channel
+							?.permissionsFor(interaction.member)
+							?.missing(memberPermCheck) as string[];
 
-					if (missing.length) {
-						const replies = `You lack the ${formatArray(
-							missing.map((item) => underline(italic(formatPermissions(item))))
-						)} permission(s) to continue.`;
+						if (missing.length) {
+							const replies = `You lack the ${formatArray(
+								missing.map((item) => underline(italic(formatPermissions(item))))
+							)} permission(s) to continue.`;
 
-						return interaction.reply({ content: replies, ephemeral: true });
+							return interaction.reply({ content: replies, ephemeral: true });
+						}
 					}
-				}
 
-				const clientPermCheck = command.clientPermissions
-					? this.client.defaultPermissions.add(command.clientPermissions)
-					: this.client.defaultPermissions;
+					const clientPermCheck = command.clientPermissions
+						? this.client.defaultPermissions.add(command.clientPermissions)
+						: this.client.defaultPermissions;
 
-				if (clientPermCheck) {
-					const missing = interaction.channel
-						?.permissionsFor(interaction.guild?.members.me as GuildMember)
-						?.missing(clientPermCheck) as string[];
+					if (clientPermCheck) {
+						const missing = interaction.channel
+							?.permissionsFor(interaction.guild?.members.me as GuildMember)
+							?.missing(clientPermCheck) as string[];
 
-					if (missing.length) {
-						const replies = `I lack the ${formatArray(
-							missing.map((item) => underline(italic(formatPermissions(item))))
-						)} permission(s) to continue.`;
+						if (missing.length) {
+							const replies = `I lack the ${formatArray(
+								missing.map((item) => underline(italic(formatPermissions(item))))
+							)} permission(s) to continue.`;
 
-						return interaction.reply({ content: replies, ephemeral: true });
+							return interaction.reply({ content: replies, ephemeral: true });
+						}
 					}
 				}
 

@@ -1,7 +1,13 @@
-import { ApplicationCommandType, type RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
+import {
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	InteractionContextType,
+	type RESTPostAPIApplicationCommandsJSONBody
+} from 'discord-api-types/v10';
 
 export default {
 	name: 'User Information',
 	type: ApplicationCommandType.User,
-	dm_permission: false
+	integration_types: [ApplicationIntegrationType.GuildInstall],
+	contexts: [InteractionContextType.Guild]
 } as RESTPostAPIApplicationCommandsJSONBody;

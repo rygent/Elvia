@@ -1,6 +1,8 @@
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
+	ApplicationIntegrationType,
+	InteractionContextType,
 	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
 import { PermissionsBitField } from 'discord.js';
@@ -92,5 +94,6 @@ export default {
 		}
 	],
 	default_member_permissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
-	dm_permission: false
+	integration_types: [ApplicationIntegrationType.GuildInstall],
+	contexts: [InteractionContextType.Guild]
 } as RESTPostAPIApplicationCommandsJSONBody;

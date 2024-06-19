@@ -14,8 +14,7 @@ export default class extends Interaction {
 		super(client, {
 			name: 'trivia',
 			description: 'Plays a quick trivia game.',
-			category: 'Fun',
-			guildOnly: true
+			category: 'Fun'
 		});
 	}
 

@@ -1,6 +1,8 @@
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
+	ApplicationIntegrationType,
+	InteractionContextType,
 	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
 
@@ -22,5 +24,6 @@ export default {
 			required: false
 		}
 	],
-	dm_permission: true
+	integration_types: [ApplicationIntegrationType.GuildInstall],
+	contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel]
 } as RESTPostAPIApplicationCommandsJSONBody;
