@@ -10,7 +10,7 @@ import {
 } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/Constants.js';
-import { Type } from '@anishshobith/deeptype';
+import { Type } from '@sapphire/type';
 import { nanoid } from 'nanoid';
 import { inspect } from 'node:util';
 

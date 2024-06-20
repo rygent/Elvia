@@ -3,7 +3,7 @@ import { Command } from '@/lib/structures/Command.js';
 import { AttachmentBuilder, Message } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/Constants.js';
-import { Type } from '@anishshobith/deeptype';
+import { Type } from '@sapphire/type';
 import { inspect } from 'node:util';
 
 export default class extends Command {

@@ -22,7 +22,6 @@
     "directory": "apps/bot"
   },
   "dependencies": {
-    "@anishshobith/deeptype": "^1.1.0",
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
@@ -31,6 +30,7 @@
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.3.0",
     "@sapphire/time-utilities": "^1.7.12",
+    "@sapphire/type": "^2.4.4",
     "@sapphire/utilities": "^3.16.2",
     "colorette": "^2.0.20",
     "commander": "^12.1.0",
