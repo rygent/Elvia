@@ -365,7 +365,7 @@ __metadata:
     "@swc/cli": "npm:^0.3.12"
     "@swc/core": "npm:^1.6.1"
     "@types/moment-duration-format": "npm:^2.2.6"
-    "@types/node": "npm:^20.14.2"
+    "@types/node": "npm:^20.16.11"
     bufferutil: "npm:^4.0.8"
     colorette: "npm:^2.0.20"
     commander: "npm:^12.1.0"
@@ -395,7 +395,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/database@workspace:packages/database"
   dependencies:
-    "@types/node": "npm:^20.14.2"
+    "@types/node": "npm:^20.16.11"
     eslint: "npm:^9.5.0"
     prettier: "npm:^3.3.2"
     prettier-plugin-prisma: "npm:^5.0.0"
@@ -411,7 +411,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/logger@workspace:packages/logger"
   dependencies:
-    "@types/node": "npm:^20.14.2"
+    "@types/node": "npm:^20.16.11"
     colorette: "npm:^2.0.20"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^9.5.0"
@@ -432,7 +432,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^19.3.0"
     "@commitlint/config-angular": "npm:^19.3.0"
-    "@types/node": "npm:^20.14.2"
+    "@types/node": "npm:^20.16.11"
     eslint: "npm:^9.5.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:^2.29.1"
@@ -1373,12 +1373,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.14.2":
+"@types/node@npm:*":
   version: 20.14.2
   resolution: "@types/node@npm:20.14.2"
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/2d86e5f2227aaa42212e82ea0affe72799111b888ff900916376450b02b09b963ca888b20d9c332d8d2b833ed4781987867a38eaa2e4863fa8439071468b0a6f
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.16.11":
+  version: 20.16.11
+  resolution: "@types/node@npm:20.16.11"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10c0/bba43f447c3c80548513954dae174e18132e9149d572c09df4a282772960d33e229d05680fb5364997c03489c22fe377d1dbcd018a3d4ff1cfbcfcdaa594a9c3
   languageName: node
   linkType: hard
 
@@ -6402,6 +6411,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10c0/bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.19.2":
+  version: 6.19.8
+  resolution: "undici-types@npm:6.19.8"
+  checksum: 10c0/078afa5990fba110f6824823ace86073b4638f1d5112ee26e790155f481f2a868cc3e0615505b6f4282bdf74a3d8caad715fd809e870c2bb0704e3ea6082f344
   languageName: node
   linkType: hard
 
