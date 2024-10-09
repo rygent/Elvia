@@ -49,7 +49,11 @@ export default class extends Interaction {
 				.setOptions(
 					...response.map((data) => ({
 						value: data!.id.toString(),
-						label: cutText(Object.values(data!.title!).filter((title) => title?.length)[0], 1e2) ?? 'Unknown Name',
+						label:
+							cutText(
+								Object.values(data!.title!).find((title) => title?.length),
+								1e2
+							) ?? 'Unknown Name',
 						...(data!.description?.length && { description: cutText(parseDescription(data!.description), 1e2) })
 					}))
 				)
@@ -87,7 +91,7 @@ export default class extends Interaction {
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: 'Anilist', iconURL: 'https://i.imgur.com/B48olfM.png', url: 'https://anilist.co/' })
-				.setTitle(Object.values(data.title!).filter((title) => title?.length)[0])
+				.setTitle(Object.values(data.title!).find((title) => title?.length))
 				.addFields({
 					name: underline(italic('Detail')),
 					value: [
