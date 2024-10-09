@@ -1,6 +1,7 @@
 import globals from 'globals';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import stylistic from '@stylistic/eslint-plugin';
 import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
@@ -8,6 +9,8 @@ export default tseslint.config(
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
 	...tseslint.configs.recommendedTypeChecked,
+	...tseslint.configs.stylistic,
+	...tseslint.configs.stylisticTypeChecked,
 	{
 		languageOptions: {
 			globals: {
@@ -40,10 +43,7 @@ export default tseslint.config(
 				}
 			],
 			'@typescript-eslint/ban-ts-ignore': 'off',
-			'@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
 			'@typescript-eslint/class-literal-property-style': 'error',
-			'@typescript-eslint/comma-dangle': ['error', 'never'],
-			'@typescript-eslint/comma-spacing': ['error', { before: false, after: true }],
 			'@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
 			'@typescript-eslint/default-param-last': 'error',
 			'@typescript-eslint/dot-notation': [
@@ -57,33 +57,8 @@ export default tseslint.config(
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-member-accessibility': 'error',
 			'@typescript-eslint/explicit-module-boundary-types': 'off',
-			'@typescript-eslint/func-call-spacing': ['error', 'never'],
 			'@typescript-eslint/init-declarations': 'off',
 			'@typescript-eslint/interface-name-prefix': 'off',
-			'@typescript-eslint/keyword-spacing': [
-				'error',
-				{
-					overrides: {
-						if: {
-							after: true
-						},
-						for: {
-							after: true
-						},
-						while: {
-							after: true
-						},
-						catch: {
-							after: true
-						},
-						switch: {
-							after: true
-						}
-					}
-				}
-			],
-			'@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
-			'@typescript-eslint/member-delimiter-style': 'error',
 			'@typescript-eslint/method-signature-style': 'error',
 			'@typescript-eslint/no-array-constructor': 'error',
 			'@typescript-eslint/no-base-to-string': 'error',
@@ -94,7 +69,6 @@ export default tseslint.config(
 			'@typescript-eslint/no-empty-interface': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-extra-non-null-assertion': 'error',
-			'@typescript-eslint/no-extra-semi': 'error',
 			'@typescript-eslint/no-extraneous-class': 'error',
 			'@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true, ignoreIIFE: true }],
 			'@typescript-eslint/no-for-in-array': 'error',
@@ -109,7 +83,6 @@ export default tseslint.config(
 			'@typescript-eslint/no-redeclare': 'error',
 			'@typescript-eslint/no-require-imports': 'error',
 			'@typescript-eslint/no-shadow': 'warn',
-			'@typescript-eslint/no-throw-literal': 'error',
 			'@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
 			'@typescript-eslint/no-unnecessary-qualifier': 'error',
 			'@typescript-eslint/no-unnecessary-type-arguments': 'error',
@@ -137,8 +110,8 @@ export default tseslint.config(
 				}
 			],
 			'@typescript-eslint/no-useless-constructor': 'error',
-			'@typescript-eslint/no-var-requires': 'error',
-			'@typescript-eslint/object-curly-spacing': ['error', 'always'],
+			'@typescript-eslint/non-nullable-type-assertion-style': 'off',
+			"@typescript-eslint/only-throw-error": "error",
 			'@typescript-eslint/prefer-as-const': 'error',
 			'@typescript-eslint/prefer-for-of': 'error',
 			'@typescript-eslint/prefer-function-type': 'error',
@@ -150,37 +123,25 @@ export default tseslint.config(
 			'@typescript-eslint/prefer-reduce-type-parameter': 'error',
 			'@typescript-eslint/prefer-regexp-exec': 'error',
 			'@typescript-eslint/prefer-return-this-type': 'error',
-			'@typescript-eslint/prefer-ts-expect-error': 'warn',
 			'@typescript-eslint/promise-function-async': 'off',
-			'@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
 			'@typescript-eslint/require-array-sort-compare': 'error',
 			'@typescript-eslint/require-await': 'warn',
 			'@typescript-eslint/return-await': 'warn',
 			'@typescript-eslint/restrict-plus-operands': 'off',
 			'@typescript-eslint/restrict-template-expressions': 'off',
-			'@typescript-eslint/semi': ['error', 'always', { omitLastInOneLineBlock: false }],
-			'@typescript-eslint/space-before-blocks': ['error', 'always'],
-			'@typescript-eslint/space-before-function-paren': [
-				'error',
-				{
-					anonymous: 'never',
-					named: 'never',
-					asyncArrow: 'always'
-				}
-			],
-			'@typescript-eslint/space-infix-ops': ['error', { int32Hint: true }],
 			'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 			'@typescript-eslint/triple-slash-reference': 'off',
-			'@typescript-eslint/type-annotation-spacing': 'error',
 			'@typescript-eslint/unbound-method': 'error',
 			'@typescript-eslint/unified-signatures': 'error'
 		}
 	},
 	{
+		plugins: {
+			'@stylistic': stylistic
+		},
 		rules: {
-			'accessor-pairs': 'warn',
-			'array-bracket-newline': ['error', 'consistent'],
-			'array-bracket-spacing': [
+			'@stylistic/array-bracket-newline': ['error', 'consistent'],
+			'@stylistic/array-bracket-spacing': [
 				'error',
 				'never',
 				{
@@ -189,39 +150,44 @@ export default tseslint.config(
 					arraysInArrays: false
 				}
 			],
-			'array-callback-return': 'error',
-			'arrow-body-style': ['error', 'as-needed'],
-			'arrow-spacing': ['error', { before: true, after: true }],
-			'block-scoped-var': 'error',
-			'block-spacing': ['error', 'always'],
-			'brace-style': 'off',
-			'comma-dangle': 'off',
-			'comma-spacing': 'off',
-			'comma-style': ['error', 'last'],
-			complexity: ['warn', { max: 35 }],
-			'computed-property-spacing': ['error', 'never'],
-			'consistent-this': ['error', 'self'],
-			'constructor-super': 'error',
-			curly: ['error', 'multi-line', 'consistent'],
-			'default-param-last': 'off',
-			'dot-location': ['error', 'property'],
-			'dot-notation': 'off',
-			'eol-last': ['error', 'always'],
-			eqeqeq: ['error', 'smart'],
-			'func-call-spacing': 'off',
-			'func-name-matching': ['warn', 'always'],
-			'func-names': ['warn', 'as-needed'],
-			'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
-			'guard-for-in': 'warn',
-			'generator-star-spacing': ['error', 'before'],
-			'handle-callback-err': 'error',
-			'jsx-quotes': ['error', 'prefer-double'],
-			'key-spacing': ['error', { beforeColon: false, afterColon: true, mode: 'strict' }],
-			'keyword-spacing': 'off',
-			'linebreak-style': ['error', 'unix'],
-			'lines-between-class-members': 'off',
-			'max-depth': ['error', { max: 5 }],
-			'max-len': [
+			'@stylistic/arrow-spacing': ['error', { before: true, after: true }],
+			'@stylistic/block-spacing': ['error', 'always'],
+			'@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+			'@stylistic/comma-dangle': ['error', 'never'],
+			'@stylistic/comma-spacing': ['error', { before: false, after: true }],
+			'@stylistic/comma-style': ['error', 'last'],
+			'@stylistic/computed-property-spacing': ['error', 'never'],
+			'@stylistic/dot-location': ['error', 'property'],
+			'@stylistic/eol-last': ['error', 'always'],
+			'@stylistic/func-call-spacing': ['error', 'never'],
+			'@stylistic/generator-star-spacing': ['error', 'before'],
+			'@stylistic/jsx-quotes': ['error', 'prefer-double'],
+			'@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true, mode: 'strict' }],
+			'@stylistic/keyword-spacing': [
+				'error',
+				{
+					overrides: {
+						if: {
+							after: true
+						},
+						for: {
+							after: true
+						},
+						while: {
+							after: true
+						},
+						catch: {
+							after: true
+						},
+						switch: {
+							after: true
+						}
+					}
+				}
+			],
+			'@stylistic/linebreak-style': ['error', 'unix'],
+			'@stylistic/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+			'@stylistic/max-len': [
 				'error',
 				{
 					code: 150,
@@ -230,11 +196,68 @@ export default tseslint.config(
 					ignoreTemplateLiterals: true
 				}
 			],
+			'@stylistic/max-statements-per-line': ['error', { max: 2 }],
+			'@stylistic/member-delimiter-style': 'error',
+			'@stylistic/multiline-ternary': ['error', 'always-multiline'],
+			'@stylistic/new-parens': 'error',
+			'@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 6 }],
+			'@stylistic/no-extra-semi': 'error',
+			'@stylistic/no-floating-decimal': 'error',
+			'@stylistic/no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+			'@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true }],
+			'@stylistic/no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }],
+			'@stylistic/no-trailing-spaces': 'error',
+			'@stylistic/no-whitespace-before-property': 'error',
+			'@stylistic/object-curly-newline': ['error', { multiline: true, consistent: true }],
+			'@stylistic/object-curly-spacing': ['error', 'always'],
+			'@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
+			'@stylistic/padded-blocks': ['error', 'never'],
+			'@stylistic/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+			'@stylistic/rest-spread-spacing': ['error', 'never'],
+			'@stylistic/semi': ['error', 'always', { omitLastInOneLineBlock: false }],
+			'@stylistic/semi-spacing': ['error', { before: false, after: true }],
+			'@stylistic/semi-style': ['error', 'last'],
+			'@stylistic/space-before-blocks': ['error', 'always'],
+			'@stylistic/space-before-function-paren': [
+				'error',
+				{
+					anonymous: 'never',
+					named: 'never',
+					asyncArrow: 'always'
+				}
+			],
+			'@stylistic/space-in-parens': ['error', 'never'],
+			'@stylistic/space-infix-ops': ['error', { int32Hint: true }],
+			'@stylistic/space-unary-ops': ['error', { words: true, nonwords: false }],
+			'@stylistic/spaced-comment': ['error', 'always'],
+			'@stylistic/switch-colon-spacing': ['error', { after: true, before: false }],
+			'@stylistic/template-curly-spacing': ['error', 'never'],
+			'@stylistic/template-tag-spacing': ['error', 'never'],
+			'@stylistic/type-annotation-spacing': 'error',
+			'@stylistic/wrap-iife': ['error', 'inside'],
+			'@stylistic/yield-star-spacing': ['error', 'before']
+		}
+	},
+	{
+		rules: {
+			'accessor-pairs': 'warn',
+			'array-callback-return': 'error',
+			'arrow-body-style': ['error', 'as-needed'],
+			'block-scoped-var': 'error',
+			complexity: ['warn', { max: 35 }],
+			'consistent-this': ['error', 'self'],
+			'constructor-super': 'error',
+			curly: ['error', 'multi-line', 'consistent'],
+			'default-param-last': 'off',
+			'dot-notation': 'off',
+			eqeqeq: ['error', 'smart'],
+			'func-name-matching': ['warn', 'always'],
+			'func-names': ['warn', 'as-needed'],
+			'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
+			'guard-for-in': 'warn',
+			'handle-callback-err': 'error',
+			'max-depth': ['error', { max: 5 }],
 			'max-nested-callbacks': ['error', { max: 4 }],
-			'max-statements-per-line': ['error', { max: 2 }],
-			'multiline-ternary': ['error', 'always-multiline'],
-			'new-parens': 'error',
-			'newline-per-chained-call': ['error', { ignoreChainWithDepth: 6 }],
 			'no-alert': 'error',
 			'no-array-constructor': 'off',
 			'no-caller': 'error',
@@ -258,8 +281,6 @@ export default tseslint.config(
 			'no-eq-null': 'warn',
 			'no-extend-native': 'warn',
 			'no-extra-label': 'warn',
-			'no-extra-semi': 'off',
-			'no-floating-decimal': 'error',
 			'no-implicit-coercion': 'error',
 			'no-implied-eval': 'off',
 			'no-inline-comments': 'warn',
@@ -278,10 +299,7 @@ export default tseslint.config(
 			'no-lone-blocks': 'error',
 			'no-lonely-if': 'error',
 			'no-mixed-requires': 'error',
-			'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
-			'no-multi-spaces': ['error', { ignoreEOLComments: true }],
 			'no-multi-str': 'error',
-			'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }],
 			'no-new-func': 'warn',
 			'no-new-object': 'error',
 			'no-new-require': 'error',
@@ -304,7 +322,6 @@ export default tseslint.config(
 			'no-sparse-arrays': 'warn',
 			'no-this-before-super': 'error',
 			'no-throw-literal': 'off',
-			'no-trailing-spaces': 'error',
 			'no-undef': 'error',
 			'no-undef-init': 'error',
 			'no-unexpected-multiline': 'error',
@@ -326,13 +343,8 @@ export default tseslint.config(
 			'no-var': 'error',
 			'no-with': 'error',
 			'no-warning-comments': 'warn',
-			'no-whitespace-before-property': 'error',
-			'object-curly-newline': ['error', { multiline: true, consistent: true }],
-			'object-curly-spacing': 'off',
 			'one-var': ['error', 'never'],
 			'operator-assignment': ['error', 'always'],
-			'operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
-			'padded-blocks': ['error', 'never'],
 			'prefer-arrow-callback': 'error',
 			'prefer-const': ['error', { destructuring: 'all' }],
 			'prefer-destructuring': [
@@ -355,30 +367,14 @@ export default tseslint.config(
 			'prefer-rest-params': 'warn',
 			'prefer-spread': 'error',
 			'prefer-template': 'warn',
-			quotes: 'off',
 			radix: 'error',
 			'require-await': 'off',
 			'require-yield': 'warn',
-			'rest-spread-spacing': ['error', 'never'],
-			semi: 'off',
-			'semi-spacing': ['error', { before: false, after: true }],
-			'semi-style': ['error', 'last'],
-			'space-before-blocks': 'off',
-			'space-before-function-paren': 'off',
-			'space-in-parens': ['error', 'never'],
-			'space-infix-ops': 'off',
-			'space-unary-ops': ['error', { words: true, nonwords: false }],
-			'spaced-comment': ['error', 'always'],
 			strict: ['error', 'never'],
-			'switch-colon-spacing': ['error', { after: true, before: false }],
 			'symbol-description': 'error',
-			'template-curly-spacing': ['error', 'never'],
-			'template-tag-spacing': ['error', 'never'],
 			'unicode-bom': ['error', 'never'],
 			'use-isnan': 'error',
 			'valid-typeof': 'error',
-			'wrap-iife': ['error', 'inside'],
-			'yield-star-spacing': ['error', 'before'],
 			yoda: 'error'
 		}
 	},
