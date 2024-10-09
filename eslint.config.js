@@ -382,10 +382,8 @@ export default tseslint.config(
 			yoda: 'error'
 		}
 	},
+	eslintPluginImport.flatConfigs.recommended,
 	{
-		plugins: {
-			import: eslintPluginImport
-		},
 		rules: {
 			'import/no-duplicates': ['error', { 'prefer-inline': true }],
 			'import/no-unresolved': 'off'
