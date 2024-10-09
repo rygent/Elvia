@@ -378,7 +378,7 @@ __metadata:
     moment-duration-format: "npm:^2.3.2"
     nanoid: "npm:^5.0.7"
     prettier: "npm:^3.3.3"
-    rimraf: "npm:^5.0.7"
+    rimraf: "npm:^5.0.10"
     systeminformation: "npm:^5.22.11"
     typescript: "npm:^5.4.5"
     undici: "npm:^6.20.0"
@@ -5577,14 +5577,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^5.0.7":
-  version: 5.0.7
-  resolution: "rimraf@npm:5.0.7"
+"rimraf@npm:^5.0.10":
+  version: 5.0.10
+  resolution: "rimraf@npm:5.0.10"
   dependencies:
     glob: "npm:^10.3.7"
   bin:
     rimraf: dist/esm/bin.mjs
-  checksum: 10c0/bd6dbfaa98ae34ce1e54d1e06045d2d63e8859d9a1979bb4a4628b652b459a2d17b17dc20ee072b034bd2d09bd691e801d24c4d9cfe94e16fdbcc8470a1d4807
+  checksum: 10c0/7da4fd0e15118ee05b918359462cfa1e7fe4b1228c7765195a45b55576e8c15b95db513b8466ec89129666f4af45ad978a3057a02139afba1a63512a2d9644cc
   languageName: node
   linkType: hard
 
