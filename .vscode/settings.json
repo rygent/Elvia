@@ -1,6 +1,6 @@
 {
   "eslint.validate": ["typescript"],
-  "eslint.experimental.useFlatConfig": true,
+  "eslint.useFlatConfig": true,
   "search.exclude": {
     "**/node_modules": true,
     "**/.yarn": true,
