@@ -360,7 +360,7 @@ __metadata:
     "@rygent/spotify": "npm:^1.1.1"
     "@sapphire/discord-utilities": "npm:^3.3.0"
     "@sapphire/time-utilities": "npm:^1.7.12"
-    "@sapphire/type": "npm:^2.4.4"
+    "@sapphire/type": "npm:^2.5.1"
     "@sapphire/utilities": "npm:^3.16.2"
     "@swc/cli": "npm:^0.4.0"
     "@swc/core": "npm:^1.7.26"
@@ -1160,14 +1160,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/type@npm:^2.4.4":
-  version: 2.4.4
-  resolution: "@sapphire/type@npm:2.4.4"
+"@sapphire/type@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "@sapphire/type@npm:2.5.1"
   dependencies:
     "@discordjs/node-pre-gyp": "npm:^0.4.5"
-    nan: "npm:^2.18.0"
-    tslib: "npm:^2.6.2"
-  checksum: 10c0/20cbbfad4d371ed0e2f7bc82291920ba2e1dd80491e50158e0690eda34678e5f50618dc56e029e5def1c973458b697bb68b1572f6d1cc9ca34815b1c511fc422
+    nan: "npm:^2.20.0"
+    tslib: "npm:^2.6.3"
+  checksum: 10c0/8206a13adcd03d73385a04f00f4b5de096eb4bb9fa33e8fb1aa25b4143ba4045bc7779b28ce993733983b9fbe9b26e984b44272c03f2bdbc217b78188620f68f
   languageName: node
   linkType: hard
 
@@ -4784,7 +4784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.18.0":
+"nan@npm:^2.20.0":
   version: 2.20.0
   resolution: "nan@npm:2.20.0"
   dependencies:
@@ -6294,6 +6294,13 @@ __metadata:
   version: 2.6.3
   resolution: "tslib@npm:2.6.3"
   checksum: 10c0/2598aef53d9dbe711af75522464b2104724d6467b26a60f2bdac8297d2b5f1f6b86a71f61717384aa8fd897240467aaa7bcc36a0700a0faf751293d1331db39a
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.3":
+  version: 2.7.0
+  resolution: "tslib@npm:2.7.0"
+  checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
   languageName: node
   linkType: hard
 
