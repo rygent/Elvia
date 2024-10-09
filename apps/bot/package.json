@@ -31,7 +31,7 @@
     "@sapphire/discord-utilities": "^3.4.1",
     "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/type": "^2.5.1",
-    "@sapphire/utilities": "^3.16.2",
+    "@sapphire/utilities": "^3.17.0",
     "colorette": "^2.0.20",
     "commander": "^12.1.0",
     "discord-api-types": "^0.37.89",
