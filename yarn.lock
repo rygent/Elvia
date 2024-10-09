@@ -381,7 +381,7 @@ __metadata:
     rimraf: "npm:^5.0.7"
     systeminformation: "npm:^5.22.11"
     typescript: "npm:^5.4.5"
-    undici: "npm:^6.19.0"
+    undici: "npm:^6.20.0"
     utf-8-validate: "npm:^6.0.4"
   dependenciesMeta:
     bufferutil:
@@ -6567,10 +6567,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^6.19.0":
-  version: 6.19.2
-  resolution: "undici@npm:6.19.2"
-  checksum: 10c0/3b7b9238c0c84fd90742422fb12844a29e33e922d2c5f722f626090ca1f1ec93596ccec9be1814bb0e923e28682d2080a17d17a4afe373897b9770ef25a64d97
+"undici@npm:^6.20.0":
+  version: 6.20.0
+  resolution: "undici@npm:6.20.0"
+  checksum: 10c0/b74a6e4dcdfc3a6e7f5eab77c24f598c5a8664091797dc4940f86e1ed27e5dc9bef390aa1ecf53f20c7ec0e8809bc3d1518a8c3c560fa5972a6a325d628765be
   languageName: node
   linkType: hard
 
