@@ -111,7 +111,7 @@ export default tseslint.config(
 			],
 			'@typescript-eslint/no-useless-constructor': 'error',
 			'@typescript-eslint/non-nullable-type-assertion-style': 'off',
-			"@typescript-eslint/only-throw-error": "error",
+			'@typescript-eslint/only-throw-error': 'error',
 			'@typescript-eslint/prefer-as-const': 'error',
 			'@typescript-eslint/prefer-for-of': 'error',
 			'@typescript-eslint/prefer-function-type': 'error',
@@ -381,6 +381,7 @@ export default tseslint.config(
 	eslintPluginImport.flatConfigs.recommended,
 	{
 		rules: {
+			'import/extensions': ['error', 'ignorePackages'],
 			'import/no-duplicates': ['error', { 'prefer-inline': true }],
 			'import/no-unresolved': 'off'
 		}
