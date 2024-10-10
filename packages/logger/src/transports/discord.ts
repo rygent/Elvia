@@ -1,5 +1,4 @@
 import TransportStream, { type TransportStreamOptions } from 'winston-transport';
-import type { LogCallback, LogEntry } from 'winston';
 import { EmbedBuilder } from '@discordjs/builders';
 import { type Client, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
@@ -38,7 +37,7 @@ export class Discord extends TransportStream {
 		this.webhook = options.webhook;
 	}
 
-	public override log(info: LogEntry, callback: LogCallback) {
+	public override log(info: any, next: () => void) {
 		setImmediate(() => {
 			this.emit('logged', info);
 
@@ -73,6 +72,6 @@ export class Discord extends TransportStream {
 			return webhook.send({ embeds: [embed], threadId });
 		});
 
-		callback();
+		next();
 	}
 }
