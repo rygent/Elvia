@@ -18,7 +18,7 @@ export default class extends Command {
 		});
 	}
 
-	public async execute(message: Message<false>, args: string[]) {
+	public async execute(message: Message<true>, args: string[]) {
 		if (!args.length) return message.reply({ content: `Please enter the javascript code that will be evaluated.` });
 
 		let code = args.join(' ');

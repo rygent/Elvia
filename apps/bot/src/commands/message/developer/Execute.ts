@@ -16,7 +16,7 @@ export default class extends Command {
 		});
 	}
 
-	public execute(message: Message<false>, args: string[]) {
+	public execute(message: Message<true>, args: string[]) {
 		const bash = args.join(' ');
 
 		exec(bash, (error, stdout) => {

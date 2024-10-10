@@ -89,8 +89,8 @@ export default class extends Interaction {
 			max: 1
 		});
 
-		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', (i) => {
+		collector.on('ignore', (i: ButtonInteraction<'cached'>) => void i.deferUpdate());
+		collector.on('collect', (i: ButtonInteraction<'cached'>) => {
 			if (trivia.answer !== i.component.label) {
 				answer.setDescription(`Unfortunately, the correct answer was ${bold(trivia.answer)}.`);
 				button.components[trivia.options.indexOf(i.component.label!)]?.setStyle(ButtonStyle.Danger);
