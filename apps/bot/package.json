@@ -29,6 +29,7 @@
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.4.1",
+    "@sapphire/shapeshift": "^4.0.0",
     "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/type": "^2.5.1",
     "@sapphire/utilities": "^3.17.0",

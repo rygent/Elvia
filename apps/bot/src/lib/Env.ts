@@ -2,26 +2,26 @@ import { s } from '@sapphire/shapeshift';
 import 'dotenv/config';
 
 const schema = s.object({
-	DiscordToken: s.string,
-	DiscordApplicationId: s.string.lengthGreaterThanOrEqual(17),
-	DeveloperGuildId: s.string.lengthGreaterThanOrEqual(17),
-	ClientPrefix: s.string.lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4),
-	ClientOwners: s.string.lengthGreaterThanOrEqual(17).array,
-	ClientVersion: s.string.nullable,
-	DatabaseUrl: s.string,
+	DiscordToken: s.string(),
+	DiscordApplicationId: s.string().lengthGreaterThanOrEqual(17),
+	DeveloperGuildId: s.string().lengthGreaterThanOrEqual(17),
+	ClientPrefix: s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4),
+	ClientOwners: s.string().lengthGreaterThanOrEqual(17).array(),
+	ClientVersion: s.string().nullable(),
+	DatabaseUrl: s.string(),
 
-	CustomStatus: s.string.nullable,
-	DebugMode: s.boolean,
-	Timezone: s.string,
-	SupportServerUrl: s.string.url(),
-	LoggerWebhookUrl: s.string.url(),
-	GuildWebhookUrl: s.string.url(),
+	CustomStatus: s.string().nullable(),
+	DebugMode: s.boolean(),
+	Timezone: s.string(),
+	SupportServerUrl: s.string().url(),
+	LoggerWebhookUrl: s.string().url(),
+	GuildWebhookUrl: s.string().url(),
 
-	ImgurClientId: s.string,
-	OpenWeatherApiKey: s.string,
-	SpotifyClientId: s.string,
-	SpotifyClientSecret: s.string,
-	TmdbApiKey: s.string
+	ImgurClientId: s.string(),
+	OpenWeatherApiKey: s.string(),
+	SpotifyClientId: s.string(),
+	SpotifyClientSecret: s.string(),
+	TmdbApiKey: s.string()
 });
 
 const data = {
