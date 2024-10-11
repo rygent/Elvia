@@ -1,5 +1,5 @@
 import { inspect } from 'node:util';
-import { blackBright, cyanBright, isColorSupported } from 'colorette';
+import { blackBright, isColorSupported } from 'colorette';
 import moment from 'moment';
 import { levels } from '@/lib/constants.js';
 
@@ -10,11 +10,7 @@ export function resolveTimestamp(timestamp: string) {
 }
 
 export function resolveLevel(level: string) {
-	return `${(levels as any)[level]}${' '.repeat(levelLength - (levels as any)[level].length)}`;
-}
-
-export function resolveShardId(shardId: number) {
-	return cyanBright(`[${shardId ?? 'M'}]`);
+	return `${(levels as any)[level]}${' '.repeat(levelLength - (levels as any)[level].length)}`.trim();
 }
 
 export function clean(input: any, depth?: number) {

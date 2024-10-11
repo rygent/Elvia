@@ -58,7 +58,13 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 		this.events = new Collection();
 		this.cooldowns = new Collection();
 
-		this.logger = new Logger(this);
+		this.logger = new Logger({
+			webhook: {
+				url: Env.LoggerWebhookUrl,
+				name: this.user?.username,
+				avatar: this.user?.displayAvatarURL({ size: 4096 })
+			}
+		});
 		this.utils = new Util(this);
 
 		this.version = options.version;

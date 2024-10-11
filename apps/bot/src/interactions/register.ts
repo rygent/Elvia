@@ -7,7 +7,12 @@ import { Env } from '@/lib/Env.js';
 import { Logger } from '@elvia/logger';
 import path from 'node:path';
 
-const logger = new Logger();
+const webhookUrl = Env.LoggerWebhookUrl;
+if (!webhookUrl) {
+	throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
+}
+
+const logger = new Logger({ webhook: { url: webhookUrl } });
 const program = new Command();
 
 program.option('-g, --global', 'register global commands');

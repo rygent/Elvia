@@ -1,7 +1,6 @@
-import type { Client } from 'discord.js';
 import { createLogger, format, transports } from 'winston';
-import { Discord } from '@/transports/discord.js';
-import { clean, resolveLevel, resolveShardId, resolveTimestamp } from '@/lib/util.js';
+import { DiscordHook, type WebhookOptions } from '@/lib/discord-webhooks.js';
+import { clean, resolveLevel, resolveTimestamp } from '@/lib/util.js';
 import moment from 'moment';
 import 'moment-timezone';
 import 'dotenv/config';
@@ -9,9 +8,11 @@ import 'dotenv/config';
 const timezone = process.env.TIMEZONE;
 moment.tz.setDefault(timezone);
 
-export class Logger {
-	private readonly client: Client | undefined;
+interface LoggerOptions {
+	webhook: WebhookOptions;
+}
 
+export class Logger {
 	private readonly level = {
 		syslog: 0,
 		syserr: 1,
@@ -23,13 +24,14 @@ export class Logger {
 	private readonly format = format.combine(
 		format.timestamp(),
 		format.printf(({ timestamp, level, message }) => {
-			const shard = this.client ? `${resolveShardId(this.client.shard?.ids[0] as number)} ` : '';
-			return `${resolveTimestamp(timestamp)} ${resolveLevel(level)}: ${shard}${message}`;
+			return `${resolveTimestamp(timestamp)} ${resolveLevel(level)}: ${message}`;
 		})
 	);
 
-	public constructor(client?: Client) {
-		this.client = client;
+	private readonly options: LoggerOptions;
+
+	public constructor(options: LoggerOptions) {
+		this.options = options;
 	}
 
 	public log(message: string) {
@@ -53,7 +55,7 @@ export class Logger {
 					dirname: `${process.cwd()}/logs`,
 					format: format.combine(format.printf(() => clean(error.stack as string)))
 				}),
-				new Discord({ ...(this.client && { client: this.client }), error })
+				new DiscordHook({ error, webhook: this.options.webhook })
 			]
 		});
 
