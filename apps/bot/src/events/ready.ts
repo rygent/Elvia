@@ -13,8 +13,8 @@ export default class extends Event {
 	}
 
 	public async run() {
-		this.client.logger.log(`Logged in as ${redBright(underline(`${this.client.user.tag}`))}`);
-		this.client.logger.log(
+		this.client.logger.info(`Logged in as ${redBright(underline(`${this.client.user.tag}`))}`);
+		this.client.logger.info(
 			`Loaded ${formatNumber(this.client.commands.size + this.client.interactions.size)} commands & ${formatNumber(
 				this.client.events.size
 			)} events!`

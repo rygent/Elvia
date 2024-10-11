@@ -14,11 +14,11 @@ interface LoggerOptions {
 
 export class Logger {
 	private readonly level = {
-		syslog: 0,
-		syserr: 1,
+		debug: 0,
+		info: 1,
 		warn: 2,
-		info: 3,
-		debug: 4
+		error: 3,
+		fatal: 4
 	};
 
 	private readonly format = format.combine(
@@ -34,42 +34,14 @@ export class Logger {
 		this.options = options;
 	}
 
-	public log(message: string) {
+	public debug(message: string) {
 		const logger = createLogger({
-			level: 'syslog',
+			level: 'debug',
 			levels: this.level,
-			transports: [new transports.Console({ format: this.format })]
+			transports: [new transports.Console({ level: 'debug', format: this.format })]
 		});
 
-		return logger.log({ level: 'syslog', message });
-	}
-
-	public error(message: string, error: Error) {
-		const logger = createLogger({
-			level: 'syserr',
-			levels: this.level,
-			transports: [
-				new transports.Console({ format: this.format }),
-				new transports.File({
-					filename: `report.${moment().format('yyyyMMDD.HHmmss')}.log`,
-					dirname: `${process.cwd()}/logs`,
-					format: format.combine(format.printf(() => clean(error.stack as string)))
-				}),
-				new DiscordHook({ error, webhook: this.options.webhook })
-			]
-		});
-
-		return logger.log({ level: 'syserr', message });
-	}
-
-	public warn(message: string) {
-		const logger = createLogger({
-			level: 'warn',
-			levels: this.level,
-			transports: [new transports.Console({ format: this.format })]
-		});
-
-		return logger.log({ level: 'warn', message });
+		return logger.log({ level: 'debug', message });
 	}
 
 	public info(message: string) {
@@ -82,13 +54,49 @@ export class Logger {
 		return logger.log({ level: 'info', message });
 	}
 
-	public debug(message: string) {
+	public warn(message: string) {
 		const logger = createLogger({
-			level: 'debug',
+			level: 'warn',
 			levels: this.level,
-			transports: [new transports.Console({ level: 'debug', format: this.format })]
+			transports: [new transports.Console({ format: this.format })]
 		});
 
-		return logger.log({ level: 'debug', message });
+		return logger.log({ level: 'warn', message });
+	}
+
+	public error(message: string, error: Error) {
+		const logger = createLogger({
+			level: 'error',
+			levels: this.level,
+			transports: [
+				new transports.Console({ format: this.format }),
+				new transports.File({
+					filename: `report.${moment().format('yyyyMMDD.HHmmss')}.log`,
+					dirname: `${process.cwd()}/logs/error`,
+					format: format.combine(format.printf(() => clean(error.stack as string)))
+				}),
+				new DiscordHook({ error, webhook: this.options.webhook })
+			]
+		});
+
+		return logger.log({ level: 'error', message });
+	}
+
+	public fatal(message: string, error: Error) {
+		const logger = createLogger({
+			level: 'fatal',
+			levels: this.level,
+			transports: [
+				new transports.Console({ format: this.format }),
+				new transports.File({
+					filename: `report.${moment().format('yyyyMMDD.HHmmss')}.log`,
+					dirname: `${process.cwd()}/logs/fatal`,
+					format: format.combine(format.printf(() => clean(error.stack as string)))
+				}),
+				new DiscordHook({ error, webhook: this.options.webhook })
+			]
+		});
+
+		return logger.log({ level: 'fatal', message });
 	}
 }

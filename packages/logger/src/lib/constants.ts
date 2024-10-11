@@ -1,13 +1,14 @@
-import { blueBright, greenBright, magentaBright, redBright, yellowBright } from 'colorette';
+import { blueBright, magentaBright, red, redBright, yellowBright } from 'colorette';
 
 export enum color {
+	// eslint-disable-next-line @typescript-eslint/no-shadow
 	red = 0xff6961
 }
 
 export const levels = {
-	syslog: blueBright('[SYSLOG]'),
-	syserr: redBright('[SYSERR]'),
+	debug: magentaBright('[DEBUG]'),
+	info: blueBright('[INFO]'),
 	warn: yellowBright('[WARN]'),
-	info: greenBright('[INFO]'),
-	debug: magentaBright('[DEBUG]')
+	error: redBright('[ERROR]'),
+	fatal: red('[FATAL]')
 };
