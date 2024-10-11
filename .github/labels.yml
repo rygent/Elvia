@@ -36,6 +36,8 @@
   color: fbca04
 - name: packages:logger
   color: fbca04
+- name: packages:tesseract
+  color: fbca04
 - name: 'performance'
   color: '80c042'
 - name: 'priority:critical'

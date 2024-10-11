@@ -13,3 +13,8 @@ packages:logger:
       - any-glob-to-any-file:
           - packages/logger/*
           - packages/logger/**/*
+packages:tesseract:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/tesseract/*
+          - packages/tesseract/**/*

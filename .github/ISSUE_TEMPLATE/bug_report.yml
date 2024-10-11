@@ -16,6 +16,7 @@ body:
         - bot
         - database
         - logger
+        - tesseract
     validations:
       required: true
   - type: textarea
