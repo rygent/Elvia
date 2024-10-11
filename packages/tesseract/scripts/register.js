@@ -32,7 +32,7 @@ async function loadCommands(developer) {
 	const commandData = [];
 
 	if (!developer) {
-		await globby(`${directory}actions/**/*.js`).then(async (commands) => {
+		await globby(`${directory}commands/context/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
 				const { default: File } = await import(pathToFileURL(commandFile).toString());
 				const command = new File();
@@ -43,8 +43,8 @@ async function loadCommands(developer) {
 	}
 
 	const patterns = developer
-		? `${directory}commands/?(developer)/**/*.js`
-		: [`${directory}commands/!(developer)/**/*.js`, `${directory}commands/*.js`];
+		? `${directory}commands/slash/?(developer)/**/*.js`
+		: [`${directory}commands/slash/!(developer)/**/*.js`, `${directory}commands/slash/*.js`];
 
 	await globby(patterns).then(async (commands) => {
 		for (const commandFile of commands) {

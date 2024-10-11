@@ -55,7 +55,7 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 	}
 
 	private async loadCommands(): Promise<void> {
-		return globby(`${this.directory}?(actions|commands)/**/*.js`).then(async (commands: string[]) => {
+		return globby(`${this.directory}commands/**/*.js`).then(async (commands: string[]) => {
 			for (const commandFile of commands) {
 				const { name } = path.parse(commandFile);
 				const { default: File } = await import(pathToFileURL(commandFile).toString());
@@ -65,7 +65,7 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 					throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
 				}
 				const [commandName, subCommandGroup] = path
-					.relative(`${this.directory}commands`, path.dirname(commandFile))
+					.relative(`${this.directory}commands/slash`, path.dirname(commandFile))
 					.split(path.sep);
 				command.group = subCommandGroup ? `${commandName}.${subCommandGroup}` : (commandName ?? undefined);
 				this.commands.push(command);
