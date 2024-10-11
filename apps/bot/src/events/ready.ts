@@ -1,8 +1,6 @@
 import type { BaseClient } from '@/lib/structures/BaseClient.js';
 import { Event } from '@/lib/structures/Event.js';
-import { formatNumber } from '@/lib/utils/Functions.js';
 import { prisma } from '@elvia/database';
-import { redBright, underline } from 'colorette';
 
 export default class extends Event {
 	public constructor(client: BaseClient<true>) {
@@ -13,13 +11,6 @@ export default class extends Event {
 	}
 
 	public async run() {
-		this.client.logger.info(`Logged in as ${redBright(underline(`${this.client.user.tag}`))}`);
-		this.client.logger.info(
-			`Loaded ${formatNumber(this.client.commands.size + this.client.interactions.size)} commands & ${formatNumber(
-				this.client.events.size
-			)} events!`
-		);
-
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {
 			await prisma.guild.upsert({
