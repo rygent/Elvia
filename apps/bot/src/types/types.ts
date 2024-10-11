@@ -5,7 +5,6 @@ import type { EventEmitter } from 'node:events';
 export interface ClientOptions {
 	token: string;
 	version: string;
-	prefix: string;
 	owners: string[] | undefined;
 	debug: boolean;
 	defaultPermissions: PermissionsString[];

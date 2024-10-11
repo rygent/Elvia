@@ -1,5 +1,4 @@
 import type { BaseClient } from '@/lib/structures/BaseClient.js';
-import { Command } from '@/lib/structures/Command.js';
 import { Event } from '@/lib/structures/Event.js';
 import { Interaction } from '@/lib/structures/Interaction.js';
 import { globby } from 'globby';
@@ -33,24 +32,6 @@ export class Util {
 					throw new TypeError(`Interaction ${name} doesn't belong in interactions directory.`);
 				}
 				this.client.interactions.set(interaction.name, interaction);
-			}
-		});
-	}
-
-	public async loadCommands(): Promise<void> {
-		return globby(`${this.directory}commands/?(message)/**/*.js`).then(async (commands: string[]) => {
-			for await (const commandFile of commands) {
-				const { name } = path.parse(commandFile);
-				const { default: File } = await import(pathToFileURL(commandFile).toString());
-				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
-				const command = new File(this.client, name.toLowerCase());
-				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
-				this.client.commands.set(command.name, command);
-				if (command.aliases.length) {
-					for (const alias of command.aliases) {
-						this.client.aliases.set(alias, command.name);
-					}
-				}
 			}
 		});
 	}
