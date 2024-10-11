@@ -29,6 +29,7 @@ export abstract class TesseractCommand extends EventEmitter {
 	public contexts: InteractionContextType[];
 	public category: string;
 	public enabled: boolean;
+	public cooldown: number;
 	public clientPermissions: Readonly<BitField<PermissionsString, bigint>>;
 	public userPermissions: Readonly<BitField<PermissionsString, bigint>>;
 	public unsafe: boolean;
@@ -52,6 +53,7 @@ export abstract class TesseractCommand extends EventEmitter {
 		];
 		this.category = options.category ?? '';
 		this.enabled = typeof options.enabled === 'boolean' ? options.enabled : true;
+		this.cooldown = options.cooldown ?? 3e3;
 		this.clientPermissions = new PermissionsBitField(options.clientPermissions).freeze();
 		this.userPermissions = new PermissionsBitField(options.userPermissions).freeze();
 		this.unsafe = options.unsafe ?? false;

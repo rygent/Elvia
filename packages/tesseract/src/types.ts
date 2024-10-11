@@ -71,6 +71,7 @@ export interface TesseractCommandOptions {
 	contexts?: InteractionContextType[] | null;
 	category?: string;
 	enabled?: boolean;
+	cooldown?: number;
 	clientPermissions?: Readonly<BitField<PermissionsString, bigint>>;
 	userPermissions?: Readonly<BitField<PermissionsString, bigint>>;
 	unsafe?: boolean;
