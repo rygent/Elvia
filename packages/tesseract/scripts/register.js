@@ -3,7 +3,7 @@ import { REST } from '@discordjs/rest';
 import { toTitleCase } from '@sapphire/utilities';
 import { Command } from 'commander';
 import { globby } from 'globby';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import 'dotenv/config';
 
@@ -25,7 +25,7 @@ if (!applicationId) {
 	throw new Error('The DISCORD_APPLICATION_ID environment variable is required.');
 }
 
-const main = fileURLToPath(`${process.cwd()}/dist/index.js`);
+const main = `${process.cwd()}/dist/index.js`;
 const directory = `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 
 async function loadCommands(developer) {
@@ -52,7 +52,7 @@ async function loadCommands(developer) {
 			const command = new File();
 
 			const [commandName, subCommandGroup] = path
-				.relative(`${directory}commands`, path.dirname(commandFile))
+				.relative(`${directory}commands/slash`, path.dirname(commandFile))
 				.split(path.sep);
 
 			if (commandName) {

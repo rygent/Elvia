@@ -1,17 +1,26 @@
-import type { BaseClient } from '@/lib/structures/BaseClient.js';
-import { Interaction } from '@/lib/structures/Interaction.js';
-import { ComponentType, type APIMessageComponentEmoji } from 'discord-api-types/v10';
+import { Client, Command } from '@elvia/tesseract';
+import {
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	ComponentType,
+	InteractionContextType,
+	type APIMessageComponentEmoji
+} from 'discord-api-types/v10';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { parseEmoji, type MessageContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import languages from '@/assets/json/languages.json' with { type: 'json' };
 import translate from '@iamtraction/google-translate';
 import { nanoid } from 'nanoid';
 
-export default class extends Interaction {
-	public constructor(client: BaseClient<true>) {
+export default class extends Command {
+	public constructor(client: Client<true>) {
 		super(client, {
+			type: ApplicationCommandType.Message,
 			name: 'Translate',
-			context: true
+			description: '',
+			defaultMemberPermissions: null,
+			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel]
 		});
 	}
 

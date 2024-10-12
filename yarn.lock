@@ -353,6 +353,7 @@ __metadata:
   dependencies:
     "@elvia/database": "workspace:^"
     "@elvia/logger": "workspace:^"
+    "@elvia/tesseract": "workspace:^"
     "@iamtraction/google-translate": "npm:^2.0.1"
     "@prisma/client": "npm:^5.20.0"
     "@rygent/anilist": "npm:^1.4.0"
@@ -448,21 +449,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@elvia/tesseract@workspace:packages/tesseract":
+"@elvia/tesseract@workspace:^, @elvia/tesseract@workspace:packages/tesseract":
   version: 0.0.0-use.local
   resolution: "@elvia/tesseract@workspace:packages/tesseract"
   dependencies:
+    "@elvia/logger": "workspace:^"
     "@sapphire/utilities": "npm:^3.17.0"
     "@types/node": "npm:^22.7.5"
     commander: "npm:^12.1.0"
+    discord.js: "npm:^14.16.3"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^9.12.0"
     globby: "npm:^14.0.2"
     prettier: "npm:^3.3.3"
     tsup: "npm:^8.3.0"
     typescript: "npm:^5.6.3"
-  peerDependencies:
-    discord.js: "*"
   bin:
     tesseract: ./bin/tesseract.js
   languageName: unknown

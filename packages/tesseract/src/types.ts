@@ -6,7 +6,7 @@ import {
 	type ChannelType,
 	type Permissions
 } from 'discord-api-types/v10';
-import type { ApplicationCommandOptionChoiceData, BitField, PermissionsString, Snowflake } from 'discord.js';
+import type { ApplicationCommandOptionChoiceData, PermissionsString, Snowflake } from 'discord.js';
 import type { TesseractClient } from '@/lib/structures/TesseractClient';
 import { EventEmitter } from 'node:events';
 
@@ -15,6 +15,7 @@ export declare namespace tesseract {
 	interface Settings {
 		token: string;
 		owners: Snowflake[];
+		loggerWebhookUrl: string;
 		defaultPermissions: PermissionsString[];
 		debug: boolean;
 		unsafeMode: boolean;
@@ -72,8 +73,8 @@ export interface TesseractCommandOptions {
 	category?: string;
 	enabled?: boolean;
 	cooldown?: number;
-	clientPermissions?: Readonly<BitField<PermissionsString, bigint>>;
-	userPermissions?: Readonly<BitField<PermissionsString, bigint>>;
+	clientPermissions?: PermissionsString[];
+	userPermissions?: PermissionsString[];
 	unsafe?: boolean;
 	guild?: boolean;
 	owner?: boolean;

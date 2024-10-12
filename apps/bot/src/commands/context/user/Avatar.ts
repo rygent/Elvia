@@ -1,16 +1,24 @@
-import type { BaseClient } from '@/lib/structures/BaseClient.js';
-import { Interaction } from '@/lib/structures/Interaction.js';
-import { ButtonStyle } from 'discord-api-types/v10';
+import { Client, Command } from '@elvia/tesseract';
+import {
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	ButtonStyle,
+	InteractionContextType
+} from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 
-export default class extends Interaction {
-	public constructor(client: BaseClient<true>) {
+export default class extends Command {
+	public constructor(client: Client<true>) {
 		super(client, {
+			type: ApplicationCommandType.User,
 			name: 'Avatar',
-			context: true
+			description: '',
+			defaultMemberPermissions: null,
+			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			contexts: [InteractionContextType.Guild]
 		});
 	}
 

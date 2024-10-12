@@ -9,12 +9,13 @@ export class TesseractSettings {
 	}
 
 	public get owners(): string[] {
-		const owners = (process.env.CLIENT_OWNERS as string)
-			.split(',')
-			.concat(this.data.owners)
-			.filter((id) => id);
+		const owners = (process.env.CLIENT_OWNERS as string).split(',').filter((id) => id.length);
 
 		return owners;
+	}
+
+	public get loggerWebhookUrl(): string {
+		return process.env.LOGGER_WEBHOOK_URL ?? this.data.loggerWebhookUrl;
 	}
 
 	public get defaultPermissions(): PermissionsString[] {

@@ -1,4 +1,4 @@
-import { ShardingManager } from 'discord.js';
+import { ShardingManager } from '@elvia/tesseract';
 import { Logger } from '@elvia/logger';
 import { Env } from '@/lib/Env.js';
 import { gray } from 'colorette';
