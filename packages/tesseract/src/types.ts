@@ -11,8 +11,8 @@ import type { TesseractClient } from '@/lib/structures/TesseractClient';
 import { EventEmitter } from 'node:events';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-export declare namespace tesseract {
-	interface Settings {
+export namespace tesseract {
+	export interface Settings {
 		token: string;
 		owners: Snowflake[];
 		loggerWebhookUrl: string;
