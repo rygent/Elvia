@@ -69,15 +69,27 @@ export abstract class TesseractCommand extends EventEmitter {
 		const data: TesseractCommandData = {
 			type: this.type,
 			name: this.name,
-			description: this.description,
-			default_member_permissions: this.defaultMemberPermissions,
-			nsfw: this.nsfw,
-			integration_types: this.integrationTypes,
-			contexts: this.contexts
+			description: this.description
 		};
 
 		if (this.type === ApplicationCommandType.ChatInput) {
 			data.options = this.options;
+		}
+
+		if (typeof this.defaultMemberPermissions === 'string') {
+			data.default_member_permissions = this.defaultMemberPermissions;
+		}
+
+		if (this.nsfw) {
+			data.nsfw = this.nsfw;
+		}
+
+		if (typeof this.integrationTypes !== 'undefined') {
+			data.integration_types = this.integrationTypes;
+		}
+
+		if (typeof this.contexts !== 'undefined') {
+			data.contexts = this.contexts;
 		}
 
 		return data;

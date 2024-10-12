@@ -85,7 +85,7 @@ export interface TesseractCommandData {
 	name: string;
 	description: string;
 	options?: TesseractCommandParameter[];
-	default_member_permissions: Permissions | null;
+	default_member_permissions?: Permissions | null;
 	nsfw?: boolean;
 	integration_types?: ApplicationIntegrationType[];
 	contexts?: InteractionContextType[] | null;
