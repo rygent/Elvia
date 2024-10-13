@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",
-    "@swc/core": "^1.7.26",
+    "@swc/core": "^1.7.35",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.7.5",
     "eslint": "^9.12.0",

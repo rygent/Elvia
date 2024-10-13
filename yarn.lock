@@ -364,7 +364,7 @@ __metadata:
     "@sapphire/type": "npm:^2.5.1"
     "@sapphire/utilities": "npm:^3.17.0"
     "@swc/cli": "npm:^0.4.0"
-    "@swc/core": "npm:^1.7.26"
+    "@swc/core": "npm:^1.7.35"
     "@types/moment-duration-format": "npm:^2.2.6"
     "@types/node": "npm:^22.7.5"
     bufferutil: "npm:^4.0.8"
@@ -1487,7 +1487,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.7.26":
+"@swc/core@npm:^1.7.35":
   version: 1.7.35
   resolution: "@swc/core@npm:1.7.35"
   dependencies:
@@ -4979,11 +4979,11 @@ __metadata:
   linkType: hard
 
 "nan@npm:^2.20.0":
-  version: 2.21.0
-  resolution: "nan@npm:2.21.0"
+  version: 2.22.0
+  resolution: "nan@npm:2.22.0"
   dependencies:
     node-gyp: "npm:latest"
-  checksum: 10c0/cc3f89ca7dbba3413bed8f450284016af2d127ef7303e8cbcee5cb2a3ade989871ab7653fb36fffcddb3cde420a8279859cee4e4e9d64d4c1783e762b1f3237b
+  checksum: 10c0/d5d31aefdb218deba308d44867c5f432b4d3aabeb57c70a2b236d62652e9fee7044e5d5afd380d9fef022fe7ebb2f2d6c85ca3cbcac5031aaca3592c844526bb
   languageName: node
   linkType: hard
 
