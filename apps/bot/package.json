@@ -13,7 +13,7 @@
     "format:check": "prettier . --check",
     "start": "node --no-warnings ./dist/index.js",
     "start:shard": "node --no-warnings ./dist/shard.js",
-    "register": "node ./dist/interactions/register.js"
+    "register": "tesseract register"
   },
   "license": "GPL-3.0",
   "private": true,
