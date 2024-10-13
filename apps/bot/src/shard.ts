@@ -1,8 +1,7 @@
-import { ShardingManager } from '@elvia/tesseract';
+import { ShardingManager, WebServer } from '@elvia/tesseract';
 import { Logger } from '@elvia/logger';
 import { Env } from '@/lib/Env.js';
 import { gray } from 'colorette';
-import 'dotenv/config';
 
 const logger = new Logger({ webhook: { url: Env.LoggerWebhookUrl } });
 
@@ -12,3 +11,8 @@ void manager.spawn();
 manager.on('shardCreate', (shard) => {
 	logger.info(`Shard ${shard.id} - Launching ${gray(`[${shard.id + 1} of ${manager.totalShards}]`)}`);
 });
+
+if (Env.ClientApiAuth && Env.ClientApiPort) {
+	const server = new WebServer(manager);
+	void server.start(Env.ClientApiPort);
+}

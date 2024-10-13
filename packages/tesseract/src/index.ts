@@ -3,3 +3,4 @@ export { TesseractCommand as Command } from '@/lib/structures/TesseractCommand.j
 export { TesseractListener as Listener } from '@/lib/structures/TesseractListener.js';
 export { TesseractSettings as Settings } from '@/lib/structures/TesseractSettings.js';
 export { TesseractShardingManager as ShardingManager } from '@/lib/structures/TesseractShardingManager.js';
+export { TesseractWebServer as WebServer } from '@/lib/structures/TesseractWebServer.js';
