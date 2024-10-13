@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, Routes } from 'discord-api-types/v10';
 import { REST } from '@discordjs/rest';
+import { Logger } from '@elvia/logger';
 import { toTitleCase } from '@sapphire/utilities';
 import { Command } from 'commander';
 import { globby } from 'globby';
@@ -7,6 +8,12 @@ import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import 'dotenv/config';
 
+const webhookUrl = process.env.LOGGER_WEBHOOK_URL;
+if (!webhookUrl) {
+	throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
+}
+
+const logger = new Logger({ webhook: { url: webhookUrl } });
 const program = new Command();
 
 program.option('-g, --global', 'register global commands');
@@ -102,7 +109,7 @@ async function loadCommands(developer) {
 
 async function registerCommands() {
 	const options = program.opts();
-	if (!Object.keys(options).length) return void console.log(program.helpInformation());
+	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
 
 	const guildId = process.env.DEVELOPER_GUILD_ID;
 	if (!guildId && options.dev) {
@@ -112,7 +119,7 @@ async function registerCommands() {
 	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {
-		console.log('Started refreshing application (/) commands.');
+		logger.debug('Started refreshing application (/) commands.');
 
 		if (options.reset) {
 			await rest.put(Routes.applicationCommands(applicationId), { body: [] });
@@ -131,10 +138,10 @@ async function registerCommands() {
 			await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: commands });
 		}
 
-		console.log('Successfully reloaded application (/) commands.');
+		logger.debug('Successfully reloaded application (/) commands.');
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error(`${error.name}: ${error.message}`, error);
+			logger.error(`${error.name}: ${error.message}`, error);
 		}
 	}
 }
