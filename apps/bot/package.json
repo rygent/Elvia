@@ -58,7 +58,7 @@
     "utf-8-validate": "^6.0.4"
   },
   "engines": {
-    "node": ">=v20.10.0"
+    "node": ">=v20.11.0"
   },
   "packageManager": "yarn@4.5.0"
 }
