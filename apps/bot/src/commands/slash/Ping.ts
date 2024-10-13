@@ -9,7 +9,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'ping',
 			description: 'Send a ping request.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM],
 			category: 'General'

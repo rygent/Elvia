@@ -34,7 +34,6 @@ export default class extends Command {
 					required: false
 				}
 			],
-			defaultMemberPermissions: null,
 			nsfw: true,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM],

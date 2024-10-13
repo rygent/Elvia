@@ -18,7 +18,6 @@ export default class extends Command {
 			type: ApplicationCommandType.User,
 			name: 'User Information',
 			description: '',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});

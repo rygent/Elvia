@@ -16,7 +16,6 @@ export default class extends Command {
 			type: ApplicationCommandType.User,
 			name: 'Avatar',
 			description: '',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});

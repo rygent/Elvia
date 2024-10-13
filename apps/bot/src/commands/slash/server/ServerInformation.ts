@@ -12,7 +12,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'information',
 			description: 'Get server information.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',

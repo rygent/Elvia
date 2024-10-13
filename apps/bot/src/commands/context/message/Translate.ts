@@ -18,7 +18,6 @@ export default class extends Command {
 			type: ApplicationCommandType.Message,
 			name: 'Translate',
 			description: '',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel]
 		});

@@ -20,7 +20,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'trivia',
 			description: 'Plays a quick trivia game.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Fun'

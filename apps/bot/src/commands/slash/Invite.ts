@@ -18,7 +18,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'invite',
 			description: 'Add the bot to another server.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'General'

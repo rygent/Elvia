@@ -10,7 +10,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'advice',
 			description: 'Get a random advice.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM],
 			category: 'Fun'

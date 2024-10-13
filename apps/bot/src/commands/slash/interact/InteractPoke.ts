@@ -24,7 +24,6 @@ export default class extends Command {
 					required: true
 				}
 			],
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 			category: 'Social',

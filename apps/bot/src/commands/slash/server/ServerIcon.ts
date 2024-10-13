@@ -16,7 +16,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'icon',
 			description: 'Display the server icon.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',

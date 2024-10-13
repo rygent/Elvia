@@ -33,7 +33,6 @@ export default class extends Command {
 					required: false
 				}
 			],
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Meme'

@@ -8,7 +8,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'list',
 			description: 'List server emojis.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',

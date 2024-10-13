@@ -16,7 +16,6 @@ export default class extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: 'random',
 			description: 'Displays random memes.',
-			defaultMemberPermissions: null,
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Meme'
