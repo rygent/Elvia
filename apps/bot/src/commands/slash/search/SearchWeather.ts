@@ -22,8 +22,8 @@ export default class extends Command {
 			description: 'Search for weather forecast.',
 			options: [
 				{
-					name: 'search',
-					description: 'Your search.',
+					name: 'location',
+					description: 'Your location.',
 					type: ApplicationCommandOptionType.String,
 					required: true
 				}
@@ -35,11 +35,11 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const search = interaction.options.getString('search', true);
+		const location = interaction.options.getString('location', true);
 
 		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
 		const raw = await request(
-			`${endpoint}?q=${encodeURIComponent(search)}&appid=${Env.OpenWeatherApiKey}&units=metric`,
+			`${endpoint}?q=${encodeURIComponent(location)}&appid=${Env.OpenWeatherApiKey}&units=metric`,
 			{
 				method: 'GET',
 				headers: { 'User-Agent': UserAgent },
