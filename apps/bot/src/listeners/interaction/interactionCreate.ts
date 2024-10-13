@@ -1,5 +1,5 @@
 import { Client, Listener } from '@elvia/tesseract';
-import { Events, type AutocompleteInteraction, type CommandInteraction, type GuildMember } from 'discord.js';
+import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
@@ -15,7 +15,7 @@ export default class extends Listener {
 	}
 
 	// eslint-disable-next-line complexity
-	public async run(interaction: CommandInteraction<'cached' | 'raw'> | AutocompleteInteraction<'cached' | 'raw'>) {
+	public async run(interaction: BaseInteraction<'cached' | 'raw'>) {
 		// Handle slash & context menu commands
 		if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
 			let command = this.client.commands.find((cmd) => cmd.name === interaction.commandName);
