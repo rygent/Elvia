@@ -1,4 +1,5 @@
 import { Client, Listener } from '@elvia/tesseract';
+import { logger } from '@elvia/logger';
 import type { RateLimitData } from '@discordjs/rest';
 
 export default class extends Listener {
@@ -20,6 +21,6 @@ export default class extends Listener {
 			`    Global : ${rateLimitInfo.global.toString()}`
 		].join('\n');
 
-		this.client.logger.warn(`Discord API client is rate-limited.\n${info}`);
+		logger.warn(`Discord API client is rate-limited.\n${info}`);
 	}
 }

@@ -1,9 +1,7 @@
 import { ShardingManager, WebServer } from '@elvia/tesseract';
-import { Logger } from '@elvia/logger';
+import { logger } from '@elvia/logger';
 import { Env } from '@/lib/Env.js';
 import { gray } from 'colorette';
-
-const logger = new Logger({ webhook: { url: Env.LoggerWebhookUrl } });
 
 const manager = new ShardingManager('./dist/index.js');
 void manager.spawn();

@@ -5,7 +5,6 @@ import { Collection } from '@discordjs/collection';
 import { TesseractCommand } from '@/lib/structures/TesseractCommand.js';
 import { TesseractListener } from '@/lib/structures/TesseractListener.js';
 import { TesseractSettings } from '@/lib/structures/TesseractSettings.js';
-import { Logger } from '@elvia/logger';
 import { globby } from 'globby';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
@@ -19,8 +18,6 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 
 	public cooldowns: Collection<string, Collection<string, number>>;
 
-	public logger: Logger;
-
 	public version: string;
 	public defaultPermissions: Readonly<BitField<PermissionsString, bigint>>;
 
@@ -33,14 +30,6 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 		this.listener = new Array();
 
 		this.cooldowns = new Collection();
-
-		this.logger = new Logger({
-			webhook: {
-				url: this.settings.loggerWebhookUrl,
-				name: this.user?.username,
-				avatar: this.user?.displayAvatarURL({ size: 4096 })
-			}
-		});
 
 		this.version = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf8')).version;
 		this.defaultPermissions = new PermissionsBitField(this.settings.defaultPermissions).freeze();

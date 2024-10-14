@@ -1,4 +1,5 @@
 import { Client, Listener } from '@elvia/tesseract';
+import { logger } from '@elvia/logger';
 import { Events } from 'discord.js';
 
 export default class extends Listener {
@@ -10,6 +11,6 @@ export default class extends Listener {
 	}
 
 	public run(error: Error) {
-		this.client.logger.error(`${error.name}: ${error.message}`, error);
+		logger.error(error, `${error.name}: ${error.message}`);
 	}
 }

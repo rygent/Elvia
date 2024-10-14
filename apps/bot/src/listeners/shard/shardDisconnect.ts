@@ -1,6 +1,7 @@
 import { Client, Listener } from '@elvia/tesseract';
 import { Events, type CloseEvent } from 'discord.js';
-import { cyanBright, redBright, underline } from 'colorette';
+import { redBright, underline } from 'colorette';
+import { logger } from '@elvia/logger';
 
 export default class extends Listener {
 	public constructor(client: Client<true>) {
@@ -12,12 +13,10 @@ export default class extends Listener {
 
 	public run(closeEvent: CloseEvent, shardId: number) {
 		if (closeEvent.wasClean) {
-			this.client.logger.info(
-				`${cyanBright(`[${shardId}]`)} ${redBright(underline(`${this.client.user.username}`))} is disconnected!`
-			);
+			logger.info(`Shard ${shardId} - ${redBright(underline(`${this.client.user.username}`))} is disconnected!`);
 		} else {
-			this.client.logger.info(
-				`${cyanBright(`[${shardId}]`)} ${redBright(underline(`${this.client.user.username}`))} is disconnected! (${closeEvent.code}: ${closeEvent.reason})`
+			logger.info(
+				`Shard ${shardId} - ${redBright(underline(`${this.client.user.username}`))} is disconnected! (${closeEvent.code}: ${closeEvent.reason})`
 			);
 		}
 	}

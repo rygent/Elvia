@@ -1,7 +1,8 @@
 import { Client, Listener } from '@elvia/tesseract';
 import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import type { DiscordAPIError } from '@discordjs/rest';
+import { DiscordAPIError } from '@discordjs/rest';
+import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
 import { Env } from '@/lib/Env.js';
@@ -120,10 +121,12 @@ export default class extends Listener {
 
 				try {
 					await command.execute(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
+				} catch (error: unknown) {
+					if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
 					if (interaction.replied) return;
-					this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
+					if (error instanceof Error) {
+						logger.error(error, `${error.name}: ${error.message}`);
+					}
 
 					const replies = [
 						'An error has occured when executing this command, our developers have been informed.',
@@ -166,7 +169,7 @@ export default class extends Listener {
 					await command.autocomplete!(interaction);
 				} catch (e: unknown) {
 					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					this.client.logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
+					logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
 				}
 			}
 		}

@@ -4,6 +4,7 @@ import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 import { Env } from '@/lib/Env.js';
+import { logger } from '@elvia/logger';
 
 export default class extends Listener {
 	public constructor(client: Client<true>) {
@@ -16,7 +17,7 @@ export default class extends Listener {
 
 	// @ts-expect-error TS6133: 'origin' is declared but its value is never read.
 	public run(error: Error, origin: string) {
-		this.client.logger.error(`${error.name}: ${error.message}`, error);
+		logger.fatal(error, `${error.name}: ${error.message}`);
 
 		if (this.client.isReady() && Env.LoggerWebhookUrl) {
 			const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });
