@@ -2,7 +2,7 @@ import { Client, Listener } from '@elvia/tesseract';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { DiscordAPIError } from '@discordjs/rest';
+import type { DiscordAPIError } from '@discordjs/rest';
 import { Colors } from '@/lib/utils/Constants.js';
 import { Env } from '@/lib/Env.js';
 import { logger } from '@elvia/logger';
@@ -18,7 +18,7 @@ export default class extends Listener {
 
 	// @ts-expect-error TS6133: 'promise' is declared but its value is never read.
 	public run(error: Error, promise: Promise<unknown>) {
-		if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
+		if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 		logger.fatal(error, `${error.name}: ${error.message}`);
 
 		if (this.client.isReady() && Env.LoggerWebhookUrl) {

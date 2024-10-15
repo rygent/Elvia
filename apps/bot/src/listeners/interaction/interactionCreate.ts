@@ -1,7 +1,7 @@
 import { Client, Listener } from '@elvia/tesseract';
 import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import { DiscordAPIError } from '@discordjs/rest';
+import type { DiscordAPIError } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
@@ -122,7 +122,7 @@ export default class extends Listener {
 				try {
 					await command.execute(interaction);
 				} catch (error: unknown) {
-					if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
+					if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 					if (interaction.replied) return;
 					if (error instanceof Error) {
 						logger.error(error, `${error.name}: ${error.message}`);
