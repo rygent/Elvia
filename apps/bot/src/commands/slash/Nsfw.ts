@@ -8,10 +8,10 @@ import {
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/Constants.js';
 import { isNsfwChannel } from '@/lib/utils/Functions.js';
 import nsfw from '@/assets/json/nsfw.json' with { type: 'json' };
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -47,13 +47,7 @@ export default class extends Command {
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		try {
-			const raw = await request(`https://nekobot.xyz/api/image?type=${category}`, {
-				method: 'GET',
-				headers: { 'User-Agent': UserAgent },
-				maxRedirections: 20
-			});
-
-			const response: any = await raw.body.json();
+			const response = await axios.get(`https://nekobot.xyz/api/image?type=${category}`).then(({ data }) => data);
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 				new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.message)

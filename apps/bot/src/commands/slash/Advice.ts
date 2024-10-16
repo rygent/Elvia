@@ -1,8 +1,7 @@
 import { Client, Command } from '@elvia/tesseract';
 import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -17,13 +16,7 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const raw = await request('https://api.adviceslip.com/advice', {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		const response: any = await raw.body.json();
+		const response = await axios.get('https://api.adviceslip.com/advice').then(({ data }) => data);
 
 		return interaction.reply({ content: response.slip.advice });
 	}

@@ -9,8 +9,7 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -35,7 +34,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		let color = interaction.options.getString('color', true);
 
-		if (color.match(/^#?[0-9a-f]{3,6}$/g)) {
+		if (color.match(/^#?[0-9a-fA-F]{3,6}$/g)) {
 			color = color.toLowerCase();
 		} else if (
 			color.match(
@@ -54,13 +53,9 @@ export default class extends Command {
 			});
 		}
 
-		const raw = await request(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		const response: any = await raw.body.json();
+		const response = await axios
+			.get(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`)
+			.then(({ data }) => data);
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

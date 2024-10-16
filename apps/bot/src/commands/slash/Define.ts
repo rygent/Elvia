@@ -9,8 +9,8 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { italic, underline } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import { Colors } from '@/lib/utils/Constants.js';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -35,15 +35,11 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const word = interaction.options.getString('word', true);
 
-		const raw = await request(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
+		const response = await axios
+			.get(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`)
+			.then(({ data }) => data.list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
 
-		const response = await raw.body
-			.json()
-			.then(({ list }: any) => list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
+		if (!response) return interaction.reply({ content: 'No definition found for this word.', ephemeral: true });
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.permalink)

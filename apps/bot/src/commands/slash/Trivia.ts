@@ -9,10 +9,10 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/Constants.js';
 import { disableAllButtons, sentenceCase, shuffleArray } from '@/lib/utils/Functions.js';
-import { request } from 'undici';
 import { nanoid } from 'nanoid';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -27,13 +27,9 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const raw = await request('https://opentdb.com/api.php?amount=1&type=multiple&encode=base64', {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		const response = await raw.body.json().then(({ results }: any) => results[0]);
+		const response = await axios
+			.get('https://opentdb.com/api.php?amount=1&type=multiple&encode=base64')
+			.then(({ data }) => data.results[0]);
 		response.incorrect_answers.push(response.correct_answer);
 
 		const trivia = {

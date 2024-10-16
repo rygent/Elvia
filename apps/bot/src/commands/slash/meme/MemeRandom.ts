@@ -7,8 +7,8 @@ import {
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import { Colors } from '@/lib/utils/Constants.js';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -36,15 +36,11 @@ export default class extends Command {
 
 		const random_subreddit = Math.floor(Math.random() * subreddit.length);
 
-		const raw = await request(`https://www.reddit.com/r/${subreddit[random_subreddit]}/random/.json`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
+		const response = await axios
+			.get(`https://www.reddit.com/r/${subreddit[random_subreddit]}/random/.json`)
+			.then(({ data }) => data[0]);
 
-		const response: any = await raw.body.json();
-
-		const post = response[0].data.children
+		const post = response.data.children
 			.filter(({ data }: any) => !data.over_18)
 			.filter(({ data }: any) => !data.is_video);
 

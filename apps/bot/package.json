@@ -35,14 +35,14 @@
     "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/type": "^2.5.1",
     "@sapphire/utilities": "^3.17.0",
+    "axios": "^1.7.7",
     "colorette": "^2.0.20",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
-    "systeminformation": "^5.23.5",
-    "undici": "^6.20.0"
+    "systeminformation": "^5.23.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",

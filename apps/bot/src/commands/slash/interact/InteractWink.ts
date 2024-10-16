@@ -7,8 +7,8 @@ import {
 } from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import { Colors } from '@/lib/utils/Constants.js';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -34,13 +34,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user');
 
-		const raw = await request(`https://nekos.best/api/v2/wink`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		const response = await raw.body.json().then(({ results }: any) => results[0]);
+		const response = await axios.get('https://nekos.best/api/v2/wink').then(({ data }) => data.results[0]);
 
 		const embed = new EmbedBuilder()
 			.setColor(Colors.Default)

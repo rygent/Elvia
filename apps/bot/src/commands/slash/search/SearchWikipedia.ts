@@ -8,8 +8,8 @@ import {
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import { Colors } from '@/lib/utils/Constants.js';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -34,17 +34,12 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const raw = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		if (raw.statusCode === 404) {
-			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
-		}
-
-		const response: any = await raw.body.json();
+		const response = await axios
+			.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`)
+			.then(({ data }) => data)
+			.catch(({ status }) => {
+				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

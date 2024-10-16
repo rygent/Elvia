@@ -10,10 +10,10 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, inlineCode, italic, underline } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/Constants.js';
 import { formatArray, titleCase } from '@/lib/utils/Functions.js';
 import { nanoid } from 'nanoid';
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -38,13 +38,9 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const raw = await request(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
-
-		const response = await raw.body.json().then(({ items }: any) => items.filter((item: any) => item.type === 'app'));
+		const response = await axios
+			.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`)
+			.then(({ data }) => data.items.filter((item: any) => item.type === 'app'));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const selectId = nanoid();
@@ -76,11 +72,10 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
-			const data = await request(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, {
-				method: 'GET',
-				headers: { 'User-Agent': UserAgent },
-				maxRedirections: 20
-			}).then((res) => res.body.json().then((item: any) => item[ids!].data));
+
+			const data = await axios
+				.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`)
+				.then((res) => res.data[ids!].data);
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 				new ButtonBuilder()

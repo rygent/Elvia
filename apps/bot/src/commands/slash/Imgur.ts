@@ -6,10 +6,9 @@ import {
 	InteractionContextType
 } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { hideLinkEmbed } from '@discordjs/formatters';
-import { UserAgent } from '@/lib/utils/Constants.js';
+import { bold, hideLinkEmbed, subtext } from '@discordjs/formatters';
 import { Env } from '@/lib/Env.js';
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -43,29 +42,24 @@ export default class extends Command {
 
 		await interaction.deferReply({ ephemeral: !visible });
 
-		const raw = await request(media.url, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
+		const response = await axios
+			.post(
+				`https://api.imgur.com/3/upload`,
+				{ image: media.url, type: 'url' },
+				{
+					headers: {
+						Authorization: `Client-ID ${Env.ImgurClientId}`,
+						'Content-Type': 'multipart/form-data'
+					}
+				}
+			)
+			.then(({ data }) => data);
 
-		const buffer = Buffer.from(await raw.body.arrayBuffer()).toString('base64');
-		const payload = JSON.stringify({ image: buffer, type: 'base64' });
-
-		const { body } = await request(`https://api.imgur.com/3/upload`, {
-			method: 'POST',
-			headers: {
-				Authorization: `Client-ID ${Env.ImgurClientId}`,
-				'Content-Type': 'application/json',
-				'User-Agent': UserAgent
-			},
-			body: payload,
-			maxRedirections: 20
-		});
-
-		const response: any = await body.json();
-
-		const replies = ['Here are your Imgur links:', `${hideLinkEmbed(response.data.link)}`].join('\n');
+		const replies = [
+			'Here are your Imgur links:',
+			`${hideLinkEmbed(response.data.link)}`,
+			subtext(`Powered by ${bold('Imgur')}`)
+		].join('\n');
 
 		return interaction.editReply({ content: replies });
 	}

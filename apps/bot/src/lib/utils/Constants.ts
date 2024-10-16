@@ -18,5 +18,3 @@ export const enum Emojis {
 	Last = '<:last:1032617724922314782>',
 	Branch = '<:branch:1048976559345770556>'
 }
-
-export const UserAgent = 'Axios 1.4.0';

@@ -9,10 +9,10 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/Constants.js';
 import { sentenceCase } from '@/lib/utils/Functions.js';
 import { Env } from '@/lib/Env.js';
-import { request } from 'undici';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -38,20 +38,13 @@ export default class extends Command {
 		const location = interaction.options.getString('location', true);
 
 		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
-		const raw = await request(
-			`${endpoint}?q=${encodeURIComponent(location)}&appid=${Env.OpenWeatherApiKey}&units=metric`,
-			{
-				method: 'GET',
-				headers: { 'User-Agent': UserAgent },
-				maxRedirections: 20
-			}
-		);
-
-		if (raw.statusCode === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
-		if (raw.statusCode === 404) {
-			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
-		}
-		const response: any = await raw.body.json();
+		const response = await axios
+			.get(`${endpoint}?q=${encodeURIComponent(location)}&appid=${Env.OpenWeatherApiKey}&units=metric`)
+			.then(({ data }) => data)
+			.catch(({ status }) => {
+				if (status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
+				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

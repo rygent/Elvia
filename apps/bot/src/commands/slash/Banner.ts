@@ -9,8 +9,8 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
-import { request } from 'undici';
+import { Colors } from '@/lib/utils/Constants.js';
+import axios from 'axios';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -53,13 +53,9 @@ export default class extends Command {
 				return interaction.reply({ content: `${bold(user.tag)}'s has no banner color!`, ephemeral: true });
 			}
 
-			const raw = await request(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, {
-				method: 'GET',
-				headers: { 'User-Agent': UserAgent },
-				maxRedirections: 20
-			});
-
-			const response: any = await raw.body.json();
+			const response = await axios
+				.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`)
+				.then(({ data }) => data);
 
 			embed.setColor(resolveColor(response.hex.clean));
 			embed.setDescription(

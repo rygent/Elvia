@@ -10,13 +10,13 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
 import { bold, hyperlink, italic, underline } from '@discordjs/formatters';
-import { Colors, UserAgent } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/Constants.js';
 import { formatArray, formatNumber } from '@/lib/utils/Functions.js';
 import { Env } from '@/lib/Env.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
-import { request } from 'undici';
+import axios from 'axios';
 import moment from 'moment';
 
 export default class extends Command {
@@ -42,13 +42,10 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const raw = await request(`https://api.themoviedb.org/3/search/movie?api_key=${Env.TmdbApiKey}&query=${search}`, {
-			method: 'GET',
-			headers: { 'User-Agent': UserAgent },
-			maxRedirections: 20
-		});
+		const response = await axios
+			.get(`https://api.themoviedb.org/3/search/movie?api_key=${Env.TmdbApiKey}&query=${search}`)
+			.then(({ data }) => data.results.slice(0, 10));
 
-		const response = await raw.body.json().then(({ results }: any) => results.slice(0, 10));
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
 
 		const selectId = nanoid();
@@ -83,11 +80,9 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
-			const data: any = await request(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Env.TmdbApiKey}`, {
-				method: 'GET',
-				headers: { 'User-Agent': UserAgent },
-				maxRedirections: 20
-			}).then(({ body }) => body.json());
+			const data = await axios
+				.get(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Env.TmdbApiKey}`)
+				.then((res) => res.data);
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 				new ButtonBuilder()
