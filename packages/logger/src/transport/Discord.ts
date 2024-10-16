@@ -24,7 +24,8 @@ export function discord(options: DiscordOptions) {
 					const threadId = new URL(options.url!).searchParams.get('thread_id')!;
 
 					const embed = new EmbedBuilder()
-						.setTitle(log.err.type)
+						.setColor(0xe13f4d)
+						.setTitle(log.err.type ?? log.err.name)
 						.setDescription(
 							[
 								`${codeBlock('xl', clean(log.err.stack))}`,
