@@ -1,92 +1,38 @@
-import type { Client } from 'discord.js';
-import { createLogger, format, transports } from 'winston';
-import { Discord } from '@/transports/discord.js';
-import { clean, resolveLevel, resolveShardId, resolveTimestamp } from '@/lib/util.js';
-import moment from 'moment';
-import 'moment-timezone';
+import pino from 'pino';
+import pretty, { type PrettyOptions } from 'pino-pretty';
+import { discord } from '@/transport/Discord.js';
+import { blackBright, white } from 'colorette';
 import 'dotenv/config';
 
-const timezone = process.env.TIMEZONE;
-moment.tz.setDefault(timezone);
+const options: PrettyOptions = {
+	colorize: true,
+	translateTime: 'UTC:dd/mm/yyyy HH:MM:ss Z',
+	ignore: 'pid,hostname',
+	customPrettifiers: {
+		time: (timestamp) => blackBright(timestamp as string)
+	},
+	messageFormat: (log, messageKey, _levelLabel) => {
+		return white(`${log[messageKey]}`);
+	}
+};
 
-export class Logger {
-	private readonly client: Client | undefined;
-
-	private readonly level = {
-		syslog: 0,
-		syserr: 1,
-		warn: 2,
-		info: 3,
-		debug: 4
-	};
-
-	private readonly format = format.combine(
-		format.timestamp(),
-		format.printf(({ timestamp, level, message }) => {
-			const shard = this.client ? `${resolveShardId(this.client.shard?.ids[0] as number)} ` : '';
-			return `${resolveTimestamp(timestamp)} ${resolveLevel(level)}: ${shard}${message}`;
+const streams = [
+	{ stream: pretty({ ...options, sync: true }) },
+	{
+		level: 'error',
+		stream: pretty({
+			...options,
+			colorize: false,
+			destination: `${process.cwd()}/logs/error.log`,
+			mkdir: true,
+			sync: true,
+			append: true
 		})
-	);
-
-	public constructor(client?: Client) {
-		this.client = client;
+	},
+	{
+		level: 'error',
+		stream: discord({ url: process.env.LOGGER_WEBHOOK_URL! })
 	}
+];
 
-	public log(message: string) {
-		const logger = createLogger({
-			level: 'syslog',
-			levels: this.level,
-			transports: [new transports.Console({ format: this.format })]
-		});
-
-		return logger.log({ level: 'syslog', message });
-	}
-
-	public error(message: string, error: Error) {
-		const logger = createLogger({
-			level: 'syserr',
-			levels: this.level,
-			transports: [
-				new transports.Console({ format: this.format }),
-				new transports.File({
-					filename: `report.${moment().format('yyyyMMDD.HHmmss')}.log`,
-					dirname: `${process.cwd()}/logs`,
-					format: format.combine(format.printf(() => clean(error.stack as string)))
-				}),
-				new Discord({ ...(this.client && { client: this.client }), error })
-			]
-		});
-
-		return logger.log({ level: 'syserr', message });
-	}
-
-	public warn(message: string) {
-		const logger = createLogger({
-			level: 'warn',
-			levels: this.level,
-			transports: [new transports.Console({ format: this.format })]
-		});
-
-		return logger.log({ level: 'warn', message });
-	}
-
-	public info(message: string) {
-		const logger = createLogger({
-			level: 'info',
-			levels: this.level,
-			transports: [new transports.Console({ format: this.format })]
-		});
-
-		return logger.log({ level: 'info', message });
-	}
-
-	public debug(message: string) {
-		const logger = createLogger({
-			level: 'debug',
-			levels: this.level,
-			transports: [new transports.Console({ level: 'debug', format: this.format })]
-		});
-
-		return logger.log({ level: 'debug', message });
-	}
-}
+export const logger = pino({ level: 'info' }, pino.multistream(streams));

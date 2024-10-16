@@ -5,10 +5,12 @@ const schema = s.object({
 	DiscordToken: s.string(),
 	DiscordApplicationId: s.string().lengthGreaterThanOrEqual(17),
 	DeveloperGuildId: s.string().lengthGreaterThanOrEqual(17),
-	ClientPrefix: s.string().lengthGreaterThanOrEqual(1).lengthLessThanOrEqual(4),
 	ClientOwners: s.string().lengthGreaterThanOrEqual(17).array(),
 	ClientVersion: s.string().nullable(),
 	DatabaseUrl: s.string(),
+
+	ClientApiAuth: s.string().optional(),
+	ClientApiPort: s.string().optional(),
 
 	CustomStatus: s.string().nullable(),
 	DebugMode: s.boolean(),
@@ -28,10 +30,12 @@ const data = {
 	DiscordToken: process.env.DISCORD_TOKEN,
 	DiscordApplicationId: process.env.DISCORD_APPLICATION_ID,
 	DeveloperGuildId: process.env.DEVELOPER_GUILD_ID,
-	ClientPrefix: process.env.CLIENT_PREFIX,
 	ClientOwners: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
 	ClientVersion: process.env.CLIENT_VERSION?.length ? process.env.CLIENT_VERSION : null,
 	DatabaseUrl: process.env.DATABASE_URL,
+
+	ClientApiAuth: process.env.CLIENT_API_AUTH,
+	ClientApiPort: process.env.CLIENT_API_PORT,
 
 	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',

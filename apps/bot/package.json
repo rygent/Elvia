@@ -12,7 +12,8 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "start": "node --no-warnings ./dist/index.js",
-    "register": "node ./dist/interactions/register.js"
+    "start:shard": "node --no-warnings ./dist/shard.js",
+    "register": "tesseract register"
   },
   "license": "GPL-3.0",
   "private": true,
@@ -24,6 +25,7 @@
   "dependencies": {
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
+    "@elvia/tesseract": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
     "@prisma/client": "^5.20.0",
     "@rygent/anilist": "^1.4.0",
@@ -33,20 +35,18 @@
     "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/type": "^2.5.1",
     "@sapphire/utilities": "^3.17.0",
+    "axios": "^1.7.7",
     "colorette": "^2.0.20",
-    "commander": "^12.1.0",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
-    "globby": "^14.0.2",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
-    "systeminformation": "^5.23.5",
-    "undici": "^6.20.0"
+    "systeminformation": "^5.23.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",
-    "@swc/core": "^1.7.26",
+    "@swc/core": "^1.7.35",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.7.5",
     "eslint": "^9.12.0",
@@ -59,7 +59,7 @@
     "utf-8-validate": "^6.0.4"
   },
   "engines": {
-    "node": ">=v20.10.0"
+    "node": ">=v20.11.0"
   },
   "packageManager": "yarn@4.5.0"
 }
