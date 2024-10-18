@@ -7,7 +7,6 @@ export default (_: Request, res: Response, next: NextFunction) => {
 	res.append('Content-Security-Policy', "script-src 'self'; object-src 'self'");
 	res.append('X-Permitted-Cross-Domain-Policies', 'none');
 	res.append('Referrer-Policy', 'no-referrer');
-	res.append('via', 'starlink');
 	res.append('X-Powered-By', 'Tesseract');
 	next();
 };
