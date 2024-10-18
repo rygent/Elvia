@@ -7,7 +7,6 @@ import { router } from '@/lib/server/routes/info.js';
 import body from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import morgan from 'morgan';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
@@ -26,7 +25,6 @@ export class TesseractWebServer {
 		this.server.use(body.urlencoded({ extended: true }));
 		this.server.use(compression());
 		this.server.use(cors());
-		this.server.use(morgan('dev'));
 		this.server.use(headers);
 	}
 

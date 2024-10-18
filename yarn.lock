@@ -457,7 +457,6 @@ __metadata:
     "@types/compression": "npm:^1.7.5"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
-    "@types/morgan": "npm:^1.9.9"
     "@types/node": "npm:^22.7.6"
     body-parser: "npm:^1.20.3"
     commander: "npm:^12.1.0"
@@ -468,7 +467,6 @@ __metadata:
     eslint: "npm:^9.12.0"
     express: "npm:^4.21.1"
     globby: "npm:^14.0.2"
-    morgan: "npm:^1.10.0"
     prettier: "npm:^3.3.3"
     tsup: "npm:^8.3.0"
     typescript: "npm:^5.6.3"
@@ -1739,15 +1737,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/morgan@npm:^1.9.9":
-  version: 1.9.9
-  resolution: "@types/morgan@npm:1.9.9"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/2b310c6f7c3cd1d0e19fd8c644c6f4edd58415bb88be78cc8bea853c02b165a76e6d7ade91f5b92c124e9b9cf3a810c23e400392d5e30118988f68575dcd1ed4
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*":
   version: 22.7.5
   resolution: "@types/node@npm:22.7.5"
@@ -2348,15 +2337,6 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 10c0/f23823513b63173a001030fae4f2dabe283b99a9d324ade3ad3d148e218134676f1ee8568c877cd79ec1c53158dcf2d2ba527a97c606618928ba99dd930102bf
-  languageName: node
-  linkType: hard
-
-"basic-auth@npm:~2.0.1":
-  version: 2.0.1
-  resolution: "basic-auth@npm:2.0.1"
-  dependencies:
-    safe-buffer: "npm:5.1.2"
-  checksum: 10c0/05f56db3a0fc31c89c86b605231e32ee143fb6ae38dc60616bc0970ae6a0f034172def99e69d3aed0e2c9e7cac84e2d63bc51a0b5ff6ab5fc8808cc8b29923c1
   languageName: node
   linkType: hard
 
@@ -3055,7 +3035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"depd@npm:2.0.0, depd@npm:~2.0.0":
+"depd@npm:2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: 10c0/58bd06ec20e19529b06f7ad07ddab60e504d9e0faca4bd23079fac2d279c3594334d736508dc350e06e510aba5e22e4594483b3a6562ce7c17dd797f4cc4ad2c
@@ -5480,19 +5460,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"morgan@npm:^1.10.0":
-  version: 1.10.0
-  resolution: "morgan@npm:1.10.0"
-  dependencies:
-    basic-auth: "npm:~2.0.1"
-    debug: "npm:2.6.9"
-    depd: "npm:~2.0.0"
-    on-finished: "npm:~2.3.0"
-    on-headers: "npm:~1.0.2"
-  checksum: 10c0/684db061daca28f8d8e3bfd50bd0d21734401b46f74ea76f6df7785d45698fcd98f6d3b81a6bad59f8288c429183afba728c428e8f66d2e8c30fd277af3b5b3a
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -5734,15 +5701,6 @@ __metadata:
   dependencies:
     ee-first: "npm:1.1.1"
   checksum: 10c0/46fb11b9063782f2d9968863d9cbba33d77aa13c17f895f56129c274318b86500b22af3a160fe9995aa41317efcd22941b6eba747f718ced08d9a73afdb087b4
-  languageName: node
-  linkType: hard
-
-"on-finished@npm:~2.3.0":
-  version: 2.3.0
-  resolution: "on-finished@npm:2.3.0"
-  dependencies:
-    ee-first: "npm:1.1.1"
-  checksum: 10c0/c904f9e518b11941eb60279a3cbfaf1289bd0001f600a950255b1dede9fe3df8cd74f38483550b3bb9485165166acb5db500c3b4c4337aec2815c88c96fcc2ea
   languageName: node
   linkType: hard
 
