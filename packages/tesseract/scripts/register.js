@@ -135,7 +135,7 @@ async function registerCommands() {
 		logger.info('Successfully reloaded application (/) commands.');
 	} catch (error) {
 		if (error instanceof Error) {
-			logger.error(error, `${error.name}: ${error.message}`);
+			logger.error(`${error.name}: ${error.message}`, { error, webhook: false });
 		}
 	}
 }

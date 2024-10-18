@@ -19,7 +19,7 @@ export default class extends Listener {
 	// @ts-expect-error TS6133: 'promise' is declared but its value is never read.
 	public run(error: Error, promise: Promise<unknown>) {
 		if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-		logger.fatal(error, `${error.name}: ${error.message}`);
+		logger.fatal(`${error.name}: ${error.message}`, { error });
 
 		if (this.client.isReady() && Env.LoggerWebhookUrl) {
 			const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });

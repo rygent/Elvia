@@ -17,7 +17,7 @@ export default class extends Listener {
 
 	// @ts-expect-error TS6133: 'origin' is declared but its value is never read.
 	public run(error: Error, origin: string) {
-		logger.fatal(error, `${error.name}: ${error.message}`);
+		logger.fatal(`${error.name}: ${error.message}`, { error });
 
 		if (this.client.isReady() && Env.LoggerWebhookUrl) {
 			const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });

@@ -125,7 +125,7 @@ export default class extends Listener {
 					if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 					if (interaction.replied) return;
 					if (error instanceof Error) {
-						logger.error(error, `${error.name}: ${error.message}`);
+						logger.error(`${error.name}: ${error.message}`, { error });
 					}
 
 					const replies = [
@@ -169,7 +169,7 @@ export default class extends Listener {
 					await command.autocomplete!(interaction);
 				} catch (e: unknown) {
 					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, e as Error);
+					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
 				}
 			}
 		}

@@ -11,6 +11,6 @@ export default class extends Listener {
 	}
 
 	public run(error: Error) {
-		logger.error(error, `${error.name}: ${error.message}`);
+		logger.error(`${error.name}: ${error.message}`, { error });
 	}
 }

@@ -13,6 +13,6 @@ export default class extends Listener {
 
 	public run(error: Error, shardId: number) {
 		logger.info(`Shard ${shardId} - ${redBright(underline(`${this.client.user.username}`))} is error!`);
-		logger.error(error, `${error.name}: ${error.message}`);
+		logger.error(`${error.name}: ${error.message}`, { error });
 	}
 }

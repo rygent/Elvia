@@ -14,7 +14,6 @@ const schema = s.object({
 
 	CustomStatus: s.string().nullable(),
 	DebugMode: s.boolean(),
-	Timezone: s.string(),
 	SupportServerUrl: s.string().url(),
 	LoggerWebhookUrl: s.string().url(),
 	GuildWebhookUrl: s.string().url(),
@@ -39,7 +38,6 @@ const data = {
 
 	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',
-	Timezone: process.env.TIMEZONE,
 	SupportServerUrl: process.env.SUPPORT_SERVER_URL,
 	LoggerWebhookUrl: process.env.LOGGER_WEBHOOK_URL,
 	GuildWebhookUrl: process.env.GUILD_WEBHOOK_URL,

@@ -1,38 +1,27 @@
-import pino from 'pino';
-import pretty, { type PrettyOptions } from 'pino-pretty';
-import { discord } from '@/transport/Discord.js';
-import { blackBright, white } from 'colorette';
+import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston';
+import { WinstonDiscord } from '@/lib/transport/discord.js';
+import { customConsoleFormat, customFileFormat, customLevel } from '@/lib/constants.js';
+import moment from 'moment';
+import 'moment-timezone';
 import 'dotenv/config';
 
-const options: PrettyOptions = {
-	colorize: true,
-	translateTime: 'UTC:dd/mm/yyyy HH:MM:ss Z',
-	ignore: 'pid,hostname',
-	customPrettifiers: {
-		time: (timestamp) => blackBright(timestamp as string)
-	},
-	messageFormat: (log, messageKey, _levelLabel) => {
-		return white(`${log[messageKey]}`);
-	}
-};
+const timezone = process.env.TZ ?? 'UTC';
+moment.tz.setDefault(timezone);
 
-const streams = [
-	{ stream: pretty({ ...options, sync: true }) },
-	{
-		level: 'error',
-		stream: pretty({
-			...options,
-			colorize: false,
-			destination: `${process.cwd()}/logs/error.log`,
-			mkdir: true,
-			sync: true,
-			append: true
-		})
-	},
-	{
-		level: 'error',
-		stream: discord({ url: process.env.LOGGER_WEBHOOK_URL! })
-	}
-];
+const webhookUrl = process.env.LOGGER_WEBHOOK_URL;
+if (!webhookUrl) throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
 
-export const logger = pino({ level: 'info' }, pino.multistream(streams));
+export const logger = createLogger({
+	level: 'info',
+	levels: customLevel,
+	transports: [
+		new transports.Console({ format: customConsoleFormat }),
+		new transports.File({
+			level: 'error',
+			format: customFileFormat,
+			filename: 'error.log',
+			dirname: `${process.cwd()}/logs`
+		}),
+		new WinstonDiscord({ level: 'error', webhookUrl })
+	]
+}) as Logger & Record<keyof typeof customLevel, LeveledLogMethod>;
