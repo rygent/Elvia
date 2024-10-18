@@ -7,3 +7,6 @@ packages:database:
 packages:logger:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nlogger\\n"
+packages:tesseract:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\ntesseract\\n"
