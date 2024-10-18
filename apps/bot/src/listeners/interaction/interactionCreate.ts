@@ -5,7 +5,7 @@ import type { DiscordAPIError } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 
 export default class extends Listener {
 	public constructor(client: Client<true>) {
@@ -133,7 +133,7 @@ export default class extends Listener {
 						subtext(
 							`If the issue persists, please contact us in our ${hyperlink(
 								'Support Server',
-								hideLinkEmbed(Env.SupportServerUrl)
+								hideLinkEmbed(env.SupportServerUrl)
 							)}.`
 						)
 					].join('\n');

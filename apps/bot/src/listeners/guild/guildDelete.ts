@@ -4,7 +4,7 @@ import { Events, Guild, WebhookClient, type WebhookMessageCreateOptions } from '
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 import { formatNumber } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import { prisma } from '@elvia/database';
 
 export default class extends Listener {
@@ -20,9 +20,9 @@ export default class extends Listener {
 		await prisma.guild.delete({ where: { guildId: guild.id } });
 		await prisma.tag.deleteMany({ where: { guildId: guild.id } });
 
-		if (Env.GuildWebhookUrl) {
-			const webhook = new WebhookClient({ url: Env.GuildWebhookUrl });
-			const threadId = new URL(Env.GuildWebhookUrl).searchParams.get('thread_id') as string;
+		if (env.GuildWebhookUrl) {
+			const webhook = new WebhookClient({ url: env.GuildWebhookUrl });
+			const threadId = new URL(env.GuildWebhookUrl).searchParams.get('thread_id') as string;
 			const guildOwner = await guild.fetchOwner();
 
 			const guildCount = formatNumber(this.client.guilds.cache.size);

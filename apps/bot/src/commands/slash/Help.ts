@@ -22,7 +22,7 @@ import {
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '@/lib/utils/Constants.js';
 import { formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import { nanoid } from 'nanoid';
 
 export default class extends Command {
@@ -172,7 +172,7 @@ export default class extends Command {
 
 		const description = [
 			`Welcome to help menu, here is the list of commands!`,
-			`Need more help? Come join our ${hyperlink('support server', Env.SupportServerUrl)}.\n`,
+			`Need more help? Come join our ${hyperlink('support server', env.SupportServerUrl)}.\n`,
 			selectedCommands
 				.sort((a, b) => a.name.localeCompare(b.name))
 				.map(

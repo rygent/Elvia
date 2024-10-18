@@ -3,7 +3,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import { logger } from '@elvia/logger';
 
 export default class extends Listener {
@@ -19,9 +19,9 @@ export default class extends Listener {
 	public run(error: Error, origin: string) {
 		logger.fatal(`${error.name}: ${error.message}`, { error });
 
-		if (this.client.isReady() && Env.LoggerWebhookUrl) {
-			const webhook = new WebhookClient({ url: Env.LoggerWebhookUrl });
-			const threadId = new URL(Env.LoggerWebhookUrl).searchParams.get('thread_id') as string;
+		if (this.client.isReady() && env.LoggerWebhookUrl) {
+			const webhook = new WebhookClient({ url: env.LoggerWebhookUrl });
+			const threadId = new URL(env.LoggerWebhookUrl).searchParams.get('thread_id') as string;
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Red)

@@ -12,7 +12,7 @@ import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'd
 import { bold, hyperlink, italic, underline } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 import { formatArray, formatNumber } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
@@ -43,7 +43,7 @@ export default class extends Command {
 		const search = interaction.options.getString('search', true);
 
 		const response = await axios
-			.get(`https://api.themoviedb.org/3/search/movie?api_key=${Env.TmdbApiKey}&query=${search}`)
+			.get(`https://api.themoviedb.org/3/search/movie?api_key=${env.TmdbApiKey}&query=${search}`)
 			.then(({ data }) => data.results.slice(0, 10));
 
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
@@ -81,7 +81,7 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
 			const data = await axios
-				.get(`https://api.themoviedb.org/3/movie/${ids}?api_key=${Env.TmdbApiKey}`)
+				.get(`https://api.themoviedb.org/3/movie/${ids}?api_key=${env.TmdbApiKey}`)
 				.then((res) => res.data);
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

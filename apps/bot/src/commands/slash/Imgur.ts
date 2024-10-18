@@ -7,7 +7,7 @@ import {
 } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, hideLinkEmbed, subtext } from '@discordjs/formatters';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import axios from 'axios';
 
 export default class extends Command {
@@ -48,7 +48,7 @@ export default class extends Command {
 				{ image: media.url, type: 'url' },
 				{
 					headers: {
-						Authorization: `Client-ID ${Env.ImgurClientId}`,
+						Authorization: `Client-ID ${env.ImgurClientId}`,
 						'Content-Type': 'multipart/form-data'
 					}
 				}

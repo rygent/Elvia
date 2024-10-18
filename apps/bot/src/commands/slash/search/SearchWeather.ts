@@ -11,7 +11,7 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 import { sentenceCase } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import axios from 'axios';
 
 export default class extends Command {
@@ -39,7 +39,7 @@ export default class extends Command {
 
 		const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
 		const response = await axios
-			.get(`${endpoint}?q=${encodeURIComponent(location)}&appid=${Env.OpenWeatherApiKey}&units=metric`)
+			.get(`${endpoint}?q=${encodeURIComponent(location)}&appid=${env.OpenWeatherApiKey}&units=metric`)
 			.then(({ data }) => data)
 			.catch(({ status }) => {
 				if (status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });

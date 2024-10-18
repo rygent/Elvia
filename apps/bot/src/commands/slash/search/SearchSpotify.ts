@@ -13,7 +13,7 @@ import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } 
 import { bold, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '@/lib/utils/Constants.js';
 import { formatArray, formatNumber } from '@/lib/utils/Functions.js';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import { Spotify } from '@rygent/spotify';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
@@ -43,7 +43,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const spotify = new Spotify({ id: Env.SpotifyClientId, secret: Env.SpotifyClientSecret });
+		const spotify = new Spotify({ id: env.SpotifyClientId, secret: env.SpotifyClientSecret });
 		const response = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);

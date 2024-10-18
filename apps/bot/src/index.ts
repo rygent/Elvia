@@ -1,7 +1,7 @@
 import { ActivityType, AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
 import { Options, Partials } from 'discord.js';
 import { Client } from '@elvia/tesseract';
-import { Env } from '@/lib/Env.js';
+import { env } from '@/env.js';
 import 'dotenv/config';
 
 const client = new Client({
@@ -12,7 +12,7 @@ const client = new Client({
 		repliedUser: false
 	},
 	presence: {
-		activities: [...(Env.CustomStatus ? [{ name: Env.CustomStatus, type: ActivityType.Custom }] : [])]
+		activities: [...(env.CustomStatus ? [{ name: env.CustomStatus, type: ActivityType.Custom }] : [])]
 	},
 	sweepers: {
 		...Options.DefaultSweeperSettings,

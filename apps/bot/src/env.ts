@@ -1,36 +1,35 @@
-import { s } from '@sapphire/shapeshift';
+import { z } from 'zod';
 import 'dotenv/config';
 
-const schema = s.object({
-	DiscordToken: s.string(),
-	DiscordApplicationId: s.string().lengthGreaterThanOrEqual(17),
-	DeveloperGuildId: s.string().lengthGreaterThanOrEqual(17),
-	ClientOwners: s.string().lengthGreaterThanOrEqual(17).array(),
-	ClientVersion: s.string().nullable(),
-	DatabaseUrl: s.string(),
+const schema = z.object({
+	DiscordToken: z.string(),
+	DiscordApplicationId: z.string().min(17).max(20),
+	DeveloperGuildId: z.string().min(17).max(20),
+	ClientOwners: z.string().min(17).max(20).array(),
+	DatabaseUrl: z.string().url(),
 
-	ClientApiAuth: s.string().optional(),
-	ClientApiPort: s.string().optional(),
+	ClientApiAuth: z.string().optional(),
+	ClientApiPort: z.string().optional(),
 
-	CustomStatus: s.string().nullable(),
-	DebugMode: s.boolean(),
-	SupportServerUrl: s.string().url(),
-	LoggerWebhookUrl: s.string().url(),
-	GuildWebhookUrl: s.string().url(),
+	CustomStatus: z.string().nullable(),
+	DebugMode: z.boolean(),
+	UnsafeMode: z.boolean(),
+	SupportServerUrl: z.string().url(),
+	LoggerWebhookUrl: z.string().url(),
+	GuildWebhookUrl: z.string().url(),
 
-	ImgurClientId: s.string(),
-	OpenWeatherApiKey: s.string(),
-	SpotifyClientId: s.string(),
-	SpotifyClientSecret: s.string(),
-	TmdbApiKey: s.string()
+	ImgurClientId: z.string(),
+	OpenWeatherApiKey: z.string(),
+	SpotifyClientId: z.string(),
+	SpotifyClientSecret: z.string(),
+	TmdbApiKey: z.string()
 });
 
-const data = {
+export const env = schema.parse({
 	DiscordToken: process.env.DISCORD_TOKEN,
 	DiscordApplicationId: process.env.DISCORD_APPLICATION_ID,
 	DeveloperGuildId: process.env.DEVELOPER_GUILD_ID,
 	ClientOwners: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
-	ClientVersion: process.env.CLIENT_VERSION?.length ? process.env.CLIENT_VERSION : null,
 	DatabaseUrl: process.env.DATABASE_URL,
 
 	ClientApiAuth: process.env.CLIENT_API_AUTH,
@@ -38,6 +37,7 @@ const data = {
 
 	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',
+	UnsafeMode: process.env.UNSAFE_MODE === 'true',
 	SupportServerUrl: process.env.SUPPORT_SERVER_URL,
 	LoggerWebhookUrl: process.env.LOGGER_WEBHOOK_URL,
 	GuildWebhookUrl: process.env.GUILD_WEBHOOK_URL,
@@ -47,6 +47,4 @@ const data = {
 	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
 	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 	TmdbApiKey: process.env.TMDB_API_KEY
-};
-
-export const Env = schema.parse(data);
+});
