@@ -3,8 +3,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "Node16",
     "resolveJsonModule": true,
     "sourceMap": true,
     "removeComments": true,
