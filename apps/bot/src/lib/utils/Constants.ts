@@ -1,9 +1,9 @@
 export const enum Colors {
 	Default = 0x2b2d31,
-	Green = 0x77dd77,
-	Yellow = 0xfdfd96,
-	Orange = 0xffb347,
-	Red = 0xff6961,
+	Green = 0x3fe165,
+	Yellow = 0xe1de3f,
+	Orange = 0xe18a3f,
+	Red = 0xe13f4d,
 	Grey = 0xcfcfc4
 }
 
@@ -18,5 +18,3 @@ export const enum Emojis {
 	Last = '<:last:1032617724922314782>',
 	Branch = '<:branch:1048976559345770556>'
 }
-
-export const UserAgent = 'Axios 1.4.0';

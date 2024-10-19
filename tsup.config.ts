@@ -14,7 +14,7 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 		skipNodeModulesBundle: true,
 		sourcemap: options.sourcemap ?? true,
 		splitting: options.splitting ?? true,
-		target: options.target ?? 'es2022',
+		target: options.target ?? 'esnext',
 		treeshake: true,
 		tsconfig: relative(__dirname, resolveDir(process.cwd(), 'tsconfig.json'))
 	});
