@@ -42,7 +42,7 @@
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
     "systeminformation": "^5.23.5",
-    "undici": "^6.20.0"
+    "undici": "^6.20.1"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",
