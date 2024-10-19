@@ -1,4 +1,4 @@
-import { bgRedBright, blackBright, blueBright, gray, greenBright, italic, redBright, yellowBright } from 'colorette';
+import { blackBright, blueBright, gray, greenBright, italic, red, redBright, yellowBright } from 'colorette';
 import { format } from 'winston';
 import { getStackTrace } from '@/lib/utils.js';
 import moment from 'moment';
@@ -13,7 +13,7 @@ export const customLevel = {
 };
 
 const customLevelColor = {
-	fatal: bgRedBright,
+	fatal: red,
 	error: redBright,
 	warn: yellowBright,
 	info: greenBright,
