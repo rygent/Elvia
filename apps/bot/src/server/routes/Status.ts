@@ -1,6 +1,6 @@
 import { ShardingManager } from '@elvia/tesseract';
 import { type NextFunction, type Request, type Response, Router } from 'express';
-import auth from '@/servers/middlewares/Auth.js';
+import auth from '@/server/middlewares/Auth.js';
 import createError from 'http-errors';
 
 export const router = Router();

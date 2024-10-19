@@ -7,7 +7,7 @@ import {
 	type Permissions
 } from 'discord-api-types/v10';
 import type { ApplicationCommandOptionChoiceData, PermissionsString, Snowflake } from 'discord.js';
-import type { TesseractClient } from '@/lib/structures/TesseractClient.js';
+import type { TesseractClient } from '@/structures/client.js';
 import { EventEmitter } from 'node:events';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace

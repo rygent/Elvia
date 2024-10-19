@@ -1,9 +1,9 @@
 import express, { type Express } from 'express';
-import type { TesseractShardingManager } from '@/lib/structures/TesseractShardingManager.js';
-import errors from '@/lib/server/middlewares/errors.js';
-import headers from '@/lib/server/middlewares/headers.js';
-import noroutes from '@/lib/server/middlewares/noroutes.js';
-import { router } from '@/lib/server/routes/info.js';
+import type { TesseractShardingManager } from '@/structures/sharding-manager.js';
+import errors from '@/server/middlewares/errors.js';
+import headers from '@/server/middlewares/headers.js';
+import noroutes from '@/server/middlewares/noroutes.js';
+import { router } from '@/server/routes/info.js';
 import body from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
@@ -16,7 +16,7 @@ export class TesseractWebServer {
 	public server: Express;
 
 	public constructor(manager: TesseractShardingManager) {
-		this.directory = path.resolve('dist/servers/routes');
+		this.directory = path.resolve('dist/server/routes');
 
 		this.server = express();
 		this.server.set('shard-manager', manager);

@@ -2,9 +2,9 @@
 
 import { BitField, Client, PermissionsBitField, type ClientOptions, type PermissionsString } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import { TesseractCommand } from '@/lib/structures/TesseractCommand.js';
-import { TesseractListener } from '@/lib/structures/TesseractListener.js';
-import { TesseractSettings } from '@/lib/structures/TesseractSettings.js';
+import { TesseractCommand } from '@/structures/command.js';
+import { TesseractListener } from '@/structures/listener.js';
+import { TesseractSettings } from '@/structures/settings.js';
 import { globby } from 'globby';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';

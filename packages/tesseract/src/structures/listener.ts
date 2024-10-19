@@ -1,4 +1,4 @@
-import type { TesseractClient } from '@/lib/structures/TesseractClient.js';
+import type { TesseractClient } from '@/structures/client.js';
 import type { TesseractListenerOptions } from '@/types.js';
 import type { Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
