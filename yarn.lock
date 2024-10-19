@@ -365,7 +365,7 @@ __metadata:
     "@swc/cli": "npm:^0.4.0"
     "@swc/core": "npm:^1.7.26"
     "@types/moment-duration-format": "npm:^2.2.6"
-    "@types/node": "npm:^22.7.5"
+    "@types/node": "npm:^22.7.7"
     bufferutil: "npm:^4.0.8"
     colorette: "npm:^2.0.20"
     commander: "npm:^12.1.0"
@@ -394,7 +394,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/database@workspace:packages/database"
   dependencies:
-    "@types/node": "npm:^22.7.5"
+    "@types/node": "npm:^22.7.7"
     eslint: "npm:^9.12.0"
     prettier: "npm:^3.3.3"
     prettier-plugin-prisma: "npm:^5.0.0"
@@ -410,7 +410,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/logger@workspace:packages/logger"
   dependencies:
-    "@types/node": "npm:^22.7.5"
+    "@types/node": "npm:^22.7.7"
     colorette: "npm:^2.0.20"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^9.12.0"
@@ -432,7 +432,7 @@ __metadata:
     "@commitlint/cli": "npm:^19.5.0"
     "@commitlint/config-angular": "npm:^19.5.0"
     "@stylistic/eslint-plugin": "npm:^2.9.0"
-    "@types/node": "npm:^22.7.5"
+    "@types/node": "npm:^22.7.7"
     eslint: "npm:^9.12.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:^2.31.0"
@@ -1611,12 +1611,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.7.5":
+"@types/node@npm:*":
   version: 22.7.5
   resolution: "@types/node@npm:22.7.5"
   dependencies:
     undici-types: "npm:~6.19.2"
   checksum: 10c0/cf11f74f1a26053ec58066616e3a8685b6bcd7259bc569738b8f752009f9f0f7f85a1b2d24908e5b0f752482d1e8b6babdf1fbb25758711ec7bb9500bfcd6e60
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.7.7":
+  version: 22.7.7
+  resolution: "@types/node@npm:22.7.7"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10c0/07268a1e990ad9d9b1865092881317ea679a46eb6706d83a8874eec75fdddae6cfd6452e4e68b651561183e2a8f8548276f3155744bc402c2545978c19b70d65
   languageName: node
   linkType: hard
 
