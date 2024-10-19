@@ -13,12 +13,10 @@
     },
     "lint": {
       "dependsOn": ["^build"],
-      "outputs": [],
       "outputLogs": "errors-only"
     },
     "format": {
       "dependsOn": ["^build"],
-      "outputs": [],
       "outputLogs": "errors-only"
     },
     "@elvia/database#db:generate": {
