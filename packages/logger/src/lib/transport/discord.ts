@@ -5,18 +5,18 @@ import { bold, codeBlock, italic, time } from '@discordjs/formatters';
 import { isColorSupported } from 'colorette';
 import { inspect } from 'node:util';
 
-interface WinstonDiscordOptions {
+interface DiscordOptions {
 	webhookUrl: string;
 	level?: string;
 	unique?: boolean;
 }
 
-export class WinstonDiscord extends TransportStream {
+export class Discord extends TransportStream {
 	private readonly webhookUrl: string;
 
 	private readonly unique?: boolean;
 
-	public constructor(options: WinstonDiscordOptions) {
+	public constructor(options: DiscordOptions) {
 		super(options);
 		this.webhookUrl = options.webhookUrl;
 		if (!this.webhookUrl) throw new Error('options.webhookUrl is required.');

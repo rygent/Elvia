@@ -1,5 +1,5 @@
 import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston';
-import { WinstonDiscord } from '@/lib/transport/discord.js';
+import { Discord } from '@/lib/transport/discord.js';
 import { customConsoleFormat, customFileFormat, customLevel } from '@/lib/constants.js';
 import moment from 'moment';
 import 'winston-daily-rotate-file';
@@ -25,6 +25,6 @@ export const logger = createLogger({
 			filename: 'report.%DATE%.log',
 			maxFiles: '14d'
 		}),
-		new WinstonDiscord({ level: 'error', webhookUrl })
+		new Discord({ level: 'error', webhookUrl })
 	]
 }) as Logger & Record<keyof typeof customLevel, LeveledLogMethod>;
