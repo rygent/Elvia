@@ -2,6 +2,7 @@ import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston
 import { WinstonDiscord } from '@/lib/transport/discord.js';
 import { customConsoleFormat, customFileFormat, customLevel } from '@/lib/constants.js';
 import moment from 'moment';
+import 'winston-daily-rotate-file';
 import 'moment-timezone';
 import 'dotenv/config';
 
@@ -16,11 +17,13 @@ export const logger = createLogger({
 	levels: customLevel,
 	transports: [
 		new transports.Console({ format: customConsoleFormat }),
-		new transports.File({
+		new transports.DailyRotateFile({
 			level: 'error',
 			format: customFileFormat,
-			filename: 'error.log',
-			dirname: `${process.cwd()}/logs`
+			datePattern: 'yyyyMMDD',
+			dirname: `${process.cwd()}/logs`,
+			filename: 'report.%DATE%.log',
+			maxFiles: '14d'
 		}),
 		new WinstonDiscord({ level: 'error', webhookUrl })
 	]
