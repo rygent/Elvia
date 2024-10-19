@@ -39,8 +39,8 @@
     "@prisma/client": "*"
   },
   "devDependencies": {
-    "@types/node": "^22.7.6",
-    "eslint": "^9.12.0",
+    "@types/node": "^22.7.7",
+    "eslint": "^9.13.0",
     "prettier": "^3.3.3",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.21.1",
@@ -53,5 +53,5 @@
   "engines": {
     "node": ">=v20.11.0"
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.1"
 }
