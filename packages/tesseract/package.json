@@ -1,6 +1,6 @@
 {
   "name": "@elvia/tesseract",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The heart and soul of the Elvia bot.",
   "type": "module",
   "main": "./dist/index.cjs",
