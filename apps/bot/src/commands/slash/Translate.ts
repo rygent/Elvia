@@ -9,9 +9,9 @@ import { EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, hideLinkEmbed, hyperlink, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
+import { Languages } from '@/lib/utils/autocomplete.js';
 import { cutText } from '@sapphire/utilities';
 import translate from '@iamtraction/google-translate';
-import languages from '@/assets/json/languages.json' with { type: 'json' };
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -91,7 +91,7 @@ export default class extends Command {
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
 		const focused = interaction.options.getFocused(true);
 
-		const choices = languages.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
+		const choices = Languages.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 
 		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name, value }) => ({ name, value }));
 
@@ -122,5 +122,5 @@ function resolveDefaultLanguage(interaction: ChatInputCommandInteraction): strin
 }
 
 function resolveLanguage(input: string) {
-	return languages.filter(({ value }) => value.toLowerCase().includes(input.toLowerCase()))[0]!.name;
+	return Languages.filter(({ value }) => value.toLowerCase().includes(input.toLowerCase()))[0]!.name;
 }

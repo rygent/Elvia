@@ -8,7 +8,7 @@ import {
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { parseEmoji, type MessageContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
-import languages from '@/assets/json/languages.json' with { type: 'json' };
+import { Languages } from '@/lib/utils/autocomplete.js';
 import translate from '@iamtraction/google-translate';
 import { nanoid } from 'nanoid';
 
@@ -35,13 +35,11 @@ export default class extends Command {
 				.setCustomId(selectId)
 				.setPlaceholder('Select a languages')
 				.setOptions(
-					...languages
-						.filter(({ hoisted }) => hoisted)
-						.map((item) => ({
-							value: item.value,
-							label: item.name,
-							emoji: parseEmoji(item.flag as string) as APIMessageComponentEmoji
-						}))
+					...Languages.filter(({ hoisted }) => hoisted).map((item) => ({
+						value: item.value,
+						label: item.name,
+						emoji: parseEmoji(item.flag as string) as APIMessageComponentEmoji
+					}))
 				)
 		);
 

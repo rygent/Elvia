@@ -10,7 +10,7 @@ import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builde
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { Colors } from '@/lib/utils/Constants.js';
 import { isNsfwChannel } from '@/lib/utils/Functions.js';
-import nsfw from '@/assets/json/nsfw.json' with { type: 'json' };
+import { Nsfw } from '@/lib/utils/autocomplete.js';
 import axios from 'axios';
 
 export default class extends Command {
@@ -71,7 +71,7 @@ export default class extends Command {
 		const focused = interaction.options.getFocused();
 		if (!isNsfwChannel(interaction.channel)) return interaction.respond([]);
 
-		const choices = nsfw.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = Nsfw.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
 
 		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name }) => ({ name, value: name.toLowerCase() }));
 
