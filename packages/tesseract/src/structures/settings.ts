@@ -1,7 +1,7 @@
 import type { PermissionsString } from 'discord.js';
 import type { tesseract } from '@/types.ts';
 
-export class TesseractSettings {
+export class BaseSettings {
 	protected declare data: tesseract.Settings;
 
 	public get token(): string {

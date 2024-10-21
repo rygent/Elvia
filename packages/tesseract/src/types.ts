@@ -7,7 +7,7 @@ import {
 	type Permissions
 } from 'discord-api-types/v10';
 import type { ApplicationCommandOptionChoiceData, PermissionsString, Snowflake } from 'discord.js';
-import type { TesseractClient } from '@/structures/client.js';
+import type { BaseClient } from '@/structures/client.js';
 import { EventEmitter } from 'node:events';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -22,13 +22,13 @@ export namespace tesseract {
 	}
 }
 
-export interface TesseractCommandParameter {
+export interface BaseCommandParameter {
 	type: ApplicationCommandOptionType;
 	name: string;
 	description: string;
 	required?: boolean;
 	choices?: ApplicationCommandOptionChoiceData[];
-	options?: TesseractCommandParameter[];
+	options?: BaseCommandParameter[];
 	channel_types?: ChannelType[];
 	min_value?: number;
 	max_value?: number;
@@ -37,7 +37,7 @@ export interface TesseractCommandParameter {
 	autocomplete?: boolean;
 }
 
-export interface TesseractCommandOptions {
+export interface BaseCommandOptions {
 	/**
 	 * Type of the command
 	 */
@@ -53,7 +53,7 @@ export interface TesseractCommandOptions {
 	/**
 	 * The parameters for the `CHAT_INPUT` command, max 25
 	 */
-	options?: TesseractCommandParameter[];
+	options?: BaseCommandParameter[];
 	/**
 	 * Set of permissions represented as a bitset
 	 */
@@ -80,19 +80,19 @@ export interface TesseractCommandOptions {
 	owner?: boolean;
 }
 
-export interface TesseractCommandData {
+export interface BaseCommandData {
 	type: ApplicationCommandType;
 	name: string;
 	description: string;
-	options?: TesseractCommandParameter[];
+	options?: BaseCommandParameter[];
 	default_member_permissions?: Permissions | null;
 	nsfw?: boolean;
 	integration_types?: ApplicationIntegrationType[];
 	contexts?: InteractionContextType[] | null;
 }
 
-export interface TesseractListenerOptions {
+export interface BaseListenerOptions {
 	name: string;
 	once?: boolean;
-	emitter?: keyof TesseractClient | EventEmitter;
+	emitter?: keyof BaseClient | EventEmitter;
 }

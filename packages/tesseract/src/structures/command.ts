@@ -1,4 +1,4 @@
-import type { TesseractClient } from '@/structures/client.js';
+import type { BaseClient } from '@/structures/client.js';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -12,17 +12,17 @@ import {
 	PermissionsBitField,
 	type PermissionsString
 } from 'discord.js';
-import type { TesseractCommandData, TesseractCommandOptions, TesseractCommandParameter } from '@/types.js';
+import type { BaseCommandData, BaseCommandOptions, BaseCommandParameter } from '@/types.js';
 import type { Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
-export abstract class TesseractCommand extends EventEmitter {
-	public client: TesseractClient<true>;
+export abstract class BaseCommand extends EventEmitter {
+	public client: BaseClient<true>;
 	public group?: string;
 	public type: ApplicationCommandType;
 	public name: string;
 	public description: string;
-	public options: TesseractCommandParameter[];
+	public options: BaseCommandParameter[];
 	public defaultMemberPermissions: Permissions | null;
 	public nsfw: boolean;
 	public integrationTypes: ApplicationIntegrationType[];
@@ -36,7 +36,7 @@ export abstract class TesseractCommand extends EventEmitter {
 	public guild: boolean;
 	public owner: boolean;
 
-	public constructor(client: TesseractClient<true>, options: TesseractCommandOptions) {
+	public constructor(client: BaseClient<true>, options: BaseCommandOptions) {
 		super();
 		this.client = client;
 		this.type = options.type;
@@ -65,8 +65,8 @@ export abstract class TesseractCommand extends EventEmitter {
 
 	public autocomplete?(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown>;
 
-	public toJSON(): TesseractCommandData {
-		const data: TesseractCommandData = {
+	public toJSON(): BaseCommandData {
+		const data: BaseCommandData = {
 			type: this.type,
 			name: this.name,
 			description: this.description

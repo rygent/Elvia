@@ -1,20 +1,18 @@
-/* eslint-disable @typescript-eslint/no-array-constructor */
-
 import { BitField, Client, PermissionsBitField, type ClientOptions, type PermissionsString } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import { TesseractCommand } from '@/structures/command.js';
-import { TesseractListener } from '@/structures/listener.js';
-import { TesseractSettings } from '@/structures/settings.js';
+import { BaseCommand } from '@/structures/command.js';
+import { BaseListener } from '@/structures/listener.js';
+import { BaseSettings } from '@/structures/settings.js';
 import { globby } from 'globby';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-export class TesseractClient<Ready extends boolean = boolean> extends Client<Ready> {
-	public settings: TesseractSettings;
+export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
+	public settings: BaseSettings;
 
-	public commands: TesseractCommand[];
-	public listener: TesseractListener[];
+	public commands: BaseCommand[];
+	public listener: BaseListener[];
 
 	public cooldowns: Collection<string, Collection<string, number>>;
 
@@ -23,10 +21,12 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 
 	public constructor(options: ClientOptions) {
 		super(options);
-		this.settings = new TesseractSettings();
+		this.settings = new BaseSettings();
 		this.validate();
 
+		// eslint-disable-next-line @typescript-eslint/no-array-constructor
 		this.commands = new Array();
+		// eslint-disable-next-line @typescript-eslint/no-array-constructor
 		this.listener = new Array();
 
 		this.cooldowns = new Collection();
@@ -66,7 +66,7 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 				const { default: File } = await import(pathToFileURL(commandFile).toString());
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this);
-				if (!(command instanceof TesseractCommand)) {
+				if (!(command instanceof BaseCommand)) {
 					throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
 				}
 				const [commandName, subCommandGroup] = path
@@ -85,7 +85,7 @@ export class TesseractClient<Ready extends boolean = boolean> extends Client<Rea
 				const { default: File } = await import(pathToFileURL(listenerFile).toString());
 				if (!this.isClass(File)) throw new TypeError(`Listener ${name} doesn't export a class!`);
 				const listener = new File(this);
-				if (!(listener instanceof TesseractListener)) {
+				if (!(listener instanceof BaseListener)) {
 					throw new TypeError(`Listener ${name} doesn't belong in listeners directory.`);
 				}
 				this.listener.push(listener);

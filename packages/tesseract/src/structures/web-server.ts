@@ -1,5 +1,5 @@
 import express, { type Express } from 'express';
-import type { TesseractShardingManager } from '@/structures/sharding-manager.js';
+import type { BaseShardingManager } from '@/structures/sharding-manager.js';
 import errors from '@/server/middlewares/errors.js';
 import headers from '@/server/middlewares/headers.js';
 import noroutes from '@/server/middlewares/noroutes.js';
@@ -11,11 +11,11 @@ import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-export class TesseractWebServer {
+export class BaseWebServer {
 	private readonly directory: string;
 	public server: Express;
 
-	public constructor(manager: TesseractShardingManager) {
+	public constructor(manager: BaseShardingManager) {
 		this.directory = path.resolve('dist/server/routes');
 
 		this.server = express();

@@ -1,15 +1,15 @@
-import type { TesseractClient } from '@/structures/client.js';
-import type { TesseractListenerOptions } from '@/types.js';
+import type { BaseClient } from '@/structures/client.js';
+import type { BaseListenerOptions } from '@/types.js';
 import type { Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
-export abstract class TesseractListener extends EventEmitter {
-	protected client: TesseractClient<true>;
+export abstract class BaseListener extends EventEmitter {
+	protected client: BaseClient<true>;
 	public name: string;
 	public type: 'once' | 'on';
 	public emitter: EventEmitter;
 
-	public constructor(client: TesseractClient<true>, options: TesseractListenerOptions) {
+	public constructor(client: BaseClient<true>, options: BaseListenerOptions) {
 		super();
 		this.client = client;
 		this.name = options.name;
