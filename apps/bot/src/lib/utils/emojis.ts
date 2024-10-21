@@ -1,6 +1,6 @@
 import type { UserFlags } from 'discord-api-types/v10';
 
-export default {
+export const Badges = {
 	Staff: '<:discord_employee:852852657940463646>',
 	Partner: '<:partnered_server_owner:852862048865615872>',
 	Hypesquad: '<:hypesquad_events:852862248883585084>',

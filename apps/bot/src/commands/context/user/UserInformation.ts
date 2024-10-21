@@ -10,7 +10,7 @@ import {
 import { bold, inlineCode, italic, time, underline } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/Constants.js';
 import { formatArray, formatPermissions, trimArray } from '@/lib/utils/Functions.js';
-import flags from '@/assets/ts/Badges.js';
+import { Badges } from '@/lib/utils/emojis.js';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -27,7 +27,7 @@ export default class extends Command {
 		const member = interaction.options.getMember('user') as GuildMember;
 
 		const userFlags = member.user.flags!.toArray();
-		const badges = userFlags.map((item) => flags[item]).filter((value) => value !== '');
+		const badges = userFlags.map((item) => Badges[item]).filter((value) => value !== '');
 
 		const banner = await member.user.fetch(true);
 		const roles = member.roles.cache
@@ -45,7 +45,7 @@ export default class extends Command {
 					`${bold(italic('Display Name:'))} ${member.user.globalName ?? inlineCode('N/A')}`,
 					`${bold(italic('Nickname:'))} ${member.nickname ?? inlineCode('N/A')}`,
 					`${bold(italic('Badges:'))} ${
-						badges.length ? userFlags.map((item) => flags[item]).join(' ') : inlineCode('N/A')
+						badges.length ? userFlags.map((item) => Badges[item]).join(' ') : inlineCode('N/A')
 					}`,
 					`${bold(italic('Pending:'))} ${member.pending ? 'Yes' : 'No'}`,
 					`${bold(italic('Created:'))} ${time(new Date(member.user.createdTimestamp), 'D')} (${time(
