@@ -1,6 +1,9 @@
 apps:bot:
   - changed-files:
       - any-glob-to-any-file: ['apps/bot/*', 'apps/bot/**/*']
+apps:website:
+  - changed-files:
+      - any-glob-to-any-file: ['apps/website/*', 'apps/website/**/*']
 packages:database:
   - changed-files:
       - any-glob-to-any-file: ['packages/database/*', 'packages/database/**/*']

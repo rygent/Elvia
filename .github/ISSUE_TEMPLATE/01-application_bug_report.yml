@@ -13,7 +13,8 @@ body:
     attributes:
       label: Which application is this bug report for?
       options:
-        - Bot
+        - bot
+        - website
     validations:
       required: true
   - type: textarea

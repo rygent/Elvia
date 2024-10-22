@@ -1,6 +1,9 @@
 apps:bot:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nbot\\n"
+apps:website:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nwebsite\\n"
 packages:database:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\ndatabase\\n"

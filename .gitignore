@@ -47,6 +47,7 @@ web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
+next-env.d.ts
 
 # Optional npm cache directory
 .npm
@@ -68,6 +69,7 @@ web_modules/
 
 # Miscellaneous file
 .DS_Store
+*.pem
 
 # Optional REPL history
 .node_repl_history
@@ -85,6 +87,7 @@ web_modules/
 .env.production.local
 .env.local
 !apps/bot/.env
+!apps/website/.env
 !packages/database/.env
 
 # parcel-bundler cache (https://parceljs.org/)
