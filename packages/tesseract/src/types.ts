@@ -15,7 +15,6 @@ export namespace tesseract {
 	export interface Settings {
 		token: string;
 		owners: Snowflake[];
-		loggerWebhookUrl: string;
 		defaultPermissions: PermissionsString[];
 		debug: boolean;
 		unsafeMode: boolean;

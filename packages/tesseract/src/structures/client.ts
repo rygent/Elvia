@@ -24,10 +24,8 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 		this.settings = new BaseSettings();
 		this.validate();
 
-		// eslint-disable-next-line @typescript-eslint/no-array-constructor
-		this.commands = new Array();
-		// eslint-disable-next-line @typescript-eslint/no-array-constructor
-		this.listener = new Array();
+		this.commands = [];
+		this.listener = [];
 
 		this.cooldowns = new Collection();
 
@@ -97,6 +95,6 @@ export class BaseClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public async start(token = this.settings.token) {
 		await this.loadCommands();
 		await this.loadListeners();
-		void super.login(token as string);
+		void super.login(token);
 	}
 }

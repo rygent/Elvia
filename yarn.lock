@@ -472,6 +472,7 @@ __metadata:
     prettier: "npm:^3.3.3"
     tsup: "npm:^8.3.0"
     typescript: "npm:^5.6.3"
+    zod: "npm:^3.23.8"
   bin:
     tesseract: ./bin/tesseract.js
   languageName: unknown

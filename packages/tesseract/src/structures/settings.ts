@@ -1,21 +1,16 @@
 import type { PermissionsString } from 'discord.js';
-import type { tesseract } from '@/types.ts';
+import type { tesseract } from '@/types.js';
+import { env } from '@/env.js';
 
 export class BaseSettings {
 	protected declare data: tesseract.Settings;
 
 	public get token(): string {
-		return process.env.DISCORD_TOKEN ?? this.data.token;
+		return env('DiscordToken') ?? this.data.token;
 	}
 
 	public get owners(): string[] {
-		const owners = (process.env.CLIENT_OWNERS as string).split(',').filter((id) => id.length);
-
-		return owners;
-	}
-
-	public get loggerWebhookUrl(): string {
-		return process.env.LOGGER_WEBHOOK_URL ?? this.data.loggerWebhookUrl;
+		return env('ClientOwners') ?? this.data.owners;
 	}
 
 	public get defaultPermissions(): PermissionsString[] {
@@ -23,27 +18,11 @@ export class BaseSettings {
 	}
 
 	public get debug(): boolean {
-		if (process.env.DEBUG_MODE) {
-			if (process.env.DEBUG_MODE.toLowerCase() === 'true') {
-				return true;
-			}
-			if (process.env.DEBUG_MODE.toLowerCase() === 'false') {
-				return false;
-			}
-		}
-		return this.data.debug;
+		return env('DebugMode') ?? this.data.debug;
 	}
 
 	public get unsafeMode(): boolean {
-		if (process.env.UNSAFE_MODE) {
-			if (process.env.UNSAFE_MODE.toLowerCase() === 'true') {
-				return true;
-			}
-			if (process.env.UNSAFE_MODE.toLowerCase() === 'false') {
-				return false;
-			}
-		}
-		return this.data.unsafeMode;
+		return env('UnsafeMode') ?? this.data.unsafeMode;
 	}
 
 	public get<K extends keyof tesseract.Settings>(key: K): tesseract.Settings[K] {
