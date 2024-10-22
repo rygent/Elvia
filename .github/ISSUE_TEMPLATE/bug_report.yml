@@ -16,6 +16,7 @@ body:
         - bot
         - database
         - logger
+        - tesseract
     validations:
       required: true
   - type: textarea
@@ -29,9 +30,8 @@ body:
       placeholder: |
         Steps to reproduce:
         1. do thing
-        2. do thing in Discord client
-        3. observe behavior
-        4. see error logs below
+        2. observe behavior
+        3. see error logs below
     validations:
       required: true
   - type: textarea

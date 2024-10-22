@@ -21,7 +21,9 @@ To get ready to work on the codebase, please do the following:
 <!-- REFERENCES -->
 
 [^env]: You will need to create a `.env` file in the root directory of the project.
+
 [^lint]: We recommend using [`eslint`][eslint] to lint your code.
+
 [^commit]: We strongly follow the [Commit Message Conventions][commit message conventions]. This is important when commiting your code for a PR.
 
 <!-- LINKS -->

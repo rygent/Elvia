@@ -1,13 +1,19 @@
-import { blueBright, greenBright, magentaBright, redBright, yellowBright } from 'colorette';
+import { blueBright, gray, greenBright, red, redBright, yellowBright } from 'colorette';
 
-export enum color {
-	red = 0xff6961
-}
+export const customLevel = {
+	fatal: 0,
+	error: 1,
+	warn: 2,
+	info: 3,
+	debug: 4,
+	trace: 5
+};
 
-export const levels = {
-	syslog: blueBright('[SYSLOG]'),
-	syserr: redBright('[SYSERR]'),
-	warn: yellowBright('[WARN]'),
-	info: greenBright('[INFO]'),
-	debug: magentaBright('[DEBUG]')
+export const customLevelColor = {
+	fatal: red,
+	error: redBright,
+	warn: yellowBright,
+	info: greenBright,
+	debug: blueBright,
+	trace: gray
 };

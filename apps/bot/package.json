@@ -1,18 +1,19 @@
 {
   "name": "@elvia/bot",
-  "version": "5.5.0",
+  "version": "6.0.0",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && yarn build:check && yarn build:swc",
     "build:check": "tsc --noEmit",
     "build:swc": "swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
+    "build:command": "tesseract register",
+    "start": "node --no-warnings ./dist/index.js",
+    "start:shard": "node --no-warnings ./dist/shard.js",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check",
-    "start": "node --no-warnings ./dist/index.js",
-    "register": "node ./dist/interactions/register.js"
+    "format:check": "prettier . --check"
   },
   "license": "GPL-3.0",
   "private": true,
@@ -24,32 +25,31 @@
   "dependencies": {
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
+    "@elvia/tesseract": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
-    "@prisma/client": "^5.20.0",
+    "@prisma/client": "^5.21.1",
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.1.1",
     "@sapphire/discord-utilities": "^3.4.1",
-    "@sapphire/shapeshift": "^4.0.0",
     "@sapphire/time-utilities": "^1.7.12",
     "@sapphire/type": "^2.5.1",
     "@sapphire/utilities": "^3.17.0",
+    "axios": "^1.7.7",
     "colorette": "^2.0.20",
-    "commander": "^12.1.0",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
-    "globby": "^14.0.2",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.0.7",
     "systeminformation": "^5.23.5",
-    "undici": "^6.20.0"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",
-    "@swc/core": "^1.7.26",
+    "@swc/core": "^1.7.36",
     "@types/moment-duration-format": "^2.2.6",
-    "@types/node": "^22.7.5",
-    "eslint": "^9.12.0",
+    "@types/node": "^22.7.7",
+    "eslint": "^9.13.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "typescript": "^5.6.3"
@@ -59,7 +59,7 @@
     "utf-8-validate": "^6.0.4"
   },
   "engines": {
-    "node": ">=v20.10.0"
+    "node": ">=v20.11.0"
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.1"
 }

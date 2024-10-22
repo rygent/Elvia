@@ -5,7 +5,8 @@
 <!--
 Please move lines that apply to you out of the comment:
 - Code changes have been tested against the Discord API, or there are no code changes
-- This PR changes the bot's interface (methods or commands added)
+- I know how to update typings and have done so, or typings don't need updating
+- This PR changes the library's interface (methods or parameters added)
 - This PR includes breaking changes (methods removed or renamed, commands moved, removed or renamed)
 - This PR **only** includes non-code changes, like changes to template, README, etc.
 -->

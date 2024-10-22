@@ -16,10 +16,10 @@ export default tseslint.config(
 			globals: {
 				...globals.browser,
 				...globals.commonjs,
-				...globals.es2021,
+				...globals.es2024,
 				...globals.node
 			},
-			ecmaVersion: 2022,
+			ecmaVersion: 'latest',
 			sourceType: 'module',
 			parserOptions: {
 				project: ['./tsconfig.eslint.json', './apps/*/tsconfig.eslint.json', './packages/*/tsconfig.eslint.json'],
