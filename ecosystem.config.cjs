@@ -3,7 +3,7 @@ module.exports = {
 		{
 			name: '@elvia/bot',
 			cwd: './apps/bot',
-			script: './dist/index.js',
+			script: './dist/shard.js',
 			interpreter: 'node',
 			env: {
 				NODE_ENV: 'development'
