@@ -4,7 +4,7 @@ import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
-import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/Functions.js';
+import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 
 export default class extends Listener {

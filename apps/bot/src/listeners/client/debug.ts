@@ -12,6 +12,6 @@ export default class extends Listener {
 
 	public run(info: string) {
 		if (!this.client.settings.debug) return;
-		logger.info(info);
+		logger.debug(info);
 	}
 }

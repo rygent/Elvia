@@ -2,7 +2,7 @@ import { Client, Listener } from '@elvia/tesseract';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/Constants.js';
+import { Colors } from '@/lib/utils/constants.js';
 import { env } from '@/env.js';
 import { logger } from '@elvia/logger';
 

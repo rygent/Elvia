@@ -2,8 +2,8 @@ import { Client, Listener } from '@elvia/tesseract';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Events, Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/Constants.js';
-import { formatNumber } from '@/lib/utils/Functions.js';
+import { Colors } from '@/lib/utils/constants.js';
+import { formatNumber } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { prisma } from '@elvia/database';
 
