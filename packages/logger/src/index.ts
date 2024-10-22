@@ -2,19 +2,17 @@ import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston
 import { Discord } from '@/lib/transport/discord.js';
 import { customLevel } from '@/lib/constants.js';
 import { formatBuilder } from '@/lib/utils.js';
-import moment from 'moment';
+import { env } from '@/env.js';
+import moment from 'moment-timezone';
 import 'winston-daily-rotate-file';
-import 'moment-timezone';
-import 'dotenv/config';
 
-const timezone = process.env.TZ ?? 'UTC';
+const timezone = env('Timezone') || 'UTC';
 moment.tz.setDefault(timezone);
 
-const webhookUrl = process.env.LOGGER_WEBHOOK_URL;
-if (!webhookUrl) throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
+if (!env('LoggerWebhookUrl')) throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
 
 export const logger = createLogger({
-	level: 'info',
+	level: env('DebugMode') ? 'debug' : 'info',
 	levels: customLevel,
 	transports: [
 		new transports.Console({ format: formatBuilder(true) }),
@@ -26,6 +24,6 @@ export const logger = createLogger({
 			filename: 'report.%DATE%.log',
 			maxFiles: '14d'
 		}),
-		new Discord({ level: 'error', webhookUrl })
+		new Discord({ level: 'error', webhookUrl: env('LoggerWebhookUrl') })
 	]
 }) as Logger & Record<keyof typeof customLevel, LeveledLogMethod>;

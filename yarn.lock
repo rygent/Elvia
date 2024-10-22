@@ -420,6 +420,7 @@ __metadata:
     typescript: "npm:^5.6.3"
     winston: "npm:^3.15.0"
     winston-daily-rotate-file: "npm:^5.0.0"
+    zod: "npm:^3.23.8"
   peerDependencies:
     discord.js: "*"
   languageName: unknown
