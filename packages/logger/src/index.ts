@@ -1,6 +1,7 @@
 import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston';
 import { Discord } from '@/lib/transport/discord.js';
-import { customConsoleFormat, customFileFormat, customLevel } from '@/lib/constants.js';
+import { customLevel } from '@/lib/constants.js';
+import { formatBuilder } from '@/lib/utils.js';
 import moment from 'moment';
 import 'winston-daily-rotate-file';
 import 'moment-timezone';
@@ -16,10 +17,10 @@ export const logger = createLogger({
 	level: 'info',
 	levels: customLevel,
 	transports: [
-		new transports.Console({ format: customConsoleFormat }),
+		new transports.Console({ format: formatBuilder(true) }),
 		new transports.DailyRotateFile({
 			level: 'error',
-			format: customFileFormat,
+			format: formatBuilder(false),
 			datePattern: 'yyyyMMDD',
 			dirname: `${process.cwd()}/logs`,
 			filename: 'report.%DATE%.log',
