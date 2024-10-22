@@ -1,19 +1,19 @@
 {
   "name": "@elvia/bot",
-  "version": "6.0.0-beta",
+  "version": "6.0.0",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && yarn build:check && yarn build:swc",
     "build:check": "tsc --noEmit",
     "build:swc": "swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
+    "build:command": "tesseract register",
+    "start": "node --no-warnings ./dist/index.js",
+    "start:shard": "node --no-warnings ./dist/shard.js",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check",
-    "start": "node --no-warnings ./dist/index.js",
-    "start:shard": "node --no-warnings ./dist/shard.js",
-    "register": "tesseract register"
+    "format:check": "prettier . --check"
   },
   "license": "GPL-3.0",
   "private": true,
