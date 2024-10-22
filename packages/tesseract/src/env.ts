@@ -10,7 +10,7 @@ const schema = z.object({
 	UnsafeMode: z.boolean()
 });
 
-const data = schema.parse({
+export const env = schema.parse({
 	DiscordToken: process.env.DISCORD_TOKEN,
 	DiscordApplicationId: process.env.DISCORD_APPLICATION_ID,
 	ClientOwners: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
@@ -18,7 +18,3 @@ const data = schema.parse({
 	DebugMode: process.env.DEBUG_MODE?.toLowerCase() === 'true',
 	UnsafeMode: process.env.UNSAFE_MODE?.toLowerCase() === 'true'
 });
-
-export function env<K extends keyof typeof data>(key: K) {
-	return data[key];
-}

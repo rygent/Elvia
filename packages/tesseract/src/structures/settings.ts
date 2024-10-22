@@ -6,11 +6,11 @@ export class BaseSettings {
 	protected declare data: tesseract.Settings;
 
 	public get token(): string {
-		return env('DiscordToken') ?? this.data.token;
+		return env.DiscordToken ?? this.data.token;
 	}
 
 	public get owners(): string[] {
-		return env('ClientOwners') ?? this.data.owners;
+		return env.ClientOwners ?? this.data.owners;
 	}
 
 	public get defaultPermissions(): PermissionsString[] {
@@ -18,11 +18,11 @@ export class BaseSettings {
 	}
 
 	public get debug(): boolean {
-		return env('DebugMode') ?? this.data.debug;
+		return env.DebugMode ?? this.data.debug;
 	}
 
 	public get unsafeMode(): boolean {
-		return env('UnsafeMode') ?? this.data.unsafeMode;
+		return env.UnsafeMode ?? this.data.unsafeMode;
 	}
 
 	public get<K extends keyof tesseract.Settings>(key: K): tesseract.Settings[K] {
