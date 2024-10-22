@@ -3,11 +3,13 @@ import common from 'eslint-config-terrax/common';
 import node from 'eslint-config-terrax/node';
 import typescript from 'eslint-config-terrax/typescript';
 import stylistic from 'eslint-config-terrax/stylistic-typescript';
+import react from 'eslint-config-terrax/react';
+import next from 'eslint-config-terrax/next';
 import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import merge from 'lodash.merge';
 
-const commonFiles = '{js,mjs,cjs,ts}';
+const commonFiles = '{js,jsx,mjs,cjs,ts,tsx}';
 
 const commonRuleset = merge(...common, {
 	files: [`**/*${commonFiles}`]
@@ -57,6 +59,18 @@ const stylisticRuleset = merge(...stylistic, {
 	}
 });
 
+const reactRuleset = merge(...react, {
+	files: [`./apps/website/**/*${commonFiles}`],
+	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+	rules: {
+		'@next/next/no-html-link-for-pages': 'off',
+		'react/react-in-jsx-scope': 'off',
+		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
+	}
+});
+
+const nextRuleset = merge(...next, { files: [`./apps/website/**/*${commonFiles}`] });
+
 export default tseslint.config(
 	commonRuleset,
 	nodeRuleset,
@@ -67,8 +81,10 @@ export default tseslint.config(
 			ecmaVersion: 'latest',
 			sourceType: 'module'
 		},
-		ignores: ['.turbo/', '.vscode/', '.yarn/', 'dist/', 'node_modules/']
+		ignores: ['.next/', '.turbo/', '.vscode/', '.yarn/', 'dist/', 'node_modules/']
 	},
+	reactRuleset,
+	nextRuleset,
 	eslintPluginImport.flatConfigs.recommended,
 	{
 		rules: {

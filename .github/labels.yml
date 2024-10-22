@@ -1,5 +1,7 @@
 - name: apps:bot
   color: fbca04
+- name: apps:website
+  color: fbca04
 - name: 'blocked'
   color: 'd81a0d'
 - name: 'bug'
