@@ -60,7 +60,7 @@ const stylisticRuleset = merge(...stylistic, {
 });
 
 const reactRuleset = merge(...react, {
-	files: [`./apps/website/**/*${commonFiles}`],
+	files: [`./apps/website/**/*${commonFiles}`, `./packages/ui/**/*${commonFiles}`],
 	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'@next/next/no-html-link-for-pages': 'off',

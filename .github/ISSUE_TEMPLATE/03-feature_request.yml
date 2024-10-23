@@ -16,6 +16,8 @@ body:
         - database
         - logger
         - tesseract
+        - ui
+        - utils
     validations:
       required: true
   - type: textarea

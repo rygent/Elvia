@@ -51,3 +51,7 @@
   color: 'c66037'
 - name: 'packages:tesseract'
   color: 'c66037'
+- name: 'packages:ui'
+  color: 'c66037'
+- name: 'packages:utils'
+  color: 'c66037'
