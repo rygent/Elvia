@@ -40,6 +40,10 @@
   color: fbca04
 - name: packages:tesseract
   color: fbca04
+- name: packages:ui
+  color: fbca04
+- name: packages:utils
+  color: fbca04
 - name: 'performance'
   color: '80c042'
 - name: 'priority:critical'

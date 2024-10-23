@@ -1,20 +1,18 @@
+// tailwind config is required for editor support
+import sharedConfig from '@elvia/ui/tailwind.config.ts';
 import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme.js';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-	content: ['./src/**/*.{ts,tsx}'],
+	content: ['./src/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
-			colors: {
-				background: 'var(--background)',
-				foreground: 'var(--foreground)'
-			},
 			fontFamily: {
 				sans: ['var(--font-geist-sans)', ...fontFamily.sans],
 				mono: ['var(--font-geist-mono)', ...fontFamily.mono]
 			}
 		}
 	},
-	plugins: []
+	presets: [sharedConfig]
 };
 export default config;

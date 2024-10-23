@@ -13,3 +13,9 @@ packages:logger:
 packages:tesseract:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\ntesseract\\n"
+packages:ui:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nui\\n"
+packages:utils:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nutils\\n"
