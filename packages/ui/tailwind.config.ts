@@ -5,6 +5,13 @@ const config: Config = {
 	content: ['./**/*.{js,ts,jsx,tsx}'],
 	darkMode: ['class'],
 	theme: {
+		container: {
+			center: true,
+			padding: '2rem',
+			screens: {
+				'2xl': '1400px'
+			}
+		},
 		extend: {
 			colors: {
 				background: 'hsl(var(--background))',
@@ -55,6 +62,7 @@ const config: Config = {
 			}
 		}
 	},
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	plugins: [require('tailwindcss-animate')]
 };
 export default config;
