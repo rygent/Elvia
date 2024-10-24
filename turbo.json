@@ -11,6 +11,11 @@
       "outputs": ["dist/**"],
       "outputLogs": "errors-only"
     },
+    "@elvia/website#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "outputLogs": "errors-only"
+    },
     "lint": {
       "dependsOn": ["^build"],
       "outputLogs": "errors-only"

@@ -1,4 +1,5 @@
 {
+  "css.validate": false,
   "eslint.validate": ["typescript"],
   "eslint.useFlatConfig": true,
   "search.exclude": {

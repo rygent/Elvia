@@ -1,5 +1,7 @@
 - name: apps:bot
   color: fbca04
+- name: apps:website
+  color: fbca04
 - name: 'blocked'
   color: 'd81a0d'
 - name: 'bug'
@@ -37,6 +39,10 @@
 - name: packages:logger
   color: fbca04
 - name: packages:tesseract
+  color: fbca04
+- name: packages:ui
+  color: fbca04
+- name: packages:utils
   color: fbca04
 - name: 'performance'
   color: '80c042'

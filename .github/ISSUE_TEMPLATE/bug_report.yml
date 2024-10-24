@@ -14,9 +14,12 @@ body:
       label: Which package is this bug report for?
       options:
         - bot
+        - website
         - database
         - logger
         - tesseract
+        - ui
+        - utils
     validations:
       required: true
   - type: textarea
