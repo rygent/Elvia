@@ -58,10 +58,6 @@ const stylisticRuleset = merge(...stylistic, {
 });
 
 export default tseslint.config(
-	commonRuleset,
-	nodeRuleset,
-	typescriptRuleset,
-	stylisticRuleset,
 	{
 		languageOptions: {
 			ecmaVersion: 'latest',
@@ -69,6 +65,10 @@ export default tseslint.config(
 		},
 		ignores: ['.turbo/', '.vscode/', '.yarn/', 'dist/', 'node_modules/']
 	},
+	commonRuleset,
+	nodeRuleset,
+	typescriptRuleset,
+	stylisticRuleset,
 	eslintPluginImport.flatConfigs.recommended,
 	{
 		rules: {
