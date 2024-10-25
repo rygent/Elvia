@@ -1,20 +1,12 @@
 apps:bot:
   - changed-files:
-      - any-glob-to-any-file:
-          - apps/bot/*
-          - apps/bot/**/*
+      - any-glob-to-any-file: ['apps/bot/*', 'apps/bot/**/*']
 packages:database:
   - changed-files:
-      - any-glob-to-any-file:
-          - packages/database/*
-          - packages/database/**/*
+      - any-glob-to-any-file: ['packages/database/*', 'packages/database/**/*']
 packages:logger:
   - changed-files:
-      - any-glob-to-any-file:
-          - packages/logger/*
-          - packages/logger/**/*
+      - any-glob-to-any-file: ['packages/logger/*', 'packages/logger/**/*']
 packages:tesseract:
   - changed-files:
-      - any-glob-to-any-file:
-          - packages/tesseract/*
-          - packages/tesseract/**/*
+      - any-glob-to-any-file: ['packages/tesseract/*', 'packages/tesseract/**/*']

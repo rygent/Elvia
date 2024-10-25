@@ -1,22 +1,19 @@
-name: Bug report
-description: Report incorrect or unexpected behavior
-labels: [bug, need repro]
+name: Apps bug report
+description: Report incorrect or unexpected behavior.
+labels: [bug]
 body:
   - type: markdown
     attributes:
       value: |
         Thank you for filing an issue! If you are here to ask a question, use Discord instead: https://discord.gg/FD5MMabf8Y
 
-        This issue form is for Elvia, including other packages.
+        This issue form is for any apps.
   - type: dropdown
-    id: package
+    id: application
     attributes:
-      label: Which package is this bug report for?
+      label: Which application is this bug report for?
       options:
-        - bot
-        - database
-        - logger
-        - tesseract
+        - Bot
     validations:
       required: true
   - type: textarea
@@ -43,17 +40,25 @@ body:
     id: node-version
     attributes:
       label: Node.js version
-      description: Which version of Node.js are you using? Run `node --version` in your project directory and paste the output.
+      description: Which version of Node.js are you using?
+      placeholder: Node.js (22.10.0)
+  - type: input
+    id: typescript-version
+    attributes:
+      label: TypeScript version
+      description: Which version of TypeScript are you using?
+      placeholder: TypeScript (5.6.3)
   - type: input
     id: os
     attributes:
       label: Operating system
       description: Which OS does your application run on?
+      placeholder: macOS Ventura (13.3.1)
   - type: dropdown
     id: priority
     attributes:
-      label: Priority this issue should have
-      description: Please be realistic. If you need to elaborate on your reasoning, please use the Issue description field above.
+      label: Issue priority
+      description: Please be realistic. If you need to elaborate on your reasoning, please use the issue description field above.
       options:
         - Low (slightly annoying)
         - Medium (should be fixed soon)

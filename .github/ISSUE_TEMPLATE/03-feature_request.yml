@@ -6,6 +6,17 @@ body:
     attributes:
       value: |
         Use Discord for questions: https://discord.gg/FD5MMabf8Y
+  - type: dropdown
+    id: application_or_package
+    attributes:
+      label: Which application or package is this feature request for?
+      options:
+        - bot
+        - database
+        - logger
+        - tesseract
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
