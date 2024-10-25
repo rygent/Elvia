@@ -12,9 +12,12 @@ body:
       label: Which application or package is this feature request for?
       options:
         - bot
+        - website
         - database
         - logger
         - tesseract
+        - ui
+        - utils
     validations:
       required: true
   - type: textarea

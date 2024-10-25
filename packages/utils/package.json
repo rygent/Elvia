@@ -1,0 +1,55 @@
+{
+  "name": "@elvia/utils",
+  "version": "0.1.0",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  },
+  "license": "GPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/Rygent/Elvia.git",
+    "directory": "packages/utils"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react-string-replace": "^1.1.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.9",
+    "eslint": "^9.13.0",
+    "prettier": "^3.3.3",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
+  },
+  "files": [
+    "./dist/"
+  ],
+  "engines": {
+    "node": ">=v20.11.0"
+  },
+  "packageManager": "yarn@4.5.1"
+}
