@@ -670,7 +670,7 @@ __metadata:
     autoprefixer: "npm:^10.4.20"
     class-variance-authority: "npm:^0.7.0"
     eslint: "npm:^9.13.0"
-    lucide-react: "npm:^0.453.0"
+    lucide-react: "npm:^0.454.0"
     postcss: "npm:^8.4.47"
     prettier: "npm:^3.3.3"
     prettier-plugin-tailwindcss: "npm:^0.6.8"
@@ -7096,12 +7096,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.453.0":
-  version: 0.453.0
-  resolution: "lucide-react@npm:0.453.0"
+"lucide-react@npm:^0.454.0":
+  version: 0.454.0
+  resolution: "lucide-react@npm:0.454.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
-  checksum: 10c0/eec257049609eff958329943da6e129c8db1969aa789c6e922f59418d7b6f6913c22e971ac7885efc80eeb3e41e180c48afdee92738a63a31ef5a39836037b7e
+  checksum: 10c0/e5eebe542e32f0c2210a702fddbbe6e37b977dc7d8ff991b7fd5e886f96adf2ac4870275b618c79d6b2f611da1bfb8696062c5138b06ee728090309b8e27ca07
   languageName: node
   linkType: hard
 
