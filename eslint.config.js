@@ -77,7 +77,7 @@ export default tseslint.config(
 			ecmaVersion: 'latest',
 			sourceType: 'module'
 		},
-		ignores: ['.next/', '.turbo/', '.vscode/', '.yarn/', 'dist/', 'node_modules/']
+		ignores: ['.next/', '.turbo/', '.vscode/', 'dist/', 'node_modules/']
 	},
 	commonRuleset,
 	nodeRuleset,

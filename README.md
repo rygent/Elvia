@@ -33,7 +33,7 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 
 1. [Node.JS v20.10+][node.js] or higher.
 2. [MongoDB v5.0+][mongodb] or higher.
-3. [Yarn v1.22+][yarn] or higher. (Highly recommended)
+3. [pnpm v9.12+][pnpm] or higher. (Highly recommended)
 
 ## Invite
 
@@ -59,7 +59,7 @@ This project is licensed under the GPL 3.0 license. See the file [`LICENSE`][lic
 [license]: ./LICENSE
 [node.js]: https://nodejs.org/en/download
 [mongodb]: https://www.mongodb.com/try/download/community
-[yarn]: https://yarnpkg.com/en/docs/install
+[pnpm]: https://pnpm.io/installation
 [discord.js github]: https://github.com/discordjs/discord.js
 [discord server]: https://discord.gg/FD5MMabf8Y
 [top.gg]: https://top.gg/bot/614645495779819551

@@ -4,7 +4,6 @@
   "eslint.useFlatConfig": true,
   "search.exclude": {
     "**/node_modules": true,
-    "**/.yarn": true,
     "**/.git/": true
   },
   "typescript.tsdk": "./node_modules/typescript/lib",

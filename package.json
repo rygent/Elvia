@@ -1,19 +1,16 @@
 {
-  "name": "@elvia/root",
+  "name": "@elvia/monorepo",
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo run build --concurrency=3",
     "lint": "turbo run lint --concurrency=3",
     "format": "turbo run format --concurrency=3",
-    "register": "yarn workspace @elvia/bot register",
+    "register": "pnpm --filter=@elvia/bot register",
     "generate": "turbo run db:generate",
     "push": "turbo run db:push",
-    "postinstall": "is-ci || husky install",
-    "update": "yarn upgrade-interactive"
+    "postinstall": "is-ci || husky",
+    "update": "pnpm --recursive update --interactive",
+    "update:latest": "pnpm --recursive update --interactive --latest"
   },
   "author": "Rygent",
   "license": "GPL-3.0",
@@ -37,13 +34,16 @@
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.12.2"
   },
-  "lint-staged": {
-    "**/*.{js,ts}": [
-      "prettier --write"
-    ],
-    "*.json": [
-      "prettier --write"
-    ]
+  "prisma": {
+    "schema": "packages/database/prisma/schema.prisma"
   },
-  "packageManager": "yarn@4.5.1"
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.0",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.0",
+      "react": "19.0.0-rc-0bc30748-20241028",
+      "react-dom": "19.0.0-rc-0bc30748-20241028"
+    }
+  },
+  "packageManager": "pnpm@9.12.3"
 }
