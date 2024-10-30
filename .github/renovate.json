@@ -1,11 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "lockFileMaintenance": {
     "enabled": true,
     "dependencyDashboardApproval": true,
-    "recreateClosed": true,
-    "rebaseStalePrs": true,
+    "recreateWhen": "always",
+    "rebaseWhen": "behind-base-branch",
     "branchTopic": "lock-file-maintenance",
     "commitMessageAction": "Lockfile maintenance",
     "schedule": ["before 6am on sunday"],
@@ -19,14 +19,14 @@
       "dependencyDashboardApproval": true
     },
     {
-      "matchPackagePatterns": ["*"],
       "semanticCommitType": "chore",
       "commitMessageAction": "Bump",
       "commitMessageExtra": "to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if newValue}}{{{prettyNewVersion}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}",
       "commitMessageTopic": "{{depName}}",
       "rangeStrategy": "bump",
-      "recreateClosed": true,
-      "addLabels": ["dependencies"]
+      "recreateWhen": "always",
+      "addLabels": ["dependencies"],
+      "matchPackageNames": ["*"]
     },
     {
       "matchDepTypes": ["dependencies", "require"],
@@ -61,7 +61,7 @@
     "enabled": true,
     "schedule": ["at any time"],
     "addLabels": ["security"],
-    "stabilityDays": 0,
+    "minimumReleaseAge": null,
     "rangeStrategy": "update-lockfile",
     "commitMessageSuffix": "[SECURITY]",
     "branchTopic": "{{{datasource}}}-{{{depName}}}-vulnerability",
