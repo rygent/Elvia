@@ -542,7 +542,7 @@ __metadata:
     "@swc/cli": "npm:^0.4.0"
     "@swc/core": "npm:^1.7.39"
     "@types/moment-duration-format": "npm:^2.2.6"
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     axios: "npm:^1.7.7"
     bufferutil: "npm:^4.0.8"
     colorette: "npm:^2.0.20"
@@ -570,7 +570,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/database@workspace:packages/database"
   dependencies:
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     eslint: "npm:^9.13.0"
     prettier: "npm:^3.3.3"
     prettier-plugin-prisma: "npm:^5.0.0"
@@ -586,7 +586,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/logger@workspace:packages/logger"
   dependencies:
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     colorette: "npm:^2.0.20"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^9.13.0"
@@ -610,7 +610,7 @@ __metadata:
     "@commitlint/cli": "npm:^19.5.0"
     "@commitlint/config-angular": "npm:^19.5.0"
     "@types/lodash.merge": "npm:^4.6.9"
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     eslint: "npm:^9.13.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-config-terrax: "npm:^0.2.0"
@@ -637,7 +637,7 @@ __metadata:
     "@types/compression": "npm:^1.7.5"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     body-parser: "npm:^1.20.3"
     commander: "npm:^12.1.0"
     compression: "npm:^1.7.4"
@@ -666,7 +666,7 @@ __metadata:
     "@radix-ui/react-navigation-menu": "npm:^1.2.1"
     "@radix-ui/react-separator": "npm:^1.1.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     autoprefixer: "npm:^10.4.20"
     class-variance-authority: "npm:^0.7.0"
     eslint: "npm:^9.13.0"
@@ -691,7 +691,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elvia/utils@workspace:packages/utils"
   dependencies:
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     clsx: "npm:^2.1.1"
     eslint: "npm:^9.13.0"
     prettier: "npm:^3.3.3"
@@ -709,7 +709,7 @@ __metadata:
     "@elvia/ui": "workspace:^"
     "@elvia/utils": "workspace:^"
     "@ianvs/prettier-plugin-sort-imports": "npm:^4.3.1"
-    "@types/node": "npm:^22.7.9"
+    "@types/node": "npm:^22.8.4"
     "@types/react": "npm:types-react@19.0.0-rc.1"
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
     autoprefixer: "npm:^10.4.20"
@@ -2917,12 +2917,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.7.9":
+"@types/node@npm:*":
   version: 22.7.9
   resolution: "@types/node@npm:22.7.9"
   dependencies:
     undici-types: "npm:~6.19.2"
   checksum: 10c0/2d1917702b9d9ede8e4d8151cd8b1af8bc147d543486474ffbe0742e38764ea73105939e6a767addf7a4c39e842e16eae762bff90617d7b7f9ee3fbbb2d23bfa
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.8.4":
+  version: 22.8.4
+  resolution: "@types/node@npm:22.8.4"
+  dependencies:
+    undici-types: "npm:~6.19.8"
+  checksum: 10c0/f88d030480630194a9168772462ec09b2d86454f34368c46d2b7fda5dc6e14594b1576fcc5c35cc53b57a4d1e8dd2865a85ae81f34ded0d1af753a0f5d294c25
   languageName: node
   linkType: hard
 
@@ -9922,7 +9931,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.19.2":
+"undici-types@npm:~6.19.2, undici-types@npm:~6.19.8":
   version: 6.19.8
   resolution: "undici-types@npm:6.19.8"
   checksum: 10c0/078afa5990fba110f6824823ace86073b4638f1d5112ee26e790155f481f2a868cc3e0615505b6f4282bdf74a3d8caad715fd809e870c2bb0704e3ea6082f344
