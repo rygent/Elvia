@@ -45,7 +45,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@swc/cli": "^0.4.0",
+    "@swc/cli": "^0.5.0",
     "@swc/core": "^1.7.40",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.8.4",
