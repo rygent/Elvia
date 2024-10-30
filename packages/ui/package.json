@@ -30,8 +30,7 @@
     "@types/react-dom": "*",
     "next": "*",
     "react": "*",
-    "react-dom": "*",
-    "tailwindcss": "*"
+    "react-dom": "*"
   },
   "dependencies": {
     "@elvia/utils": "workspace:^",
@@ -57,5 +56,5 @@
   "engines": {
     "node": ">=v20.11.0"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "pnpm@9.12.3"
 }

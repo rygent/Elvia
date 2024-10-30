@@ -4,14 +4,14 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rimraf ./dist && yarn build:check && yarn build:swc",
-    "build:check": "tsc --noEmit",
+    "build": "rimraf ./dist && pnpm run build:swc",
     "build:swc": "swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
     "build:command": "tesseract register",
     "start": "node --no-warnings ./dist/index.js",
     "start:shard": "node --no-warnings ./dist/shard.js",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
@@ -61,5 +61,5 @@
   "engines": {
     "node": ">=v20.11.0"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "pnpm@9.12.3"
 }
