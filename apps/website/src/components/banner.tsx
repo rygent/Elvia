@@ -12,11 +12,11 @@ interface BannerProps {
 export function Banner({ text, dismissable = false }: BannerProps) {
   if (!text) return null;
 
-  const hideBannerScript = `try{if(localStorage.getItem('banner')==='disabled'){document.body.classList.add('banner')}}catch(e){}`;
+  const [displayed, setDisplayed] = React.useState(true);
+  if (!displayed) return null;
 
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div className="relative top-0 z-20 flex h-10 items-center overflow-hidden bg-card px-8 print:hidden [body.banner_&]:hidden">
         {/* Background */}
         <div
@@ -43,7 +43,6 @@ export function Banner({ text, dismissable = false }: BannerProps) {
             }}
           />
         </div>
-        {/* <p className="text-sm leading-6">We are going live soon! Get notified when launched.</p> */}
         <p className="w-full truncate px-4 text-center text-sm font-medium leading-6">{renderComponent(text)}</p>
         {dismissable && (
           <div className="flex flex-1 justify-end">
@@ -53,12 +52,7 @@ export function Banner({ text, dismissable = false }: BannerProps) {
               size="icon"
               className="h-7 w-7"
               onClick={() => {
-                try {
-                  localStorage.setItem('banner', 'disabled');
-                } catch (error) {
-                  /* empty */
-                }
-                document.body.classList.add('banner');
+                setDisplayed(false);
               }}
             >
               <X size={18} aria-hidden="true" />
