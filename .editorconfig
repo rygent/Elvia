@@ -13,6 +13,10 @@ block_comment_start = /*
 block_comment = *
 block_comment_end = */
 
+[*.{css,jsx,tsx}]
+indent_size = 2
+indent_style = tab
+
 [*.{json,prisma}]
 indent_size = 2
 indent_style = space
