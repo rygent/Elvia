@@ -1,4 +1,5 @@
-import { Client, Command } from '@elvia/tesseract';
+import { Client } from '@/lib/structures/client.js';
+import { Command } from '@/lib/structures/command.js';
 import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';

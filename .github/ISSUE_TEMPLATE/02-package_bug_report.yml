@@ -15,9 +15,9 @@ body:
       options:
         - database
         - logger
-        - tesseract
         - ui
         - utils
+        - webserver
     validations:
       required: true
   - type: textarea

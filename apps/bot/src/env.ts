@@ -33,7 +33,7 @@ export const env = schema.parse({
 	DatabaseUrl: process.env.DATABASE_URL,
 
 	ClientApiAuth: process.env.CLIENT_API_AUTH,
-	ClientApiPort: process.env.CLIENT_API_PORT,
+	ClientApiPort: process.env.CLIENT_API_PORT ?? process.env.PORT,
 
 	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',

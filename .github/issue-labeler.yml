@@ -10,12 +10,12 @@ packages:database:
 packages:logger:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nlogger\\n"
-packages:tesseract:
-  - "### Which (application|package|application or package) is this (bug
-    report|feature request) for\\?\\n\\ntesseract\\n"
 packages:ui:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nui\\n"
 packages:utils:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nutils\\n"
+packages:webserver:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\nwebserver\\n"

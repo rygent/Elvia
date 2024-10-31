@@ -59,17 +59,17 @@ export function isNsfwChannel(channel: Channel | Nullish): boolean {
 	}
 }
 
-export function resolveCommandName(
+export function getCommandName(
 	interaction: CommandInteraction<'cached' | 'raw'> | AutocompleteInteraction<'cached' | 'raw'>
 ): string {
 	if (!interaction.isChatInputCommand() && !interaction.isAutocomplete()) return interaction.commandName;
 
-	const topLevelCommand = interaction.commandName;
+	const { commandName } = interaction;
 	const subCommandGroup = interaction.options.getSubcommandGroup(false);
 	const subCommand = interaction.options.getSubcommand(false);
 
 	const command = [
-		topLevelCommand,
+		commandName,
 		...(subCommandGroup ? [subCommandGroup] : []),
 		...(subCommand ? [subCommand] : [])
 	].join(' ');

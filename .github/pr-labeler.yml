@@ -10,12 +10,12 @@ packages:database:
 packages:logger:
   - changed-files:
       - any-glob-to-any-file: ['packages/logger/*', 'packages/logger/**/*']
-packages:tesseract:
-  - changed-files:
-      - any-glob-to-any-file: ['packages/tesseract/*', 'packages/tesseract/**/*']
 packages:ui:
   - changed-files:
       - any-glob-to-any-file: ['packages/ui/*', 'packages/ui/**/*']
 packages:utils:
   - changed-files:
       - any-glob-to-any-file: ['packages/utils/*', 'packages/utils/**/*']
+packages:webserver:
+  - changed-files:
+      - any-glob-to-any-file: ['packages/webserver/*', 'packages/webserver/**/*']

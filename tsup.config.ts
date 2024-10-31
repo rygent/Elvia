@@ -7,7 +7,7 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 		clean: true,
 		dts: options.dts ?? true,
 		entry: options.entry ?? ['src/index.ts'],
-		format: options.format ?? ['esm', 'cjs'],
+		format: options.format ?? ['esm'],
 		keepNames: true,
 		minify: false,
 		platform: 'node',

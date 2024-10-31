@@ -1,7 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import { Client, Command } from '@elvia/tesseract';
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+import { Client } from '@/lib/structures/client.js';
+import { Command } from '@/lib/structures/command.js';
 import {
 	type APIMessageComponentEmoji,
 	ApplicationCommandOptionType,
@@ -42,8 +41,7 @@ export default class extends Command {
 			],
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
-			category: 'General',
-			enabled: false
+			category: 'General'
 		});
 	}
 
@@ -53,19 +51,19 @@ export default class extends Command {
 		const app_command = await this.client.application?.commands.fetch();
 
 		if (command) {
-			const cmd = this.client.interactions.get(command);
+			const cmd = this.client.commands.get(command);
 			if (!cmd) {
 				return interaction.reply({ content: 'This command does not seem to exist.', ephemeral: true });
 			}
 
-			const cmdId = app_command.find((item) => item.name === cmd.name.split(' ')[0])?.id;
+			const cmdId = app_command.find((item) => item.name === cmd.unique?.split(' ')[0])?.id;
 
-			const permissions = cmd.memberPermissions.toArray();
+			const permissions = cmd.userPermissions.toArray();
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Default)
 				.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: this.client.user.displayAvatarURL() })
-				.setTitle(`${chatInputApplicationCommandMention(cmd.name, cmdId as string)}`)
+				.setTitle(`${chatInputApplicationCommandMention(cmd.unique!, cmdId as string)}`)
 				.setThumbnail('https://i.imgur.com/YxoUvH8.png')
 				.setDescription(
 					[
@@ -91,10 +89,10 @@ export default class extends Command {
 		let i1 = 8;
 		let page = 1;
 
-		const commands = this.client.interactions
-			.filter(({ context, ownerOnly }) => !context && !ownerOnly)
+		const commands = this.client.commands
+			.filter(({ owner, type }) => !owner && type === ApplicationCommandType.ChatInput)
 			.map((item) => ({
-				id: app_command.find((i) => i.name === item.name.split(' ')[0])?.id,
+				id: app_command.find((i) => i.name === item.unique?.split(' ')[0])?.id,
 				...item
 			}));
 
@@ -108,7 +106,7 @@ export default class extends Command {
 
 		let selectedCommands = commands
 			.filter((cmd) => {
-				if (cmd.guildOnly && !interaction.inGuild()) return false;
+				if (cmd.guild && !interaction.inGuild()) return false;
 				return true;
 			})
 			.filter((cmd) => cmd.category === 'General');
@@ -174,10 +172,10 @@ export default class extends Command {
 			`Welcome to help menu, here is the list of commands!`,
 			`Need more help? Come join our ${hyperlink('support server', env.SupportServerUrl)}.\n`,
 			selectedCommands
-				.sort((a, b) => a.name.localeCompare(b.name))
+				.sort((a, b) => a.unique!.localeCompare(b.unique!))
 				.map(
 					(cmd) =>
-						`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+						`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 				)
 				.slice(i0, i1)
 				.join('\n')
@@ -220,7 +218,7 @@ export default class extends Command {
 			if (!selected.length) {
 				selectedCommands = commands
 					.filter((cmd) => {
-						if (cmd.guildOnly && !interaction.inGuild()) return false;
+						if (cmd.guild && !interaction.inGuild()) return false;
 						return true;
 					})
 					.filter((cmd) => cmd.category === 'General');
@@ -236,7 +234,7 @@ export default class extends Command {
 			if (selected.length) {
 				selectedCommands = commands
 					.filter((cmd) => {
-						if (cmd.guildOnly && !interaction.inGuild()) return false;
+						if (cmd.guild && !interaction.inGuild()) return false;
 						return true;
 					})
 					.filter((cmd) => selected.includes(cmd.category.toLowerCase()));
@@ -268,10 +266,10 @@ export default class extends Command {
 				2,
 				description.length,
 				selectedCommands
-					.sort((a, b) => a.name.localeCompare(b.name))
+					.sort((a, b) => a.unique!.localeCompare(b.unique!))
 					.map(
 						(cmd) =>
-							`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+							`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 					)
 					.slice(i0, i1)
 					.join('\n')
@@ -308,10 +306,10 @@ export default class extends Command {
 						2,
 						description.length,
 						selectedCommands
-							.sort((a, b) => a.name.localeCompare(b.name))
+							.sort((a, b) => a.unique!.localeCompare(b.unique!))
 							.map(
 								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -341,10 +339,10 @@ export default class extends Command {
 						2,
 						description.length,
 						selectedCommands
-							.sort((a, b) => a.name.localeCompare(b.name))
+							.sort((a, b) => a.unique!.localeCompare(b.unique!))
 							.map(
 								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -374,10 +372,10 @@ export default class extends Command {
 						2,
 						description.length,
 						selectedCommands
-							.sort((a, b) => a.name.localeCompare(b.name))
+							.sort((a, b) => a.unique!.localeCompare(b.unique!))
 							.map(
 								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -407,10 +405,10 @@ export default class extends Command {
 						2,
 						description.length,
 						selectedCommands
-							.sort((a, b) => a.name.localeCompare(b.name))
+							.sort((a, b) => a.unique!.localeCompare(b.unique!))
 							.map(
 								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.name, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
+									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
 							)
 							.slice(i0, i1)
 							.join('\n')
@@ -442,22 +440,22 @@ export default class extends Command {
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
 		const focused = interaction.options.getFocused();
 
-		const choices = this.client.interactions
-			.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()))
+		const choices = this.client.commands
+			.filter(({ unique }) => unique?.includes(focused.toLowerCase()))
 			.map((commands) => ({ ...commands }));
 
 		const respond = choices
-			.sort((a, b) => a.name.localeCompare(b.name))
-			.filter((cmd) => !cmd.context && !cmd.ownerOnly)
-			.filter((cmd) => {
-				if (cmd.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
+			.sort((a, b) => a.unique!.localeCompare(b.unique!))
+			.filter((command) => !command.owner && command.type === ApplicationCommandType.ChatInput)
+			.filter((command) => {
+				if (command.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
 				return true;
 			})
-			.filter((cmd) => {
-				if (cmd.guildOnly && !interaction.inGuild()) return false;
+			.filter((command) => {
+				if (command.guild && !interaction.inCachedGuild()) return false;
 				return true;
 			})
-			.map(({ name }) => ({ name, value: name }));
+			.map(({ unique }) => ({ name: unique!, value: unique! }));
 
 		return interaction.respond(respond.slice(0, 25));
 	}

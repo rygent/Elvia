@@ -1,4 +1,5 @@
-import { Client, Command } from '@elvia/tesseract';
+import { Client } from '@/lib/structures/client.js';
+import { Command } from '@/lib/structures/command.js';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
