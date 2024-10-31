@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ModeToggle } from '@/components/mode-toggle';
 import { siteConfig } from '@/config';
 import { buttonVariants, Github } from '@elvia/ui';
 import { cn } from '@elvia/utils';
@@ -55,7 +54,6 @@ export function SiteHeader({ transparentMode = 'none' }: HeaderProps) {
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <ModeToggle />
           </nav>
         </div>
       </div>
