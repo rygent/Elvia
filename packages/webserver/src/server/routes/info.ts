@@ -1,7 +1,6 @@
 import { Router } from 'express';
-import type { Router as IRouter } from 'express-serve-static-core';
 
-export const router: IRouter = Router();
+export const router = Router();
 // @ts-expect-error TS2769: No overload matches this call.
 router.get('/', (req, res) => {
 	const shard = req.app.get('shard-manager');
