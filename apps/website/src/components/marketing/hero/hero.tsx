@@ -25,7 +25,7 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
           target="_blank"
           className={cn(
             badgeVariants({ variant: 'outline' }),
-            'cursor-pointer space-x-2 font-mono delay-75 duration-200 hover:bg-secondary'
+            'cursor-pointer space-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary'
           )}
         >
           <Sparkles size={18} strokeWidth={1.5} className="scale-x-[-1]" />

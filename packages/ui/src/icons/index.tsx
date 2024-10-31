@@ -1,3 +1,4 @@
-export { Github } from './Github';
+export * from './Github';
+export * from './Discord';
 
-export { ArrowRight, Moon, Sparkles, Sun, X } from 'lucide-react';
+export { ArrowRight, Monitor, Moon, Sparkles, Sun, X } from 'lucide-react';
