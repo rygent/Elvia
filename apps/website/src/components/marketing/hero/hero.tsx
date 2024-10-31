@@ -28,7 +28,7 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
             'cursor-pointer space-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary'
           )}
         >
-          <Sparkles size={18} strokeWidth={1.5} className="scale-x-[-1]" />
+          <Sparkles size={15} strokeWidth={1.5} className="scale-x-[-1]" />
           <span>Star us on GitHub</span> <ArrowRight size={15} strokeWidth={1.5} />
         </Link>
         <h1 className="mt-4 font-heading text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
@@ -37,12 +37,12 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
         <h2 className="text-md mt-6 text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           {cta[0] && (
-            <Button size="lg" variant="default" asChild>
+            <Button size="lg" variant="default" className="shadow-none" asChild>
               <Link href={cta[0].href}>{cta[0].label}</Link>
             </Button>
           )}
           {cta[1] && (
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" className="shadow-none" asChild>
               <Link href={cta[1].href}>{cta[1].label}</Link>
             </Button>
           )}

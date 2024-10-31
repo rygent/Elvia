@@ -73,7 +73,7 @@ export function SiteFooter() {
               </Link>
             ))}
           </div>
-          <ThemeSwitcher className="mt-8 bg-muted" />
+          <ThemeSwitcher className="mt-6" />
         </div>
         <div className="flex gap-4 sm:gap-16">
           {links.map((group, index) => (
@@ -97,7 +97,7 @@ export function SiteFooter() {
         </div>
       </div>
       <p className="mb-4 mt-12 text-sm text-muted-foreground">
-        Copyright &copy; 2019 - {new Date().getFullYear()} {siteConfig.global.name}. All rights reserved.
+        Copyright &copy; {new Date().getFullYear()} {siteConfig.global.name}. All rights reserved.
       </p>
     </footer>
   );
