@@ -7,7 +7,7 @@
       "outputLogs": "errors-only"
     },
     "@elvia/bot#build": {
-      "dependsOn": ["^build", "@elvia/database#db:generate"],
+      "dependsOn": ["^build", "@elvia/database#build"],
       "outputs": ["dist/**"],
       "outputLogs": "errors-only"
     },
@@ -17,11 +17,9 @@
       "outputLogs": "errors-only"
     },
     "lint": {
-      "dependsOn": ["^build"],
       "outputLogs": "errors-only"
     },
     "format": {
-      "dependsOn": ["^build"],
       "outputLogs": "errors-only"
     },
     "@elvia/database#db:generate": {

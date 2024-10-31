@@ -5,5 +5,5 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["./src/**/*.ts", "prettier.config.js"]
+  "include": ["./scripts/**/*.ts", "./src/**/*.ts", "prettier.config.js"]
 }

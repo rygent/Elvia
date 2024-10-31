@@ -2,18 +2,13 @@
   "name": "@elvia/database",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
       }
     }
   },
@@ -27,13 +22,13 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "prebuild": "pnpm db:generate"
+    "prebuild": "pnpm run db:generate"
   },
   "license": "GPL-3.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/Rygent/Elvia.git",
+    "url": "https://gihub.com/rygent/Elvia.git",
     "directory": "packages/database"
   },
   "peerDependencies": {

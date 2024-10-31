@@ -1,5 +1,7 @@
 {
   "name": "@elvia/monorepo",
+  "version": "0.0.0",
+  "description": "A powerful multipurpose discord app.",
   "type": "module",
   "scripts": {
     "build": "turbo run build --concurrency=3",
@@ -15,6 +17,14 @@
   "author": "Rygent",
   "license": "GPL-3.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/rygent/Elvia.git"
+  },
+  "bugs": {
+    "url": "https://gihub.com/rygent/Elvia/issues"
+  },
+  "funding": "https://gihub.com/rygent/Elvia?sponsor",
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-angular": "^19.5.0",

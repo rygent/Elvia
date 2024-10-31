@@ -22,7 +22,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/Rygent/Elvia.git",
+    "url": "https://gihub.com/rygent/Elvia.git",
     "directory": "packages/ui"
   },
   "peerDependencies": {

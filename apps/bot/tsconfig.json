@@ -9,6 +9,6 @@
     },
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts", "./src/**/*.json"],
+  "include": ["./scripts/**/*.ts", "./src/**/*.ts", "./src/**/*.json"],
   "exclude": ["./dist/**/*"]
 }
