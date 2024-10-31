@@ -16,7 +16,7 @@ export async function CallToAction({ headline, subheadline, className }: CallToA
 
 	return (
 		<section className={cn('mx-auto max-w-2xl px-6 text-center', className)}>
-			<h2 className="mx-auto mt-8 max-w-2xl font-heading text-3xl font-bold lg:text-5xl">{headline}</h2>
+			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">{headline}</h2>
 			<p className="mt-4 text-lg text-muted-foreground">{subheadline}</p>
 			<div className="mt-10 flex justify-center space-x-2">
 				<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer" className="group flex">

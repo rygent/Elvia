@@ -31,7 +31,7 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 					<Sparkles size={15} strokeWidth={1.5} className="scale-x-[-1]" />
 					<span>Star us on GitHub</span> <ArrowRight size={15} strokeWidth={1.5} />
 				</Link>
-				<h1 className="mt-4 font-heading text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+				<h1 className="mt-4 font-cal text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
 					<Balancer>{headline.split('\n')}</Balancer>
 				</h1>
 				<h2 className="text-md mt-6 text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>

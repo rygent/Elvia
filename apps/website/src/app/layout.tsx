@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@/components/analytics';
 import { SpeedInsights } from '@/components/speed-insights';
 import { ThemeProvider } from '@/components/theme-provider';
-import { fontHeading, geistMono, geistSans } from '@/styles/fonts.ts';
+import { calSans, geistMono, geistSans } from '@/styles/fonts.ts';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
 import '@elvia/ui/styles/shared-globals.css';
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: React.PropsWithChildren) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, fontHeading.variable)}>
+			<body className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, calSans.variable)}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<main className="min-h-screen">{children}</main>
 					<Analytics />
