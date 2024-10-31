@@ -1,9 +1,9 @@
 // tailwind config is required for editor support
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
-	content: ['./**/*.{js,ts,jsx,tsx}'],
+const config = {
 	darkMode: ['class'],
+	content: ['./**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		container: {
 			center: true,
@@ -64,5 +64,6 @@ const config: Config = {
 	},
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	plugins: [require('tailwindcss-animate')]
-};
+} satisfies Config;
+
 export default config;

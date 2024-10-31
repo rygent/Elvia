@@ -1,6 +1,6 @@
 import prettierConfig from '../../prettier.config.js';
 
-/** @type {import('prettier').Config} */
+/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
 const config = {
 	...prettierConfig,
 	importOrder: [
@@ -20,8 +20,8 @@ const config = {
 		'<BUILTIN_MODULES>',
 		'^[./]'
 	],
-	importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-	importOrderCombineTypeAndValueImports: true,
+	importOrderParserPlugins: ['typescript', 'jsx'],
+	importOrderTypeScriptVersion: '5.6.3',
 	plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss']
 };
 

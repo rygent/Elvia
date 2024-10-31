@@ -3,7 +3,7 @@ import sharedConfig from '@elvia/ui/tailwind.config.ts';
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
-const config: Config = {
+const config = {
 	content: ['./src/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
@@ -15,5 +15,6 @@ const config: Config = {
 		}
 	},
 	presets: [sharedConfig]
-};
+} satisfies Config;
+
 export default config;

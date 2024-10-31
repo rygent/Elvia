@@ -1,9 +1,9 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig = {
 	pageExtensions: ['ts', 'tsx'],
-	poweredByHeader: false,
 	reactStrictMode: false,
+	poweredByHeader: false,
 	eslint: {
 		ignoreDuringBuilds: true
 	},
@@ -23,6 +23,6 @@ const nextConfig: NextConfig = {
 		];
 	},
 	transpilePackages: ['@elvia/ui', '@elvia/utils']
-};
+} satisfies NextConfig;
 
 export default nextConfig;
