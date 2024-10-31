@@ -1,5 +1,7 @@
 import * as React from 'react';
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@/components/analytics';
+import { SpeedInsights } from '@/components/speed-insights';
 import { ThemeProvider } from '@/components/theme-provider';
 import { fontHeading, geistMono, geistSans } from '@/styles/fonts.ts';
 import { siteConfig } from '@/config';
@@ -33,6 +35,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
 			<body className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, fontHeading.variable)}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<main className="min-h-screen">{children}</main>
+					<Analytics />
+					<SpeedInsights />
 				</ThemeProvider>
 			</body>
 		</html>
