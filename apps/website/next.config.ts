@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
 	pageExtensions: ['ts', 'tsx'],
 	poweredByHeader: false,
 	reactStrictMode: false,
+	eslint: {
+		ignoreDuringBuilds: true
+	},
 	// eslint-disable-next-line @typescript-eslint/require-await
 	async redirects() {
 		return [

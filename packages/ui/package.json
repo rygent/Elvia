@@ -13,8 +13,8 @@
     "./tailwind.config.ts": "./tailwind.config.ts"
   },
   "scripts": {
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --format=pretty",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix --format=pretty",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
@@ -47,6 +47,7 @@
     "@types/node": "^22.8.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.13.0",
+    "eslint-formatter-pretty": "^6.0.1",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",

@@ -17,8 +17,8 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",
     "db:format": "prisma format",
-    "lint": "eslint \"src/**/*.ts\"",
-    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "lint": "eslint \"src/**/*.ts\" --format=pretty",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
     "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@types/node": "^22.8.4",
     "eslint": "^9.13.0",
+    "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.3.3",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.21.1",
