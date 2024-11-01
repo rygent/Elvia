@@ -64,6 +64,8 @@ export function DesktopNav() {
 								navigationMenuTriggerStyle(),
 								'gap-1 bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50'
 							)}
+							target="_blank"
+							rel="noreferrer"
 						>
 							Vote on Top.gg
 							<ExternalLink size={14} strokeWidth={1.5} />
@@ -96,4 +98,5 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWit
 		);
 	}
 );
+
 ListItem.displayName = 'ListItem';
