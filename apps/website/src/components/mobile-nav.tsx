@@ -34,13 +34,13 @@ export function MobileNav() {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="hamburger h-8 w-8 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+					className="hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-6"
 				>
-					<Hamburger size={24} strokeWidth={1.5} className={cn({ open: isOpen })} />
+					<Hamburger size={24} className={cn({ open: isOpen })} />
 					<span className="sr-only">Menu</span>
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="z-40 h-[calc(100vh-4.0625rem)] w-screen animate-none rounded-none border-none bg-background/90 p-0 px-3 backdrop-blur transition-none supports-[backdrop-filter]:bg-background/90 md:hidden">
+			<PopoverContent className="z-40 h-[calc(100vh-4.0625rem)] w-screen animate-none rounded-none border-none bg-background/90 p-0 px-3 shadow-none backdrop-blur transition-transform supports-[backdrop-filter]:bg-background/90 md:hidden">
 				<ScrollArea>
 					<section className="my-3 px-3">
 						<Button variant="default" className="w-full shadow-none">

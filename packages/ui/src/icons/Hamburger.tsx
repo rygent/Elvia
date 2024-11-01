@@ -6,7 +6,6 @@ export const Hamburger: LucideIcon = ({ size = 28, ...restProps }) => {
 		<svg
 			stroke="currentColor"
 			fill="currentColor"
-			strokeWidth="0"
 			version="1.1"
 			viewBox="0 0 24 24"
 			width={size}
