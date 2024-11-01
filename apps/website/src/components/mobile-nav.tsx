@@ -34,7 +34,7 @@ export function MobileNav() {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-6"
+					className="hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-5"
 				>
 					<Hamburger size={24} className={cn({ open: isOpen })} />
 					<span className="sr-only">Menu</span>

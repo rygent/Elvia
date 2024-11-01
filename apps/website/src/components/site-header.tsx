@@ -31,7 +31,7 @@ export function SiteHeader() {
 						<Button
 							variant="ghost"
 							size="icon"
-							className="focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-6"
+							className="focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-5"
 							asChild
 						>
 							<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer">
