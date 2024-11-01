@@ -4,7 +4,6 @@ import { Animation } from '@/components/marketing/hero/animation';
 import { siteConfig } from '@/config';
 import { ArrowRight, badgeVariants, Button, Sparkles } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-// eslint-disable-next-line import/no-named-as-default
 import Balancer from 'react-wrap-balancer';
 
 interface HeroProps {
