@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { DesktopNav } from '@/components/desktop-nav';
+import { MobileNav } from '@/components/mobile-nav';
 import { siteConfig } from '@/config';
 import { Button, Github } from '@elvia/ui';
 
@@ -38,6 +39,7 @@ export function SiteHeader() {
 								<span className="sr-only">GitHub</span>
 							</Link>
 						</Button>
+						<MobileNav />
 					</nav>
 				</div>
 			</div>
