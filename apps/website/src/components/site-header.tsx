@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { DesktopNav } from '@/components/desktop-nav';
 import { siteConfig } from '@/config';
 import { buttonVariants, Github } from '@elvia/ui';
 import { cn } from '@elvia/utils';
@@ -39,6 +40,7 @@ export function SiteHeader({ transparentMode = 'none' }: HeaderProps) {
 			})}
 		>
 			<div className="container flex h-14 max-w-screen-2xl items-center">
+				<DesktopNav />
 				<div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
 					<nav className="flex items-center">
 						<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer">
