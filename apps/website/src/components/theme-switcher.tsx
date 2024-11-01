@@ -38,7 +38,7 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
 			<SelectTrigger
 				className={cn(
 					buttonVariants({ variant: 'outline' }),
-					'flex w-[150px] items-center gap-2 shadow-none [&>span]:line-clamp-1 [&>span]:flex [&>span]:w-full [&>span]:items-center [&>span]:gap-1 [&>span]:truncate [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0',
+					'flex w-[150px] items-center gap-2 shadow-none focus:ring-0 focus-visible:ring-0 [&>span]:line-clamp-1 [&>span]:flex [&>span]:w-full [&>span]:items-center [&>span]:gap-1 [&>span]:truncate [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0',
 					className
 				)}
 				aria-label="Select theme"
