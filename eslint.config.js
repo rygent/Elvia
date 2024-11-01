@@ -30,7 +30,7 @@ const typescriptRuleset = merge(...typescript, {
 		parserOptions: {
 			warnOnUnsupportedTypeScriptVersion: false,
 			allowAutomaticSingleRunInference: true,
-			project: ['./tsconfig.eslint.json', './apps/*/tsconfig.eslint.json', './packages/*/tsconfig.eslint.json'],
+			project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json'],
 			tsconfigRootDir: import.meta.dirname
 		}
 	},
@@ -48,6 +48,13 @@ const typescriptRuleset = merge(...typescript, {
 				}
 			}
 		]
+	},
+	settings: {
+		'import/resolver': {
+			typescript: {
+				project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json']
+			}
+		}
 	}
 });
 
@@ -60,7 +67,7 @@ const stylisticRuleset = merge(...stylistic, {
 });
 
 const reactRuleset = merge(...react, {
-	files: [`./apps/website/**/*${commonFiles}`, `./packages/ui/**/*${commonFiles}`],
+	files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
 	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'@next/next/no-html-link-for-pages': 'off',
@@ -69,7 +76,7 @@ const reactRuleset = merge(...react, {
 	}
 });
 
-const nextRuleset = merge(...next, { files: [`./apps/website/**/*${commonFiles}`] });
+const nextRuleset = merge(...next, { files: [`apps/website/**/*${commonFiles}`] });
 
 export default tseslint.config(
 	{
