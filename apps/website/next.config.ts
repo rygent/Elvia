@@ -1,7 +1,8 @@
 import type { NextConfig } from 'next';
+import { withContentlayer } from 'next-contentlayer2';
 
 const nextConfig = {
-	pageExtensions: ['ts', 'tsx'],
+	pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
 	reactStrictMode: false,
 	poweredByHeader: false,
 	eslint: {
@@ -25,4 +26,4 @@ const nextConfig = {
 	transpilePackages: ['@elvia/ui', '@elvia/utils']
 } satisfies NextConfig;
 
-export default nextConfig;
+export default withContentlayer(nextConfig);

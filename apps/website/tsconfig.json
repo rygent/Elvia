@@ -8,6 +8,7 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"],
       "@/*": ["./src/*"]
     },
     "allowJs": true,
@@ -19,5 +20,12 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": [".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "next.config.ts", "next-env.d.ts"]
+  "include": [
+    ".contentlayer/generated",
+    ".next/types/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "next.config.ts",
+    "next-env.d.ts"
+  ]
 }
