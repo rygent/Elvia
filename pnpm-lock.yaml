@@ -138,9 +138,6 @@ importers:
       bufferutil:
         specifier: ^4.0.8
         version: 4.0.8
-      utf-8-validate:
-        specifier: ^6.0.4
-        version: 6.0.5
     devDependencies:
       '@swc/cli':
         specifier: ^0.5.0
@@ -11456,7 +11453,7 @@ snapshots:
 
   send@1.1.0:
     dependencies:
-      debug: 4.3.6
+      debug: 4.3.7
       destroy: 1.2.0
       encodeurl: 2.0.0
       escape-html: 1.0.3

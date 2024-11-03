@@ -60,8 +60,7 @@
     "typescript": "^5.6.3"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.8",
-    "utf-8-validate": "^6.0.4"
+    "bufferutil": "^4.0.8"
   },
   "engines": {
     "node": ">=v20.11.0"
