@@ -99,8 +99,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       '@sapphire/utilities':
-        specifier: ^3.17.0
-        version: 3.17.0
+        specifier: ^3.18.0
+        version: 3.18.0
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -2235,8 +2235,8 @@ packages:
     resolution: {integrity: sha512-0UDGhR/qNuaUTiC0w9pcvs1dQj5SmNEfs4fjk7UfsnSJSFMNIbVmIdyajJHe37C46/NQZwn1SohGTh9XThgXZg==}
     engines: {node: '>=v12', npm: '>=7'}
 
-  '@sapphire/utilities@3.17.0':
-    resolution: {integrity: sha512-bbqjnKKrCgyT0C3+KOjIBzE6z6/v764EFuV7Uxw9WeIdkqGhwepl6tuNEzgiek/JdtEcODaPeX0K1aCt53yCcA==}
+  '@sapphire/utilities@3.18.0':
+    resolution: {integrity: sha512-C9vxSOYwQywjBn0TPiB9vVyhS7a6Y3GyvON8Q4tvVJYRrr9d2+ad/0jN1r7ObPlYK98YSBi/IoI1B+kWUKGFxg==}
     engines: {node: '>=v14.0.0'}
 
   '@sapphire/utilities@3.18.0':
@@ -7729,7 +7729,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@sapphire/utilities@3.17.0': {}
+  '@sapphire/utilities@3.18.0': {}
 
   '@sapphire/utilities@3.18.0': {}
 
