@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "pnpm run build:content && next build",
     "build:content": "contentlayer2 build",
     "dev": "next dev --turbo",
     "start": "next start",
