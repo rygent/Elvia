@@ -19,7 +19,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/rygent/Elvia.git",
+    "url": "https://github.com/rygent/Elvia.git",
     "directory": "apps/bot"
   },
   "dependencies": {
