@@ -95,7 +95,7 @@ export function MobileNav() {
 											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
-											<Link href="/">Terms of Service</Link>
+											<Link href="/legal/terms">Terms of Service</Link>
 										</Button>
 									</PopoverClose>
 									<PopoverClose asChild>
@@ -104,7 +104,7 @@ export function MobileNav() {
 											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
-											<Link href="/">Privacy Policy</Link>
+											<Link href="/legal/privacy">Privacy Policy</Link>
 										</Button>
 									</PopoverClose>
 								</AccordionContent>

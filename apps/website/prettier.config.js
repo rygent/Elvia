@@ -6,6 +6,7 @@ const config = {
 	importOrder: [
 		'^(react/(.*)$)|^(react$)',
 		'^(next/(.*)$)|^(next$)',
+		'^(contentlayer/(.*)$)|^(contentlayer$)',
 		'^@/components/(.*)$',
 		'^@/hooks/(.*)$',
 		'^@/utils/(.*)$',

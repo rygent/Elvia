@@ -27,11 +27,11 @@ const links = [
 		links: [
 			{
 				label: 'Terms of Service',
-				href: '/terms'
+				href: '/legal/terms'
 			},
 			{
 				label: 'Privacy Policy',
-				href: '/privacy'
+				href: '/legal/privacy'
 			}
 		]
 	}
