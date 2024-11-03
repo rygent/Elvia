@@ -139,7 +139,7 @@ importers:
         specifier: ^4.0.8
         version: 4.0.8
       utf-8-validate:
-        specifier: ^6.0.4
+        specifier: ^6.0.5
         version: 6.0.5
     devDependencies:
       '@swc/cli':
