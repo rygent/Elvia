@@ -22,6 +22,11 @@
     "url": "https://github.com/rygent/Elvia.git",
     "directory": "apps/bot"
   },
+  "peerDependencies": {
+    "discord-api-types": "*",
+    "express": "*",
+    "http-errors": "*"
+  },
   "dependencies": {
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",

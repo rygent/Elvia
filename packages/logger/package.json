@@ -28,7 +28,9 @@
     "directory": "packages/logger"
   },
   "peerDependencies": {
-    "discord.js": "*"
+    "discord.js": "*",
+    "logform": "*",
+    "winston-transport": "*"
   },
   "dependencies": {
     "colorette": "^2.0.20",

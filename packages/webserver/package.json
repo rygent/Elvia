@@ -30,17 +30,13 @@
   "peerDependencies": {
     "discord.js": "*"
   },
-  "peerDependenciesMeta": {
-    "discord.js": {
-      "optional": true
-    }
-  },
   "dependencies": {
     "body-parser": "^2.0.2",
     "compression": "^1.7.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^5.0.1",
+    "http-errors": "^2.0.0",
     "jiti": "^2.4.0",
     "zod": "^3.23.8"
   },
@@ -49,6 +45,7 @@
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/http-errors": "^2.0.4",
     "@types/node": "^22.8.7",
     "eslint": "^9.14.0",
     "eslint-formatter-pretty": "^6.0.1",

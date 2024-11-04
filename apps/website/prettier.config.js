@@ -17,7 +17,8 @@ const config = {
 		'^@/(.*)$',
 		'<THIRD_PARTY_MODULES>',
 		'<BUILTIN_MODULES>',
-		'^[./]'
+		'^(?!.*[.]css$)[./].*$',
+		'.css$'
 	],
 	importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
 	importOrderTypeScriptVersion: '5.6.3',
