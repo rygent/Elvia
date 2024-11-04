@@ -1,6 +1,6 @@
 {
   "name": "@elvia/bot",
-  "version": "6.0.0",
+  "version": "5.6.0",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
