@@ -16,9 +16,9 @@
     "build": "tsup",
     "lint": "eslint \"src/**/*.ts\" --format=pretty",
     "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
-    "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "typecheck": "tsc --noEmit"
   },
   "license": "GPL-3.0",
   "private": true,

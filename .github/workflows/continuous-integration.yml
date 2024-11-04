@@ -37,6 +37,12 @@ jobs:
       - name: ESLint (Push)
         if: ${{ github.event_name == 'push' }}
         run: pnpm exec turbo run lint --filter="...[HEAD^1]" --concurrency=3
+      - name: Typecheck (PR)
+        if: ${{ github.event_name != 'push' }}
+        run: pnpm exec turbo run typecheck --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=3
+      - name: Typecheck (Push)
+        if: ${{ github.event_name == 'push' }}
+        run: pnpm exec turbo run typecheck --filter="...[HEAD^1]" --concurrency=3
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}

@@ -7,6 +7,7 @@
     "build": "turbo run build --concurrency=3",
     "lint": "turbo run lint --concurrency=3",
     "format": "turbo run format --concurrency=3",
+    "typecheck": "turbo run typecheck --concurrency=3",
     "register": "pnpm --filter=@elvia/bot register",
     "generate": "turbo run db:generate",
     "push": "turbo run db:push",

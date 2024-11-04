@@ -10,7 +10,8 @@
     "lint": "eslint \"src/**/*\" --format=pretty",
     "lint:fix": "eslint \"src/**/*\" --fix --format=pretty",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "typecheck": "contentlayer2 build && tsc --noEmit"
   },
   "license": "GPL-3.0",
   "private": true,

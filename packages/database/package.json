@@ -19,9 +19,9 @@
     "db:format": "prisma format",
     "lint": "eslint \"src/**/*.ts\" --format=pretty",
     "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
-    "typecheck": "tsc --noEmit",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "typecheck": "tsc --noEmit",
     "prebuild": "pnpm run db:generate"
   },
   "license": "GPL-3.0",

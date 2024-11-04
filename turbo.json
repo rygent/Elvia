@@ -22,6 +22,9 @@
     "format": {
       "outputLogs": "errors-only"
     },
+    "typecheck": {
+      "outputLogs": "errors-only"
+    },
     "@elvia/database#db:generate": {
       "cache": false,
       "outputLogs": "none"
