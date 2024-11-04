@@ -1,7 +1,7 @@
 .mdx > .steps:first-child > h3:first-child {
-  @apply mt-0;
+	@apply mt-0;
 }
 
 .steps > h3 {
-  @apply mt-8 mb-4 text-base font-semibold;
+	@apply mb-4 mt-8 text-base font-semibold;
 }
