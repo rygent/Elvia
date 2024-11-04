@@ -13,7 +13,7 @@
     },
     "@elvia/website#build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"],
+      "outputs": [".next/**", "!.next/cache/**", ".contentlayer/**"],
       "outputLogs": "errors-only"
     },
     "lint": {
