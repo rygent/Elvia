@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import {
 	buttonVariants,
 	Monitor,
@@ -25,13 +26,10 @@ interface ThemeSwitcherProps {
 	className?: string;
 }
 
-export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
-	const [mounted, setMounted] = React.useState<boolean>(false);
-	const { theme, setTheme } = useTheme();
+export const ThemeSwitcher = dynamic<ThemeSwitcherProps>(() => Promise.resolve(ThemeSwitcherComponent), { ssr: false });
 
-	// When mounted on client, now we can show the UI
-	React.useEffect(() => setMounted(true), []);
-	if (!mounted) return null;
+function ThemeSwitcherComponent({ className }: ThemeSwitcherProps) {
+	const { theme, setTheme } = useTheme();
 
 	return (
 		<Select defaultValue={theme} onValueChange={setTheme}>
