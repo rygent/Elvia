@@ -2,7 +2,7 @@ import { CallToAction } from '@/components/marketing/cta';
 import { Hero } from '@/components/marketing/hero';
 import { siteConfig } from '@/config';
 
-export default function Marketing() {
+export default function MarketingPage() {
 	return (
 		<main className="container mb-36 pt-16 duration-500 animate-in fade-in slide-in-from-top-6">
 			<Hero

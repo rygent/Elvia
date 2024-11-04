@@ -29,9 +29,12 @@ export const viewport: Viewport = {
 	]
 };
 
-export default function RootLayout({ children }: React.PropsWithChildren) {
+type RootLayoutProps = React.PropsWithChildren;
+
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head />
 			<body className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, calSans.variable)}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<main className="min-h-screen">{children}</main>

@@ -3,7 +3,9 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { siteConfig } from '@/config';
 
-export default function MarketingLayout({ children }: React.PropsWithChildren) {
+type MarketingLayoutProps = React.PropsWithChildren;
+
+export default function MarketingLayout({ children }: MarketingLayoutProps) {
 	return (
 		<>
 			<Banner text={siteConfig.header.banner.text} dismissable />
