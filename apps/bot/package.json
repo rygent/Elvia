@@ -4,7 +4,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rimraf ./dist && pnpm run build:swc",
+    "build": "tsx ./scripts/clean.ts && pnpm run build:swc",
     "build:swc": "swc ./src --out-dir ./dist --copy-files --strip-leading-paths",
     "start": "node --no-warnings ./dist/index.js",
     "start:shard": "node --no-warnings ./dist/shard.js",
@@ -60,7 +60,6 @@
     "eslint": "^9.14.0",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.3.3",
-    "rimraf": "^6.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   },
