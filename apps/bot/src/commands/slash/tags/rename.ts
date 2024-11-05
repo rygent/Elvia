@@ -49,7 +49,7 @@ export default class extends Command {
 		const name = interaction.options.getString('name', true);
 
 		const database = await prisma.guild.findUnique({
-			where: { guildId: interaction.guildId },
+			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
@@ -107,7 +107,7 @@ export default class extends Command {
 		const focused = interaction.options.getFocused();
 
 		const database = await prisma.guild.findUnique({
-			where: { guildId: interaction.guildId },
+			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 

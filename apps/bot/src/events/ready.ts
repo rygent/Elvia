@@ -15,8 +15,8 @@ export default class extends Listener {
 		const guilds = await this.client.guilds.fetch();
 		for (const [, guild] of guilds) {
 			await prisma.guild.upsert({
-				where: { guildId: guild.id },
-				create: { guildId: guild.id },
+				where: { id: guild.id },
+				create: { id: guild.id },
 				update: {}
 			});
 		}

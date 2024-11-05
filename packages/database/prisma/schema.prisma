@@ -3,21 +3,21 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Guild {
-  id           String    @id @default(cuid()) @map("_id")
-  guildId      String    @unique
-  tags         Tag[]
-  caseCount    Int?      @default(0)
-  registeredAt DateTime? @default(now())
-  updatedAt    DateTime? @updatedAt
+  id        String    @id
+  tags      Tag[]
+  caseCount Int?      @default(0)
+  addedAt   DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Tag {
-  id        String    @id @default(cuid()) @map("_id")
+  id        String    @id @default(cuid())
   guildId   String
   slug      String
   name      String
@@ -26,5 +26,5 @@ model Tag {
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
 
-  guild Guild @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
