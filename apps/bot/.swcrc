@@ -1,16 +1,15 @@
 {
-  "$schema": "http://json.schemastore.org/swcrc",
+  "$schema": "https://swc.rs/schema.json",
   "module": {
-    "type": "es6"
+    "type": "nodenext"
   },
   "jsc": {
-    "target": "es2022",
+    "target": "esnext",
     "externalHelpers": true,
     "parser": {
       "syntax": "typescript",
       "tsx": false,
-      "decorators": false,
-      "dynamicImport": false
+      "decorators": false
     },
     "baseUrl": "./",
     "paths": {
