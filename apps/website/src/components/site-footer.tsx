@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { siteConfig } from '@/config';
-import { Discord, Github, Separator } from '@elvia/ui';
+import { Separator } from '@elvia/ui';
+import { Discord, Github } from '@elvia/ui/icons';
 
 const links = [
 	{

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { getGitHubStars } from '@/utils/github';
 import { siteConfig } from '@/config';
-import { Github } from '@elvia/ui';
+import { Github } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 
 interface CallToActionProps {

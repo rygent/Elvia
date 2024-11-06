@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { renderComponent } from '@/utils/render';
-import { Button, X } from '@elvia/ui';
+import { Button } from '@elvia/ui';
+import { X } from '@elvia/ui/icons';
 
 interface BannerProps {
 	text: React.ReactNode | React.FC;

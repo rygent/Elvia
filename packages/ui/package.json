@@ -9,6 +9,10 @@
   "types": "./src/index.tsx",
   "exports": {
     ".": "./src/index.tsx",
+    "./icons": {
+      "import": "./src/icons/index.tsx",
+      "types": "./src/icons/index.d.ts"
+    },
     "./styles/shared-globals.css": "./src/styles/shared-globals.css",
     "./tailwind.config.ts": "./tailwind.config.ts"
   },

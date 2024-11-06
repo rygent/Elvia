@@ -2,17 +2,8 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import {
-	buttonVariants,
-	Monitor,
-	Moon,
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-	Sun
-} from '@elvia/ui';
+import { buttonVariants, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@elvia/ui';
+import { Monitor, Moon, Sun } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 import { useTheme } from 'next-themes';
 

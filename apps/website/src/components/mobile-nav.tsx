@@ -9,14 +9,13 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 	Button,
-	ExternalLink,
-	Hamburger,
 	Popover,
 	PopoverClose,
 	PopoverContent,
 	PopoverTrigger,
 	ScrollArea
 } from '@elvia/ui';
+import { ExternalLink, Hamburger } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 import '@/styles/hamburger.css';
 

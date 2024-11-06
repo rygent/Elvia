@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { DesktopNav } from '@/components/desktop-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { siteConfig } from '@/config';
-import { Button, Github } from '@elvia/ui';
+import { Button } from '@elvia/ui';
+import { Github } from '@elvia/ui/icons';
 
 export function SiteHeader() {
 	return (

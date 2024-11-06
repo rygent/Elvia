@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { siteConfig } from '@/config';
 import {
-	ExternalLink,
 	NavigationMenu,
 	NavigationMenuContent,
 	NavigationMenuItem,
@@ -14,6 +13,7 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle
 } from '@elvia/ui';
+import { ExternalLink } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 
 export function DesktopNav() {
