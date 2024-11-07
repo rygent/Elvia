@@ -4,20 +4,21 @@ import auth from '@/server/middlewares/auth.js';
 import createError from 'http-errors';
 
 export const router = Router();
-// @ts-expect-error TS2769: No overload matches this call.
 router.get('/', auth, async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const manager: ShardingManager = req.app.get('shard-manager');
 
-		const shards = await manager.broadcastEval((client) => ({
-			id: client.shard?.ids.join(' / '),
+		const response = await manager.broadcastEval((client) => ({
+			shardId: client.shard?.ids.join(' / '),
 			uptime: client.uptime,
 			wsStatus: client.ws.status,
 			wsPing: client.ws.ping,
-			guildCount: client.guilds.cache.size
+			userCount: client.users.cache.size,
+			guildCount: client.guilds.cache.size,
+			memberCount: client.guilds.cache.map((guild) => guild).reduce((a, b) => a + b.memberCount, 0)
 		}));
 
-		return res.status(200).json(shards);
+		res.status(200).json(response);
 	} catch {
 		next(createError(500));
 	}
