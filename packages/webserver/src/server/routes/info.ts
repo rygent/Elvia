@@ -1,14 +1,20 @@
+import type { ShardingManager } from 'discord.js';
 import { Router } from 'express';
+import createError from 'http-errors';
 
 export const router = Router();
-// @ts-expect-error TS2769: No overload matches this call.
-router.get('/', (req, res) => {
-	const shard = req.app.get('shard-manager');
+router.get('/', async (req, res, next) => {
+	try {
+		const manager: ShardingManager = req.app.get('shard-manager');
 
-	const response = {
-		version: process.env.npm_package_version,
-		shards: shard?.totalShards
-	};
+		const response = await manager.broadcastEval((client) => ({
+			name: client.user?.displayName,
+			version: process.env.npm_package_version,
+			shards: client.shard?.count
+		}));
 
-	return res.status(200).json(response);
+		res.status(200).json(response);
+	} catch {
+		next(createError(500));
+	}
 });

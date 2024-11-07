@@ -493,9 +493,6 @@ importers:
       discord.js:
         specifier: '*'
         version: 14.16.3(bufferutil@4.0.8)
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
       express:
         specifier: ^5.0.1
         version: 5.0.1

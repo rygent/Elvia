@@ -9,7 +9,7 @@ const schema = z.object({
 	DatabaseUrl: z.string().url(),
 
 	ClientApiAuth: z.string().optional(),
-	ClientApiPort: z.string().optional(),
+	ClientApiPort: z.number().optional(),
 
 	CustomStatus: z.string().nullable(),
 	DebugMode: z.boolean(),
@@ -33,7 +33,8 @@ export const env = schema.parse({
 	DatabaseUrl: process.env.DATABASE_URL,
 
 	ClientApiAuth: process.env.CLIENT_API_AUTH,
-	ClientApiPort: process.env.CLIENT_API_PORT ?? process.env.PORT,
+	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+	ClientApiPort: Number(process.env.CLIENT_API_PORT || process.env.PORT),
 
 	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
 	DebugMode: process.env.DEBUG_MODE === 'true',

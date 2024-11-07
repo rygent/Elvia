@@ -1,26 +1,22 @@
-import express, { type Express } from 'express';
-import { ShardingManager } from 'discord.js';
+import express, { type Express, type Router } from 'express';
+import type { ShardingManager } from 'discord.js';
 import errors from '@/server/middlewares/errors.js';
 import headers from '@/server/middlewares/headers.js';
 import noroutes from '@/server/middlewares/noroutes.js';
 import { router } from '@/server/routes/info.js';
-import { env } from '@/env.js';
 import { createJiti } from 'jiti';
 import body from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import path from 'node:path';
-import fs from 'node:fs';
+import { extname, join, parse, resolve } from 'node:path';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 
 const jiti = createJiti(import.meta.url);
 
 export class WebServer {
-	private readonly directory: string;
 	public server: Express;
 
 	public constructor(manager: ShardingManager) {
-		this.directory = path.resolve('dist/server/routes');
-
 		this.server = express();
 		this.server.set('shard-manager', manager);
 		this.server.disable('x-powered-by');
@@ -31,15 +27,25 @@ export class WebServer {
 		this.server.use(headers);
 	}
 
+	private get directory() {
+		const routes = 'dist/server/routes';
+		return resolve(routes);
+	}
+
 	private routes() {
 		const routes = [];
-		for (const route of fs.readdirSync(this.directory)) {
-			const dirname = path.join(this.directory, route);
-			const filename = fs.statSync(dirname).isDirectory() ? path.join(dirname, 'index.js') : dirname;
-			if (path.extname(filename) === '.js' && fs.existsSync(filename)) {
+
+		for (const fileOrFolder of readdirSync(this.directory)) {
+			const filePath = join(this.directory, fileOrFolder);
+			const isDirectory = statSync(filePath).isDirectory();
+
+			const pathToLoad = isDirectory ? join(filePath, 'index.js') : filePath;
+			const isFile = existsSync(pathToLoad) && statSync(pathToLoad).isFile();
+
+			if (isFile && extname(pathToLoad) === '.js') {
 				routes.push({
-					name: path.parse(route).name.toLowerCase(),
-					path: filename
+					name: parse(fileOrFolder).name.toLowerCase(),
+					path: pathToLoad
 				});
 			}
 		}
@@ -49,16 +55,18 @@ export class WebServer {
 
 	private async loadRoutes() {
 		this.server.use('/', router);
-		for (const route of this.routes()) {
-			const file: any = await jiti.import(route.path);
-			this.server.use(`/${route.name}`, file.router);
+
+		for (const { name, path } of this.routes()) {
+			const route = await jiti.import<{ router: Router }>(path);
+			this.server.use(`/${name}`, route.router);
 		}
+
 		this.server.use(noroutes);
 		this.server.use(errors);
 	}
 
-	public async start(port = '8080') {
+	public async start(port = 8080) {
 		await this.loadRoutes();
-		this.server.listen(env.Port || port);
+		this.server.listen(port);
 	}
 }

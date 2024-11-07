@@ -9,6 +9,7 @@ export default (err: HttpError, _: Request, res: Response, next: NextFunction) =
 		status: status,
 		message: res.locals.message || 'Internal Server Error'
 	};
+
 	res.status(status).json(response);
 
 	next();
