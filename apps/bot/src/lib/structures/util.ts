@@ -28,7 +28,7 @@ export class Util {
 		return globby(`${this.directory}commands/context/**/*.js`).then(async (commands: string[]) => {
 			for (const commandFile of commands) {
 				const { name } = path.parse(commandFile);
-				const File: any = await jiti.import(commandFile, { default: true });
+				const File = await jiti.import<any>(commandFile, { default: true });
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client);
 				if (!(command instanceof Command)) {
@@ -44,7 +44,7 @@ export class Util {
 		return globby(`${this.directory}commands/slash/**/*.js`).then(async (commands: string[]) => {
 			for (const commandFile of commands) {
 				const { name } = path.parse(commandFile);
-				const File: any = await jiti.import(commandFile, { default: true });
+				const File = await jiti.import<any>(commandFile, { default: true });
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client);
 				if (!(command instanceof Command)) {
@@ -68,11 +68,11 @@ export class Util {
 		return globby(`${this.directory}events/**/*.js`).then(async (listeners: string[]) => {
 			for (const listenerFile of listeners) {
 				const { name } = path.parse(listenerFile);
-				const File: any = await jiti.import(listenerFile, { default: true });
+				const File = await jiti.import<any>(listenerFile, { default: true });
 				if (!this.isClass(File)) throw new TypeError(`Listener ${name} doesn't export a class!`);
 				const listener = new File(this.client);
 				if (!(listener instanceof Listener)) {
-					throw new TypeError(`Listener ${name} doesn't belong in listeners directory.`);
+					throw new TypeError(`Listener ${name} doesn't belong in events directory.`);
 				}
 				listener.emitter[listener.type](listener.name, (...args: unknown[]) => listener.run(...args));
 			}
