@@ -1,7 +1,10 @@
-import type { LucideIcon } from 'lucide-react';
+import * as React from 'react';
 
-// @ts-expect-error
-export const Hamburger: LucideIcon = ({ size = 28, ...restProps }) => {
+interface IconProps extends React.HTMLAttributes<SVGElement> {
+	size?: number;
+}
+
+export const Hamburger = ({ size = 28, ...restProps }: IconProps) => {
 	return (
 		<svg
 			stroke="currentColor"
