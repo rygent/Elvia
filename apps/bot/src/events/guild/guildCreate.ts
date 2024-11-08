@@ -18,7 +18,7 @@ export default class extends Listener {
 
 	public async run(guild: Guild) {
 		if (!guild.available) return;
-		await prisma.guild.create({ data: { guildId: guild.id } });
+		await prisma.guild.create({ data: { id: guild.id } });
 
 		if (env.GUILD_WEBHOOK_URL) {
 			const webhook = new WebhookClient({ url: env.GUILD_WEBHOOK_URL });

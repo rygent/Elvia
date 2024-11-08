@@ -18,7 +18,7 @@ export default class extends Listener {
 
 	public async run(guild: Guild) {
 		if (!this.client.isReady() && !guild.available) return;
-		await prisma.guild.delete({ where: { guildId: guild.id } });
+		await prisma.guild.delete({ where: { id: guild.id } });
 		await prisma.tag.deleteMany({ where: { guildId: guild.id } });
 
 		if (env.GUILD_WEBHOOK_URL) {
