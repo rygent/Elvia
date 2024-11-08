@@ -24,6 +24,6 @@ export const logger = createLogger({
 			filename: 'report.%DATE%.log',
 			maxFiles: '14d'
 		}),
-		new Discord({ level: 'error', webhookUrl: env.LOGGER_WEBHOOK_URL })
+		new Discord({ level: 'error', unique: true, webhookUrl: env.LOGGER_WEBHOOK_URL })
 	]
 }) as Logger & Record<keyof typeof customLevel, LeveledLogMethod>;
