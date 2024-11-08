@@ -31,8 +31,8 @@
     "url": "https://github.com/rygent/Elvia.git",
     "directory": "packages/database"
   },
-  "peerDependencies": {
-    "@prisma/client": "*"
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
