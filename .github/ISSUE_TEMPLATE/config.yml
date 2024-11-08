@@ -1,5 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Discord server
+  - name: Ask a question or discuss a topic
+    url: https://github.com/rygent/Elvia/discussions
+    about: Ask questions or discuss with other users in discussions.
+  - name: Feature request
+    url: https://github.com/rygent/Elvia/discussions/new?category=ideas
+    about: Open a feature request in discussions.
+  - name: Ask a question in Discord server
     url: https://discord.gg/FD5MMabf8Y
-    about: Please visit our Discord server for questions and support requests.
+    about: Ask questions or discuss with other users in discord.

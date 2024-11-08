@@ -1,0 +1,101 @@
+name: Report an issue
+description: Report incorrect or unexpected behavior.
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue form is used for reporting a issue.
+
+        Feature requests should be opened in [discussions](https://github.com/rygent/Elvia/discussions/new?category=ideas).
+
+        Before opening a new issue, please do a [search](https://github.com/rygent/Elvia/issues) of existing issues and :+1: upvote the existing issue instead. This will result in a quicker resolution.
+
+        If you need help, you can:
+        - Start a discussion in the ["Help"](https://github.com/rygent/Elvia/discussions/categories/help) section.
+        - Ask a question in [Discord server](https://discord.gg/FD5MMabf8Y).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A step-by-step description of how to reproduce the issue. Screenshots can be provided in the issue body below. If using code blocks, make sure that [syntax highlighting is correct](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting) and double check that the rendered preview is not broken.
+      placeholder: |
+        1. Start the application
+        2. Do thing
+        3. Observe behavior
+        4. See error logs below
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Current vs. Expected behavior
+      description: |
+        A clear and concise description of what the bug is (e.g., screenshots, logs, etc.), and what you expected to happen.
+      placeholder: 'Following the steps from the previous section, I expected A to happen, but I observed B instead.'
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Provide environment information
+      description: List necessary versions here. This includes your package version, runtime version, operating system etc.
+      render: bash
+      placeholder: |
+        Operating System:
+          Platform: macOS
+          Arch: arm64
+          Version: Ventura (13.7.1)
+        Binaries:
+          Node: 22.11.0
+          pnpm: 9.12.3
+        Relevant Packages:
+          discord.js: 14.16.3
+          next: 15.0.3
+          react: 19.0.0-rc-5c56b873-20241107
+          react-dom: 19.0.0-rc-5c56b873-20241107
+          typescript: 5.6.3
+    validations:
+      required: true
+  - type: dropdown
+    id: application
+    attributes:
+      label: Which app(s) are affected? (Select all that apply)
+      multiple: true
+      options:
+        - 'Bot'
+        - 'Website'
+    validations:
+      required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: Which package(s) are affected? (Select all that apply)
+      multiple: true
+      options:
+        - 'Not sure'
+        - 'Database'
+        - 'Logger'
+        - 'UI'
+        - 'Utils'
+        - 'WebServer'
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Which priority should be assigned for this issue?
+      options:
+        - 'Low (slightly annoying)'
+        - 'Medium (should be fixed soon)'
+        - 'High (immediate attention needed)'
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: |
+        Any extra information that might help us investigate. For example, where are you deploying your application (Vercel, Docker, other platform)? Is it only reproducible on that platform, or locally too? Is the issue only happening in a specific browser? etc.
+      placeholder: |
+        I am hosting via Docker with the recommended option, and if I remove that option or try a different hosting option, I cannot reproduce the same issue.
