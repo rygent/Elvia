@@ -3,29 +3,38 @@ import type { client } from '@/types/types.js';
 import { env } from '@/env.js';
 
 export class Settings {
-	protected declare data: client.Settings;
+	protected declare data: Partial<client.Settings>;
+
+	public constructor() {
+		this.data = {};
+	}
 
 	public get token(): string {
-		return env.DiscordToken ?? this.data.token;
+		this.data.token ??= env.DiscordToken;
+		return this.data.token;
 	}
 
 	public get owners(): string[] {
-		return env.ClientOwners ?? this.data.owners;
+		this.data.owners ??= env.ClientOwners;
+		return this.data.owners;
 	}
 
 	public get defaultPermissions(): PermissionsString[] {
-		return ['SendMessages', 'ViewChannel'];
+		this.data.defaultPermissions ??= ['SendMessages', 'ViewChannel'];
+		return this.data.defaultPermissions;
 	}
 
 	public get debug(): boolean {
-		return env.DebugMode ?? this.data.debug;
+		this.data.debug ??= env.DebugMode;
+		return this.data.debug;
 	}
 
 	public get unsafeMode(): boolean {
-		return env.UnsafeMode ?? this.data.unsafeMode;
+		this.data.unsafeMode ??= env.UnsafeMode;
+		return this.data.unsafeMode;
 	}
 
-	public get<K extends keyof client.Settings>(key: K): client.Settings[K] {
+	public get<Key extends keyof Partial<client.Settings>>(key: Key): client.Settings[Key] {
 		return this.data[key];
 	}
 }

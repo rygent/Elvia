@@ -13,11 +13,11 @@ import { EventEmitter } from 'node:events';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace client {
 	export interface Settings {
-		token: string;
-		owners: Snowflake[];
-		defaultPermissions: PermissionsString[];
-		debug: boolean;
-		unsafeMode: boolean;
+		token?: string;
+		owners?: Snowflake[];
+		defaultPermissions?: PermissionsString[];
+		debug?: boolean;
+		unsafeMode?: boolean;
 	}
 }
 
