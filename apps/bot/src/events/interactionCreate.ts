@@ -118,7 +118,7 @@ export default class extends Listener {
 
 					const replies = [
 						'An error has occured when executing this command.',
-						subtext(`please contact us in our ${hyperlink('Support Server', hideLinkEmbed(env.SupportServerUrl))}.`)
+						subtext(`please contact us in our ${hyperlink('Support Server', hideLinkEmbed(env.SUPPORT_SERVER_URL))}.`)
 					].join('\n');
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });

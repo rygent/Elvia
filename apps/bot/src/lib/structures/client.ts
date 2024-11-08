@@ -34,7 +34,7 @@ export class Client<Ready extends boolean = boolean> extends BaseClient<Ready> {
 				repliedUser: false
 			},
 			presence: {
-				activities: [...(env.CustomStatus ? [{ name: env.CustomStatus, type: ActivityType.Custom }] : [])]
+				activities: [...(env.CUSTOM_STATUS ? [{ name: env.CUSTOM_STATUS, type: ActivityType.Custom }] : [])]
 			},
 			sweepers: {
 				...Options.DefaultSweeperSettings,

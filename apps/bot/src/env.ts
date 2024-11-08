@@ -1,51 +1,51 @@
 import { z } from 'zod';
 import 'dotenv/config';
 
-const schema = z.object({
-	DiscordToken: z.string(),
-	DiscordApplicationId: z.string().min(17).max(20),
-	DeveloperGuildId: z.string().min(17).max(20),
-	ClientOwners: z.string().min(17).max(20).array(),
-	DatabaseUrl: z.string().url(),
+const envSchema = z.object({
+	DISCORD_TOKEN: z.string(),
+	DISCORD_APPLICATION_ID: z.string().min(17).max(20),
+	DEVELOPER_GUILD_ID: z.string().min(17).max(20),
+	CLIENT_OWNERS: z.string().min(17).max(20).array(),
+	DATABASE_URL: z.string().url(),
 
-	ClientApiAuth: z.string().optional(),
-	ClientApiPort: z.number().optional(),
+	SERVER_AUTH: z.string().optional(),
+	SERVER_PORT: z.number().optional(),
 
-	CustomStatus: z.string().nullable(),
-	DebugMode: z.boolean(),
-	UnsafeMode: z.boolean(),
-	SupportServerUrl: z.string().url(),
-	LoggerWebhookUrl: z.string().url(),
-	GuildWebhookUrl: z.string().url(),
+	CUSTOM_STATUS: z.string().optional(),
+	DEBUG_MODE: z.boolean(),
+	UNSAFE_MODE: z.boolean(),
+	SUPPORT_SERVER_URL: z.string().url(),
+	LOGGER_WEBHOOK_URL: z.string().url(),
+	GUILD_WEBHOOK_URL: z.string().url(),
 
-	ImgurClientId: z.string(),
-	OpenWeatherApiKey: z.string(),
-	SpotifyClientId: z.string(),
-	SpotifyClientSecret: z.string(),
-	TmdbApiKey: z.string()
+	IMGUR_CLIENT_ID: z.string(),
+	OPEN_WEATHER_API_KEY: z.string(),
+	SPOTIFY_CLIENT_ID: z.string(),
+	SPOTIFY_CLIENT_SECRET: z.string(),
+	TMDB_API_KEY: z.string()
 });
 
-export const env = schema.parse({
-	DiscordToken: process.env.DISCORD_TOKEN,
-	DiscordApplicationId: process.env.DISCORD_APPLICATION_ID,
-	DeveloperGuildId: process.env.DEVELOPER_GUILD_ID,
-	ClientOwners: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
-	DatabaseUrl: process.env.DATABASE_URL,
+export const env = envSchema.parse({
+	DISCORD_TOKEN: process.env.DISCORD_TOKEN,
+	DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID,
+	DEVELOPER_GUILD_ID: process.env.DEVELOPER_GUILD_ID,
+	CLIENT_OWNERS: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
+	DATABASE_URL: process.env.DATABASE_URL,
 
-	ClientApiAuth: process.env.CLIENT_API_AUTH,
+	SERVER_AUTH: process.env.SERVER_AUTH,
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-	ClientApiPort: Number(process.env.CLIENT_API_PORT || process.env.PORT),
+	SERVER_PORT: Number(process.env.SERVER_PORT || process.env.PORT),
 
-	CustomStatus: process.env.CUSTOM_STATUS?.length ? process.env.CUSTOM_STATUS : null,
-	DebugMode: process.env.DEBUG_MODE === 'true',
-	UnsafeMode: process.env.UNSAFE_MODE === 'true',
-	SupportServerUrl: process.env.SUPPORT_SERVER_URL,
-	LoggerWebhookUrl: process.env.LOGGER_WEBHOOK_URL,
-	GuildWebhookUrl: process.env.GUILD_WEBHOOK_URL,
+	CUSTOM_STATUS: process.env.CUSTOM_STATUS,
+	DEBUG_MODE: process.env.DEBUG_MODE === 'true',
+	UNSAFE_MODE: process.env.UNSAFE_MODE === 'true',
+	SUPPORT_SERVER_URL: process.env.SUPPORT_SERVER_URL,
+	LOGGER_WEBHOOK_URL: process.env.LOGGER_WEBHOOK_URL,
+	GUILD_WEBHOOK_URL: process.env.GUILD_WEBHOOK_URL,
 
-	ImgurClientId: process.env.IMGUR_CLIENT_ID,
-	OpenWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
-	SpotifyClientId: process.env.SPOTIFY_CLIENT_ID,
-	SpotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-	TmdbApiKey: process.env.TMDB_API_KEY
+	IMGUR_CLIENT_ID: process.env.IMGUR_CLIENT_ID,
+	OPEN_WEATHER_API_KEY: process.env.OPEN_WEATHER_API_KEY,
+	SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+	SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+	TMDB_API_KEY: process.env.TMDB_API_KEY
 });

@@ -21,9 +21,9 @@ export default class extends Listener {
 		await prisma.guild.delete({ where: { guildId: guild.id } });
 		await prisma.tag.deleteMany({ where: { guildId: guild.id } });
 
-		if (env.GuildWebhookUrl) {
-			const webhook = new WebhookClient({ url: env.GuildWebhookUrl });
-			const threadId = new URL(env.GuildWebhookUrl).searchParams.get('thread_id') as string;
+		if (env.GUILD_WEBHOOK_URL) {
+			const webhook = new WebhookClient({ url: env.GUILD_WEBHOOK_URL });
+			const threadId = new URL(env.GUILD_WEBHOOK_URL).searchParams.get('thread_id') as string;
 			const guildOwner = await guild.fetchOwner();
 
 			const guildCount = formatNumber(this.client.guilds.cache.size);

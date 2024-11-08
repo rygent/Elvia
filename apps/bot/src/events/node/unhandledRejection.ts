@@ -22,9 +22,9 @@ export default class extends Listener {
 		if ((error as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 		logger.fatal(`${error.name}: ${error.message}`, { error });
 
-		if (this.client.isReady() && env.LoggerWebhookUrl) {
-			const webhook = new WebhookClient({ url: env.LoggerWebhookUrl });
-			const threadId = new URL(env.LoggerWebhookUrl).searchParams.get('thread_id') as string;
+		if (this.client.isReady() && env.LOGGER_WEBHOOK_URL) {
+			const webhook = new WebhookClient({ url: env.LOGGER_WEBHOOK_URL });
+			const threadId = new URL(env.LOGGER_WEBHOOK_URL).searchParams.get('thread_id') as string;
 
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Red)

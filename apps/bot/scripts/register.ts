@@ -19,12 +19,12 @@ program.option('-r, --reset', 'reset registered commands');
 
 program.parse(process.argv);
 
-const token = env.DiscordToken;
+const token = env.DISCORD_TOKEN;
 if (!token) {
 	throw new Error('The DISCORD_TOKEN environment variable is required.');
 }
 
-const applicationId = env.DiscordApplicationId;
+const applicationId = env.DISCORD_APPLICATION_ID;
 if (!applicationId) {
 	throw new Error('The DISCORD_APPLICATION_ID environment variable is required.');
 }
@@ -107,7 +107,7 @@ async function execute() {
 	const options = program.opts();
 	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
 
-	const guildId = env.DeveloperGuildId;
+	const guildId = env.DEVELOPER_GUILD_ID;
 	if (!guildId && options.dev) {
 		throw new Error('The DEVELOPER_GUILD_ID environment variable is required.');
 	}

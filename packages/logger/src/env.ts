@@ -1,14 +1,15 @@
 import { z } from 'zod';
 import 'dotenv/config';
 
-const schema = z.object({
-	DebugMode: z.boolean(),
-	LoggerWebhookUrl: z.string().url(),
-	Timezone: z.string().optional()
+const envSchema = z.object({
+	DEBUG_MODE: z.boolean(),
+	LOGGER_WEBHOOK_URL: z.string().url(),
+	TIMEZONE: z.string().optional()
 });
 
-export const env = schema.parse({
-	DebugMode: process.env.DEBUG_MODE === 'true',
-	LoggerWebhookUrl: process.env.LOGGER_WEBHOOK_URL,
-	Timezone: process.env.TIMEZONE ?? process.env.TZ
+export const env = envSchema.parse({
+	DEBUG_MODE: process.env.DEBUG_MODE === 'true',
+	LOGGER_WEBHOOK_URL: process.env.LOGGER_WEBHOOK_URL,
+	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+	TIMEZONE: process.env.TIMEZONE || process.env.TZ
 });

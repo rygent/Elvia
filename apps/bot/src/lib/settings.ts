@@ -10,12 +10,12 @@ export class Settings {
 	}
 
 	public get token(): string {
-		this.data.token ??= env.DiscordToken;
+		this.data.token ??= env.DISCORD_TOKEN;
 		return this.data.token;
 	}
 
 	public get owners(): string[] {
-		this.data.owners ??= env.ClientOwners;
+		this.data.owners ??= env.CLIENT_OWNERS;
 		return this.data.owners;
 	}
 
@@ -25,16 +25,16 @@ export class Settings {
 	}
 
 	public get debug(): boolean {
-		this.data.debug ??= env.DebugMode;
+		this.data.debug ??= env.DEBUG_MODE;
 		return this.data.debug;
 	}
 
 	public get unsafeMode(): boolean {
-		this.data.unsafeMode ??= env.UnsafeMode;
+		this.data.unsafeMode ??= env.UNSAFE_MODE;
 		return this.data.unsafeMode;
 	}
 
-	public get<Key extends keyof Partial<client.Settings>>(key: Key): client.Settings[Key] {
+	public get<Key extends keyof client.Settings>(key: Key): client.Settings[Key] {
 		return this.data[key];
 	}
 }

@@ -170,7 +170,7 @@ export default class extends Command {
 
 		const description = [
 			`Welcome to help menu, here is the list of commands!`,
-			`Need more help? Come join our ${hyperlink('support server', env.SupportServerUrl)}.\n`,
+			`Need more help? Come join our ${hyperlink('support server', env.SUPPORT_SERVER_URL)}.\n`,
 			selectedCommands
 				.sort((a, b) => a.unique!.localeCompare(b.unique!))
 				.map(

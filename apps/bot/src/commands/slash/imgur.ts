@@ -49,7 +49,7 @@ export default class extends Command {
 				{ image: media.url, type: 'url' },
 				{
 					headers: {
-						Authorization: `Client-ID ${env.ImgurClientId}`,
+						Authorization: `Client-ID ${env.IMGUR_CLIENT_ID}`,
 						'Content-Type': 'multipart/form-data'
 					}
 				}

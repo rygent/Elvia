@@ -44,7 +44,7 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const spotify = new Spotify({ id: env.SpotifyClientId, secret: env.SpotifyClientSecret });
+		const spotify = new Spotify({ id: env.SPOTIFY_CLIENT_ID, secret: env.SPOTIFY_CLIENT_SECRET });
 		const response = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);

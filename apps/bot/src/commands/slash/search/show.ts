@@ -44,7 +44,7 @@ export default class extends Command {
 		const search = interaction.options.getString('search', true);
 
 		const response = await axios
-			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TmdbApiKey}&query=${search}`)
+			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_API_KEY}&query=${search}`)
 			.then(({ data }) => data.results.slice(0, 10));
 
 		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
@@ -82,7 +82,7 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
 			const data = await axios
-				.get(`https://api.themoviedb.org/3/tv/${ids}?api_key=${env.TmdbApiKey}`)
+				.get(`https://api.themoviedb.org/3/tv/${ids}?api_key=${env.TMDB_API_KEY}`)
 				.then((res) => res.data);
 
 			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
