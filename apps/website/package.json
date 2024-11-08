@@ -24,7 +24,7 @@
     "@elvia/ui": "workspace:^",
     "@elvia/utils": "workspace:^",
     "@vercel/analytics": "^1.3.2",
-    "@vercel/speed-insights": "^1.0.14",
+    "@vercel/speed-insights": "^1.1.0",
     "contentlayer2": "^0.5.3",
     "framer-motion": "^12.0.0-alpha.1",
     "geist": "^1.3.1",
