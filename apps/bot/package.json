@@ -38,7 +38,7 @@
     "@sapphire/discord-utilities": "^3.4.2",
     "@sapphire/time-utilities": "^1.7.13",
     "@sapphire/type": "^2.5.1",
-    "@sapphire/utilities": "^3.18.0",
+    "@sapphire/utilities": "^3.18.1",
     "axios": "^1.7.7",
     "colorette": "^2.0.20",
     "discord.js": "^14.16.3",
