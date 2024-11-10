@@ -99,8 +99,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       '@sapphire/utilities':
-        specifier: ^3.18.0
-        version: 3.18.0
+        specifier: ^3.18.1
+        version: 3.18.1
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -2209,8 +2209,8 @@ packages:
     resolution: {integrity: sha512-0UDGhR/qNuaUTiC0w9pcvs1dQj5SmNEfs4fjk7UfsnSJSFMNIbVmIdyajJHe37C46/NQZwn1SohGTh9XThgXZg==}
     engines: {node: '>=v12', npm: '>=7'}
 
-  '@sapphire/utilities@3.18.0':
-    resolution: {integrity: sha512-C9vxSOYwQywjBn0TPiB9vVyhS7a6Y3GyvON8Q4tvVJYRrr9d2+ad/0jN1r7ObPlYK98YSBi/IoI1B+kWUKGFxg==}
+  '@sapphire/utilities@3.18.1':
+    resolution: {integrity: sha512-zyEyQOQb2/t2mKRmu8T+M4r1Ulb+54BjwDS5pfzf6abGzTAcUg4VDWjHeKX7p3IgiZTcpN4Ij77b9k+K1KV4Lg==}
     engines: {node: '>=v14.0.0'}
 
   '@sindresorhus/is@4.6.0':
@@ -7558,7 +7558,7 @@ snapshots:
 
   '@sapphire/cron@1.2.0':
     dependencies:
-      '@sapphire/utilities': 3.18.0
+      '@sapphire/utilities': 3.18.1
 
   '@sapphire/discord-utilities@3.4.3':
     dependencies:
@@ -7593,7 +7593,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@sapphire/utilities@3.18.0': {}
+  '@sapphire/utilities@3.18.1': {}
 
   '@sindresorhus/is@4.6.0': {}
 
