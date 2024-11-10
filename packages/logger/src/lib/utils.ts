@@ -13,30 +13,24 @@ function getStackTrace(stack: string) {
 export function formatBuilder(color: boolean) {
 	return format.combine(
 		format.timestamp(),
-		format.printf((info) => {
-			const time = moment(info.timestamp).format('DD/MM/YYYY HH:mm:ss z');
-			const shard = `[${typeof info.shardId !== 'undefined' ? info.shardId : `M`}]`;
+		format.printf(({ timestamp, level, message, ...info }) => {
+			const formattedTime = moment(timestamp as string).format('DD/MM/YYYY HH:mm:ss z');
+			const formattedLevel = color ? Reflect.get(customLevelColor, level).toUpperCase() : level.toUpperCase();
+			const formattedShard = `[${(info.shardId as string) ?? 'M'}]`;
 
-			if (color) {
-				// @ts-expect-error TS7053: Element implicitly has an 'any' type because expression of type 'string'.
-				const level = customLevelColor[info.level](info.level.toUpperCase());
+			const lines: string[] = [
+				`${color ? blackBright(italic(formattedTime)) : formattedTime} [${formattedLevel}]: ${color ? cyanBright(formattedShard) : formattedShard} ${message}`
+			];
 
-				const result = [
-					`${blackBright(italic(time))} [${level}]: ${cyanBright(shard)} ${info.message}`,
-					typeof info.error !== 'undefined' ? [whiteBright(italic(getStackTrace(info.error.stack)))] : []
-				].join('');
-
-				return result;
+			if (info.error) {
+				lines.push(
+					color
+						? whiteBright(italic(getStackTrace((info.error as Error).stack as string)))
+						: getStackTrace((info.error as Error).stack as string)
+				);
 			}
 
-			const level = info.level.toUpperCase();
-
-			const result = [
-				`${time} [${level}]: ${shard} ${info.message}`,
-				typeof info.error !== 'undefined' ? [getStackTrace(info.error.stack)] : []
-			].join('');
-
-			return result;
+			return lines.join('');
 		})
 	);
 }
