@@ -6,7 +6,7 @@ interface MDXContentProps {
 	code: string;
 }
 
-export const MDXContent = ({ code }: MDXContentProps) => {
+export function MDXContent({ code }: MDXContentProps) {
 	const Component = useMDXComponent(code);
 
 	return (
@@ -14,4 +14,4 @@ export const MDXContent = ({ code }: MDXContentProps) => {
 			<Component components={components} />
 		</div>
 	);
-};
+}
