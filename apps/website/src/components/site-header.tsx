@@ -1,6 +1,7 @@
+import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { DesktopNav } from '@/components/desktop-nav';
+import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { siteConfig } from '@/config';
 import { Button } from '@elvia/ui';
@@ -25,7 +26,7 @@ export function SiteHeader() {
 						/>
 						<span className="inline-block font-bold">{siteConfig.global.name}</span>
 					</Link>
-					<DesktopNav />
+					<MainNav />
 				</div>
 				<div className="flex items-center">
 					<nav className="flex items-center space-x-2 md:space-x-4">

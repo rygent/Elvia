@@ -11,10 +11,8 @@ interface BannerProps {
 }
 
 export function Banner({ text, dismissable = false }: BannerProps) {
-	if (!text) return null;
-
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [displayed, setDisplayed] = React.useState<boolean>(true);
+	if (!text) return null;
 	if (!displayed) return null;
 
 	return (

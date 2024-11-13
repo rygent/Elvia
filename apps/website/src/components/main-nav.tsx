@@ -16,7 +16,7 @@ import {
 import { ExternalLink } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 
-export function DesktopNav() {
+export function MainNav() {
 	return (
 		<NavigationMenu className="hidden md:flex">
 			<NavigationMenuList>
