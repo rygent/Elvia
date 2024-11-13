@@ -20,7 +20,7 @@ import { cn } from '@elvia/utils';
 import '@/styles/hamburger.css';
 
 export function MobileNav() {
-	const [isOpen, setIsOpen] = React.useState(false);
+	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
 	React.useEffect(() => {
 		if (isOpen) {
@@ -46,7 +46,7 @@ export function MobileNav() {
 				<ScrollArea>
 					<section className="my-3 px-3">
 						<PopoverClose asChild>
-							<Button variant="default" className="w-full shadow-none">
+							<Button variant="default" className="h-10 w-full text-base shadow-none">
 								Support
 							</Button>
 						</PopoverClose>
@@ -54,12 +54,14 @@ export function MobileNav() {
 					<section className="py-3">
 						<Accordion type="multiple" className="px-3">
 							<AccordionItem value="resources" className="border-none">
-								<AccordionTrigger className="py-2 text-muted-foreground hover:no-underline">Resources</AccordionTrigger>
+								<AccordionTrigger className="h-10 py-2 text-base text-muted-foreground hover:no-underline">
+									Resources
+								</AccordionTrigger>
 								<AccordionContent className="pb-0">
 									<PopoverClose asChild>
 										<Button
 											variant="link"
-											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
 											<Link href="/">Commands</Link>
@@ -68,7 +70,7 @@ export function MobileNav() {
 									<PopoverClose asChild>
 										<Button
 											variant="link"
-											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
 											<Link href="/">Blog</Link>
@@ -77,7 +79,7 @@ export function MobileNav() {
 									<PopoverClose asChild>
 										<Button
 											variant="link"
-											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
 											<Link href="/">Changelog</Link>
@@ -86,12 +88,14 @@ export function MobileNav() {
 								</AccordionContent>
 							</AccordionItem>
 							<AccordionItem value="legal" className="border-none">
-								<AccordionTrigger className="py-2 text-muted-foreground hover:no-underline">Legal</AccordionTrigger>
+								<AccordionTrigger className="h-10 py-2 text-base text-muted-foreground hover:no-underline">
+									Legal
+								</AccordionTrigger>
 								<AccordionContent className="pb-0">
 									<PopoverClose asChild>
 										<Button
 											variant="link"
-											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
 											<Link href="/legal/terms">Terms of Service</Link>
@@ -100,7 +104,7 @@ export function MobileNav() {
 									<PopoverClose asChild>
 										<Button
 											variant="link"
-											className="w-full justify-start px-0 text-muted-foreground hover:text-foreground hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											asChild
 										>
 											<Link href="/legal/privacy">Privacy Policy</Link>
@@ -112,7 +116,7 @@ export function MobileNav() {
 						<PopoverClose asChild>
 							<Button
 								variant="link"
-								className="w-full justify-start px-3 text-muted-foreground hover:text-foreground hover:no-underline"
+								className="h-10 w-full justify-start px-3 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 								asChild
 							>
 								<Link href={siteConfig.external.links.topgg} className="gap-1" target="_blank" rel="noreferrer">

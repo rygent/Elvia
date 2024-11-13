@@ -37,12 +37,12 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 				<h2 className="text-md mt-6 text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>
 				<div className="mt-10 flex flex-col gap-4 sm:flex-row">
 					{cta[0] && (
-						<Button size="lg" variant="default" className="shadow-none" asChild>
+						<Button size="lg" variant="default" className="text-base shadow-none" asChild>
 							<Link href={cta[0].href}>{cta[0].label}</Link>
 						</Button>
 					)}
 					{cta[1] && (
-						<Button size="lg" variant="outline" className="shadow-none" asChild>
+						<Button size="lg" variant="outline" className="text-base shadow-none" asChild>
 							<Link href={cta[1].href}>{cta[1].label}</Link>
 						</Button>
 					)}
