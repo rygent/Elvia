@@ -56,5 +56,5 @@
       "react-dom": "19.0.0-rc-5c56b873-20241107"
     }
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.13.0"
 }
