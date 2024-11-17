@@ -4,26 +4,26 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "@elvia/bot#build": {
       "dependsOn": ["^build", "@elvia/database#build"],
       "outputs": ["dist/**"],
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "@elvia/website#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", ".contentlayer/**"],
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "lint": {
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "format": {
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "typecheck": {
-      "outputLogs": "errors-only"
+      "outputLogs": "full"
     },
     "@elvia/database#db:generate": {
       "cache": false,
@@ -33,5 +33,6 @@
       "cache": false,
       "outputLogs": "none"
     }
-  }
+  },
+  "ui": "tui"
 }
