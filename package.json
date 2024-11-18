@@ -36,7 +36,7 @@
     "eslint-config-terrax": "^0.2.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "is-ci": "^3.0.1",
     "lodash.merge": "^4.6.2",
     "prettier": "^3.3.3",
