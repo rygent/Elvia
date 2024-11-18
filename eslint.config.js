@@ -1,84 +1,76 @@
 import tseslint from 'typescript-eslint';
 import common from 'eslint-config-terrax/common';
+import browser from 'eslint-config-terrax/browser';
 import node from 'eslint-config-terrax/node';
 import typescript from 'eslint-config-terrax/typescript';
-import stylistic from 'eslint-config-terrax/stylistic-typescript';
 import react from 'eslint-config-terrax/react';
 import next from 'eslint-config-terrax/next';
-import eslintPluginImport from 'eslint-plugin-import';
+import edge from 'eslint-config-terrax/edge';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import merge from 'lodash.merge';
 
 const commonFiles = '{js,jsx,mjs,cjs,ts,tsx}';
 
-const commonRuleset = merge(...common, {
-	files: [`**/*${commonFiles}`]
-});
-
-const nodeRuleset = merge(...node, {
-	files: [`**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-	rules: {
-		'no-restricted-globals': 'off'
-	}
-});
-
-const typescriptRuleset = merge(...typescript, {
-	files: [`**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.LanguageOptions} */
-	languageOptions: {
-		parserOptions: {
-			warnOnUnsupportedTypeScriptVersion: false,
-			allowAutomaticSingleRunInference: true,
-			project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json'],
-			tsconfigRootDir: import.meta.dirname
-		}
-	},
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-	rules: {
-		'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
-		'@typescript-eslint/naming-convention': [
-			'warn',
-			{
-				selector: 'typeParameter',
-				format: ['PascalCase'],
-				custom: {
-					regex: '^\\w{3,}',
-					match: true
+const mainRulesets = [...common, ...node, ...typescript].map((config) =>
+	merge(config, {
+		files: [`**/*${commonFiles}`],
+		languageOptions: {
+			parserOptions: {
+				warnOnUnsupportedTypeScriptVersion: false,
+				allowAutomaticSingleRunInference: true,
+				project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json'],
+				tsconfigRootDir: import.meta.dirname
+			}
+		},
+		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+		rules: {
+			'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+			'@typescript-eslint/naming-convention': [
+				'warn',
+				{
+					selector: 'typeParameter',
+					format: ['PascalCase'],
+					custom: {
+						regex: '^\\w{3,}',
+						match: true
+					}
+				}
+			],
+			'@typescript-eslint/non-nullable-type-assertion-style': 'off',
+			'no-restricted-globals': 'off'
+		},
+		settings: {
+			'import-x/resolver': {
+				typescript: {
+					project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json']
 				}
 			}
-		]
-	},
-	settings: {
-		'import/resolver': {
-			typescript: {
-				project: ['tsconfig.eslint.json', 'apps/*/tsconfig.eslint.json', 'packages/*/tsconfig.eslint.json']
-			}
 		}
-	}
-});
+	})
+);
 
-const stylisticRuleset = merge(...stylistic, {
-	files: [`**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-	rules: {
-		'@typescript-eslint/non-nullable-type-assertion-style': 'off'
-	}
-});
+const reactRulesets = [...react, ...edge].map((config) =>
+	merge(config, {
+		files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
+		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+		rules: {
+			'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
+		}
+	})
+);
 
-const reactRuleset = merge(...react, {
-	files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-	rules: {
-		'@next/next/no-html-link-for-pages': 'off',
-		'react/react-in-jsx-scope': 'off',
-		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
-	}
-});
-
-const nextRuleset = merge(...next, { files: [`apps/website/**/*${commonFiles}`] });
+const nextRulesets = [...browser, ...next].map((config) =>
+	merge(config, {
+		files: [`apps/website/**/*${commonFiles}`],
+		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+		rules: {
+			'@next/next/no-html-link-for-pages': 'off'
+		}
+	})
+);
 
 export default tseslint.config(
+	...mainRulesets,
 	{
 		languageOptions: {
 			ecmaVersion: 'latest',
@@ -86,17 +78,12 @@ export default tseslint.config(
 		},
 		ignores: ['**/.contentlayer/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
 	},
-	commonRuleset,
-	nodeRuleset,
-	typescriptRuleset,
-	stylisticRuleset,
-	reactRuleset,
-	nextRuleset,
-	eslintPluginImport.flatConfigs.recommended,
+	...reactRulesets,
+	...nextRulesets,
 	{
+		files: [`**/*${commonFiles}`],
 		rules: {
-			'import/no-duplicates': ['error', { 'prefer-inline': true }],
-			'import/no-unresolved': 'off'
+			'import-x/no-duplicates': ['error', { 'prefer-inline': true }]
 		}
 	},
 	eslintPluginPrettierRecommended
