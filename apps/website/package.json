@@ -46,7 +46,7 @@
     "eslint-formatter-pretty": "^6.0.1",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "rehype": "^13.0.2",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
