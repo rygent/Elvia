@@ -15,7 +15,7 @@ export function formatBuilder(color: boolean) {
 		format.timestamp(),
 		format.printf(({ timestamp, level, message, ...info }) => {
 			const formattedTime = moment(timestamp as string).format('DD/MM/YYYY HH:mm:ss z');
-			const formattedLevel = color ? Reflect.get(customLevelColor, level).toUpperCase() : level.toUpperCase();
+			const formattedLevel = color ? Reflect.get(customLevelColor, level)(level.toUpperCase()) : level.toUpperCase();
 			const formattedShard = `[${(info.shardId as string) ?? 'M'}]`;
 
 			const lines: string[] = [
@@ -23,11 +23,8 @@ export function formatBuilder(color: boolean) {
 			];
 
 			if (info.error) {
-				lines.push(
-					color
-						? whiteBright(italic(getStackTrace((info.error as Error).stack as string)))
-						: getStackTrace((info.error as Error).stack as string)
-				);
+				const stackTrace = getStackTrace((info.error as Error).stack as string);
+				lines.push(color ? whiteBright(italic(stackTrace)) : stackTrace);
 			}
 
 			return lines.join('');
