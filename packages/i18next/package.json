@@ -1,5 +1,5 @@
 {
-  "name": "@elvia/core",
+  "name": "@elvia/i18next",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,29 +25,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rygent/Elvia.git",
-    "directory": "packages/core"
+    "directory": "packages/i18next"
   },
   "dependencies": {
-    "@elvia/i18next": "workspace:^",
     "@sapphire/utilities": "^3.18.2",
-    "body-parser": "^2.2.0",
-    "compression": "^1.8.1",
-    "cors": "^2.8.5",
-    "discord-api-types": "^0.38.24",
-    "discord.js": "^14.22.1",
-    "express": "^5.1.0",
-    "globby": "^14.1.0",
-    "http-errors": "^2.0.0",
-    "jiti": "^2.5.1",
-    "yaml": "^2.8.1"
+    "i18next": "^25.5.2",
+    "i18next-fs-backend": "^2.6.0"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.6",
-    "@types/compression": "^1.8.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/express-serve-static-core": "^5.0.7",
-    "@types/http-errors": "^2.0.5",
     "@types/node": "^24.4.0",
     "eslint": "^9.35.0",
     "eslint-formatter-pretty": "^6.0.1",

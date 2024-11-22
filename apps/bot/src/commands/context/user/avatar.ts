@@ -14,6 +14,7 @@ import {
 } from '@discordjs/builders';
 import { type UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext } from '@discordjs/formatters';
+import { type Internationalization } from '@elvia/i18next';
 
 export default class extends CoreContext {
 	public constructor(client: CoreClient<true>) {
@@ -25,7 +26,7 @@ export default class extends CoreContext {
 		});
 	}
 
-	public execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
+	public execute(interaction: UserContextMenuCommandInteraction<'cached'>, i18n: Internationalization) {
 		const member = interaction.options.getMember('user')!;
 
 		const container = new ContainerBuilder()
@@ -41,7 +42,9 @@ export default class extends CoreContext {
 			)
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+				new TextDisplayBuilder().setContent(
+					subtext(i18n.text('common:powered_by', { service: this.client.user.username }))
+				)
 			);
 
 		return interaction.reply({ components: [container], flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2] });

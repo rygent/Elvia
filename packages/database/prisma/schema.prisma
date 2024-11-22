@@ -11,6 +11,7 @@ datasource db {
 
 model Guild {
   id        String @id
+  locale    String @default("en-US")
   caseCount Int?   @default(0)
   tags      Tag[]
 

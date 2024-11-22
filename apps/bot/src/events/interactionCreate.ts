@@ -3,9 +3,10 @@ import { MessageFlags } from 'discord-api-types/v10';
 import { Events, type BaseInteraction } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import { logger } from '@elvia/logger';
-import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
+import { italic, underline } from '@discordjs/formatters';
 import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
+import { prisma } from '@elvia/database';
 
 export default class extends CoreEvent {
 	public constructor(client: CoreClient<true>) {
@@ -19,6 +20,15 @@ export default class extends CoreEvent {
 	public async run(interaction: BaseInteraction<'cached' | 'raw'>) {
 		// Handle slash & context menu commands
 		if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
+			let i18n = this.client.i18n.setLocale(interaction.locale);
+
+			if (interaction.inCachedGuild()) {
+				const database = await prisma.guild.findFirst({ where: { id: interaction.guildId }, select: { locale: true } });
+				const locale = database?.locale ?? interaction.guildLocale;
+
+				i18n = this.client.i18n.setLocale(locale);
+			}
+
 			// eslint-disable-next-line prefer-destructuring
 			let commandName = interaction.commandName;
 
@@ -36,17 +46,11 @@ export default class extends CoreEvent {
 
 			if (commandOrContext) {
 				if (!commandOrContext.enabled) {
-					return interaction.reply({
-						content: 'This command is currently inaccessible.',
-						flags: MessageFlags.Ephemeral
-					});
+					return interaction.reply({ content: i18n.text('misc:command_disabled'), flags: MessageFlags.Ephemeral });
 				}
 
 				if (commandOrContext.guildOnly && !interaction.inCachedGuild()) {
-					return interaction.reply({
-						content: 'This command cannot be used out of a server.',
-						flags: MessageFlags.Ephemeral
-					});
+					return interaction.reply({ content: i18n.text('misc:guild_only'), flags: MessageFlags.Ephemeral });
 				}
 
 				if (interaction.inGuild()) {
@@ -60,9 +64,9 @@ export default class extends CoreEvent {
 
 							// eslint-disable-next-line max-depth
 							if (missing?.length) {
-								const replies = `You lack the ${formatArray(
-									missing?.map((item) => underline(italic(formatPermissions(item))))
-								)} permission(s) to continue.`;
+								const replies = i18n.text('misc:missing_user_permission', {
+									permission: formatArray(missing?.map((item) => underline(italic(formatPermissions(item)))))
+								});
 
 								return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 							}
@@ -79,9 +83,9 @@ export default class extends CoreEvent {
 
 							// eslint-disable-next-line max-depth
 							if (missing?.length) {
-								const replies = `I lack the ${formatArray(
-									missing?.map((item) => underline(italic(formatPermissions(item))))
-								)} permission(s) to continue.`;
+								const replies = i18n.text('misc:missing_client_permission', {
+									permission: formatArray(missing?.map((item) => underline(italic(formatPermissions(item)))))
+								});
 
 								return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 							}
@@ -89,17 +93,12 @@ export default class extends CoreEvent {
 					}
 
 					if (commandOrContext.nsfw && !isNsfwChannel(interaction.channel)) {
-						const replies = `This command is only accessible on ${bold('Age-Restricted')} channels.`;
-
-						return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
+						return interaction.reply({ content: i18n.text('misc:nsfw_command'), flags: MessageFlags.Ephemeral });
 					}
 				}
 
 				if (commandOrContext.ownerOnly && !this.client.settings.owners?.includes(interaction.user.id)) {
-					return interaction.reply({
-						content: 'This command is only accessible for developers.',
-						flags: MessageFlags.Ephemeral
-					});
+					return interaction.reply({ content: i18n.text('misc:owner_only'), flags: MessageFlags.Ephemeral });
 				}
 
 				if (!this.client.cooldowns.has(commandName)) {
@@ -116,7 +115,7 @@ export default class extends CoreEvent {
 						const duration = (expired - now) / 1e3;
 						return interaction
 							.reply({
-								content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.`,
+								content: i18n.text('misc:cooldown', { duration: duration.toFixed(2) }),
 								flags: MessageFlags.Ephemeral
 							})
 							.then(() => setTimeout(() => interaction.deleteReply(), expired - now));
@@ -128,9 +127,9 @@ export default class extends CoreEvent {
 
 				try {
 					if (command && interaction.isChatInputCommand()) {
-						await command.execute(interaction);
+						await command.execute(interaction, i18n);
 					} else if (context && interaction.isContextMenuCommand()) {
-						await context.execute(interaction);
+						await context.execute(interaction, i18n);
 					}
 				} catch (error: unknown) {
 					if (error instanceof Error) {
@@ -138,10 +137,7 @@ export default class extends CoreEvent {
 						logger.error(`${error.name}: ${error.message}`, { error });
 					}
 
-					const replies = [
-						'An error has occured when executing this command.',
-						subtext(`please contact us in our ${hyperlink('Support Server', hideLinkEmbed(env.SUPPORT_SERVER_URL))}.`)
-					].join('\n');
+					const replies = i18n.text('misc:error_occurred', { invite: env.SUPPORT_SERVER_URL });
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });
 					if (interaction.replied) return interaction.followUp({ content: replies, flags: MessageFlags.Ephemeral });
