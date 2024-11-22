@@ -1,0 +1,14 @@
+[
+  {
+    "name": "English",
+    "nativeName": "English",
+    "locale": "en-US",
+    "default": true
+  },
+  {
+    "name": "Indonesian",
+    "nativeName": "Bahasa Indonesia",
+    "locale": "id-ID",
+    "default": false
+  }
+]

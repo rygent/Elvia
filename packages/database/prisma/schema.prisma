@@ -10,6 +10,7 @@ datasource db {
 
 model Guild {
   id        String    @id
+  locale    String    @default("en-US")
   tags      Tag[]
   caseCount Int?      @default(0)
   addedAt   DateTime? @default(now())

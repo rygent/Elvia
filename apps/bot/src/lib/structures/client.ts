@@ -11,6 +11,7 @@ import { Collection } from '@discordjs/collection';
 import { Command } from '@/lib/structures/command.js';
 import { Util } from '@/lib/structures/util.js';
 import { Settings } from '@/lib/settings.js';
+import { Internationalization } from '@elvia/i18next';
 import { env } from '@/env.js';
 import fs from 'node:fs';
 
@@ -20,6 +21,7 @@ export class Client<Ready extends boolean = boolean> extends BaseClient<Ready> {
 	public commands: Collection<string, Command>;
 	public cooldowns: Collection<string, Collection<string, number>>;
 
+	public i18n: Internationalization;
 	private readonly utils: Util;
 
 	public version: string;
@@ -50,6 +52,10 @@ export class Client<Ready extends boolean = boolean> extends BaseClient<Ready> {
 		this.commands = new Collection();
 		this.cooldowns = new Collection();
 
+		this.i18n = new Internationalization({
+			defaultName: 'en-US',
+			defaultLanguageDirectory: `${process.cwd()}/locales`
+		});
 		this.utils = new Util(this);
 
 		this.version = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf8')).version;
@@ -72,6 +78,7 @@ export class Client<Ready extends boolean = boolean> extends BaseClient<Ready> {
 	}
 
 	public async start(token = this.settings.token) {
+		await this.i18n.init();
 		await this.utils.loadContextCommands();
 		await this.utils.loadSlashCommands();
 		await this.utils.loadListeners();

@@ -78,6 +78,14 @@ export default tseslint.config(
 		},
 		ignores: ['**/.contentlayer/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
 	},
+	{
+		files: [`packages/i18next/**/*${commonFiles}`],
+		rules: {
+			'@typescript-eslint/consistent-indexed-object-style': 'off',
+			'@typescript-eslint/no-unnecessary-type-arguments': 'off',
+			'@typescript-eslint/no-redundant-type-constituents': 'off'
+		}
+	},
 	...reactRulesets,
 	...nextRulesets,
 	{

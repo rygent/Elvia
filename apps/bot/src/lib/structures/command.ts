@@ -13,6 +13,7 @@ import {
 	type PermissionsString
 } from 'discord.js';
 import type { CommandData, CommandOptions, CommandParameter } from '@/types/types.js';
+import type { Internationalization } from '@elvia/i18next';
 import type { Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
@@ -61,7 +62,10 @@ export abstract class Command extends EventEmitter {
 		this.owner = options.owner ?? false;
 	}
 
-	public abstract execute(interaction: CommandInteraction<'cached' | 'raw'>): Awaitable<unknown>;
+	public abstract execute(
+		interaction: CommandInteraction<'cached' | 'raw'>,
+		i18n: Internationalization
+	): Awaitable<unknown>;
 
 	public autocomplete?(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown>;
 

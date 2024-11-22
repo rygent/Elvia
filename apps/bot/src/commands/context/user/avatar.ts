@@ -9,6 +9,7 @@ import {
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
+import type { Internationalization } from '@elvia/i18next';
 import { Colors } from '@/lib/utils/constants.js';
 
 export default class extends Command {
@@ -22,7 +23,7 @@ export default class extends Command {
 		});
 	}
 
-	public execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
+	public execute(interaction: UserContextMenuCommandInteraction<'cached'>, i18n: Internationalization) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
@@ -37,7 +38,10 @@ export default class extends Command {
 			.setAuthor({ name: member.user.tag, iconURL: member.displayAvatarURL() })
 			.setDescription(`${bold(italic('ID:'))} ${inlineCode(member.user.id)}`)
 			.setImage(member.displayAvatarURL({ size: 512 }))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+			.setFooter({
+				text: i18n.text('common:powered_by', { service: this.client.user.username }),
+				iconURL: interaction.user.avatarURL() as string
+			});
 
 		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
 	}

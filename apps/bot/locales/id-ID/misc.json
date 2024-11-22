@@ -1,0 +1,10 @@
+{
+  "command_disabled": "Perintah ini saat ini tidak dapat diakses.",
+  "guild_only": "Perintah ini tidak dapat digunakan di luar server.",
+  "missing_user_permission": "Anda tidak memiliki izin {{permission}} untuk melanjutkan.",
+  "missing_client_permission": "Saya tidak memiliki izin {{permission}} untuk melanjutkan.",
+  "nsfw_command": "Perintah ini hanya dapat diakses di saluran **Batasan Usia**.",
+  "owner_only": "Perintah ini hanya dapat diakses oleh pengembang.",
+  "cooldown": "Anda harus menunggu {{duration}} detik untuk melanjutkan.",
+  "error_occurred": "Terjadi kesalahan saat menjalankan perintah ini.\n-# silakan hubungi kami di [Server Dukungan](<{{invite}}>)."
+}

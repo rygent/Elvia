@@ -3,8 +3,9 @@ import { Listener } from '@/lib/structures/listener.js';
 import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import type { DiscordAPIError } from '@discordjs/rest';
+import { prisma } from '@elvia/database';
 import { logger } from '@elvia/logger';
-import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
+import { bold, italic, underline } from '@discordjs/formatters';
 import { formatArray, formatPermissions, getCommandName, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 
@@ -23,9 +24,21 @@ export default class extends Listener {
 			const commandName = getCommandName(interaction);
 			const command = this.client.commands.get(commandName);
 
+			// eslint-disable-next-line prefer-destructuring
+			let i18n = this.client.i18n;
+
+			if (interaction.inCachedGuild()) {
+				const database = await prisma.guild.findFirst({
+					where: { id: interaction.guildId },
+					select: { locale: true }
+				});
+
+				i18n = this.client.i18n.setLocale(database?.locale ?? interaction.guildLocale);
+			}
+
 			if (command) {
 				if (!command.enabled) {
-					return interaction.reply({ content: 'This command is currently inaccessible.', ephemeral: true });
+					return interaction.reply({ content: i18n.text('misc:command_disabled'), ephemeral: true });
 				}
 
 				if (command.unsafe && !this.client.settings.unsafeMode) {
@@ -33,7 +46,7 @@ export default class extends Listener {
 				}
 
 				if (command.guild && !interaction.inCachedGuild()) {
-					return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
+					return interaction.reply({ content: i18n.text('misc:guild_only'), ephemeral: true });
 				}
 
 				if (interaction.inGuild()) {
@@ -49,9 +62,9 @@ export default class extends Listener {
 
 							// eslint-disable-next-line max-depth
 							if (missing.length) {
-								const replies = `You lack the ${formatArray(
-									missing.map((item) => underline(italic(formatPermissions(item))))
-								)} permission(s) to continue.`;
+								const replies = i18n.text('misc:missing_user_permission', {
+									permission: formatArray(missing.map((item) => underline(italic(formatPermissions(item)))))
+								});
 
 								return interaction.reply({ content: replies, ephemeral: true });
 							}
@@ -68,9 +81,9 @@ export default class extends Listener {
 
 							// eslint-disable-next-line max-depth
 							if (missing.length) {
-								const replies = `I lack the ${formatArray(
-									missing.map((item) => underline(italic(formatPermissions(item))))
-								)} permission(s) to continue.`;
+								const replies = i18n.text('misc:missing_client_permission', {
+									permission: formatArray(missing.map((item) => underline(italic(formatPermissions(item)))))
+								});
 
 								return interaction.reply({ content: replies, ephemeral: true });
 							}
@@ -78,14 +91,12 @@ export default class extends Listener {
 					}
 
 					if (command.nsfw && !isNsfwChannel(interaction.channel)) {
-						const replies = `This command is only accessible on ${bold('Age-Restricted')} channels.`;
-
-						return interaction.reply({ content: replies, ephemeral: true });
+						return interaction.reply({ content: i18n.text('misc:nsfw_command'), ephemeral: true });
 					}
 				}
 
 				if (command.owner && !this.client.settings.owners?.includes(interaction.user.id)) {
-					return interaction.reply({ content: 'This command is only accessible for developers.', ephemeral: true });
+					return interaction.reply({ content: i18n.text('misc:owner_only'), ephemeral: true });
 				}
 
 				if (!this.client.cooldowns.has(commandName)) {
@@ -101,7 +112,7 @@ export default class extends Listener {
 					if (now < expired) {
 						const duration = (expired - now) / 1e3;
 						return interaction
-							.reply({ content: `You've to wait ${bold(duration.toFixed(2))} second(s) to continue.`, ephemeral: true })
+							.reply({ content: i18n.text('misc:cooldown', { duration: bold(duration.toFixed(2)) }), ephemeral: true })
 							.then(() => setTimeout(() => interaction.deleteReply(), expired - now));
 					}
 				}
@@ -110,16 +121,13 @@ export default class extends Listener {
 				setTimeout(() => cooldown?.delete(interaction.user.id), command.cooldown);
 
 				try {
-					await command.execute(interaction);
+					await command.execute(interaction, i18n);
 				} catch (e: unknown) {
 					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
 					if (interaction.replied) return;
 					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
 
-					const replies = [
-						'An error has occured when executing this command.',
-						subtext(`please contact us in our ${hyperlink('Support Server', hideLinkEmbed(env.SUPPORT_SERVER_URL))}.`)
-					].join('\n');
+					const replies = i18n.text('misc:error_occurred', { invite: env.SUPPORT_SERVER_URL });
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });
 					return interaction.reply({ content: replies, ephemeral: true });
