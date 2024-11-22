@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@elvia/database": "workspace:^",
+    "@elvia/i18next": "workspace:^",
     "@elvia/logger": "workspace:^",
     "@elvia/webserver": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
