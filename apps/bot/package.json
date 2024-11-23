@@ -34,7 +34,7 @@
     "@iamtraction/google-translate": "^2.0.1",
     "@prisma/client": "^5.22.0",
     "@rygent/anilist": "^1.4.0",
-    "@rygent/spotify": "^1.1.1",
+    "@rygent/spotify": "^1.2.0",
     "@sapphire/discord-utilities": "^3.4.3",
     "@sapphire/time-utilities": "^1.7.14",
     "@sapphire/type": "^2.5.1",
