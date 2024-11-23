@@ -42,7 +42,7 @@
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.22.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "files": [
     "./dist/"
