@@ -48,7 +48,7 @@
     "@radix-ui/react-select": "^2.1.4",
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.1",
-    "class-variance-authority": "^0.7.0",
+    "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.460.0",
     "tailwindcss-animate": "^1.0.7"
   },
