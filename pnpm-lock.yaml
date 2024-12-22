@@ -21,7 +21,7 @@ importers:
         specifier: ^22.10.2
         version: 22.10.2
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-config-prettier:
         specifier: ^9.1.0
@@ -152,7 +152,7 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
@@ -229,7 +229,7 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-config-next:
         specifier: ^15.1.2
@@ -278,7 +278,7 @@ importers:
         specifier: ^22.10.2
         version: 22.10.2
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
@@ -336,7 +336,7 @@ importers:
         specifier: ^22.10.2
         version: 22.10.2
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
@@ -415,7 +415,7 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
@@ -452,7 +452,7 @@ importers:
         specifier: ^22.10.2
         version: 22.10.2
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
@@ -513,7 +513,7 @@ importers:
         specifier: ^22.10.2
         version: 22.10.2
       eslint:
-        specifier: ^9.15.0
+        specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.2)
       eslint-formatter-pretty:
         specifier: ^6.0.1
