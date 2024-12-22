@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.0
-        version: 19.6.0(@types/node@22.9.1)(typescript@5.7.2)
+        version: 19.6.0(@types/node@22.10.2)(typescript@5.7.2)
       '@commitlint/config-angular':
         specifier: ^19.6.0
         version: 19.6.0
@@ -18,8 +18,8 @@ importers:
         specifier: ^4.6.9
         version: 4.6.9
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       eslint:
         specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
@@ -146,8 +146,8 @@ importers:
         specifier: ^2.2.6
         version: 2.2.6
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -217,8 +217,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0(prettier@3.3.3)
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       '@types/react':
         specifier: ^19.0.2
         version: 19.0.2
@@ -275,8 +275,8 @@ importers:
         version: 5.22.0(prisma@5.22.0)
     devDependencies:
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       eslint:
         specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
@@ -333,8 +333,8 @@ importers:
         version: 3.23.8
     devDependencies:
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       eslint:
         specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
@@ -409,8 +409,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.15)
     devDependencies:
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -449,8 +449,8 @@ importers:
         version: 2.5.4
     devDependencies:
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       eslint:
         specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
@@ -510,8 +510,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       '@types/node':
-        specifier: ^22.9.1
-        version: 22.9.1
+        specifier: ^22.10.2
+        version: 22.10.2
       eslint:
         specifier: ^9.15.0
         version: 9.15.0(jiti@2.4.0)
@@ -2373,8 +2373,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@22.9.1':
-    resolution: {integrity: sha512-p8Yy/8sw1caA8CdRIQBG5tiLHmxtQKObCijiAa9Ez+d4+PRffM4054xbju0msf+cvhJpnFEeNjxmVT/0ipktrg==}
+  '@types/node@22.10.2':
+    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
   '@types/qs@6.9.17':
     resolution: {integrity: sha512-rX4/bPcfmvxHDv0XjfJELTTr+iB+tn032nPILqHm5wbthUUUuVtNGGqzhya9XUxjTP8Fpr0qYgSZZKxGY++svQ==}
@@ -5787,8 +5787,8 @@ packages:
   unbzip2-stream@1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}
 
-  undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -6052,11 +6052,11 @@ snapshots:
 
   '@colors/colors@1.6.0': {}
 
-  '@commitlint/cli@19.6.0(@types/node@22.9.1)(typescript@5.7.2)':
+  '@commitlint/cli@19.6.0(@types/node@22.10.2)(typescript@5.7.2)':
     dependencies:
       '@commitlint/format': 19.5.0
       '@commitlint/lint': 19.6.0
-      '@commitlint/load': 19.5.0(@types/node@22.9.1)(typescript@5.7.2)
+      '@commitlint/load': 19.5.0(@types/node@22.10.2)(typescript@5.7.2)
       '@commitlint/read': 19.5.0
       '@commitlint/types': 19.5.0
       tinyexec: 0.3.1
@@ -6104,7 +6104,7 @@ snapshots:
       '@commitlint/rules': 19.6.0
       '@commitlint/types': 19.5.0
 
-  '@commitlint/load@19.5.0(@types/node@22.9.1)(typescript@5.7.2)':
+  '@commitlint/load@19.5.0(@types/node@22.10.2)(typescript@5.7.2)':
     dependencies:
       '@commitlint/config-validator': 19.5.0
       '@commitlint/execute-rule': 19.5.0
@@ -6112,7 +6112,7 @@ snapshots:
       '@commitlint/types': 19.5.0
       chalk: 5.3.0
       cosmiconfig: 9.0.0(typescript@5.7.2)
-      cosmiconfig-typescript-loader: 5.1.0(@types/node@22.9.1)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2)
+      cosmiconfig-typescript-loader: 5.1.0(@types/node@22.10.2)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -7679,7 +7679,7 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@types/compression@1.7.5':
     dependencies:
@@ -7687,15 +7687,15 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@types/debug@4.1.12':
     dependencies:
@@ -7714,7 +7714,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.1':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -7758,9 +7758,9 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@22.9.1':
+  '@types/node@22.10.2':
     dependencies:
-      undici-types: 6.19.8
+      undici-types: 6.20.0
 
   '@types/qs@6.9.17': {}
 
@@ -7779,12 +7779,12 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
       '@types/send': 0.17.4
 
   '@types/triple-beam@1.3.5': {}
@@ -7795,7 +7795,7 @@ snapshots:
 
   '@types/ws@8.5.13':
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
 
   '@typescript-eslint/eslint-plugin@8.15.0(@typescript-eslint/parser@8.15.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.7.2))(eslint@9.15.0(jiti@2.4.0))(typescript@5.7.2)':
     dependencies:
@@ -8453,9 +8453,9 @@ snapshots:
       object-assign: 4.1.1
       vary: 1.1.2
 
-  cosmiconfig-typescript-loader@5.1.0(@types/node@22.9.1)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2):
+  cosmiconfig-typescript-loader@5.1.0(@types/node@22.10.2)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2):
     dependencies:
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
       cosmiconfig: 9.0.0(typescript@5.7.2)
       jiti: 1.21.6
       typescript: 5.7.2
@@ -10939,7 +10939,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.9.1
+      '@types/node': 22.10.2
       long: 5.2.3
 
   proxy-addr@2.0.7:
@@ -11861,7 +11861,7 @@ snapshots:
       buffer: 5.7.1
       through: 2.3.8
 
-  undici-types@6.19.8: {}
+  undici-types@6.20.0: {}
 
   undici@5.28.4:
     dependencies:
