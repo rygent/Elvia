@@ -31,7 +31,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "react-string-replace": "^1.1.1",
-    "tailwind-merge": "^2.5.4"
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
