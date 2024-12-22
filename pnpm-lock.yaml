@@ -126,7 +126,7 @@ importers:
         specifier: ^5.0.9
         version: 5.0.9
       systeminformation:
-        specifier: ^5.23.5
+        specifier: ^5.23.16
         version: 5.23.16
       zod:
         specifier: ^3.24.1
