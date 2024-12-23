@@ -3,7 +3,7 @@ import type { client } from '@/types/types.js';
 import { env } from '@/env.js';
 
 export class Settings {
-	protected declare data: Partial<client.Settings>;
+	declare protected data: Partial<client.Settings>;
 
 	public constructor() {
 		this.data = {};
