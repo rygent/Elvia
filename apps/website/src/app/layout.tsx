@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { calSans, geistMono, geistSans } from '@/styles/fonts.ts';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
-import '@elvia/ui/styles/shared-globals.css';
+import '@elvia/ui/globals.css';
 
 export const metadata: Metadata = {
 	title: {

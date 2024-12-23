@@ -8,12 +8,12 @@
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
   "exports": {
-    ".": "./src/index.tsx",
+    ".": "./src/components/index.tsx",
     "./icons": {
       "import": "./src/icons/index.tsx",
       "types": "./src/icons/index.d.ts"
     },
-    "./styles/shared-globals.css": "./src/styles/shared-globals.css",
+    "./globals.css": "./src/styles/globals.css",
     "./tailwind.config.ts": "./tailwind.config.ts"
   },
   "scripts": {

@@ -5,19 +5,11 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "incremental": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "allowJs": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    }
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "exclude": ["node_modules"]
