@@ -84,7 +84,7 @@ importers:
         specifier: ^1.7.14
         version: 1.7.14
       '@sapphire/type':
-        specifier: ^2.5.1
+        specifier: ^2.6.0
         version: 2.6.0
       '@sapphire/utilities':
         specifier: ^3.18.1
