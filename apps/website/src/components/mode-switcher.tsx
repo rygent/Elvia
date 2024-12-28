@@ -11,7 +11,7 @@ export function ModeSwitcher() {
 	return (
 		<Button
 			variant="ghost"
-			className="group/toggle h-8 w-8 px-0 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-5"
+			className="group/toggle h-9 w-9 px-0 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-5"
 			onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
 		>
 			<Sun className="hidden [html.dark_&]:block" strokeWidth={1.5} size={24} />
