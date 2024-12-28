@@ -19,7 +19,7 @@ import { ExternalLink, Hamburger } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
 import '@/styles/hamburger.css';
 
-export function MobileNav() {
+export function MobileNav({ className }: React.ComponentProps<'button'>) {
 	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
 	React.useEffect(() => {
@@ -36,7 +36,10 @@ export function MobileNav() {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-5"
+					className={cn(
+						'hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-5',
+						className
+					)}
 				>
 					<Hamburger size={24} className={cn({ open: isOpen })} />
 					<span className="sr-only">Menu</span>
