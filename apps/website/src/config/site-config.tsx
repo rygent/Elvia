@@ -48,7 +48,7 @@ export const siteConfig = {
 			headline: 'Everything you need\n to manage Discord server',
 			subheadline: 'The most powerful multipurpose Discord app.',
 			cta: [
-				{ label: 'Getting Started', href: '/invite' },
+				{ label: 'Invite App', href: '/invite' },
 				{ label: 'Support Server', href: '/discord' }
 			]
 		},
