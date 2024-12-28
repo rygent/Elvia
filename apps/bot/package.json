@@ -64,7 +64,7 @@
     "typescript": "^5.7.2"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.8"
+    "bufferutil": "^4.0.9"
   },
   "engines": {
     "node": ">=v20.11.0"
