@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next';
 import { withContentlayer } from 'next-contentlayer2';
+import '@/env';
 
 const nextConfig = {
 	pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
