@@ -14,8 +14,8 @@
       "outputLogs": "full"
     },
     "@elvia/website#build": {
-      "dependsOn": ["^build"],
-      "env": ["DISCORD_APPLICATION_ID"],
+      "dependsOn": ["^build", "@elvia/database#db:generate"],
+      "env": ["DISCORD_APPLICATION_ID", "DISCORD_APPLICATION_SECRET", "AUTH_SECRET", "JWT_SECRET"],
       "outputs": [".next/**", "!.next/cache/**", ".contentlayer/**"],
       "outputLogs": "full"
     },

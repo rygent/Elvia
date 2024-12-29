@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MainAuth } from '@/components/auth/main-auth';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { ModeSwitcher } from '@/components/mode-switcher';
@@ -30,7 +31,7 @@ export function SiteHeader() {
 					</Link>
 					<MainNav />
 				</div>
-				<div className="flex items-center">
+				<div className="flex items-center gap-2">
 					<nav className="flex items-center gap-0.5">
 						<Button
 							variant="ghost"
@@ -45,6 +46,7 @@ export function SiteHeader() {
 						</Button>
 						<ModeSwitcher />
 					</nav>
+					<MainAuth />
 				</div>
 			</div>
 		</header>
