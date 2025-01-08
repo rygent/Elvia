@@ -9,9 +9,10 @@ datasource db {
 }
 
 model Guild {
-  id        String    @id
+  id        String @id
+  caseCount Int?   @default(0)
   tags      Tag[]
-  caseCount Int?      @default(0)
+
   addedAt   DateTime? @default(now())
   updatedAt DateTime? @updatedAt
 
@@ -19,12 +20,13 @@ model Guild {
 }
 
 model Tag {
-  id        String    @id @default(cuid())
-  guildId   String
-  slug      String
-  name      String
-  content   String
-  hoisted   Boolean?  @default(false)
+  id      String   @id @default(cuid())
+  guildId String
+  slug    String
+  name    String
+  content String
+  hoisted Boolean? @default(false)
+
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
 
