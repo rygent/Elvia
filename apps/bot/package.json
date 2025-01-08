@@ -22,11 +22,6 @@
     "url": "https://github.com/rygent/Elvia.git",
     "directory": "apps/bot"
   },
-  "peerDependencies": {
-    "discord-api-types": "*",
-    "express": "*",
-    "http-errors": "*"
-  },
   "dependencies": {
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
@@ -41,9 +36,12 @@
     "@sapphire/utilities": "^3.18.1",
     "axios": "^1.7.9",
     "colorette": "^2.0.20",
+    "discord-api-types": "0.37.100",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.7",
+    "express": "^5.0.1",
     "globby": "^14.0.2",
+    "http-errors": "^2.0.0",
     "jiti": "^2.4.2",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
