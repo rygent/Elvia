@@ -18,7 +18,7 @@ import { cn } from '@elvia/utils';
 
 export function MainNav() {
 	return (
-		<NavigationMenu className="hidden md:flex">
+		<NavigationMenu className="hidden lg:flex">
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50">

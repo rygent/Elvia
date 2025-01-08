@@ -37,7 +37,7 @@ export function MobileNav({ className }: React.ComponentProps<'button'>) {
 					variant="ghost"
 					size="icon"
 					className={cn(
-						'hamburger focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden [&_svg]:size-5',
+						'hamburger h-8 w-8 rounded-full border hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden [&_svg]:size-6',
 						className
 					)}
 				>
@@ -45,7 +45,7 @@ export function MobileNav({ className }: React.ComponentProps<'button'>) {
 					<span className="sr-only">Menu</span>
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="z-40 h-[calc(100vh-4.0625rem)] w-screen animate-none rounded-none border-none bg-background/90 p-0 px-3 shadow-none backdrop-blur transition-transform data-[state=closed]:!zoom-out-100 data-[state=open]:!zoom-in-100 supports-[backdrop-filter]:bg-background/90 md:hidden">
+			<PopoverContent className="z-40 h-[calc(100vh-4.0625rem)] w-screen animate-none rounded-none border-none bg-background/90 p-0 px-3 shadow-none backdrop-blur transition-transform data-[state=closed]:!zoom-out-100 data-[state=open]:!zoom-in-100 supports-[backdrop-filter]:bg-background/90 lg:hidden">
 				<ScrollArea>
 					<section className="my-3 px-3">
 						<PopoverClose asChild>
