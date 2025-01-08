@@ -3,4 +3,4 @@ export * from './Discord';
 export * from './Hamburger';
 export * from './Topgg';
 
-export { ArrowRight, ExternalLink, Monitor, Moon, Sparkles, Sun, X } from 'lucide-react';
+export { ArrowRight, ChevronDown, ExternalLink, Laptop, Moon, Sparkles, Sun, X } from 'lucide-react';
