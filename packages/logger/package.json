@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "colorette": "^2.0.20",
-    "discord.js": "^14.16.3",
+    "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "logform": "^2.7.0",
     "moment": "^2.30.1",
