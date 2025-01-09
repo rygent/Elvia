@@ -1,16 +1,16 @@
 .hamburger svg g {
 	@apply origin-center;
-	transition: all 0.16s ease;
+	transition: transform 0.16s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .hamburger svg path {
 	@apply opacity-100;
-	transition: all 0.16s ease;
+	transition: transform 0.16s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .hamburger svg.open path {
-	transition: all 0.16s ease,
+	transition: transform 0.16s cubic-bezier(0.25, 0.1, 0.25, 1),
 }
 .hamburger svg.open g {
-	transition: all 0.16s ease;
+	transition: transform 0.16s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .hamburger svg.open > g:nth-of-type(1) {
 	@apply rotate-45;
