@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
-import { MDXContent } from '@/components/mdx/mdx-content';
+import { MDXProvider } from '@/components/mdx/mdx-provider';
 import { cn } from '@elvia/utils';
 import Balancer from 'react-wrap-balancer';
 import '@/styles/mdx.css';
@@ -59,7 +59,7 @@ export default async function LegalPage({ params }: LegalPageProps) {
 				)}
 			</div>
 			<div className="pb-12 pt-8">
-				<MDXContent code={doc.body.code} />
+				<MDXProvider code={doc.body.code} />
 			</div>
 		</main>
 	);

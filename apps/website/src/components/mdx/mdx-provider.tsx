@@ -2,11 +2,11 @@ import * as React from 'react';
 import { components } from '@/components/mdx/mdx-components';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
 
-interface MDXContentProps {
+interface MDXProviderProps {
 	code: string;
 }
 
-export function MDXContent({ code }: MDXContentProps) {
+export function MDXProvider({ code }: MDXProviderProps) {
 	const Component = useMDXComponent(code);
 
 	return (
