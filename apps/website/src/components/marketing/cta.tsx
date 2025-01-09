@@ -21,7 +21,7 @@ export async function CallToAction({ headline, subheadline, className }: CallToA
 			<div className="mt-10 flex justify-center space-x-2">
 				<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer" className="group flex">
 					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80">
-						<Github size={18} />
+						<Github className="h-[18px] w-[18px]" />
 						<span>Star us on GitHub</span>
 					</div>
 					<div className="flex items-center">

@@ -41,7 +41,7 @@ export function MobileNav({ className }: React.ComponentProps<'button'>) {
 						className
 					)}
 				>
-					<Hamburger size={24} className={cn({ open: isOpen })} />
+					<Hamburger className={cn('h-6 w-6', { open: isOpen })} />
 					<span className="sr-only">Menu</span>
 				</Button>
 			</PopoverTrigger>

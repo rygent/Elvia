@@ -37,7 +37,7 @@ export function SiteHeader() {
 							asChild
 						>
 							<Link href={siteConfig.external.links.topgg} target="_blank" rel="noreferrer">
-								<Topgg size={16} />
+								<Topgg className="h-4 w-4" />
 								<span className="sr-only">Top.gg</span>
 							</Link>
 						</Button>
