@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Topgg } from '@/components/icons';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { siteConfig } from '@/config';
 import { Button } from '@elvia/ui';
-import { Topgg } from '@elvia/ui/icons';
 
 export function SiteHeader() {
 	return (
