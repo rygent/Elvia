@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Topgg } from '@/components/icons';
+import { Logo, Topgg } from '@/components/icons';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
 import { siteConfig } from '@/config';
@@ -12,19 +11,11 @@ export function SiteHeader() {
 		<header className="sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
 			<div className="container flex h-14 max-w-screen-2xl items-center justify-between px-6 md:px-8">
 				<div className="flex items-center">
-					<Link
-						href="/"
-						className="mr-4 flex items-center space-x-2 transition-opacity duration-150 hover:opacity-80 lg:mr-6"
-					>
-						<Image
-							alt={siteConfig.global.name}
-							src={siteConfig.global.logo}
-							width={24}
-							height={24}
-							className="rounded-md"
-							aria-label={siteConfig.global.name}
-						/>
-						<span className="inline-block font-bold">{siteConfig.global.name}</span>
+					<Link href="/" className="flex items-center justify-center gap-x-2 lg:mr-5">
+						<Logo className="h-5 w-5" />
+						<span className="inline-block whitespace-nowrap font-cal text-xl font-bold leading-5 tracking-wide">
+							{siteConfig.global.name}
+						</span>
 					</Link>
 					<MainNav />
 				</div>

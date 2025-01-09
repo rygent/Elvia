@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Logo } from '@/components/icons';
 import { siteConfig } from '@/config';
 import {
 	NavigationMenu,
@@ -32,14 +32,7 @@ export function MainNav() {
 										className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
 										href="/invite"
 									>
-										<Image
-											alt={siteConfig.global.name}
-											src={siteConfig.global.logo}
-											width={38}
-											height={38}
-											className="rounded-md"
-											aria-label={siteConfig.global.name}
-										/>
+										<Logo className="h-8 w-8" />
 										<div className="mb-2 mt-4 text-lg font-medium">{siteConfig.global.name}</div>
 										<p className="text-sm leading-tight text-muted-foreground">{siteConfig.global.description}</p>
 									</a>

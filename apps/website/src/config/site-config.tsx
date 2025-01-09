@@ -1,10 +1,7 @@
-import Logo from '@/assets/logo.jpg';
-
 export const siteConfig = {
 	global: {
 		url: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
 		name: 'Elvia',
-		logo: Logo,
 		title: 'Elvia - The most powerful multipurpose Discord app.',
 		description: 'The most powerful multipurpose Discord app.',
 		keywords: ['Discord', 'Bot', 'Multipurpose', 'Moderation', 'Games', 'Utilities', 'Social'],
