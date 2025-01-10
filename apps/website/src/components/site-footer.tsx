@@ -49,30 +49,7 @@ export function SiteFooter() {
 							</li>
 						))}
 						<li className="text-sm">
-							<Popover>
-								<PopoverTrigger asChild>
-									<Button
-										variant="link"
-										className="h-fit justify-start gap-[2px] p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
-									>
-										Legal
-										<ChevronDown size={16} />
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent className="flex w-52 flex-col gap-x-2 p-2" side="top">
-									{legal.map((item, index) => (
-										<PopoverClose key={index} asChild>
-											<Button
-												variant="link"
-												className="h-10 w-full justify-start p-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
-												asChild
-											>
-												<Link href={item.href}>{item.name}</Link>
-											</Button>
-										</PopoverClose>
-									))}
-								</PopoverContent>
-							</Popover>
+							<Legal />
 						</li>
 					</ul>
 				</div>
@@ -86,5 +63,36 @@ export function SiteFooter() {
 				</p>
 			</div>
 		</footer>
+	);
+}
+
+function Legal() {
+	const [open, setOpen] = React.useState<boolean>(false);
+
+	return (
+		<Popover open={open} onOpenChange={setOpen}>
+			<PopoverTrigger asChild>
+				<Button
+					variant="link"
+					className="h-fit justify-start gap-[2px] p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
+				>
+					Legal
+					<ChevronDown size={16} strokeWidth={1.5} />
+				</Button>
+			</PopoverTrigger>
+			<PopoverContent className="flex w-52 flex-col gap-x-2 p-2" side="top">
+				{legal.map((item, index) => (
+					<PopoverClose key={index} asChild>
+						<Button
+							variant="link"
+							className="h-10 w-full justify-start p-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
+							asChild
+						>
+							<Link href={item.href}>{item.name}</Link>
+						</Button>
+					</PopoverClose>
+				))}
+			</PopoverContent>
+		</Popover>
 	);
 }
