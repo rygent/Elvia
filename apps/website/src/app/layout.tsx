@@ -14,11 +14,27 @@ export const metadata: Metadata = {
 		template: `%s | ${siteConfig.global.name}`
 	},
 	description: siteConfig.global.description,
+	keywords: siteConfig.global.keywords,
+	authors: siteConfig.global.authors,
 	creator: siteConfig.global.creator,
+	openGraph: {
+		type: 'website',
+		locale: 'en_US',
+		url: siteConfig.global.url,
+		title: siteConfig.global.name,
+		description: siteConfig.global.description,
+		siteName: siteConfig.global.name
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: siteConfig.global.name,
+		description: siteConfig.global.description,
+		creator: `@${siteConfig.global.creator}`
+	},
 	icons: {
-		icon: '/favicon.ico'
-		// shortcut: '/favicon-16x16.png',
-		// apple: '/apple-touch-icon.png'
+		icon: '/favicon.ico',
+		shortcut: '/favicon-32x32.png',
+		apple: '/apple-touch-icon.png'
 	}
 };
 

@@ -1,6 +1,6 @@
 export const siteConfig = {
 	global: {
-		url: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
+		url: 'https://elvia.vercel.app',
 		name: 'Elvia',
 		title: 'Elvia - The most powerful multipurpose Discord app.',
 		description: 'The most powerful multipurpose Discord app.',
