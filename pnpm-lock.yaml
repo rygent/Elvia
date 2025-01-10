@@ -126,8 +126,8 @@ importers:
         specifier: ^5.0.9
         version: 5.0.9
       systeminformation:
-        specifier: ^5.23.23
-        version: 5.23.23
+        specifier: ^5.25.9
+        version: 5.25.9
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -5606,8 +5606,8 @@ packages:
     resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  systeminformation@5.23.23:
-    resolution: {integrity: sha512-QhEWrMFZnzWjFZ7J65gikIXTrB8U6b7VTQ8pLaF/GUgJaJoUoSuucqalIVj91D/grhRUtXplL6qYwTn1A4FfhQ==}
+  systeminformation@5.25.9:
+    resolution: {integrity: sha512-E69GXnoc1z3vdvTSSVdIETJbjfdLQnaQScsBTuser4Ej9+BoxsxYh2yURjy0+Zp81Fb1ScSyY4E48l1yJS5q7A==}
     engines: {node: '>=8.0.0'}
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
@@ -11711,7 +11711,7 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
 
-  systeminformation@5.23.23: {}
+  systeminformation@5.25.9: {}
 
   tailwind-merge@2.6.0: {}
 
