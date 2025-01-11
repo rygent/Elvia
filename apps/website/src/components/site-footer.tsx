@@ -80,12 +80,16 @@ function Legal() {
 					<ChevronDown size={16} strokeWidth={1.5} />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="flex w-52 flex-col gap-x-2 p-2" side="top">
+			<PopoverContent
+				className="flex w-52 flex-col gap-x-2 rounded-xl p-2"
+				side="top"
+				onCloseAutoFocus={(event) => event.preventDefault()}
+			>
 				{legal.map((item, index) => (
 					<PopoverClose key={index} asChild>
 						<Button
 							variant="link"
-							className="h-10 w-full justify-start p-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
+							className="h-10 w-full justify-start px-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
 							asChild
 						>
 							<Link href={item.href}>{item.name}</Link>
