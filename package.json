@@ -33,7 +33,7 @@
     "@types/node": "^22.10.5",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-terrax": "^0.3.3",
+    "eslint-config-terrax": "^0.3.4",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.7",
     "lodash.merge": "^4.6.2",
