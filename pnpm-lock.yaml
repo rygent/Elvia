@@ -78,8 +78,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@sapphire/discord-utilities':
-        specifier: ^3.4.3
-        version: 3.4.3
+        specifier: ^3.4.4
+        version: 3.4.4
       '@sapphire/time-utilities':
         specifier: ^1.7.14
         version: 1.7.14
@@ -2207,8 +2207,8 @@ packages:
     resolution: {integrity: sha512-K96GX4UkzgC/Y2VHXVjhM2Bl4D04552nr/fDiOj9bOACW1+wqeFfLJ3eV6jleTSXmzPIwDvkPIUJLf8A5KSD+w==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/discord-utilities@3.4.3':
-    resolution: {integrity: sha512-QVh0KN+UYKnOZBhjMCe7IS2Wr0Ug3IT4evyygIDXZz2fRpfup7peHW2w1QplwLfEbpBTW9Uzr/9aONOYIobpxg==}
+  '@sapphire/discord-utilities@3.4.4':
+    resolution: {integrity: sha512-P7bCL5U2s+U5oy9OFpC4lr4Y0bGoNrSCPu2bgxP9AaqK90hcwpoLWWKouvGgaY9tCbUZmaf8E98/SlZZoakhAQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
   '@sapphire/duration@1.1.4':
@@ -7696,9 +7696,9 @@ snapshots:
     dependencies:
       '@sapphire/utilities': 3.18.1
 
-  '@sapphire/discord-utilities@3.4.3':
+  '@sapphire/discord-utilities@3.4.4':
     dependencies:
-      discord-api-types: 0.37.100
+      discord-api-types: 0.37.114
 
   '@sapphire/duration@1.1.4': {}
 
