@@ -24,7 +24,13 @@ const Legal = defineDocumentType(() => ({
 			required: true
 		},
 		description: {
-			type: 'string'
+			type: 'string',
+			required: false
+		},
+		toc: {
+			type: 'boolean',
+			default: true,
+			required: false
 		}
 	},
 	computedFields

@@ -1,35 +1,37 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Heading } from '@/components/mdx/heading';
 import { cn } from '@elvia/utils';
 
 export const components = {
 	h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h1 className={cn('mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />
+		<Heading as="h1" className={cn('text-4xl font-bold', className)} {...props} />
 	),
 	h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h2
-			className={cn('mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0', className)}
+		<Heading
+			as="h2"
+			className={cn('border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0', className)}
 			{...props}
 		/>
 	),
 	h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h3 className={cn('mt-8 scroll-m-20 text-xl font-semibold tracking-tight', className)} {...props} />
+		<Heading as="h3" className={cn('text-xl font-semibold tracking-tight', className)} {...props} />
 	),
 	h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h4 className={cn('mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />
+		<Heading as="h4" className={cn('text-lg font-semibold tracking-tight', className)} {...props} />
 	),
 	h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h5 className={cn('mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />
+		<Heading as="h5" className={cn('text-lg font-semibold tracking-tight', className)} {...props} />
 	),
 	h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-		<h6 className={cn('mt-8 scroll-m-20 text-base font-semibold tracking-tight', className)} {...props} />
+		<Heading as="h4" className={cn('text-base font-semibold tracking-tight', className)} {...props} />
 	),
 	a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
-		<a className={cn('font-medium underline underline-offset-4', className)} {...props} />
+		<a className={cn('font-medium text-blue-600 underline dark:text-blue-400', className)} {...props} />
 	),
 	p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-		<p className={cn('leading-7 [&:not(:first-child)]:mt-6', className)} {...props} />
+		<p className={cn('leading-7 text-foreground/80 [&:not(:first-child)]:mt-6', className)} {...props} />
 	),
 	ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
 		<ul className={cn('my-6 ml-6 list-disc', className)} {...props} />
@@ -71,19 +73,13 @@ export const components = {
 		/>
 	),
 	pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-		<pre
-			className={cn(
-				'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900',
-				className
-			)}
-			{...props}
-		/>
+		<pre className={cn('mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border', className)} {...props} />
 	),
 	code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
 		<code className={cn('relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm', className)} {...props} />
 	),
 	Image,
 	Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
-		<Link className={cn('font-medium underline underline-offset-4', className)} {...props} />
+		<Link className={cn('font-medium text-blue-600 underline dark:text-blue-400', className)} {...props} />
 	)
 };
