@@ -9,5 +9,6 @@ export * from './ui/popover';
 export * from './ui/scroll-area';
 export * from './ui/select';
 export * from './ui/separator';
+export * from './ui/toc';
 export * from './ui/toggle';
 export * from './ui/toggle-group';

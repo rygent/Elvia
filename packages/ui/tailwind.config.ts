@@ -1,6 +1,7 @@
 // tailwind config is required for editor support
 import type { Config } from 'tailwindcss';
 import pluginAnimate from 'tailwindcss-animate';
+import pluginTypography from '@tailwindcss/typography';
 
 const config = {
 	darkMode: ['selector'],
@@ -88,7 +89,7 @@ const config = {
 			}
 		}
 	},
-	plugins: [pluginAnimate]
+	plugins: [pluginAnimate, pluginTypography]
 } satisfies Config;
 
 export default config;
