@@ -1,5 +1,3 @@
-export * from './hamburger';
-
 export {
 	ArrowRight,
 	ChevronDown,
