@@ -37,7 +37,7 @@ const Legal = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-	contentDirPath: './src/content',
+	contentDirPath: './content',
 	documentTypes: [Legal],
 	mdx: {
 		remarkPlugins: [remarkGfm],

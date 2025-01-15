@@ -4,7 +4,7 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 
 const config = {
-	content: ['./src/**/*.{md,mdx,ts,tsx}', '../../packages/ui/src/**/*.{js,ts,jsx,tsx}'],
+	content: ['./node_modules/@elvia/ui/src/**/*.{js,ts,jsx,tsx}', './content/**/*.{md,mdx}', './src/**/*.{ts,tsx}'],
 	theme: {
 		extend: {
 			fontFamily: {

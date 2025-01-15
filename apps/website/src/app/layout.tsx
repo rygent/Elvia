@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Metadata, Viewport } from 'next';
+import { SiteFooter } from '@/components/site-footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { calSans, geistMono, geistSans } from '@/styles/fonts.ts';
 import { siteConfig } from '@/config';
@@ -60,7 +61,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				)}
 			>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-					<main className="min-h-svh bg-background">{children}</main>
+					{children}
+					<SiteFooter />
 				</ThemeProvider>
 				<Analytics />
 				<SpeedInsights />

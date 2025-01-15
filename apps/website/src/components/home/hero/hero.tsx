@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Animation } from '@/components/marketing/hero/animation';
+import { Animation } from '@/components/home/hero/animation';
 import { siteConfig } from '@/config';
 import { badgeVariants, Button } from '@elvia/ui';
 import { ArrowRight, Sparkles } from '@elvia/ui/icons';
