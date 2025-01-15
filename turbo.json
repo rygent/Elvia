@@ -15,7 +15,7 @@
     },
     "@elvia/website#build": {
       "dependsOn": ["^build"],
-      "env": ["DISCORD_APPLICATION_ID"],
+      "env": ["BETTERSTACK_API_KEY", "DISCORD_APPLICATION_ID"],
       "outputs": [".next/**", "!.next/cache/**", ".contentlayer/**"],
       "outputLogs": "full"
     },

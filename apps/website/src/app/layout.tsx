@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { SiteFooter } from '@/components/site-footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import { getUptimeStatus } from '@/lib/status';
 import { calSans, geistMono, geistSans } from '@/styles/fonts.ts';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
@@ -48,7 +49,9 @@ export const viewport: Viewport = {
 
 type RootLayoutProps = React.PropsWithChildren;
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+	const status = await getUptimeStatus();
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
@@ -62,7 +65,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 			>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					{children}
-					<SiteFooter />
+					<SiteFooter status={status} />
 				</ThemeProvider>
 				<Analytics />
 				<SpeedInsights />

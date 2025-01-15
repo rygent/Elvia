@@ -3,9 +3,15 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { Logo } from '@/components/icons';
+import { StatusIndicator } from '@/components/status';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import type { Monitor } from '@/types/betterstack';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';
 import { ChevronDown } from '@elvia/ui/icons';
+
+interface SiteFooterProps {
+	status: Monitor[] | null;
+}
 
 const navigation = [
 	{ name: 'Home', href: '/' },
@@ -19,7 +25,7 @@ const legal = [
 	{ name: 'Privacy Policy', href: '/legal/privacy' }
 ];
 
-export function SiteFooter() {
+export function SiteFooter({ status }: SiteFooterProps) {
 	const [year, setYear] = React.useState<number>(new Date().getFullYear());
 
 	React.useEffect(() => {
@@ -54,6 +60,7 @@ export function SiteFooter() {
 					</ul>
 				</div>
 				<div className="flex items-center justify-end gap-4 max-[750px]:justify-between">
+					{status && <StatusIndicator data={status} />}
 					<ThemeSwitcher size="xs" />
 				</div>
 			</nav>
