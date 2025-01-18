@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-import { withContentlayer } from 'next-contentlayer2';
+import { createMDX } from 'fumadocs-mdx/next';
 import '@/env';
 
 const nextConfig = {
@@ -27,4 +27,6 @@ const nextConfig = {
 	transpilePackages: ['@elvia/ui', '@elvia/utils']
 } satisfies NextConfig;
 
-export default withContentlayer(nextConfig);
+const withMDX = createMDX();
+
+export default withMDX(nextConfig);

@@ -76,7 +76,7 @@ export default tseslint.config(
 			ecmaVersion: 'latest',
 			sourceType: 'module'
 		},
-		ignores: ['**/.contentlayer/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
+		ignores: ['**/.source/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
 	},
 	...reactRulesets,
 	...nextRulesets,
