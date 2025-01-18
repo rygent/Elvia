@@ -14,8 +14,8 @@
       "outputLogs": "full"
     },
     "@elvia/website#build": {
-      "dependsOn": ["^build"],
-      "env": ["BETTERSTACK_API_KEY", "DISCORD_APPLICATION_ID"],
+      "dependsOn": ["^build", "@elvia/database#db:generate"],
+      "env": ["BETTERSTACK_API_KEY", "DISCORD_APPLICATION_ID", "DISCORD_APPLICATION_SECRET", "AUTH_SECRET", "JWT_SECRET"],
       "outputs": [".next/**", "!.next/cache/**", ".source/**"],
       "outputLogs": "full"
     },
