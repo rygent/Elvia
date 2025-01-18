@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { MainAuth } from '@/components/auth/main-auth';
 import { Logo, Topgg } from '@/components/icons';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
@@ -33,6 +34,7 @@ export function SiteHeader() {
 							</Link>
 						</Button>
 					</nav>
+					<MainAuth />
 					<MobileNav />
 				</div>
 			</div>
