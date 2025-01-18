@@ -6,7 +6,6 @@ const config = {
 	importOrder: [
 		'^(react/(.*)$)|^(react$)',
 		'^(next/(.*)$)|^(next$)',
-		'^(contentlayer/(.*)$)|^(contentlayer$)',
 		'^@/components/(.*)$',
 		'^@/hooks/(.*)$',
 		'^@/utils/(.*)$',
@@ -21,7 +20,7 @@ const config = {
 		'.css$'
 	],
 	importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-	importOrderTypeScriptVersion: '5.6.3',
+	importOrderTypeScriptVersion: '5.7.3',
 	plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss']
 };
 

@@ -8,10 +8,10 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "contentlayer.config.ts",
     "next.config.ts",
     "postcss.config.js",
     "prettier.config.js",
+    "source.config.ts",
     "tailwind.config.ts"
   ]
 }

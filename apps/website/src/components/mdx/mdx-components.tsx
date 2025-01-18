@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Heading } from '@/components/mdx/heading';
 import { cn } from '@elvia/utils';
+import type { MDXComponents } from 'mdx/types';
 
-export const components = {
+export const components: MDXComponents = {
 	h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
 		<Heading as="h1" className={cn('text-4xl font-bold', className)} {...props} />
 	),
@@ -28,7 +28,7 @@ export const components = {
 		<Heading as="h4" className={cn('text-base font-semibold tracking-tight', className)} {...props} />
 	),
 	a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
-		<a className={cn('font-medium text-blue-600 underline dark:text-blue-400', className)} {...props} />
+		<a className={cn('font-medium text-blue-600 underline', className)} {...props} />
 	),
 	p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
 		<p className={cn('leading-7 text-foreground/80 [&:not(:first-child)]:mt-6', className)} {...props} />
@@ -78,8 +78,7 @@ export const components = {
 	code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
 		<code className={cn('relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm', className)} {...props} />
 	),
-	Image,
 	Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
-		<Link className={cn('font-medium text-blue-600 underline dark:text-blue-400', className)} {...props} />
+		<Link className={cn('font-medium text-blue-600 underline', className)} {...props} />
 	)
 };

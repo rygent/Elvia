@@ -95,7 +95,7 @@ next-env.d.ts
 .parcel-cache
 
 # Next.js build output
-.contentlayer
+.source
 .next
 out
 
