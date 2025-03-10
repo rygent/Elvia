@@ -40,7 +40,7 @@
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",
     "turbo": "^2.4.4",
-    "typescript": "^5.7.3",
+    "typescript": "^5.8.2",
     "typescript-eslint": "^8.20.0"
   },
   "prisma": {
