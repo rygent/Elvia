@@ -27,7 +27,7 @@
     "@elvia/logger": "workspace:^",
     "@elvia/webserver": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^6.4.1",
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.2.0",
     "@sapphire/discord-utilities": "^3.4.4",
