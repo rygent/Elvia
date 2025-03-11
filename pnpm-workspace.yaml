@@ -1,3 +1,13 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@sapphire/type'
+  - '@swc/core'
+  - '@vercel/speed-insights'
+  - 'bufferutil'
+  - 'esbuild'
+  - 'prisma'
+  - 'sharp'
