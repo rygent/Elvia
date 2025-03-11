@@ -28,7 +28,7 @@
     "directory": "packages/webserver"
   },
   "dependencies": {
-    "body-parser": "^2.0.2",
+    "body-parser": "^2.1.0",
     "compression": "^1.7.5",
     "cors": "^2.8.5",
     "discord.js": "^14.17.3",
