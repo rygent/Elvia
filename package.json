@@ -41,7 +41,7 @@
     "tsup": "^8.4.0",
     "turbo": "^2.4.4",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.20.0"
+    "typescript-eslint": "^8.26.1"
   },
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
