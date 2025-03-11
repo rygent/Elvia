@@ -25,7 +25,7 @@
     "@sapphire/timestamp": "^1.0.5",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@vercel/analytics": "^1.4.1",
-    "@vercel/speed-insights": "^1.1.0",
+    "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^11.18.2",
     "fumadocs-core": "^14.7.7",
     "fumadocs-mdx": "^11.3.1",
