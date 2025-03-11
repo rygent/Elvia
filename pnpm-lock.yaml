@@ -96,8 +96,8 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       discord-api-types:
-        specifier: 0.37.115
-        version: 0.37.115
+        specifier: 0.37.119
+        version: 0.37.119
       discord.js:
         specifier: ^14.18.0
         version: 14.18.0(bufferutil@4.0.9)
@@ -3059,9 +3059,6 @@ packages:
   didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
 
-  discord-api-types@0.37.115:
-    resolution: {integrity: sha512-ivPnJotSMrXW8HLjFu+0iCVs8zP6KSliMelhr7HgcB2ki1QzpORkb26m71l1pzSnnGfm7gb5n/VtRTtpw8kXFA==}
-
   discord-api-types@0.37.119:
     resolution: {integrity: sha512-WasbGFXEB+VQWXlo6IpW3oUv73Yuau1Ig4AZF/m13tXcTKnMpc/mHjpztIlz4+BM9FG9BHQkEXiPto3bKduQUg==}
 
@@ -6020,7 +6017,7 @@ snapshots:
 
   '@discordjs/formatters@0.6.0':
     dependencies:
-      discord-api-types: 0.37.115
+      discord-api-types: 0.37.119
 
   '@discordjs/node-pre-gyp@0.4.5':
     dependencies:
@@ -7112,7 +7109,7 @@ snapshots:
 
   '@sapphire/discord-utilities@3.4.4':
     dependencies:
-      discord-api-types: 0.37.115
+      discord-api-types: 0.37.119
 
   '@sapphire/duration@1.1.4': {}
 
@@ -8261,8 +8258,6 @@ snapshots:
       dequal: 2.0.3
 
   didyoumean@1.2.2: {}
-
-  discord-api-types@0.37.115: {}
 
   discord-api-types@0.37.119: {}
 
