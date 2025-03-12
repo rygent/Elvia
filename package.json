@@ -48,7 +48,7 @@
   },
   "pnpm": {
     "overrides": {
-      "fumadocs-mdx": "11.3.2"
+      "fumadocs-mdx": "11.5.6"
     }
   },
   "packageManager": "pnpm@10.6.2"
