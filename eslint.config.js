@@ -1,12 +1,10 @@
 import tseslint from 'typescript-eslint';
 import common from 'eslint-config-terrax/common';
-import browser from 'eslint-config-terrax/browser';
 import node from 'eslint-config-terrax/node';
 import typescript from 'eslint-config-terrax/typescript';
 import react from 'eslint-config-terrax/react';
 import next from 'eslint-config-terrax/next';
-import edge from 'eslint-config-terrax/edge';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import prettier from 'eslint-config-terrax/prettier';
 import merge from 'lodash.merge';
 
 const commonFiles = '{js,jsx,mjs,cjs,ts,tsx}';
@@ -49,25 +47,25 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 	})
 );
 
-const reactRulesets = [...react, ...edge].map((config) =>
-	merge(config, {
-		files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
-		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-		rules: {
-			'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
-		}
-	})
-);
+const reactRuleset = merge(...react, {
+	files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
+	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+	rules: {
+		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
+	}
+});
 
-const nextRulesets = [...browser, ...next].map((config) =>
-	merge(config, {
-		files: [`apps/website/**/*${commonFiles}`],
-		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
-		rules: {
-			'@next/next/no-html-link-for-pages': 'off'
-		}
-	})
-);
+const nextRuleset = merge(...next, {
+	files: [`apps/website/**/*${commonFiles}`],
+	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
+	rules: {
+		'@next/next/no-html-link-for-pages': 'off'
+	}
+});
+
+const prettierRuleset = merge(...prettier, {
+	files: [`**/*${commonFiles}`]
+});
 
 export default tseslint.config(
 	...mainRulesets,
@@ -78,13 +76,17 @@ export default tseslint.config(
 		},
 		ignores: ['**/.source/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
 	},
-	...reactRulesets,
-	...nextRulesets,
+	reactRuleset,
+	nextRuleset,
 	{
 		files: [`**/*${commonFiles}`],
 		rules: {
-			'import-x/no-duplicates': ['error', { 'prefer-inline': true }]
+			'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
+			'n/prefer-global/buffer': ['error', 'always'],
+			'n/prefer-global/process': ['error', 'always'],
+			'n/prefer-global/url': ['error', 'always'],
+			'n/prefer-global/url-search-params': ['error', 'always']
 		}
 	},
-	eslintPluginPrettierRecommended
+	prettierRuleset
 );
