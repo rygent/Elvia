@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Banner } from '@/components/banner';
-import { SiteHeader } from '@/components/site-header';
-import { siteConfig } from '@/config';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 
-type HomeLayoutProps = React.PropsWithChildren;
+type HomeLayoutProps = Readonly<React.PropsWithChildren>;
 
 export default function HomeLayout({ children }: HomeLayoutProps) {
 	return (
-		<>
-			<Banner text={siteConfig.header.banner.text} dismissable />
-			<SiteHeader />
-			<>{children}</>
-		</>
+		<main className="bg-background flex min-h-svh flex-col">
+			<Header />
+			{children}
+			<Footer />
+		</main>
 	);
 }

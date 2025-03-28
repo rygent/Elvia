@@ -46,10 +46,5 @@
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
   },
-  "pnpm": {
-    "overrides": {
-      "fumadocs-mdx": "11.3.2"
-    }
-  },
   "packageManager": "pnpm@10.7.0"
 }

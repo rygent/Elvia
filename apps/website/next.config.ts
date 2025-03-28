@@ -9,6 +9,9 @@ const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true
 	},
+	experimental: {
+		optimizePackageImports: ['@elvia/ui']
+	},
 	// eslint-disable-next-line @typescript-eslint/require-await
 	async redirects() {
 		return [

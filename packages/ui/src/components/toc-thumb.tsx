@@ -1,8 +1,11 @@
+'use client';
+
 import * as React from 'react';
 import * as Primitive from 'fumadocs-core/toc';
+import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 
-export type TOCThumbType = [top: number, height: number];
+type TOCThumbType = [top: number, height: number];
 
 function calc(container: HTMLElement, active: string[]): TOCThumbType {
 	if (active.length === 0 || container.clientHeight === 0) {
@@ -29,7 +32,7 @@ function update(element: HTMLElement, info: TOCThumbType): void {
 	element.style.setProperty('--thumb-height', `${info[1]}px`);
 }
 
-export function TOCThumb({
+function TOCThumb({
 	containerRef,
 	...props
 }: React.HTMLAttributes<HTMLDivElement> & {
@@ -38,17 +41,15 @@ export function TOCThumb({
 	const active = Primitive.useActiveAnchors();
 	const thumbRef = React.useRef<HTMLDivElement>(null);
 
-	const activeRef = React.useRef(active);
-	activeRef.current = active;
+	const onResize = useEffectEvent(() => {
+		if (!containerRef.current || !thumbRef.current) return;
+
+		update(thumbRef.current, calc(containerRef.current, active));
+	});
 
 	React.useEffect(() => {
 		if (!containerRef.current) return;
 		const container = containerRef.current;
-
-		const onResize = (): void => {
-			if (!thumbRef.current) return;
-			update(thumbRef.current, calc(container, activeRef.current));
-		};
 
 		onResize();
 		const observer = new ResizeObserver(onResize);
@@ -57,7 +58,7 @@ export function TOCThumb({
 		return () => {
 			observer.disconnect();
 		};
-	}, [containerRef]);
+	}, [containerRef, onResize]);
 
 	useOnChange(active, () => {
 		if (!containerRef.current || !thumbRef.current) return;
@@ -67,3 +68,5 @@ export function TOCThumb({
 
 	return <div ref={thumbRef} role="none" {...props} />;
 }
+
+export { type TOCThumbType, TOCThumb };

@@ -3,9 +3,8 @@ import Link from 'next/link';
 import { Animation } from '@/components/home/hero/animation';
 import { siteConfig } from '@/config';
 import { badgeVariants, Button } from '@elvia/ui';
-import { ArrowRight, Sparkles } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
-import Balancer from 'react-wrap-balancer';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface HeroProps {
 	headline: string;
@@ -25,17 +24,16 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 					target="_blank"
 					className={cn(
 						badgeVariants({ variant: 'outline' }),
-						'cursor-pointer space-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary'
+						'hover:bg-secondary cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 [&>svg]:size-[15px]'
 					)}
 				>
-					<Sparkles size={15} strokeWidth={1.5} className="scale-x-[-1]" />
-					<span>Star us on GitHub</span> <ArrowRight size={15} strokeWidth={1.5} />
+					<Sparkles strokeWidth={1.5} className="scale-x-[-1]" />
+					<span>Star us on GitHub</span>
+					<ArrowRight strokeWidth={1.5} />
 				</Link>
-				<h1 className="mt-4 font-cal text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-					<Balancer>{headline.split('\n')}</Balancer>
-				</h1>
-				<h2 className="text-md mt-6 text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>
-				<div className="mt-10 flex flex-col gap-4 sm:flex-row">
+				<h1 className="font-cal mt-4 text-4xl text-balance md:text-5xl lg:text-6xl">{headline}</h1>
+				<h2 className="text-muted-foreground mt-2 text-base text-balance md:text-lg lg:text-xl">{subheadline}</h2>
+				<div className="mt-5 flex flex-col gap-4 sm:flex-row">
 					{cta[0] && (
 						<Button size="lg" variant="default" className="text-base shadow-none" asChild>
 							<Link href={cta[0].href}>{cta[0].label}</Link>
