@@ -13,30 +13,27 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle
 } from '@elvia/ui';
-import { ExternalLink } from '@elvia/ui/icons';
 import { cn } from '@elvia/utils';
+import { ExternalLink } from 'lucide-react';
 
 export function MainNav() {
 	return (
 		<NavigationMenu className="hidden lg:flex">
 			<NavigationMenuList>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50">
+					<NavigationMenuTrigger className="text-muted-foreground hover:bg-accent/50 focus:bg-accent/50 bg-transparent">
 						Resources
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 							<li className="row-span-3">
-								<NavigationMenuLink asChild>
-									<a
-										className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-										href="/invite"
-									>
-										<Logo className="h-8 w-8" />
-										<div className="mb-2 mt-4 text-lg font-medium">{siteConfig.global.name}</div>
-										<p className="text-sm leading-tight text-muted-foreground">{siteConfig.global.description}</p>
-									</a>
-								</NavigationMenuLink>
+								<Link href="/invite" legacyBehavior passHref>
+									<NavigationMenuLink className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none select-none focus:shadow-md">
+										<Logo className="text-foreground size-8" />
+										<div className="mt-4 mb-2 text-lg font-medium">{siteConfig.global.name}</div>
+										<p className="text-muted-foreground text-sm leading-tight">{siteConfig.global.description}</p>
+									</NavigationMenuLink>
+								</Link>
 							</li>
 							<ListItem href="/" title="Commands">
 								A list of available commands.
@@ -55,13 +52,13 @@ export function MainNav() {
 						<NavigationMenuLink
 							className={cn(
 								navigationMenuTriggerStyle(),
-								'gap-1 bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50'
+								'text-muted-foreground hover:bg-accent/50 focus:bg-accent/50 flex-row bg-transparent'
 							)}
 							target="_blank"
 							rel="noreferrer"
 						>
 							Vote on Top.gg
-							<ExternalLink size={14} strokeWidth={1.5} />
+							<ExternalLink strokeWidth={1.5} className="size-3.5 text-current" />
 						</NavigationMenuLink>
 					</Link>
 				</NavigationMenuItem>
@@ -78,13 +75,13 @@ const ListItem = React.forwardRef<React.ComponentRef<'a'>, React.ComponentPropsW
 					<a
 						ref={ref}
 						className={cn(
-							'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+							'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none',
 							className
 						)}
 						{...props}
 					>
-						<div className="text-sm font-medium leading-none">{title}</div>
-						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+						<div className="text-sm leading-none font-medium">{title}</div>
+						<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">{children}</p>
 					</a>
 				</NavigationMenuLink>
 			</li>

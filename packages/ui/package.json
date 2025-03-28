@@ -5,16 +5,15 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
-    ".": "./src/components/index.tsx",
-    "./icons": {
-      "import": "./src/icons/index.tsx",
-      "types": "./src/icons/index.d.ts"
-    },
-    "./globals.css": "./src/styles/globals.css",
-    "./tailwind.config.ts": "./tailwind.config.ts"
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./postcss.config": "./postcss.config.js",
+    "./globals.css": "./src/styles/globals.css"
   },
   "scripts": {
     "lint": "eslint \"src/**/*.{ts,tsx}\" --format=pretty",
@@ -34,9 +33,13 @@
     "@elvia/utils": "workspace:^",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-avatar": "^1.1.3",
+    "@radix-ui/react-collapsible": "^1.1.3",
+    "@radix-ui/react-context": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-navigation-menu": "^1.2.5",
     "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-portal": "^1.1.4",
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.2",
@@ -45,24 +48,29 @@
     "@radix-ui/react-toggle-group": "^1.1.2",
     "@tailwindcss/typography": "^0.5.16",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "fumadocs-core": "^15.1.2",
     "lucide-react": "^0.484.0",
     "next": "^15.2.4",
+    "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.17",
     "@types/node": "^22.13.13",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.21",
     "eslint": "^9.23.0",
     "eslint-formatter-pretty": "^6.0.1",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.0.17",
     "typescript": "^5.8.2"
   },
   "engines": {

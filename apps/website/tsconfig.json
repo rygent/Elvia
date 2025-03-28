@@ -6,8 +6,9 @@
     "moduleResolution": "Bundler",
     "incremental": true,
     "jsx": "preserve",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
+      "@elvia/ui/*": ["../../packages/ui/src/*"],
       "content/source": ["./.source"],
       "@/*": ["./src/*"]
     },

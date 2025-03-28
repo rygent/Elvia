@@ -35,7 +35,7 @@ export function Animation() {
 						{...(animationStarted ? animationProps : { layoutId: 'underline' })}
 						className={cn(
 							'h-[450px] w-[350px]',
-							!animationStarted && 'duration-500 animate-in fade-in slide-in-from-bottom-3'
+							!animationStarted && 'animate-in fade-in slide-in-from-bottom-3 duration-500'
 						)}
 					>
 						<h2 className="text-3xl font-bold">fun.</h2>

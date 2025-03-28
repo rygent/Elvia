@@ -1,17 +1,20 @@
 'use client';
 
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Logo } from '@/components/icons';
-import { StatusIndicator } from '@/components/status';
-import { ThemeSwitcher } from '@/components/theme-switcher';
-import type { Monitor } from '@/types/betterstack';
+import { type ThemeSwitcherProps } from '@/components/theme-switcher';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';
-import { ChevronDown } from '@elvia/ui/icons';
+import { ChevronDown } from 'lucide-react';
 
-interface SiteFooterProps {
-	status: Monitor[] | null;
-}
+const StatusBadge = dynamic(() => import('@/components/status').then((mod) => mod.StatusBadge), { ssr: false });
+const ThemeSwitcher = dynamic<ThemeSwitcherProps>(
+	() => import('@/components/theme-switcher').then((mod) => mod.ThemeSwitcher),
+	{
+		ssr: false
+	}
+);
 
 const navigation = [
 	{ name: 'Home', href: '/' },
@@ -25,7 +28,7 @@ const legal = [
 	{ name: 'Privacy Policy', href: '/legal/privacy' }
 ];
 
-export function SiteFooter({ status }: SiteFooterProps) {
+export function Footer() {
 	const [year, setYear] = React.useState<number>(new Date().getFullYear());
 
 	React.useEffect(() => {
@@ -33,10 +36,10 @@ export function SiteFooter({ status }: SiteFooterProps) {
 	}, []);
 
 	return (
-		<footer className="border-t border-border bg-card px-6 py-5">
+		<footer className="border-border bg-card border-t px-4 py-5 md:px-6">
 			<nav
 				aria-label="Directory"
-				className="mx-auto grid w-full max-w-[1200px] grid-cols-[auto_1fr] items-center justify-between gap-x-2 gap-y-6 max-[750px]:grid-cols-[1fr]"
+				className="mx-auto grid w-full max-w-7xl grid-cols-[auto_1fr] items-center justify-between gap-x-2 gap-y-6 max-[750px]:grid-cols-[1fr]"
 			>
 				<div className="flex flex-row items-center gap-x-4 max-[750px]:flex-col max-[750px]:items-start max-[750px]:gap-y-6">
 					<Link href="/" className="flex h-fit">
@@ -47,7 +50,7 @@ export function SiteFooter({ status }: SiteFooterProps) {
 							<li key={index} className="text-sm">
 								<Button
 									variant="link"
-									className="h-fit justify-start p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
+									className="text-muted-foreground ease-ease hover:text-foreground h-fit justify-start p-0 text-sm font-normal transition-colors duration-100 hover:no-underline"
 									asChild
 								>
 									<Link href={item.href}>{item.name}</Link>
@@ -60,12 +63,12 @@ export function SiteFooter({ status }: SiteFooterProps) {
 					</ul>
 				</div>
 				<div className="flex items-center justify-end gap-4 max-[750px]:justify-between">
-					{status && <StatusIndicator data={status} />}
+					<StatusBadge />
 					<ThemeSwitcher size="xs" />
 				</div>
 			</nav>
-			<div className="mx-auto flex w-full max-w-[1200px] flex-col flex-nowrap justify-between">
-				<p className="mt-4 whitespace-nowrap text-[12px] font-normal leading-4 text-muted-foreground">
+			<div className="mx-auto flex w-full max-w-7xl flex-col flex-nowrap justify-between">
+				<p className="text-muted-foreground mt-4 text-[12px] leading-4 font-normal whitespace-nowrap">
 					&copy; {year}, All rights reserved.
 				</p>
 			</div>
@@ -81,7 +84,7 @@ function Legal() {
 			<PopoverTrigger asChild>
 				<Button
 					variant="link"
-					className="h-fit justify-start gap-[2px] p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
+					className="text-muted-foreground ease-ease hover:text-foreground h-fit cursor-pointer justify-start gap-[2px] !p-0 text-sm font-normal transition-colors duration-100 hover:no-underline"
 				>
 					Legal
 					<ChevronDown size={16} strokeWidth={1.5} />
@@ -96,7 +99,7 @@ function Legal() {
 					<PopoverClose key={index} asChild>
 						<Button
 							variant="link"
-							className="h-10 w-full justify-start px-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
+							className="text-foreground hover:bg-accent h-10 w-full justify-start rounded-md px-2 text-sm font-normal hover:no-underline"
 							asChild
 						>
 							<Link href={item.href}>{item.name}</Link>
