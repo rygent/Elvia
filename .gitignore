@@ -87,7 +87,7 @@ next-env.d.ts
 .env.production.local
 .env.local
 !apps/bot/.env
-!apps/website/.env
+!apps/web/.env
 !packages/database/.env
 
 # parcel-bundler cache (https://parceljs.org/)

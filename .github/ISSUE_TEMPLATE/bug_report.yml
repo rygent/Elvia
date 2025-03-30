@@ -64,7 +64,7 @@ body:
       multiple: true
       options:
         - 'Bot'
-        - 'Website'
+        - 'Web'
     validations:
       required: true
   - type: dropdown

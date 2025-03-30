@@ -13,7 +13,7 @@
       "outputs": ["dist/**"],
       "outputLogs": "full"
     },
-    "@elvia/website#build": {
+    "@elvia/web#build": {
       "dependsOn": ["^build"],
       "env": ["BETTERSTACK_API_KEY", "DISCORD_APPLICATION_ID"],
       "outputs": [".next/**", "!.next/cache/**", ".source/**"],

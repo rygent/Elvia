@@ -43,7 +43,7 @@
 # Monorepo labels
 - name: 'apps:bot'
   color: 'cc317c'
-- name: 'apps:website'
+- name: 'apps:web'
   color: 'cc317c'
 - name: 'packages:database'
   color: 'c66037'
