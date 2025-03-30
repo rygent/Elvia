@@ -48,7 +48,7 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 );
 
 const reactRuleset = merge(...react, {
-	files: [`apps/website/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
+	files: [`apps/web/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
 	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
@@ -56,7 +56,7 @@ const reactRuleset = merge(...react, {
 });
 
 const nextRuleset = merge(...next, {
-	files: [`apps/website/**/*${commonFiles}`],
+	files: [`apps/web/**/*${commonFiles}`],
 	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'@next/next/no-html-link-for-pages': 'off'

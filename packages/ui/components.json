@@ -4,17 +4,17 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
+    "config": "",
     "css": "./src/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@/components",
-    "hooks": "@/hooks",
-    "lib": "@/lib",
+    "components": "@elvia/ui/components",
     "utils": "@elvia/utils",
-    "ui": "@/components/ui"
+    "hooks": "@elvia/ui/hooks",
+    "lib": "@elvia/ui/lib",
+    "ui": "@elvia/ui/components"
   }
 }

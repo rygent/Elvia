@@ -1,0 +1,63 @@
+{
+  "name": "@elvia/web",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbopack",
+    "start": "next start",
+    "lint": "eslint \"src/**/*\" --format=pretty",
+    "lint:fix": "eslint \"src/**/*\" --fix --format=pretty",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "typecheck": "fumadocs-mdx && tsc --noEmit"
+  },
+  "license": "GPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rygent/Elvia.git",
+    "directory": "apps/web"
+  },
+  "dependencies": {
+    "@elvia/ui": "workspace:^",
+    "@elvia/utils": "workspace:^",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "framer-motion": "^12.6.2",
+    "fumadocs-core": "^15.2.0",
+    "fumadocs-mdx": "^11.5.7",
+    "geist": "^1.3.1",
+    "lucide-react": "^0.484.0",
+    "next": "^15.2.4",
+    "next-themes": "^0.4.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "swr": "^2.3.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@tailwindcss/postcss": "^4.0.17",
+    "@types/node": "^22.13.14",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.23.0",
+    "eslint-formatter-pretty": "^6.0.1",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "shiki": "^3.2.1",
+    "tailwindcss": "^4.0.17",
+    "typescript": "^5.8.2"
+  },
+  "optionalDependencies": {
+    "@emotion/is-prop-valid": "^1.3.1",
+    "@fumadocs/mdx-remote": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=v22.12.0"
+  },
+  "packageManager": "pnpm@10.7.0"
+}
