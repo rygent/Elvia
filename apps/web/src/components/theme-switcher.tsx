@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@elvia/ui';
-import { cn, cva, type VariantProps } from '@elvia/utils';
+import { cn } from '@elvia/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { Laptop, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
