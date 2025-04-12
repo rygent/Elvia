@@ -5,11 +5,11 @@ import { legal } from '@/lib/mdx';
 import { TOC, TOCInline, TOCInlineItems, TOCInlineTrigger, TOCItems, TOCProvider } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 
-interface LegalPageProps {
+interface LegalProps {
 	params: Promise<{ slug: string }>;
 }
 
-export default async function LegalPage({ params }: LegalPageProps) {
+export default async function LegalPage({ params }: LegalProps) {
 	const { slug } = await params;
 
 	const page = legal.getPage([slug]);
@@ -47,7 +47,7 @@ export default async function LegalPage({ params }: LegalPageProps) {
 	);
 }
 
-export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: LegalProps): Promise<Metadata> {
 	const { slug } = await params;
 
 	const page = legal.getPage([slug]);
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: LegalPageProps): Promise<Meta
 	};
 }
 
-export function generateStaticParams(): Awaited<LegalPageProps['params']>[] {
+export function generateStaticParams(): Awaited<LegalProps['params']>[] {
 	return legal.getPages().map((page) => ({
 		slug: page.slugs[0]!
 	}));

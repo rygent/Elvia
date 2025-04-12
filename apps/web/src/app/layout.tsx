@@ -45,9 +45,7 @@ export const viewport: Viewport = {
 	]
 };
 
-type RootLayoutProps = Readonly<React.PropsWithChildren>;
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: Readonly<React.PropsWithChildren>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />

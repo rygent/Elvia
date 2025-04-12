@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-type LegalLayoutProps = Readonly<React.PropsWithChildren>;
-
-export default function LegalLayout({ children }: LegalLayoutProps) {
+export default function LegalLayout({ children }: Readonly<React.PropsWithChildren>) {
 	return (
 		<main className="bg-background flex min-h-svh flex-col">
 			<Header />
