@@ -1,6 +1,20 @@
+autoInstallPeers: true
+
+resolutionMode: 'highest'
+
+publicHoistPattern:
+  - '*eslint*'
+  - '*prettier*'
+  - '*types*'
+  - '!@types/react'
+  - '!@types/react-dom'
+  - '*discordjs*'
+  - '*prisma*'
+
 packages:
   - 'apps/*'
   - 'packages/*'
+
 onlyBuiltDependencies:
   - '@prisma/client'
   - '@prisma/engines'
