@@ -36,7 +36,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "swr": "^2.3.3",
-    "zod": "^3.24.2"
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
