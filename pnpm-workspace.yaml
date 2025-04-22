@@ -1,6 +1,9 @@
 autoInstallPeers: true
-
 resolutionMode: 'highest'
+
+packages:
+  - 'apps/*'
+  - 'packages/*'
 
 publicHoistPattern:
   - '*eslint*'
@@ -10,10 +13,6 @@ publicHoistPattern:
   - '!@types/react-dom'
   - '*discordjs*'
   - '*prisma*'
-
-packages:
-  - 'apps/*'
-  - 'packages/*'
 
 onlyBuiltDependencies:
   - '@prisma/client'
@@ -25,3 +24,4 @@ onlyBuiltDependencies:
   - 'esbuild'
   - 'prisma'
   - 'sharp'
+  - 'unrs-resolver'
