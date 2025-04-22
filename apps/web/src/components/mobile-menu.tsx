@@ -40,7 +40,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 				size="icon"
 				data-state={getState(open)}
 				className={cn(
-					'group relative flex h-8 w-8 flex-col gap-0 rounded-full border ps-[6px] pe-[6px] duration-200 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0',
+					'group relative flex h-8 w-8 flex-col gap-0 rounded-full border ps-[6px] pe-[6px] duration-200 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden',
 					className
 				)}
 				onClick={toggleMenu}
