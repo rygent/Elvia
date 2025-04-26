@@ -90,8 +90,8 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       discord-api-types:
-        specifier: 0.37.120
-        version: 0.37.120
+        specifier: 0.38.1
+        version: 0.38.1
       discord.js:
         specifier: ^14.19.1
         version: 14.19.1(bufferutil@4.0.9)
