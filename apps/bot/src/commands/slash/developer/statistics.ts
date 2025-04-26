@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -22,8 +21,8 @@ import { DurationFormatter } from '@sapphire/time-utilities';
 import * as system from 'systeminformation';
 import { version as TsVersion } from 'typescript';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'statistics',
@@ -57,7 +56,7 @@ export default class extends Command {
 							[
 								`${bold('ID:')} ${inlineCode(this.client.user.id)}`,
 								`${bold('Developer:')} ${formatArray(
-									this.client.settings.owners.map((user) => this.client.users.cache.get(user)?.tag as string)
+									this.client.settings.owners!.map((user) => this.client.users.cache.get(user)?.tag as string)
 								)}`,
 								`${bold('Version:')} v${this.client.version}`,
 								`${bold('Node.JS:')} ${process.version}`,

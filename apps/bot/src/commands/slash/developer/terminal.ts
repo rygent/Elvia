@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -11,8 +10,8 @@ import { AttachmentBuilder, ChatInputCommandInteraction } from 'discord.js';
 import { codeBlock } from '@discordjs/formatters';
 import { exec } from 'node:child_process';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'terminal',
@@ -45,6 +44,7 @@ export default class extends Command {
 
 		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 
+		// eslint-disable-next-line promise/prefer-await-to-callbacks
 		exec(bash, (error, stdout) => {
 			const replies = codeBlock('console', stdout ?? error).toString();
 			if (replies.length <= 2e3) {

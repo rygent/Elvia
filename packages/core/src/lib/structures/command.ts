@@ -1,4 +1,4 @@
-import type { Client } from '@/lib/structures/client.js';
+import { CoreClient } from '@/lib/structures/client.js';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -8,18 +8,18 @@ import {
 import {
 	AutocompleteInteraction,
 	BitField,
-	CommandInteraction,
+	ChatInputCommandInteraction,
 	PermissionsBitField,
 	type PermissionsString
 } from 'discord.js';
-import type { CommandData, CommandOptions, CommandParameter } from '@/types/types.js';
-import type { Awaitable } from '@discordjs/util';
+import { type ChatInputData, type ChatInputOptions, type CommandParameter } from '@/types/command.js';
+import { type Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
-export abstract class Command extends EventEmitter {
-	protected client: Client<true>;
+export abstract class CoreCommand extends EventEmitter {
+	protected client: CoreClient<true>;
 	public unique?: string;
-	public type: ApplicationCommandType;
+	public type: ApplicationCommandType.ChatInput;
 	public name: string;
 	public description: string;
 	public options: CommandParameter[];
@@ -36,7 +36,7 @@ export abstract class Command extends EventEmitter {
 	public guild: boolean;
 	public owner: boolean;
 
-	public constructor(client: Client<true>, options: CommandOptions) {
+	public constructor(client: CoreClient<true>, options: ChatInputOptions) {
 		super();
 		this.client = client;
 		this.type = options.type;
@@ -61,24 +61,23 @@ export abstract class Command extends EventEmitter {
 		this.owner = options.owner ?? false;
 	}
 
-	public abstract execute(interaction: CommandInteraction<'cached' | 'raw'>): Awaitable<unknown>;
+	public abstract execute(
+		interaction: ChatInputCommandInteraction<'cached' | 'raw'>,
+		...args: unknown[]
+	): Awaitable<unknown>;
 
-	public autocomplete?(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown>;
+	public autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>): Awaitable<unknown>;
+	public autocomplete() {
+		throw new Error(`The method 'autocomplete' has not been implemented in ${this.name}.`);
+	}
 
-	public toJSON(): CommandData {
-		const data: CommandData = {
+	public toJSON(): ChatInputData {
+		const data: ChatInputData = {
 			type: this.type,
 			name: this.name,
-			description: this.description
+			description: this.description,
+			options: this.options
 		};
-
-		if (this.type !== ApplicationCommandType.ChatInput) {
-			Reflect.deleteProperty(data, 'description');
-		}
-
-		if (this.type === ApplicationCommandType.ChatInput) {
-			data.options = this.options;
-		}
 
 		if (typeof this.defaultMemberPermissions === 'string') {
 			data.default_member_permissions = this.defaultMemberPermissions;

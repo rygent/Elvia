@@ -1,0 +1,49 @@
+# Add the Client ID of bot which should be running.
+# https://discord.com/developers/applications
+# `BOT_ID` environment variable overwrites this value.
+id: ''
+
+# Add the token of the bot which should be running.
+# https://discord.com/developers/applications
+# `BOT_TOKEN` and `DISCORD_TOKEN` environment variable overwrites this value.
+token: ''
+
+# User IDs of users who should be considered as the bot owners.
+# `BOT_OWNERS` environment variable adds an additional owner to the list.
+owners:
+  - '123456789012345678'
+
+# Add the presence of the bot.
+# status — online / idle / dnd / invisible
+# type — 0 (Playing) / 1 (Streaming) / 2 (Listening) / 3 (Watching) /  4 (Custom Status) / 5 (Competing)
+presences:
+  status: 'online'
+  activities:
+    name: 'hello world'
+    type: 4
+
+# When enabled, this enables debug mode for the bot.
+# This will log all the events and commands to the console.
+# `DEBUG_MODE` and `DEBUG` environment variable overwrites this value.
+debugMode: false
+
+# When enabled, this enables usage of unsafe commands like `exec` and `eval`.
+# Keep this disabled if the bot owner isn't exclusively you.
+# `UNSAFE_MODE` environment variable overwrites this value.
+unsafeMode: false
+
+# Port used for API Server.
+# If port isn't set the API server won't start.
+# `SERVER_API_PORT` and `PORT` environment variables overwrites this value.
+port: 8080
+
+# Auth for accessing the API Server.
+# If auth isn't set the API server won't start.
+# `SERVER_API_AUTH` environment variable overwrites this value.
+auth: ''
+
+# This is used to set the default permissions for commands.
+defaultPermissions:
+  - 'SendMessages'
+  - 'ViewChannel'
+

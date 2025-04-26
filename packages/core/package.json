@@ -1,5 +1,5 @@
 {
-  "name": "@elvia/webserver",
+  "name": "@elvia/core",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,16 +25,22 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rygent/Elvia.git",
-    "directory": "packages/webserver"
+    "directory": "packages/core"
   },
   "dependencies": {
+    "@elvia/utils": "workspace:^",
+    "@sapphire/utilities": "^3.18.2",
     "body-parser": "^2.2.0",
     "compression": "^1.8.0",
     "cors": "^2.8.5",
+    "discord-api-types": "^0.38.13",
     "discord.js": "^14.21.0",
+    "dotenv": "^17.0.0",
     "express": "^5.1.0",
+    "globby": "^14.1.0",
     "http-errors": "^2.0.0",
     "jiti": "^2.4.2",
+    "yaml": "^2.8.0",
     "zod": "^3.25.67"
   },
   "devDependencies": {
