@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
@@ -14,10 +13,9 @@ import { isNsfwChannel } from '@/lib/utils/functions.js';
 import { Nsfw } from '@/lib/utils/autocomplete.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'nsfw',
 			description: 'Displays explicit content.',
 			options: [
@@ -64,7 +62,7 @@ export default class extends Command {
 
 			return await interaction.reply({ embeds: [embed], components: [button], ephemeral: !visible });
 		} catch {
-			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+			return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
 		}
 	}
 

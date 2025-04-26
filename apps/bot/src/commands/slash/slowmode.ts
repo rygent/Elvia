@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ChannelType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import {
 	PermissionsBitField,
@@ -17,10 +16,9 @@ import {
 import { bold, channelMention, italic } from '@discordjs/formatters';
 import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'slowmode',
 			description: 'Applies a slowmode to a channel.',
 			options: [
@@ -72,7 +70,7 @@ export default class extends Command {
 		if (offset > 216e5) {
 			return interaction.reply({
 				content: 'Slowmode time must be a number between 0 second and 6 hours.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 

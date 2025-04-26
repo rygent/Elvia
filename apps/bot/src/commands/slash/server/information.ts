@@ -1,16 +1,14 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic, time, underline, userMention } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 import { formatArray, formatNumber, trimArray } from '@/lib/utils/functions.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'information',
 			description: 'Get server information.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],

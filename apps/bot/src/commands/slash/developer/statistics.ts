@@ -1,6 +1,5 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, version } from 'discord.js';
 import { bold, inlineCode, italic, time, underline } from '@discordjs/formatters';
@@ -10,10 +9,9 @@ import { DurationFormatter } from '@sapphire/time-utilities';
 import systeminformation from 'systeminformation';
 import typescript from 'typescript';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'statistics',
 			description: 'Get statistics of the bot.',
 			defaultMemberPermissions: '0',
@@ -43,7 +41,7 @@ export default class extends Command {
 				[
 					`${bold(italic('ID:'))} ${inlineCode(this.client.user.id)}`,
 					`${bold(italic('Developer:'))} ${formatArray(
-						this.client.settings.owners.map((user) => this.client.users.cache.get(user)?.tag as string)
+						this.client.settings.owners!.map((user) => this.client.users.cache.get(user)?.tag as string)
 					)}`,
 					`${bold(italic('Version:'))} v${this.client.version}`,
 					`${bold(italic('Node.JS:'))} ${process.version}`,

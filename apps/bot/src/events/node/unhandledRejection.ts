@@ -1,15 +1,14 @@
-import { Client } from '@/lib/structures/client.js';
-import { Listener } from '@/lib/structures/listener.js';
+import { CoreClient, CoreEvent } from '@elvia/core';
 import { EmbedBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
 import { bold, codeBlock, italic, time } from '@discordjs/formatters';
-import type { DiscordAPIError } from '@discordjs/rest';
+import { type DiscordAPIError } from '@discordjs/rest';
 import { Colors } from '@/lib/utils/constants.js';
 import { env } from '@/env.js';
 import { logger } from '@elvia/logger';
 
-export default class extends Listener {
-	public constructor(client: Client<true>) {
+export default class extends CoreEvent {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			name: 'unhandledRejection',
 			once: false,

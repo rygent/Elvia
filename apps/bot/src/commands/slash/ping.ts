@@ -1,13 +1,11 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'ping',
 			description: 'Send a ping request.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],

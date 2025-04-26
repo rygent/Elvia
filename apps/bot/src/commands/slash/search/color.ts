@@ -1,21 +1,19 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'color',
 			description: 'Get information about a color.',
 			options: [
@@ -50,7 +48,7 @@ export default class extends Command {
 				content: `Please provide a valid ${bold('hexadecimal')}/${bold('rgb')} color code. Example: ${bold(
 					'#77dd77'
 				)}/${bold('(253, 253, 150)')} or ${bold('random')} to get a random color.`,
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 

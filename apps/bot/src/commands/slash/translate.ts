@@ -1,10 +1,9 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
@@ -14,10 +13,9 @@ import { Languages } from '@/lib/utils/autocomplete.js';
 import { cutText } from '@sapphire/utilities';
 import translate from '@iamtraction/google-translate';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'translate',
 			description: 'Translate your text.',
 			options: [
@@ -84,7 +82,7 @@ export default class extends Command {
 					hideLinkEmbed('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes')
 				)} languages codes.`;
 
-				return interaction.reply({ content: replies, ephemeral: true });
+				return interaction.reply({ content: replies, flags: [MessageFlags.Ephemeral] });
 			}
 		}
 	}

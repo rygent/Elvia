@@ -1,18 +1,16 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'kick',
 			description: 'Kick a member with optional reason.',
 			options: [
@@ -77,26 +75,26 @@ export default class extends Command {
 		if (!member) {
 			return interaction.reply({
 				content: 'Member not found, please verify that this user is a server member.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 
 		if (member.user.id === interaction.user.id) {
-			return interaction.reply({ content: `You can't kick yourself.`, ephemeral: true });
+			return interaction.reply({ content: `You can't kick yourself.`, flags: [MessageFlags.Ephemeral] });
 		}
 		if (member.user.id === this.client.user.id) {
-			return interaction.reply({ content: `You cannot kick me!`, ephemeral: true });
+			return interaction.reply({ content: `You cannot kick me!`, flags: [MessageFlags.Ephemeral] });
 		}
 		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
 			return interaction.reply({
 				content: 'You cannot kick a member who has a higher or equal role than yours.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 		if (!member.kickable) {
 			return interaction.reply({
 				content: `I cannot kick a member who has a higher or equal role than mine.`,
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 

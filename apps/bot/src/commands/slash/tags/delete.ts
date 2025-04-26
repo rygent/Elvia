@@ -1,12 +1,11 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import {
@@ -20,10 +19,9 @@ import { shuffleArray } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'delete',
 			description: 'Delete an existing server tag.',
 			options: [
@@ -53,7 +51,12 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: [MessageFlags.Ephemeral]
+			});
+		}
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
@@ -64,7 +67,7 @@ export default class extends Command {
 		const reply = await interaction.reply({
 			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
 			components: [button],
-			ephemeral: true
+			flags: [MessageFlags.Ephemeral]
 		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;

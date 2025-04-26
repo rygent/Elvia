@@ -1,20 +1,13 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import {
-	ApplicationCommandType,
-	ApplicationIntegrationType,
-	ButtonStyle,
-	InteractionContextType
-} from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, ButtonStyle, InteractionContextType, MessageFlags } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'icon',
 			description: 'Display the server icon.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
@@ -26,7 +19,7 @@ export default class extends Command {
 
 	public execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		if (!interaction.guild?.iconURL()) {
-			return interaction.reply({ content: 'This server has no icon.', ephemeral: true });
+			return interaction.reply({ content: 'This server has no icon.', flags: [MessageFlags.Ephemeral] });
 		}
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

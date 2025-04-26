@@ -1,20 +1,18 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 
 const ImageUrlRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)($|\?.*$)/;
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'add',
 			description: 'Add an emoji to the server.',
 			options: [
@@ -61,7 +59,7 @@ export default class extends Command {
 		} catch {
 			return interaction.reply({
 				content: "The emoji are invalid or you don't have more space on your server!",
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 	}

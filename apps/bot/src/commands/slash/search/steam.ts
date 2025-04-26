@@ -1,12 +1,11 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
@@ -16,10 +15,9 @@ import { formatArray, titleCase } from '@/lib/utils/functions.js';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'steam',
 			description: 'Search for a Games on Steam.',
 			options: [
@@ -42,7 +40,9 @@ export default class extends Command {
 		const response = await axios
 			.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`)
 			.then(({ data }) => data.items.filter((item: any) => item.type === 'app'));
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

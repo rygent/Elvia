@@ -1,12 +1,5 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import {
-	ApplicationCommandType,
-	ApplicationIntegrationType,
-	ButtonStyle,
-	ComponentType,
-	InteractionContextType
-} from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, ButtonStyle, ComponentType, InteractionContextType } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
@@ -15,10 +8,9 @@ import { disableAllButtons, sentenceCase, shuffleArray } from '@/lib/utils/funct
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'trivia',
 			description: 'Plays a quick trivia game.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],

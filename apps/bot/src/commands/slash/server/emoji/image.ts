@@ -1,17 +1,15 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { AttachmentBuilder, ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'image',
 			description: 'Get the full size image of an emoji.',
 			options: [
@@ -35,7 +33,9 @@ export default class extends Command {
 		const fetched = await interaction.guild?.emojis.fetch();
 
 		const emojis = fetched?.get(parseEmoji(emoji)?.id as string);
-		if (!emojis?.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
+		if (!emojis?.guild) {
+			return interaction.reply({ content: 'This emoji not from this guild', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const attachment = new AttachmentBuilder(emojis.url).setName(`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`);
 

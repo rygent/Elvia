@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -13,10 +12,9 @@ import { italic, underline } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'define',
 			description: 'Define a word.',
 			options: [
@@ -40,7 +38,9 @@ export default class extends Command {
 			.get(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`)
 			.then(({ data }) => data.list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
 
-		if (!response) return interaction.reply({ content: 'No definition found for this word.', ephemeral: true });
+		if (!response) {
+			return interaction.reply({ content: 'No definition found for this word.', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.permalink)

@@ -1,8 +1,6 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
@@ -21,10 +19,9 @@ import { Type } from '@sapphire/type';
 import { nanoid } from 'nanoid';
 import { inspect } from 'node:util';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'evaluate',
 			description: 'Evaluates any JavaScript code.',
 			options: [

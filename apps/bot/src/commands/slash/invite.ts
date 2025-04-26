@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	type APIMessageComponentEmoji,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	InteractionContextType,
+	MessageFlags,
 	OAuth2Scopes,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
@@ -13,10 +12,9 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, parseEmoji } from 'discord.js';
 import { Emojis } from '@/lib/utils/constants.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'invite',
 			description: 'Add the bot to another server.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
@@ -62,6 +60,6 @@ export default class extends Command {
 				.setURL(link)
 		);
 
-		return interaction.reply({ content: replies, components: [button], ephemeral: true });
+		return interaction.reply({ content: replies, components: [button], flags: [MessageFlags.Ephemeral] });
 	}
 }

@@ -1,7 +1,6 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, Routes } from 'discord-api-types/v10';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, CoreContext, type CommandData } from '@elvia/core';
 import { REST } from '@discordjs/rest';
-import type { CommandData } from '@/types/types.js';
 import { titleCase } from '@/lib/utils/functions.js';
 import { logger } from '@elvia/logger';
 import { Command as Commander } from 'commander';
@@ -19,7 +18,7 @@ program.option('-r, --reset', 'reset registered commands');
 
 program.parse(process.argv);
 
-const token = env.DISCORD_TOKEN;
+const token = env.BOT_TOKEN;
 if (!token) {
 	throw new Error('The DISCORD_TOKEN environment variable is required.');
 }
@@ -39,7 +38,8 @@ async function loadCommands(developer: boolean) {
 		await globby(`${directory}commands/context/**/*.ts`).then(async (commands) => {
 			for (const commandFile of commands) {
 				const File: any = await jiti.import(commandFile, { default: true });
-				const command: Command = new File();
+				const command: CoreContext = new File();
+				// @ts-expect-error
 				commandData.push(command.toJSON());
 			}
 		});
@@ -52,7 +52,7 @@ async function loadCommands(developer: boolean) {
 	await globby(patterns).then(async (commands) => {
 		for (const commandFile of commands) {
 			const File: any = await jiti.import(commandFile, { default: true });
-			const command: Command = new File();
+			const command: CoreCommand = new File();
 
 			const [commandName, subCommandGroup] = path
 				.relative(`${directory}commands/slash`, path.dirname(commandFile))
@@ -112,7 +112,7 @@ async function execute() {
 		throw new Error('The DEVELOPER_GUILD_ID environment variable is required.');
 	}
 
-	const rest = new REST({ version: '10' }).setToken(token);
+	const rest = new REST({ version: '10' }).setToken(token as string);
 
 	try {
 		logger.info('Started refreshing application (/) commands.');

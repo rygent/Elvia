@@ -1,21 +1,19 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { Colors } from '@/lib/utils/constants.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'wikipedia',
 			description: 'Search for something on Wikipedia.',
 			options: [
@@ -39,7 +37,9 @@ export default class extends Command {
 			.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`)
 			.then(({ data }) => data)
 			.catch(({ status }) => {
-				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+				if (status === 404) {
+					return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
+				}
 			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

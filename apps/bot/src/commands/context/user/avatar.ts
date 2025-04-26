@@ -1,22 +1,21 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreContext } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
-import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
+import { type GuildMember, type UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreContext {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.User,
 			name: 'Avatar',
-			description: '',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});
@@ -39,6 +38,6 @@ export default class extends Command {
 			.setImage(member.displayAvatarURL({ size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
-		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+		return interaction.reply({ embeds: [embed], components: [button], flags: [MessageFlags.Ephemeral] });
 	}
 }

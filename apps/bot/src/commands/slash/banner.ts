@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
@@ -13,10 +12,9 @@ import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'banner',
 			description: 'Display the banner of the provided user.',
 			options: [
@@ -51,7 +49,10 @@ export default class extends Command {
 
 		if (color) {
 			if (!user.hexAccentColor) {
-				return interaction.reply({ content: `${bold(user.tag)}'s has no banner color!`, ephemeral: true });
+				return interaction.reply({
+					content: `${bold(user.tag)}'s has no banner color!`,
+					flags: [MessageFlags.Ephemeral]
+				});
 			}
 
 			const response = await axios
@@ -67,7 +68,9 @@ export default class extends Command {
 			return interaction.reply({ embeds: [embed] });
 		}
 
-		if (!user.banner) return interaction.reply({ content: `${bold(user.tag)}'s has no banner!`, ephemeral: true });
+		if (!user.banner) {
+			return interaction.reply({ content: `${bold(user.tag)}'s has no banner!`, flags: [MessageFlags.Ephemeral] });
+		}
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
 			new ButtonBuilder()

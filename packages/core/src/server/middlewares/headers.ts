@@ -1,6 +1,7 @@
-import type { NextFunction, Request, Response } from 'express';
+import { type NextFunction, type Request, type Response } from 'express';
 
-export default (_: Request, res: Response, next: NextFunction) => {
+// @ts-expect-error TS6133: 'req' is declared but its value is never read.
+export default (req: Request, res: Response, next: NextFunction) => {
 	res.append('X-Frame-Options', 'deny');
 	res.append('X-XSS-Protection', '1; mode=block');
 	res.append('X-Content-Type-Options', 'nosniff');

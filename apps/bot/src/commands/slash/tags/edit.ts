@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
+	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
@@ -21,10 +20,9 @@ import { shuffleArray } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'edit',
 			description: 'Edit an existing server tag.',
 			options: [
@@ -54,7 +52,12 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: [MessageFlags.Ephemeral]
+			});
+		}
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -90,7 +93,10 @@ export default class extends Command {
 				data: { content }
 			});
 
-			return void i.reply({ content: `Successfully edited the tag ${inlineCode(name)}.`, ephemeral: true });
+			return void i.reply({
+				content: `Successfully edited the tag ${inlineCode(name)}.`,
+				flags: [MessageFlags.Ephemeral]
+			});
 		});
 	}
 

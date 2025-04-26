@@ -1,8 +1,6 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType
 } from 'discord-api-types/v10';
@@ -10,10 +8,9 @@ import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.j
 import { bold, italic } from '@discordjs/formatters';
 import { DiscordInviteLinkRegex } from '@sapphire/discord-utilities';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'invites',
 			description: 'Purge messages that contain invite links in the channel.',
 			options: [

@@ -1,10 +1,9 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
+	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
@@ -19,10 +18,9 @@ import { slugify } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'create',
 			description: 'Create a new server tag.',
 			defaultMemberPermissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
@@ -81,7 +79,10 @@ export default class extends Command {
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
 			if (tags) {
-				return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+				return void i.reply({
+					content: `The tag ${inlineCode(slugify(names))} already exists.`,
+					flags: [MessageFlags.Ephemeral]
+				});
 			}
 
 			await prisma.tag.create({
@@ -95,7 +96,7 @@ export default class extends Command {
 
 			return void i.reply({
 				content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`,
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		});
 	}

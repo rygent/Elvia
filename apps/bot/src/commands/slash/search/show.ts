@@ -1,12 +1,11 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
@@ -20,10 +19,9 @@ import { nanoid } from 'nanoid';
 import axios from 'axios';
 import moment from 'moment';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'show',
 			description: 'Search for a TV Show on TMDb.',
 			options: [
@@ -47,7 +45,9 @@ export default class extends Command {
 			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_API_KEY}&query=${search}`)
 			.then(({ data }) => data.results.slice(0, 10));
 
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

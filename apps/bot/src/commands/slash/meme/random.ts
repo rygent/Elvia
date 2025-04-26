@@ -1,20 +1,13 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
-import {
-	ApplicationCommandType,
-	ApplicationIntegrationType,
-	ButtonStyle,
-	InteractionContextType
-} from 'discord-api-types/v10';
+import { CoreClient, CoreCommand } from '@elvia/core';
+import { ApplicationIntegrationType, ButtonStyle, InteractionContextType, MessageFlags } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { Colors } from '@/lib/utils/constants.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'random',
 			description: 'Displays random memes.',
 			integrationTypes: [ApplicationIntegrationType.GuildInstall],
@@ -45,7 +38,9 @@ export default class extends Command {
 			.filter(({ data }: any) => !data.over_18)
 			.filter(({ data }: any) => !data.is_video);
 
-		if (!post.length) return interaction.reply({ content: 'It seems we are out of fresh memes!', ephemeral: true });
+		if (!post.length) {
+			return interaction.reply({ content: 'It seems we are out of fresh memes!', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const random_post = Math.floor(Math.random() * post.length);
 

@@ -1,21 +1,19 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { PermissionsBitField, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'reset',
 			description: 'Reset all server tags.',
 			defaultMemberPermissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
@@ -34,7 +32,7 @@ export default class extends Command {
 		});
 
 		if (!database?.tags.length) {
-			return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
+			return interaction.reply({ content: 'The tags for this server is empty.', flags: [MessageFlags.Ephemeral] });
 		}
 
 		const cancelId = nanoid();
@@ -46,7 +44,7 @@ export default class extends Command {
 		const reply = await interaction.reply({
 			content: `Are you sure that you want to reset all server tags?`,
 			components: [button],
-			ephemeral: true
+			flags: [MessageFlags.Ephemeral]
 		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;

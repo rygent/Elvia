@@ -1,18 +1,16 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'unban',
 			description: 'Unban a user with optional reason.',
 			options: [
@@ -77,9 +75,11 @@ export default class extends Command {
 		const target = banned?.find(
 			(member) => member.user.id.includes(user.id) || member.user.tag.includes(user.tag)
 		)?.user;
-		if (!target) return interaction.reply({ content: 'This user is not banned on this server.', ephemeral: true });
+		if (!target) {
+			return interaction.reply({ content: 'This user is not banned on this server.', flags: [MessageFlags.Ephemeral] });
+		}
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ flags: !visible ? [MessageFlags.Ephemeral] : [] });
 		await interaction.guild?.members.unban(target, reason as string);
 
 		if (notify) {

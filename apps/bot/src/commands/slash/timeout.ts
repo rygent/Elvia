@@ -1,19 +1,17 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic, time } from '@discordjs/formatters';
 import { Duration } from '@sapphire/time-utilities';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'timeout',
 			description: 'Timeout a member with duration and optional reason.',
 			options: [
@@ -85,26 +83,26 @@ export default class extends Command {
 		if (!member) {
 			return interaction.reply({
 				content: 'Member not found, please verify that this user is a server member.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 
 		if (member.user.id === interaction.user.id) {
-			return interaction.reply({ content: `You can't timeout yourself.`, ephemeral: true });
+			return interaction.reply({ content: `You can't timeout yourself.`, flags: [MessageFlags.Ephemeral] });
 		}
 		if (member.user.id === this.client.user.id) {
-			return interaction.reply({ content: `You cannot timeout me!`, ephemeral: true });
+			return interaction.reply({ content: `You cannot timeout me!`, flags: [MessageFlags.Ephemeral] });
 		}
 		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
 			return interaction.reply({
 				content: 'You cannot timeout a member who has a higher or equal role than yours.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 		if (!member.moderatable) {
 			return interaction.reply({
 				content: `I cannot timeout a member who has a higher or equal role than mine.`,
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		}
 
@@ -112,16 +110,22 @@ export default class extends Command {
 		if (offset > 24192e5) {
 			return interaction.reply({
 				content: 'The duration is too long. The maximum duration is 28 days.',
-				ephemeral: true
+				flags: [MessageFlags.Ephemeral]
 			});
 		} else if (offset > 241884e4 && offset <= 24192e5) {
 			offset = 241884e4;
 		} else if (isNaN(offset)) {
-			return interaction.reply({ content: `You need to specify a duration for the timeout.`, ephemeral: true });
+			return interaction.reply({
+				content: `You need to specify a duration for the timeout.`,
+				flags: [MessageFlags.Ephemeral]
+			});
 		}
 
 		if (Date.now() <= Number(member.communicationDisabledUntilTimestamp)) {
-			return interaction.reply({ content: `${bold(member.user.tag)} is already timed out.`, ephemeral: true });
+			return interaction.reply({
+				content: `${bold(member.user.tag)} is already timed out.`,
+				flags: [MessageFlags.Ephemeral]
+			});
 		}
 
 		await interaction.deferReply({ ephemeral: !visible });

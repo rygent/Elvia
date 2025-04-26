@@ -1,22 +1,20 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonInteraction, ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'rename',
 			description: 'Rename a server emoji.',
 			options: [
@@ -53,7 +51,9 @@ export default class extends Command {
 
 		const parse = parseEmoji(emoji);
 		const emojis = fetched?.get(parse?.id as string);
-		if (!emojis?.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
+		if (!emojis?.guild) {
+			return interaction.reply({ content: 'This emoji not from this guild', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const cancelId = nanoid();
 		const renameId = nanoid();

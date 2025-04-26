@@ -1,11 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -15,10 +14,9 @@ import { sentenceCase } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'weather',
 			description: 'Search for weather forecast.',
 			options: [
@@ -43,8 +41,10 @@ export default class extends Command {
 			.get(`${endpoint}?q=${encodeURIComponent(location)}&appid=${env.OPEN_WEATHER_API_KEY}&units=metric`)
 			.then(({ data }) => data)
 			.catch(({ status }) => {
-				if (status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
-				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+				if (status === 401) return interaction.reply({ content: 'Invalid API key.', flags: [MessageFlags.Ephemeral] });
+				if (status === 404) {
+					return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
+				}
 			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

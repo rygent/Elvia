@@ -1,10 +1,9 @@
-import { Client } from '@/lib/structures/client.js';
-import { Listener } from '@/lib/structures/listener.js';
+import { CoreClient, CoreEvent } from '@elvia/core';
 import { logger } from '@elvia/logger';
 import { Events } from 'discord.js';
 
-export default class extends Listener {
-	public constructor(client: Client<true>) {
+export default class extends CoreEvent {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			name: Events.Warn,
 			once: false

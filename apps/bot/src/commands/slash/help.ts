@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	type APIMessageComponentEmoji,
 	ApplicationCommandOptionType,
@@ -8,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import {
@@ -24,10 +23,9 @@ import { formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'help',
 			description: 'Shows help information and commands.',
 			options: [
@@ -53,7 +51,7 @@ export default class extends Command {
 		if (command) {
 			const cmd = this.client.commands.get(command);
 			if (!cmd) {
-				return interaction.reply({ content: 'This command does not seem to exist.', ephemeral: true });
+				return interaction.reply({ content: 'This command does not seem to exist.', flags: [MessageFlags.Ephemeral] });
 			}
 
 			const cmdId = app_command.find((item) => item.name === cmd.unique?.split(' ')[0])?.id;

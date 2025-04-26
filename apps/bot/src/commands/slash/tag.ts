@@ -1,19 +1,17 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { prisma } from '@elvia/database';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'tag',
 			description: 'Send an existing server tag.',
 			options: [
@@ -41,7 +39,12 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: [MessageFlags.Ephemeral]
+			});
+		}
 
 		return interaction.reply({ content: tag.content });
 	}

@@ -1,13 +1,12 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	type APIMessageComponentEmoji,
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } from 'discord.js';
@@ -21,10 +20,9 @@ import { nanoid } from 'nanoid';
 import moment from 'moment';
 import 'moment-duration-format';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'spotify',
 			description: 'Search for a song on Spotify.',
 			options: [
@@ -48,7 +46,9 @@ export default class extends Command {
 		const response = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: [MessageFlags.Ephemeral] });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

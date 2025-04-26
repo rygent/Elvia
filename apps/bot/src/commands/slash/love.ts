@@ -1,8 +1,6 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
-	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType
 } from 'discord-api-types/v10';
@@ -11,10 +9,9 @@ import type { ChatInputCommandInteraction, GuildMember } from 'discord.js';
 import { bold, inlineCode, italic } from '@discordjs/formatters';
 import { Colors } from '@/lib/utils/constants.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
-			type: ApplicationCommandType.ChatInput,
 			name: 'love',
 			description: 'Calculate love percentage between two users.',
 			options: [
