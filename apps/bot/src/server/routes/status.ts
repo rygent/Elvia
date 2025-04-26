@@ -1,12 +1,11 @@
-import { ShardingManager } from 'discord.js';
-import { type NextFunction, type Request, type Response, Router } from 'express';
+import { Router, type NextFunction, type Request, type Response } from 'express';
+import { CoreShardingManager, createError } from '@elvia/core';
 import auth from '@/server/middlewares/auth.js';
-import createError from 'http-errors';
 
 export const router = Router();
 router.get('/', auth, async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const manager: ShardingManager = req.app.get('shard-manager');
+		const manager: CoreShardingManager = req.app.get('shard-manager');
 
 		const response = await manager.broadcastEval((client) => ({
 			shardId: client.shard?.ids.join(' / '),

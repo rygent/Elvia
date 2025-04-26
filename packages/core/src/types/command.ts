@@ -6,20 +6,7 @@ import {
 	type ChannelType,
 	type Permissions
 } from 'discord-api-types/v10';
-import type { ApplicationCommandOptionChoiceData, PermissionsString, Snowflake } from 'discord.js';
-import type { Client } from '@/lib/structures/client.js';
-import { EventEmitter } from 'node:events';
-
-// eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace client {
-	export interface Settings {
-		token?: string;
-		owners?: Snowflake[];
-		defaultPermissions?: PermissionsString[];
-		debug?: boolean;
-		unsafeMode?: boolean;
-	}
-}
+import type { ApplicationCommandOptionChoiceData, PermissionsString } from 'discord.js';
 
 export interface CommandParameter {
 	type: ApplicationCommandOptionType;
@@ -36,11 +23,11 @@ export interface CommandParameter {
 	autocomplete?: boolean;
 }
 
-export interface CommandOptions {
+interface BaseCommandOptions {
 	/**
 	 * Type of the command
 	 */
-	type: ApplicationCommandType;
+	type: ApplicationCommandType.ChatInput | ApplicationCommandType.Message | ApplicationCommandType.User;
 	/**
 	 * 1-32 character name; `CHAT_INPUT` command names must be all lowercase matching `^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$`
 	 */
@@ -79,8 +66,16 @@ export interface CommandOptions {
 	owner?: boolean;
 }
 
-export interface CommandData {
-	type: ApplicationCommandType;
+export interface ChatInputOptions extends BaseCommandOptions {
+	type: ApplicationCommandType.ChatInput;
+}
+
+export interface ContextMenuOptions extends Omit<BaseCommandOptions, 'description' | 'options' | 'category'> {
+	type: ApplicationCommandType.Message | ApplicationCommandType.User;
+}
+
+interface BaseCommandData {
+	type: ApplicationCommandType.ChatInput | ApplicationCommandType.Message | ApplicationCommandType.User;
 	name: string;
 	description: string;
 	options?: CommandParameter[];
@@ -90,8 +85,12 @@ export interface CommandData {
 	contexts?: InteractionContextType[] | null;
 }
 
-export interface ListenerOptions {
-	name: string;
-	once?: boolean;
-	emitter?: keyof Client | EventEmitter;
+export interface ChatInputData extends BaseCommandData {
+	type: ApplicationCommandType.ChatInput;
 }
+
+export interface ContextMenuData extends Omit<BaseCommandData, 'description' | 'options'> {
+	type: ApplicationCommandType.Message | ApplicationCommandType.User;
+}
+
+export type CommandData = ChatInputData | ContextMenuData;
