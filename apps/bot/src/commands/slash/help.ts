@@ -17,7 +17,8 @@ import {
 	ChatInputCommandInteraction,
 	parseEmoji,
 	ButtonInteraction,
-	StringSelectMenuInteraction
+	StringSelectMenuInteraction,
+	Message
 } from 'discord.js';
 import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
 import { Colors, Emojis } from '@/lib/utils/constants.js';
@@ -194,7 +195,8 @@ export default class extends Command {
 			.setDescription(description.join('\n'))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
-		const reply = await interaction.reply({ embeds: [embed], components: [select, button], fetchReply: true });
+		const { resource } = await interaction.reply({ embeds: [embed], components: [select, button], withResponse: true });
+		const reply = resource?.message as Message<true>;
 
 		const filter = (i: StringSelectMenuInteraction | ButtonInteraction) => i.user.id === interaction.user.id;
 		const selectCollector = reply.createMessageComponentCollector({

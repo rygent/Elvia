@@ -7,7 +7,7 @@ import {
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
+import { Message, PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
 
 export default class extends Command {
@@ -46,10 +46,11 @@ export default class extends Command {
 		const amount = interaction.options.getInteger('amount') ?? 1;
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		const reply = await interaction.deferReply({
+		const { resource } = await interaction.deferReply({
 			...(!visible && { flags: MessageFlags.Ephemeral }),
-			fetchReply: true
+			withResponse: true
 		});
+		const reply = resource?.message as Message<true>;
 
 		const messages = await interaction.channel?.messages.fetch({ limit: 1e2, cache: true, before: reply.id });
 		const filter = messages?.filter((m) => m.reactions.cache.size && !m.pinned);
