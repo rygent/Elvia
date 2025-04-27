@@ -6,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import {
@@ -53,7 +54,12 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: MessageFlags.Ephemeral
+			});
+		}
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
@@ -64,7 +70,7 @@ export default class extends Command {
 		const reply = await interaction.reply({
 			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
 			components: [button],
-			ephemeral: true
+			flags: MessageFlags.Ephemeral
 		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;

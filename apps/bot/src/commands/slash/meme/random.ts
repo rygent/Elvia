@@ -4,7 +4,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -45,7 +46,9 @@ export default class extends Command {
 			.filter(({ data }: any) => !data.over_18)
 			.filter(({ data }: any) => !data.is_video);
 
-		if (!post.length) return interaction.reply({ content: 'It seems we are out of fresh memes!', ephemeral: true });
+		if (!post.length) {
+			return interaction.reply({ content: 'It seems we are out of fresh memes!', flags: MessageFlags.Ephemeral });
+		}
 
 		const random_post = Math.floor(Math.random() * post.length);
 

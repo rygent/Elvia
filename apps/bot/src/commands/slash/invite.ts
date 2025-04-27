@@ -6,6 +6,7 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	InteractionContextType,
+	MessageFlags,
 	OAuth2Scopes,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
@@ -62,6 +63,6 @@ export default class extends Command {
 				.setURL(link)
 		);
 
-		return interaction.reply({ content: replies, components: [button], ephemeral: true });
+		return interaction.reply({ content: replies, components: [button], flags: MessageFlags.Ephemeral });
 	}
 }

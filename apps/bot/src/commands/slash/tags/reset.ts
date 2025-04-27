@@ -5,7 +5,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { PermissionsBitField, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
@@ -34,7 +35,7 @@ export default class extends Command {
 		});
 
 		if (!database?.tags.length) {
-			return interaction.reply({ content: 'The tags for this server is empty.', ephemeral: true });
+			return interaction.reply({ content: 'The tags for this server is empty.', flags: MessageFlags.Ephemeral });
 		}
 
 		const cancelId = nanoid();
@@ -46,7 +47,7 @@ export default class extends Command {
 		const reply = await interaction.reply({
 			content: `Are you sure that you want to reset all server tags?`,
 			components: [button],
-			ephemeral: true
+			flags: MessageFlags.Ephemeral
 		});
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;

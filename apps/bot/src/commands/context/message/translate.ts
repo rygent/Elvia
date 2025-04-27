@@ -5,6 +5,7 @@ import {
 	ApplicationIntegrationType,
 	ComponentType,
 	InteractionContextType,
+	MessageFlags,
 	type APIMessageComponentEmoji
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
@@ -26,7 +27,7 @@ export default class extends Command {
 
 	public async execute(interaction: MessageContextMenuCommandInteraction<'cached' | 'raw'>) {
 		const message = interaction.options.getMessage('message', true);
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
 		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });
 

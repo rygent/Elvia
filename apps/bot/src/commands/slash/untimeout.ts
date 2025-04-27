@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
@@ -56,25 +57,25 @@ export default class extends Command {
 		if (!member) {
 			return interaction.reply({
 				content: 'Member not found, please verify that this user is a server member.',
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 
 		if (member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
 			return interaction.reply({
 				content: 'You cannot remove a timeout from a member who has a higher or equal role than yours.',
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 
 		if (!member.moderatable) {
 			return interaction.reply({
 				content: `I cannot remove a timeout from a member who has a higher or equal role than mine.`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 		await member.timeout(null, reason as string);
 
 		const replies = [

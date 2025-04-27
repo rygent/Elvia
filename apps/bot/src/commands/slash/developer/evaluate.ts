@@ -6,6 +6,7 @@ import {
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
+	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
@@ -87,7 +88,7 @@ export default class extends Command {
 			let code = i.fields.getTextInputValue('code-input').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 			let evaled;
 
-			await i.deferReply({ ephemeral: !visible });
+			await i.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 
 			if (async) {
 				const indentedCode = code

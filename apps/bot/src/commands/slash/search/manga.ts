@@ -6,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
@@ -49,13 +50,15 @@ export default class extends Command {
 				}
 			}) => media
 		);
-		if (!raw?.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!raw?.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+		}
 
 		const response = isNsfwChannel(interaction.channel) ? raw : raw.filter((data) => !data?.isAdult);
 		if (!response.length) {
 			return interaction.reply({
 				content: `This search contain explicit content, use ${bold('NSFW Channel')} instead.`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 

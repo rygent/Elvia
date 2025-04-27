@@ -5,7 +5,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
@@ -62,9 +63,13 @@ export default class extends Command {
 					iconURL: interaction.user.avatarURL() as string
 				});
 
-			return await interaction.reply({ embeds: [embed], components: [button], ephemeral: !visible });
+			return await interaction.reply({
+				embeds: [embed],
+				components: [button],
+				...(!visible && { flags: MessageFlags.Ephemeral })
+			});
 		} catch {
-			return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 	}
 

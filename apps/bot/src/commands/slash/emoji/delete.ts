@@ -6,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { ButtonInteraction, ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
@@ -44,7 +45,9 @@ export default class extends Command {
 
 		const parse = parseEmoji(emoji);
 		const emojis = fetched?.get(parse?.id as string);
-		if (!emojis?.guild) return interaction.reply({ content: 'This emoji not from this guild', ephemeral: true });
+		if (!emojis?.guild) {
+			return interaction.reply({ content: 'This emoji not from this guild', flags: MessageFlags.Ephemeral });
+		}
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();

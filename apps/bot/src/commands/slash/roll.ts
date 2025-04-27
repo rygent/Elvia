@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
@@ -55,12 +56,18 @@ export default class extends Command {
 
 			const amount = typeof results[1] === 'undefined' ? 1 : Number(results[1]);
 			if (amount < 1 || amount > 1024) {
-				return interaction.reply({ content: 'Amount of rolls must be a number between 1 and 1024.', ephemeral: true });
+				return interaction.reply({
+					content: 'Amount of rolls must be a number between 1 and 1024.',
+					flags: MessageFlags.Ephemeral
+				});
 			}
 
 			const dices = Number(results[2]);
 			if (dices < 3 || dices > 1024) {
-				return interaction.reply({ content: 'Amount of sides must be a number between 3 and 1024.', ephemeral: true });
+				return interaction.reply({
+					content: 'Amount of sides must be a number between 3 and 1024.',
+					flags: MessageFlags.Ephemeral
+				});
 			}
 
 			let result = generateNumber(amount, amount * dices);

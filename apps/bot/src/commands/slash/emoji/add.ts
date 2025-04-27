@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
@@ -61,7 +62,7 @@ export default class extends Command {
 		} catch {
 			return interaction.reply({
 				content: "The emoji are invalid or you don't have more space on your server!",
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 	}

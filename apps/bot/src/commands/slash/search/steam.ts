@@ -6,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
@@ -42,7 +43,9 @@ export default class extends Command {
 		const response = await axios
 			.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`)
 			.then(({ data }) => data.items.filter((item: any) => item.type === 'app'));
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

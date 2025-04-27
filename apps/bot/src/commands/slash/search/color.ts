@@ -5,7 +5,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
@@ -50,7 +51,7 @@ export default class extends Command {
 				content: `Please provide a valid ${bold('hexadecimal')}/${bold('rgb')} color code. Example: ${bold(
 					'#77dd77'
 				)}/${bold('(253, 253, 150)')} or ${bold('random')} to get a random color.`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 

@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { AttachmentBuilder, ChatInputCommandInteraction } from 'discord.js';
 import { codeBlock } from '@discordjs/formatters';
@@ -42,7 +43,7 @@ export default class extends Command {
 		const bash = interaction.options.getString('command', true);
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 
 		exec(bash, (error, stdout) => {
 			const replies = codeBlock('console', stdout ?? error).toString();

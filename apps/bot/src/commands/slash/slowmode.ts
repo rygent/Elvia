@@ -5,7 +5,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ChannelType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import {
 	PermissionsBitField,
@@ -72,11 +73,11 @@ export default class extends Command {
 		if (offset > 216e5) {
 			return interaction.reply({
 				content: 'Slowmode time must be a number between 0 second and 6 hours.',
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 		await channel?.setRateLimitPerUser(offset / 1e3, reason as string);
 
 		const time = new DurationFormatter();
