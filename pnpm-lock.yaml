@@ -90,7 +90,7 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       discord-api-types:
-        specifier: 0.38.1
+        specifier: ^0.38.1
         version: 0.38.1
       discord.js:
         specifier: ^14.19.1
@@ -527,6 +527,9 @@ importers:
       '@types/express':
         specifier: ^5.0.1
         version: 5.0.1
+      '@types/express-serve-static-core':
+        specifier: ^5.0.6
+        version: 5.0.6
       '@types/http-errors':
         specifier: ^2.0.4
         version: 2.0.4

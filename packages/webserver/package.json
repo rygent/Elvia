@@ -42,6 +42,7 @@
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/express-serve-static-core": "^5.0.6",
     "@types/http-errors": "^2.0.4",
     "@types/node": "^22.15.2",
     "eslint": "^9.25.1",
