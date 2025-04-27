@@ -5,7 +5,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -43,8 +44,12 @@ export default class extends Command {
 			.get(`${endpoint}?q=${encodeURIComponent(location)}&appid=${env.OPEN_WEATHER_API_KEY}&units=metric`)
 			.then(({ data }) => data)
 			.catch(({ status }) => {
-				if (status === 401) return interaction.reply({ content: 'Invalid API key.', ephemeral: true });
-				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+				if (status === 401) {
+					return interaction.reply({ content: 'Invalid API key.', flags: MessageFlags.Ephemeral });
+				}
+				if (status === 404) {
+					return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+				}
 			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

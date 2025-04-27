@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
@@ -84,7 +85,7 @@ export default class extends Command {
 					hideLinkEmbed('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes')
 				)} languages codes.`;
 
-				return interaction.reply({ content: replies, ephemeral: true });
+				return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 			}
 		}
 	}

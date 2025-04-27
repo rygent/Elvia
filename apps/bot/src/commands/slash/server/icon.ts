@@ -4,7 +4,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -26,7 +27,7 @@ export default class extends Command {
 
 	public execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		if (!interaction.guild?.iconURL()) {
-			return interaction.reply({ content: 'This server has no icon.', ephemeral: true });
+			return interaction.reply({ content: 'This server has no icon.', flags: MessageFlags.Ephemeral });
 		}
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(

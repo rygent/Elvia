@@ -1,6 +1,11 @@
 import { Client } from '@/lib/structures/client.js';
 import { Command } from '@/lib/structures/command.js';
-import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
+import {
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	InteractionContextType,
+	MessageFlags
+} from 'discord-api-types/v10';
 import { EmbedBuilder } from '@discordjs/builders';
 import {
 	type Guild,
@@ -87,7 +92,7 @@ export default class extends Command {
 			});
 		}
 
-		return interaction.reply({ embeds: [embed], ephemeral: true });
+		return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
 	}
 }
 

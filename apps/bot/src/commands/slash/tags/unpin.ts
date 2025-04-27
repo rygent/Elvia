@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type AutocompleteInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
@@ -44,10 +45,18 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: MessageFlags.Ephemeral
+			});
+		}
 
 		if (!tag.hoisted) {
-			return interaction.reply({ content: `The tag ${inlineCode(name)} already unpinned.`, ephemeral: true });
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} already unpinned.`,
+				flags: MessageFlags.Ephemeral
+			});
 		}
 
 		await prisma.tag.update({
@@ -55,7 +64,10 @@ export default class extends Command {
 			data: { hoisted: false }
 		});
 
-		return interaction.reply({ content: `Successfully unpinned the tag ${inlineCode(name)}.`, ephemeral: true });
+		return interaction.reply({
+			content: `Successfully unpinned the tag ${inlineCode(name)}.`,
+			flags: MessageFlags.Ephemeral
+		});
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {

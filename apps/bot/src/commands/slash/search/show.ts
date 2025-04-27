@@ -6,7 +6,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
@@ -47,7 +48,9 @@ export default class extends Command {
 			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_API_KEY}&query=${search}`)
 			.then(({ data }) => data.results.slice(0, 10));
 
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

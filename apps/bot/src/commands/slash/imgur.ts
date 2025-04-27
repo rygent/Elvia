@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import { bold, hideLinkEmbed, subtext } from '@discordjs/formatters';
@@ -41,7 +42,7 @@ export default class extends Command {
 		const media = interaction.options.getAttachment('media', true);
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 
 		const response = await axios
 			.post(

@@ -7,7 +7,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction, parseEmoji, StringSelectMenuInteraction } from 'discord.js';
@@ -48,7 +49,9 @@ export default class extends Command {
 		const response = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);
-		if (!response.length) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+		if (!response.length) {
+			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+		}
 
 		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(

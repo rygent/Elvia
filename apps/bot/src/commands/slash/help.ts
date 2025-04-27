@@ -8,7 +8,8 @@ import {
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import {
@@ -53,7 +54,7 @@ export default class extends Command {
 		if (command) {
 			const cmd = this.client.commands.get(command);
 			if (!cmd) {
-				return interaction.reply({ content: 'This command does not seem to exist.', ephemeral: true });
+				return interaction.reply({ content: 'This command does not seem to exist.', flags: MessageFlags.Ephemeral });
 			}
 
 			const cmdId = app_command.find((item) => item.name === cmd.unique?.split(' ')[0])?.id;

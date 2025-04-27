@@ -5,6 +5,7 @@ import {
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
+	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
@@ -81,7 +82,10 @@ export default class extends Command {
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
 			if (tags) {
-				return void i.reply({ content: `The tag ${inlineCode(slugify(names))} already exists.`, ephemeral: true });
+				return void i.reply({
+					content: `The tag ${inlineCode(slugify(names))} already exists.`,
+					flags: MessageFlags.Ephemeral
+				});
 			}
 
 			await prisma.tag.create({
@@ -95,7 +99,7 @@ export default class extends Command {
 
 			return void i.reply({
 				content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		});
 	}

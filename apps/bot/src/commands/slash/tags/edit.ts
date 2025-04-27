@@ -6,6 +6,7 @@ import {
 	ApplicationIntegrationType,
 	InteractionContextType,
 	InteractionType,
+	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
@@ -54,7 +55,12 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: MessageFlags.Ephemeral
+			});
+		}
 
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
@@ -90,7 +96,10 @@ export default class extends Command {
 				data: { content }
 			});
 
-			return void i.reply({ content: `Successfully edited the tag ${inlineCode(name)}.`, ephemeral: true });
+			return void i.reply({
+				content: `Successfully edited the tag ${inlineCode(name)}.`,
+				flags: MessageFlags.Ephemeral
+			});
 		});
 	}
 

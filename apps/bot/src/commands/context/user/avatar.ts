@@ -4,7 +4,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
@@ -39,6 +40,6 @@ export default class extends Command {
 			.setImage(member.displayAvatarURL({ size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
 
-		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+		return interaction.reply({ embeds: [embed], components: [button], flags: MessageFlags.Ephemeral });
 	}
 }

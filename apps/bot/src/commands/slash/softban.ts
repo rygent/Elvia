@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, italic } from '@discordjs/formatters';
@@ -114,26 +115,28 @@ export default class extends Command {
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		if (user.id === interaction.user.id) {
-			return interaction.reply({ content: `You can't ban yourself.`, ephemeral: true });
+			return interaction.reply({ content: `You can't ban yourself.`, flags: MessageFlags.Ephemeral });
 		}
-		if (user.id === this.client.user.id) return interaction.reply({ content: `You cannot ban me!`, ephemeral: true });
+		if (user.id === this.client.user.id) {
+			return interaction.reply({ content: `You cannot ban me!`, flags: MessageFlags.Ephemeral });
+		}
 
 		const members = await interaction.guild?.members.fetch();
 		const member = members?.get(user.id);
 		if (member && member.roles.highest.comparePositionTo(interaction.member?.roles.highest) > 0) {
 			return interaction.reply({
 				content: 'You cannot ban a member who has a higher or equal role than yours.',
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 		if (member && !member.bannable) {
 			return interaction.reply({
 				content: `I cannot ban a member who has a higher or equal role than mine.`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 
-		await interaction.deferReply({ ephemeral: !visible });
+		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
 		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
 		await interaction.guild?.members.unban(user, reason as string);
 

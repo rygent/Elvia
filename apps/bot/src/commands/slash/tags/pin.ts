@@ -4,7 +4,8 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { PermissionsBitField, type AutocompleteInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
@@ -44,21 +45,34 @@ export default class extends Command {
 		});
 
 		const tag = database?.tags.find(({ slug }) => slug === name);
-		if (!tag) return interaction.reply({ content: `The tag ${inlineCode(name)} doesn't exist.`, ephemeral: true });
+		if (!tag) {
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} doesn't exist.`,
+				flags: MessageFlags.Ephemeral
+			});
+		}
 
 		if (tag.hoisted) {
-			return interaction.reply({ content: `The tag ${inlineCode(name)} already pinned.`, ephemeral: true });
+			return interaction.reply({
+				content: `The tag ${inlineCode(name)} already pinned.`,
+				flags: MessageFlags.Ephemeral
+			});
 		}
 
 		const pins = database?.tags.filter(({ hoisted }) => hoisted);
-		if (pins!.length >= 25) return interaction.reply({ content: 'Unable to pin more than 25 tags.', ephemeral: true });
+		if (pins!.length >= 25) {
+			return interaction.reply({ content: 'Unable to pin more than 25 tags.', flags: MessageFlags.Ephemeral });
+		}
 
 		await prisma.tag.update({
 			where: { id: tag.id },
 			data: { hoisted: true }
 		});
 
-		return interaction.reply({ content: `Successfully pinned the tag ${inlineCode(name)}.`, ephemeral: true });
+		return interaction.reply({
+			content: `Successfully pinned the tag ${inlineCode(name)}.`,
+			flags: MessageFlags.Ephemeral
+		});
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {

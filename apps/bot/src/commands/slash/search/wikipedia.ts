@@ -5,7 +5,8 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
@@ -39,7 +40,9 @@ export default class extends Command {
 			.get(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(search)}`)
 			.then(({ data }) => data)
 			.catch(({ status }) => {
-				if (status === 404) return interaction.reply({ content: 'Nothing found for this search.', ephemeral: true });
+				if (status === 404) {
+					return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+				}
 			});
 
 		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
