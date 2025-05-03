@@ -55,7 +55,7 @@
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.15.3",
     "commander": "^13.1.0",
-    "eslint": "^9.25.1",
+    "eslint": "^9.26.0",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.5.3",
     "tsx": "^4.19.4",
