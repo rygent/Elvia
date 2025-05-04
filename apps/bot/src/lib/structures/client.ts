@@ -1,4 +1,4 @@
-import { ActivityType, AllowedMentionsTypes, GatewayIntentBits } from 'discord-api-types/v10';
+import { ActivityType, GatewayIntentBits } from 'discord-api-types/v10';
 import {
 	BitField,
 	Client as BaseClient,
@@ -30,7 +30,6 @@ export class Client<Ready extends boolean = boolean> extends BaseClient<Ready> {
 			intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages],
 			partials: [Partials.Message, Partials.Channel],
 			allowedMentions: {
-				parse: [AllowedMentionsTypes.User, AllowedMentionsTypes.Role],
 				repliedUser: false
 			},
 			presence: {

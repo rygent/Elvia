@@ -3,14 +3,18 @@ import { Command } from '@/lib/structures/command.js';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
-import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, inlineCode, subtext } from '@discordjs/formatters';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -26,20 +30,22 @@ export default class extends Command {
 	public execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(member.displayAvatarURL({ extension: 'png', size: 4096 }))
-		);
+		const container = new ContainerBuilder()
+			.addMediaGalleryComponents(
+				new MediaGalleryBuilder().addItems(
+					new MediaGalleryItemBuilder().setURL(member.displayAvatarURL({ size: 4096 }))
+				)
+			)
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[`${bold('ID:')} ${inlineCode(member.user.id)}`, `${bold('Username:')} ${member.user.tag}`].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({ name: member.user.tag, iconURL: member.displayAvatarURL() })
-			.setDescription(`${bold(italic('ID:'))} ${inlineCode(member.user.id)}`)
-			.setImage(member.displayAvatarURL({ size: 512 }))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
-
-		return interaction.reply({ embeds: [embed], components: [button], flags: MessageFlags.Ephemeral });
+		return interaction.reply({ components: [container], flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2] });
 	}
 }

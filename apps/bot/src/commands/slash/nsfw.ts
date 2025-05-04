@@ -4,13 +4,18 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, subtext } from '@discordjs/formatters';
 import { isNsfwChannel } from '@/lib/utils/functions.js';
 import { Nsfw } from '@/lib/utils/autocomplete.js';
 import axios from 'axios';
@@ -51,22 +56,19 @@ export default class extends Command {
 		try {
 			const response = await axios.get(`https://nekobot.xyz/api/image?type=${category}`).then(({ data }) => data);
 
-			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-				new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.message)
-			);
-
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Default)
-				.setImage(response.message)
-				.setFooter({
-					text: `Powered by ${this.client.user.username}`,
-					iconURL: interaction.user.avatarURL() as string
-				});
+			const container = new ContainerBuilder()
+				.addMediaGalleryComponents(
+					new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(response.message).setSpoiler(visible))
+				)
+				.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+				);
 
 			return await interaction.reply({
-				embeds: [embed],
-				components: [button],
-				...(!visible && { flags: MessageFlags.Ephemeral })
+				components: [container],
+				...(visible && { flags: MessageFlags.IsComponentsV2 }),
+				...(!visible && { flags: [MessageFlags.IsComponentsV2, MessageFlags.Ephemeral] })
 			});
 		} catch {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });

@@ -4,14 +4,18 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
-import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
-import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
+import { ChatInputCommandInteraction } from 'discord.js';
+import { bold, inlineCode, subtext } from '@discordjs/formatters';
 import axios from 'axios';
 
 export default class extends Command {
@@ -46,9 +50,7 @@ export default class extends Command {
 		});
 		const color = interaction.options.getBoolean('color') ?? false;
 
-		const embed = new EmbedBuilder()
-			.setAuthor({ name: user.tag, iconURL: user.displayAvatarURL() })
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+		const container = new ContainerBuilder();
 
 		if (color) {
 			if (!user.hexAccentColor) {
@@ -62,30 +64,47 @@ export default class extends Command {
 				.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`)
 				.then(({ data }) => data);
 
-			embed.setColor(resolveColor(response.hex.clean));
-			embed.setDescription(
-				[`${bold(italic('ID:'))} ${inlineCode(user.id)}`, `${bold(italic('Hex:'))} ${response.hex.value}`].join('\n')
+			container.addMediaGalleryComponents(
+				new MediaGalleryBuilder().addItems(
+					new MediaGalleryItemBuilder().setURL(
+						`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`
+					)
+				)
 			);
-			embed.setImage(`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`);
+			container.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						`${bold('ID:')} ${inlineCode(user.id)}`,
+						`${bold('Username:')} ${user.tag}`,
+						`${bold('Hex:')} ${response.hex.value}`
+					].join('\n')
+				)
+			);
+			container.addSeparatorComponents(new SeparatorBuilder().setDivider(true));
+			container.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-			return interaction.reply({ embeds: [embed] });
+			return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		}
 
 		if (!user.banner) {
 			return interaction.reply({ content: `${bold(user.tag)}'s has no banner!`, flags: MessageFlags.Ephemeral });
 		}
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(user.bannerURL({ extension: 'png', size: 4096 }) as string)
+		container.addMediaGalleryComponents(
+			new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(user.bannerURL({ size: 4096 }) as string))
+		);
+		container.addTextDisplayComponents(
+			new TextDisplayBuilder().setContent(
+				[`${bold('ID:')} ${inlineCode(user.id)}`, `${bold('Username:')} ${user.tag}`].join('\n')
+			)
+		);
+		container.addSeparatorComponents(new SeparatorBuilder().setDivider(true));
+		container.addTextDisplayComponents(
+			new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
 		);
 
-		embed.setColor(Colors.Default);
-		embed.setDescription(`${bold(italic('ID:'))} ${inlineCode(user.id)}`);
-		embed.setImage(user.bannerURL({ size: 512 }) as string);
-
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

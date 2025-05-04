@@ -1,9 +1,14 @@
 import { Client } from '@/lib/structures/client.js';
 import { Listener } from '@/lib/structures/listener.js';
-import { EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	SectionBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder,
+	ThumbnailBuilder
+} from '@discordjs/builders';
 import { Events, Guild, WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
-import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, inlineCode, subtext } from '@discordjs/formatters';
 import { formatNumber } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { prisma } from '@elvia/database';
@@ -29,27 +34,34 @@ export default class extends Listener {
 			const guildCount = formatNumber(this.client.guilds.cache.size);
 			const userCount = formatNumber(this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0));
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Red)
-				.setTitle(`${this.client.user.username} left a Server!`)
-				.setThumbnail(guild.iconURL({ size: 512 }))
-				.setDescription(
-					[
-						`${bold(italic('Server:'))} ${guild.name} (${inlineCode(guild.id)})`,
-						`${bold(italic('Owner:'))} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`
-					].join('\n')
-				)
-				.setFooter({
-					text: `${guildCount} guilds | ${userCount} users`,
-					iconURL: this.client.user.avatarURL() as string
-				});
+			const detail = new TextDisplayBuilder().setContent(
+				[
+					heading(`${bold(this.client.user.username)} left a Server!`, 2),
+					`${bold('Server:')} ${guild.name} (${inlineCode(guild.id)})`,
+					`${bold('Owner:')} ${guildOwner.user.tag} (${inlineCode(guildOwner.id)})`
+				].join('\n')
+			);
+
+			const container = new ContainerBuilder()
+				.addTextDisplayComponents(detail)
+				.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(subtext(`${bold(guildCount)} guilds | ${bold(userCount)} users`))
+				);
+
+			if (guild.icon) {
+				const section = new SectionBuilder()
+					.addTextDisplayComponents(detail)
+					.setThumbnailAccessory(new ThumbnailBuilder().setURL(guild.iconURL({ size: 1024 })!));
+				container.spliceComponents(0, 1, section);
+			}
 
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),
 				username: this.client.user?.username
 			} as WebhookMessageCreateOptions;
 
-			return webhook.send({ embeds: [embed], threadId, ...profile });
+			return webhook.send({ components: [container], withComponents: true, threadId, ...profile });
 		}
 	}
 }

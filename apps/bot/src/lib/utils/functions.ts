@@ -1,6 +1,15 @@
 import { ButtonStyle, ChannelType } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
-import type { AutocompleteInteraction, Channel, CommandInteraction, ThreadChannel } from 'discord.js';
+import type {
+	AutocompleteInteraction,
+	Channel,
+	CommandInteraction,
+	GuildChannel,
+	Message,
+	StageChannel,
+	ThreadChannel,
+	VoiceChannel
+} from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
 
 export function disableAllButtons(row: ActionRowBuilder<ButtonBuilder>): ActionRowBuilder<ButtonBuilder> {
@@ -45,17 +54,24 @@ export function formatPermissions(input: string): string {
 
 export function isNsfwChannel(channel: Channel | Nullish): boolean {
 	if (isNullish(channel)) return false;
+
 	switch (channel.type) {
-		case ChannelType.GuildText:
-			return channel.nsfw;
 		case ChannelType.DM:
 			return true;
+		case ChannelType.GroupDM:
+		case ChannelType.GuildCategory:
+		case ChannelType.GuildStageVoice:
+		case ChannelType.GuildVoice:
+			return false;
+		case ChannelType.GuildAnnouncement:
+		case ChannelType.GuildText:
+		case ChannelType.GuildForum:
+		case ChannelType.GuildMedia:
+			return (channel as Exclude<Extract<Message['channel'], GuildChannel>, VoiceChannel | StageChannel>).nsfw;
+		case ChannelType.AnnouncementThread:
 		case ChannelType.PublicThread:
-			return Boolean((channel as ThreadChannel).parent?.nsfw);
 		case ChannelType.PrivateThread:
 			return Boolean((channel as ThreadChannel).parent?.nsfw);
-		default:
-			return false;
 	}
 }
 

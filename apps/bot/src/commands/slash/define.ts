@@ -4,14 +4,12 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { italic, underline } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext, underline } from '@discordjs/formatters';
 import axios from 'axios';
 
 export default class extends Command {
@@ -45,22 +43,23 @@ export default class extends Command {
 			return interaction.reply({ content: 'No definition found for this word.', flags: MessageFlags.Ephemeral });
 		}
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(response.permalink)
-		);
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[heading(hyperlink(response.word, response.permalink), 2), `\n${response.definition}`].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Urban Dictionary')}`)));
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({
-				name: 'Urban Dictionary',
-				iconURL: 'https://i.imgur.com/qjkcwXu.png',
-				url: 'https://urbandictionary.com/'
-			})
-			.setTitle(response.word)
-			.setDescription(response.definition)
-			.addFields({ name: underline(italic('Example')), value: response.example, inline: false })
-			.setFooter({ text: `Powered by Urban Dictionary`, iconURL: interaction.user.avatarURL() as string });
+		if (response.example.length) {
+			const example = new TextDisplayBuilder().setContent(
+				[heading(underline('Example'), 3), response.example].join('\n')
+			);
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+			container.spliceComponents(1, 0, example);
+		}
+
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

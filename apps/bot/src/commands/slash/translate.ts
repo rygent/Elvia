@@ -7,12 +7,10 @@ import {
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { EmbedBuilder } from '@discordjs/builders';
+import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import type { AutocompleteInteraction, ChatInputCommandInteraction } from 'discord.js';
-import { bold, hideLinkEmbed, hyperlink, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, hideLinkEmbed, hyperlink, italic, subtext } from '@discordjs/formatters';
 import { Languages } from '@/lib/utils/autocomplete.js';
-import { cutText } from '@sapphire/utilities';
 import translate from '@iamtraction/google-translate';
 
 export default class extends Command {
@@ -60,24 +58,21 @@ export default class extends Command {
 		try {
 			const translated = await translate(text, { from: from ?? 'auto', to: target });
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Default)
-				.setAuthor({
-					name: 'Google Translate',
-					iconURL: 'https://i.imgur.com/1JS81kv.png',
-					url: 'https://translate.google.com/'
-				})
-				.setDescription(
-					[
-						`${cutText(translated.text, 3950)}\n`,
-						`Translation from ${bold(italic(resolveLanguage(translated.from.language.iso)))} to ${bold(
-							italic(resolveLanguage(target))
-						)}.`
-					].join('\n')
+			const container = new ContainerBuilder()
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(
+						[
+							translated.text,
+							`\n${subtext(`${bold(italic(resolveLanguage(translated.from.language.iso)))} \u2192 ${bold(italic(resolveLanguage(target)))}`)}`
+						].join('\n')
+					)
 				)
-				.setFooter({ text: 'Powered by Google Translate', iconURL: interaction.user.avatarURL() as string });
+				.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Google Translate')}`))
+				);
 
-			return await interaction.reply({ embeds: [embed] });
+			return await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		} catch (error: any) {
 			if (error.code === 400) {
 				const replies = `Please send valid ${hyperlink(
