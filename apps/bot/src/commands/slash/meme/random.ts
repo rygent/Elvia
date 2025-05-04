@@ -43,8 +43,8 @@ export default class extends Command {
 			.then(({ data }) => data);
 
 		const filtered = response.data.children
-			.filter(({ data }: any) => !data.is_gallery)
-			.filter(({ data }: any) => data.domain === 'i.redd.it');
+			.filter(({ data }: any) => !data.is_self)
+			.filter(({ data }: any) => data.post_hint !== 'rich:video');
 
 		if (!isNsfwChannel(interaction.channel)) filtered.filter(({ data }: any) => !data.over_18);
 
