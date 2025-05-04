@@ -2,26 +2,30 @@
 import { Client } from '@/lib/structures/client.js';
 import { Command } from '@/lib/structures/command.js';
 import {
-	type APIMessageComponentEmoji,
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
 import {
-	AutocompleteInteraction,
-	ChatInputCommandInteraction,
-	parseEmoji,
-	ButtonInteraction,
-	StringSelectMenuInteraction,
-	Message
-} from 'discord.js';
-import { bold, chatInputApplicationCommandMention, hyperlink, italic } from '@discordjs/formatters';
-import { Colors, Emojis } from '@/lib/utils/constants.js';
+	ActionRowBuilder,
+	ContainerBuilder,
+	SeparatorBuilder,
+	StringSelectMenuBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
+import { AutocompleteInteraction, ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
+import {
+	bold,
+	chatInputApplicationCommandMention,
+	heading,
+	hyperlink,
+	inlineCode,
+	quote,
+	subtext
+} from '@discordjs/formatters';
 import { formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { nanoid } from 'nanoid';
@@ -34,7 +38,7 @@ export default class extends Command {
 			description: 'Shows help information and commands.',
 			options: [
 				{
-					name: 'command',
+					name: 'query',
 					description: 'Command to get help for.',
 					type: ApplicationCommandOptionType.String,
 					autocomplete: true,
@@ -48,394 +52,141 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const command = interaction.options.getString('command');
+		const query = interaction.options.getString('query');
 
-		const app_command = await this.client.application?.commands.fetch();
+		const commandData = await this.client.application?.commands.fetch();
 
-		if (command) {
-			const cmd = this.client.commands.get(command);
-			if (!cmd) {
-				return interaction.reply({ content: 'This command does not seem to exist.', flags: MessageFlags.Ephemeral });
+		const container = new ContainerBuilder()
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
+
+		if (query) {
+			const command = this.client.commands.get(query);
+			if (!command) {
+				const text = new TextDisplayBuilder().setContent('This command does not seem to exist.');
+				container.spliceComponents(0, 0, text);
+
+				return interaction.reply({
+					components: [container],
+					flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2]
+				});
 			}
 
-			const cmdId = app_command.find((item) => item.name === cmd.unique?.split(' ')[0])?.id;
+			const commandId = commandData.find((cmd) => cmd.name === command.unique?.split(' ')[0])!.id;
+			const permissions = command.userPermissions.toArray();
 
-			const permissions = cmd.userPermissions.toArray();
+			const section = new TextDisplayBuilder().setContent(
+				[
+					heading(chatInputApplicationCommandMention(command.unique!, commandId), 2),
+					`${command.description}`,
+					...(command.options.length
+						? [quote(command.options.map((option) => `${inlineCode(option.name)}: ${option.description}`).join('\n'))]
+						: [])
+				].join('\n')
+			);
+			container.spliceComponents(0, 0, section);
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Default)
-				.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: this.client.user.displayAvatarURL() })
-				.setTitle(`${chatInputApplicationCommandMention(cmd.unique!, cmdId as string)}`)
-				.setThumbnail('https://i.imgur.com/YxoUvH8.png')
-				.setDescription(
-					[
-						`${cmd.description}`,
-						`${bold(italic('Category:'))} ${cmd.category}`,
-						`${bold(italic('Permissions:'))} ${
-							permissions?.length
-								? permissions.map((item) => `\`${formatPermissions(item)}\``).join(', ')
-								: 'No permission required.'
-						}`,
-						`${bold(italic('Cooldown:'))} ${cmd.cooldown / 1e3} second(s)`
-					].join('\n')
-				)
-				.setFooter({
-					text: `Powered by ${this.client.user.username}`,
-					iconURL: interaction.user.avatarURL() as string
-				});
+			const detail = new TextDisplayBuilder().setContent(
+				[
+					`${bold('Category:')} ${command.category}`,
+					`${bold('Permissions:')} ${
+						permissions?.length
+							? permissions.map((item) => `\`${formatPermissions(item)}\``).join(', ')
+							: 'No permission required.'
+					}`,
+					`${bold('Cooldown:')} ${command.cooldown / 1e3} second(s)`
+				].join('\n')
+			);
+			container.spliceComponents(1, 0, detail);
 
-			return interaction.reply({ embeds: [embed] });
+			return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		}
-
-		let i0 = 0;
-		let i1 = 8;
-		let page = 1;
 
 		const commands = this.client.commands
 			.filter(({ owner, type }) => !owner && type === ApplicationCommandType.ChatInput)
-			.map((item) => ({
-				id: app_command.find((i) => i.name === item.unique?.split(' ')[0])?.id,
-				...item
+			.map((command) => ({
+				id: commandData.find((cmd) => cmd.name === command.unique?.split(' ')[0])!.id,
+				...command
 			}));
 
 		const category = commands
-			.filter((value, index, self) => index === self.findIndex((item) => item.category === value.category))
-			.filter((item) => {
-				if (item.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
+			.filter((command, index, self) => index === self.findIndex((cmd) => cmd.category === command.category))
+			.filter((command) => {
+				if (command.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
 				return true;
 			})
-			.map((item) => ({ category: item.category }));
+			.map((command) => ({ category: command.category }));
 
-		let selectedCommands = commands
-			.filter((cmd) => {
-				if (cmd.guild && !interaction.inGuild()) return false;
-				return true;
-			})
-			.filter((cmd) => cmd.category === 'General');
+		const section = new TextDisplayBuilder().setContent(
+			[
+				`Welcome to help menu, here is the list of commands!`,
+				`Need more help? Come join our ${hyperlink('support server', env.SUPPORT_SERVER_URL)}.`
+			].join('\n')
+		);
+		container.spliceComponents(0, 0, section);
 
-		const selectId = nanoid();
 		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
 			new StringSelectMenuBuilder()
-				.setCustomId(selectId)
-				.setMinValues(0)
-				.setMaxValues(category.length)
+				.setCustomId(nanoid())
+				.setPlaceholder('Select a category')
 				.setOptions(
 					category
 						.map((item) => ({
 							value: item.category.toLowerCase(),
-							label: item.category,
-							...(item.category === 'General' && { default: true })
+							label: item.category
 						}))
 						.sort((a, b) => a.label.localeCompare(b.label))
 				)
 		);
+		container.spliceComponents(1, 0, select);
 
-		const firstId = nanoid();
-		const previousId = nanoid();
-		const pageId = nanoid();
-		const nextId = nanoid();
-		const lastId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(firstId)
-					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(parseEmoji(Emojis.First) as APIMessageComponentEmoji)
-					.setDisabled(true)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(previousId)
-					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(parseEmoji(Emojis.Previous) as APIMessageComponentEmoji)
-					.setDisabled(true)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(pageId)
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`)
-					.setDisabled(true)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nextId)
-					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(parseEmoji(Emojis.Next) as APIMessageComponentEmoji)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(lastId)
-					.setStyle(ButtonStyle.Secondary)
-					.setEmoji(parseEmoji(Emojis.Last) as APIMessageComponentEmoji)
-			);
+		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 
-		const description = [
-			`Welcome to help menu, here is the list of commands!`,
-			`Need more help? Come join our ${hyperlink('support server', env.SUPPORT_SERVER_URL)}.\n`,
-			selectedCommands
-				.sort((a, b) => a.unique!.localeCompare(b.unique!))
-				.map(
-					(cmd) =>
-						`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-				)
-				.slice(i0, i1)
-				.join('\n')
-		];
-
-		if (selectedCommands.length <= 8) {
-			button.components[3]?.setDisabled(true);
-			button.components[4]?.setDisabled(true);
-		}
-
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({ name: `${this.client.user.username} | Help`, iconURL: this.client.user.displayAvatarURL() })
-			.setThumbnail('https://i.imgur.com/YxoUvH8.png')
-			.setDescription(description.join('\n'))
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
-
-		const { resource } = await interaction.reply({ embeds: [embed], components: [select, button], withResponse: true });
-		const reply = resource?.message as Message<true>;
-
-		const filter = (i: StringSelectMenuInteraction | ButtonInteraction) => i.user.id === interaction.user.id;
-		const selectCollector = reply.createMessageComponentCollector({
+		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
+		const collector = reply.createMessageComponentCollector({
+			componentType: ComponentType.StringSelect,
 			filter,
-			componentType: ComponentType.StringSelect
-		});
-		const buttonCollector = reply.createMessageComponentCollector({
-			filter,
-			componentType: ComponentType.Button,
 			time: 3e5
 		});
 
-		selectCollector.on('ignore', (i) => void i.deferUpdate());
-		selectCollector.on('collect', (i) => {
-			buttonCollector.resetTimer();
+		collector.on('ignore', (i) => void i.deferUpdate());
+		collector.on('collect', async (i: StringSelectMenuInteraction<'cached'>) => {
+			const [selected] = i.values;
+			collector.resetTimer();
 
-			i0 = 0;
-			i1 = 8;
-			page = 1;
+			const selectedCategories = commands.filter((command) => command.category.toLowerCase() === selected);
 
-			const selected = i.values;
-			if (!selected.length) {
-				selectedCommands = commands
-					.filter((cmd) => {
-						if (cmd.guild && !interaction.inGuild()) return false;
-						return true;
-					})
-					.filter((cmd) => cmd.category === 'General');
-
-				select.components[0]?.options
-					.filter((options) => options.data.value === 'general')
-					.forEach((options) => options.setDefault(true));
-				select.components[0]?.options
-					.filter((options) => options.data.value !== 'general')
-					.forEach((options) => options.setDefault(false));
-			}
-
-			if (selected.length) {
-				selectedCommands = commands
-					.filter((cmd) => {
-						if (cmd.guild && !interaction.inGuild()) return false;
-						return true;
-					})
-					.filter((cmd) => selected.includes(cmd.category.toLowerCase()));
-
-				select.components[0]?.options
-					.filter((options) => selected.includes(options.data.value as string))
-					.forEach((options) => options.setDefault(true));
-				select.components[0]?.options
-					.filter((options) => !selected.includes(options.data.value as string))
-					.forEach((options) => options.setDefault(false));
-			}
-
-			if (page === 1) {
-				button.components[0]?.setDisabled(true);
-				button.components[1]?.setDisabled(true);
-			}
-
-			if (selectedCommands.length <= 8) {
-				button.components[3]?.setDisabled(true);
-				button.components[4]?.setDisabled(true);
-			}
-
-			if (selectedCommands.length > 8) {
-				button.components[3]?.setDisabled(false);
-				button.components[4]?.setDisabled(false);
-			}
-
-			description.splice(
-				2,
-				description.length,
-				selectedCommands
-					.sort((a, b) => a.unique!.localeCompare(b.unique!))
-					.map(
-						(cmd) =>
-							`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-					)
-					.slice(i0, i1)
-					.join('\n')
+			const detail = new TextDisplayBuilder().setContent(
+				[
+					`Welcome to help menu, here is the list of commands!`,
+					`Need more help? Come join our ${hyperlink('support server', env.SUPPORT_SERVER_URL)}.`,
+					selectedCategories
+						.map((command) =>
+							[
+								`${heading(chatInputApplicationCommandMention(command.unique!, command.id), 3)}`,
+								command.description
+							].join('\n')
+						)
+						.join('\n')
+				].join('\n')
 			);
+			container.spliceComponents(0, 1, detail);
 
-			embed.setDescription(description.join('\n'));
+			select.components[0]?.options.forEach((option) => option.setDefault(false));
+			select.components[0]?.options.find((option) => option.data.value === selected)?.setDefault(true);
 
-			button.components[2]?.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`);
-
-			return void i.update({ embeds: [embed], components: [select, button] });
+			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
 
-		buttonCollector.on('ignore', (i) => void i.deferUpdate());
-		buttonCollector.on('collect', (i) => {
-			buttonCollector.resetTimer();
-
-			switch (i.customId) {
-				case firstId:
-					i0 -= 8 * (page - 1);
-					i1 -= 8 * (page - 1);
-					page -= 1 * (page - 1);
-
-					if (page === 1) {
-						button.components[0]?.setDisabled(true);
-						button.components[1]?.setDisabled(true);
-					}
-
-					if (page !== Math.ceil(selectedCommands.length / 8)) {
-						button.components[3]?.setDisabled(false);
-						button.components[4]?.setDisabled(false);
-					}
-
-					description.splice(
-						2,
-						description.length,
-						selectedCommands
-							.sort((a, b) => a.unique!.localeCompare(b.unique!))
-							.map(
-								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-							)
-							.slice(i0, i1)
-							.join('\n')
-					);
-
-					embed.setDescription(description.join('\n'));
-
-					button.components[2]?.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`);
-
-					return void i.update({ embeds: [embed], components: [select, button] });
-				case previousId:
-					i0 -= 8;
-					i1 -= 8;
-					page -= 1;
-
-					if (page === 1) {
-						button.components[0]?.setDisabled(true);
-						button.components[1]?.setDisabled(true);
-					}
-
-					if (page !== Math.ceil(selectedCommands.length / 8)) {
-						button.components[3]?.setDisabled(false);
-						button.components[4]?.setDisabled(false);
-					}
-
-					description.splice(
-						2,
-						description.length,
-						selectedCommands
-							.sort((a, b) => a.unique!.localeCompare(b.unique!))
-							.map(
-								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-							)
-							.slice(i0, i1)
-							.join('\n')
-					);
-
-					embed.setDescription(description.join('\n'));
-
-					button.components[2]?.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`);
-
-					return void i.update({ embeds: [embed], components: [select, button] });
-				case nextId:
-					i0 += 8;
-					i1 += 8;
-					page += 1;
-
-					if (page !== 1) {
-						button.components[0]?.setDisabled(false);
-						button.components[1]?.setDisabled(false);
-					}
-
-					if (page === Math.ceil(selectedCommands.length / 8)) {
-						button.components[3]?.setDisabled(true);
-						button.components[4]?.setDisabled(true);
-					}
-
-					description.splice(
-						2,
-						description.length,
-						selectedCommands
-							.sort((a, b) => a.unique!.localeCompare(b.unique!))
-							.map(
-								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-							)
-							.slice(i0, i1)
-							.join('\n')
-					);
-
-					embed.setDescription(description.join('\n'));
-
-					button.components[2]?.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`);
-
-					return void i.update({ embeds: [embed], components: [select, button] });
-				case lastId:
-					i0 += 8 * (Math.ceil(selectedCommands.length / 8) - page);
-					i1 += 8 * (Math.ceil(selectedCommands.length / 8) - page);
-					page += 1 * (Math.ceil(selectedCommands.length / 8) - page);
-
-					if (page !== 1) {
-						button.components[0]?.setDisabled(false);
-						button.components[1]?.setDisabled(false);
-					}
-
-					if (page === Math.ceil(selectedCommands.length / 8)) {
-						button.components[3]?.setDisabled(true);
-						button.components[4]?.setDisabled(true);
-					}
-
-					description.splice(
-						2,
-						description.length,
-						selectedCommands
-							.sort((a, b) => a.unique!.localeCompare(b.unique!))
-							.map(
-								(cmd) =>
-									`${chatInputApplicationCommandMention(cmd.unique!, cmd.id as string)}\n${Emojis.Branch} ${cmd.description}`
-							)
-							.slice(i0, i1)
-							.join('\n')
-					);
-
-					embed.setDescription(description.join('\n'));
-
-					button.components[2]?.setLabel(`${page}/${Math.ceil(selectedCommands.length / 8)}`);
-
-					return void i.update({ embeds: [embed], components: [select, button] });
-			}
-		});
-
-		buttonCollector.on('end', (collected, reason) => {
-			if ((!collected.size && reason === 'time') || reason === 'time') {
-				selectCollector.stop('time');
+		collector.on('end', (collected, reason) => {
+			if (!collected.size && reason === 'time') {
+				return interaction.deleteReply();
+			} else if (reason === 'time') {
 				select.components[0]?.setDisabled(true);
 
-				button.components[0]?.setDisabled(true);
-				button.components[1]?.setDisabled(true);
-				button.components[3]?.setDisabled(true);
-				button.components[4]?.setDisabled(true);
-
-				return void reply.edit({ components: [select, button] });
+				return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 			}
 		});
 	}

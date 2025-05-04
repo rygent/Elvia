@@ -6,15 +6,22 @@ import {
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SectionBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder,
+	ThumbnailBuilder
+} from '@discordjs/builders';
 import {
 	type Guild,
 	type GuildMember,
 	type PermissionsString,
 	type UserContextMenuCommandInteraction
 } from 'discord.js';
-import { bold, inlineCode, italic, time, underline } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, inlineCode, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatPermissions, trimArray } from '@/lib/utils/functions.js';
 import { Badges } from '@/lib/utils/emojis.js';
 
@@ -32,67 +39,68 @@ export default class extends Command {
 	public async execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user') as GuildMember;
 
-		const userFlags = member.user.flags!.toArray();
-		const badges = userFlags.map((item) => Badges[item]).filter((value) => value !== '');
+		const flags = member.user.flags!.toArray();
+		const badges = flags.map((flag) => Badges[flag]).filter((value) => value !== '');
 
-		const banner = await member.user.fetch(true);
 		const roles = member.roles.cache
 			.sort((a, b) => b.position - a.position)
 			.map((role) => role.toString())
 			.slice(0, -1);
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({ name: member.user.tag, iconURL: member.user.avatarURL() as string })
-			.setThumbnail(member.user.displayAvatarURL({ size: 512 }))
-			.setDescription(
-				[
-					`${bold(italic('ID:'))} ${inlineCode(member.id)}`,
-					`${bold(italic('Display Name:'))} ${member.user.globalName ?? inlineCode('N/A')}`,
-					`${bold(italic('Nickname:'))} ${member.nickname ?? inlineCode('N/A')}`,
-					`${bold(italic('Badges:'))} ${
-						badges.length ? userFlags.map((item) => Badges[item]).join(' ') : inlineCode('N/A')
-					}`,
-					`${bold(italic('Pending:'))} ${member.pending ? 'Yes' : 'No'}`,
-					`${bold(italic('Created:'))} ${time(new Date(member.user.createdTimestamp), 'D')} (${time(
-						new Date(member.user.createdTimestamp),
-						'R'
-					)})`,
-					`${bold(italic('Joined:'))} ${time(new Date(member.joinedAt as Date), 'D')} (${time(
-						new Date(member.joinedAt as Date),
-						'R'
-					)})`
-				].join('\n')
+		const container = new ContainerBuilder()
+			.addSectionComponents(
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							[
+								`${bold('ID:')} ${inlineCode(member.id)}`,
+								`${bold('Username:')} ${member.user.tag}`,
+								`${bold('Display Name:')} ${member.user.globalName ?? inlineCode('N/A')}`,
+								`${bold('Nickname:')} ${member.nickname ?? inlineCode('N/A')}`,
+								`${bold('Badges:')} ${badges.length ? badges.join(' ') : inlineCode('N/A')}`,
+								`${bold('Pending:')} ${member.pending ? 'Yes' : 'No'}`,
+								`${bold('Created:')} ${time(new Date(member.user.createdTimestamp), 'D')} (${time(
+									new Date(member.user.createdTimestamp),
+									'R'
+								)})`,
+								`${bold('Joined:')} ${time(new Date(member.joinedAt!), 'D')} (${time(new Date(member.joinedAt!), 'R')})`
+							].join('\n')
+						)
+					)
+					.setThumbnailAccessory(new ThumbnailBuilder().setURL(member.displayAvatarURL({ size: 1024 })))
 			)
-			.addFields({
-				name: underline(italic(`Roles [${roles.length ? roles.length : 1}]`)),
-				value: `${roles.length ? formatArray(trimArray(roles, { length: 10 })) : 'None'}`,
-				inline: false
-			})
-			.setImage(banner.bannerURL({ size: 4096 }) as string)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						`${bold(`Roles [${roles.length ? roles.length : 1}]:`)} ${roles.length ? formatArray(trimArray(roles, { length: 10 })) : 'None'}`,
+						...(resolvePermissions(member)?.length
+							? [
+									`${bold('Key Permissions:')} ${formatArray(
+										resolvePermissions(member)!
+											.map((item) => formatPermissions(item))
+											.sort((a, b) => a.localeCompare(b))
+									)}`
+								]
+							: []),
+						...(resolveAcknowledgements(interaction.guild, member)
+							? [`${bold('Acknowledgements:')} ${resolveAcknowledgements(interaction.guild, member)}`]
+							: [])
+					].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-		if (resolvePermissions(member)?.length) {
-			embed.addFields({
-				name: underline(italic('Key Permissions')),
-				value: `${formatArray(
-					resolvePermissions(member)!
-						.map((item) => formatPermissions(item))
-						.sort((a, b) => a.localeCompare(b))
-				)}`,
-				inline: false
-			});
+		if (member.banner) {
+			const banner = new MediaGalleryBuilder().addItems(
+				new MediaGalleryItemBuilder().setURL(member.bannerURL({ size: 1024 })!)
+			);
+			container.spliceComponents(2, 0, banner);
 		}
 
-		if (resolveAcknowledgements(interaction.guild, member)) {
-			embed.addFields({
-				name: underline(italic('Acknowledgements')),
-				value: resolveAcknowledgements(interaction.guild, member) as string,
-				inline: false
-			});
-		}
-
-		return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+		return interaction.reply({ components: [container], flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2] });
 	}
 }
 

@@ -4,13 +4,18 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
-import { ChatInputCommandInteraction, resolveColor } from 'discord.js';
-import { bold, italic } from '@discordjs/formatters';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
+import { ChatInputCommandInteraction } from 'discord.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import axios from 'axios';
 
 export default class extends Command {
@@ -59,30 +64,36 @@ export default class extends Command {
 			.get(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`)
 			.then(({ data }) => data);
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(`http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`)
-		);
-
-		const embed = new EmbedBuilder()
-			.setColor(resolveColor(response.hex.clean))
-			.setTitle(response.name.value)
-			.setDescription(
-				[
-					`${bold(italic('Hex:'))} ${response.hex.value}`,
-					`${bold(italic('RGB:'))} (${response.rgb.r}, ${response.rgb.g}, ${response.rgb.b})`,
-					`${bold(italic('HSL:'))} (${response.hsl.h}, ${response.hsl.s}%, ${response.hsl.l}%)`,
-					`${bold(italic('HSV:'))} (${response.hsv.h}, ${response.hsv.s}%, ${response.hsv.v}%)`,
-					`${bold(italic('CMYK:'))} (${response.cmyk.c}, ${response.cmyk.m}, ${response.cmyk.y}, ${response.cmyk.k})`,
-					`${bold(italic('XYZ:'))} (${response.XYZ.X}, ${response.XYZ.Y}, ${response.XYZ.Z})`
-				].join('\n')
+		const container = new ContainerBuilder()
+			.addMediaGalleryComponents(
+				new MediaGalleryBuilder().addItems(
+					new MediaGalleryItemBuilder().setURL(
+						`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`
+					)
+				)
 			)
-			.setImage(`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						heading(
+							hyperlink(response.name.value, `http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`),
+							2
+						),
+						`${bold('Hex:')} ${response.hex.value}`,
+						`${bold('RGB:')} (${response.rgb.r}, ${response.rgb.g}, ${response.rgb.b})`,
+						`${bold('HSL:')} (${response.hsl.h}, ${response.hsl.s}%, ${response.hsl.l}%)`,
+						`${bold('HSV:')} (${response.hsv.h}, ${response.hsv.s}%, ${response.hsv.v}%)`,
+						`${bold('CMYK:')} (${response.cmyk.c}, ${response.cmyk.m}, ${response.cmyk.y}, ${response.cmyk.k})`,
+						`${bold('XYZ:')} (${response.XYZ.X}, ${response.XYZ.Y}, ${response.XYZ.Z})`
+					].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }
 

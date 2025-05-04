@@ -4,15 +4,21 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import {
+	ActionRowBuilder,
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	StringSelectMenuBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
-import { bold, italic, underline } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { formatArray, formatNumber, isNsfwChannel, titleCase } from '@/lib/utils/functions.js';
 import { Anilist, parseDescription } from '@rygent/anilist';
 import { cutText } from '@sapphire/utilities';
@@ -62,28 +68,34 @@ export default class extends Command {
 			});
 		}
 
-		const selectId = nanoid();
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-			new StringSelectMenuBuilder()
-				.setCustomId(selectId)
-				.setPlaceholder('Select a manga')
-				.setOptions(
-					...response.map((data) => ({
-						value: data!.id.toString(),
-						label:
-							cutText(
-								Object.values(data!.title!).find((title) => title?.length),
-								1e2
-							) ?? 'Unknown Name',
-						...(data!.description?.length && { description: cutText(parseDescription(data!.description), 1e2) })
-					}))
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
 				)
-		);
+			)
+			.addActionRowComponents(
+				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+					new StringSelectMenuBuilder()
+						.setCustomId(nanoid())
+						.setPlaceholder('Select a manga')
+						.setOptions(
+							...response.map((data) => ({
+								value: data!.id.toString(),
+								label:
+									cutText(
+										Object.values(data!.title!).find((title) => title?.length),
+										1e2
+									) ?? 'Unknown Name',
+								...(data!.description?.length && { description: cutText(parseDescription(data!.description), 1e2) })
+							}))
+						)
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Anilist')}`)));
 
-		const reply = await interaction.reply({
-			content: `I found ${bold(response.length.toString())} possible matches, please select one of the following:`,
-			components: [select]
-		});
+		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -105,58 +117,54 @@ export default class extends Command {
 				? Object.values(data.endDate!).join('/')
 				: null;
 
-			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-				new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel('Open in Browser').setURL(data.siteUrl!)
+			const media = new MediaGalleryBuilder().addItems(
+				new MediaGalleryItemBuilder().setURL(`https://img.anili.st/media/${data.id}`)
 			);
+			container.spliceComponents(0, 1, media);
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Default)
-				.setAuthor({ name: 'Anilist', iconURL: 'https://i.imgur.com/B48olfM.png', url: 'https://anilist.co/' })
-				.setTitle(Object.values(data.title!).find((title) => title?.length))
-				.addFields({
-					name: underline(italic('Detail')),
-					value: [
-						...(data.title?.romaji ? [`${bold(italic('Romaji:'))} ${data.title.romaji}`] : []),
-						...(data.title?.english ? [`${bold(italic('English:'))} ${data.title.english}`] : []),
-						...(data.title?.native ? [`${bold(italic('Native:'))} ${data.title.native}`] : []),
-						`${bold(italic('Type:'))} ${getType(data.format!, data.countryOfOrigin!)}`,
-						`${bold(italic('Status:'))} ${titleCase(data.status!.replace(/_/g, ' '))}`,
-						`${bold(italic('Source:'))} ${titleCase(data.source!.replace(/_/g, ' '))}`,
-						...(startDate ? [`${bold(italic('Published:'))} ${getDate(startDate, endDate)}`] : []),
-						...(data.volumes ? [`${bold(italic('Volumes:'))} ${data.volumes}`] : []),
-						...(data.chapters ? [`${bold(italic('Chapters:'))} ${data.chapters}`] : []),
-						...(data.isAdult ? [`${bold(italic('Explicit content:'))} ${data.isAdult ? 'Yes' : 'No'}`] : []),
-						`${bold(italic('Popularity:'))} ${formatNumber(data.popularity!)}`
-					].join('\n'),
-					inline: false
-				})
-				.setImage(`https://img.anili.st/media/${data.id}`)
-				.setFooter({ text: 'Powered by Anilist', iconURL: interaction.user.avatarURL() as string });
+			const section = new TextDisplayBuilder().setContent(
+				[
+					heading(
+						hyperlink(
+							Object.values(data.title!).find((item) => item?.length),
+							data.siteUrl!
+						),
+						2
+					),
+					...(data.description?.length ? [parseDescription(data.description)] : [])
+				].join('\n')
+			);
+			container.spliceComponents(1, 1, section);
 
-			if (data.description?.length) {
-				embed.setDescription(cutText(parseDescription(data.description), 512));
-			}
+			const detail = new TextDisplayBuilder().setContent(
+				[
+					...(data.title?.romaji ? [`${bold('Romaji:')} ${data.title.romaji}`] : []),
+					...(data.title?.english ? [`${bold('English:')} ${data.title.english}`] : []),
+					...(data.title?.native ? [`${bold('Native:')} ${data.title.native}`] : []),
+					`${bold('Type:')} ${getType(data.format!, data.countryOfOrigin!)}`,
+					`${bold('Status:')} ${titleCase(data.status!.replace(/_/g, ' '))}`,
+					`${bold('Source:')} ${titleCase(data.source!.replace(/_/g, ' '))}`,
+					...(startDate ? [`${bold('Published:')} ${getDate(startDate, endDate)}`] : []),
+					...(data.volumes ? [`${bold('Volumes:')} ${data.volumes}`] : []),
+					...(data.chapters ? [`${bold('Chapters:')} ${data.chapters}`] : []),
+					...(data.isAdult ? [`${bold('Explicit content:')} ${data.isAdult ? 'Yes' : 'No'}`] : []),
+					`${bold('Popularity:')} ${formatNumber(data.popularity!)}`,
+					...(data.characters?.nodes?.length
+						? [`${bold('Characters:')} ${formatArray(data.characters.nodes.map((item) => item!.name!.full!))}`]
+						: []),
+					...(data.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length
+						? [
+								`${bold('Networks:')} ${data.externalLinks
+									.filter((item) => item?.type === 'STREAMING')
+									.map((item) => hyperlink(item?.site as string, item?.url as string))
+									.join(', ')}`
+							]
+						: [])
+				].join('\n')
+			);
+			container.spliceComponents(2, 0, detail);
 
-			if (data.characters?.nodes?.length) {
-				embed.addFields({
-					name: underline(italic('Characters')),
-					value: formatArray(data.characters.nodes.map((item) => item!.name!.full!)),
-					inline: false
-				});
-			}
-
-			if (data.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length) {
-				embed.addFields({
-					name: underline(italic('Networks')),
-					value: data.externalLinks
-						.filter((item) => item?.type === 'STREAMING')
-						.map((item) => `[${item?.site}](${item?.url})`)
-						.join(', '),
-					inline: false
-				});
-			}
-
-			return void i.update({ content: null, embeds: [embed], components: [button] });
+			return i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
 
 		collector.on('end', (collected, reason) => {

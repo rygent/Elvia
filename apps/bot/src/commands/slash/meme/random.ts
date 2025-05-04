@@ -3,13 +3,20 @@ import { Command } from '@/lib/structures/command.js';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
+import { pickRandom } from '@sapphire/utilities';
+import { isNsfwChannel } from '@/lib/utils/functions.js';
 import axios from 'axios';
 
 export default class extends Command {
@@ -25,46 +32,44 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const subreddit = [
-			'meme',
-			'me_irl',
-			'memes',
-			'dankmeme',
-			'dankmemes',
-			'ComedyCemetery',
-			'terriblefacebookmemes',
-			'funny'
-		];
+		const subredditList = ['meme', 'me_irl', 'memes', 'dankmemes', 'ComedyCemetery', 'terriblefacebookmemes', 'funny'];
 
-		const random_subreddit = Math.floor(Math.random() * subreddit.length);
+		const subreddit = pickRandom(subredditList);
 
 		const response = await axios
-			.get(`https://www.reddit.com/r/${subreddit[random_subreddit]}/random/.json`)
-			.then(({ data }) => data[0]);
+			.get(`https://reddit.com/r/${subreddit}/hot.json?limit=100`, {
+				headers: { 'User-Agent': 'discordbot:elvia:v5.0.0 (by /u/rygentx)' }
+			})
+			.then(({ data }) => data);
 
-		const post = response.data.children
-			.filter(({ data }: any) => !data.over_18)
-			.filter(({ data }: any) => !data.is_video);
+		const filtered = response.data.children
+			.filter(({ data }: any) => !data.is_gallery)
+			.filter(({ data }: any) => data.domain === 'i.redd.it');
 
-		if (!post.length) {
+		if (!isNsfwChannel(interaction.channel)) filtered.filter(({ data }: any) => !data.over_18);
+
+		if (!filtered.length) {
 			return interaction.reply({ content: 'It seems we are out of fresh memes!', flags: MessageFlags.Ephemeral });
 		}
 
-		const random_post = Math.floor(Math.random() * post.length);
+		const post = pickRandom<any>(filtered);
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(`https://reddit.com${post[random_post].data.permalink}`)
-		);
+		const imageUrl =
+			post.data?.media?.reddit_video?.fallback_url ||
+			post.data?.secure_media?.reddit_video?.fallback_url ||
+			post.data?.url ||
+			post.data?.url_overridden_by_dest;
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setTitle(post[random_post].data.title)
-			.setImage(post[random_post].data.url || post[random_post].data.url_overridden_by_dest)
-			.setFooter({ text: 'Powered by Reddit', iconURL: interaction.user.avatarURL() as string });
+		const container = new ContainerBuilder()
+			.addMediaGalleryComponents(new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(imageUrl)))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					heading(hyperlink(post.data.title, `https://reddit.com${post.data.permalink}`), 2)
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Reddit')}`)));
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

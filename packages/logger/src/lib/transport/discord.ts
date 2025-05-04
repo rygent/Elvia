@@ -1,7 +1,7 @@
 import TransportStream from 'winston-transport';
-import { EmbedBuilder } from '@discordjs/builders';
-import { WebhookClient } from 'discord.js';
-import { bold, codeBlock, italic, time } from '@discordjs/formatters';
+import { ContainerBuilder, TextDisplayBuilder } from '@discordjs/builders';
+import { MessageFlags, WebhookClient } from 'discord.js';
+import { bold, codeBlock, heading, time } from '@discordjs/formatters';
 import { isColorSupported } from 'colorette';
 import { inspect } from 'node:util';
 
@@ -45,19 +45,24 @@ export class Discord extends TransportStream {
 		const webhook = new WebhookClient({ url: this.webhookUrl });
 		const threadId = new URL(this.webhookUrl).searchParams.get('thread_id')!;
 
-		const embed = new EmbedBuilder()
-			.setColor(0xe13f4d)
-			.setTitle(error.name)
-			.setDescription(
+		const container = new ContainerBuilder().addTextDisplayComponents(
+			new TextDisplayBuilder().setContent(
 				[
+					heading(error.name, 2),
 					`${codeBlock('xl', this.clean(error.stack))}`,
-					`${bold(italic('Message:'))} ${error.message}`,
-					`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
+					`${bold('Message:')} ${error.message}`,
+					`${bold('Date:')} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
 				].join('\n')
-			);
+			)
+		);
 
 		try {
-			await webhook.send({ embeds: [embed], threadId });
+			await webhook.send({
+				components: [container],
+				flags: [MessageFlags.IsComponentsV2],
+				withComponents: true,
+				threadId
+			});
 		} catch (err) {
 			this.emit('error', err);
 		}

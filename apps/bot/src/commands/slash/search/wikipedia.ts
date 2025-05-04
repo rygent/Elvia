@@ -4,13 +4,12 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import axios from 'axios';
 
 export default class extends Command {
@@ -45,21 +44,15 @@ export default class extends Command {
 				}
 			});
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(response.content_urls.desktop.page)
-		);
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[heading(hyperlink(response.title, response.content_urls.desktop.page), 2), response.extract].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Wikipedia')}`)));
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({ name: 'Wikipedia', iconURL: 'https://i.imgur.com/a4eeEhh.png', url: 'https://en.wikipedia.org/' })
-			.setTitle(response.title)
-			.setThumbnail(response.originalimage?.source)
-			.setDescription(response.extract)
-			.setFooter({ text: `Powered by Wikipedia`, iconURL: interaction.user.avatarURL() as string });
-
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

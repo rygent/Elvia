@@ -4,12 +4,12 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
-import { EmbedBuilder } from '@discordjs/builders';
+import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import type { ChatInputCommandInteraction, GuildMember } from 'discord.js';
-import { bold, inlineCode, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, inlineCode, italic, subtext } from '@discordjs/formatters';
 
 export default class extends Command {
 	public constructor(client: Client<true>) {
@@ -56,18 +56,21 @@ export default class extends Command {
 			result = 'Perfect match!';
 		}
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setThumbnail('https://twemoji.maxcdn.com/72x72/1f49e.png')
-			.setDescription(
-				[
-					`${user1} is ${estimated}% in love with ${user2}`,
-					`${inlineCode('█'.repeat(Math.round(percentage * 30)).padEnd(30, '\u00A0'))}\n`,
-					`${bold(italic('Result:'))} ${result}`
-				].join('\n')
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						`${user1} is ${estimated}% in love with ${user2}`,
+						`${inlineCode('█'.repeat(Math.round(percentage * 50)).padEnd(50, '\u00A0'))}\n`,
+						`${bold(italic('Result:'))} ${result}`
+					].join('\n')
+				)
 			)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

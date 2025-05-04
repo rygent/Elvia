@@ -4,14 +4,18 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	SectionBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder,
+	ThumbnailBuilder
+} from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { bold, italic } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { sentenceCase } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import axios from 'axios';
@@ -52,45 +56,47 @@ export default class extends Command {
 				}
 			});
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
-				.setLabel('Open in Browser')
-				.setURL(`https://openweathermap.org/city/${response.id}`)
-		);
-
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setAuthor({
-				name: 'Open Weather',
-				iconURL: 'https://i.imgur.com/OgkS8BG.jpg',
-				url: 'https://openweathermap.org/'
-			})
-			.setTitle(`:flag_${response.sys.country.toLowerCase()}: ${response.name} - ${response.weather[0].main}`)
-			.setThumbnail(`https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
-			.setDescription(
-				[
-					`${sentenceCase(response.weather[0].description)} (${response.clouds.all}% clouds)\n`,
-					`${bold(italic('Temperature:'))} ${response.main.temp}°C | ${(response.main.temp * 1.8 + 32).toFixed(2)}°F`,
-					`${bold(italic('Feels Like:'))} ${response.main.feels_like}°C | ${(
-						response.main.feels_like * 1.8 +
-						32
-					).toFixed(2)}°F`,
-					`${bold(italic('Humidity:'))} ${response.main.humidity}%`,
-					`${bold(italic('Min. Temp:'))} ${response.main.temp_min}°C | ${(response.main.temp_min * 1.8 + 32).toFixed(
-						2
-					)}°F`,
-					`${bold(italic('Max. Temp:'))} ${response.main.temp_max}°C | ${(response.main.temp_max * 1.8 + 32).toFixed(
-						2
-					)}°F`,
-					`${bold(italic('Pressure:'))} ${response.main.pressure} hPA`,
-					`${bold(italic('Wind Speed:'))} ${(response.wind.speed * 3.6).toFixed(2)} km/h | ${(
-						response.wind.speed * 2.2369
-					).toFixed(2)} mph, ${response.wind.deg}°`
-				].join('\n')
+		const container = new ContainerBuilder()
+			.addSectionComponents(
+				new SectionBuilder()
+					.addTextDisplayComponents(
+						new TextDisplayBuilder().setContent(
+							[
+								heading(
+									hyperlink(
+										`:flag_${response.sys.country.toLowerCase()}: ${response.name} - ${response.weather[0].main}`,
+										`https://openweathermap.org/city/${response.id}`
+									),
+									2
+								),
+								`${sentenceCase(response.weather[0].description)} (${response.clouds.all}% clouds)`
+							].join('\n')
+						)
+					)
+					.setThumbnailAccessory(
+						new ThumbnailBuilder().setURL(`https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
+					)
 			)
-			.setFooter({ text: `Powered by Open Weather`, iconURL: interaction.user.avatarURL() as string });
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						`${bold('Temperature:')} ${response.main.temp}°C | ${(response.main.temp * 1.8 + 32).toFixed(2)}°F`,
+						`${bold('Feels Like:')} ${response.main.feels_like}°C | ${(response.main.feels_like * 1.8 + 32).toFixed(
+							2
+						)}°F`,
+						`${bold('Humidity:')} ${response.main.humidity}%`,
+						`${bold('Min. Temp:')} ${response.main.temp_min}°C | ${(response.main.temp_min * 1.8 + 32).toFixed(2)}°F`,
+						`${bold('Max. Temp:')} ${response.main.temp_max}°C | ${(response.main.temp_max * 1.8 + 32).toFixed(2)}°F`,
+						`${bold('Pressure:')} ${response.main.pressure} hPA`,
+						`${bold('Wind Speed:')} ${(response.wind.speed * 3.6).toFixed(2)} km/h | ${(
+							response.wind.speed * 2.2369
+						).toFixed(2)} mph, ${response.wind.deg}°`
+					].join('\n')
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('OpenWeather')}`)));
 
-		return interaction.reply({ embeds: [embed], components: [button] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }

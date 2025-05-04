@@ -4,15 +4,23 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import {
+	ActionRowBuilder,
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SectionBuilder,
+	SeparatorBuilder,
+	StringSelectMenuBuilder,
+	TextDisplayBuilder,
+	ThumbnailBuilder
+} from '@discordjs/builders';
 import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
-import { bold, hyperlink, italic, underline } from '@discordjs/formatters';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { formatArray, formatNumber } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
@@ -52,26 +60,32 @@ export default class extends Command {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
-		const selectId = nanoid();
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-			new StringSelectMenuBuilder()
-				.setCustomId(selectId)
-				.setPlaceholder('Select a movies')
-				.setOptions(
-					...response.map((data: any) => ({
-						value: data.id.toString(),
-						label: `${cutText(data.title, 97)} ${
-							data.release_date ? `(${new Date(data.release_date).getFullYear()})` : ''
-						}`,
-						...(data.overview && { description: cutText(data.overview, 1e2) })
-					}))
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
 				)
-		);
+			)
+			.addActionRowComponents(
+				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+					new StringSelectMenuBuilder()
+						.setCustomId(nanoid())
+						.setPlaceholder('Select a movies')
+						.setOptions(
+							...response.map((data: any) => ({
+								value: data.id.toString(),
+								label: `${cutText(data.title, 97)} ${
+									data.release_date ? `(${new Date(data.release_date).getFullYear()})` : ''
+								}`,
+								...(data.overview && { description: cutText(data.overview, 1e2) })
+							}))
+						)
+				)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('TMDb')}`)));
 
-		const reply = await interaction.reply({
-			content: `I found ${bold(response.length)} possible matches, please select one of the following:`,
-			components: [select]
-		});
+		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -88,55 +102,46 @@ export default class extends Command {
 				.get(`https://api.themoviedb.org/3/movie/${ids}?api_key=${env.TMDB_API_KEY}`)
 				.then((res) => res.data);
 
-			const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-				new ButtonBuilder()
-					.setStyle(ButtonStyle.Link)
-					.setLabel('Open in Browser')
-					.setURL(`https://www.themoviedb.org/movie/${data.id}`)
+			const section = new SectionBuilder()
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(
+						[
+							heading(hyperlink(data.title, `https://www.themoviedb.org/movie/${data.id}`), 2),
+							...(data.overview ? [data.overview] : [])
+						].join('\n')
+					)
+				)
+				.setThumbnailAccessory(new ThumbnailBuilder().setURL(`https://image.tmdb.org/t/p/original${data.poster_path}`));
+			container.spliceComponents(0, 1, section);
+
+			const detail = new TextDisplayBuilder().setContent(
+				[
+					`${bold('Genre:')} ${formatArray(data.genres.map(({ name }: any) => name))}`,
+					...(data.vote_average
+						? [`${bold('Rating:')} ${data.vote_average.toFixed(2)} (by ${formatNumber(data.vote_count)} users)`]
+						: []),
+					`${bold('Status:')} ${data.status}`,
+					...(data.release_date
+						? [`${bold('Released:')} ${moment(new Date(data.release_date)).format('MMM D, YYYY')}`]
+						: []),
+					...(data.runtime ? [`${bold('Runtime:')} ${getRuntime(data.runtime)}`] : []),
+					...(data.production_companies?.length
+						? [`${bold('Studio:')} ${formatArray(data.production_companies.map(({ name }: any) => name))}`]
+						: []),
+					...(data.belongs_to_collection ? [`${bold('Collection:')} ${data.belongs_to_collection.name}`] : []),
+					...(data.imdb_id
+						? [`${bold('IMDb:')} ${hyperlink('Click here', `http://www.imdb.com/title/${data.imdb_id}`)}`]
+						: [])
+				].join('\n')
 			);
+			container.spliceComponents(1, 1, detail);
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Default)
-				.setAuthor({
-					name: 'The Movie Database',
-					iconURL: 'https://i.imgur.com/F9tD6x9.png',
-					url: 'https://www.themoviedb.org'
-				})
-				.setTitle(data.title)
-				.setDescription(data.overview ? cutText(data.overview, 512) : null)
-				.setThumbnail(`https://image.tmdb.org/t/p/original${data.poster_path}`)
-				.addFields({
-					name: underline(italic('Detail')),
-					value: [
-						`${bold(italic('Genre:'))} ${formatArray(data.genres.map(({ name }: any) => name))}`,
-						...(data.vote_average
-							? [
-									`${bold(italic('Rating:'))} ${data.vote_average.toFixed(2)} (by ${formatNumber(
-										data.vote_count
-									)} users)`
-								]
-							: []),
-						`${bold(italic('Status:'))} ${data.status}`,
-						...(data.release_date
-							? [`${bold(italic('Released:'))} ${moment(new Date(data.release_date)).format('MMM D, YYYY')}`]
-							: []),
-						...(data.runtime ? [`${bold(italic('Runtime:'))} ${getRuntime(data.runtime)}`] : []),
-						...(data.production_companies?.length
-							? [`${bold(italic('Studio:'))} ${formatArray(data.production_companies.map(({ name }: any) => name))}`]
-							: []),
-						...(data.belongs_to_collection
-							? [`${bold(italic('Collection:'))} ${data.belongs_to_collection.name}`]
-							: []),
-						...(data.imdb_id
-							? [`${bold(italic('IMDb:'))} ${hyperlink('Click here', `http://www.imdb.com/title/${data.imdb_id}`)}`]
-							: [])
-					].join('\n'),
-					inline: false
-				})
-				.setImage(`https://image.tmdb.org/t/p/original${data.backdrop_path}`)
-				.setFooter({ text: 'Powered by The Movie Database', iconURL: interaction.user.avatarURL() as string });
+			const media = new MediaGalleryBuilder().addItems(
+				new MediaGalleryItemBuilder().setURL(`https://image.tmdb.org/t/p/original${data.backdrop_path}`)
+			);
+			container.spliceComponents(2, 0, media);
 
-			return void i.update({ content: null, embeds: [embed], components: [button] });
+			return i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
 
 		collector.on('end', (collected, reason) => {

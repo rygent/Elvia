@@ -1,10 +1,10 @@
 import { Client } from '@/lib/structures/client.js';
 import { Listener } from '@/lib/structures/listener.js';
-import { EmbedBuilder } from '@discordjs/builders';
+import { MessageFlags } from 'discord-api-types/v10';
+import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
-import { bold, codeBlock, italic, time } from '@discordjs/formatters';
+import { bold, codeBlock, heading, subtext, time } from '@discordjs/formatters';
 import type { DiscordAPIError } from '@discordjs/rest';
-import { Colors } from '@/lib/utils/constants.js';
 import { env } from '@/env.js';
 import { logger } from '@elvia/logger';
 
@@ -26,28 +26,35 @@ export default class extends Listener {
 			const webhook = new WebhookClient({ url: env.LOGGER_WEBHOOK_URL });
 			const threadId = new URL(env.LOGGER_WEBHOOK_URL).searchParams.get('thread_id') as string;
 
-			const embed = new EmbedBuilder()
-				.setColor(Colors.Red)
-				.setTitle('Unhandled Rejection')
-				.setDescription(
-					[
-						`${codeBlock('xl', error.stack as string)}`,
-						`${bold(italic('Name:'))} ${error.name}`,
-						`${bold(italic('Message:'))} ${error.message}`,
-						`${bold(italic('Date:'))} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
-					].join('\n')
+			const container = new ContainerBuilder()
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(
+						[
+							heading('Unhandled Rejection', 2),
+							`${codeBlock('xl', error.stack as string)}`,
+							`${bold('Name:')} ${error.name}`,
+							`${bold('Message:')} ${error.message}`,
+							`${bold('Date:')} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
+						].join('\n')
+					)
 				)
-				.setFooter({
-					text: `Powered by ${this.client.user.username}`,
-					iconURL: this.client.user.avatarURL() as string
-				});
+				.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+				.addTextDisplayComponents(
+					new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+				);
 
 			const profile = {
 				avatarURL: this.client.user?.displayAvatarURL({ size: 4096 }),
 				username: this.client.user?.username
 			} as WebhookMessageCreateOptions;
 
-			return webhook.send({ embeds: [embed], threadId, ...profile });
+			return webhook.send({
+				components: [container],
+				flags: [MessageFlags.IsComponentsV2],
+				withComponents: true,
+				threadId,
+				...profile
+			});
 		}
 	}
 }

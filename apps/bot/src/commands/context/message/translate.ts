@@ -8,8 +8,15 @@ import {
 	MessageFlags,
 	type APIMessageComponentEmoji
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, StringSelectMenuBuilder } from '@discordjs/builders';
+import {
+	ActionRowBuilder,
+	ContainerBuilder,
+	SeparatorBuilder,
+	StringSelectMenuBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import { parseEmoji, type MessageContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
+import { bold, italic, subtext } from '@discordjs/formatters';
 import { Languages } from '@/lib/utils/autocomplete.js';
 import translate from '@iamtraction/google-translate';
 import { nanoid } from 'nanoid';
@@ -27,25 +34,34 @@ export default class extends Command {
 
 	public async execute(interaction: MessageContextMenuCommandInteraction<'cached' | 'raw'>) {
 		const message = interaction.options.getMessage('message', true);
-		await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
 		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });
 
-		const selectId = nanoid();
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-			new StringSelectMenuBuilder()
-				.setCustomId(selectId)
-				.setPlaceholder('Select a languages')
-				.setOptions(
-					...Languages.filter(({ hoisted }) => hoisted).map((item) => ({
-						value: item.value,
-						label: item.name,
-						emoji: parseEmoji(item.flag as string) as APIMessageComponentEmoji
-					}))
+		const container = new ContainerBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent('Please select the target language you want to translate.')
+			)
+			.addActionRowComponents(
+				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+					new StringSelectMenuBuilder()
+						.setCustomId(nanoid())
+						.setPlaceholder('Select a language')
+						.setOptions(
+							...Languages.filter(({ hoisted }) => hoisted).map((item) => ({
+								value: item.value,
+								label: item.name,
+								emoji: parseEmoji(item.flag as string) as APIMessageComponentEmoji
+							}))
+						)
 				)
-		);
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Google Translate')}`)));
 
-		const reply = await interaction.editReply({ components: [select] });
+		const reply = await interaction.reply({
+			components: [container],
+			flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2]
+		});
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -59,11 +75,20 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 
-			const translated = await translate(message.content.replace(/(<a?)?:\w+:(\d{17,19}>)?/g, ''), {
-				to: selected as string
-			});
+			const context = message.content.replace(/(<a?)?:\w+:(\d{17,19}>)?/g, '');
 
-			return void interaction.editReply({ content: translated.text, components: [] });
+			const translated = await translate(context, { to: selected! });
+
+			const text = new TextDisplayBuilder().setContent(
+				[
+					translated.text,
+					`\n${subtext(`${bold(italic(resolveLanguage(translated.from.language.iso)))} \u2192 ${bold(italic(resolveLanguage(selected!)))}`)}`
+				].join('\n')
+			);
+			container.spliceComponents(0, 1, text);
+			container.spliceComponents(1, 1);
+
+			return i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
 
 		collector.on('end', (collected, reason) => {
@@ -72,4 +97,8 @@ export default class extends Command {
 			}
 		});
 	}
+}
+
+function resolveLanguage(input: string) {
+	return Languages.filter(({ value }) => value.toLowerCase().includes(input.toLowerCase()))[0]!.name;
 }

@@ -4,11 +4,18 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	InteractionContextType
+	InteractionContextType,
+	MessageFlags
 } from 'discord-api-types/v10';
-import { EmbedBuilder } from '@discordjs/builders';
+import {
+	ContainerBuilder,
+	MediaGalleryBuilder,
+	MediaGalleryItemBuilder,
+	SeparatorBuilder,
+	TextDisplayBuilder
+} from '@discordjs/builders';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import { Colors } from '@/lib/utils/constants.js';
+import { bold, subtext } from '@discordjs/formatters';
 import axios from 'axios';
 
 export default class extends Command {
@@ -37,12 +44,16 @@ export default class extends Command {
 
 		const response = await axios.get('https://nekos.best/api/v2/baka').then(({ data }) => data.results[0]);
 
-		const embed = new EmbedBuilder()
-			.setColor(Colors.Default)
-			.setDescription(`${interaction.user.toString()} says that ${member?.toString()} is a baka.`)
-			.setImage(response.url)
-			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL() as string });
+		const container = new ContainerBuilder()
+			.addMediaGalleryComponents(new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(response.url)))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(`${interaction.user.toString()} says that ${member?.toString()} is a baka.`)
+			)
+			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+			);
 
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 	}
 }
