@@ -127,8 +127,8 @@ importers:
         version: 3.24.3
     devDependencies:
       '@swc/cli':
-        specifier: ^0.7.3
-        version: 0.7.3(@swc/core@1.11.24)(chokidar@4.0.3)
+        specifier: ^0.7.7
+        version: 0.7.7(@swc/core@1.11.24)(chokidar@4.0.3)
       '@swc/core':
         specifier: ^1.11.22
         version: 1.11.24
@@ -1992,8 +1992,8 @@ packages:
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@swc/cli@0.7.3':
-    resolution: {integrity: sha512-rnVXNnlURjdOuPaBIwZ3TmBA44BF/eP0j154LanlgPEYfau74ige7cpKlKkZr1IBqMOG99lAnYNxQipDWA3hdg==}
+  '@swc/cli@0.7.7':
+    resolution: {integrity: sha512-j4yYm9bx3pxWofaJKX1BFwj/3ngUDynN4UIQ2Xd2h0h/7Gt7zkReBTpDN7g5S13mgAYxacaTHTOUsz18097E8w==}
     engines: {node: '>= 16.14.0'}
     hasBin: true
     peerDependencies:
@@ -7191,7 +7191,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@swc/cli@0.7.3(@swc/core@1.11.24)(chokidar@4.0.3)':
+  '@swc/cli@0.7.7(@swc/core@1.11.24)(chokidar@4.0.3)':
     dependencies:
       '@swc/core': 1.11.24
       '@swc/counter': 0.1.3
