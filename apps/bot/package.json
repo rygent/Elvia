@@ -53,7 +53,7 @@
     "@swc/cli": "^0.7.7",
     "@swc/core": "^1.11.22",
     "@types/moment-duration-format": "^2.2.6",
-    "@types/node": "^22.15.3",
+    "@types/node": "^22.15.18",
     "commander": "^13.1.0",
     "eslint": "^9.26.0",
     "eslint-formatter-pretty": "^6.0.1",
