@@ -37,7 +37,7 @@
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",
     "winston-transport": "^4.9.0",
-    "zod": "^3.25.20"
+    "zod": "^3.25.23"
   },
   "devDependencies": {
     "@types/node": "^22.15.21",
