@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.7.7",
-    "@swc/core": "^1.11.22",
+    "@swc/core": "^1.11.29",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.15.21",
     "commander": "^13.1.0",
