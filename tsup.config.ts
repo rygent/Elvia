@@ -7,6 +7,7 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 		clean: true,
 		dts: options.dts ?? true,
 		entry: options.entry ?? ['src/index.ts'],
+		external: options.external,
 		format: options.format ?? ['esm'],
 		keepNames: true,
 		minify: false,
@@ -23,5 +24,5 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 
 type EnhancedTsupOptions = Pick<
 	Options,
-	'bundle' | 'dts' | 'entry' | 'format' | 'sourcemap' | 'splitting' | 'swc' | 'target'
+	'bundle' | 'dts' | 'entry' | 'external' | 'format' | 'sourcemap' | 'splitting' | 'swc' | 'target'
 >;

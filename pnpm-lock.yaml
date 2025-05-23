@@ -62,9 +62,6 @@ importers:
       '@iamtraction/google-translate':
         specifier: ^2.0.1
         version: 2.0.1
-      '@prisma/client':
-        specifier: ^6.8.2
-        version: 6.8.2(prisma@6.8.2(typescript@5.8.3))(typescript@5.8.3)
       '@rygent/anilist':
         specifier: ^1.4.0
         version: 1.4.0
