@@ -13,6 +13,7 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 		platform: 'node',
 		skipNodeModulesBundle: true,
 		sourcemap: options.sourcemap ?? true,
+		swc: options.swc,
 		splitting: options.splitting ?? true,
 		target: options.target ?? 'esnext',
 		treeshake: true,
@@ -20,4 +21,7 @@ export function createTsupConfig(options: EnhancedTsupOptions = {}) {
 	});
 }
 
-type EnhancedTsupOptions = Pick<Options, 'bundle' | 'dts' | 'entry' | 'format' | 'sourcemap' | 'splitting' | 'target'>;
+type EnhancedTsupOptions = Pick<
+	Options,
+	'bundle' | 'dts' | 'entry' | 'format' | 'sourcemap' | 'splitting' | 'swc' | 'target'
+>;
