@@ -14,15 +14,14 @@
   },
   "scripts": {
     "build": "tsup",
-    "db:generate": "prisma generate",
+    "db:generate": "prisma generate --no-hints",
     "db:push": "prisma db push --skip-generate",
     "db:format": "prisma format",
     "lint": "eslint \"src/**/*.ts\" --format=pretty",
     "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "typecheck": "tsc --noEmit",
-    "prebuild": "pnpm run db:generate"
+    "typecheck": "tsc --noEmit"
   },
   "license": "GPL-3.0",
   "private": true,

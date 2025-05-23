@@ -9,7 +9,7 @@
       "outputLogs": "full"
     },
     "@elvia/bot#build": {
-      "dependsOn": ["^build", "@elvia/database#db:generate"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**"],
       "outputLogs": "full"
     },
@@ -17,6 +17,11 @@
       "dependsOn": ["^build"],
       "env": ["BETTERSTACK_API_KEY", "DISCORD_APPLICATION_ID"],
       "outputs": [".next/**", "!.next/cache/**", ".source/**"],
+      "outputLogs": "full"
+    },
+    "@elvia/database#build": {
+      "dependsOn": ["@elvia/database#db:generate"],
+      "outputs": ["dist/**"],
       "outputLogs": "full"
     },
     "lint": {
@@ -30,11 +35,14 @@
     },
     "@elvia/database#db:generate": {
       "cache": false,
-      "outputLogs": "none"
+      "env": ["DATABASE_URL"],
+      "outputs": ["prisma/client/**"],
+      "outputLogs": "full"
     },
     "@elvia/database#db:push": {
       "cache": false,
-      "outputLogs": "none"
+      "env": ["DATABASE_URL"],
+      "outputLogs": "full"
     }
   }
 }
