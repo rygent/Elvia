@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -20,8 +19,8 @@ import { isNsfwChannel } from '@/lib/utils/functions.js';
 import { Nsfw } from '@/lib/utils/autocomplete.js';
 import axios from 'axios';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'nsfw',
