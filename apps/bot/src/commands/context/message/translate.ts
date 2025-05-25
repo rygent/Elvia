@@ -35,7 +35,9 @@ export default class extends Command {
 	public async execute(interaction: MessageContextMenuCommandInteraction<'cached' | 'raw'>) {
 		const message = interaction.options.getMessage('message', true);
 
-		if (!message.content) return interaction.editReply({ content: 'There is no text in this message.' });
+		if (!message.content) {
+			return interaction.reply({ content: 'There is no text in this message.', flags: MessageFlags.Ephemeral });
+		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
