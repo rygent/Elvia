@@ -1,19 +1,18 @@
+import { envSchema } from '@elvia/core';
 import { z } from 'zod';
 import 'dotenv/config';
 
-const envSchema = z.object({
-	DISCORD_TOKEN: z.string(),
+const schema = envSchema.extend({
 	DISCORD_APPLICATION_ID: z.string().min(17).max(20),
-	DEVELOPER_GUILD_ID: z.string().min(17).max(20),
-	CLIENT_OWNERS: z.string().min(17).max(20).array(),
+	DEVELOPER_GUILD_ID: z.string().min(17).max(20).optional(),
 	DATABASE_URL: z.string().url(),
 
-	SERVER_AUTH: z.string().optional(),
-	SERVER_PORT: z.number().optional(),
+	SERVER_API_AUTH: z.string().optional(),
+	SERVER_API_PORT: z.number().optional(),
 
-	CUSTOM_STATUS: z.string().optional(),
-	DEBUG_MODE: z.boolean(),
-	UNSAFE_MODE: z.boolean(),
+	DEBUG_MODE: z.boolean().optional(),
+	UNSAFE_MODE: z.boolean().optional(),
+
 	SUPPORT_SERVER_URL: z.string().url(),
 	LOGGER_WEBHOOK_URL: z.string().url(),
 	GUILD_WEBHOOK_URL: z.string().url(),
@@ -25,20 +24,21 @@ const envSchema = z.object({
 	TMDB_API_KEY: z.string()
 });
 
-export const env = envSchema.parse({
-	DISCORD_TOKEN: process.env.DISCORD_TOKEN,
+export const env = schema.parse({
+	BOT_TOKEN: process.env.BOT_TOKEN || process.env.DISCORD_TOKEN,
+	BOT_OWNERS: process.env.BOT_OWNERS?.replace(/, /g, ',')
+		.split(',')
+		.filter((item) => item.length),
 	DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID,
 	DEVELOPER_GUILD_ID: process.env.DEVELOPER_GUILD_ID,
-	CLIENT_OWNERS: process.env.CLIENT_OWNERS?.split(',').filter((item) => item.length),
 	DATABASE_URL: process.env.DATABASE_URL,
 
-	SERVER_AUTH: process.env.SERVER_AUTH,
-	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-	SERVER_PORT: Number(process.env.SERVER_PORT || process.env.PORT),
+	SERVER_API_AUTH: process.env.SERVER_API_AUTH,
+	SERVER_API_PORT: Number(process.env.SERVER_API_PORT || process.env.PORT),
 
-	CUSTOM_STATUS: process.env.CUSTOM_STATUS,
-	DEBUG_MODE: process.env.DEBUG_MODE === 'true',
+	DEBUG_MODE: process.env.DEBUG_MODE === 'true' || process.env.DEBUG === 'true',
 	UNSAFE_MODE: process.env.UNSAFE_MODE === 'true',
+
 	SUPPORT_SERVER_URL: process.env.SUPPORT_SERVER_URL,
 	LOGGER_WEBHOOK_URL: process.env.LOGGER_WEBHOOK_URL,
 	GUILD_WEBHOOK_URL: process.env.GUILD_WEBHOOK_URL,

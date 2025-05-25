@@ -13,7 +13,7 @@ import { existsSync, readdirSync, statSync } from 'node:fs';
 
 const jiti = createJiti(import.meta.url);
 
-export class WebServer {
+export class CoreWebServer {
 	public server: Express;
 
 	public constructor(manager: ShardingManager) {
