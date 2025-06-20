@@ -45,7 +45,7 @@
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.1.5",
     "systeminformation": "^5.27.6",
-    "zod": "^3.25.23"
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@swc/core": "^1.11.29",
