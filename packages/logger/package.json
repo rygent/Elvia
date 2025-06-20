@@ -33,7 +33,7 @@
     "dotenv": "^16.5.0",
     "logform": "^2.7.0",
     "moment": "^2.30.1",
-    "moment-timezone": "^0.5.48",
+    "moment-timezone": "^0.6.0",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",
     "winston-transport": "^4.9.0",
