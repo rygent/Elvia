@@ -513,8 +513,8 @@ importers:
         version: 3.25.67
     devDependencies:
       '@types/body-parser':
-        specifier: ^1.19.5
-        version: 1.19.5
+        specifier: ^1.19.6
+        version: 1.19.6
       '@types/compression':
         specifier: ^1.8.0
         version: 1.8.0
@@ -2253,8 +2253,8 @@ packages:
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
 
-  '@types/body-parser@1.19.5':
-    resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
+  '@types/body-parser@1.19.6':
+    resolution: {integrity: sha512-HLFeCYgz89uk22N5Qg3dvGvsv46B8GLvKKo1zKG4NybA8U2DiEO3w9lqGg29t/tfLRJpJ6iQxnVw4OnB7MoM9g==}
 
   '@types/compression@1.8.0':
     resolution: {integrity: sha512-g4vmPIwbTii9dX1HVioHbOolubEaf4re4vDxuzpKrzz9uI7uarBExi9begX0cXyIB85jXZ5X2A/v8rsHZxSAPw==}
@@ -7184,7 +7184,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@types/body-parser@1.19.5':
+  '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
       '@types/node': 22.15.32
@@ -7230,7 +7230,7 @@ snapshots:
 
   '@types/express@5.0.2':
     dependencies:
-      '@types/body-parser': 1.19.5
+      '@types/body-parser': 1.19.6
       '@types/express-serve-static-core': 5.0.6
       '@types/serve-static': 1.15.7
 
