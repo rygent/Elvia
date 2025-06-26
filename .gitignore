@@ -104,7 +104,7 @@ out
 dist
 
 # Prisma build / generate output
-/packages/database/prisma/client
+/packages/database/generated
 
 # Gatsby files
 .cache/
