@@ -1,15 +1,29 @@
-packages:
-  - 'apps/*'
-  - 'packages/*'
+autoInstallPeers: true
 
 onlyBuiltDependencies:
   - '@prisma/client'
   - '@prisma/engines'
   - '@sapphire/type'
   - '@swc/core'
+  - '@tailwindcss/oxide'
   - '@vercel/speed-insights'
   - 'bufferutil'
   - 'esbuild'
   - 'prisma'
   - 'sharp'
   - 'unrs-resolver'
+
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+publicHoistPattern:
+  - '*eslint*'
+  - '*prettier*'
+  - '*types*'
+  - '!@types/react'
+  - '!@types/react-dom'
+  - '*discordjs*'
+  - '*prisma*'
+
+resolutionMode: 'highest'
