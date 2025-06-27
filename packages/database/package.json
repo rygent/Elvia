@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.33",
-    "eslint": "^9.29.0",
+    "eslint": "^9.30.0",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.5.3",
     "prettier-plugin-prisma": "^5.0.0",
