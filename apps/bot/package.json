@@ -54,7 +54,7 @@
     "commander": "^13.1.0",
     "eslint": "^9.30.0",
     "eslint-formatter-pretty": "^6.0.1",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
