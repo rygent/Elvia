@@ -45,6 +45,8 @@
   color: 'cc317c'
 - name: 'apps:web'
   color: 'cc317c'
+- name: 'packages:core'
+  color: 'c66037'
 - name: 'packages:database'
   color: 'c66037'
 - name: 'packages:logger'
