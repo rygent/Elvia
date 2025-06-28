@@ -30,7 +30,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-angular": "^19.8.1",
     "@types/lodash.merge": "^4.6.9",
-    "@types/node": "^22.15.33",
+    "@types/node": "^22.15.34",
     "eslint": "^9.30.0",
     "eslint-config-terrax": "^0.4.1",
     "husky": "^9.1.7",
