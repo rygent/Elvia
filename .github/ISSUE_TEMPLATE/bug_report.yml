@@ -79,7 +79,6 @@ body:
         - 'Logger'
         - 'UI'
         - 'Utils'
-        - 'WebServer'
     validations:
       required: true
   - type: dropdown
