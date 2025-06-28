@@ -1,0 +1,64 @@
+{
+  "name": "@elvia/core",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint \"src/**/*.ts\" --format=pretty",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "GPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rygent/Elvia.git",
+    "directory": "packages/core"
+  },
+  "dependencies": {
+    "@elvia/utils": "workspace:^",
+    "@sapphire/utilities": "^3.18.2",
+    "body-parser": "^2.2.0",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "discord-api-types": "^0.38.15",
+    "discord.js": "^14.21.0",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "globby": "^14.1.0",
+    "http-errors": "^2.0.0",
+    "jiti": "^2.4.2",
+    "yaml": "^2.8.0",
+    "zod": "^3.25.75"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/express-serve-static-core": "^5.0.6",
+    "@types/http-errors": "^2.0.5",
+    "@types/node": "^22.16.0",
+    "eslint": "^9.30.1",
+    "eslint-formatter-pretty": "^6.0.1",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "files": [
+    "./dist/"
+  ],
+  "packageManager": "pnpm@10.12.4"
+}

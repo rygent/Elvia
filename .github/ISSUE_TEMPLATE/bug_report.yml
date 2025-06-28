@@ -74,6 +74,7 @@ body:
       multiple: true
       options:
         - 'Not sure'
+        - 'Core'
         - 'Database'
         - 'Logger'
         - 'UI'
