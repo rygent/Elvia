@@ -19,6 +19,3 @@ packages:ui:
 packages:utils:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nutils\\n"
-packages:webserver:
-  - "### Which (application|package|application or package) is this (bug
-    report|feature request) for\\?\\n\\nwebserver\\n"
