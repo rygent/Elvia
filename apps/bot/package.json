@@ -1,6 +1,6 @@
 {
   "name": "@elvia/bot",
-  "version": "5.6.0",
+  "version": "6.0.0-dev",
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,9 +22,10 @@
     "directory": "apps/bot"
   },
   "dependencies": {
+    "@elvia/core": "workspace:^",
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
-    "@elvia/webserver": "workspace:^",
+    "@elvia/utils": "workspace:^",
     "@iamtraction/google-translate": "^2.0.1",
     "@rygent/anilist": "^1.4.0",
     "@rygent/spotify": "^1.2.0",
@@ -39,7 +40,6 @@
     "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "globby": "^14.1.0",
-    "http-errors": "^2.0.0",
     "jiti": "^2.4.2",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
@@ -51,7 +51,6 @@
     "@swc/core": "^1.12.7",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^22.15.33",
-    "commander": "^13.1.0",
     "eslint": "^9.30.0",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.6.2",

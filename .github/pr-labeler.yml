@@ -19,6 +19,3 @@ packages:ui:
 packages:utils:
   - changed-files:
       - any-glob-to-any-file: ['packages/utils/*', 'packages/utils/**/*']
-packages:webserver:
-  - changed-files:
-      - any-glob-to-any-file: ['packages/webserver/*', 'packages/webserver/**/*']

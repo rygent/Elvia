@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -16,13 +15,13 @@ import {
 	TextDisplayBuilder,
 	ThumbnailBuilder
 } from '@discordjs/builders';
-import type { ChatInputCommandInteraction, Guild, GuildMember, PermissionsString } from 'discord.js';
+import { type ChatInputCommandInteraction, type Guild, type GuildMember, type PermissionsString } from 'discord.js';
 import { bold, inlineCode, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatPermissions, trimArray } from '@/lib/utils/functions.js';
 import { Badges } from '@/lib/utils/emojis.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'userinfo',
