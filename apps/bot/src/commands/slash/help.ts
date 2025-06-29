@@ -125,7 +125,7 @@ export default class extends CoreCommand {
 		);
 		container.spliceComponents(0, 0, section);
 
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+		const select = new ActionRowBuilder().addStringSelectMenuComponent(
 			new StringSelectMenuBuilder()
 				.setCustomId(nanoid())
 				.setPlaceholder('Select a category')
@@ -140,7 +140,14 @@ export default class extends CoreCommand {
 		);
 		container.spliceComponents(1, 0, select);
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const respond = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -150,7 +157,7 @@ export default class extends CoreCommand {
 		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', async (i: StringSelectMenuInteraction<'cached'>) => {
+		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 			collector.resetTimer();
 
@@ -172,8 +179,10 @@ export default class extends CoreCommand {
 			);
 			container.spliceComponents(0, 1, detail);
 
-			select.components[0]?.options.forEach((option) => option.setDefault(false));
-			select.components[0]?.options.find((option) => option.data.value === selected)?.setDefault(true);
+			const selects = select.components as StringSelectMenuBuilder[];
+
+			selects[0]?.options.forEach((option) => option.setDefault(false));
+			selects[0]?.options.find((option) => option.toJSON().value === selected)?.setDefault(true);
 
 			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
@@ -182,7 +191,8 @@ export default class extends CoreCommand {
 			if (!collected.size && reason === 'time') {
 				return interaction.deleteReply();
 			} else if (reason === 'time') {
-				select.components[0]?.setDisabled(true);
+				const selects = select.components as StringSelectMenuBuilder[];
+				selects[0]?.setDisabled(true);
 
 				return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 			}
@@ -193,7 +203,7 @@ export default class extends CoreCommand {
 		const focused = interaction.options.getFocused();
 
 		const choices = this.client.commands
-			.filter(({ unique }) => unique?.includes(focused.toLowerCase()))
+			.filter(({ unique }) => unique?.includes(focused.value.toLowerCase()))
 			.map((commands) => ({ ...commands }));
 
 		const respond = choices

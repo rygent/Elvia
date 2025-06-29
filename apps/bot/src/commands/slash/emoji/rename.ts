@@ -3,12 +3,11 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, SecondaryButtonBuilder, SuccessButtonBuilder } from '@discordjs/builders';
 import { ButtonInteraction, ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { nanoid } from 'nanoid';
@@ -59,14 +58,18 @@ export default class extends CoreCommand {
 
 		const cancelId = nanoid();
 		const renameId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(renameId).setStyle(ButtonStyle.Success).setLabel('Rename'));
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(cancelId).setLabel('Cancel'))
+			.addSuccessButtonComponents(new SuccessButtonBuilder().setCustomId(renameId).setLabel('Rename'));
 
-		const reply = await interaction.reply({
+		const respond = await interaction.reply({
 			content: `Are you sure to rename ${inlineCode(`:${emojis?.name}:`)} ${emojis} to ${inlineCode(`:${name}:`)}?`,
-			components: [button]
+			components: [button],
+			withResponse: true
 		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

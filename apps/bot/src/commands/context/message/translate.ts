@@ -42,7 +42,7 @@ export default class extends CoreContext {
 				new TextDisplayBuilder().setContent('Please select the target language you want to translate.')
 			)
 			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+				new ActionRowBuilder().addStringSelectMenuComponent(
 					new StringSelectMenuBuilder()
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a language')
@@ -58,10 +58,14 @@ export default class extends CoreContext {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Google Translate')}`)));
 
-		const reply = await interaction.reply({
+		const respond = await interaction.reply({
 			components: [container],
-			flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2]
+			flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2],
+			withResponse: true
 		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

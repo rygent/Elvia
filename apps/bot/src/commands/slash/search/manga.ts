@@ -74,7 +74,7 @@ export default class extends CoreCommand {
 				)
 			)
 			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+				new ActionRowBuilder().addStringSelectMenuComponent(
 					new StringSelectMenuBuilder()
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a manga')
@@ -94,7 +94,14 @@ export default class extends CoreCommand {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Anilist')}`)));
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const respond = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

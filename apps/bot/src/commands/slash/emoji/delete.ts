@@ -3,12 +3,11 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, DangerButtonBuilder, SecondaryButtonBuilder } from '@discordjs/builders';
 import { ButtonInteraction, ChatInputCommandInteraction, parseEmoji, PermissionsBitField } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { nanoid } from 'nanoid';
@@ -50,14 +49,18 @@ export default class extends CoreCommand {
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(cancelId).setLabel('Cancel'))
+			.addDangerButtonComponents(new DangerButtonBuilder().setCustomId(deleteId).setLabel('Delete'));
 
-		const reply = await interaction.reply({
+		const respond = await interaction.reply({
 			content: `Are you sure that you want to delete the ${inlineCode(`:${emojis?.name}:`)} ${emojis} emoji?`,
-			components: [button]
+			components: [button],
+			withResponse: true
 		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

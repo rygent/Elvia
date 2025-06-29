@@ -3,12 +3,11 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, DangerButtonBuilder, SecondaryButtonBuilder } from '@discordjs/builders';
 import {
 	PermissionsBitField,
 	type AutocompleteInteraction,
@@ -62,15 +61,19 @@ export default class extends CoreCommand {
 
 		const cancelId = nanoid();
 		const deleteId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(cancelId).setLabel('Cancel'))
+			.addDangerButtonComponents(new DangerButtonBuilder().setCustomId(deleteId).setLabel('Delete'));
 
-		const reply = await interaction.reply({
+		const respond = await interaction.reply({
 			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
 			components: [button],
-			flags: MessageFlags.Ephemeral
+			flags: MessageFlags.Ephemeral,
+			withResponse: true
 		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -108,7 +111,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));

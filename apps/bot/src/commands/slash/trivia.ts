@@ -9,10 +9,13 @@ import {
 } from 'discord-api-types/v10';
 import {
 	ActionRowBuilder,
-	ButtonBuilder,
 	ContainerBuilder,
+	DangerButtonBuilder,
+	SecondaryButtonBuilder,
 	SeparatorBuilder,
-	TextDisplayBuilder
+	SuccessButtonBuilder,
+	TextDisplayBuilder,
+	type ButtonBuilder
 } from '@discordjs/builders';
 import type { ButtonInteraction, ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, subtext } from '@discordjs/formatters';
@@ -45,31 +48,11 @@ export default class extends CoreCommand {
 			Buffer.from(item, 'base64').toString('utf8')
 		);
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[0] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[1] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[2] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[3] as string)
-			);
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(nanoid()).setLabel(options[0] as string))
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(nanoid()).setLabel(options[1] as string))
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(nanoid()).setLabel(options[2] as string))
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(nanoid()).setLabel(options[3] as string));
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
@@ -88,7 +71,14 @@ export default class extends CoreCommand {
 				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
 			);
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const respond = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = respond.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -98,24 +88,28 @@ export default class extends CoreCommand {
 			max: 1
 		});
 
-		collector.on('ignore', (i: ButtonInteraction<'cached'>) => void i.deferUpdate());
-		collector.on('collect', async (i: ButtonInteraction<'cached'>) => {
-			const selected = i.component.label;
+		collector.on('ignore', (i) => void i.deferUpdate());
+		collector.on('collect', async (i) => {
+			if (i.component.style === ButtonStyle.Premium) return;
 
-			const result = new TextDisplayBuilder();
+			let result;
+			if (i.component.label === answer) {
+				result = 'Congratulations, your answer is correct.';
 
-			if (selected === answer) {
-				result.setContent(subtext('Congratulations, your answer is correct.'));
+				const correctButton = new SuccessButtonBuilder().setCustomId(i.customId).setLabel(i.component.label);
 
-				button.components[options.indexOf(selected)]?.setStyle(ButtonStyle.Success);
+				button.spliceComponents(options.indexOf(i.component.label), 1, correctButton);
 			} else {
-				result.setContent(subtext(`Unfortunately, the correct answer was ${bold(answer)}.`));
+				result = `Unfortunately, the correct answer was ${bold(answer)}.`;
 
-				button.components[options.indexOf(selected!)]?.setStyle(ButtonStyle.Danger);
-				button.components[options.indexOf(answer)]?.setStyle(ButtonStyle.Success);
+				const wrongButton = new DangerButtonBuilder().setCustomId(i.customId).setLabel(i.component.label!);
+				button.spliceComponents(options.indexOf(i.component.label!), 1, wrongButton);
+
+				const correctButton = new SuccessButtonBuilder().setCustomId(nanoid()).setLabel(answer);
+				button.spliceComponents(options.indexOf(answer), 1, correctButton);
 			}
 
-			container.spliceComponents(1, 1, result);
+			container.spliceComponents(1, 1, new TextDisplayBuilder().setContent(subtext(result)));
 
 			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
@@ -126,7 +120,10 @@ export default class extends CoreCommand {
 				container.spliceComponents(1, 1, result);
 			}
 
-			button.components.forEach((btn) => btn.setDisabled(true));
+			const buttons = button.components as ButtonBuilder[];
+			buttons.forEach((btn) => {
+				btn.setDisabled(true);
+			});
 
 			await interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});

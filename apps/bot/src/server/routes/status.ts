@@ -1,5 +1,6 @@
 import { Router, type NextFunction, type Request, type Response } from 'express';
 import { CoreShardingManager, createError } from '@elvia/core';
+import { Status } from 'discord.js';
 import auth from '@/server/middlewares/auth.js';
 
 export const router = Router();
@@ -7,11 +8,11 @@ router.get('/', auth, async (req: Request, res: Response, next: NextFunction) =>
 	try {
 		const manager: CoreShardingManager = req.app.get('shard-manager');
 
-		const response = await manager.broadcastEval((client) => ({
-			shardId: client.shard?.ids.join(' / '),
+		const response = await manager.broadcastEval(async (client) => ({
+			shardId: (await client.ws.getShardIds())[0],
 			uptime: client.uptime,
-			wsStatus: client.ws.status,
-			wsPing: client.ws.ping,
+			wsStatus: Status[client.status],
+			wsPing: client.ping,
 			userCount: client.users.cache.size,
 			guildCount: client.guilds.cache.size,
 			memberCount: client.guilds.cache.map((guild) => guild).reduce((a, b) => a + b.memberCount, 0)
