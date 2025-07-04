@@ -77,7 +77,7 @@ export default class extends Command {
 			});
 		}
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 		await channel?.setRateLimitPerUser(offset / 1e3, reason as string);
 
 		const time = new DurationFormatter();

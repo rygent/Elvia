@@ -42,7 +42,7 @@ export default class extends Command {
 		const media = interaction.options.getAttachment('media', true);
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 
 		const response = await axios
 			.post(

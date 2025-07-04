@@ -88,7 +88,7 @@ export default class extends Command {
 			let code = i.fields.getTextInputValue('code-input').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 			let evaled;
 
-			await i.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+			await i.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 
 			if (async) {
 				const indentedCode = code

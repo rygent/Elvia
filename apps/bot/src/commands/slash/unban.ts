@@ -82,7 +82,7 @@ export default class extends Command {
 			return interaction.reply({ content: 'This user is not banned on this server.', flags: MessageFlags.Ephemeral });
 		}
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 		await interaction.guild?.members.unban(target, reason as string);
 
 		if (notify) {

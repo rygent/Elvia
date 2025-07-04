@@ -136,7 +136,7 @@ export default class extends Command {
 			});
 		}
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
 
 		if (notify) {

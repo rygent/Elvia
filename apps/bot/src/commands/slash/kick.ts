@@ -101,7 +101,7 @@ export default class extends Command {
 			});
 		}
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 		await interaction.guild?.members.kick(member, reason as string);
 
 		if (notify) {

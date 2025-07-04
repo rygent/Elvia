@@ -75,7 +75,7 @@ export default class extends Command {
 			});
 		}
 
-		await interaction.deferReply({ ...(!visible && { flags: MessageFlags.Ephemeral }) });
+		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 		await member.timeout(null, reason as string);
 
 		const replies = [

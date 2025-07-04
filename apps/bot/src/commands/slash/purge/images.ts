@@ -48,7 +48,7 @@ export default class extends Command {
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const { resource } = await interaction.deferReply({
-			...(!visible && { flags: MessageFlags.Ephemeral }),
+			flags: !visible ? MessageFlags.Ephemeral : undefined,
 			withResponse: true
 		});
 		const reply = resource?.message as Message<true>;
