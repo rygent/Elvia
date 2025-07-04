@@ -67,11 +67,15 @@ export default class extends Command {
 			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
 			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
 
-		const reply = await interaction.reply({
+		const response = await interaction.reply({
 			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
 			components: [button],
-			flags: MessageFlags.Ephemeral
+			flags: MessageFlags.Ephemeral,
+			withResponse: true
 		});
+
+		const reply = response.resource?.message;
+		if (!reply?.inGuild()) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

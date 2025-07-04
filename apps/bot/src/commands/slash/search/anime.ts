@@ -61,8 +61,8 @@ export default class extends Command {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
-		const response = isNsfwChannel(interaction.channel) ? raw : raw.filter((data) => !data?.isAdult);
-		if (!response.length) {
+		const result = isNsfwChannel(interaction.channel) ? raw : raw.filter((data) => !data?.isAdult);
+		if (!result.length) {
 			return interaction.reply({
 				content: `This search contain explicit content, use ${bold('NSFW Channel')} instead.`,
 				flags: MessageFlags.Ephemeral
@@ -72,7 +72,7 @@ export default class extends Command {
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -81,7 +81,7 @@ export default class extends Command {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select an anime')
 						.setOptions(
-							...response.map((data) => ({
+							...result.map((data) => ({
 								value: data!.id.toString(),
 								label:
 									cutText(
@@ -96,7 +96,14 @@ export default class extends Command {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Anilist')}`)));
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -109,7 +116,7 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', (i) => {
 			const [selected] = i.values;
-			const data = response.find((item) => item?.id.toString() === selected)!;
+			const data = result.find((item) => item?.id.toString() === selected)!;
 
 			const startDate = !Object.values(data.startDate!).some((value) => value === null)
 				? Object.values(data.startDate!).join('/')

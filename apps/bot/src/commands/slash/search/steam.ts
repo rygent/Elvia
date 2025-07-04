@@ -46,17 +46,17 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const response = await axios
+		const result = await axios
 			.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`)
 			.then(({ data }) => data.items.filter((item: any) => item.type === 'app'));
-		if (!response.length) {
+		if (!result.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -65,7 +65,7 @@ export default class extends Command {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a game')
 						.setOptions(
-							...response.map((data: any) => ({
+							...result.map((data: any) => ({
 								value: data.id.toString(),
 								label: data.name
 							}))
@@ -75,7 +75,14 @@ export default class extends Command {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Steam')}`)));
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

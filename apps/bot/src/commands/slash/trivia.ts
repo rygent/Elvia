@@ -34,15 +34,15 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const response = await axios
+		const result = await axios
 			.get('https://opentdb.com/api.php?amount=1&type=multiple&encode=base64')
 			.then(({ data }) => data.results[0]);
 
-		const question = Buffer.from(response.question, 'base64').toString('utf8');
-		const difficulty = Buffer.from(response.difficulty, 'base64').toString('utf8');
-		const category = Buffer.from(response.category, 'base64').toString('utf8');
-		const answer = Buffer.from(response.correct_answer, 'base64').toString('utf8');
-		const options = shuffleArray([...response.incorrect_answers, response.correct_answer]).map((item) =>
+		const question = Buffer.from(result.question, 'base64').toString('utf8');
+		const difficulty = Buffer.from(result.difficulty, 'base64').toString('utf8');
+		const category = Buffer.from(result.category, 'base64').toString('utf8');
+		const answer = Buffer.from(result.correct_answer, 'base64').toString('utf8');
+		const options = shuffleArray([...result.incorrect_answers, result.correct_answer]).map((item) =>
 			Buffer.from(item, 'base64').toString('utf8')
 		);
 
@@ -89,7 +89,14 @@ export default class extends Command {
 				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
 			);
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -99,32 +106,34 @@ export default class extends Command {
 			max: 1
 		});
 
-		collector.on('ignore', (i: ButtonInteraction<'cached'>) => void i.deferUpdate());
-		collector.on('collect', async (i: ButtonInteraction<'cached'>) => {
+		collector.on('ignore', (i) => void i.deferUpdate());
+		collector.on('collect', async (i) => {
+			if (i.component.style === ButtonStyle.Premium) return;
+
 			const selected = i.component.label;
 
-			const result = new TextDisplayBuilder();
+			const content = new TextDisplayBuilder();
 
 			if (selected === answer) {
-				result.setContent(subtext('Congratulations, your answer is correct.'));
+				content.setContent(subtext('Congratulations, your answer is correct.'));
 
 				button.components[options.indexOf(selected)]?.setStyle(ButtonStyle.Success);
 			} else {
-				result.setContent(subtext(`Unfortunately, the correct answer was ${bold(answer)}.`));
+				content.setContent(subtext(`Unfortunately, the correct answer was ${bold(answer)}.`));
 
 				button.components[options.indexOf(selected!)]?.setStyle(ButtonStyle.Danger);
 				button.components[options.indexOf(answer)]?.setStyle(ButtonStyle.Success);
 			}
 
-			container.spliceComponents(1, 1, result);
+			container.spliceComponents(1, 1, content);
 
 			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
 
 		collector.once('end', async (collected, reason) => {
 			if (!collected.size && reason === 'time') {
-				const result = new TextDisplayBuilder().setContent(subtext("Guess you didn't wanna play trivia after all?"));
-				container.spliceComponents(1, 1, result);
+				const content = new TextDisplayBuilder().setContent(subtext("Guess you didn't wanna play trivia after all?"));
+				container.spliceComponents(1, 1, content);
 			}
 
 			button.components.forEach((btn) => btn.setDisabled(true));

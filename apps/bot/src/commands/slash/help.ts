@@ -142,7 +142,14 @@ export default class extends Command {
 		);
 		container.spliceComponents(1, 0, select);
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -152,7 +159,7 @@ export default class extends Command {
 		});
 
 		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', async (i: StringSelectMenuInteraction<'cached'>) => {
+		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 			collector.resetTimer();
 

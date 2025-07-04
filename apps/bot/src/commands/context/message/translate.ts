@@ -60,10 +60,14 @@ export default class extends Command {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Google Translate')}`)));
 
-		const reply = await interaction.reply({
+		const response = await interaction.reply({
 			components: [container],
-			flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2]
+			flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2],
+			withResponse: true
 		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({

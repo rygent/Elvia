@@ -51,17 +51,17 @@ export default class extends Command {
 		const search = interaction.options.getString('search', true);
 
 		const spotify = new Spotify({ id: env.SPOTIFY_CLIENT_ID, secret: env.SPOTIFY_CLIENT_SECRET });
-		const response = await spotify
+		const result = await spotify
 			.search({ type: 'track', query: search, limit: 10 })
 			.then(({ tracks }) => tracks!.items);
-		if (!response.length) {
+		if (!result.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -70,7 +70,7 @@ export default class extends Command {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a song')
 						.setOptions(
-							...response.map((data) => ({
+							...result.map((data) => ({
 								value: data.id,
 								label: cutText(data.name, 1e2),
 								description: cutText(formatArray(data.artists.map(({ name }) => name)), 1e2)
@@ -81,7 +81,14 @@ export default class extends Command {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Spotify')}`)));
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
@@ -94,7 +101,7 @@ export default class extends Command {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', (i) => {
 			const [selected] = i.values;
-			const data = response.find((item) => item.id === selected)!;
+			const data = result.find((item) => item.id === selected)!;
 
 			const media = new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(data.album.images[0]!.url));
 			container.spliceComponents(0, 1, media);

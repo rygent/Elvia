@@ -52,18 +52,18 @@ export default class extends Command {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const response = await axios
+		const result = await axios
 			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_API_KEY}&query=${search}`)
 			.then(({ data }) => data.results.slice(0, 10));
 
-		if (!response.length) {
+		if (!result.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(response.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -72,7 +72,7 @@ export default class extends Command {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a shows')
 						.setOptions(
-							...response.map((data: any) => ({
+							...result.map((data: any) => ({
 								value: data.id.toString(),
 								label: `${cutText(data.name, 97)} ${
 									data.first_air_date ? `(${new Date(data.first_air_date).getFullYear()})` : ''
@@ -85,7 +85,14 @@ export default class extends Command {
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('TMDb')}`)));
 
-		const reply = await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+		const response = await interaction.reply({
+			components: [container],
+			flags: MessageFlags.IsComponentsV2,
+			withResponse: true
+		});
+
+		const reply = response.resource?.message;
+		if (!reply) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
