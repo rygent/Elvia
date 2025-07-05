@@ -2,12 +2,11 @@ import { CoreClient, CoreCommand } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, DangerButtonBuilder, SecondaryButtonBuilder } from '@discordjs/builders';
 import { PermissionsBitField, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
@@ -39,9 +38,9 @@ export default class extends CoreCommand {
 
 		const cancelId = nanoid();
 		const resetId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(resetId).setStyle(ButtonStyle.Danger).setLabel('Reset'));
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(cancelId).setLabel('Cancel'))
+			.addDangerButtonComponents(new DangerButtonBuilder().setCustomId(resetId).setLabel('Reset'));
 
 		const response = await interaction.reply({
 			content: `Are you sure that you want to reset all server tags?`,
@@ -50,11 +49,11 @@ export default class extends CoreCommand {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply?.inGuild()) return;
+		const message = response.resource?.message;
+		if (!message?.inGuild()) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({
+		const collector = message.createMessageComponentCollector({
 			filter,
 			componentType: ComponentType.Button,
 			time: 6e4,

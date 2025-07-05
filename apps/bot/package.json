@@ -36,7 +36,7 @@
     "axios": "^1.10.0",
     "colorette": "^2.0.20",
     "discord-api-types": "^0.38.13",
-    "discord.js": "^14.21.0",
+    "discord.js": "15.0.0-dev.1750896857-d53b20317",
     "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "globby": "^14.1.0",
