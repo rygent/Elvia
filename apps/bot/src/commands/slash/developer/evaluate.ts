@@ -64,8 +64,8 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Code to evaluate')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
+			.setActionRows(
+				new ActionRowBuilder().addTextInputComponent(
 					new TextInputBuilder()
 						.setCustomId('code-input')
 						.setStyle(TextInputStyle.Paragraph)

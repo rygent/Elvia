@@ -65,8 +65,8 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Edit a server tag')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
+			.setActionRows(
+				new ActionRowBuilder().addTextInputComponent(
 					new TextInputBuilder()
 						.setCustomId('content')
 						.setStyle(TextInputStyle.Paragraph)
@@ -110,7 +110,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));

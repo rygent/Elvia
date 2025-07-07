@@ -17,7 +17,7 @@ export default class extends CoreCommand {
 
 	public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const replies = [
-			`${bold(italic('Websocket:'))} ${inlineCode(`${Math.round(this.client.ws.ping)}ms`)}`,
+			`${bold(italic('Websocket:'))} ${inlineCode(`${Math.round(this.client.ping!)}ms`)}`,
 			`${bold(italic('Latency:'))} ${inlineCode(`${Math.round(Date.now() - interaction.createdTimestamp)}ms`)}`
 		].join('\n');
 

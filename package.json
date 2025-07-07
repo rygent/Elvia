@@ -44,5 +44,16 @@
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
   },
+  "pnpm": {
+    "overrides": {
+      "@discordjs/builders": "2.0.0-dev.1751760957-024ae5c56",
+      "@discordjs/collection": "3.0.0-dev.1751803507-024ae5c56",
+      "@discordjs/formatters": "1.0.0-dev.1751760954-024ae5c56",
+      "@discordjs/rest": "3.0.0-dev.1751760950-024ae5c56",
+      "@discordjs/util": "2.0.0-dev.1751760957-024ae5c56",
+      "@discordjs/ws": "3.0.0-dev.1751760950-024ae5c56",
+      "discord.js": "15.0.0-dev.1751760949-024ae5c56"
+    }
+  },
   "packageManager": "pnpm@10.12.4"
 }
