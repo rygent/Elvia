@@ -27,7 +27,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
-    "framer-motion": "^12.23.0",
+    "framer-motion": "^12.23.6",
     "fumadocs-core": "^15.6.1",
     "fumadocs-mdx": "^11.6.10",
     "geist": "^1.4.2",
