@@ -33,7 +33,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@types/node": "^22.16.0",
+    "@types/node": "^22.16.4",
     "eslint": "^9.30.1",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.6.2",
