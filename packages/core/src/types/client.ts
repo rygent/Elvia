@@ -13,5 +13,4 @@ export namespace client {
 
 export interface CoreClientOptions extends ClientOptions {
 	settings?: CoreSettings;
-	root?: string;
 }

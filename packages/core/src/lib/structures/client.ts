@@ -8,7 +8,6 @@ import { type CoreClientOptions } from '@/types/client.js';
 import { isClass } from '@sapphire/utilities';
 import { globby } from 'globby';
 import { createJiti } from 'jiti';
-import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
@@ -23,7 +22,6 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 	public cooldowns: Collection<string, Collection<string, number>>;
 
-	private readonly root: string;
 	public version: string;
 	public defaultPermissions: Readonly<BitField<PermissionsString, bigint>>;
 
@@ -38,7 +36,6 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 		this.cooldowns = new Collection();
 
-		this.root = options.root ? options.root : fileURLToPath(import.meta.url);
 		this.version = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf8')).version;
 		this.defaultPermissions = new PermissionsBitField(this.settings.defaultPermissions).freeze();
 	}
@@ -59,7 +56,7 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	}
 
 	private get directory(): string {
-		return `${path.dirname(this.root) + path.sep}`.replace(/\\/g, '/');
+		return `${path.dirname(process.argv[1]!) + path.sep}`.replace(/\\/g, '/');
 	}
 
 	protected async loadCommands(): Promise<void> {
