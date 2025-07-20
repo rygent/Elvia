@@ -77,7 +77,7 @@ export default class extends CoreCommand {
 
 			const section = new TextDisplayBuilder().setContent(
 				[
-					heading(chatInputApplicationCommandMention(command.unique!, commandId), 2),
+					heading(chatInputApplicationCommandMention(commandId, command.unique!), 2),
 					`${command.description}`,
 					...(command.options.length
 						? [quote(command.options.map((option) => `${inlineCode(option.name)}: ${option.description}`).join('\n'))]
@@ -170,7 +170,7 @@ export default class extends CoreCommand {
 					selectedCategories
 						.map((command) =>
 							[
-								`${heading(chatInputApplicationCommandMention(command.unique!, command.id), 3)}`,
+								`${heading(chatInputApplicationCommandMention(command.id, command.unique!), 3)}`,
 								command.description
 							].join('\n')
 						)
