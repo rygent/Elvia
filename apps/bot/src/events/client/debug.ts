@@ -1,6 +1,7 @@
 import { CoreClient, CoreEvent } from '@elvia/core';
 import { Events } from 'discord.js';
 import { logger } from '@elvia/logger';
+import { isExtendedSettings } from '@/lib/settings.js';
 
 export default class extends CoreEvent {
 	public constructor(client: CoreClient<true>) {
@@ -11,7 +12,7 @@ export default class extends CoreEvent {
 	}
 
 	public run(info: string) {
-		if (!this.client.settings.debug) return;
+		if (isExtendedSettings(this.client.settings) && !this.client.settings.debug) return;
 		logger.debug(info);
 	}
 }

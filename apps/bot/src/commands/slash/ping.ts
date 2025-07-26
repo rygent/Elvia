@@ -9,7 +9,7 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'ping',
 			description: 'Send a ping request.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM],
 			category: 'General'
 		});

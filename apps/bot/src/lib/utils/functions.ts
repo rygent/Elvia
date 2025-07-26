@@ -1,14 +1,5 @@
 import { ChannelType } from 'discord-api-types/v10';
-import type {
-	AutocompleteInteraction,
-	Channel,
-	CommandInteraction,
-	GuildChannel,
-	Message,
-	StageChannel,
-	ThreadChannel,
-	VoiceChannel
-} from 'discord.js';
+import type { Channel, GuildChannel, Message, StageChannel, ThreadChannel, VoiceChannel } from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
 
 export function formatArray(
@@ -62,24 +53,6 @@ export function isNsfwChannel(channel: Channel | Nullish): boolean {
 		case ChannelType.PrivateThread:
 			return Boolean((channel as ThreadChannel).parent?.nsfw);
 	}
-}
-
-export function getCommandName(
-	interaction: CommandInteraction<'cached' | 'raw'> | AutocompleteInteraction<'cached' | 'raw'>
-): string {
-	if (!interaction.isChatInputCommand() && !interaction.isAutocomplete()) return interaction.commandName;
-
-	const { commandName } = interaction;
-	const subCommandGroup = interaction.options.getSubcommandGroup(false);
-	const subCommand = interaction.options.getSubcommand(false);
-
-	const command = [
-		commandName,
-		...(subCommandGroup ? [subCommandGroup] : []),
-		...(subCommand ? [subCommand] : [])
-	].join(' ');
-
-	return command;
 }
 
 export function sentenceCase(input: string): string {

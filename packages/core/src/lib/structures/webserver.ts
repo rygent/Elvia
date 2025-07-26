@@ -4,12 +4,12 @@ import errors from '@/server/middlewares/errors.js';
 import headers from '@/server/middlewares/headers.js';
 import noroutes from '@/server/middlewares/noroutes.js';
 import { router } from '@/server/routes/info.js';
+import { globby } from 'globby';
 import { createJiti } from 'jiti';
 import body from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import { extname, join, parse, resolve } from 'node:path';
-import { existsSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 
 const jiti = createJiti(import.meta.url);
 
@@ -28,45 +28,30 @@ export class CoreWebServer {
 	}
 
 	private get directory() {
-		const routes = 'dist/server/routes';
-		return resolve(routes);
+		return `${path.dirname(process.argv[1]!) + path.sep}`.replace(/\\/g, '/');
 	}
 
-	private routes() {
-		const routes = [];
+	protected async loadRoutes() {
+		const routeFiles = await globby(`${this.directory}server/routes/**/*.{js,ts}`);
 
-		for (const fileOrFolder of readdirSync(this.directory)) {
-			const filePath = join(this.directory, fileOrFolder);
-			const isDirectory = statSync(filePath).isDirectory();
-
-			const pathToLoad = isDirectory ? join(filePath, 'index.js') : filePath;
-			const isFile = existsSync(pathToLoad) && statSync(pathToLoad).isFile();
-
-			if (isFile && extname(pathToLoad) === '.js') {
-				routes.push({
-					name: parse(fileOrFolder).name.toLowerCase(),
-					path: pathToLoad
-				});
+		for (const file of routeFiles) {
+			let { name } = path.parse(file);
+			const fileName = path.basename(file);
+			if (fileName === 'index.js' || fileName === 'index.ts') {
+				name = path.basename(path.dirname(file));
 			}
-		}
-
-		return routes;
-	}
-
-	private async loadRoutes() {
-		this.server.use('/', router);
-
-		for (const { name, path } of this.routes()) {
-			const route = await jiti.import<{ router: Router }>(path);
+			const route = await jiti.import<{ router: Router }>(file);
 			this.server.use(`/${name}`, route.router);
 		}
-
-		this.server.use(noroutes);
-		this.server.use(errors);
 	}
 
 	public async start(port = 8080) {
 		await this.loadRoutes();
+
+		this.server.use('/', router);
+		this.server.use(noroutes);
+		this.server.use(errors);
+
 		this.server.listen(port);
 	}
 }

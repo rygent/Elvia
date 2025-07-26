@@ -33,12 +33,12 @@ export default class extends CoreCommand {
 					required: true
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ManageGuildExpressions']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['ManageGuildExpressions']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Manage',
-			clientPermissions: ['ManageGuildExpressions'],
-			userPermissions: ['ManageGuildExpressions'],
+			client_permissions: ['ManageGuildExpressions'],
+			user_permissions: ['ManageGuildExpressions'],
 			guild: true
 		});
 	}

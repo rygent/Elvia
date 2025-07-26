@@ -1,10 +1,9 @@
-import { BitField, Client, PermissionsBitField, type PermissionsString } from 'discord.js';
+import { BitField, Client, PermissionsBitField, type ClientOptions, type PermissionsString } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import { CoreCommand } from '@/lib/structures/command.js';
 import { CoreContext } from '@/lib/structures/context.js';
 import { CoreEvent } from '@/lib/structures/event.js';
 import { CoreSettings } from '@/lib/structures/settings.js';
-import { type CoreClientOptions } from '@/types/client.js';
 import { isClass } from '@sapphire/utilities';
 import { globby } from 'globby';
 import { createJiti } from 'jiti';
@@ -12,6 +11,10 @@ import path from 'node:path';
 import fs from 'node:fs';
 
 const jiti = createJiti(import.meta.url);
+
+export interface CoreClientOptions extends ClientOptions {
+	settings?: CoreSettings;
+}
 
 export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public settings: CoreSettings;
@@ -60,58 +63,52 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	}
 
 	protected async loadCommands(): Promise<void> {
-		return globby(`${this.directory}commands/slash/**/*.{js,ts}`).then(async (commands: string[]) => {
-			for (const commandFile of commands) {
-				const { name } = path.parse(commandFile);
-				const File = await jiti.import<CoreCommand>(commandFile, { default: true });
-				if (!isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
-				const command = new File(this);
-				if (!(command instanceof CoreCommand)) {
-					throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
-				}
-				const [commandName, subCommandGroup] = path
-					.relative(`${this.directory}commands/slash`, path.dirname(commandFile))
-					.split(path.sep);
-				const unique = [
-					...(commandName?.length ? [commandName] : []),
-					...(subCommandGroup ? [subCommandGroup] : []),
-					command.name
-				].join(' ');
-				command.unique = unique;
-				this.commands.set(command.unique, command);
+		const commandFiles = await globby(`${this.directory}commands/slash/**/*.{js,ts}`);
+
+		for (const file of commandFiles) {
+			const { name } = path.parse(file);
+			const Command = await jiti.import<CoreCommand>(file, { default: true });
+			if (!isClass(Command)) throw new TypeError(`Command ${name} doesn't export a class.`);
+			const command = new Command(this);
+			if (!(command instanceof CoreCommand)) {
+				throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
 			}
-		});
+			const relativePaths = path.relative(`${this.directory}commands/slash`, path.dirname(file));
+			const [commandName, subCommandGroup] = relativePaths.split(path.sep);
+			command.unique = [commandName, subCommandGroup, command.name].filter(Boolean).join(' ');
+			this.commands.set(command.unique, command);
+		}
 	}
 
 	protected async loadContextMenus(): Promise<void> {
-		return globby(`${this.directory}commands/context/**/*.{js,ts}`).then(async (commands: string[]) => {
-			for (const commandFile of commands) {
-				const { name } = path.parse(commandFile);
-				const File = await jiti.import<CoreContext>(commandFile, { default: true });
-				if (!isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
-				const command = new File(this);
-				if (!(command instanceof CoreContext)) {
-					throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
-				}
-				this.contexts.set(command.name, command);
+		const contextFiles = await globby(`${this.directory}commands/context/**/*.{js,ts}`);
+
+		for (const file of contextFiles) {
+			const { name } = path.parse(file);
+			const Context = await jiti.import<CoreContext>(file, { default: true });
+			if (!isClass(Context)) throw new TypeError(`Context ${name} doesn't export a class.`);
+			const context = new Context(this);
+			if (!(context instanceof CoreContext)) {
+				throw new TypeError(`Context ${name} doesn't belong in commands directory.`);
 			}
-		});
+			this.contexts.set(context.name, context);
+		}
 	}
 
 	protected async loadEvents(): Promise<void> {
-		return globby(`${this.directory}events/**/*.{js,ts}`).then(async (events: string[]) => {
-			for (const eventFile of events) {
-				const { name } = path.parse(eventFile);
-				const File = await jiti.import<CoreEvent>(eventFile, { default: true });
-				if (!isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
-				const event = new File(this);
-				if (!(event instanceof CoreEvent)) {
-					throw new TypeError(`Event ${name} doesn't belong in events directory.`);
-				}
-				event.emitter[event.type](event.name, (...args: unknown[]) => event.run(...args));
-				this.events.set(event.name, event);
+		const eventFiles = await globby(`${this.directory}events/**/*.{js,ts}`);
+
+		for (const file of eventFiles) {
+			const { name } = path.parse(file);
+			const Event = await jiti.import<CoreEvent>(file, { default: true });
+			if (!isClass(Event)) throw new TypeError(`Event ${name} doesn't export a class!`);
+			const event = new Event(this);
+			if (!(event instanceof CoreEvent)) {
+				throw new TypeError(`Event ${name} doesn't belong in events directory.`);
 			}
-		});
+			event.emitter[event.type](event.name, (...args: unknown[]) => event.run(...args));
+			this.events.set(event.name, event);
+		}
 	}
 
 	public async start(token = this.settings.token) {

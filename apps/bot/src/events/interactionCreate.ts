@@ -2,10 +2,10 @@ import { CoreClient, CoreEvent } from '@elvia/core';
 import { MessageFlags } from 'discord-api-types/v10';
 import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import { type DiscordAPIError } from '@discordjs/rest';
+import { DiscordAPIError } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
-import { formatArray, formatPermissions, getCommandName, isNsfwChannel } from '@/lib/utils/functions.js';
+import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 
 export default class extends CoreEvent {
@@ -20,20 +20,16 @@ export default class extends CoreEvent {
 	public async run(interaction: BaseInteraction<'cached' | 'raw'>) {
 		// Handle commands
 		if (interaction.isChatInputCommand()) {
-			const commandName = getCommandName(interaction);
+			const subCommandGroup = interaction.options.getSubcommandGroup(false);
+			const subCommand = interaction.options.getSubcommand(false);
+
+			const commandName = [interaction.commandName, subCommandGroup, subCommand].filter(Boolean).join(' ');
 			const command = this.client.commands.get(commandName);
 
 			if (command) {
 				if (!command.enabled) {
 					return interaction.reply({
 						content: 'This command is currently inaccessible.',
-						flags: MessageFlags.Ephemeral
-					});
-				}
-
-				if (command.unsafe && !this.client.settings.unsafe) {
-					return interaction.reply({
-						content: 'This command is currently under development.',
 						flags: MessageFlags.Ephemeral
 					});
 				}
@@ -126,10 +122,11 @@ export default class extends CoreEvent {
 
 				try {
 					await command.execute(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					if (interaction.replied) return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
+				} catch (error: unknown) {
+					if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
+					if (error instanceof Error) {
+						logger.error(`${error.name}: ${error.message}`, { error });
+					}
 
 					const replies = [
 						'An error has occured when executing this command.',
@@ -137,6 +134,7 @@ export default class extends CoreEvent {
 					].join('\n');
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });
+					if (interaction.replied) return interaction.followUp({ content: replies, flags: MessageFlags.Ephemeral });
 					return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 				}
 			}
@@ -150,13 +148,6 @@ export default class extends CoreEvent {
 				if (!command.enabled) {
 					return interaction.reply({
 						content: 'This command is currently inaccessible.',
-						flags: [MessageFlags.Ephemeral]
-					});
-				}
-
-				if (command.unsafe && !this.client.settings.unsafe) {
-					return interaction.reply({
-						content: 'This command is currently under development.',
 						flags: [MessageFlags.Ephemeral]
 					});
 				}
@@ -225,10 +216,11 @@ export default class extends CoreEvent {
 
 				try {
 					await command.execute(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					if (interaction.replied) return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
+				} catch (error: unknown) {
+					if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
+					if (error instanceof Error) {
+						logger.error(`${error.name}: ${error.message}`, { error });
+					}
 
 					const replies = [
 						'An error has occured when executing this command.',
@@ -236,19 +228,22 @@ export default class extends CoreEvent {
 					].join('\n');
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });
-					return interaction.reply({ content: replies, flags: [MessageFlags.Ephemeral] });
+					if (interaction.replied) return interaction.followUp({ content: replies, flags: MessageFlags.Ephemeral });
+					return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 				}
 			}
 		}
 
 		// Handle autocomplete
 		if (interaction.isAutocomplete()) {
-			const commandName = getCommandName(interaction);
+			const subCommandGroup = interaction.options.getSubcommandGroup(false);
+			const subCommand = interaction.options.getSubcommand(false);
+
+			const commandName = [interaction.commandName, subCommandGroup, subCommand].filter(Boolean).join(' ');
 			const command = this.client.commands.get(commandName);
 
 			if (command) {
 				if (!command.enabled) return interaction.respond([]);
-				if (command.unsafe && !this.client.settings.unsafe) return interaction.respond([]);
 				if (command.guild && !interaction.inCachedGuild()) return interaction.respond([]);
 				if (command.owner && !this.client.settings.owners?.includes(interaction.user.id)) {
 					return interaction.respond([]);
@@ -256,9 +251,11 @@ export default class extends CoreEvent {
 
 				try {
 					await command.autocomplete(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
+				} catch (error: unknown) {
+					if (error instanceof DiscordAPIError && error.name === 'DiscordAPIError[10062]') return;
+					if (error instanceof Error) {
+						logger.error(`${error.name}: ${error.message}`, { error });
+					}
 				}
 			}
 		}

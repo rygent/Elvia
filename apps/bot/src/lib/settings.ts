@@ -1,56 +1,45 @@
-import { type client, CoreSettings } from '@elvia/core';
+import { CoreSettings, type CoreSettingsData } from '@elvia/core';
 import { type PresenceData } from 'discord.js';
 import { env } from '@/env.js';
 
-export class Settings extends CoreSettings {
-	declare protected data: Partial<client.Settings>;
+interface ExtendedSettingsData extends CoreSettingsData {
+	presence?: PresenceData;
+	port?: number;
+	auth?: string;
+	debugMode?: boolean;
+}
+
+export class ExtendedSettings extends CoreSettings {
+	declare protected data: Partial<ExtendedSettingsData>;
 
 	public constructor() {
 		super();
 	}
 
-	public override get presence() {
+	public get presence() {
 		return this.data.presence;
 	}
 
-	public override get port() {
-		this.data.port = env.SERVER_API_PORT || this.data.port;
+	public get port() {
+		this.data.port ??= env.SERVER_API_PORT;
 		return this.data.port;
 	}
 
-	public override get auth() {
-		this.data.auth = env.SERVER_API_AUTH || this.data.auth;
+	public get auth() {
+		this.data.auth ??= env.SERVER_API_AUTH;
 		return this.data.auth;
 	}
 
-	public override get debug() {
+	public get debug() {
 		this.data.debugMode = env.DEBUG_MODE || this.data.debugMode;
 		return this.data.debugMode;
 	}
 
-	public override get unsafe() {
-		this.data.unsafeMode = env.UNSAFE_MODE || this.data.unsafeMode;
-		return this.data.unsafeMode;
+	public override get<Key extends keyof ExtendedSettingsData>(key: Key): ExtendedSettingsData[Key] {
+		return this.data[key];
 	}
 }
 
-declare module '@elvia/core' {
-	// eslint-disable-next-line @typescript-eslint/no-namespace
-	namespace client {
-		interface Settings {
-			presence?: PresenceData;
-			port?: number;
-			auth?: string;
-			debugMode?: boolean;
-			unsafeMode?: boolean;
-		}
-	}
-
-	interface CoreSettings {
-		presence?: PresenceData;
-		port?: number;
-		auth?: string;
-		debug?: boolean;
-		unsafe?: boolean;
-	}
+export function isExtendedSettings(settings: CoreSettings): settings is ExtendedSettings {
+	return settings instanceof ExtendedSettings;
 }

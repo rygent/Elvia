@@ -63,12 +63,12 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ModerateMembers']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['ModerateMembers']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Moderation',
-			clientPermissions: ['ModerateMembers'],
-			userPermissions: ['ModerateMembers'],
+			client_permissions: ['ModerateMembers'],
+			user_permissions: ['ModerateMembers'],
 			guild: true
 		});
 	}

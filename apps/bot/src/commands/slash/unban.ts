@@ -56,12 +56,12 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['BanMembers']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['BanMembers']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Moderation',
-			clientPermissions: ['BanMembers'],
-			userPermissions: ['BanMembers'],
+			client_permissions: ['BanMembers'],
+			user_permissions: ['BanMembers'],
 			guild: true
 		});
 	}

@@ -29,7 +29,7 @@ export default class extends CoreContext {
 		super(client, {
 			type: ApplicationCommandType.User,
 			name: 'User Information',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});
 	}

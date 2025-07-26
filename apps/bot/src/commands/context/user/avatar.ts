@@ -20,7 +20,7 @@ export default class extends CoreContext {
 		super(client, {
 			type: ApplicationCommandType.User,
 			name: 'Avatar',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});
 	}

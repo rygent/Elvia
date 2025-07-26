@@ -25,11 +25,11 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'create',
 			description: 'Create a new server tag.',
-			defaultMemberPermissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Tags',
-			userPermissions: ['ManageGuild'],
+			user_permissions: ['ManageGuild'],
 			guild: true
 		});
 	}

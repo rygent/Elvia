@@ -1,11 +1,17 @@
 import { CoreClient } from '@/lib/structures/client.js';
-import { type EventOptions } from '@/types/event.js';
+import { type Events } from 'discord.js';
 import { type Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
+export interface EventOptions {
+	name: Events | string;
+	once?: boolean;
+	emitter?: keyof CoreClient | EventEmitter;
+}
+
 export abstract class CoreEvent extends EventEmitter {
 	protected client: CoreClient<true>;
-	public readonly name: string;
+	public readonly name: Events | string;
 	public readonly type: 'once' | 'on';
 	public readonly emitter: EventEmitter;
 
@@ -21,4 +27,8 @@ export abstract class CoreEvent extends EventEmitter {
 	}
 
 	public abstract run(...args: unknown[]): Awaitable<unknown>;
+
+	public override toString(): string {
+		return this.name;
+	}
 }

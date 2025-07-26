@@ -32,7 +32,7 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Meme'
 		});

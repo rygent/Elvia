@@ -13,7 +13,7 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'list',
 			description: 'List server emojis.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',
 			guild: true

@@ -10,8 +10,4 @@ export * from '@/lib/structures/webserver.js';
 
 export { envSchema } from '@/lib/env.js';
 
-export * from '@/types/client.js';
-export * from '@/types/command.js';
-export * from '@/types/event.js';
-
 export { createError };

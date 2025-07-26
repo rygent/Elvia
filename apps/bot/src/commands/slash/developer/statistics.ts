@@ -27,8 +27,8 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'statistics',
 			description: 'Get statistics of the bot.',
-			defaultMemberPermissions: '0',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: '0',
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Developer',
 			owner: true

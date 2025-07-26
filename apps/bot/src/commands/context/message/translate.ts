@@ -25,7 +25,7 @@ export default class extends CoreContext {
 		super(client, {
 			type: ApplicationCommandType.Message,
 			name: 'Translate',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel]
 		});
 	}

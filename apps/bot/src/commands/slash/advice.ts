@@ -9,7 +9,7 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'advice',
 			description: 'Get a random advice.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM],
 			category: 'Fun'
 		});

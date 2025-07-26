@@ -21,7 +21,7 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'icon',
 			description: 'Display the server icon.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',
 			guild: true

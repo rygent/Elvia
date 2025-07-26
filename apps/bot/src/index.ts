@@ -1,9 +1,7 @@
 import { GatewayIntentBits } from 'discord-api-types/v10';
 import { CoreClient } from '@elvia/core';
 import { Partials, Options } from 'discord.js';
-import { Settings } from '@/lib/settings.js';
-
-const settings = new Settings();
+import { ExtendedSettings } from '@/lib/settings.js';
 
 const client = new CoreClient({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages],
@@ -11,7 +9,6 @@ const client = new CoreClient({
 	allowedMentions: {
 		repliedUser: false
 	},
-	presence: settings.presence,
 	sweepers: {
 		...Options.DefaultSweeperSettings,
 		messages: {
@@ -19,7 +16,7 @@ const client = new CoreClient({
 			lifetime: 432e2
 		}
 	},
-	settings
+	settings: new ExtendedSettings()
 });
 
 void client.start();

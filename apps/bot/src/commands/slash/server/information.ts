@@ -24,7 +24,7 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'information',
 			description: 'Get server information.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',
 			guild: true

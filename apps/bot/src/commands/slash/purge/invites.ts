@@ -32,12 +32,12 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ManageMessages']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['ManageMessages']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Manage',
-			clientPermissions: ['ManageMessages'],
-			userPermissions: ['ManageMessages'],
+			client_permissions: ['ManageMessages'],
+			user_permissions: ['ManageMessages'],
 			guild: true
 		});
 	}

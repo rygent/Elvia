@@ -56,12 +56,12 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['KickMembers']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['KickMembers']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Moderation',
-			clientPermissions: ['KickMembers'],
-			userPermissions: ['KickMembers'],
+			client_permissions: ['KickMembers'],
+			user_permissions: ['KickMembers'],
 			guild: true
 		});
 	}

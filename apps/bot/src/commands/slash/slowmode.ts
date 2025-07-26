@@ -51,12 +51,12 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ManageChannels']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: new PermissionsBitField(['ManageChannels']).bitfield.toString(),
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Manage',
-			clientPermissions: ['ManageChannels'],
-			userPermissions: ['ManageChannels'],
+			client_permissions: ['ManageChannels'],
+			user_permissions: ['ManageChannels'],
 			guild: true
 		});
 	}

@@ -11,7 +11,6 @@ const schema = envSchema.extend({
 	SERVER_API_PORT: z.number().optional(),
 
 	DEBUG_MODE: z.boolean().optional(),
-	UNSAFE_MODE: z.boolean().optional(),
 
 	SUPPORT_SERVER_URL: z.string().url(),
 	LOGGER_WEBHOOK_URL: z.string().url(),
@@ -37,7 +36,6 @@ export const env = schema.parse({
 	SERVER_API_PORT: Number(process.env.SERVER_API_PORT || process.env.PORT),
 
 	DEBUG_MODE: process.env.DEBUG_MODE === 'true' || process.env.DEBUG === 'true',
-	UNSAFE_MODE: process.env.UNSAFE_MODE === 'true',
 
 	SUPPORT_SERVER_URL: process.env.SUPPORT_SERVER_URL,
 	LOGGER_WEBHOOK_URL: process.env.LOGGER_WEBHOOK_URL,

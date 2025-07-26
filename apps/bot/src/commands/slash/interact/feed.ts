@@ -31,7 +31,7 @@ export default class extends CoreCommand {
 					required: true
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel],
 			category: 'Social',
 			guild: true

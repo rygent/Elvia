@@ -39,7 +39,7 @@ export default class extends CoreCommand {
 					required: false
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Fun'
 		});
