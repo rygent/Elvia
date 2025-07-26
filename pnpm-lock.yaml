@@ -81,7 +81,7 @@ importers:
         specifier: ^3.18.2
         version: 3.18.2
       axios:
-        specifier: ^1.10.0
+        specifier: ^1.11.0
         version: 1.11.0
       colorette:
         specifier: ^2.0.20
