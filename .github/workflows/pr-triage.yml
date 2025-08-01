@@ -1,12 +1,18 @@
-name: PR Labeler
+name: PR Triage
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
 
 jobs:
-  pr-triage:
-    name: PR Triage
+  pr-labeler:
+    name: PR Labeler
     runs-on: ubuntu-latest
+    if: github.event.action != 'edited'
     steps:
       - name: Automatically label PR
         uses: actions/labeler@v5
@@ -14,3 +20,19 @@ jobs:
           configuration-path: .github/pr-labeler.yml
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           sync-labels: true
+  validate-title:
+    name: Validate title
+    runs-on: ubuntu-latest
+    if: github.event.action != 'synchronize'
+    steps:
+      - name: Validate pull request title
+        run: |
+          REGEX="^(revert: )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|types)(\\(.+\\))?: .{1,72}$"
+
+          echo "Title: \"$TITLE\""
+
+          if [[ ! "$TITLE" =~ $REGEX ]]; then
+            exit 1
+          fi
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
