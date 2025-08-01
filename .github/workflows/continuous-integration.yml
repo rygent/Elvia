@@ -18,33 +18,37 @@ jobs:
           fetch-depth: 0
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Install node.js v22
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        shell: bash
+        run: |
+          pnpm install --frozen-lockfile --prefer-offline
         env:
           HUSKY: '0'
       - name: Build packages (PR)
         if: ${{ github.event_name != 'push' }}
-        run: pnpm exec turbo run build --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=3
+        run: pnpm exec turbo run build --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
       - name: Build packages (Push)
         if: ${{ github.event_name == 'push' }}
-        run: pnpm exec turbo run build --filter="...[HEAD^1]" --concurrency=3
+        run: pnpm exec turbo run build --filter="...[HEAD^1]" --concurrency=4
       - name: ESLint (PR)
         if: ${{ github.event_name != 'push' }}
-        run: pnpm exec turbo run lint --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=3
+        run: pnpm exec turbo run lint --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
       - name: ESLint (Push)
         if: ${{ github.event_name == 'push' }}
-        run: pnpm exec turbo run lint --filter="...[HEAD^1]" --concurrency=3
+        run: pnpm exec turbo run lint --filter="...[HEAD^1]" --concurrency=4
       - name: Typecheck (PR)
         if: ${{ github.event_name != 'push' }}
-        run: pnpm exec turbo run typecheck --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=3
+        run: pnpm exec turbo run typecheck --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
       - name: Typecheck (Push)
         if: ${{ github.event_name == 'push' }}
-        run: pnpm exec turbo run typecheck --filter="...[HEAD^1]" --concurrency=3
+        run: pnpm exec turbo run typecheck --filter="...[HEAD^1]" --concurrency=4
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}

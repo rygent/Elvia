@@ -1,12 +1,12 @@
-name: Issue Labeler
+name: Issue Triage
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  issue-triage:
-    name: Issue Triage
+  issue-labeler:
+    name: Issue Labeler
     runs-on: ubuntu-latest
     steps:
       - name: Automatically label Issue
