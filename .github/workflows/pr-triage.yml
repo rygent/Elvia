@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Validate pull request title
         run: |
-          REGEX="^(revert: )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|types)(\\(.+\\))?: .{1,72}$"
+          REGEX="^(revert: )?(feat|fix|docs|style|refactor|perf|test|build|ci|chore|types)(\\(.+\\))?!?: .{1,72}$"
 
           echo "Title: \"$TITLE\""
 
