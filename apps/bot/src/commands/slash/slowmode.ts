@@ -1,25 +1,19 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ChannelType,
 	InteractionContextType,
-	MessageFlags
+	MessageFlags,
+	PermissionFlagsBits
 } from 'discord-api-types/v10';
-import {
-	PermissionsBitField,
-	type ChatInputCommandInteraction,
-	type ForumChannel,
-	type TextChannel,
-	type VoiceChannel
-} from 'discord.js';
+import { type ChatInputCommandInteraction, type ForumChannel, type TextChannel, type VoiceChannel } from 'discord.js';
 import { bold, channelMention, italic } from '@discordjs/formatters';
 import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'slowmode',
@@ -52,13 +46,12 @@ export default class extends Command {
 					required: false
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ManageChannels']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Manage',
-			clientPermissions: ['ManageChannels'],
-			userPermissions: ['ManageChannels'],
-			guild: true
+			client_permissions: [PermissionFlagsBits.ManageChannels],
+			member_permissions: [PermissionFlagsBits.ManageChannels],
+			guild_only: true
 		});
 	}
 

@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -7,23 +6,23 @@ import {
 	InteractionContextType,
 	InteractionType,
 	MessageFlags,
+	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
-	AutocompleteInteraction,
-	ChatInputCommandInteraction,
 	InteractionCollector,
-	ModalSubmitInteraction,
-	PermissionsBitField
+	type AutocompleteInteraction,
+	type ChatInputCommandInteraction,
+	type ModalSubmitInteraction
 } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { shuffleArray, slugify } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'rename',
@@ -37,12 +36,11 @@ export default class extends Command {
 					required: true
 				}
 			],
-			defaultMemberPermissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Tags',
-			userPermissions: ['ManageGuild'],
-			guild: true
+			member_permissions: [PermissionFlagsBits.ManageGuild],
+			guild_only: true
 		});
 	}
 

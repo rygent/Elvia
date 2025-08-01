@@ -1,40 +1,51 @@
-import type { PermissionsString } from 'discord.js';
-import type { client } from '@/types/types.js';
+import { CoreSettings, type CoreSettingsData } from '@elvia/core';
+import { type PresenceData } from 'discord.js';
 import { env } from '@/env.js';
 
-export class Settings {
-	declare protected data: Partial<client.Settings>;
+interface ExtendedSettingsData extends CoreSettingsData {
+	presence?: PresenceData;
+	auth?: string;
+	port?: number;
+	debugMode?: boolean;
+}
+
+export class ExtendedSettings extends CoreSettings {
+	declare protected data: Partial<ExtendedSettingsData>;
 
 	public constructor() {
-		this.data = {};
+		super();
 	}
 
-	public get token(): string {
-		this.data.token ??= env.DISCORD_TOKEN;
+	public override get token() {
+		this.data.token ??= env.BOT_TOKEN;
 		return this.data.token;
 	}
 
-	public get owners(): string[] {
-		this.data.owners ??= env.CLIENT_OWNERS;
+	public override get owners() {
+		this.data.owners ??= env.BOT_OWNERS;
 		return this.data.owners;
 	}
 
-	public get defaultPermissions(): PermissionsString[] {
-		this.data.defaultPermissions ??= ['SendMessages', 'ViewChannel'];
-		return this.data.defaultPermissions;
+	public get auth() {
+		this.data.auth ??= env.SERVER_API_AUTH;
+		return this.data.auth;
 	}
 
-	public get debug(): boolean {
-		this.data.debug ??= env.DEBUG_MODE;
-		return this.data.debug;
+	public get port() {
+		this.data.port ??= env.SERVER_API_PORT;
+		return this.data.port;
 	}
 
-	public get unsafeMode(): boolean {
-		this.data.unsafeMode ??= env.UNSAFE_MODE;
-		return this.data.unsafeMode;
+	public get debug() {
+		this.data.debugMode = env.DEBUG_MODE || this.data.debugMode;
+		return this.data.debugMode;
 	}
 
-	public get<Key extends keyof client.Settings>(key: Key): client.Settings[Key] {
+	public override get<Key extends keyof ExtendedSettingsData>(key: Key): ExtendedSettingsData[Key] {
 		return this.data[key];
 	}
+}
+
+export function isExtendedSettings(settings: CoreSettings): settings is ExtendedSettings {
+	return settings instanceof ExtendedSettings;
 }

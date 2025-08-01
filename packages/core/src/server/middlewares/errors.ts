@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from 'express';
+import { type NextFunction, type Request, type Response } from 'express';
 import { HttpError } from 'http-errors';
 
 export default (err: HttpError, _: Request, res: Response, next: NextFunction) => {

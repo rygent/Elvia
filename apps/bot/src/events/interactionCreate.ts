@@ -1,16 +1,14 @@
-import { Client } from '@/lib/structures/client.js';
-import { Listener } from '@/lib/structures/listener.js';
+import { CoreEvent, type CoreClient } from '@elvia/core';
 import { MessageFlags } from 'discord-api-types/v10';
-import { type BaseInteraction, Events, type GuildMember } from 'discord.js';
+import { Events, type BaseInteraction } from 'discord.js';
 import { Collection } from '@discordjs/collection';
-import type { DiscordAPIError } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
 import { bold, hideLinkEmbed, hyperlink, italic, underline, subtext } from '@discordjs/formatters';
-import { formatArray, formatPermissions, getCommandName, isNsfwChannel } from '@/lib/utils/functions.js';
+import { formatArray, formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 
-export default class extends Listener {
-	public constructor(client: Client<true>) {
+export default class extends CoreEvent {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			name: Events.InteractionCreate,
 			once: false
@@ -21,25 +19,30 @@ export default class extends Listener {
 	public async run(interaction: BaseInteraction<'cached' | 'raw'>) {
 		// Handle slash & context menu commands
 		if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
-			const commandName = getCommandName(interaction);
-			const command = this.client.commands.get(commandName);
+			// eslint-disable-next-line prefer-destructuring
+			let commandName = interaction.commandName;
 
-			if (command) {
-				if (!command.enabled) {
+			if (interaction.isChatInputCommand()) {
+				const subCommandGroup = interaction.options.getSubcommandGroup(false);
+				const subCommand = interaction.options.getSubcommand(false);
+
+				commandName = [interaction.commandName, subCommandGroup, subCommand].filter(Boolean).join(' ');
+			}
+
+			const command = this.client.commands.get(commandName);
+			const context = this.client.contexts.get(commandName);
+
+			const commandOrContext = command ?? context;
+
+			if (commandOrContext) {
+				if (!commandOrContext.enabled) {
 					return interaction.reply({
 						content: 'This command is currently inaccessible.',
 						flags: MessageFlags.Ephemeral
 					});
 				}
 
-				if (command.unsafe && !this.client.settings.unsafeMode) {
-					return interaction.reply({
-						content: 'This command is currently under development.',
-						flags: MessageFlags.Ephemeral
-					});
-				}
-
-				if (command.guild && !interaction.inCachedGuild()) {
+				if (commandOrContext.guildOnly && !interaction.inCachedGuild()) {
 					return interaction.reply({
 						content: 'This command cannot be used out of a server.',
 						flags: MessageFlags.Ephemeral
@@ -48,38 +51,36 @@ export default class extends Listener {
 
 				if (interaction.inGuild()) {
 					if (interaction.inCachedGuild()) {
-						const userPermsCheck = command.userPermissions
-							? this.client.defaultPermissions.add(command.userPermissions)
+						const memberPermsCheck = commandOrContext.memberPermissions
+							? this.client.defaultPermissions.add(commandOrContext.memberPermissions)
 							: this.client.defaultPermissions;
 
-						if (userPermsCheck) {
-							const missing = interaction.channel
-								?.permissionsFor(interaction.member)
-								?.missing(userPermsCheck) as string[];
+						if (memberPermsCheck) {
+							const missing = interaction.channel?.permissionsFor(interaction.member)?.missing(memberPermsCheck);
 
 							// eslint-disable-next-line max-depth
-							if (missing.length) {
+							if (missing?.length) {
 								const replies = `You lack the ${formatArray(
-									missing.map((item) => underline(italic(formatPermissions(item))))
+									missing?.map((item) => underline(italic(formatPermissions(item))))
 								)} permission(s) to continue.`;
 
 								return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 							}
 						}
 
-						const clientPermsCheck = command.clientPermissions
-							? this.client.defaultPermissions.add(command.clientPermissions)
+						const clientPermsCheck = commandOrContext.clientPermissions
+							? this.client.defaultPermissions.add(commandOrContext.clientPermissions)
 							: this.client.defaultPermissions;
 
 						if (clientPermsCheck) {
 							const missing = interaction.channel
-								?.permissionsFor(interaction.guild?.members.me as GuildMember)
-								?.missing(clientPermsCheck) as string[];
+								?.permissionsFor(interaction.guild.members.me!)
+								?.missing(clientPermsCheck);
 
 							// eslint-disable-next-line max-depth
-							if (missing.length) {
+							if (missing?.length) {
 								const replies = `I lack the ${formatArray(
-									missing.map((item) => underline(italic(formatPermissions(item))))
+									missing?.map((item) => underline(italic(formatPermissions(item))))
 								)} permission(s) to continue.`;
 
 								return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
@@ -87,14 +88,14 @@ export default class extends Listener {
 						}
 					}
 
-					if (command.nsfw && !isNsfwChannel(interaction.channel)) {
+					if (commandOrContext.nsfw && !isNsfwChannel(interaction.channel)) {
 						const replies = `This command is only accessible on ${bold('Age-Restricted')} channels.`;
 
 						return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 					}
 				}
 
-				if (command.owner && !this.client.settings.owners?.includes(interaction.user.id)) {
+				if (commandOrContext.ownerOnly && !this.client.settings.owners?.includes(interaction.user.id)) {
 					return interaction.reply({
 						content: 'This command is only accessible for developers.',
 						flags: MessageFlags.Ephemeral
@@ -109,7 +110,7 @@ export default class extends Listener {
 				const cooldown = this.client.cooldowns.get(commandName);
 
 				if (cooldown?.has(interaction.user.id) && !this.client.settings.owners?.includes(interaction.user.id)) {
-					const expired = (cooldown.get(interaction.user.id) as number) + command.cooldown;
+					const expired = (cooldown.get(interaction.user.id) as number) + commandOrContext.cooldown;
 
 					if (now < expired) {
 						const duration = (expired - now) / 1e3;
@@ -123,14 +124,19 @@ export default class extends Listener {
 				}
 
 				cooldown?.set(interaction.user.id, now);
-				setTimeout(() => cooldown?.delete(interaction.user.id), command.cooldown);
+				setTimeout(() => cooldown?.delete(interaction.user.id), commandOrContext.cooldown);
 
 				try {
-					await command.execute(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					if (interaction.replied) return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
+					if (command && interaction.isChatInputCommand()) {
+						await command.execute(interaction);
+					} else if (context && interaction.isContextMenuCommand()) {
+						await context.execute(interaction);
+					}
+				} catch (error: unknown) {
+					if (error instanceof Error) {
+						if (error.name === 'DiscordAPIError[10062]') return;
+						logger.error(`${error.name}: ${error.message}`, { error });
+					}
 
 					const replies = [
 						'An error has occured when executing this command.',
@@ -138,6 +144,7 @@ export default class extends Listener {
 					].join('\n');
 
 					if (interaction.deferred) return interaction.editReply({ content: replies });
+					if (interaction.replied) return interaction.followUp({ content: replies, flags: MessageFlags.Ephemeral });
 					return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 				}
 			}
@@ -145,22 +152,26 @@ export default class extends Listener {
 
 		// Handle autocomplete
 		if (interaction.isAutocomplete()) {
-			const commandName = getCommandName(interaction);
+			const subCommandGroup = interaction.options.getSubcommandGroup(false);
+			const subCommand = interaction.options.getSubcommand(false);
+
+			const commandName = [interaction.commandName, subCommandGroup, subCommand].filter(Boolean).join(' ');
 			const command = this.client.commands.get(commandName);
 
 			if (command) {
 				if (!command.enabled) return interaction.respond([]);
-				if (command.unsafe && !this.client.settings.unsafeMode) return interaction.respond([]);
-				if (command.guild && !interaction.inCachedGuild()) return interaction.respond([]);
-				if (command.owner && !this.client.settings.owners?.includes(interaction.user.id)) {
+				if (command.guildOnly && !interaction.inCachedGuild()) return interaction.respond([]);
+				if (command.ownerOnly && !this.client.settings.owners?.includes(interaction.user.id)) {
 					return interaction.respond([]);
 				}
 
 				try {
-					await command.autocomplete!(interaction);
-				} catch (e: unknown) {
-					if ((e as DiscordAPIError).name === 'DiscordAPIError[10062]') return;
-					logger.error(`${(e as Error).name}: ${(e as Error).message}`, { error: e as Error });
+					await command.autocomplete(interaction);
+				} catch (error: unknown) {
+					if (error instanceof Error) {
+						if (error.name === 'DiscordAPIError[10062]') return interaction.respond([]);
+						logger.error(`${error.name}: ${error.message}`, { error });
+					}
 				}
 			}
 		}

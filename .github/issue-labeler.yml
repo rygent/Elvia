@@ -4,6 +4,9 @@ apps:bot:
 apps:web:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nweb\\n"
+packages:core:
+  - "### Which (application|package|application or package) is this (bug
+    report|feature request) for\\?\\n\\ncore\\n"
 packages:database:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\ndatabase\\n"
@@ -16,6 +19,3 @@ packages:ui:
 packages:utils:
   - "### Which (application|package|application or package) is this (bug
     report|feature request) for\\?\\n\\nutils\\n"
-packages:webserver:
-  - "### Which (application|package|application or package) is this (bug
-    report|feature request) for\\?\\n\\nwebserver\\n"

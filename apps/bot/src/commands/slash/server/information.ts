@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -15,20 +14,20 @@ import {
 	TextDisplayBuilder,
 	ThumbnailBuilder
 } from '@discordjs/builders';
-import type { ChatInputCommandInteraction } from 'discord.js';
+import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext, time, userMention } from '@discordjs/formatters';
 import { formatArray, formatNumber, trimArray } from '@/lib/utils/functions.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'information',
 			description: 'Get server information.',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Utility',
-			guild: true
+			guild_only: true
 		});
 	}
 

@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreContext, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -25,19 +24,18 @@ import { bold, inlineCode, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatPermissions, trimArray } from '@/lib/utils/functions.js';
 import { Badges } from '@/lib/utils/emojis.js';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreContext {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.User,
 			name: 'User Information',
-			description: '',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});
 	}
 
 	public async execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
-		const member = interaction.options.getMember('user') as GuildMember;
+		const member = interaction.options.getMember('user')!;
 
 		const flags = member.user.flags!.toArray();
 		const badges = flags.map((flag) => Badges[flag]).filter((value) => value !== '');

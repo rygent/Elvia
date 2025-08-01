@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreContext, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -18,16 +17,15 @@ import {
 import { parseEmoji, type MessageContextMenuCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, italic, subtext } from '@discordjs/formatters';
 import { Languages } from '@/lib/utils/autocomplete.js';
-import translate from '@iamtraction/google-translate';
 import { nanoid } from 'nanoid';
+import translate from '@iamtraction/google-translate';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreContext {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.Message,
 			name: 'Translate',
-			description: '',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.PrivateChannel]
 		});
 	}

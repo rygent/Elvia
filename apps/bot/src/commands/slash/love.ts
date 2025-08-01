@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -8,11 +7,11 @@ import {
 	MessageFlags
 } from 'discord-api-types/v10';
 import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
-import type { ChatInputCommandInteraction, GuildMember } from 'discord.js';
+import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, italic, subtext } from '@discordjs/formatters';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'love',
@@ -31,16 +30,16 @@ export default class extends Command {
 					required: true
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Fun',
-			guild: true
+			guild_only: true
 		});
 	}
 
 	public execute(interaction: ChatInputCommandInteraction<'cached'>) {
-		const user1 = interaction.options.getMember('1st') as GuildMember;
-		const user2 = interaction.options.getMember('2nd') as GuildMember;
+		const user1 = interaction.options.getMember('1st')!;
+		const user2 = interaction.options.getMember('2nd')!;
 
 		const percentage = Math.random();
 		const estimated = Math.ceil(percentage * 1e2);

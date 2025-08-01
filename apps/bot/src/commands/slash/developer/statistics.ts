@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -15,24 +14,24 @@ import {
 	TextDisplayBuilder,
 	ThumbnailBuilder
 } from '@discordjs/builders';
-import { ChatInputCommandInteraction, version as DjsVersion } from 'discord.js';
+import { type ChatInputCommandInteraction, version as DjsVersion } from 'discord.js';
 import { bold, inlineCode, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatBytes } from '@/lib/utils/functions.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
-import * as system from 'systeminformation';
 import { version as TsVersion } from 'typescript';
+import * as system from 'systeminformation';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'statistics',
 			description: 'Get statistics of the bot.',
-			defaultMemberPermissions: '0',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: '0',
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Developer',
-			owner: true
+			owner_only: true
 		});
 	}
 
@@ -57,7 +56,7 @@ export default class extends Command {
 							[
 								`${bold('ID:')} ${inlineCode(this.client.user.id)}`,
 								`${bold('Developer:')} ${formatArray(
-									this.client.settings.owners.map((user) => this.client.users.cache.get(user)?.tag as string)
+									this.client.settings.owners!.map((user) => this.client.users.cache.get(user)?.tag as string)
 								)}`,
 								`${bold('Version:')} v${this.client.version}`,
 								`${bold('Node.JS:')} ${process.version}`,

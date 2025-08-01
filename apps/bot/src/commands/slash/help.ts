@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -16,7 +14,11 @@ import {
 	StringSelectMenuBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import { AutocompleteInteraction, ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
+import {
+	type AutocompleteInteraction,
+	type ChatInputCommandInteraction,
+	type StringSelectMenuInteraction
+} from 'discord.js';
 import {
 	bold,
 	chatInputApplicationCommandMention,
@@ -30,8 +32,8 @@ import { formatPermissions, isNsfwChannel } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'help',
@@ -45,7 +47,7 @@ export default class extends Command {
 					required: false
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'General'
 		});
@@ -75,7 +77,7 @@ export default class extends Command {
 			}
 
 			const commandId = commandData.find((cmd) => cmd.name === command.unique?.split(' ')[0])!.id;
-			const permissions = command.userPermissions.toArray();
+			const permissions = command.memberPermissions.toArray();
 
 			const section = new TextDisplayBuilder().setContent(
 				[
@@ -105,7 +107,7 @@ export default class extends Command {
 		}
 
 		const commands = this.client.commands
-			.filter(({ owner, type }) => !owner && type === ApplicationCommandType.ChatInput)
+			.filter(({ ownerOnly, type }) => !ownerOnly && type === ApplicationCommandType.ChatInput)
 			.map((command) => ({
 				id: commandData.find((cmd) => cmd.name === command.unique?.split(' ')[0])!.id,
 				...command
@@ -207,13 +209,13 @@ export default class extends Command {
 
 		const respond = choices
 			.sort((a, b) => a.unique!.localeCompare(b.unique!))
-			.filter((command) => !command.owner && command.type === ApplicationCommandType.ChatInput)
+			.filter((command) => !command.ownerOnly && command.type === ApplicationCommandType.ChatInput)
 			.filter((command) => {
 				if (command.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
 				return true;
 			})
 			.filter((command) => {
-				if (command.guild && !interaction.inCachedGuild()) return false;
+				if (command.guildOnly && !interaction.inCachedGuild()) return false;
 				return true;
 			})
 			.map(({ unique }) => ({ name: unique!, value: unique! }));

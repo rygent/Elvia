@@ -1,115 +1,116 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, Routes } from 'discord-api-types/v10';
-import { Command } from '@/lib/structures/command.js';
+import {
+	ApplicationCommandOptionType,
+	ApplicationCommandType,
+	Routes,
+	type APIApplicationCommandBasicOption,
+	type RESTPostAPIApplicationCommandsJSONBody
+} from 'discord-api-types/v10';
+import { CoreCommand, CoreContext } from '@elvia/core';
 import { REST } from '@discordjs/rest';
-import type { CommandData } from '@/types/types.js';
-import { titleCase } from '@/lib/utils/functions.js';
+import { titleCase } from '@elvia/utils';
 import { logger } from '@elvia/logger';
-import { Command as Commander } from 'commander';
 import { globby } from 'globby';
 import { createJiti } from 'jiti';
 import { env } from '@/env.js';
 import path from 'node:path';
+import dotenv from 'dotenv';
+
+// eslint-disable-next-line import-x/no-named-as-default-member
+dotenv.config({ override: true, quiet: true });
 
 const jiti = createJiti(import.meta.url);
-const program = new Commander();
-
-program.option('-g, --global', 'register global commands');
-program.option('-d, --dev', 'register developer commands');
-program.option('-r, --reset', 'reset registered commands');
-
-program.parse(process.argv);
-
-const token = env.DISCORD_TOKEN;
-if (!token) {
-	throw new Error('The DISCORD_TOKEN environment variable is required.');
-}
-
-const applicationId = env.DISCORD_APPLICATION_ID;
-if (!applicationId) {
-	throw new Error('The DISCORD_APPLICATION_ID environment variable is required.');
-}
 
 const main = `${process.cwd()}/src/index.ts`;
 const directory = `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 
-async function loadCommands(developer: boolean) {
-	const commandData: CommandData[] = [];
+async function loadCommands(patterns: string | readonly string[]) {
+	const commandData: RESTPostAPIApplicationCommandsJSONBody[] = [];
 
-	if (!developer) {
-		await globby(`${directory}commands/context/**/*.ts`).then(async (commands) => {
-			for (const commandFile of commands) {
-				const File: any = await jiti.import(commandFile, { default: true });
-				const command: Command = new File();
-				commandData.push(command.toJSON());
-			}
-		});
-	}
+	const commandFiles = await globby(patterns);
+	for (const commandFile of commandFiles) {
+		const Command = await jiti.import<any>(commandFile, { default: true });
+		const command = new Command();
 
-	const patterns = developer
-		? `${directory}commands/slash/?(developer)/**/*.ts`
-		: [`${directory}commands/slash/!(developer)/**/*.ts`, `${directory}commands/slash/*.ts`];
-
-	await globby(patterns).then(async (commands) => {
-		for (const commandFile of commands) {
-			const File: any = await jiti.import(commandFile, { default: true });
-			const command: Command = new File();
-
-			const [commandName, subCommandGroup] = path
-				.relative(`${directory}commands/slash`, path.dirname(commandFile))
-				.split(path.sep);
-
-			if (commandName) {
-				if (!commandData.some((cmd) => cmd.name === commandName)) {
-					commandData.push({
-						...command.toJSON(),
-						type: ApplicationCommandType.ChatInput,
-						name: commandName,
-						description: `Use ${commandName} commands.`,
-						options: []
-					});
-				}
-
-				Reflect.deleteProperty(command, 'defaultMemberPermissions');
-				Reflect.deleteProperty(command, 'nsfw');
-				Reflect.deleteProperty(command, 'integrationTypes');
-				Reflect.deleteProperty(command, 'contexts');
-
-				const data = {
-					...command.toJSON(),
-					type: ApplicationCommandOptionType.Subcommand
-				};
-
-				const subCommand = commandData.find((cmd) => cmd.name === commandName);
-				if (subCommandGroup) {
-					if (!subCommand?.options?.some((cmd) => cmd.name === subCommandGroup)) {
-						subCommand?.options?.push({
-							type: ApplicationCommandOptionType.SubcommandGroup,
-							name: subCommandGroup,
-							description: `${titleCase(subCommandGroup)} commands group.`,
-							options: []
-						});
-					}
-
-					subCommand?.options?.find((cmd) => cmd.name === subCommandGroup)?.options?.push(data);
-				} else {
-					subCommand?.options?.push(data);
-				}
-			} else {
-				commandData.push(command.toJSON());
-			}
+		if (command instanceof CoreContext) {
+			commandData.push(command.toJSON());
+			continue;
 		}
-	});
+
+		if (command instanceof CoreCommand) {
+			mergeCommands(commandData, command, commandFile);
+		}
+	}
 
 	return commandData;
 }
 
-async function execute() {
-	const options = program.opts();
-	if (!Object.keys(options).length) return void logger.info(program.helpInformation());
+function mergeCommands(
+	commandData: RESTPostAPIApplicationCommandsJSONBody[],
+	command: CoreCommand,
+	commandFile: string
+) {
+	const relativePath = path.relative(`${directory}commands/slash`, path.dirname(commandFile));
+	const [commandName, subGroup] = relativePath.split(path.sep);
 
-	const guildId = env.DEVELOPER_GUILD_ID;
-	if (!guildId && options.dev) {
-		throw new Error('The DEVELOPER_GUILD_ID environment variable is required.');
+	if (commandName) {
+		let parentCommand = commandData.find((cmd) => cmd.name === commandName);
+		if (!parentCommand) {
+			parentCommand = {
+				...command.toJSON(),
+				type: ApplicationCommandType.ChatInput,
+				name: commandName,
+				description: `Use ${commandName} commands.`,
+				options: []
+			};
+
+			commandData.push(parentCommand);
+		}
+
+		const subData = command.toJSON();
+
+		if (subGroup) {
+			let groupCommand = parentCommand.options?.find((opt) => opt.name === subGroup);
+			if (!groupCommand) {
+				groupCommand = {
+					type: ApplicationCommandOptionType.SubcommandGroup,
+					name: subGroup,
+					description: `${titleCase(subGroup)} commands group.`,
+					options: []
+				};
+
+				parentCommand.options?.push(groupCommand);
+			}
+
+			if (groupCommand.type === ApplicationCommandOptionType.SubcommandGroup) {
+				groupCommand.options?.push({
+					type: ApplicationCommandOptionType.Subcommand,
+					name: subData.name,
+					description: subData.description,
+					options: subData.options as APIApplicationCommandBasicOption[]
+				});
+			}
+		} else {
+			parentCommand.options?.push({
+				type: ApplicationCommandOptionType.Subcommand,
+				name: subData.name,
+				description: subData.description,
+				options: subData.options as APIApplicationCommandBasicOption[]
+			});
+		}
+	} else {
+		commandData.push(command.toJSON());
+	}
+}
+
+async function registerCommands() {
+	const token = env.BOT_TOKEN;
+	if (!token) {
+		throw new Error('The BOT_TOKEN environment variable is required.');
+	}
+
+	const applicationId = env.BOT_ID;
+	if (!applicationId) {
+		throw new Error('The DISCORD_APPLICATION_ID environment variable is required.');
 	}
 
 	const rest = new REST({ version: '10' }).setToken(token);
@@ -117,22 +118,24 @@ async function execute() {
 	try {
 		logger.info('Started refreshing application (/) commands.');
 
-		if (options.reset) {
-			await rest.put(Routes.applicationCommands(applicationId), { body: [] });
-			if (guildId) {
-				await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: [] });
-			}
+		const guildId = env.DEVELOPER_GUILD_ID;
+		if (guildId) {
+			const devCommands = await loadCommands(`${directory}commands/slash/?(developer)/**/*.ts`);
+
+			await rest.put(Routes.applicationGuildCommands(applicationId, guildId), {
+				body: devCommands
+			});
 		}
 
-		if (options.global) {
-			const commands = await loadCommands(false);
-			await rest.put(Routes.applicationCommands(applicationId), { body: commands });
-		}
+		const globalCommands = await loadCommands([
+			`${directory}commands/context/**/*.ts`,
+			`${directory}commands/slash/!(developer)/**/*.ts`,
+			`${directory}commands/slash/*.ts`
+		]);
 
-		if (options.dev) {
-			const commands = await loadCommands(true);
-			await rest.put(Routes.applicationGuildCommands(applicationId, guildId), { body: commands });
-		}
+		await rest.put(Routes.applicationCommands(applicationId), {
+			body: globalCommands
+		});
 
 		logger.info('Successfully reloaded application (/) commands.');
 	} catch (error) {
@@ -142,4 +145,4 @@ async function execute() {
 	}
 }
 
-void execute();
+void registerCommands();

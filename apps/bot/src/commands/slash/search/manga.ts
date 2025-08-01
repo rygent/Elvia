@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -17,7 +16,7 @@ import {
 	StringSelectMenuBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import type { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
+import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { formatArray, formatNumber, isNsfwChannel, titleCase } from '@/lib/utils/functions.js';
 import { Anilist, parseDescription } from '@rygent/anilist';
@@ -25,8 +24,8 @@ import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'manga',
@@ -39,7 +38,7 @@ export default class extends Command {
 					required: true
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Utility'
 		});
