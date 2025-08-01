@@ -47,14 +47,14 @@ body:
           Arch: arm64
           Version: Ventura (13.7.1)
         Binaries:
-          Node: 22.11.0
-          pnpm: 9.12.3
+          Node: 22.18.0
+          pnpm: 10.14.0
         Relevant Packages:
-          discord.js: 14.16.3
-          next: 15.0.3
-          react: 19.0.0-rc-5c56b873-20241107
-          react-dom: 19.0.0-rc-5c56b873-20241107
-          typescript: 5.6.3
+          discord.js: 14.21.0
+          next: 15.4.5
+          react: 19.1.0
+          react-dom: 19.1.0
+          typescript: 5.9.2
     validations:
       required: true
   - type: dropdown
@@ -74,11 +74,11 @@ body:
       multiple: true
       options:
         - 'Not sure'
+        - 'Core'
         - 'Database'
         - 'Logger'
         - 'UI'
         - 'Utils'
-        - 'WebServer'
     validations:
       required: true
   - type: dropdown

@@ -4,6 +4,9 @@ apps:bot:
 apps:web:
   - changed-files:
       - any-glob-to-any-file: ['apps/web/*', 'apps/web/**/*']
+packages:core:
+  - changed-files:
+      - any-glob-to-any-file: ['packages/core/*', 'packages/core/**/*']
 packages:database:
   - changed-files:
       - any-glob-to-any-file: ['packages/database/*', 'packages/database/**/*']
@@ -16,6 +19,3 @@ packages:ui:
 packages:utils:
   - changed-files:
       - any-glob-to-any-file: ['packages/utils/*', 'packages/utils/**/*']
-packages:webserver:
-  - changed-files:
-      - any-glob-to-any-file: ['packages/webserver/*', 'packages/webserver/**/*']

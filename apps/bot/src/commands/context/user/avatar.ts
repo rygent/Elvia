@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreContext, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -13,22 +12,21 @@ import {
 	SeparatorBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import type { GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
+import { type UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext } from '@discordjs/formatters';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreContext {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.User,
 			name: 'Avatar',
-			description: '',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild]
 		});
 	}
 
 	public execute(interaction: UserContextMenuCommandInteraction<'cached'>) {
-		const member = interaction.options.getMember('user') as GuildMember;
+		const member = interaction.options.getMember('user')!;
 
 		const container = new ContainerBuilder()
 			.addMediaGalleryComponents(

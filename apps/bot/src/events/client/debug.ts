@@ -1,10 +1,10 @@
-import { Client } from '@/lib/structures/client.js';
-import { Listener } from '@/lib/structures/listener.js';
-import { logger } from '@elvia/logger';
+import { CoreEvent, type CoreClient } from '@elvia/core';
 import { Events } from 'discord.js';
+import { isExtendedSettings } from '@/lib/settings.js';
+import { logger } from '@elvia/logger';
 
-export default class extends Listener {
-	public constructor(client: Client<true>) {
+export default class extends CoreEvent {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			name: Events.Debug,
 			once: false
@@ -12,7 +12,7 @@ export default class extends Listener {
 	}
 
 	public run(info: string) {
-		if (!this.client.settings.debug) return;
+		if (isExtendedSettings(this.client.settings) && !this.client.settings.debug) return;
 		logger.debug(info);
 	}
 }
