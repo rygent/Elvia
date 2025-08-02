@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -17,7 +16,7 @@ import {
 	StringSelectMenuBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import { ChatInputCommandInteraction, StringSelectMenuInteraction } from 'discord.js';
+import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { formatArray, formatNumber } from '@/lib/utils/functions.js';
 import { env } from '@/env.js';
@@ -27,8 +26,8 @@ import { nanoid } from 'nanoid';
 import moment from 'moment';
 import 'moment-duration-format';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'spotify',
@@ -41,7 +40,7 @@ export default class extends Command {
 					required: true
 				}
 			],
-			integrationTypes: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Utility'
 		});
@@ -113,6 +112,7 @@ export default class extends Command {
 					`${bold('Album:')} ${data.album.name}`,
 					`${bold('Tracks:')} ${formatNumber(data.track_number)} of ${formatNumber(data.album.total_tracks)}`,
 					`${bold('Released:')} ${moment(data.album.release_date).format('MMMM D, YYYY')}`,
+					// eslint-disable-next-line import-x/no-named-as-default-member
 					`${bold('Duration:')} ${moment.duration(data.duration_ms).format('HH:mm:ss')}`,
 					`${bold('Popularity:')} ${formatNumber(data.popularity)}`
 				].join('\n')

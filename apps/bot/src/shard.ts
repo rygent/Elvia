@@ -1,17 +1,20 @@
-import { ShardingManager } from 'discord.js';
-import { WebServer } from '@elvia/webserver';
+import { CoreWebserver, CoreShardingManager } from '@elvia/core';
 import { logger } from '@elvia/logger';
 import { gray } from 'colorette';
 import { env } from '@/env.js';
+import dotenv from 'dotenv';
 
-const manager = new ShardingManager('./dist/index.js', { token: env.DISCORD_TOKEN, totalShards: 'auto' });
+// eslint-disable-next-line import-x/no-named-as-default-member
+dotenv.config({ override: true, quiet: true });
+
+const manager = new CoreShardingManager('./dist/index.js', { totalShards: 'auto' });
 void manager.spawn();
 
 manager.on('shardCreate', (shard) => {
 	logger.info(`Launching ${gray(`[${shard.id + 1} of ${manager.totalShards}]`)}`, { shardId: shard.id });
 });
 
-if (env.SERVER_AUTH && env.SERVER_PORT) {
-	const server = new WebServer(manager);
-	void server.start(env.SERVER_PORT);
+if (env.SERVER_API_AUTH && env.SERVER_API_PORT) {
+	const server = new CoreWebserver(manager);
+	void server.start(env.SERVER_API_PORT);
 }

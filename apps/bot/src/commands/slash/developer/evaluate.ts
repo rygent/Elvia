@@ -1,5 +1,4 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
@@ -12,9 +11,9 @@ import {
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	AttachmentBuilder,
-	ChatInputCommandInteraction,
 	InteractionCollector,
-	ModalSubmitInteraction
+	type ChatInputCommandInteraction,
+	type ModalSubmitInteraction
 } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/constants.js';
@@ -22,8 +21,8 @@ import { Type } from '@sapphire/type';
 import { nanoid } from 'nanoid';
 import { inspect } from 'node:util';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'evaluate',
@@ -48,11 +47,11 @@ export default class extends Command {
 					required: false
 				}
 			],
-			defaultMemberPermissions: '0',
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			default_member_permissions: '0',
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Developer',
-			owner: true
+			owner_only: true
 		});
 	}
 

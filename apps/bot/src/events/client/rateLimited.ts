@@ -1,10 +1,9 @@
-import { Client } from '@/lib/structures/client.js';
-import { Listener } from '@/lib/structures/listener.js';
+import { CoreEvent, type CoreClient } from '@elvia/core';
+import { type RateLimitData } from '@discordjs/rest';
 import { logger } from '@elvia/logger';
-import type { RateLimitData } from '@discordjs/rest';
 
-export default class extends Listener {
-	public constructor(client: Client<true>) {
+export default class extends CoreEvent {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			name: 'rateLimited',
 			once: false,

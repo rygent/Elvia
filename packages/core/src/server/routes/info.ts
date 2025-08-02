@@ -1,11 +1,11 @@
-import type { ShardingManager } from 'discord.js';
+import { type CoreShardingManager } from '@/lib/sharding.js';
 import { Router } from 'express';
 import createError from 'http-errors';
 
 export const router = Router();
 router.get('/', async (req, res, next) => {
 	try {
-		const manager: ShardingManager = req.app.get('shard-manager');
+		const manager: CoreShardingManager = req.app.get('shard-manager');
 
 		const response = await manager.broadcastEval((client) => ({
 			name: client.user?.displayName,

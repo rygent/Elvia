@@ -1,10 +1,10 @@
-import type { NextFunction, Request, Response } from 'express';
+import { type NextFunction, type Request, type Response } from 'express';
+import { createError } from '@elvia/core';
 import { env } from '@/env.js';
-import createError from 'http-errors';
 
 export default (req: Request, _: Response, next: NextFunction): void => {
 	const authorization = req.get('Authorization');
 
-	if (authorization && authorization === env.SERVER_AUTH) next();
+	if (authorization && authorization === env.SERVER_API_AUTH) next();
 	else next(createError(401));
 };

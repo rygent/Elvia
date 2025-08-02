@@ -1,30 +1,29 @@
-import { Client } from '@/lib/structures/client.js';
-import { Command } from '@/lib/structures/command.js';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
-	MessageFlags
+	MessageFlags,
+	PermissionFlagsBits
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
-import { PermissionsBitField, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
+import { type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
-export default class extends Command {
-	public constructor(client: Client<true>) {
+export default class extends CoreCommand {
+	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
 			name: 'reset',
 			description: 'Reset all server tags.',
-			defaultMemberPermissions: new PermissionsBitField(['ManageGuild']).bitfield.toString(),
-			integrationTypes: [ApplicationIntegrationType.GuildInstall],
+			integration_types: [ApplicationIntegrationType.GuildInstall],
 			contexts: [InteractionContextType.Guild],
 			category: 'Tags',
-			userPermissions: ['ManageGuild'],
-			guild: true
+			member_permissions: [PermissionFlagsBits.ManageGuild],
+			guild_only: true
 		});
 	}
 
