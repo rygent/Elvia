@@ -59,12 +59,12 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name, slug }) => ({ name, value: slug }));
 
-		if (focused.length) {
+		if (focused.value.length) {
 			respond = choices.map(({ name, slug }) => ({ name, value: slug }));
 
 			return interaction.respond(respond.slice(0, 25));

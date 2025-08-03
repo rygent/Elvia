@@ -1,6 +1,8 @@
 import { CoreEvent, type CoreClient } from '@elvia/core';
 import { Events } from 'discord.js';
+import { redBright, underline } from 'colorette';
 import { prisma } from '@elvia/database';
+import { logger } from '@elvia/logger';
 
 export default class extends CoreEvent {
 	public constructor(client: CoreClient<true>) {
@@ -19,5 +21,7 @@ export default class extends CoreEvent {
 				update: {}
 			});
 		}
+
+		logger.info(`${redBright(underline(`${this.client.user.username}`))} is ready!`);
 	}
 }
