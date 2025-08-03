@@ -7,7 +7,7 @@ import {
 	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { AttachmentBuilder, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/constants.js';
@@ -58,14 +58,16 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Code to evaluate')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`code:${modalId}`)
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the code to evaluate")
-						.setRequired(true)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the code to evaluate")
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`code:${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setRequired(true)
+							.setMaxLength(4000)
+					)
 			);
 
 		await interaction.showModal(modal);
@@ -74,7 +76,7 @@ export default class extends CoreCommand {
 		const submitted = await interaction.awaitModalSubmit({ filter, time: 9e5 }).catch(() => null);
 		if (!submitted) return;
 
-		let code = submitted.fields.getTextInputValue(`code:${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+		let code = submitted.components.getTextInputValue(`code:${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		let evaled;
 
 		await submitted.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });

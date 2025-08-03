@@ -2,13 +2,12 @@ import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, DangerButtonBuilder, SecondaryButtonBuilder } from '@discordjs/builders';
 import { type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
@@ -38,13 +37,9 @@ export default class extends CoreCommand {
 		}
 
 		const buttonId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(
-				new ButtonBuilder().setCustomId(`cancel:${buttonId}`).setStyle(ButtonStyle.Secondary).setLabel('Cancel')
-			)
-			.addComponents(
-				new ButtonBuilder().setCustomId(`reset:${buttonId}`).setStyle(ButtonStyle.Danger).setLabel('Reset')
-			);
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(`cancel:${buttonId}`).setLabel('Cancel'))
+			.addDangerButtonComponents(new DangerButtonBuilder().setCustomId(`reset:${buttonId}`).setLabel('Reset'));
 
 		const response = await interaction.reply({
 			content: `Are you sure want to reset all tags?`,

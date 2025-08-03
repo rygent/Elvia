@@ -54,11 +54,15 @@ export class CoreWebserver {
 			try {
 				const manager = this.app.getDecorator<CoreShardingManager>('shardManager');
 
-				const response = await manager.broadcastEval((client) => ({
-					name: client.user?.displayName,
-					version: process.env.npm_package_version,
-					shards: client.shard?.count
-				}));
+				const response = await manager.broadcastEval(async (client) => {
+					const shardCount = await client.ws.getShardCount();
+
+					return {
+						name: client.user?.displayName,
+						version: process.env.npm_package_version,
+						shards: shardCount
+					};
+				});
 
 				reply.status(200).send(response);
 			} catch {
