@@ -42,7 +42,7 @@ export default class extends CoreContext {
 				new TextDisplayBuilder().setContent('Please select the target language you want to translate.')
 			)
 			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+				new ActionRowBuilder().addStringSelectMenuComponent(
 					new StringSelectMenuBuilder()
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a language')

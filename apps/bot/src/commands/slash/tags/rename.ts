@@ -9,7 +9,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	InteractionCollector,
 	type AutocompleteInteraction,
@@ -64,20 +64,21 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Rename a server tag')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId('name')
-						.setStyle(TextInputStyle.Short)
-						.setLabel("What's the new name?")
-						.setRequired(true)
-						.setMaxLength(100)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the new name?")
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`name-${modalId}`)
+							.setStyle(TextInputStyle.Short)
+							.setRequired(true)
+							.setMaxLength(100)
+					)
 			);
 
 		await interaction.showModal(modal);
 
-		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
+		const filter = (i: ModalSubmitInteraction<'cached'>) => i.customId === modalId;
 		const collector = new InteractionCollector(this.client, {
 			filter,
 			interactionType: InteractionType.ModalSubmit,
@@ -85,7 +86,7 @@ export default class extends CoreCommand {
 		});
 
 		collector.on('collect', async (i) => {
-			const names = i.fields.getTextInputValue('name');
+			const names = i.fields.getTextInputValue(`name-${modalId}`);
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
 			if (tags) {
@@ -118,7 +119,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));

@@ -8,7 +8,7 @@ import {
 	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	AttachmentBuilder,
 	InteractionCollector,
@@ -63,28 +63,26 @@ export default class extends CoreCommand {
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
-			.setTitle('Code to evaluate')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId('code-input')
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the code to evaluate")
-						.setRequired(true)
-				)
+			.setTitle('Evaluate')
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the code to evaluate ?")
+					.setTextInputComponent(
+						new TextInputBuilder().setCustomId(`code-${modalId}`).setStyle(TextInputStyle.Paragraph).setRequired(true)
+					)
 			);
 
 		await interaction.showModal(modal);
 
-		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
+		const filter = (i: ModalSubmitInteraction<'cached'>) => i.customId === modalId;
 		const collector = new InteractionCollector(this.client, {
 			filter,
 			interactionType: InteractionType.ModalSubmit,
 			max: 1
 		});
 
-		collector.on('collect', async (i: ModalSubmitInteraction) => {
-			let code = i.fields.getTextInputValue('code-input').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+		collector.on('collect', async (i) => {
+			let code = i.fields.getTextInputValue(`code-${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 			let evaled;
 
 			await i.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });

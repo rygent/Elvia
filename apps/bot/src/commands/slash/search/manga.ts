@@ -71,7 +71,7 @@ export default class extends CoreCommand {
 				)
 			)
 			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+				new ActionRowBuilder().addStringSelectMenuComponent(
 					new StringSelectMenuBuilder()
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a manga')

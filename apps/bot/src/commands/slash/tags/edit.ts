@@ -9,7 +9,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	InteractionCollector,
 	type AutocompleteInteraction,
@@ -64,22 +64,23 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Edit a server tag')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId('content')
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the new content?")
-						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
-						.setValue(tag.content)
-						.setRequired(true)
-						.setMaxLength(2000)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the new content?")
+					.setDescription('PRO TIP: can use discord markdown syntax.')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`content-${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setValue(tag.content)
+							.setRequired(true)
+							.setMaxLength(2000)
+					)
 			);
 
 		await interaction.showModal(modal);
 
-		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
+		const filter = (i: ModalSubmitInteraction<'cached'>) => i.customId === modalId;
 		const collector = new InteractionCollector(this.client, {
 			filter,
 			interactionType: InteractionType.ModalSubmit,
@@ -87,7 +88,7 @@ export default class extends CoreCommand {
 		});
 
 		collector.on('collect', async (i) => {
-			const content = i.fields.getTextInputValue('content');
+			const content = i.fields.getTextInputValue(`content-${modalId}`);
 
 			await prisma.tag.update({
 				where: { id: tag.id },
@@ -109,7 +110,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
