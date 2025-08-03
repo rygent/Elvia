@@ -26,6 +26,10 @@ export class ExtendedSettings extends CoreSettings {
 		return this.data.owners;
 	}
 
+	public get presence() {
+		return this.data.presence;
+	}
+
 	public get auth() {
 		this.data.auth ??= env.SERVER_API_AUTH;
 		return this.data.auth;
