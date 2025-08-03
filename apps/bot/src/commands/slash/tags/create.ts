@@ -39,8 +39,8 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Create a new server tag')
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
+			.addActionRows(
+				new ActionRowBuilder().addTextInputComponent(
 					new TextInputBuilder()
 						.setCustomId('name')
 						.setStyle(TextInputStyle.Short)
@@ -49,8 +49,8 @@ export default class extends CoreCommand {
 						.setMaxLength(100)
 				)
 			)
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
+			.addActionRows(
+				new ActionRowBuilder().addTextInputComponent(
 					new TextInputBuilder()
 						.setCustomId('content')
 						.setStyle(TextInputStyle.Paragraph)

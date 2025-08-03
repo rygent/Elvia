@@ -3,13 +3,12 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, SecondaryButtonBuilder, SuccessButtonBuilder } from '@discordjs/builders';
 import { parseEmoji, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { nanoid } from 'nanoid';
@@ -59,9 +58,9 @@ export default class extends CoreCommand {
 
 		const cancelId = nanoid();
 		const renameId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(renameId).setStyle(ButtonStyle.Success).setLabel('Rename'));
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(cancelId).setLabel('Cancel'))
+			.addSuccessButtonComponents(new SuccessButtonBuilder().setCustomId(renameId).setLabel('Rename'));
 
 		const response = await interaction.reply({
 			content: `Are you sure to rename ${inlineCode(`:${emojis?.name}:`)} ${emojis} to ${inlineCode(`:${name}:`)}?`,
@@ -69,11 +68,11 @@ export default class extends CoreCommand {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply?.inGuild()) return;
+		const message = response.resource?.message;
+		if (!message?.inGuild()) return;
 
 		const filter = (i: ButtonInteraction<'cached'>) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({
+		const collector = message.createMessageComponentCollector({
 			filter,
 			componentType: ComponentType.Button,
 			time: 6e4,
