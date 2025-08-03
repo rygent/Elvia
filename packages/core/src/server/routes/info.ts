@@ -7,10 +7,10 @@ router.get('/', async (req, res, next) => {
 	try {
 		const manager: CoreShardingManager = req.app.get('shard-manager');
 
-		const response = await manager.broadcastEval((client) => ({
+		const response = await manager.broadcastEval(async (client) => ({
 			name: client.user?.displayName,
 			version: process.env.npm_package_version,
-			shards: client.shard?.count
+			shards: await client.ws.getShardCount()
 		}));
 
 		res.status(200).json(response);

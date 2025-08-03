@@ -64,8 +64,8 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Rename a server tag')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
+			.setActionRows(
+				new ActionRowBuilder().addTextInputComponent(
 					new TextInputBuilder()
 						.setCustomId('name')
 						.setStyle(TextInputStyle.Short)
@@ -118,7 +118,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!choices?.length) return interaction.respond([]);
 
 		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
