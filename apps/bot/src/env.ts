@@ -1,20 +1,21 @@
 import { z } from 'zod';
+import 'dotenv/config';
 
 const envSchema = z.object({
 	BOT_TOKEN: z.string(),
 	BOT_ID: z.string().min(17).max(20),
 	BOT_OWNERS: z.string().min(17).max(20).array(),
 	DEVELOPER_GUILD_ID: z.string().min(17).max(20),
-	DATABASE_URL: z.string().url(),
+	DATABASE_URL: z.url(),
 
 	SERVER_API_AUTH: z.string().optional(),
 	SERVER_API_PORT: z.number().optional(),
 
 	DEBUG_MODE: z.boolean(),
 
-	SUPPORT_SERVER_URL: z.string().url(),
-	LOGGER_WEBHOOK_URL: z.string().url(),
-	GUILD_WEBHOOK_URL: z.string().url(),
+	SUPPORT_SERVER_URL: z.url(),
+	LOGGER_WEBHOOK_URL: z.url(),
+	GUILD_WEBHOOK_URL: z.url(),
 
 	IMGUR_CLIENT_ID: z.string(),
 	OPEN_WEATHER_API_KEY: z.string(),
