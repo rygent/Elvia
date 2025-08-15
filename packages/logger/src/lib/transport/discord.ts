@@ -1,70 +1,79 @@
 import TransportStream from 'winston-transport';
+import { MessageFlags, type RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10';
 import { ContainerBuilder, TextDisplayBuilder } from '@discordjs/builders';
-import { MessageFlags, WebhookClient } from 'discord.js';
 import { bold, codeBlock, heading, time } from '@discordjs/formatters';
+import { fetcher } from '@/lib/fetcher.js';
 import { isColorSupported } from 'colorette';
 import { inspect } from 'node:util';
 
-interface DiscordOptions {
-	webhookUrl: string;
+interface DiscordTransportOptions {
 	level?: string;
-	unique?: boolean;
+	webhookUrl?: string;
 }
 
-export class Discord extends TransportStream {
-	private readonly webhookUrl: string;
+interface LogEntry {
+	level: string;
+	error?: Error;
+	webhook?: {
+		title?: string;
+		disabled?: boolean;
+	};
+}
 
-	private readonly unique?: boolean;
+export class DiscordTransport extends TransportStream {
+	private readonly webhookUrl?: string;
 
-	public constructor(options: DiscordOptions) {
+	public constructor(options: DiscordTransportOptions) {
 		super(options);
-		this.webhookUrl = options.webhookUrl;
-		if (!this.webhookUrl) throw new Error('options.webhookUrl is required.');
-
 		this.level = options.level ?? 'error';
-		this.unique = options.unique ?? false;
+		this.webhookUrl = options.webhookUrl;
 	}
 
-	public override log(info: any, next: () => void) {
-		if (this.unique && this.level !== info.level) return next();
-		if (typeof info.error === 'undefined') return next();
-		if (typeof info.webhook === 'boolean' && !info.webhook) return next();
+	public override log(info: LogEntry, next: () => void) {
+		if (this.level && this.level !== info.level) return next();
+		if (!info.error) return next();
+		if (info.webhook?.disabled) return next();
+		if (!this.webhookUrl) return next();
 
-		setImmediate(() => {
+		setImmediate(async () => {
 			this.emit('logged', info);
 
-			void this.send(info);
+			await this.send(info);
 		});
 
 		next();
 	}
 
-	private async send(info: any) {
-		const { error } = info;
-
-		const webhook = new WebhookClient({ url: this.webhookUrl });
-		const threadId = new URL(this.webhookUrl).searchParams.get('thread_id')!;
+	private async send(info: LogEntry) {
+		if (!info.error) return;
 
 		const container = new ContainerBuilder().addTextDisplayComponents(
 			new TextDisplayBuilder().setContent(
 				[
-					heading(error.name, 2),
-					`${codeBlock('xl', this.clean(error.stack))}`,
-					`${bold('Message:')} ${error.message}`,
+					heading(info.webhook?.title ?? info.error.name, 2),
+					`${codeBlock('xl', this.clean(info.error.stack))}`,
+					`${bold('Message:')} ${info.error.message}`,
 					`${bold('Date:')} ${time(new Date(Date.now()), 'D')} (${time(new Date(Date.now()), 'R')})`
 				].join('\n')
 			)
 		);
 
+		const body = {
+			components: [container.toJSON()],
+			flags: MessageFlags.IsComponentsV2
+		} as RESTPostAPIWebhookWithTokenJSONBody;
+
+		const url = new URL(this.webhookUrl!);
+		url.searchParams.append('with_components', 'true');
+
 		try {
-			await webhook.send({
-				components: [container],
-				flags: [MessageFlags.IsComponentsV2],
-				withComponents: true,
-				threadId
+			await fetcher(url.toString(), {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
 			});
-		} catch (err) {
-			this.emit('error', err);
+		} catch (error: unknown) {
+			this.emit('error', error);
 		}
 	}
 

@@ -1,29 +1,26 @@
-import { createLogger, Logger, transports, type LeveledLogMethod } from 'winston';
-import { Discord } from '@/lib/transport/discord.js';
-import { customLevel } from '@/lib/constants.js';
-import { formatBuilder } from '@/lib/utils.js';
-import { env } from '@/env.js';
-import moment from 'moment-timezone';
+import * as winston from 'winston';
+import { DiscordTransport } from '@/lib/transport/discord.js';
+import { formatters, levels } from '@/lib/formatter.js';
+import moment from 'moment';
 import 'winston-daily-rotate-file';
+import 'moment-timezone';
 
-const timezone = env.TIMEZONE || 'UTC';
+const timezone = process.env.TZ || 'UTC';
 moment.tz.setDefault(timezone);
 
-if (!env.LOGGER_WEBHOOK_URL) throw new Error('The LOGGER_WEBHOOK_URL environment variable is required.');
-
-export const logger = createLogger({
-	level: env.DEBUG_MODE ? 'debug' : 'info',
-	levels: customLevel,
+export const logger = winston.createLogger({
+	level: process.env.DEBUG === 'true' ? 'debug' : 'info',
+	levels: levels,
 	transports: [
-		new transports.Console({ format: formatBuilder(true) }),
-		new transports.DailyRotateFile({
+		new winston.transports.Console({ format: formatters({ colorize: true }) }),
+		new winston.transports.DailyRotateFile({
 			level: 'error',
-			format: formatBuilder(false),
+			format: formatters({ colorize: false }),
 			datePattern: 'yyyyMMDD',
 			dirname: `${process.cwd()}/logs`,
 			filename: 'report.%DATE%.log',
 			maxFiles: '14d'
 		}),
-		new Discord({ level: 'error', unique: true, webhookUrl: env.LOGGER_WEBHOOK_URL })
+		new DiscordTransport({ level: 'error', webhookUrl: process.env.LOGGER_WEBHOOK_URL })
 	]
-}) as Logger & Record<keyof typeof customLevel, LeveledLogMethod>;
+}) as winston.Logger & Record<keyof typeof levels, winston.LeveledLogMethod>;
