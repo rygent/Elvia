@@ -66,8 +66,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       '@rygent/anilist':
-        specifier: ^1.4.0
-        version: 1.4.0
+        specifier: ^1.5.0
+        version: 1.5.0
       '@rygent/spotify':
         specifier: ^1.2.0
         version: 1.2.0
@@ -1815,9 +1815,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rygent/anilist@1.4.0':
-    resolution: {integrity: sha512-sLHY4KgA997rHJG4CUKIxl1xabAfQ2+4Xg4xYj5PUP77NUgHoRY2MWIl4/skmQCOXpAZw604++pu1Nz31VMY4w==}
-    engines: {node: '>=18.12.0'}
+  '@rygent/anilist@1.5.0':
+    resolution: {integrity: sha512-mXey+Q+oDakqOA9Ti/utC1yeJvROoziwvJD67Xy/N1ff4XLjAYCKvZyUBLxUuOgVBNegQXIkkVtTtLuVFjKtcQ==}
+    engines: {node: ^18.18.0 || ^20.11.0 || >=22.11.0}
 
   '@rygent/spotify@1.2.0':
     resolution: {integrity: sha512-i9uJWWqbn830WwfbVELBomqBrtdOvLct1TOmuj4DuydeS7Kn11XtyzV2FQxrQ/Rp1Znr1AeWUCifNaMHViQwkA==}
@@ -3526,10 +3526,6 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  graphql@16.11.0:
-    resolution: {integrity: sha512-mS1lbMsxgQj6hge1XZ6p7GPhbrtFwUFYi3wRzXAC/FmYnyXMTvvI3td3rjmQ2u8ewXueaSvRPWaEcgVVOT9Jnw==}
-    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
-
   gray-matter@4.0.3:
     resolution: {integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==}
     engines: {node: '>=6.0'}
@@ -3579,13 +3575,12 @@ packages:
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
-  he@1.2.0:
-    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
-    hasBin: true
-
   hosted-git-info@7.0.2:
     resolution: {integrity: sha512-puUZAUKT5m8Zzvs72XWy3HtvVbTWljRE66cP60bxJzAqf2DgICo7lYTY2IHUmLnNpjYvw5bvmoHvPc0QO2a62w==}
     engines: {node: ^16.14.0 || >=18.0.0}
+
+  html-entities@2.6.0:
+    resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
 
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
@@ -6797,13 +6792,9 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
 
-  '@rygent/anilist@1.4.0':
+  '@rygent/anilist@1.5.0':
     dependencies:
-      axios: 1.11.0
-      graphql: 16.11.0
-      he: 1.2.0
-    transitivePeerDependencies:
-      - debug
+      html-entities: 2.6.0
 
   '@rygent/spotify@1.2.0':
     dependencies:
@@ -8699,8 +8690,6 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  graphql@16.11.0: {}
-
   gray-matter@4.0.3:
     dependencies:
       js-yaml: 3.14.1
@@ -8796,11 +8785,11 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
-  he@1.2.0: {}
-
   hosted-git-info@7.0.2:
     dependencies:
       lru-cache: 10.4.3
+
+  html-entities@2.6.0: {}
 
   html-void-elements@3.0.0: {}
 
