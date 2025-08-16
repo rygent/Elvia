@@ -35,7 +35,7 @@
     "@sapphire/utilities": "^3.18.2",
     "axios": "^1.11.0",
     "colorette": "^2.0.20",
-    "discord-api-types": "^0.38.18",
+    "discord-api-types": "^0.38.20",
     "discord.js": "^14.21.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
