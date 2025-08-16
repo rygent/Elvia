@@ -53,26 +53,19 @@ export default class extends CoreCommand {
 		const reply = response.resource?.message;
 		if (!reply?.inGuild()) return;
 
-		const messages = await interaction.channel?.messages.fetch({ limit: 1e2, cache: true, before: reply.id });
-		const filter = messages?.filter((m) => m.author.bot && !m.pinned);
+		const fetchedMessages = await interaction.channel?.messages
+			.fetch({ limit: 1e2, cache: true, before: reply.id })
+			.then((fetched) => fetched.filter((m) => m.author.bot && !m.pinned));
 
-		const message = Array.from(filter!.values());
-		const deleted = await interaction.channel?.bulkDelete(message.slice(0, amount), true);
+		const deletedMessages = await interaction.channel?.bulkDelete(
+			Array.from(fetchedMessages!.values()).slice(0, amount),
+			true
+		);
 
-		const results = {} as object;
-		for (const [, msg] of deleted!) {
-			const user = msg?.author?.tag;
-			if (!Reflect.get(results, user as string)) Reflect.set(results, user as string, 0);
-			(results as any)[user as string]++;
-		}
+		if (!deletedMessages?.size) return interaction.editReply({ content: 'No messages were deleted.' });
 
-		const replies = [
-			`${bold(italic(deleted!.size.toString()))} message(s) have been successfully deleted!`,
-			`${Object.entries(results)
-				.map(([user, size]) => `${italic(`${user}:`)} ${bold(italic(size))}`)
-				.join('\n')}`
-		].join('\n\n');
-
-		return interaction.editReply({ content: replies });
+		return interaction.editReply({
+			content: `${bold(italic(deletedMessages.size.toString()))} message(s) have been successfully deleted!`
+		});
 	}
 }
