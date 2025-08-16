@@ -94,11 +94,11 @@ export default class extends CoreCommand {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply) return;
+		const message = response.resource?.message;
+		if (!message) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({
+		const collector = message.createMessageComponentCollector({
 			filter,
 			componentType: ComponentType.Button,
 			time: 15e3,

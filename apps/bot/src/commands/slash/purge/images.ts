@@ -51,11 +51,11 @@ export default class extends CoreCommand {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply?.inGuild()) return;
+		const message = response.resource?.message;
+		if (!message?.inGuild()) return;
 
 		const fetchedMessages = await interaction.channel?.messages
-			.fetch({ limit: 1e2, cache: true, before: reply.id })
+			.fetch({ limit: 1e2, cache: true, before: message.id })
 			.then((fetched) =>
 				fetched.filter(
 					(m) => m.attachments.find(({ contentType }) => contentType?.match(ImageMimeTypeRegex)) && !m.pinned

@@ -31,9 +31,9 @@ export default class extends CoreContext {
 	}
 
 	public async execute(interaction: MessageContextMenuCommandInteraction<'cached' | 'raw'>) {
-		const message = interaction.options.getMessage('message', true);
+		const source = interaction.options.getMessage('message', true);
 
-		if (!message.content) {
+		if (!source.content) {
 			return interaction.reply({ content: 'There is no text in this message.', flags: MessageFlags.Ephemeral });
 		}
 
@@ -64,11 +64,11 @@ export default class extends CoreContext {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply) return;
+		const message = response.resource?.message;
+		if (!message) return;
 
 		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({
+		const collector = message.createMessageComponentCollector({
 			filter,
 			componentType: ComponentType.StringSelect,
 			time: 6e4,
@@ -79,7 +79,7 @@ export default class extends CoreContext {
 		collector.on('collect', async (i) => {
 			const [selected] = i.values;
 
-			const context = message.content.replace(/(<a?)?:\w+:(\d{17,19}>)?/g, '');
+			const context = source.content.replace(/(<a?)?:\w+:(\d{17,19}>)?/g, '');
 
 			const translated = await translate(context, { to: selected! });
 

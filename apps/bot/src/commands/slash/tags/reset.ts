@@ -50,11 +50,11 @@ export default class extends CoreCommand {
 			withResponse: true
 		});
 
-		const reply = response.resource?.message;
-		if (!reply?.inGuild()) return;
+		const message = response.resource?.message;
+		if (!message?.inGuild()) return;
 
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = reply.createMessageComponentCollector({
+		const collector = message.createMessageComponentCollector({
 			filter,
 			componentType: ComponentType.Button,
 			time: 6e4,
