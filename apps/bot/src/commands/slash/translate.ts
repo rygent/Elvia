@@ -85,7 +85,7 @@ export default class extends CoreCommand {
 	}
 
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused(true);
+		const focused = interaction.options.getFocused();
 
 		const choices = Languages.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 
