@@ -19,11 +19,10 @@ import {
 import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatNumber, isNsfwChannel, titleCase } from '@/lib/utils/functions.js';
-import { Anilist, parseDescription } from '@rygent/anilist';
+import { Anilist } from '@rygent/anilist';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
-import moment from 'moment';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -49,18 +48,16 @@ export default class extends CoreCommand {
 		const search = interaction.options.getString('search', true);
 
 		const anilist = new Anilist();
-		const raw = await anilist.search({ type: 'anime', search }).then(
-			({
-				data: {
-					Page: { media }
-				}
-			}) => media
-		);
-		if (!raw?.length) {
+		const respond = await anilist.media.search({ type: 'Anime', search });
+		if (!respond?.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
-		const result = isNsfwChannel(interaction.channel) ? raw : raw.filter((data) => !data?.isAdult);
+		const result = respond.filter((data) => {
+			if (data.isAdult && !isNsfwChannel(interaction.channel)) return false;
+			return true;
+		});
+
 		if (!result.length) {
 			return interaction.reply({
 				content: `This search contain explicit content, use ${bold('NSFW Channel')} instead.`,
@@ -81,13 +78,9 @@ export default class extends CoreCommand {
 						.setPlaceholder('Select an anime')
 						.setOptions(
 							...result.map((data) => ({
-								value: data!.id.toString(),
-								label:
-									cutText(
-										Object.values(data!.title!).find((title) => title?.length),
-										1e2
-									) ?? 'Unknown Name',
-								...(data!.description?.length && { description: cutText(parseDescription(data!.description), 1e2) })
+								value: data.id.toString(),
+								label: cutText(data.title!.english! || data.title!.userPreferred!, 1e2),
+								...(data.description?.length && { description: cutText(data.description, 1e2) })
 							}))
 						)
 				)
@@ -117,13 +110,6 @@ export default class extends CoreCommand {
 			const [selected] = i.values;
 			const data = result.find((item) => item?.id.toString() === selected)!;
 
-			const startDate = !Object.values(data.startDate!).some((value) => value === null)
-				? Object.values(data.startDate!).join('/')
-				: null;
-			const endDate = !Object.values(data.endDate!).some((value) => value === null)
-				? Object.values(data.endDate!).join('/')
-				: null;
-
 			const media = new MediaGalleryBuilder().addItems(
 				new MediaGalleryItemBuilder().setURL(`https://img.anili.st/media/${data.id}`)
 			);
@@ -131,14 +117,8 @@ export default class extends CoreCommand {
 
 			const section = new TextDisplayBuilder().setContent(
 				[
-					heading(
-						hyperlink(
-							Object.values(data.title!).find((item) => item?.length),
-							data.siteUrl!
-						),
-						2
-					),
-					...(data.description?.length ? [parseDescription(data.description)] : [])
+					heading(hyperlink(data.title!.english! || data.title!.userPreferred!, data.siteUrl!), 2),
+					...(data.description?.length ? [data.description] : [])
 				].join('\n')
 			);
 			container.spliceComponents(1, 1, section);
@@ -148,10 +128,10 @@ export default class extends CoreCommand {
 					...(data.title?.romaji ? [`${bold('Romaji:')} ${data.title.romaji}`] : []),
 					...(data.title?.english ? [`${bold('English:')} ${data.title.english}`] : []),
 					...(data.title?.native ? [`${bold('Native:')} ${data.title.native}`] : []),
-					`${bold('Type:')} ${getType(data.format!)}`,
-					`${bold('Status:')} ${titleCase(data.status!.replace(/_/g, ' '))}`,
-					`${bold('Source:')} ${titleCase(data.source!.replace(/_/g, ' '))}`,
-					...(startDate ? [`${bold('Aired:')} ${getDate(startDate, endDate)}`] : []),
+					...(data.format ? [`${bold('Type:')} ${getType(data.format)}`] : []),
+					...(data.status ? [`${bold('Status:')} ${titleCase(data.status.replace(/_/g, ' '))}`] : []),
+					...(data.source ? [`${bold('Source:')} ${titleCase(data.source.replace(/_/g, ' '))}`] : []),
+					...(data.startDate ? [`${bold('Aired:')} ${getDate(data.startDate, data.endDate!)}`] : []),
 					...(data.duration
 						? [`${bold('Length:')} ${getDurationLength(data.duration, data.episodes!, data.format!)}`]
 						: []),
@@ -163,15 +143,15 @@ export default class extends CoreCommand {
 							]
 						: []),
 					...(data.isAdult ? [`${bold('Explicit content:')} ${data.isAdult ? 'Yes' : 'No'}`] : []),
-					`${bold('Popularity:')} ${formatNumber(data.popularity!)}`,
-					...(data.characters?.nodes?.length
-						? [`${bold('Characters:')} ${formatArray(data.characters.nodes.map((item) => item!.name!.full!))}`]
+					...(data.popularity ? [`${bold('Popularity:')} ${formatNumber(data.popularity)}`] : []),
+					...(data.characters?.length
+						? [`${bold('Characters:')} ${formatArray(data.characters.map((item) => item.name!.userPreferred!))}`]
 						: []),
 					...(data.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length
 						? [
 								`${bold('Networks:')} ${data.externalLinks
-									.filter((item) => item?.type === 'STREAMING')
-									.map((item) => hyperlink(item?.site as string, item?.url as string))
+									.filter((item) => item.type === 'STREAMING')
+									.map((item) => hyperlink(item.site, item.url!))
 									.join(', ')}`
 							]
 						: [])
@@ -204,9 +184,7 @@ function getDurationLength(duration: number, episodes: number, format: string): 
 }
 
 function getDate(startDate: string, endDate: string | null): string {
-	if (startDate === endDate) return moment(new Date(startDate)).format('MMM D, YYYY');
-	else if (startDate && !endDate) return `${moment(new Date(startDate)).format('MMM D, YYYY')} to ?`;
-	return `${moment(new Date(startDate)).format('MMM D, YYYY')} to ${moment(new Date(endDate as string)).format(
-		'MMM D, YYYY'
-	)}`;
+	if (startDate === endDate) return startDate;
+	else if (startDate && !endDate) return `${startDate} to ?`;
+	return `${startDate} to ${endDate}`;
 }
