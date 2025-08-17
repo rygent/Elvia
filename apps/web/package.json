@@ -29,7 +29,7 @@
     "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.23.12",
     "fumadocs-core": "^15.6.11",
-    "fumadocs-mdx": "^11.7.4",
+    "fumadocs-mdx": "^11.7.5",
     "geist": "^1.4.2",
     "lucide-react": "^0.539.0",
     "next": "^15.4.6",
