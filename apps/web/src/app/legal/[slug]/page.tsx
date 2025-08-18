@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { components } from '@/components/mdx';
 import { legal } from '@/lib/mdx';
+import { formatDate } from '@/lib/utils';
 import { TOC, TOCInline, TOCInlineItems, TOCInlineTrigger, TOCItems, TOCProvider } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 
@@ -16,12 +17,9 @@ export default async function LegalPage({ params }: LegalProps) {
 	if (!page) notFound();
 
 	const doc = page.data;
-	const { body: MDXContent, toc } = await doc.load();
-	const lastModified = new Date(doc.date!).toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+	const { body: MDXContent, lastModified, toc } = await doc.load();
+
+	const lastUpdated = formatDate(new Date(lastModified!));
 
 	return (
 		<TOCProvider toc={toc} single={false}>
@@ -33,7 +31,7 @@ export default async function LegalPage({ params }: LegalProps) {
 				<article className="flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 pt-8 pb-8 max-md:pb-16 md:px-6 xl:mx-auto">
 					<div className="space-y-2">
 						<h1 className={cn('font-cal text-3xl font-bold tracking-wide')}>{doc.title}</h1>
-						<p className="text-muted-foreground text-base text-balance">Last updated: {lastModified}</p>
+						<p className="text-muted-foreground text-base text-balance">Last updated: {lastUpdated}</p>
 					</div>
 					<div className="prose text-foreground/80 text-justify">
 						<MDXContent components={components} />
