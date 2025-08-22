@@ -31,17 +31,17 @@ export function OpenSource({ headline, subheadline, className }: OpenSourceProps
 
 	return (
 		<section className={cn('mx-auto max-w-7xl text-center', className)}>
-			<h2 className="font-cal mx-auto mt-8 max-w-2xl text-3xl font-bold lg:text-5xl">{headline}</h2>
-			<p className="text-muted-foreground mx-auto mt-2 max-w-2xl px-6 text-lg">{subheadline}</p>
+			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">{headline}</h2>
+			<p className="mx-auto mt-2 max-w-2xl px-6 text-lg text-muted-foreground">{subheadline}</p>
 			<div className="mt-5 flex justify-center gap-x-2">
 				<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer" className="group flex">
-					<div className="bg-secondary text-secondary-foreground group-hover:bg-secondary/80 flex h-10 items-center justify-center space-x-2 rounded-md px-4">
+					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80">
 						<Github className="h-[18px] w-[18px]" />
 						<span>Star us on GitHub</span>
 					</div>
 					<div className="flex items-center">
-						<div className="border-secondary group-hover:border-secondary/80 h-4 w-4 border-y-8 border-r-8 border-l-0 border-solid border-y-transparent group-hover:border-y-transparent" />
-						<div className="bg-secondary text-secondary-foreground group-hover:bg-secondary/80 flex h-10 items-center rounded-md px-4 font-medium">
+						<div className="h-4 w-4 border-y-8 border-r-8 border-l-0 border-solid border-secondary border-y-transparent group-hover:border-secondary/80 group-hover:border-y-transparent" />
+						<div className="flex h-10 items-center rounded-md bg-secondary px-4 font-medium text-secondary-foreground group-hover:bg-secondary/80">
 							{stars}
 						</div>
 					</div>

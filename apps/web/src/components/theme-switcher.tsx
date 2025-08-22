@@ -42,7 +42,7 @@ export function ThemeSwitcher({ className, size }: ThemeSwitcherProps) {
 			onValueChange={(value: string) => {
 				if (value) setTheme(value);
 			}}
-			className={cn('shadow-border gap-0 rounded-full shadow-[0_0_0_1px]', className)}
+			className={cn('gap-0 rounded-full shadow-[0_0_0_1px] shadow-border', className)}
 		>
 			{themes.map((item, index) => (
 				<ToggleGroupItem key={index} value={item.name.toLowerCase()} className={cn(switchVariants({ size }))}>

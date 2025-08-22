@@ -48,19 +48,19 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 			>
 				<div
 					data-position="top"
-					className="bg-foreground absolute h-[1.5px] w-[14px] translate-y-[-3.5px] transition-transform group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:rotate-45"
+					className="absolute h-[1.5px] w-[14px] translate-y-[-3.5px] bg-foreground transition-transform group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:rotate-45"
 					style={{ transitionDuration: '160ms', transitionTimingFunction: 'cubic-bezier(0.31,0.05,0.43,1.02)' }}
 				></div>
 				<div
 					data-position="bottom"
-					className="bg-foreground absolute h-[1.5px] w-[14px] translate-y-[3.5px] transition-transform group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:-rotate-45"
+					className="absolute h-[1.5px] w-[14px] translate-y-[3.5px] bg-foreground transition-transform group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:-rotate-45"
 					style={{ transitionDuration: '160ms', transitionTimingFunction: 'cubic-bezier(0.31,0.05,0.43,1.02)' }}
 				></div>
 			</Button>
 			{open && (
 				<Portal
 					className={cn(
-						'bg-background/95 supports-[backdrop-filter]:bg-background/90 fixed top-14 right-0 z-50 flex h-dvh w-screen flex-col overflow-visible px-3 backdrop-blur transition-transform'
+						'fixed top-14 right-0 z-50 flex h-dvh w-screen flex-col overflow-visible bg-background/95 px-3 backdrop-blur transition-transform supports-[backdrop-filter]:bg-background/90'
 					)}
 				>
 					<ScrollArea>
@@ -72,13 +72,13 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 						<section className="py-3">
 							<Accordion type="multiple" className="px-3">
 								<AccordionItem value="resources" className="border-none">
-									<AccordionTrigger className="text-muted-foreground h-10 py-2 text-base hover:no-underline">
+									<AccordionTrigger className="h-10 py-2 text-base text-muted-foreground hover:no-underline">
 										Resources
 									</AccordionTrigger>
 									<AccordionContent className="pb-0">
 										<Button
 											variant="link"
-											className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-0 text-base hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											onClick={closeMenu}
 											asChild
 										>
@@ -86,7 +86,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 										</Button>
 										<Button
 											variant="link"
-											className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-0 text-base hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											onClick={closeMenu}
 											asChild
 										>
@@ -94,7 +94,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 										</Button>
 										<Button
 											variant="link"
-											className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-0 text-base hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											onClick={closeMenu}
 											asChild
 										>
@@ -103,13 +103,13 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="legal" className="border-none">
-									<AccordionTrigger className="text-muted-foreground h-10 py-2 text-base hover:no-underline">
+									<AccordionTrigger className="h-10 py-2 text-base text-muted-foreground hover:no-underline">
 										Legal
 									</AccordionTrigger>
 									<AccordionContent className="pb-0">
 										<Button
 											variant="link"
-											className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-0 text-base hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											onClick={closeMenu}
 											asChild
 										>
@@ -117,7 +117,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 										</Button>
 										<Button
 											variant="link"
-											className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-0 text-base hover:no-underline"
+											className="h-10 w-full justify-start px-0 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 											onClick={closeMenu}
 											asChild
 										>
@@ -128,7 +128,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 							</Accordion>
 							<Button
 								variant="link"
-								className="text-muted-foreground hover:text-foreground h-10 w-full justify-start px-3 text-base hover:no-underline"
+								className="h-10 w-full justify-start px-3 text-base text-muted-foreground hover:text-foreground hover:no-underline"
 								onClick={closeMenu}
 								asChild
 							>

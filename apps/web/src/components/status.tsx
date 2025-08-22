@@ -41,7 +41,7 @@ export function StatusBadge() {
 
 	return (
 		<Link href="https://elvia.betteruptime.com/" target="_blank" rel="noopener" className="-ml-2 h-fit w-fit pl-2">
-			<div className="hover:bg-accent ease-ease -ml-2 inline-flex h-[34px] max-w-[300px] items-center gap-1.5 rounded-md p-2 transition-all duration-200">
+			<div className="-ml-2 inline-flex h-[34px] max-w-[300px] items-center gap-1.5 rounded-md p-2 transition-all duration-200 ease-ease hover:bg-accent">
 				<span className={cn('relative inline-flex h-2 w-2 rounded-full', color)} />
 				<p
 					className={cn('overflow-x-hidden overflow-y-hidden text-start text-sm text-nowrap text-ellipsis', textColor)}

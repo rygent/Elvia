@@ -5,7 +5,7 @@ import { Header } from '@/components/header';
 
 export default function HomeLayout({ children }: Readonly<React.PropsWithChildren>) {
 	return (
-		<main className="bg-background flex min-h-svh flex-col">
+		<main className="flex min-h-svh flex-col bg-background">
 			<Banner dismissable />
 			<Header />
 			{children}

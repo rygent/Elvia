@@ -21,7 +21,7 @@ export function Header({ className, ...props }: React.ComponentProps<'header'>) 
 	return (
 		<header
 			className={cn(
-				'bg-background/95 supports-[backdrop-filter]:bg-background/90 sticky top-0 z-50 w-full px-6 backdrop-blur max-md:px-4',
+				'sticky top-0 z-50 w-full bg-background/95 px-6 backdrop-blur supports-[backdrop-filter]:bg-background/90 max-md:px-4',
 				className
 			)}
 			{...props}
@@ -29,7 +29,7 @@ export function Header({ className, ...props }: React.ComponentProps<'header'>) 
 			<nav className="mx-auto flex h-14 w-full max-w-7xl flex-row items-center">
 				<Link href="/" className="flex items-center justify-center gap-x-2 lg:mr-5">
 					<Logo className="h-5 w-5" />
-					<span className="font-cal inline-block text-xl leading-5 font-bold tracking-wide whitespace-nowrap">
+					<span className="inline-block font-cal text-xl leading-5 font-bold tracking-wide whitespace-nowrap">
 						{siteConfig.global.name}
 					</span>
 				</Link>
@@ -58,20 +58,20 @@ function NavigationBar({ ...props }: React.ComponentProps<typeof NavigationMenu>
 		<NavigationMenu viewport={false} data-viewport {...props}>
 			<NavigationMenuList>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="text-muted-foreground hover:bg-accent/50 focus:bg-accent/50 bg-transparent">
+					<NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50">
 						Resources
 					</NavigationMenuTrigger>
 					<NavigationMenuContent className="p-0">
 						<ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 							<li className="row-span-3">
 								<NavigationMenuLink
-									className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none select-none hover:bg-transparent focus:shadow-md"
+									className="flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none select-none hover:bg-transparent focus:shadow-md"
 									asChild
 								>
 									<Link href="/invite">
-										<Logo className="text-foreground size-8" />
-										<div className="font-cal mt-4 mb-2 text-lg font-medium">{siteConfig.global.name}</div>
-										<p className="text-muted-foreground text-sm leading-tight">{siteConfig.global.description}</p>
+										<Logo className="size-8 text-foreground" />
+										<div className="mt-4 mb-2 font-cal text-lg font-medium">{siteConfig.global.name}</div>
+										<p className="text-sm leading-tight text-muted-foreground">{siteConfig.global.description}</p>
 									</Link>
 								</NavigationMenuLink>
 							</li>
@@ -91,7 +91,7 @@ function NavigationBar({ ...props }: React.ComponentProps<typeof NavigationMenu>
 					<NavigationMenuLink
 						className={cn(
 							navigationMenuTriggerStyle(),
-							'text-muted-foreground hover:bg-accent/50 focus:bg-accent/50 flex-row bg-transparent'
+							'flex-row bg-transparent text-muted-foreground hover:bg-accent/50 focus:bg-accent/50'
 						)}
 						asChild
 					>
@@ -111,12 +111,12 @@ function ListItem({ title, children, href, ...props }: React.ComponentPropsWitho
 	return (
 		<li {...props}>
 			<NavigationMenuLink
-				className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none"
+				className="block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
 				asChild
 			>
 				<Link href={href}>
 					<div className="text-sm leading-none font-medium">{title}</div>
-					<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">{children}</p>
+					<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
 				</Link>
 			</NavigationMenuLink>
 		</li>

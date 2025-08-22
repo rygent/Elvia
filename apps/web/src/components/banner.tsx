@@ -23,7 +23,7 @@ export function Banner({ dismissable = false }: BannerProps) {
 					`
 				}}
 			/>
-			<div className="bg-card relative top-0 z-20 flex h-10 items-center overflow-hidden px-6 max-md:px-4 print:hidden [body.banner_&]:hidden">
+			<div className="relative top-0 z-20 flex h-10 items-center overflow-hidden bg-card px-6 max-md:px-4 print:hidden [body.banner_&]:hidden">
 				{/* Background */}
 				<div
 					className="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl dark:opacity-40"

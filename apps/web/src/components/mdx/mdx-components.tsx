@@ -31,7 +31,7 @@ export const components: MDXComponents = {
 		<a className={cn('font-medium text-blue-600 underline', className)} {...props} />
 	),
 	p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-		<p className={cn('text-foreground/80 leading-7 [&:not(:first-child)]:mt-6', className)} {...props} />
+		<p className={cn('leading-7 text-foreground/80 [&:not(:first-child)]:mt-6', className)} {...props} />
 	),
 	ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
 		<ul className={cn('my-6 ml-6 list-disc', className)} {...props} />
@@ -76,7 +76,7 @@ export const components: MDXComponents = {
 		<pre className={cn('mt-6 mb-4 max-h-[650px] overflow-x-auto rounded-lg border', className)} {...props} />
 	),
 	code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-		<code className={cn('bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm', className)} {...props} />
+		<code className={cn('relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm', className)} {...props} />
 	),
 	Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
 		<Link className={cn('font-medium text-blue-600 underline', className)} {...props} />

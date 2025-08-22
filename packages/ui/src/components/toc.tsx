@@ -15,7 +15,7 @@ function TOCProvider({ ...props }: React.ComponentProps<typeof Primitive.AnchorP
 }
 
 function TOCItemsEmpty() {
-	return <div className="bg-card text-muted-foreground rounded-lg border p-3 text-xs">No Headings</div>;
+	return <div className="rounded-lg border bg-card p-3 text-xs text-muted-foreground">No Headings</div>;
 }
 
 function TOCScrollArea({
@@ -111,7 +111,7 @@ function TOCItems({
 				>
 					<TOCThumb
 						containerRef={containerRef}
-						className="bg-foreground mt-(--thumb-top) h-(--thumb-height) transition-all"
+						className="mt-(--thumb-top) h-(--thumb-height) bg-foreground transition-all"
 					/>
 				</div>
 			) : null}
@@ -154,7 +154,7 @@ function TOCItem({
 				paddingInlineStart: getItemOffset(item.depth)
 			}}
 			className={cn(
-				'prose text-muted-foreground data-[active=true]:text-foreground relative py-1.5 text-sm [overflow-wrap:anywhere] transition-colors first:pt-0 last:pb-0'
+				'relative prose py-1.5 text-sm [overflow-wrap:anywhere] text-muted-foreground transition-colors first:pt-0 last:pb-0 data-[active=true]:text-foreground'
 			)}
 		>
 			{offset !== upperOffset ? (
@@ -168,7 +168,7 @@ function TOCItem({
 			) : null}
 			<div
 				className={cn(
-					'bg-foreground/10 absolute inset-y-0 w-px',
+					'absolute inset-y-0 w-px bg-foreground/10',
 					offset !== upperOffset && 'top-1.5',
 					offset !== lowerOffset && 'bottom-1.5'
 				)}
@@ -185,7 +185,7 @@ function TOC({ children, className }: React.HTMLAttributes<HTMLDivElement>) {
 	return (
 		<div className={cn('sticky top-14 h-[calc(100vh-3.5rem)] pt-4 pb-2', className)}>
 			<div className="flex h-full max-w-full flex-col gap-3 pe-4">
-				<h3 className="text-muted-foreground -ms-0.5 inline-flex items-center gap-1.5 text-sm">
+				<h3 className="-ms-0.5 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
 					<Text className="size-4" />
 					On this page
 				</h3>
@@ -232,7 +232,7 @@ function TOCInline({ className, children }: React.HTMLAttributes<HTMLDivElement>
 				>
 					<nav
 						className={cn(
-							'bg-background/90 supports-[backdrop-filter]:bg-background/90 backdrop-blur transition-colors'
+							'bg-background/90 backdrop-blur transition-colors supports-[backdrop-filter]:bg-background/90'
 						)}
 						ref={ref}
 					>
@@ -267,13 +267,13 @@ function TOCInlineTrigger({
 			On this page
 			<ChevronRight
 				className={cn(
-					'text-muted-foreground size-4 shrink-0 transition-all',
+					'size-4 shrink-0 text-muted-foreground transition-all',
 					!current && 'opacity-0',
 					open ? 'rotate-90' : '-ms-1.5'
 				)}
 			/>
 			<span
-				className={cn('text-muted-foreground -ms-1.5 truncate transition-opacity', (!current || open) && 'opacity-0')}
+				className={cn('-ms-1.5 truncate text-muted-foreground transition-opacity', (!current || open) && 'opacity-0')}
 			>
 				{current}
 			</span>

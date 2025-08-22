@@ -14,7 +14,7 @@ export function Heading<T extends HeadingTypes>({
 	const As = as ?? 'h1';
 
 	return (
-		<As className={cn('text-foreground scroll-m-28', className)} {...props}>
+		<As className={cn('scroll-m-28 text-foreground', className)} {...props}>
 			{children}
 		</As>
 	);

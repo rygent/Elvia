@@ -31,9 +31,9 @@ export default async function LegalPage({ params }: LegalProps) {
 				<article className="flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 pt-8 pb-8 max-md:pb-16 md:px-6 xl:mx-auto">
 					<div className="space-y-2">
 						<h1 className={cn('font-cal text-3xl font-bold tracking-wide')}>{doc.title}</h1>
-						<p className="text-muted-foreground text-base text-balance">Last updated: {lastUpdated}</p>
+						<p className="text-base text-balance text-muted-foreground">Last updated: {lastUpdated}</p>
 					</div>
-					<div className="prose text-foreground/80 text-justify">
+					<div className="prose text-justify text-foreground/80">
 						<MDXContent components={components} />
 					</div>
 				</article>

@@ -24,15 +24,15 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 					target="_blank"
 					className={cn(
 						badgeVariants({ variant: 'outline' }),
-						'hover:bg-secondary cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 [&>svg]:size-[15px]'
+						'cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary [&>svg]:size-[15px]'
 					)}
 				>
 					<Sparkles strokeWidth={1.5} className="scale-x-[-1]" />
 					<span>Star us on GitHub</span>
 					<ArrowRight strokeWidth={1.5} />
 				</Link>
-				<h1 className="font-cal mt-4 text-4xl text-balance md:text-5xl lg:text-6xl">{headline}</h1>
-				<h2 className="text-muted-foreground mt-2 text-base text-balance md:text-lg lg:text-xl">{subheadline}</h2>
+				<h1 className="mt-4 font-cal text-4xl text-balance md:text-5xl lg:text-6xl">{headline}</h1>
+				<h2 className="mt-2 text-base text-balance text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>
 				<div className="mt-5 flex flex-col gap-4 sm:flex-row">
 					{cta[0] && (
 						<Button size="lg" variant="default" className="text-base shadow-none" asChild>
