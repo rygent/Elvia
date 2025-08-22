@@ -20,7 +20,8 @@ const config = {
 		'.css$'
 	],
 	importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-	importOrderTypeScriptVersion: '5.8.2',
+	importOrderTypeScriptVersion: '5.9.2',
+	tailwindStylesheet: './src/styles/globals.css',
 	plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss']
 };
 

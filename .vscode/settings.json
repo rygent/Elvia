@@ -1,6 +1,6 @@
 {
   "css.validate": false,
-  "eslint.validate": ["typescript"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.useFlatConfig": true,
   "search.exclude": {
     "**/node_modules": true,
