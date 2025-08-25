@@ -55,6 +55,16 @@ export const siteConfig = {
 			]
 		}
 	},
+	footer: {
+		nav: {
+			items: [
+				{ url: '/', label: 'Home' },
+				{ url: '/', label: 'Documentation' },
+				{ url: '/', label: 'Commands' },
+				{ url: '/', label: 'Blog' }
+			]
+		}
+	},
 	homePage: {
 		hero: {
 			headline: 'Everything you need\n to manage Discord server',

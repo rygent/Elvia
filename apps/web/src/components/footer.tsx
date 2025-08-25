@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Logo } from '@/components/icons';
 import { type ThemeSwitcherProps } from '@/components/theme-switcher';
+import { siteConfig } from '@/config';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';
 import { ChevronDown } from 'lucide-react';
 
@@ -16,16 +17,9 @@ const ThemeSwitcher = dynamic<ThemeSwitcherProps>(
 	}
 );
 
-const navigation = [
-	{ name: 'Home', href: '/' },
-	{ name: 'Docs', href: '/docs' },
-	{ name: 'Commands', href: '/commands' },
-	{ name: 'Blog', href: '/blog' }
-];
-
 const legal = [
-	{ name: 'Terms of Service', href: '/legal/terms' },
-	{ name: 'Privacy Policy', href: '/legal/privacy' }
+	{ url: '/legal/terms', label: 'Terms of Service' },
+	{ url: '/legal/privacy', label: 'Privacy Policy' }
 ];
 
 export function Footer() {
@@ -46,14 +40,14 @@ export function Footer() {
 						<Logo className="h-[15px] w-[15px]" />
 					</Link>
 					<ul className="grid w-full list-none grid-cols-2 items-start gap-4 min-[601px]:flex min-[601px]:items-center">
-						{navigation.map((item, index) => (
+						{siteConfig.footer.nav.items.map((item, index) => (
 							<li key={index} className="text-sm">
 								<Button
 									variant="link"
 									className="h-fit justify-start p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
 									asChild
 								>
-									<Link href={item.href}>{item.name}</Link>
+									<Link href={item.url}>{item.label}</Link>
 								</Button>
 							</li>
 						))}
@@ -102,7 +96,7 @@ function Legal() {
 							className="h-10 w-full justify-start rounded-md px-2 text-sm font-normal text-foreground hover:bg-accent hover:no-underline"
 							asChild
 						>
-							<Link href={item.href}>{item.name}</Link>
+							<Link href={item.url}>{item.label}</Link>
 						</Button>
 					</PopoverClose>
 				))}
