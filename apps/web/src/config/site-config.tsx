@@ -65,20 +65,5 @@ export const siteConfig = {
 				{ url: '/', label: 'Blog' }
 			]
 		}
-	},
-	homePage: {
-		hero: {
-			headline: 'Everything you need\n to manage Discord server',
-			subheadline: 'The most powerful multipurpose Discord app.',
-			cta: [
-				{ label: 'Invite App', href: '/invite' },
-				{ label: 'Support Server', href: '/discord' }
-			]
-		},
-		cta: {
-			headline: 'Proudly open-source',
-			subheadline:
-				'Our source code is available on GitHub - feel free to read, review, or contribute to it however you want!'
-		}
 	}
 };

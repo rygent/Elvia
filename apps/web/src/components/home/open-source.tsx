@@ -8,13 +8,7 @@ import { api, externalLink } from '@/config';
 import { cn } from '@elvia/utils';
 import useSWR from 'swr';
 
-interface OpenSourceProps {
-	headline: string;
-	subheadline: string;
-	className?: string;
-}
-
-export function OpenSource({ headline, subheadline, className }: OpenSourceProps) {
+export function OpenSource({ className, ...props }: React.ComponentProps<'section'>) {
 	const { data } = useSWR<{ stargazers_count: number }>(api.github, (url: string) =>
 		fetcher(url, { headers: { Accept: 'application/vnd.github+json' } })
 	);
@@ -30,9 +24,11 @@ export function OpenSource({ headline, subheadline, className }: OpenSourceProps
 	}, [data]);
 
 	return (
-		<section className={cn('mx-auto max-w-7xl text-center', className)}>
-			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">{headline}</h2>
-			<p className="mx-auto mt-2 max-w-2xl px-6 text-lg text-muted-foreground">{subheadline}</p>
+		<section className={cn('mx-auto max-w-7xl text-center', className)} {...props}>
+			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">Proudly open-source</h2>
+			<p className="mx-auto mt-2 max-w-2xl px-6 text-lg text-muted-foreground">
+				Our source code is available on GitHub - feel free to read, review, or contribute to it however you want!
+			</p>
 			<div className="mt-5 flex justify-center gap-x-2">
 				<Link href={externalLink.github} target="_blank" rel="noreferrer" className="group flex">
 					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80">

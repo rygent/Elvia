@@ -6,18 +6,9 @@ import { badgeVariants, Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
-interface HeroProps {
-	headline: string;
-	subheadline: string;
-	cta: {
-		label: string;
-		href: string;
-	}[];
-}
-
-export function Hero({ headline, subheadline, cta }: HeroProps) {
+export function Hero({ className, ...props }: React.ComponentProps<'section'>) {
 	return (
-		<section className="mx-auto flex max-w-7xl items-start justify-between">
+		<section className={cn('mx-auto flex max-w-7xl items-start justify-between', className)} {...props}>
 			<div className="pt-4">
 				<Link
 					href={externalLink.github}
@@ -31,19 +22,19 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 					<span>Star us on GitHub</span>
 					<ArrowRight strokeWidth={1.5} />
 				</Link>
-				<h1 className="mt-4 font-cal text-4xl text-balance md:text-5xl lg:text-6xl">{headline}</h1>
-				<h2 className="mt-2 text-base text-balance text-muted-foreground md:text-lg lg:text-xl">{subheadline}</h2>
+				<h1 className="mt-4 font-cal text-4xl text-balance md:text-5xl lg:text-6xl">
+					Everything you need to manage Discord server
+				</h1>
+				<h2 className="mt-2 text-base text-balance text-muted-foreground md:text-lg lg:text-xl">
+					The most powerful multipurpose Discord app.
+				</h2>
 				<div className="mt-5 flex flex-col gap-4 sm:flex-row">
-					{cta[0] && (
-						<Button size="lg" variant="default" className="text-base shadow-none" asChild>
-							<Link href={cta[0].href}>{cta[0].label}</Link>
-						</Button>
-					)}
-					{cta[1] && (
-						<Button size="lg" variant="outline" className="text-base shadow-none" asChild>
-							<Link href={cta[1].href}>{cta[1].label}</Link>
-						</Button>
-					)}
+					<Button size="lg" variant="default" className="text-base shadow-none" asChild>
+						<Link href="/invite">Invite App</Link>
+					</Button>
+					<Button size="lg" variant="outline" className="text-base shadow-none" asChild>
+						<Link href="/discord">Support Server</Link>
+					</Button>
 				</div>
 			</div>
 			<div className="hidden px-10 lg:block xl:px-20">
