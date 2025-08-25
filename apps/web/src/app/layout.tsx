@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { ThemeProvider } from '@/components/theme-provider';
 import { calSans, geistMono, geistSans } from '@/styles/fonts';
+import { Provider } from '@/app/provider';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
 import { Analytics } from '@vercel/analytics/next';
@@ -53,9 +53,7 @@ export default function RootLayout({ children }: Readonly<React.PropsWithChildre
 				className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, calSans.variable)}
 				suppressHydrationWarning
 			>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange enableColorScheme>
-					{children}
-				</ThemeProvider>
+				<Provider>{children}</Provider>
 				<Analytics />
 				<SpeedInsights />
 			</body>
