@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { Animation } from '@/components/home/hero/animation';
-import { siteConfig } from '@/config';
+import { externalLink } from '@/config';
 import { badgeVariants, Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { ArrowRight, Sparkles } from 'lucide-react';
@@ -20,7 +20,7 @@ export function Hero({ headline, subheadline, cta }: HeroProps) {
 		<section className="mx-auto flex max-w-7xl items-start justify-between">
 			<div className="pt-4">
 				<Link
-					href={siteConfig.external.links.github}
+					href={externalLink.github}
 					target="_blank"
 					className={cn(
 						badgeVariants({ variant: 'outline' }),

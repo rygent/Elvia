@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Github } from '@/components/icons';
 import { fetcher } from '@/lib/fetcher';
-import { siteConfig } from '@/config';
+import { api, externalLink } from '@/config';
 import { cn } from '@elvia/utils';
 import useSWR from 'swr';
 
@@ -15,7 +15,7 @@ interface OpenSourceProps {
 }
 
 export function OpenSource({ headline, subheadline, className }: OpenSourceProps) {
-	const { data } = useSWR<{ stargazers_count: number }>('https://api.github.com/repos/rygent/Elvia', (url: string) =>
+	const { data } = useSWR<{ stargazers_count: number }>(api.github, (url: string) =>
 		fetcher(url, { headers: { Accept: 'application/vnd.github+json' } })
 	);
 
@@ -34,7 +34,7 @@ export function OpenSource({ headline, subheadline, className }: OpenSourceProps
 			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">{headline}</h2>
 			<p className="mx-auto mt-2 max-w-2xl px-6 text-lg text-muted-foreground">{subheadline}</p>
 			<div className="mt-5 flex justify-center gap-x-2">
-				<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer" className="group flex">
+				<Link href={externalLink.github} target="_blank" rel="noreferrer" className="group flex">
 					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80">
 						<Github className="h-[18px] w-[18px]" />
 						<span>Star us on GitHub</span>

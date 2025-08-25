@@ -9,7 +9,7 @@ import {
 	NavbarMenuLink,
 	NavbarMenuTrigger
 } from '@/components/ui/navbar';
-import { siteConfig } from '@/config';
+import { externalLink, siteConfig } from '@/config';
 import { Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { ExternalLink } from 'lucide-react';
@@ -65,7 +65,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 						className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-4"
 						asChild
 					>
-						<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer">
+						<Link href={externalLink.github} target="_blank" rel="noreferrer">
 							<Github className="h-4 w-4" />
 							<span className="sr-only">GitHub</span>
 						</Link>
@@ -79,7 +79,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 					className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-4"
 					asChild
 				>
-					<Link href={siteConfig.external.links.github} target="_blank" rel="noreferrer">
+					<Link href={externalLink.github} target="_blank" rel="noreferrer">
 						<Github className="h-4 w-4" />
 						<span className="sr-only">GitHub</span>
 					</Link>

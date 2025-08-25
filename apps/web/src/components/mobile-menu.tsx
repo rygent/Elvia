@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Topgg } from '@/components/icons';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { MenuBar, MenuBarContent, MenuBarLink, MenuBarTrigger } from '@/components/ui/menubar';
-import { siteConfig } from '@/config';
+import { externalLink, siteConfig } from '@/config';
 import { Button, ScrollArea } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 
@@ -62,7 +62,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 						className="-me-1.5 h-8 w-8 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:!size-5"
 						asChild
 					>
-						<Link href={siteConfig.external.links.topgg} target="_blank" rel="noreferrer">
+						<Link href={externalLink.topgg} target="_blank" rel="noreferrer">
 							<Topgg />
 							<span className="sr-only">Top.gg</span>
 						</Link>

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { siteConfig } from '@/config';
+import { externalLink } from '@/config';
 
 export function GET() {
-	return NextResponse.redirect(siteConfig.external.links.discord);
+	return NextResponse.redirect(externalLink.discord);
 }
