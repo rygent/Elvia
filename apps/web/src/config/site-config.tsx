@@ -31,9 +31,6 @@ export const siteConfig = {
 		}
 	},
 	header: {
-		banner: {
-			text: 'We are going live soon! Get notified when launched.'
-		},
 		menu: {
 			label: 'Documentation',
 			items: [
