@@ -2,6 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Animation } from '@/components/home/hero/animation';
 import { externalLink } from '@/config';
+import { env } from '@/env';
 import { badgeVariants, Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { ArrowRight, Sparkles } from 'lucide-react';
@@ -30,10 +31,10 @@ export function Hero({ className, ...props }: React.ComponentProps<'section'>) {
 				</h2>
 				<div className="mt-5 flex flex-col gap-4 sm:flex-row">
 					<Button size="lg" variant="default" className="text-base shadow-none" asChild>
-						<Link href="/invite">Invite App</Link>
+						<Link href={externalLink.invite.replace('{{client_id}}', env.DISCORD_APPLICATION_ID)}>Invite App</Link>
 					</Button>
 					<Button size="lg" variant="outline" className="text-base shadow-none" asChild>
-						<Link href="/discord">Support Server</Link>
+						<Link href={externalLink.discord}>Support Server</Link>
 					</Button>
 				</div>
 			</div>

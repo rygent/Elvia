@@ -6,12 +6,12 @@ export const externalLink = {
 	topgg: 'https://top.gg/bot/614645495779819551/vote',
 	invite:
 		'https://discord.com/api/oauth2/authorize?client_id={{client_id}}&permissions=10189542386807&scope=applications.commands%20bot'
-};
+} as const;
 
 export const api = {
 	github: 'https://api.github.com/repos/rygent/Elvia',
 	betterstack: 'https://uptime.betterstack.com/api/v2/monitor-groups/1384070/monitors'
-};
+} as const;
 
 export const siteConfig = {
 	global: {

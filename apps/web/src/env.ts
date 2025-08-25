@@ -3,8 +3,10 @@ import { z } from 'zod';
 
 export const env = createEnv({
 	server: {
-		DISCORD_APPLICATION_ID: z.string().min(17).max(20),
 		BETTERSTACK_API_KEY: z.string()
+	},
+	shared: {
+		DISCORD_APPLICATION_ID: z.string().min(17).max(20)
 	},
 	runtimeEnv: {
 		DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID,
