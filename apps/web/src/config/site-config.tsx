@@ -1,3 +1,5 @@
+import { Album, Book, Terminal } from 'lucide-react';
+
 export const siteConfig = {
 	global: {
 		url: 'https://elvia.vercel.app',
@@ -32,11 +34,27 @@ export const siteConfig = {
 		banner: {
 			text: 'We are going live soon! Get notified when launched.'
 		},
+		menu: {
+			label: 'Documentation',
+			items: [
+				{
+					url: '/',
+					name: 'Getting started',
+					description: 'Add interactive experience to your docs.',
+					icon: Book
+				},
+				{
+					url: '/',
+					name: 'Commands',
+					description: 'Add interactive experience to your docs.',
+					icon: Terminal
+				}
+			]
+		},
 		nav: {
-			links: [
-				{ href: '/docs', label: 'Docs' },
-				{ href: '/commands', label: 'Commands' },
-				{ href: '/blog', label: 'Blog' }
+			items: [
+				{ url: '/', label: 'Blog', icon: Album, external: false },
+				{ url: 'https://top.gg/bot/614645495779819551/vote', label: 'Vote on Top.gg', external: true }
 			]
 		}
 	},

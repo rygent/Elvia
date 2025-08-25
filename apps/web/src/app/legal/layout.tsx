@@ -6,9 +6,7 @@ export default function LegalLayout({ children }: Readonly<React.PropsWithChildr
 	return (
 		<main className="flex min-h-svh flex-col bg-background">
 			<Header />
-			<div className="relative mx-auto max-w-7xl items-start lg:grid lg:grid-cols-[1fr_300px] lg:gap-10">
-				{children}
-			</div>
+			{children}
 			<Footer />
 		</main>
 	);
