@@ -1,5 +1,15 @@
 @import "@elvia/ui/globals.css";
 
+:root {
+	--primary: oklch(0.5586 0.2245 262.14);
+	--sidebar-primary: oklch(0.5586 0.2245 262.14);
+}
+
+.dark {
+	--primary: oklch(0.7681 0.1106 259.66);
+	--sidebar-primary: oklch(0.7681 0.1106 259.66);
+}
+
 @theme inline {
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
