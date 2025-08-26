@@ -11,6 +11,5 @@ export * from '@elvia/ui/components/popover';
 export * from '@elvia/ui/components/scroll-area';
 export * from '@elvia/ui/components/select';
 export * from '@elvia/ui/components/separator';
-export * from '@elvia/ui/components/toc';
 export * from '@elvia/ui/components/toggle-group';
 export * from '@elvia/ui/components/toggle';

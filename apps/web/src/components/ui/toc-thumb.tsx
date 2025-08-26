@@ -5,9 +5,9 @@ import * as Primitive from 'fumadocs-core/toc';
 import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 
-type TOCThumbType = [top: number, height: number];
+type TocThumb = [top: number, height: number];
 
-function calc(container: HTMLElement, active: string[]): TOCThumbType {
+function calc(container: HTMLElement, active: string[]): TocThumb {
 	if (active.length === 0 || container.clientHeight === 0) {
 		return [0, 0];
 	}
@@ -27,17 +27,17 @@ function calc(container: HTMLElement, active: string[]): TOCThumbType {
 	return [upper, lower - upper];
 }
 
-function update(element: HTMLElement, info: TOCThumbType): void {
+function update(element: HTMLElement, info: TocThumb): void {
 	element.style.setProperty('--thumb-top', `${info[0]}px`);
 	element.style.setProperty('--thumb-height', `${info[1]}px`);
 }
 
-function TOCThumb({
+function TocThumb({
 	containerRef,
 	...props
 }: React.HTMLAttributes<HTMLDivElement> & {
 	containerRef: React.RefObject<HTMLElement | null>;
-}): React.ReactNode {
+}) {
 	const active = Primitive.useActiveAnchors();
 	const thumbRef = React.useRef<HTMLDivElement>(null);
 
@@ -69,4 +69,4 @@ function TOCThumb({
 	return <div ref={thumbRef} role="none" {...props} />;
 }
 
-export { type TOCThumbType, TOCThumb };
+export { TocThumb };
