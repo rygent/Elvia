@@ -19,9 +19,9 @@ export function Hero({ className, ...props }: React.ComponentProps<'section'>) {
 						'cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary [&>svg]:size-[15px]'
 					)}
 				>
-					<Sparkles strokeWidth={1.5} className="scale-x-[-1]" />
+					<Sparkles className="scale-x-[-1]" />
 					<span>Star us on GitHub</span>
-					<ArrowRight strokeWidth={1.5} />
+					<ArrowRight />
 				</Link>
 				<h1 className="mt-4 font-cal text-4xl text-balance md:text-5xl lg:text-6xl">
 					Everything you need to manage Discord server

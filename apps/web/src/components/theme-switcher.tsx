@@ -4,12 +4,12 @@ import * as React from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Laptop, Moon, Sun } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 const themes = [
 	{ name: 'Light', icon: Sun },
-	{ name: 'System', icon: Laptop },
+	{ name: 'System', icon: Monitor },
 	{ name: 'Dark', icon: Moon }
 ];
 
@@ -46,7 +46,7 @@ export function ThemeSwitcher({ className, size }: ThemeSwitcherProps) {
 		>
 			{themes.map((item, index) => (
 				<ToggleGroupItem key={index} value={item.name.toLowerCase()} className={cn(switchVariants({ size }))}>
-					<item.icon size={24} strokeWidth={2} />
+					<item.icon size={24} fill="currentColor" />
 					<span className="sr-only">{item.name}</span>
 				</ToggleGroupItem>
 			))}

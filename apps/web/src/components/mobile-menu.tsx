@@ -18,11 +18,11 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 				>
 					<span
 						data-position="top"
-						className="absolute h-[1.5px] w-[14px] translate-y-[-3.5px] rounded-full bg-foreground transition-transform duration-[160ms] [transition-timing-function:cubic-bezier(0.31,0.05,0.43,1.02)] group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:rotate-45"
+						className="absolute h-[1.5px] w-[14px] translate-y-[-3.5px] bg-foreground transition-transform duration-[160ms] [transition-timing-function:cubic-bezier(0.31,0.05,0.43,1.02)] group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:rotate-45"
 					/>
 					<span
 						data-position="bottom"
-						className="absolute h-[1.5px] w-[14px] translate-y-[3.5px] rounded-full bg-foreground transition-transform duration-[160ms] [transition-timing-function:cubic-bezier(0.31,0.05,0.43,1.02)] group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:-rotate-45"
+						className="absolute h-[1.5px] w-[14px] translate-y-[3.5px] bg-foreground transition-transform duration-[160ms] [transition-timing-function:cubic-bezier(0.31,0.05,0.43,1.02)] group-data-[state=open]:translate-y-0 group-data-[state=open]:scale-110 group-data-[state=open]:-rotate-45"
 					/>
 					<span className="sr-only">Toggle menu</span>
 				</Button>
@@ -55,11 +55,11 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 							</MenuBarLink>
 						))}
 				</ScrollArea>
-				<div className="-ms-1.5 flex flex-row items-center gap-1.5 max-sm:mt-2">
+				<div className="-ms-1 flex flex-row items-center gap-1.5 max-sm:mt-2">
 					<Button
 						variant="ghost"
 						size="icon"
-						className="-me-1.5 h-8 w-8 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:!size-5"
+						className="-me-1 h-8 w-8 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:!size-5"
 						asChild
 					>
 						<Link href={externalLink.topgg} target="_blank" rel="noreferrer">

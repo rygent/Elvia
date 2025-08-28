@@ -1,4 +1,4 @@
-import { Album, Book, Terminal } from 'lucide-react';
+import { BookMarked, Newspaper, SquareSlash } from 'lucide-react';
 
 export const externalLink = {
 	github: 'https://github.com/Rygent/Elvia',
@@ -38,20 +38,20 @@ export const siteConfig = {
 				{
 					url: '/',
 					name: 'Getting started',
-					description: 'Add interactive experience to your docs.',
-					icon: Book
+					description: 'Learn to use Elvia on your discord server.',
+					icon: BookMarked
 				},
 				{
 					url: '/',
 					name: 'Commands',
-					description: 'Add interactive experience to your docs.',
-					icon: Terminal
+					description: 'Learn to use commands.',
+					icon: SquareSlash
 				}
 			]
 		},
 		nav: {
 			items: [
-				{ url: '/', label: 'Blog', icon: Album, external: false },
+				{ url: '/', label: 'Blog', icon: Newspaper, external: false },
 				{ url: externalLink.topgg, label: 'Vote on Top.gg', external: true }
 			]
 		}

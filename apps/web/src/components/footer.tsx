@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Logo } from '@/components/icons';
+import { Elvia } from '@/components/icons';
 import { type ThemeSwitcherProps } from '@/components/theme-switcher';
 import { siteConfig } from '@/config';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';
@@ -37,7 +37,7 @@ export function Footer() {
 			>
 				<div className="flex flex-row items-center gap-x-4 max-[750px]:flex-col max-[750px]:items-start max-[750px]:gap-y-6">
 					<Link href="/" className="flex h-fit">
-						<Logo className="h-[15px] w-[15px]" />
+						<Elvia size={15} />
 					</Link>
 					<ul className="grid w-full list-none grid-cols-2 items-start gap-4 min-[601px]:flex min-[601px]:items-center">
 						{siteConfig.footer.nav.items.map((item, index) => (
@@ -81,7 +81,7 @@ function Legal() {
 					className="h-fit cursor-pointer justify-start gap-[2px] !p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
 				>
 					Legal
-					<ChevronDown size={16} strokeWidth={1.5} />
+					<ChevronDown size={16} />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent

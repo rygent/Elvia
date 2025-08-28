@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Github, Logo } from '@/components/icons';
+import { Elvia, Github } from '@/components/icons';
 import { MobileMenu } from '@/components/mobile-menu';
 import {
 	NavbarMenu,
@@ -12,13 +12,13 @@ import {
 import { externalLink, siteConfig } from '@/config';
 import { Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<NavbarMenu className={className} {...props}>
 			<Link href="/" className="inline-flex items-center gap-x-2.5">
-				<Logo className="h-5 w-5" />
+				<Elvia size={20} />
 				<span className="inline-block font-cal text-xl leading-5 font-bold tracking-wide whitespace-nowrap">
 					{siteConfig.global.name}
 				</span>
@@ -31,7 +31,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 							<NavbarMenuLink
 								key={index}
 								href={item.url}
-								className="rounded-lg border bg-card p-3 duration-100 ease-ease hover:bg-accent/80 hover:text-accent-foreground"
+								className="rounded-lg border bg-card p-3 duration-100 ease-ease hover:bg-accent/80 hover:text-accent-foreground [&_svg]:!size-7"
 							>
 								<item.icon className="mb-2 rounded-md border bg-secondary p-1 text-secondary-foreground" />
 								<p className="font-medium">{item.name}</p>
@@ -45,14 +45,14 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 						<NavbarMenuLink
 							href={item.url}
 							className={cn(
-								'inline-flex flex-row items-center p-2 text-muted-foreground duration-100 ease-ease hover:bg-transparent',
-								item.external && 'gap-x-1'
+								'inline-flex flex-row p-2 text-muted-foreground transition-colors duration-100 ease-ease hover:bg-transparent',
+								item.external && 'gap-x-px'
 							)}
 							target={item.external ? '_blank' : undefined}
 							rel={item.external ? 'noreferrer' : undefined}
 						>
 							<p className="text-sm">{item.label}</p>
-							{item.external && <ExternalLink strokeWidth={1.5} className="size-3.5 text-current" />}
+							{item.external && <ArrowUpRight size={10} className="top-0.5 text-current" />}
 						</NavbarMenuLink>
 					</NavbarMenuItem>
 				))}
@@ -62,11 +62,11 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 					<Button
 						variant="ghost"
 						size="icon"
-						className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-4"
+						className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 						asChild
 					>
 						<Link href={externalLink.github} target="_blank" rel="noreferrer">
-							<Github className="h-4 w-4" />
+							<Github />
 							<span className="sr-only">GitHub</span>
 						</Link>
 					</Button>
@@ -76,11 +76,11 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:size-4"
+					className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 					asChild
 				>
 					<Link href={externalLink.github} target="_blank" rel="noreferrer">
-						<Github className="h-4 w-4" />
+						<Github />
 						<span className="sr-only">GitHub</span>
 					</Link>
 				</Button>

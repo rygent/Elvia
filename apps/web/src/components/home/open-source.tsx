@@ -31,8 +31,8 @@ export function OpenSource({ className, ...props }: React.ComponentProps<'sectio
 			</p>
 			<div className="mt-5 flex justify-center gap-x-2">
 				<Link href={externalLink.github} target="_blank" rel="noreferrer" className="group flex">
-					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80">
-						<Github className="h-[18px] w-[18px]" />
+					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80 [&_svg]:size-5">
+						<Github />
 						<span>Star us on GitHub</span>
 					</div>
 					<div className="flex items-center">
