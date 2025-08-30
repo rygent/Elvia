@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Animation } from '@/components/home/hero/animation';
+import { Animation } from '@/components/layout/home/animation';
 import { externalLink } from '@/config';
 import { env } from '@/env';
 import { badgeVariants, Button } from '@elvia/ui';

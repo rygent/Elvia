@@ -1,5 +1,5 @@
-import { Hero } from '@/components/home/hero';
-import { OpenSource } from '@/components/home/open-source';
+import { Hero } from '@/components/layout/home/hero';
+import { OpenSource } from '@/components/layout/home/open-source';
 
 export default function HomePage() {
 	return (
