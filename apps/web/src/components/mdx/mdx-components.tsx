@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Heading } from '@/components/mdx/heading';
 import { cn } from '@elvia/utils';
-import type { MDXComponents } from 'mdx/types';
+import { type MDXComponents } from 'mdx/types';
 
 export const components: MDXComponents = {
 	h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (

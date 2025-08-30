@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LastUpdated } from '@/components/last-updated';
 import { components } from '@/components/mdx';
