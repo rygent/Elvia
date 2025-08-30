@@ -1,10 +1,14 @@
-import { defineCollections, defineConfig, frontmatterSchema } from 'fumadocs-mdx/config';
+import { defineCollections, defineConfig } from 'fumadocs-mdx/config';
+import { z } from 'zod';
 
 export const legal = defineCollections({
 	type: 'doc',
 	dir: 'content/legal',
-	async: true,
-	schema: frontmatterSchema.omit({ icon: true })
+	async: false,
+	schema: z.object({
+		title: z.string(),
+		description: z.string().optional()
+	})
 });
 
 export default defineConfig({

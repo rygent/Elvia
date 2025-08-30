@@ -18,11 +18,16 @@ export default async function LegalPage({ params }: LegalProps) {
 	if (!page) notFound();
 
 	const doc = page.data;
-	const { body: MDXContent, lastModified, toc } = await doc.load();
+	const { body: MDXContent, lastModified, toc } = doc;
 
 	return (
 		<TocProvider toc={toc} single={false}>
-			<div className="relative mx-auto mt-14 max-w-7xl items-start lg:grid lg:grid-cols-[1fr_300px] lg:gap-10">
+			<div
+				className={cn(
+					'relative mx-auto mt-14 max-w-7xl items-start lg:grid lg:gap-10',
+					toc.length > 0 && 'lg:grid-cols-[1fr_300px]'
+				)}
+			>
 				<div className="flex w-full min-w-0 flex-col">
 					<TocPopover className="lg:hidden">
 						<TocPopoverTrigger />
@@ -32,7 +37,7 @@ export default async function LegalPage({ params }: LegalProps) {
 					</TocPopover>
 					<article className="flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 pt-12 pb-8 max-md:pb-16 md:px-6 md:pt-8 xl:mx-auto">
 						<div className="space-y-2">
-							<h1 className={cn('font-cal text-3xl font-bold tracking-wide')}>{doc.title}</h1>
+							<h1 className="font-cal text-3xl font-bold tracking-wide">{doc.title}</h1>
 							<LastUpdated date={lastModified!} className="text-balance" />
 						</div>
 						<div className="prose text-justify text-foreground/80">
@@ -40,7 +45,7 @@ export default async function LegalPage({ params }: LegalProps) {
 						</div>
 					</article>
 				</div>
-				{toc.length && (
+				{toc.length > 0 && (
 					<div className="sticky top-14 h-[calc(100vh-3.5rem)] pt-8 pb-2 max-lg:hidden">
 						<div className="flex h-full max-w-full flex-col pe-4">
 							<TocTitle />
