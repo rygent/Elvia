@@ -7,11 +7,7 @@ import { TocPopover, TocPopoverContent, TocPopoverTrigger } from '@/components/u
 import { legal } from '@/lib/mdx';
 import { cn } from '@elvia/utils';
 
-interface LegalProps {
-	params: Promise<{ slug: string }>;
-}
-
-export default async function LegalPage({ params }: LegalProps) {
+export default async function LegalPage({ params }: PageProps<'/legal/[slug]'>) {
 	const { slug } = await params;
 
 	const page = legal.getPage([slug]);
@@ -58,7 +54,7 @@ export default async function LegalPage({ params }: LegalProps) {
 	);
 }
 
-export async function generateMetadata({ params }: LegalProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<'/legal/[slug]'>): Promise<Metadata> {
 	const { slug } = await params;
 
 	const page = legal.getPage([slug]);
@@ -76,7 +72,7 @@ export async function generateMetadata({ params }: LegalProps): Promise<Metadata
 	};
 }
 
-export function generateStaticParams(): Awaited<LegalProps['params']>[] {
+export function generateStaticParams(): Awaited<PageProps<'/legal/[slug]'>['params']>[] {
 	return legal.getPages().map((page) => ({
 		slug: page.slugs[0]!
 	}));
