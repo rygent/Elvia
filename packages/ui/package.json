@@ -44,7 +44,6 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
-    "@tailwindcss/typography": "^0.5.16",
     "class-variance-authority": "^0.7.1",
     "fumadocs-core": "^15.7.2",
     "lucide-react": "^0.541.0",
