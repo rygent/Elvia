@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { type Metadata, type Viewport } from 'next';
-import { calSans, geistMono, geistSans } from '@/styles/fonts';
+import { calSans, geistMono, geistSans } from '@/lib/fonts';
 import { Provider } from '@/app/provider';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
