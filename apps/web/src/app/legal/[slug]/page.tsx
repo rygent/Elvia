@@ -4,7 +4,7 @@ import { LastUpdated } from '@/components/last-updated';
 import { components } from '@/components/mdx';
 import { TocItems, TocProvider, TocTitle } from '@/components/ui/toc';
 import { TocPopover, TocPopoverContent, TocPopoverTrigger } from '@/components/ui/toc-popover';
-import { legal } from '@/lib/mdx';
+import { legal } from '@/lib/source';
 import { cn } from '@elvia/utils';
 
 export default async function LegalPage({ params }: PageProps<'/legal/[slug]'>) {

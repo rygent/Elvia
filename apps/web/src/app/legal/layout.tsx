@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TreeContextProvider } from '@/components/context/tree';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { legal } from '@/lib/mdx';
+import { legal } from '@/lib/source';
 
 export default function LegalLayout({ children }: Readonly<React.PropsWithChildren>) {
 	return (
