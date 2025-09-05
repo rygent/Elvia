@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Link from 'next/link';
 import { Topgg } from '@/components/icons';
+import { Link } from '@/components/link';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { MenuBar, MenuBarContent, MenuBarLink, MenuBarTrigger } from '@/components/ui/menubar';
 import { externalLink, siteConfig } from '@/config';
@@ -62,7 +62,7 @@ export function MobileMenu({ className, ...props }: React.ComponentProps<typeof 
 						className="-me-1 h-8 w-8 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:!size-5"
 						asChild
 					>
-						<Link href={externalLink.topgg} target="_blank" rel="noreferrer">
+						<Link href={externalLink.topgg} external>
 							<Topgg />
 							<span className="sr-only">Top.gg</span>
 						</Link>

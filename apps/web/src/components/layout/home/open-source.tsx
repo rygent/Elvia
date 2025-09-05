@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
 import { Github } from '@/components/icons';
+import { Link } from '@/components/link';
 import { fetcher } from '@/lib/fetcher';
 import { api, externalLink } from '@/config';
 import { cn } from '@elvia/utils';
@@ -30,7 +30,7 @@ export function OpenSource({ className, ...props }: React.ComponentProps<'sectio
 				Our source code is available on GitHub - feel free to read, review, or contribute to it however you want!
 			</p>
 			<div className="mt-5 flex justify-center gap-x-2">
-				<Link href={externalLink.github} target="_blank" rel="noreferrer" className="group flex">
+				<Link href={externalLink.github} className="group flex" external>
 					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80 [&_svg]:size-5">
 						<Github />
 						<span>Star us on GitHub</span>

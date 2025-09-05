@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/components/link';
 import { Heading } from '@/components/mdx/heading';
 import { cn } from '@elvia/utils';
 import { type MDXComponents } from 'mdx/types';
@@ -17,7 +17,7 @@ const defaultComponents: MDXComponents = {
 	h5: ({ className, ...props }: React.ComponentProps<'h5'>) => <Heading as="h5" className={className} {...props} />,
 	h6: ({ className, ...props }: React.ComponentProps<'h6'>) => <Heading as="h4" className={className} {...props} />,
 	a: ({ className, href, ...props }: React.ComponentProps<'a'>) => (
-		<Link className={className} href={href || ''} {...props} />
+		<Link className={className} href={href} {...props} />
 	),
 	img: ({ className, src, height, width, alt, ...props }: React.ComponentProps<'img'>) => (
 		<Image

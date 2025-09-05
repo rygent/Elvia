@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { Elvia } from '@/components/icons';
+import { Link } from '@/components/link';
 import { type ThemeSwitcherProps } from '@/components/theme-switcher';
 import { siteConfig } from '@/config';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';

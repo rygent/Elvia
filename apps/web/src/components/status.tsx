@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from '@/components/link';
 import { fetcher } from '@/lib/fetcher';
 import { type MonitorStatus } from '@/types/betterstack';
 import { cn } from '@elvia/utils';
@@ -40,7 +40,7 @@ export function StatusBadge() {
 	}, [data, error]);
 
 	return (
-		<Link href="https://elvia.betteruptime.com/" target="_blank" rel="noopener" className="-ml-2 h-fit w-fit pl-2">
+		<Link href="https://elvia.betteruptime.com/" className="-ml-2 h-fit w-fit pl-2" external>
 			<div className="-ml-2 inline-flex h-[34px] max-w-[300px] items-center gap-1.5 rounded-md p-2 transition-all duration-200 ease-ease hover:bg-accent">
 				<span className={cn('relative inline-flex h-2 w-2 rounded-full', color)} />
 				<p

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from '@/components/link';
 import { NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 
@@ -13,10 +13,10 @@ function MenuBarContent({ className, ...props }: React.ComponentProps<typeof Nav
 	return <NavigationMenuContent className={cn('flex flex-col p-4', className)} {...props} />;
 }
 
-function MenuBarLink({ className, children, ...props }: React.ComponentProps<typeof NavigationMenuLink>) {
+function MenuBarLink({ className, href, children, ...props }: React.ComponentProps<typeof NavigationMenuLink>) {
 	return (
 		<NavigationMenuLink className={cn('flex flex-row transition-colors', className)} asChild {...props}>
-			<Link href={props.href!}>{children}</Link>
+			<Link href={href}>{children}</Link>
 		</NavigationMenuLink>
 	);
 }

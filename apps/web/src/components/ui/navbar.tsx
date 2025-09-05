@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from '@/components/link';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -43,10 +43,10 @@ function NavbarMenuItem({ className, ...props }: React.ComponentProps<typeof Nav
 	return <NavigationMenuItem className={cn(className)} {...props} />;
 }
 
-function NavbarMenuLink({ className, children, ...props }: React.ComponentProps<typeof NavigationMenuLink>) {
+function NavbarMenuLink({ className, href, children, ...props }: React.ComponentProps<typeof NavigationMenuLink>) {
 	return (
 		<NavigationMenuLink className={cn('flex flex-col transition-colors', className)} asChild {...props}>
-			<Link href={props.href!}>{children}</Link>
+			<Link href={href}>{children}</Link>
 		</NavigationMenuLink>
 	);
 }

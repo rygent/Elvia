@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Link from 'next/link';
 import { Elvia, Github } from '@/components/icons';
+import { Link } from '@/components/link';
 import { MobileMenu } from '@/components/mobile-menu';
 import {
 	NavbarMenu,
@@ -65,7 +65,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 						className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 						asChild
 					>
-						<Link href={externalLink.github} target="_blank" rel="noreferrer">
+						<Link href={externalLink.github} external>
 							<Github />
 							<span className="sr-only">GitHub</span>
 						</Link>
@@ -79,7 +79,7 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 					className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 					asChild
 				>
-					<Link href={externalLink.github} target="_blank" rel="noreferrer">
+					<Link href={externalLink.github} external>
 						<Github />
 						<span className="sr-only">GitHub</span>
 					</Link>
