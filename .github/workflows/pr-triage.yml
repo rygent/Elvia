@@ -15,7 +15,7 @@ jobs:
     if: github.event.action != 'edited'
     steps:
       - name: Automatically label PR
-        uses: actions/labeler@v5
+        uses: actions/labeler@v6
         with:
           configuration-path: .github/pr-labeler.yml
           repo-token: ${{ secrets.GITHUB_TOKEN }}
