@@ -23,7 +23,6 @@ jobs:
   validate-title:
     name: Validate title
     runs-on: ubuntu-latest
-    if: github.event.action != 'synchronize'
     steps:
       - name: Validate pull request title
         run: |
