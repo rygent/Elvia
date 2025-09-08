@@ -11,7 +11,7 @@ interface LinkProps extends React.ComponentProps<'a'> {
 export function Link({
 	children,
 	href = '#',
-	external = href.match(/^\w+:/) || href.startsWith('//'),
+	external = Boolean(/^\w+:/.exec(href)) || href.startsWith('//'),
 	prefetch,
 	ref,
 	...props
