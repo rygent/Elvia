@@ -1,4 +1,4 @@
-import tseslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 import common from 'eslint-config-terrax/common';
 import node from 'eslint-config-terrax/node';
 import typescript from 'eslint-config-terrax/typescript';
@@ -20,7 +20,6 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 				tsconfigRootDir: import.meta.dirname
 			}
 		},
-		/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 		rules: {
 			'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
 			'@typescript-eslint/naming-convention': [
@@ -49,7 +48,6 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 
 const reactRuleset = merge(...react, {
 	files: [`apps/web/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
 	}
@@ -57,7 +55,6 @@ const reactRuleset = merge(...react, {
 
 const nextRuleset = merge(...next, {
 	files: [`apps/web/**/*${commonFiles}`],
-	/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.Rules} */
 	rules: {
 		'@next/next/no-html-link-for-pages': 'off'
 	}
@@ -67,7 +64,7 @@ const prettierRuleset = merge(...prettier, {
 	files: [`**/*${commonFiles}`]
 });
 
-export default tseslint.config(
+export default defineConfig(
 	...mainRulesets,
 	{
 		languageOptions: {
