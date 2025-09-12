@@ -48,6 +48,11 @@
       "semanticCommitScope": null
     },
     {
+      "matchDepTypes": ["uses-with"],
+      "matchManagers": ["github-actions"],
+      "enabled": false
+    },
+    {
       "matchPackageNames": ["node"],
       "matchManagers": ["npm"],
       "matchDepTypes": ["engines"],
