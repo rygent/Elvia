@@ -3,13 +3,12 @@ import {
 	type APIMessageComponentEmoji,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	InteractionContextType,
 	MessageFlags,
 	OAuth2Scopes,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, LinkButtonBuilder } from '@discordjs/builders';
 import { parseEmoji, type ChatInputCommandInteraction } from 'discord.js';
 import { Emojis } from '@/lib/utils/constants.js';
 
@@ -54,9 +53,8 @@ export default class extends CoreCommand {
 			`Just click on the button below.`
 		].join('\n');
 
-		const button = new ActionRowBuilder<ButtonBuilder>().setComponents(
-			new ButtonBuilder()
-				.setStyle(ButtonStyle.Link)
+		const button = new ActionRowBuilder().addLinkButtonComponents(
+			new LinkButtonBuilder()
 				.setEmoji(parseEmoji(Emojis.Bot) as APIMessageComponentEmoji)
 				.setLabel('Add to Server')
 				.setURL(link)

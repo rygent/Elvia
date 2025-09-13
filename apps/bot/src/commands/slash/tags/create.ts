@@ -8,7 +8,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { InteractionCollector, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { slugify } from '@/lib/utils/functions.js';
@@ -39,31 +39,33 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Create a new server tag')
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId('name')
-						.setStyle(TextInputStyle.Short)
-						.setLabel("What's the name?")
-						.setRequired(true)
-						.setMaxLength(100)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the name?")
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`name-${modalId}`)
+							.setStyle(TextInputStyle.Short)
+							.setRequired(true)
+							.setMaxLength(100)
+					)
 			)
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId('content')
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the content?")
-						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
-						.setRequired(true)
-						.setMaxLength(2000)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel("What's the content?")
+					.setDescription('PRO TIP: can use discord markdown syntax.')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`content-${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setRequired(true)
+							.setMaxLength(2000)
+					)
 			);
 
 		await interaction.showModal(modal);
 
-		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
+		const filter = (i: ModalSubmitInteraction<'cached'>) => i.customId === modalId;
 		const collector = new InteractionCollector(this.client, {
 			filter,
 			interactionType: InteractionType.ModalSubmit,
@@ -71,8 +73,8 @@ export default class extends CoreCommand {
 		});
 
 		collector.on('collect', async (i) => {
-			const names = i.fields.getTextInputValue('name');
-			const content = i.fields.getTextInputValue('content');
+			const names = i.fields.getTextInputValue(`name-${modalId}`);
+			const content = i.fields.getTextInputValue(`content-${modalId}`);
 
 			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
 			if (tags) {
