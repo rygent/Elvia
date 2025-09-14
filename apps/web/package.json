@@ -56,5 +56,5 @@
     "@emotion/is-prop-valid": "^1.4.0",
     "@fumadocs/mdx-remote": "^1.4.0"
   },
-  "packageManager": "pnpm@10.15.1"
+  "packageManager": "pnpm@10.16.1"
 }
