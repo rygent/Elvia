@@ -15,6 +15,7 @@ import {
 } from '@discordjs/builders';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext } from '@discordjs/formatters';
+import { type Internationalization } from '@elvia/i18next';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -36,7 +37,7 @@ export default class extends CoreCommand {
 		});
 	}
 
-	public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
+	public execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>, i18n: Internationalization) {
 		const user = interaction.options.getUser('user') ?? interaction.user;
 
 		const container = new ContainerBuilder()
@@ -50,7 +51,9 @@ export default class extends CoreCommand {
 			)
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
+				new TextDisplayBuilder().setContent(
+					subtext(i18n.text('common:powered_by', { service: this.client.user.username }))
+				)
 			);
 
 		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });

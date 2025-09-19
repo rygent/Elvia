@@ -1,4 +1,5 @@
 import { BitField, Client, PermissionsBitField, type ClientOptions, type PermissionsString } from 'discord.js';
+import { Internationalization, type InternationalizationOptions } from '@elvia/i18next';
 import { Collection } from '@discordjs/collection';
 import { CoreCommand } from '@/lib/command.js';
 import { CoreContext } from '@/lib/context.js';
@@ -14,6 +15,7 @@ const jiti = createJiti(import.meta.url);
 
 export interface CoreClientOptions extends ClientOptions {
 	settings?: CoreSettings;
+	i18next?: InternationalizationOptions;
 }
 
 export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
@@ -24,6 +26,8 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public events: Collection<string, CoreEvent>;
 
 	public cooldowns: Collection<string, Collection<string, number>>;
+
+	public i18n: Internationalization;
 
 	public version: string;
 	public defaultPermissions: Readonly<BitField<PermissionsString, bigint>>;
@@ -38,6 +42,8 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 		this.events = new Collection();
 
 		this.cooldowns = new Collection();
+
+		this.i18n = new Internationalization(options.i18next);
 
 		this.version = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf8')).version;
 		this.defaultPermissions = new PermissionsBitField(this.settings.defaultPermissions).freeze();
@@ -112,6 +118,7 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	}
 
 	public async start(token = this.settings.token) {
+		await this.i18n.init();
 		await this.loadCommands();
 		await this.loadContextMenus();
 		await this.loadEvents();
