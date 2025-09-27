@@ -33,9 +33,9 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@types/node": "^24.4.0",
-    "eslint": "^9.35.0",
-    "eslint-formatter-pretty": "^6.0.1",
+    "@types/node": "^24.5.2",
+    "eslint": "^9.36.0",
+    "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2"
@@ -43,5 +43,5 @@
   "files": [
     "./dist/"
   ],
-  "packageManager": "pnpm@10.16.1"
+  "packageManager": "pnpm@10.17.0"
 }

@@ -32,7 +32,7 @@
     "body-parser": "^2.2.0",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
-    "discord-api-types": "^0.38.24",
+    "discord-api-types": "^0.38.26",
     "discord.js": "^14.22.1",
     "express": "^5.1.0",
     "globby": "^14.1.0",
@@ -47,9 +47,9 @@
     "@types/express": "^5.0.3",
     "@types/express-serve-static-core": "^5.0.7",
     "@types/http-errors": "^2.0.5",
-    "@types/node": "^24.4.0",
-    "eslint": "^9.35.0",
-    "eslint-formatter-pretty": "^6.0.1",
+    "@types/node": "^24.5.2",
+    "eslint": "^9.36.0",
+    "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2"
@@ -57,5 +57,5 @@
   "files": [
     "./dist/"
   ],
-  "packageManager": "pnpm@10.16.1"
+  "packageManager": "pnpm@10.17.0"
 }
