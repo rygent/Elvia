@@ -28,7 +28,7 @@
     "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.23.22",
     "fumadocs-core": "^15.8.1",
-    "fumadocs-mdx": "^11.9.1",
+    "fumadocs-mdx": "^11.10.1",
     "geist": "^1.5.1",
     "lucide-react": "^0.544.0",
     "next": "^15.5.4",
