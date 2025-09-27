@@ -69,8 +69,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0
       '@rygent/spotify':
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       '@sapphire/discord-utilities':
         specifier: ^3.5.0
         version: 3.5.0
@@ -1807,8 +1807,8 @@ packages:
     resolution: {integrity: sha512-mXey+Q+oDakqOA9Ti/utC1yeJvROoziwvJD67Xy/N1ff4XLjAYCKvZyUBLxUuOgVBNegQXIkkVtTtLuVFjKtcQ==}
     engines: {node: ^18.18.0 || ^20.11.0 || >=22.11.0}
 
-  '@rygent/spotify@1.2.0':
-    resolution: {integrity: sha512-i9uJWWqbn830WwfbVELBomqBrtdOvLct1TOmuj4DuydeS7Kn11XtyzV2FQxrQ/Rp1Znr1AeWUCifNaMHViQwkA==}
+  '@rygent/spotify@1.2.1':
+    resolution: {integrity: sha512-f+DB+Bg5Iw0vZtTdJWx8jtUCMMuGkKXY8DVxjr02qdzpEk4v3XtVyGLsMeO7khBDVZqoiL09ZtpV5FAV1vOBiw==}
     engines: {node: ^18.18.0 || ^20.11.0 || >=22.11.0}
 
   '@sapphire/async-queue@1.5.5':
@@ -6731,9 +6731,7 @@ snapshots:
     dependencies:
       html-entities: 2.6.0
 
-  '@rygent/spotify@1.2.0':
-    dependencies:
-      undici: 6.21.3
+  '@rygent/spotify@1.2.1': {}
 
   '@sapphire/async-queue@1.5.5': {}
 
