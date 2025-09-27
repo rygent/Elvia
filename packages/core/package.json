@@ -37,7 +37,7 @@
     "express": "^5.1.0",
     "globby": "^14.1.0",
     "http-errors": "^2.0.0",
-    "jiti": "^2.5.1",
+    "jiti": "^2.6.0",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
