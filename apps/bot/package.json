@@ -51,7 +51,7 @@
     "@swc/core": "^1.13.20",
     "@types/moment-duration-format": "^2.2.6",
     "@types/node": "^24.5.2",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "eslint-formatter-pretty": "^6.0.1",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
