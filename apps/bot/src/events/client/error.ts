@@ -11,6 +11,7 @@ export default class extends CoreEvent {
 	}
 
 	public run(error: Error) {
+		if (error.name === 'DiscordAPIError[10062]') return;
 		logger.error(`${error.name}: ${error.message}`, { error });
 	}
 }
