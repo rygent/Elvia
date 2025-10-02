@@ -3,16 +3,16 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType,
-	InteractionType,
 	MessageFlags,
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
-import { InteractionCollector, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
+import { type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { slugify } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
+import { pickRandom } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
 
 export default class extends CoreCommand {
@@ -35,16 +35,25 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
+		const tips = [
+			'💡 Pro tip: Use **bold**, *italic*, or ~~strikethrough~~ for emphasis.',
+			'💡 Pro tip: Add inline code with `backticks` or multi-line code with ```blocks```.',
+			'💡 Pro tip: Create lists using `- item` or `1. item`.',
+			'💡 Pro tip: Use > for blockquotes to highlight text.',
+			'💡 Pro tip: Use headers with #, ##, ### to structure text.'
+		];
+
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
-			.setTitle('Create a new server tag')
+			.setTitle('Create a Tag')
 			.addComponents(
 				new ActionRowBuilder<TextInputBuilder>().setComponents(
 					new TextInputBuilder()
-						.setCustomId('name')
+						.setCustomId(`name:${modalId}`)
 						.setStyle(TextInputStyle.Short)
-						.setLabel("What's the name?")
+						.setLabel('Name')
+						.setPlaceholder('E.g. rules, faq, welcome')
 						.setRequired(true)
 						.setMaxLength(100)
 				)
@@ -52,10 +61,10 @@ export default class extends CoreCommand {
 			.addComponents(
 				new ActionRowBuilder<TextInputBuilder>().setComponents(
 					new TextInputBuilder()
-						.setCustomId('content')
+						.setCustomId(`content:${modalId}`)
 						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the content?")
-						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
+						.setLabel('Content')
+						.setPlaceholder(pickRandom(tips))
 						.setRequired(true)
 						.setMaxLength(2000)
 				)
@@ -64,37 +73,28 @@ export default class extends CoreCommand {
 		await interaction.showModal(modal);
 
 		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, {
-			filter,
-			interactionType: InteractionType.ModalSubmit,
-			max: 1
-		});
+		const submitted = await interaction.awaitModalSubmit({ filter, time: 9e5 }).catch(() => null);
+		if (!submitted) return;
 
-		collector.on('collect', async (i) => {
-			const names = i.fields.getTextInputValue('name');
-			const content = i.fields.getTextInputValue('content');
+		await submitted.deferReply({ flags: MessageFlags.Ephemeral });
 
-			const tags = database?.tags.some(({ slug }) => slug === slugify(names));
-			if (tags) {
-				return void i.reply({
-					content: `The tag ${inlineCode(slugify(names))} already exists.`,
-					flags: MessageFlags.Ephemeral
-				});
+		const name = submitted.fields.getTextInputValue(`name:${modalId}`);
+		const content = submitted.fields.getTextInputValue(`content:${modalId}`);
+
+		const isPresent = database?.tags.some(({ slug }) => slug === slugify(name));
+		if (isPresent) {
+			return submitted.editReply({ content: `The tag ${inlineCode(slugify(name))} already exists.` });
+		}
+
+		const tag = await prisma.tag.create({
+			data: {
+				guildId: interaction.guildId,
+				slug: slugify(name),
+				name,
+				content
 			}
-
-			await prisma.tag.create({
-				data: {
-					guildId: interaction.guildId,
-					slug: slugify(names),
-					name: names,
-					content
-				}
-			});
-
-			return void i.reply({
-				content: `Successfully created a new server tag ${inlineCode(slugify(names))}.`,
-				flags: MessageFlags.Ephemeral
-			});
 		});
+
+		return submitted.editReply({ content: `Successfully created a tag ${inlineCode(tag.slug)}.` });
 	}
 }

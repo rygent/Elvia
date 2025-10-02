@@ -4,21 +4,20 @@ import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	InteractionContextType,
-	InteractionType,
 	MessageFlags,
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
-	InteractionCollector,
 	type AutocompleteInteraction,
 	type ChatInputCommandInteraction,
 	type ModalSubmitInteraction
 } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '@/lib/utils/functions.js';
+import { slugify } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
+import { pickRandom } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
 
 export default class extends CoreCommand {
@@ -60,17 +59,37 @@ export default class extends CoreCommand {
 			});
 		}
 
+		const proTips = [
+			'💡 Pro tip: Use **bold**, *italic*, or ~~strikethrough~~ for emphasis.',
+			'💡 Pro tip: Add inline code with `backticks` or multi-line code with ```blocks```.',
+			'💡 Pro tip: Create lists using `- item` or `1. item`.',
+			'💡 Pro tip: Use > for blockquotes to highlight text.',
+			'💡 Pro tip: Use headers with #, ##, ### to structure text.'
+		];
+
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
-			.setTitle('Edit a server tag')
-			.setComponents(
+			.setTitle('Edit Tag')
+			.addComponents(
 				new ActionRowBuilder<TextInputBuilder>().setComponents(
 					new TextInputBuilder()
-						.setCustomId('content')
+						.setCustomId(`name:${modalId}`)
+						.setStyle(TextInputStyle.Short)
+						.setLabel('Name')
+						.setPlaceholder('E.g. rules, faq, welcome')
+						.setValue(tag.name)
+						.setRequired(true)
+						.setMaxLength(100)
+				)
+			)
+			.addComponents(
+				new ActionRowBuilder<TextInputBuilder>().setComponents(
+					new TextInputBuilder()
+						.setCustomId(`content:${modalId}`)
 						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the new content?")
-						.setPlaceholder('PRO TIP: can use discord markdown syntax.')
+						.setLabel('Content')
+						.setPlaceholder(pickRandom(proTips))
 						.setValue(tag.content)
 						.setRequired(true)
 						.setMaxLength(2000)
@@ -80,25 +99,28 @@ export default class extends CoreCommand {
 		await interaction.showModal(modal);
 
 		const filter = (i: ModalSubmitInteraction) => i.customId === modalId;
-		const collector = new InteractionCollector(this.client, {
-			filter,
-			interactionType: InteractionType.ModalSubmit,
-			max: 1
+		const submitted = await interaction.awaitModalSubmit({ filter, time: 9e5 }).catch(() => null);
+		if (!submitted) return;
+
+		await submitted.deferReply({ flags: MessageFlags.Ephemeral });
+
+		const editedName = submitted.fields.getTextInputValue(`name:${modalId}`);
+		const editedContent = submitted.fields.getTextInputValue(`content:${modalId}`);
+
+		const isPresent = database?.tags.some(({ slug }) => slug === slugify(editedName));
+		if (editedName !== tag.name && isPresent) {
+			return submitted.editReply({ content: `The tag ${inlineCode(slugify(editedName))} already exists.` });
+		}
+
+		const updated = await prisma.tag.update({
+			where: { id: tag.id },
+			data: {
+				content: editedContent,
+				...(editedName !== tag.name && { slug: slugify(editedName), name: editedName })
+			}
 		});
 
-		collector.on('collect', async (i) => {
-			const content = i.fields.getTextInputValue('content');
-
-			await prisma.tag.update({
-				where: { id: tag.id },
-				data: { content }
-			});
-
-			return void i.reply({
-				content: `Successfully edited the tag ${inlineCode(name)}.`,
-				flags: MessageFlags.Ephemeral
-			});
-		});
+		return submitted.editReply({ content: `Successfully edited the tag ${inlineCode(updated.slug)}.` });
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
@@ -109,11 +131,11 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
-		if (!choices?.length) return interaction.respond([]);
+		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		if (!options?.length) return interaction.respond([]);
 
-		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
+		const respond = options.map(({ name, slug }) => ({ name, value: slug })).slice(0, 25);
 
-		return interaction.respond(shuffleArray(respond).slice(0, 25));
+		return interaction.respond(respond);
 	}
 }

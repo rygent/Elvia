@@ -12,7 +12,6 @@ import {
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { type AutocompleteInteraction, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
-import { shuffleArray } from '@/lib/utils/functions.js';
 import { prisma } from '@elvia/database';
 import { nanoid } from 'nanoid';
 
@@ -55,14 +54,17 @@ export default class extends CoreCommand {
 			});
 		}
 
-		const cancelId = nanoid();
-		const deleteId = nanoid();
+		const buttonId = nanoid();
 		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(new ButtonBuilder().setCustomId(cancelId).setStyle(ButtonStyle.Secondary).setLabel('Cancel'))
-			.addComponents(new ButtonBuilder().setCustomId(deleteId).setStyle(ButtonStyle.Danger).setLabel('Delete'));
+			.addComponents(
+				new ButtonBuilder().setCustomId(`cancel:${buttonId}`).setStyle(ButtonStyle.Secondary).setLabel('Cancel')
+			)
+			.addComponents(
+				new ButtonBuilder().setCustomId(`delete:${buttonId}`).setStyle(ButtonStyle.Danger).setLabel('Delete')
+			);
 
 		const response = await interaction.reply({
-			content: `Are you sure that you want to delete ${inlineCode(name)}?`,
+			content: `Are you sure want to delete ${inlineCode(name)}?`,
 			components: [button],
 			flags: MessageFlags.Ephemeral,
 			withResponse: true
@@ -71,32 +73,39 @@ export default class extends CoreCommand {
 		const message = response.resource?.message;
 		if (!message?.inGuild()) return;
 
-		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = message.createMessageComponentCollector({
-			filter,
-			componentType: ComponentType.Button,
-			time: 6e4,
-			max: 1
-		});
+		try {
+			const filter = async (i: ButtonInteraction<'cached'>) => {
+				if (i.user.id !== interaction.user.id) {
+					await i.deferUpdate();
+					return false;
+				}
+				return true;
+			};
 
-		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', async (i) => {
-			switch (i.customId) {
-				case cancelId:
-					collector.stop();
-					return void i.update({ content: 'Cancelation of the deletion.', components: [] });
-				case deleteId:
+			const clicked = await message.awaitMessageComponent({
+				componentType: ComponentType.Button,
+				filter,
+				time: 6e4
+			});
+
+			switch (clicked.customId) {
+				case `cancel:${buttonId}`: {
+					return await clicked.update({ content: 'Cancelation of the deletion.', components: [] });
+				}
+				case `delete:${buttonId}`:
 					await prisma.tag.delete({ where: { id: tag.id } });
-
-					return void i.update({ content: `Successfully deleted the tag ${inlineCode(name)}.`, components: [] });
+					return await clicked.update({
+						content: `Successfully deleted the tag ${inlineCode(name)}.`,
+						components: []
+					});
 			}
-		});
-
-		collector.on('end', (collected, reason) => {
-			if (!collected.size && reason === 'time') {
+		} catch (error) {
+			if (error instanceof Error && error.name === 'Error [InteractionCollectorError]') {
 				return interaction.deleteReply();
 			}
-		});
+
+			throw error;
+		}
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
@@ -107,11 +116,11 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const choices = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
-		if (!choices?.length) return interaction.respond([]);
+		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		if (!options?.length) return interaction.respond([]);
 
-		const respond = choices.map(({ name, slug }) => ({ name, value: slug }));
+		const respond = options.map(({ name, slug }) => ({ name, value: slug })).slice(0, 25);
 
-		return interaction.respond(shuffleArray(respond).slice(0, 25));
+		return interaction.respond(respond);
 	}
 }
