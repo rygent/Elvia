@@ -28,25 +28,17 @@
     "directory": "packages/core"
   },
   "dependencies": {
+    "@fastify/compress": "^8.1.0",
+    "@fastify/cors": "^11.1.0",
     "@sapphire/utilities": "^3.18.2",
-    "body-parser": "^2.2.0",
-    "compression": "^1.8.1",
-    "cors": "^2.8.5",
     "discord-api-types": "^0.38.26",
     "discord.js": "^14.22.1",
-    "express": "^5.1.0",
+    "fastify": "^5.6.1",
     "globby": "^14.1.0",
-    "http-errors": "^2.0.0",
     "jiti": "^2.6.0",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.6",
-    "@types/compression": "^1.8.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/express-serve-static-core": "^5.0.7",
-    "@types/http-errors": "^2.0.5",
     "@types/node": "^24.5.2",
     "eslint": "^9.36.0",
     "eslint-formatter-pretty": "^7.0.0",

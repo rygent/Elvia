@@ -1,57 +1,88 @@
-import express, { type Express, type Router } from 'express';
+import { fastify, type FastifyInstance, type FastifyPluginAsync } from 'fastify';
 import { type CoreShardingManager } from '@/lib/sharding.js';
-import errors from '@/server/middlewares/errors.js';
-import headers from '@/server/middlewares/headers.js';
-import noroutes from '@/server/middlewares/noroutes.js';
-import { router } from '@/server/routes/info.js';
+import compression from '@fastify/compress';
+import cors from '@fastify/cors';
 import { globby } from 'globby';
 import { createJiti } from 'jiti';
-import body from 'body-parser';
-import compression from 'compression';
-import cors from 'cors';
-import path from 'node:path';
+import { basename, dirname, parse, sep } from 'node:path';
 
 const jiti = createJiti(import.meta.url);
 
 export class CoreWebserver {
-	public server: Express;
+	public app: FastifyInstance;
 
 	public constructor(manager: CoreShardingManager) {
-		this.server = express();
-		this.server.set('shard-manager', manager);
-		this.server.disable('x-powered-by');
-		this.server.use(body.json());
-		this.server.use(body.urlencoded({ extended: true }));
-		this.server.use(compression());
-		this.server.use(cors());
-		this.server.use(headers);
+		this.app = fastify({ logger: false });
+		this.app.decorate('shardManager', manager);
+		this.app.register(compression);
+		this.app.register(cors);
+
+		// @ts-expect-error TS6133: 'request' is declared but its value is never read.
+		this.app.addHook('onSend', async (request, reply, payload) => {
+			reply.header('X-Frame-Options', 'deny');
+			reply.header('X-XSS-Protection', '1; mode=block');
+			reply.header('X-Content-Type-Options', 'nosniff');
+			reply.header('Content-Security-Policy', "script-src 'self'; object-src 'self'");
+			reply.header('X-Permitted-Cross-Domain-Policies', 'none');
+			reply.header('Referrer-Policy', 'no-referrer');
+
+			return payload;
+		});
 	}
 
 	private get directory() {
-		return `${path.dirname(process.argv[1]!) + path.sep}`.replace(/\\/g, '/');
+		return `${dirname(process.argv[1]!) + sep}`.replace(/\\/g, '/');
 	}
 
-	protected async loadRoutes() {
-		const routeFiles = await globby(`${this.directory}server/routes/**/*.{js,ts}`);
+	protected async loader() {
+		const routes = await globby(`${this.directory}routes/**/*.{js,ts}`);
 
-		for (const file of routeFiles) {
-			let { name } = path.parse(file);
-			const fileName = path.basename(file);
-			if (fileName === 'index.js' || fileName === 'index.ts') {
-				name = path.basename(path.dirname(file));
-			}
-			const route = await jiti.import<{ router: Router }>(file);
-			this.server.use(`/${name}`, route.router);
+		for (const route of routes) {
+			let { name } = parse(route);
+			const [filename] = basename(route).split('.');
+			if (filename?.match('index')) name = basename(dirname(route));
+			const router = await jiti.import<FastifyPluginAsync>(route, { default: true });
+			this.app.register(router, { prefix: `/${name}` });
 		}
 	}
 
 	public async start(port = 8080) {
-		await this.loadRoutes();
+		await this.loader();
 
-		this.server.use('/', router);
-		this.server.use(noroutes);
-		this.server.use(errors);
+		// @ts-expect-error TS6133: 'request' is declared but its value is never read.
+		this.app.get('/', async (request, reply) => {
+			try {
+				const manager = this.app.getDecorator<CoreShardingManager>('shardManager');
 
-		this.server.listen(port);
+				const response = await manager.broadcastEval((client) => ({
+					name: client.user?.displayName,
+					version: process.env.npm_package_version,
+					shards: client.shard?.count
+				}));
+
+				reply.status(200).send(response);
+			} catch {
+				reply.status(500).send();
+			}
+		});
+
+		// eslint-disable-next-line promise/prefer-await-to-callbacks
+		this.app.setErrorHandler((error, request, reply) => {
+			request.log.error(error);
+
+			const status = error.statusCode ?? 500;
+			const name = error.name || 'Internal Server Error';
+			const message = error.message || 'An unknown error occurred';
+
+			reply.status(status).send({ status, name, message });
+		});
+
+		this.app.setNotFoundHandler((request, reply) => {
+			const message = `Route ${request.method}:${request.url} not found`;
+
+			reply.status(404).send({ message });
+		});
+
+		await this.app.listen({ port });
 	}
 }
