@@ -65,10 +65,10 @@ export default class extends CoreCommand {
 			true
 		);
 
-		if (!deletedMessages?.size) return interaction.editReply({ content: 'No messages were deleted.' });
+		if (!deletedMessages?.length) return interaction.editReply({ content: 'No messages were deleted.' });
 
 		return interaction.editReply({
-			content: `${bold(italic(deletedMessages.size.toString()))} message(s) have been successfully deleted!`
+			content: `${bold(italic(deletedMessages.length.toString()))} message(s) have been successfully deleted!`
 		});
 	}
 }

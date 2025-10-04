@@ -81,7 +81,7 @@ export default class extends CoreCommand {
 
 			const section = new TextDisplayBuilder().setContent(
 				[
-					heading(chatInputApplicationCommandMention(command.unique!, commandId), 2),
+					heading(chatInputApplicationCommandMention(commandId, command.unique!), 2),
 					`${command.description}`,
 					...(command.options.length
 						? [quote(command.options.map((option) => `${inlineCode(option.name)}: ${option.description}`).join('\n'))]
@@ -129,7 +129,7 @@ export default class extends CoreCommand {
 		);
 		container.spliceComponents(0, 0, section);
 
-		const select = new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
+		const select = new ActionRowBuilder().addStringSelectMenuComponent(
 			new StringSelectMenuBuilder()
 				.setCustomId(nanoid())
 				.setPlaceholder('Select a category')
@@ -174,7 +174,7 @@ export default class extends CoreCommand {
 					selectedCategories
 						.map((command) =>
 							[
-								`${heading(chatInputApplicationCommandMention(command.unique!, command.id), 3)}`,
+								`${heading(chatInputApplicationCommandMention(command.id, command.unique!), 3)}`,
 								command.description
 							].join('\n')
 						)
@@ -183,8 +183,10 @@ export default class extends CoreCommand {
 			);
 			container.spliceComponents(0, 1, detail);
 
-			select.components[0]?.options.forEach((option) => option.setDefault(false));
-			select.components[0]?.options.find((option) => option.data.value === selected)?.setDefault(true);
+			const selects = select.components as StringSelectMenuBuilder[];
+
+			selects[0]?.options.forEach((option) => option.setDefault(false));
+			selects[0]?.options.find((option) => option.toJSON().value === selected)?.setDefault(true);
 
 			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
 		});
@@ -193,7 +195,8 @@ export default class extends CoreCommand {
 			if (!collected.size && reason === 'time') {
 				return interaction.deleteReply();
 			} else if (reason === 'time') {
-				select.components[0]?.setDisabled(true);
+				const selects = select.components as StringSelectMenuBuilder[];
+				selects[0]?.setDisabled(true);
 
 				return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 			}
@@ -204,7 +207,7 @@ export default class extends CoreCommand {
 		const focused = interaction.options.getFocused();
 
 		const choices = this.client.commands
-			.filter(({ unique }) => unique?.includes(focused.toLowerCase()))
+			.filter(({ unique }) => unique?.includes(focused.value.toLowerCase()))
 			.map((commands) => ({ ...commands }));
 
 		const respond = choices

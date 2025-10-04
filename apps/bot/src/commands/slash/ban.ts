@@ -41,31 +41,31 @@ export default class extends CoreCommand {
 						},
 						{
 							name: '1 day.',
-							value: 1
+							value: 86400
 						},
 						{
 							name: '2 days.',
-							value: 2
+							value: 172800
 						},
 						{
 							name: '3 days.',
-							value: 3
+							value: 259200
 						},
 						{
 							name: '4 days.',
-							value: 4
+							value: 345600
 						},
 						{
 							name: '5 days.',
-							value: 5
+							value: 432000
 						},
 						{
 							name: '6 days.',
-							value: 6
+							value: 518400
 						},
 						{
 							name: '7 days.',
-							value: 7
+							value: 604800
 						}
 					],
 					required: false
@@ -136,7 +136,7 @@ export default class extends CoreCommand {
 		}
 
 		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
-		await interaction.guild?.members.ban(user, { deleteMessageDays: days, reason: reason as string });
+		await interaction.guild?.members.ban(user, { deleteMessageSeconds: days, reason: reason as string });
 
 		if (notify) {
 			if (notify !== 'dont-notify') {

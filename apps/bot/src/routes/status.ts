@@ -5,7 +5,8 @@ import { env } from '@/env.js';
 // eslint-disable-next-line @typescript-eslint/require-await
 const router: FastifyPluginAsync = async (app) => {
 	// eslint-disable-next-line prettier/prettier
-	app.get('/', {
+	app.get('/',
+		{
 			preHandler: async (request, reply) => {
 				const { authorization } = request.headers;
 
@@ -19,15 +20,19 @@ const router: FastifyPluginAsync = async (app) => {
 			try {
 				const manager = app.getDecorator<CoreShardingManager>('shardManager');
 
-				const response = await manager.broadcastEval((client) => ({
-					shardId: client.shard?.ids[0],
-					uptime: client.uptime,
-					wsStatus: Status[client.ws.status],
-					wsPing: client.ws.ping,
-					userCount: client.users.cache.size,
-					guildCount: client.guilds.cache.size,
-					memberCount: client.guilds.cache.map((guild) => guild).reduce((a, b) => a + b.memberCount, 0)
-				}));
+				const response = await manager.broadcastEval(async (client) => {
+					const shardIds = await client.ws.getShardIds();
+
+					return {
+						shardId: shardIds[0],
+						uptime: client.uptime,
+						status: Status[client.status],
+						ping: client.ping,
+						userCount: client.users.cache.size,
+						guildCount: client.guilds.cache.size,
+						memberCount: client.guilds.cache.map((guild) => guild).reduce((a, b) => a + b.memberCount, 0)
+					};
+				});
 
 				reply.status(200).send(response);
 			} catch {

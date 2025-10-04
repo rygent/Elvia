@@ -3,13 +3,12 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ButtonStyle,
 	ComponentType,
 	InteractionContextType,
 	MessageFlags,
 	PermissionFlagsBits
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, DangerButtonBuilder, SecondaryButtonBuilder } from '@discordjs/builders';
 import { type AutocompleteInteraction, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { prisma } from '@elvia/database';
@@ -55,13 +54,9 @@ export default class extends CoreCommand {
 		}
 
 		const buttonId = nanoid();
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(
-				new ButtonBuilder().setCustomId(`cancel:${buttonId}`).setStyle(ButtonStyle.Secondary).setLabel('Cancel')
-			)
-			.addComponents(
-				new ButtonBuilder().setCustomId(`delete:${buttonId}`).setStyle(ButtonStyle.Danger).setLabel('Delete')
-			);
+		const button = new ActionRowBuilder()
+			.addSecondaryButtonComponents(new SecondaryButtonBuilder().setCustomId(`cancel:${buttonId}`).setLabel('Cancel'))
+			.addDangerButtonComponents(new DangerButtonBuilder().setCustomId(`delete:${buttonId}`).setLabel('Delete'));
 
 		const response = await interaction.reply({
 			content: `Are you sure want to delete ${inlineCode(name)}?`,
@@ -116,7 +111,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!options?.length) return interaction.respond([]);
 
 		const respond = options.map(({ name, slug }) => ({ name, value: slug })).slice(0, 25);

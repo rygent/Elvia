@@ -39,7 +39,9 @@ export default class extends CoreCommand {
 			return interaction.reply({ content: 'This emoji not from this guild', flags: MessageFlags.Ephemeral });
 		}
 
-		const attachment = new AttachmentBuilder(emojis.url).setName(`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`);
+		const attachment = new AttachmentBuilder(emojis.imageURL({ size: 4096 })).setName(
+			`${emojis.name}.${emojis.animated ? 'gif' : 'png'}`
+		);
 
 		return interaction.reply({ files: [attachment] });
 	}

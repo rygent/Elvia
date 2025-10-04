@@ -8,7 +8,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	type AutocompleteInteraction,
 	type ChatInputCommandInteraction,
@@ -71,29 +71,31 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Edit Tag')
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`name:${modalId}`)
-						.setStyle(TextInputStyle.Short)
-						.setLabel('Name')
-						.setPlaceholder('E.g. rules, faq, welcome')
-						.setValue(tag.name)
-						.setRequired(true)
-						.setMaxLength(100)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Name')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`name:${modalId}`)
+							.setStyle(TextInputStyle.Short)
+							.setPlaceholder('E.g. rules, faq, welcome')
+							.setValue(tag.name)
+							.setRequired(true)
+							.setMaxLength(100)
+					)
 			)
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`content:${modalId}`)
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel('Content')
-						.setPlaceholder(pickRandom(proTips))
-						.setValue(tag.content)
-						.setRequired(true)
-						.setMaxLength(2000)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Content')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`content:${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setPlaceholder(pickRandom(proTips))
+							.setValue(tag.content)
+							.setRequired(true)
+							.setMaxLength(2000)
+					)
 			);
 
 		await interaction.showModal(modal);
@@ -104,8 +106,8 @@ export default class extends CoreCommand {
 
 		await submitted.deferReply({ flags: MessageFlags.Ephemeral });
 
-		const editedName = submitted.fields.getTextInputValue(`name:${modalId}`);
-		const editedContent = submitted.fields.getTextInputValue(`content:${modalId}`);
+		const editedName = submitted.components.getTextInputValue(`name:${modalId}`);
+		const editedContent = submitted.components.getTextInputValue(`content:${modalId}`);
 
 		const isPresent = database?.tags.some(({ slug }) => slug === slugify(editedName));
 		if (editedName !== tag.name && isPresent) {
@@ -131,7 +133,7 @@ export default class extends CoreCommand {
 			select: { tags: true }
 		});
 
-		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
+		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
 		if (!options?.length) return interaction.respond([]);
 
 		const respond = options.map(({ name, slug }) => ({ name, value: slug })).slice(0, 25);
