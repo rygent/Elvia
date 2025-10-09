@@ -27,7 +27,7 @@
   },
   "funding": "https://github.com/rygent/Elvia?sponsor",
   "devDependencies": {
-    "@commitlint/cli": "^20.0.0",
+    "@commitlint/cli": "^20.1.0",
     "@commitlint/config-angular": "^20.0.0",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^24.7.1",
