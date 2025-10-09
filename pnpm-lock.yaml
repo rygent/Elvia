@@ -93,8 +93,8 @@ importers:
         specifier: ^0.38.29
         version: 0.38.29
       discord.js:
-        specifier: ^14.22.1
-        version: 14.22.1(bufferutil@4.0.9)
+        specifier: ^14.23.2
+        version: 14.23.2(bufferutil@4.0.9)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -265,8 +265,8 @@ importers:
         specifier: ^0.38.29
         version: 0.38.29
       discord.js:
-        specifier: ^14.22.1
-        version: 14.22.1(bufferutil@4.0.9)
+        specifier: ^14.23.2
+        version: 14.23.2(bufferutil@4.0.9)
       fastify:
         specifier: ^5.6.1
         version: 5.6.1
@@ -637,8 +637,8 @@ packages:
   '@dabh/diagnostics@2.0.3':
     resolution: {integrity: sha512-hrlQOIi7hAfzsMqlGSFyVucrx38O+j6wiGOf//H2ecvIEqYN4ADBSS2iLMh5UFyDunCNniUIPk/q3riFv45xRA==}
 
-  '@discordjs/builders@1.11.3':
-    resolution: {integrity: sha512-p3kf5eV49CJiRTfhtutUCeivSyQ/l2JlKodW1ZquRwwvlOWmG9+6jFShX6x8rUiYhnP6wKI96rgN/SXMy5e5aw==}
+  '@discordjs/builders@1.12.2':
+    resolution: {integrity: sha512-AugKmrgRJOHXEyMkABH/hXpAmIBKbYokCEl9VAM4Kh6FvkdobQ+Zhv7AR6K+y5hS7+VQ7gKXPYCe1JQmV07H1g==}
     engines: {node: '>=16.11.0'}
 
   '@discordjs/collection@1.5.3':
@@ -2843,8 +2843,8 @@ packages:
   discord-api-types@0.38.29:
     resolution: {integrity: sha512-+5BfrjLJN1hrrcK0MxDQli6NSv5lQH7Y3/qaOfk9+k7itex8RkA/UcevVMMLe8B4IKIawr4ITBTb2fBB2vDORg==}
 
-  discord.js@14.22.1:
-    resolution: {integrity: sha512-3k+Kisd/v570Jr68A1kNs7qVhNehDwDJAPe4DZ2Syt+/zobf9zEcuYFvsfIaAOgCa0BiHMfOOKQY4eYINl0z7w==}
+  discord.js@14.23.2:
+    resolution: {integrity: sha512-tU2NFr823X3TXEc8KyR/4m296KLxPai4nirN3q9kHCpY4TKj96n9lHZnyLzRNMui8EbL07jg9hgH2PWWfKMGIg==}
     engines: {node: '>=18'}
 
   doctrine@2.1.0:
@@ -5664,7 +5664,7 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@discordjs/builders@1.11.3':
+  '@discordjs/builders@1.12.2':
     dependencies:
       '@discordjs/formatters': 0.6.1
       '@discordjs/util': 1.1.1
@@ -7696,9 +7696,9 @@ snapshots:
 
   discord-api-types@0.38.29: {}
 
-  discord.js@14.22.1(bufferutil@4.0.9):
+  discord.js@14.23.2(bufferutil@4.0.9):
     dependencies:
-      '@discordjs/builders': 1.11.3
+      '@discordjs/builders': 1.12.2
       '@discordjs/collection': 1.5.3
       '@discordjs/formatters': 0.6.1
       '@discordjs/rest': 2.6.0
