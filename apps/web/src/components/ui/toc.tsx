@@ -4,13 +4,12 @@ import * as React from 'react';
 import { TocThumb } from '@/components/ui/toc-thumb';
 import { mergeRefs } from '@/lib/merge-refs';
 import { cn } from '@elvia/utils';
-import { type TOCItemType } from 'fumadocs-core/server';
 import * as Primitive from 'fumadocs-core/toc';
 import { Text } from 'lucide-react';
 
-const TocContext = React.createContext<TOCItemType[]>([]);
+const TocContext = React.createContext<Primitive.TOCItemType[]>([]);
 
-function useTocItems(): TOCItemType[] {
+function useTocItems(): Primitive.TOCItemType[] {
 	return React.useContext(TocContext);
 }
 
@@ -150,7 +149,7 @@ function TocItem({
 	upper = item.depth,
 	lower = item.depth
 }: {
-	item: TOCItemType;
+	item: Primitive.TOCItemType;
 	upper?: number;
 	lower?: number;
 }) {

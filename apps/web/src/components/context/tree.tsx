@@ -3,19 +3,19 @@
 import * as React from 'react';
 import { searchPath } from 'fumadocs-core/breadcrumb';
 import { createContext, usePathname } from 'fumadocs-core/framework';
-import { type PageTree } from 'fumadocs-core/server';
+import { type Folder, type Node, type Root } from 'fumadocs-core/page-tree';
 
 type MakeRequired<O, K extends keyof O> = Omit<O, K> & Pick<Required<O>, K>;
 
 interface TreeContextType {
-	root: MakeRequired<PageTree.Root | PageTree.Folder, '$id'>;
+	root: MakeRequired<Root | Folder, '$id'>;
 }
 
 const TreeContext = createContext<TreeContextType>('TreeContext');
-const PathContext = createContext<PageTree.Node[]>('PathContext', []);
+const PathContext = createContext<Node[]>('PathContext', []);
 
 interface TreeContextProviderProps extends React.PropsWithChildren {
-	tree: PageTree.Root;
+	tree: Root;
 }
 
 export function TreeContextProvider({ children, ...props }: TreeContextProviderProps) {
@@ -44,7 +44,7 @@ export function TreeContextProvider({ children, ...props }: TreeContextProviderP
 	);
 }
 
-export function useTreePath(): PageTree.Node[] {
+export function useTreePath(): Node[] {
 	return PathContext.use();
 }
 
