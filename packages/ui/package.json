@@ -56,7 +56,7 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.13",
+    "@tailwindcss/postcss": "^4.1.14",
     "@types/node": "^24.5.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
@@ -64,7 +64,7 @@
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@10.17.1"
