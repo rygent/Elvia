@@ -31,7 +31,7 @@
     "directory": "packages/database"
   },
   "dependencies": {
-    "@prisma/client": "^6.16.2"
+    "@prisma/client": "^6.17.0"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
@@ -39,7 +39,7 @@
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
     "prettier-plugin-prisma": "^5.0.0",
-    "prisma": "^6.16.2",
+    "prisma": "^6.17.0",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3"
   },
