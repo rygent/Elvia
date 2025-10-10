@@ -7,7 +7,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { inlineCode } from '@discordjs/formatters';
 import { slugify } from '@/lib/utils/functions.js';
@@ -47,27 +47,31 @@ export default class extends CoreCommand {
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
 			.setTitle('Create a Tag')
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`name:${modalId}`)
-						.setStyle(TextInputStyle.Short)
-						.setLabel('Name')
-						.setPlaceholder('E.g. rules, faq, welcome')
-						.setRequired(true)
-						.setMaxLength(100)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Name')
+					.setDescription('A short, unique name to identify the tag.')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`name:${modalId}`)
+							.setStyle(TextInputStyle.Short)
+							.setPlaceholder('e.g. rules, faq, welcome')
+							.setMaxLength(100)
+							.setRequired()
+					)
 			)
-			.addComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`content:${modalId}`)
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel('Content')
-						.setPlaceholder(pickRandom(tips))
-						.setRequired(true)
-						.setMaxLength(2000)
-				)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Content')
+					.setDescription('The message that appears when the tag is used.')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`content:${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setPlaceholder(pickRandom(tips))
+							.setMaxLength(2000)
+							.setRequired()
+					)
 			);
 
 		await interaction.showModal(modal);

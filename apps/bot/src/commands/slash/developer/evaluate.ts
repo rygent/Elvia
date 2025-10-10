@@ -7,7 +7,7 @@ import {
 	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { AttachmentBuilder, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/constants.js';
@@ -57,15 +57,19 @@ export default class extends CoreCommand {
 		const modalId = nanoid();
 		const modal = new ModalBuilder()
 			.setCustomId(modalId)
-			.setTitle('Code to evaluate')
-			.setComponents(
-				new ActionRowBuilder<TextInputBuilder>().setComponents(
-					new TextInputBuilder()
-						.setCustomId(`code:${modalId}`)
-						.setStyle(TextInputStyle.Paragraph)
-						.setLabel("What's the code to evaluate")
-						.setRequired(true)
-				)
+			.setTitle('Evaluate JavaScript')
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Code')
+					.setDescription('Enter the JavaScript code to evaluate.')
+					.setTextInputComponent(
+						new TextInputBuilder()
+							.setCustomId(`code:${modalId}`)
+							.setStyle(TextInputStyle.Paragraph)
+							.setPlaceholder('e.g. console.log("Hello, world!");')
+							.setMaxLength(4000)
+							.setRequired()
+					)
 			);
 
 		await interaction.showModal(modal);
