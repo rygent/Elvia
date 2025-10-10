@@ -7,7 +7,13 @@ import {
 	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import { LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
+import {
+	LabelBuilder,
+	ModalBuilder,
+	StringSelectMenuBuilder,
+	StringSelectMenuOptionBuilder,
+	TextInputBuilder
+} from '@discordjs/builders';
 import { AttachmentBuilder, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/constants.js';
@@ -29,12 +35,6 @@ export default class extends CoreCommand {
 					required: false
 				},
 				{
-					name: 'async',
-					description: 'Whether this code should be evaluated asynchronously.',
-					type: ApplicationCommandOptionType.Boolean,
-					required: false
-				},
-				{
 					name: 'visible',
 					description: 'Whether the replies should be visible in the channel.',
 					type: ApplicationCommandOptionType.Boolean,
@@ -51,7 +51,6 @@ export default class extends CoreCommand {
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const depth = interaction.options.getInteger('depth');
-		const async = interaction.options.getBoolean('async') ?? false;
 		const visible = interaction.options.getBoolean('visible') ?? false;
 
 		const modalId = nanoid();
@@ -70,6 +69,18 @@ export default class extends CoreCommand {
 							.setMaxLength(4000)
 							.setRequired()
 					)
+			)
+			.addLabelComponents(
+				new LabelBuilder()
+					.setLabel('Asynchronous')
+					.setDescription('Choose whether to run the code asynchronously.')
+					.setStringSelectMenuComponent(
+						new StringSelectMenuBuilder()
+							.setCustomId(`async:${modalId}`)
+							.addOptions(new StringSelectMenuOptionBuilder().setLabel('True').setValue('1'))
+							.addOptions(new StringSelectMenuOptionBuilder().setLabel('False').setValue('0').setDefault())
+							.setRequired(false)
+					)
 			);
 
 		await interaction.showModal(modal);
@@ -78,12 +89,14 @@ export default class extends CoreCommand {
 		const submitted = await interaction.awaitModalSubmit({ filter, time: 9e5 }).catch(() => null);
 		if (!submitted) return;
 
-		let code = submitted.fields.getTextInputValue(`code:${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		let evaled;
+		let code = submitted.fields.getTextInputValue(`code:${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+		const [async] = submitted.fields.getStringSelectValues(`async:${modalId}`);
+		const isAsync = Boolean(Number(async));
 
 		await submitted.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 
-		if (async) {
+		if (isAsync) {
 			const indentedCode = code
 				.split('\n')
 				.map((codeLine: string) => `  ${codeLine}`)
