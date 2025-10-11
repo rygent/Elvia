@@ -15,7 +15,7 @@ import {
 } from '@discordjs/builders';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, subtext } from '@discordjs/formatters';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -41,10 +41,12 @@ export default class extends CoreCommand {
 	public async execute(interaction: ChatInputCommandInteraction<'cached'>) {
 		const member = interaction.options.getMember('user');
 
-		const response = await axios.get('https://nekos.best/api/v2/bored').then(({ data }) => data.results[0]);
+		const respond = await fetcher('https://nekos.best/api/v2/bored', {
+			method: 'GET'
+		}).then((data) => data.results[0]);
 
 		const container = new ContainerBuilder()
-			.addMediaGalleryComponents(new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(response.url)))
+			.addMediaGalleryComponents(new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(respond.url)))
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(`${member?.toString()} made ${interaction.user.toString()} bored.`)
 			)

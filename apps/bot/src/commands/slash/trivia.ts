@@ -17,8 +17,8 @@ import {
 import { type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, subtext } from '@discordjs/formatters';
 import { sentenceCase, shuffleArray } from '@/lib/utils/functions.js';
+import { fetcher } from '@/lib/fetcher.js';
 import { nanoid } from 'nanoid';
-import axios from 'axios';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -33,15 +33,20 @@ export default class extends CoreCommand {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const result = await axios
-			.get('https://opentdb.com/api.php?amount=1&type=multiple&encode=base64')
-			.then(({ data }) => data.results[0]);
+		const params = new URLSearchParams();
+		params.append('amount', '1');
+		params.append('encode', 'base64');
+		params.append('type', 'multiple');
 
-		const question = Buffer.from(result.question, 'base64').toString('utf8');
-		const difficulty = Buffer.from(result.difficulty, 'base64').toString('utf8');
-		const category = Buffer.from(result.category, 'base64').toString('utf8');
-		const answer = Buffer.from(result.correct_answer, 'base64').toString('utf8');
-		const options = shuffleArray([...result.incorrect_answers, result.correct_answer]).map((item) =>
+		const respond = await fetcher(`https://opentdb.com/api.php?${params.toString()}`, {
+			method: 'GET'
+		}).then((data) => data.results[0]);
+
+		const question = Buffer.from(respond.question, 'base64').toString('utf8');
+		const difficulty = Buffer.from(respond.difficulty, 'base64').toString('utf8');
+		const category = Buffer.from(respond.category, 'base64').toString('utf8');
+		const answer = Buffer.from(respond.correct_answer, 'base64').toString('utf8');
+		const options = shuffleArray([...respond.incorrect_answers, respond.correct_answer]).map((item) =>
 			Buffer.from(item, 'base64').toString('utf8')
 		);
 
