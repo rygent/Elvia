@@ -34,7 +34,7 @@
     "@prisma/client": "^6.17.0"
   },
   "devDependencies": {
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.7.2",
     "eslint": "^9.37.0",
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
