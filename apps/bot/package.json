@@ -33,7 +33,6 @@
     "@sapphire/time-utilities": "^1.7.14",
     "@sapphire/type": "^2.6.0",
     "@sapphire/utilities": "^3.18.2",
-    "axios": "^1.12.2",
     "colorette": "^2.0.20",
     "discord-api-types": "^0.38.29",
     "discord.js": "^14.23.2",
@@ -44,6 +43,7 @@
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.1.6",
     "systeminformation": "^5.27.11",
+    "undici": "^7.16.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {

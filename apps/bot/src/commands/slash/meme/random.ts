@@ -16,7 +16,7 @@ import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { pickRandom } from '@sapphire/utilities';
 import { isNsfwChannel } from '@/lib/utils/functions.js';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -35,13 +35,11 @@ export default class extends CoreCommand {
 
 		const subreddit = pickRandom(subredditList);
 
-		const response = await axios
-			.get(`https://reddit.com/r/${subreddit}/hot.json?limit=100`, {
-				headers: { 'User-Agent': 'discordbot:elvia:v5.0.0 (by /u/rygentx)' }
-			})
-			.then(({ data }) => data);
+		const respond = await fetcher(`https://www.reddit.com/r/${subreddit}/hot.json?limit=100`, {
+			headers: { 'User-Agent': 'elvia:v7.0.0 (by /u/rygentx)' }
+		});
 
-		const filtered = response.data.children
+		const filtered = respond.data.children
 			.filter(({ data }: any) => !data.is_self)
 			.filter(({ data }: any) => data.post_hint !== 'rich:video');
 
