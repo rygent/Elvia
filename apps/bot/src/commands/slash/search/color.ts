@@ -15,7 +15,7 @@ import {
 } from '@discordjs/builders';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -59,31 +59,35 @@ export default class extends CoreCommand {
 			});
 		}
 
-		const response = await axios
-			.get(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`)
-			.then(({ data }) => data);
+		const respond = await fetcher(`http://www.thecolorapi.com/id?hex=${color.replace('#', '')}`, {
+			method: 'GET'
+		});
 
 		const container = new ContainerBuilder()
 			.addMediaGalleryComponents(
 				new MediaGalleryBuilder().addItems(
 					new MediaGalleryItemBuilder().setURL(
-						`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`
+						`https://serux.pro/rendercolour?hex=${respond.hex.clean}&height=200&width=512`
+					)
+				)
+			)
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					heading(
+						hyperlink(respond.name.value, `http://www.thecolorapi.com/id?format=html&hex=${respond.hex.clean}`),
+						2
 					)
 				)
 			)
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
 					[
-						heading(
-							hyperlink(response.name.value, `http://www.thecolorapi.com/id?format=html&hex=${response.hex.clean}`),
-							2
-						),
-						`${bold('Hex:')} ${response.hex.value}`,
-						`${bold('RGB:')} (${response.rgb.r}, ${response.rgb.g}, ${response.rgb.b})`,
-						`${bold('HSL:')} (${response.hsl.h}, ${response.hsl.s}%, ${response.hsl.l}%)`,
-						`${bold('HSV:')} (${response.hsv.h}, ${response.hsv.s}%, ${response.hsv.v}%)`,
-						`${bold('CMYK:')} (${response.cmyk.c}, ${response.cmyk.m}, ${response.cmyk.y}, ${response.cmyk.k})`,
-						`${bold('XYZ:')} (${response.XYZ.X}, ${response.XYZ.Y}, ${response.XYZ.Z})`
+						`${bold('Hex:')} ${respond.hex.value}`,
+						`${bold('RGB:')} (${respond.rgb.r}, ${respond.rgb.g}, ${respond.rgb.b})`,
+						`${bold('HSL:')} (${respond.hsl.h}, ${respond.hsl.s}%, ${respond.hsl.l}%)`,
+						`${bold('HSV:')} (${respond.hsv.h}, ${respond.hsv.s}%, ${respond.hsv.v}%)`,
+						`${bold('CMYK:')} (${respond.cmyk.c}, ${respond.cmyk.m}, ${respond.cmyk.y}, ${respond.cmyk.k})`,
+						`${bold('XYZ:')} (${respond.XYZ.X}, ${respond.XYZ.Y}, ${respond.XYZ.Z})`
 					].join('\n')
 				)
 			)

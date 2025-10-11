@@ -7,7 +7,7 @@ import {
 } from 'discord-api-types/v10';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, quote } from '@discordjs/formatters';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -32,11 +32,11 @@ export default class extends CoreCommand {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const question = interaction.options.getString('question', true);
 
-		const response = await axios
-			.get(`https://eightballapi.com/api?question=${encodeURIComponent(question)}`)
-			.then(({ data }) => data);
+		const respond = await fetcher(`https://www.eightballapi.com/api?question=${encodeURIComponent(question)}`, {
+			method: 'GET'
+		});
 
-		const replies = [quote(`${bold(interaction.user.tag)}: ${question}`), `🎱 ${response.reading}`].join('\n');
+		const replies = [quote(`${bold(interaction.user.tag)}: ${question}`), `🎱 ${respond.reading}`].join('\n');
 
 		return interaction.reply({ content: replies });
 	}

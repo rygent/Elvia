@@ -19,8 +19,8 @@ import {
 import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, heading, hyperlink, inlineCode, italic, subtext } from '@discordjs/formatters';
 import { formatArray, titleCase } from '@/lib/utils/functions.js';
+import { fetcher } from '@/lib/fetcher.js';
 import { nanoid } from 'nanoid';
-import axios from 'axios';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -45,17 +45,17 @@ export default class extends CoreCommand {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const result = await axios
-			.get(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`)
-			.then(({ data }) => data.items.filter((item: any) => item.type === 'app'));
-		if (!result.length) {
+		const respond = await fetcher(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, {
+			method: 'GET'
+		}).then((data) => data.items.filter((item: any) => item.type === 'app'));
+		if (!respond.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(respond.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -64,7 +64,7 @@ export default class extends CoreCommand {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a game')
 						.setOptions(
-							...result.map((data: any) => ({
+							...respond.map((data: any) => ({
 								value: data.id.toString(),
 								label: data.name
 							}))
@@ -95,9 +95,9 @@ export default class extends CoreCommand {
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
 
-			const data = await axios
-				.get(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`)
-				.then((res) => res.data[ids!].data);
+			const data = await fetcher(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, {
+				method: 'GET'
+			}).then((res) => res[ids!].data);
 
 			const media = new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(data.header_image));
 			container.spliceComponents(0, 1, media);

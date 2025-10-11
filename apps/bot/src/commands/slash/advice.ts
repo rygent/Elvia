@@ -1,7 +1,7 @@
 import { CoreCommand, type CoreClient } from '@elvia/core';
 import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 import { type ChatInputCommandInteraction } from 'discord.js';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -16,8 +16,10 @@ export default class extends CoreCommand {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const response = await axios.get('https://api.adviceslip.com/advice').then(({ data }) => data);
+		const respond = await fetcher('https://api.adviceslip.com/advice', {
+			method: 'GET'
+		});
 
-		return interaction.reply({ content: response.slip.advice });
+		return interaction.reply({ content: respond.slip.advice });
 	}
 }

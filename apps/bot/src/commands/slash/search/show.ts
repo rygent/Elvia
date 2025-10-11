@@ -21,11 +21,11 @@ import {
 import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { formatArray, formatNumber } from '@/lib/utils/functions.js';
-import { env } from '@/env.js';
+import { fetcher } from '@/lib/fetcher.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
-import axios from 'axios';
+import { env } from '@/env.js';
 import moment from 'moment';
 
 export default class extends CoreCommand {
@@ -51,18 +51,22 @@ export default class extends CoreCommand {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const search = interaction.options.getString('search', true);
 
-		const result = await axios
-			.get(`https://api.themoviedb.org/3/search/tv?api_key=${env.TMDB_API_KEY}&query=${search}`)
-			.then(({ data }) => data.results.slice(0, 10));
+		const params = new URLSearchParams();
+		params.append('api_key', env.TMDB_API_KEY);
+		params.append('query', search);
 
-		if (!result.length) {
+		const respond = await fetcher(`https://api.themoviedb.org/3/search/tv?${params.toString()}`, {
+			method: 'GET'
+		}).then((data) => data.results.slice(0, 10));
+
+		if (!respond.length) {
 			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
+					`I found ${bold(respond.length.toString())} possible matches, please select one of the following:`
 				)
 			)
 			.addActionRowComponents(
@@ -71,7 +75,7 @@ export default class extends CoreCommand {
 						.setCustomId(nanoid())
 						.setPlaceholder('Select a shows')
 						.setOptions(
-							...result.map((data: any) => ({
+							...respond.map((data: any) => ({
 								value: data.id.toString(),
 								label: `${cutText(data.name, 97)} ${
 									data.first_air_date ? `(${new Date(data.first_air_date).getFullYear()})` : ''
@@ -104,9 +108,12 @@ export default class extends CoreCommand {
 		collector.on('ignore', (i) => void i.deferUpdate());
 		collector.on('collect', async (i) => {
 			const [ids] = i.values;
-			const data = await axios
-				.get(`https://api.themoviedb.org/3/tv/${ids}?api_key=${env.TMDB_API_KEY}`)
-				.then((res) => res.data);
+
+			params.delete('query');
+
+			const data = await fetcher(`https://api.themoviedb.org/3/tv/${ids}?${params.toString()}`, {
+				method: 'GET'
+			});
 
 			const section = new SectionBuilder()
 				.addTextDisplayComponents(

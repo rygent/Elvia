@@ -8,8 +8,8 @@ import {
 } from 'discord-api-types/v10';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, hideLinkEmbed, subtext } from '@discordjs/formatters';
+import { FormData, fetcher } from '@/lib/fetcher.js';
 import { env } from '@/env.js';
-import axios from 'axios';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -43,22 +43,21 @@ export default class extends CoreCommand {
 
 		await interaction.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
 
-		const response = await axios
-			.post(
-				`https://api.imgur.com/3/upload`,
-				{ image: media.url, type: 'url' },
-				{
-					headers: {
-						Authorization: `Client-ID ${env.IMGUR_CLIENT_ID}`,
-						'Content-Type': 'multipart/form-data'
-					}
-				}
-			)
-			.then(({ data }) => data);
+		const form = new FormData();
+		form.append('type', 'url');
+		form.append('image', media.url);
+
+		const respond = await fetcher(`https://api.imgur.com/3/upload`, {
+			method: 'POST',
+			headers: {
+				Authorization: `Client-ID ${env.IMGUR_CLIENT_ID}`
+			},
+			body: form
+		});
 
 		const replies = [
 			'Here are your Imgur links:',
-			`${hideLinkEmbed(response.data.link)}`,
+			`${hideLinkEmbed(respond.data.link)}`,
 			subtext(`Powered by ${bold('Imgur')}`)
 		].join('\n');
 

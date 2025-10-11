@@ -9,7 +9,7 @@ import {
 import { ContainerBuilder, SeparatorBuilder, TextDisplayBuilder } from '@discordjs/builders';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext, underline } from '@discordjs/formatters';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -34,29 +34,32 @@ export default class extends CoreCommand {
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
 		const word = interaction.options.getString('word', true);
 
-		const response = await axios
-			.get(`https://api.urbandictionary.com/v0/define?page=1&term=${encodeURIComponent(word)}`)
-			.then(({ data }) => data.list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
+		const params = new URLSearchParams();
+		params.set('term', word);
+		params.set('page', '1');
 
-		if (!response) {
+		const respond = await fetcher(`https://api.urbandictionary.com/v0/define?${params.toString()}`, {
+			method: 'GET'
+		}).then((data) => data.list.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up)[0]);
+
+		if (!respond) {
 			return interaction.reply({ content: 'No definition found for this word.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(
-					[heading(hyperlink(response.word, response.permalink), 2), `\n${response.definition}`].join('\n')
-				)
+				new TextDisplayBuilder().setContent(heading(hyperlink(respond.word, respond.permalink), 2))
 			)
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(respond.definition))
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Urban Dictionary')}`)));
 
-		if (response.example.length) {
+		if (respond.example.length) {
 			const example = new TextDisplayBuilder().setContent(
-				[heading(underline('Example'), 3), response.example].join('\n')
+				[heading(underline('Example'), 3), respond.example].join('\n')
 			);
 
-			container.spliceComponents(1, 0, example);
+			container.spliceComponents(2, 0, example);
 		}
 
 		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });

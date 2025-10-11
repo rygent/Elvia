@@ -15,7 +15,7 @@ import {
 } from '@discordjs/builders';
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext } from '@discordjs/formatters';
-import axios from 'axios';
+import { fetcher } from '@/lib/fetcher.js';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -59,14 +59,14 @@ export default class extends CoreCommand {
 				});
 			}
 
-			const response = await axios
-				.get(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`)
-				.then(({ data }) => data);
+			const respond = await fetcher(`http://www.thecolorapi.com/id?hex=${user.hexAccentColor.replace(/#/g, '')}`, {
+				method: 'GET'
+			});
 
 			container.addMediaGalleryComponents(
 				new MediaGalleryBuilder().addItems(
 					new MediaGalleryItemBuilder().setURL(
-						`https://serux.pro/rendercolour?hex=${response.hex.clean}&height=200&width=512`
+						`https://serux.pro/rendercolour?hex=${respond.hex.clean}&height=200&width=512`
 					)
 				)
 			);
@@ -75,7 +75,7 @@ export default class extends CoreCommand {
 					[
 						`${bold('ID:')} ${inlineCode(user.id)}`,
 						`${bold('Username:')} ${user.tag}`,
-						`${bold('Hex:')} ${response.hex.value}`
+						`${bold('Hex:')} ${respond.hex.value}`
 					].join('\n')
 				)
 			);
