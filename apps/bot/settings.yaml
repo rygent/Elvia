@@ -1,11 +1,11 @@
 # Add the presence of the bot.
 # status — online / idle / dnd / invisible
 # type — 0 (Playing) / 1 (Streaming) / 2 (Listening) / 3 (Watching) /  4 (Custom Status) / 5 (Competing)
-presences:
+presence:
   status: 'online'
   activities:
-    name: 'hello world'
-    type: 4
+    - name: '/help'
+      type: 4
 
 # When enabled, this enables debug mode for the bot.
 # This will log all the events and commands to the console.
