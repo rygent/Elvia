@@ -3,26 +3,22 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
 import {
-	ActionRowBuilder,
 	ContainerBuilder,
 	MediaGalleryBuilder,
 	MediaGalleryItemBuilder,
 	SeparatorBuilder,
-	StringSelectMenuBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
+import { type AutocompleteInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatNumber, isNsfwChannel, titleCase } from '@/lib/utils/functions.js';
 import { Anilist } from '@rygent/anilist';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { cutText } from '@sapphire/utilities';
-import { nanoid } from 'nanoid';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -32,9 +28,10 @@ export default class extends CoreCommand {
 			description: 'Search for an Anime on Anilist.',
 			options: [
 				{
-					name: 'search',
-					description: 'Your search.',
-					type: ApplicationCommandOptionType.String,
+					name: 'query',
+					description: 'Your query.',
+					type: ApplicationCommandOptionType.Number,
+					autocomplete: true,
 					required: true
 				}
 			],
@@ -45,128 +42,89 @@ export default class extends CoreCommand {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const search = interaction.options.getString('search', true);
+		const id = interaction.options.getNumber('query', true);
 
 		const anilist = new Anilist();
-		const respond = await anilist.media.search({ type: 'Anime', search });
-		if (!respond?.length) {
-			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
-		}
-
-		const result = respond.filter((data) => {
-			if (data.isAdult && !isNsfwChannel(interaction.channel)) return false;
-			return true;
-		});
-
-		if (!result.length) {
-			return interaction.reply({
-				content: `This search contain explicit content, use ${bold('NSFW Channel')} instead.`,
-				flags: MessageFlags.Ephemeral
-			});
+		const respond = await anilist.media.anime(id);
+		if (respond.isAdult && !isNsfwChannel(interaction.channel)) {
+			return interaction.reply({ content: `This anime contain adult content.`, flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
-			.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(
-					`I found ${bold(result.length.toString())} possible matches, please select one of the following:`
+			.addMediaGalleryComponents(
+				new MediaGalleryBuilder().addItems(
+					new MediaGalleryItemBuilder().setURL(`https://img.anili.st/media/${respond.id}`)
 				)
 			)
-			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-					new StringSelectMenuBuilder()
-						.setCustomId(nanoid())
-						.setPlaceholder('Select an anime')
-						.setOptions(
-							...result.map((data) => ({
-								value: data.id.toString(),
-								label: cutText(data.title!.english! || data.title!.userPreferred!, 1e2),
-								...(data.description?.length && { description: cutText(data.description, 1e2) })
-							}))
-						)
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(heading(hyperlink(respond.title!.userPreferred!, respond.siteUrl!), 2))
+			)
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						...(respond.title?.romaji ? [`${bold('Romaji:')} ${respond.title.romaji}`] : []),
+						...(respond.title?.english ? [`${bold('English:')} ${respond.title.english}`] : []),
+						...(respond.title?.native ? [`${bold('Native:')} ${respond.title.native}`] : []),
+						...(respond.format ? [`${bold('Type:')} ${getType(respond.format)}`] : []),
+						...(respond.status ? [`${bold('Status:')} ${titleCase(respond.status.replace(/_/g, ' '))}`] : []),
+						...(respond.source ? [`${bold('Source:')} ${titleCase(respond.source.replace(/_/g, ' '))}`] : []),
+						...(respond.startDate ? [`${bold('Aired:')} ${getDate(respond.startDate, respond.endDate!)}`] : []),
+						...(respond.duration
+							? [`${bold('Length:')} ${getDurationLength(respond.duration, respond.episodes!, respond.format!)}`]
+							: []),
+						...(respond.nextAiringEpisode
+							? [
+									`${bold('Next episodes:')} ${time(respond.nextAiringEpisode.airingAt, 'R')} (episode ${
+										respond.nextAiringEpisode.episode
+									})`
+								]
+							: []),
+						...(respond.isAdult ? [`${bold('Adult content:')} ${respond.isAdult ? 'Yes' : 'No'}`] : []),
+						...(respond.popularity ? [`${bold('Popularity:')} ${formatNumber(respond.popularity)}`] : []),
+						...(respond.characters?.length
+							? [`${bold('Characters:')} ${formatArray(respond.characters.map((item) => item.name!.userPreferred!))}`]
+							: []),
+						...(respond.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length
+							? [
+									`${bold('Networks:')} ${respond.externalLinks
+										.filter((item) => item.type === 'STREAMING')
+										.map((item) => hyperlink(item.site, item.url!))
+										.join(', ')}`
+								]
+							: [])
+					].join('\n')
 				)
 			)
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Anilist')}`)));
 
-		const response = await interaction.reply({
-			components: [container],
-			flags: MessageFlags.IsComponentsV2,
-			withResponse: true
-		});
+		if (respond.description?.length) {
+			const description = new TextDisplayBuilder().setContent(respond.description);
+			container.spliceComponents(2, 0, description);
+		}
 
-		const message = response.resource?.message;
-		if (!message) return;
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+	}
 
-		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
-		const collector = message.createMessageComponentCollector({
-			filter,
-			componentType: ComponentType.StringSelect,
-			time: 6e4,
-			max: 1
-		});
+	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
+		const focused = interaction.options.getFocused();
 
-		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', (i) => {
-			const [selected] = i.values;
-			const data = result.find((item) => item?.id.toString() === selected)!;
+		const anilist = new Anilist();
+		const respond = await anilist.media.search({ type: 'Anime', search: focused }).then((res) =>
+			res.filter((data) => {
+				if (data.isAdult && !isNsfwChannel(interaction.channel)) return false;
+				return true;
+			})
+		);
 
-			const media = new MediaGalleryBuilder().addItems(
-				new MediaGalleryItemBuilder().setURL(`https://img.anili.st/media/${data.id}`)
-			);
-			container.spliceComponents(0, 1, media);
+		if (!respond.length) return interaction.respond([]);
 
-			const section = new TextDisplayBuilder().setContent(
-				[
-					heading(hyperlink(data.title!.english! || data.title!.userPreferred!, data.siteUrl!), 2),
-					...(data.description?.length ? [data.description] : [])
-				].join('\n')
-			);
-			container.spliceComponents(1, 1, section);
+		const options = respond.map((data) => ({
+			name: cutText(data.title!.userPreferred!, 1e2),
+			value: data.id
+		}));
 
-			const detail = new TextDisplayBuilder().setContent(
-				[
-					...(data.title?.romaji ? [`${bold('Romaji:')} ${data.title.romaji}`] : []),
-					...(data.title?.english ? [`${bold('English:')} ${data.title.english}`] : []),
-					...(data.title?.native ? [`${bold('Native:')} ${data.title.native}`] : []),
-					...(data.format ? [`${bold('Type:')} ${getType(data.format)}`] : []),
-					...(data.status ? [`${bold('Status:')} ${titleCase(data.status.replace(/_/g, ' '))}`] : []),
-					...(data.source ? [`${bold('Source:')} ${titleCase(data.source.replace(/_/g, ' '))}`] : []),
-					...(data.startDate ? [`${bold('Aired:')} ${getDate(data.startDate, data.endDate!)}`] : []),
-					...(data.duration
-						? [`${bold('Length:')} ${getDurationLength(data.duration, data.episodes!, data.format!)}`]
-						: []),
-					...(data.nextAiringEpisode
-						? [
-								`${bold('Next episodes:')} ${time(data.nextAiringEpisode.airingAt, 'R')} (episode ${
-									data.nextAiringEpisode.episode
-								})`
-							]
-						: []),
-					...(data.isAdult ? [`${bold('Explicit content:')} ${data.isAdult ? 'Yes' : 'No'}`] : []),
-					...(data.popularity ? [`${bold('Popularity:')} ${formatNumber(data.popularity)}`] : []),
-					...(data.characters?.length
-						? [`${bold('Characters:')} ${formatArray(data.characters.map((item) => item.name!.userPreferred!))}`]
-						: []),
-					...(data.externalLinks?.filter((item) => item?.type === 'STREAMING')?.length
-						? [
-								`${bold('Networks:')} ${data.externalLinks
-									.filter((item) => item.type === 'STREAMING')
-									.map((item) => hyperlink(item.site, item.url!))
-									.join(', ')}`
-							]
-						: [])
-				].join('\n')
-			);
-			container.spliceComponents(2, 0, detail);
-
-			return i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
-		});
-
-		collector.on('end', (collected, reason) => {
-			if (!collected.size && reason === 'time') {
-				return interaction.deleteReply();
-			}
-		});
+		return interaction.respond(options.slice(0, 25));
 	}
 }
 

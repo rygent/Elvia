@@ -3,24 +3,21 @@ import {
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
-	ComponentType,
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
 import {
-	ActionRowBuilder,
 	ContainerBuilder,
 	MediaGalleryBuilder,
 	MediaGalleryItemBuilder,
 	SeparatorBuilder,
-	StringSelectMenuBuilder,
 	TextDisplayBuilder
 } from '@discordjs/builders';
-import { type ChatInputCommandInteraction, type StringSelectMenuInteraction } from 'discord.js';
+import { type AutocompleteInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, inlineCode, italic, subtext } from '@discordjs/formatters';
 import { formatArray, titleCase } from '@/lib/utils/functions.js';
 import { fetcher } from '@/lib/fetcher.js';
-import { nanoid } from 'nanoid';
+import { cutText } from '@sapphire/utilities';
 
 export default class extends CoreCommand {
 	public constructor(client: CoreClient<true>) {
@@ -30,9 +27,10 @@ export default class extends CoreCommand {
 			description: 'Search for a Games on Steam.',
 			options: [
 				{
-					name: 'search',
-					description: 'Your search.',
+					name: 'query',
+					description: 'Your query.',
 					type: ApplicationCommandOptionType.String,
+					autocomplete: true,
 					required: true
 				}
 			],
@@ -43,104 +41,84 @@ export default class extends CoreCommand {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
-		const search = interaction.options.getString('search', true);
+		const id = interaction.options.getString('query', true);
 
-		const respond = await fetcher(`https://store.steampowered.com/api/storesearch/?term=${search}&l=en&cc=us`, {
+		const params = new URLSearchParams();
+		params.append('appids', id);
+		params.append('l', 'en');
+		params.append('cc', 'us');
+
+		const respond = await fetcher(`https://store.steampowered.com/api/appdetails?${params.toString()}`, {
 			method: 'GET'
-		}).then((data) => data.items.filter((item: any) => item.type === 'app'));
-		if (!respond.length) {
-			return interaction.reply({ content: 'Nothing found for this search.', flags: MessageFlags.Ephemeral });
+		}).then((res) => res[id].data);
+
+		if (!respond) {
+			return interaction.reply({ content: 'Nothing found for this query.', flags: MessageFlags.Ephemeral });
 		}
 
 		const container = new ContainerBuilder()
+			.addMediaGalleryComponents(
+				new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(respond.header_image))
+			)
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
-					`I found ${bold(respond.length.toString())} possible matches, please select one of the following:`
+					[
+						heading(hyperlink(respond.name, `https://store.steampowered.com/app/${respond.steam_appid}/`), 2),
+						respond.short_description,
+						...(respond.content_descriptors?.notes
+							? [`\n${italic(respond.content_descriptors.notes.replace(/\r|\n/g, ''))}`]
+							: [])
+					].join('\n')
 				)
 			)
-			.addActionRowComponents(
-				new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(
-					new StringSelectMenuBuilder()
-						.setCustomId(nanoid())
-						.setPlaceholder('Select a game')
-						.setOptions(
-							...respond.map((data: any) => ({
-								value: data.id.toString(),
-								label: data.name
-							}))
-						)
+			.addTextDisplayComponents(
+				new TextDisplayBuilder().setContent(
+					[
+						`${bold('Release Date:')} ${respond.release_date.coming_soon ? 'Coming soon' : respond.release_date.date}`,
+						`${bold('Price:')} ${inlineCode(respond.price_overview ? respond.price_overview.final_formatted : 'Free')}`,
+						`${bold('Genres:')} ${respond.genres.map(({ description }: any) => description).join(', ')}`,
+						...(respond.platforms
+							? [
+									`${bold('Platform:')} ${titleCase(
+										formatArray(Object.keys(respond.platforms).filter((item) => respond.platforms[item]))
+									).replace(/And/g, 'and')}`
+								]
+							: []),
+						...(respond.metacritic
+							? [
+									`${bold('Metascores:')} ${respond.metacritic.score} from ${hyperlink('metacritic', respond.metacritic.url)}`
+								]
+							: []),
+						`${bold('Developers:')} ${respond.developers.join(', ')}`,
+						`${bold('Publishers:')} ${respond.publishers.join(', ')}`
+					].join('\n')
 				)
 			)
 			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
 			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext(`Powered by ${bold('Steam')}`)));
 
-		const response = await interaction.reply({
-			components: [container],
-			flags: MessageFlags.IsComponentsV2,
-			withResponse: true
-		});
+		return interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+	}
 
-		const message = response.resource?.message;
-		if (!message) return;
+	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
+		const focused = interaction.options.getFocused();
 
-		const filter = (i: StringSelectMenuInteraction) => i.user.id === interaction.user.id;
-		const collector = message.createMessageComponentCollector({
-			filter,
-			componentType: ComponentType.StringSelect,
-			time: 6e4,
-			max: 1
-		});
+		const params = new URLSearchParams();
+		params.append('term', focused);
+		params.append('l', 'en');
+		params.append('cc', 'us');
 
-		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', async (i) => {
-			const [ids] = i.values;
+		const respond = await fetcher(`https://store.steampowered.com/api/storesearch?${params.toString()}`, {
+			method: 'GET'
+		}).then((data) => data.items.filter((item: any) => item.type === 'app'));
 
-			const data = await fetcher(`https://store.steampowered.com/api/appdetails?appids=${ids}&l=en&cc=us`, {
-				method: 'GET'
-			}).then((res) => res[ids!].data);
+		if (!respond.length) return interaction.respond([]);
 
-			const media = new MediaGalleryBuilder().addItems(new MediaGalleryItemBuilder().setURL(data.header_image));
-			container.spliceComponents(0, 1, media);
+		const options = respond.map((data: any) => ({
+			name: cutText(data.name, 1e2),
+			value: data.id.toString()
+		}));
 
-			const section = new TextDisplayBuilder().setContent(
-				[
-					heading(hyperlink(data.name, `https://store.steampowered.com/app/${data.steam_appid}/`), 2),
-					data.short_description,
-					...(data.content_descriptors?.notes
-						? [`\n${italic(data.content_descriptors.notes.replace(/\r|\n/g, ''))}`]
-						: [])
-				].join('\n')
-			);
-			container.spliceComponents(1, 1, section);
-
-			const detail = new TextDisplayBuilder().setContent(
-				[
-					`${bold('Release Date:')} ${data.release_date.coming_soon ? 'Coming soon' : data.release_date.date}`,
-					`${bold('Price:')} ${inlineCode(data.price_overview ? data.price_overview.final_formatted : 'Free')}`,
-					`${bold('Genres:')} ${data.genres.map(({ description }: any) => description).join(', ')}`,
-					...(data.platforms
-						? [
-								`${bold('Platform:')} ${titleCase(
-									formatArray(Object.keys(data.platforms).filter((item) => data.platforms[item]))
-								).replace(/And/g, 'and')}`
-							]
-						: []),
-					...(data.metacritic
-						? [`${bold('Metascores:')} ${data.metacritic.score} from ${hyperlink('metacritic', data.metacritic.url)}`]
-						: []),
-					`${bold('Developers:')} ${data.developers.join(', ')}`,
-					`${bold('Publishers:')} ${data.publishers.join(', ')}`
-				].join('\n')
-			);
-			container.spliceComponents(2, 0, detail);
-
-			return i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
-		});
-
-		collector.on('end', (collected, reason) => {
-			if (!collected.size && reason === 'time') {
-				return interaction.deleteReply();
-			}
-		});
+		return interaction.respond(options.slice(0, 25));
 	}
 }
