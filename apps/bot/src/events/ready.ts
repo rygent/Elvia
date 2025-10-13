@@ -19,12 +19,11 @@ export default class extends CoreEvent {
 		}
 
 		const guilds = await this.client.guilds.fetch();
-		for (const [, guild] of guilds) {
-			await prisma.guild.upsert({
-				where: { id: guild.id },
-				create: { id: guild.id },
-				update: {}
-			});
+		for (const guildId of guilds.keys()) {
+			const exists = await prisma.guild.findUnique({ where: { id: guildId } });
+			if (exists) continue;
+
+			await prisma.guild.create({ data: { id: guildId } });
 		}
 
 		logger.info(`${redBright(underline(`${this.client.user.username}`))} is ready!`);
