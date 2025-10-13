@@ -111,11 +111,11 @@ export default class extends CoreCommand {
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
 		const params = new URLSearchParams();
 		params.append('api_key', env.TMDB_API_KEY);
-		params.append('query', focused);
+		params.append('query', focused.value);
 
 		const respond = await fetcher(`https://api.themoviedb.org/3/search/tv?${params.toString()}`, {
 			method: 'GET'

@@ -161,7 +161,7 @@ export default class extends CoreCommand {
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
 		const respond = await fetcher('https://opentdb.com/api_category.php', {
 			method: 'GET'
@@ -170,7 +170,7 @@ export default class extends CoreCommand {
 		if (!respond.length) return interaction.respond([]);
 
 		const options = respond
-			.filter((data: any) => data.name.toLowerCase().includes(focused.toLowerCase()))
+			.filter((data: any) => data.name.toLowerCase().includes(focused.value.toLowerCase()))
 			.map((data: any) => ({
 				name: data.name,
 				value: data.id

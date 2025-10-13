@@ -101,10 +101,10 @@ export default class extends CoreCommand {
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
 		const params = new URLSearchParams();
-		params.append('term', focused);
+		params.append('term', focused.value);
 		params.append('l', 'en');
 		params.append('cc', 'us');
 

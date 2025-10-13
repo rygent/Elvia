@@ -87,17 +87,14 @@ export default class extends CoreCommand {
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
 		const focused = interaction.options.getFocused(true);
 
-		const choices = Languages.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()));
+		const options = Languages.filter(({ name, hoisted }) => {
+			if (!focused.value.length) return hoisted;
+			return name.toLowerCase().includes(focused.value.toLowerCase());
+		})
+			.sort((a, b) => a.name.localeCompare(b.name))
+			.map(({ name, value }) => ({ name, value }));
 
-		let respond = choices.filter(({ hoisted }) => hoisted).map(({ name, value }) => ({ name, value }));
-
-		if (focused.value.length) {
-			respond = choices.map(({ name, value }) => ({ name, value }));
-
-			return interaction.respond(respond.slice(0, 25));
-		}
-
-		return interaction.respond(respond.slice(0, 25));
+		return interaction.respond(options.slice(0, 25));
 	}
 }
 

@@ -109,18 +109,19 @@ export default class extends CoreCommand {
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
 		const database = await prisma.guild.findUnique({
 			where: { id: interaction.guildId },
 			select: { tags: true }
 		});
 
-		const options = database?.tags.filter(({ name }) => name.toLowerCase().includes(focused.toLowerCase()));
-		if (!options?.length) return interaction.respond([]);
+		if (!database) return interaction.respond([]);
 
-		const respond = options.map(({ name, slug }) => ({ name, value: slug })).slice(0, 25);
+		const options = database?.tags
+			.filter(({ name }) => name.toLowerCase().includes(focused.value.toLowerCase()))
+			.map(({ name, slug }) => ({ name, value: slug }));
 
-		return interaction.respond(respond);
+		return interaction.respond(options.slice(0, 25));
 	}
 }

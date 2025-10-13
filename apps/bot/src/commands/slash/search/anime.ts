@@ -107,22 +107,19 @@ export default class extends CoreCommand {
 	}
 
 	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
 		const anilist = new Anilist();
-		const respond = await anilist.media.search({ type: 'Anime', search: focused }).then((res) =>
-			res.filter((data) => {
-				if (data.isAdult && !isNsfwChannel(interaction.channel)) return false;
-				return true;
-			})
-		);
+		const respond = await anilist.media.search({ type: 'Anime', search: focused.value });
 
 		if (!respond.length) return interaction.respond([]);
 
-		const options = respond.map((data) => ({
-			name: cutText(data.title!.userPreferred!, 1e2),
-			value: data.id
-		}));
+		const options = respond
+			.filter((data) => !(data.isAdult && !isNsfwChannel(interaction.channel)))
+			.map((data) => ({
+				name: cutText(data.title!.userPreferred!, 1e2),
+				value: data.id
+			}));
 
 		return interaction.respond(options.slice(0, 25));
 	}

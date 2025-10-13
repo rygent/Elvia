@@ -201,25 +201,19 @@ export default class extends CoreCommand {
 	}
 
 	public override autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
-		const focused = interaction.options.getFocused();
+		const focused = interaction.options.getFocused(true);
 
-		const choices = this.client.commands
-			.filter(({ unique }) => unique?.includes(focused.toLowerCase()))
-			.map((commands) => ({ ...commands }));
-
-		const respond = choices
-			.sort((a, b) => a.unique!.localeCompare(b.unique!))
-			.filter((command) => !command.ownerOnly && command.type === ApplicationCommandType.ChatInput)
-			.filter((command) => {
+		const options = [...this.client.commands.entries()]
+			.filter(([name, command]) => {
+				if (command.type !== ApplicationCommandType.ChatInput) return false;
 				if (command.category.toLowerCase() === 'nsfw' && !isNsfwChannel(interaction.channel)) return false;
-				return true;
-			})
-			.filter((command) => {
 				if (command.guildOnly && !interaction.inCachedGuild()) return false;
-				return true;
+				if (command.ownerOnly) return false;
+				return name.toLowerCase().includes(focused.value.toLowerCase());
 			})
-			.map(({ unique }) => ({ name: unique!, value: unique! }));
+			.sort((a, b) => a[0].localeCompare(b[0]))
+			.map(([name]) => ({ name, value: name }));
 
-		return interaction.respond(respond.slice(0, 25));
+		return interaction.respond(options.slice(0, 25));
 	}
 }
