@@ -1,5 +1,6 @@
 import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ApplicationIntegrationType,
 	ButtonStyle,
@@ -7,14 +8,8 @@ import {
 	InteractionContextType,
 	MessageFlags
 } from 'discord-api-types/v10';
-import {
-	ActionRowBuilder,
-	ButtonBuilder,
-	ContainerBuilder,
-	SeparatorBuilder,
-	TextDisplayBuilder
-} from '@discordjs/builders';
-import { type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ContainerBuilder, TextDisplayBuilder } from '@discordjs/builders';
+import { type AutocompleteInteraction, type ButtonInteraction, type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, subtext } from '@discordjs/formatters';
 import { sentenceCase, shuffleArray } from '@/lib/utils/functions.js';
 import { fetcher } from '@/lib/fetcher.js';
@@ -26,6 +21,35 @@ export default class extends CoreCommand {
 			type: ApplicationCommandType.ChatInput,
 			name: 'trivia',
 			description: 'Plays a quick trivia game.',
+			options: [
+				{
+					name: 'category',
+					description: 'Pick a category.',
+					type: ApplicationCommandOptionType.Number,
+					autocomplete: true,
+					required: false
+				},
+				{
+					name: 'difficulty',
+					description: 'Choose how challenging the questions should be.',
+					type: ApplicationCommandOptionType.String,
+					choices: [
+						{
+							name: 'Easy',
+							value: 'easy'
+						},
+						{
+							name: 'Medium',
+							value: 'medium'
+						},
+						{
+							name: 'Hard',
+							value: 'hard'
+						}
+					],
+					required: false
+				}
+			],
 			integration_types: [ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall],
 			contexts: [InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel],
 			category: 'Fun'
@@ -33,65 +57,47 @@ export default class extends CoreCommand {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction<'cached' | 'raw'>) {
+		const category = interaction.options.getNumber('category');
+		const difficulty = interaction.options.getString('difficulty');
+
 		const params = new URLSearchParams();
 		params.append('amount', '1');
 		params.append('encode', 'base64');
 		params.append('type', 'multiple');
 
+		if (category) params.append('category', category.toString());
+		if (difficulty) params.append('difficulty', difficulty);
+
 		const respond = await fetcher(`https://opentdb.com/api.php?${params.toString()}`, {
 			method: 'GET'
 		}).then((data) => data.results[0]);
 
-		const question = Buffer.from(respond.question, 'base64').toString('utf8');
-		const difficulty = Buffer.from(respond.difficulty, 'base64').toString('utf8');
-		const category = Buffer.from(respond.category, 'base64').toString('utf8');
-		const answer = Buffer.from(respond.correct_answer, 'base64').toString('utf8');
-		const options = shuffleArray([...respond.incorrect_answers, respond.correct_answer]).map((item) =>
-			Buffer.from(item, 'base64').toString('utf8')
-		);
+		const decode = (data: string) => Buffer.from(data, 'base64').toString('utf8');
 
-		const button = new ActionRowBuilder<ButtonBuilder>()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[0] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[1] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[2] as string)
-			)
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId(nanoid())
-					.setStyle(ButtonStyle.Secondary)
-					.setLabel(options[3] as string)
-			);
+		const question = decode(respond.question);
+		const correct = decode(respond.correct_answer);
+		const incorrect = respond.incorrect_answers.map(decode);
+		const allAnswers = shuffleArray([...incorrect, correct]);
+
+		const buttonId = nanoid();
+		const row = new ActionRowBuilder<ButtonBuilder>();
+		for (const [index, answer] of allAnswers.entries()) {
+			const customId = `answer_${index + 1}:${buttonId}`;
+			row.addComponents(new ButtonBuilder().setCustomId(customId).setStyle(ButtonStyle.Secondary).setLabel(answer));
+		}
 
 		const container = new ContainerBuilder()
 			.addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(
 					[
 						heading(question, 2),
-						`${bold('Difficulty:')} ${sentenceCase(difficulty)}`,
-						`${bold('Category:')} ${category}`
+						`${bold('Difficulty:')} ${sentenceCase(decode(respond.difficulty))}`,
+						`${bold('Category:')} ${decode(respond.category)}`
 					].join('\n')
 				)
 			)
-			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext('You have 15 seconds to answer.')))
-			.addActionRowComponents(button)
-			.addSeparatorComponents(new SeparatorBuilder().setDivider(true))
-			.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(subtext(`Powered by ${bold(this.client.user.username)}`))
-			);
+			.addActionRowComponents(row)
+			.addTextDisplayComponents(new TextDisplayBuilder().setContent(subtext('You have 15 seconds to answer.')));
 
 		const response = await interaction.reply({
 			components: [container],
@@ -102,47 +108,74 @@ export default class extends CoreCommand {
 		const message = response.resource?.message;
 		if (!message) return;
 
-		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
-		const collector = message.createMessageComponentCollector({
-			filter,
-			componentType: ComponentType.Button,
-			time: 15e3,
-			max: 1
-		});
+		try {
+			const filter = async (i: ButtonInteraction) => {
+				if (i.user.id !== interaction.user.id) {
+					await i.deferUpdate();
+					return false;
+				}
+				return true;
+			};
 
-		collector.on('ignore', (i) => void i.deferUpdate());
-		collector.on('collect', async (i) => {
-			if (i.component.style === ButtonStyle.Premium) return;
+			const clicked = await message.awaitMessageComponent({
+				componentType: ComponentType.Button,
+				filter,
+				time: 15e3
+			});
 
-			const selected = i.component.label;
+			if (clicked.component.style === ButtonStyle.Premium) return;
+			const selected = clicked.component.label;
 
-			const content = new TextDisplayBuilder();
+			if (selected === correct) {
+				const result = new TextDisplayBuilder().setContent(subtext('Well done! You got it!'));
+				container.spliceComponents(2, 1, result);
 
-			if (selected === answer) {
-				content.setContent(subtext('Congratulations, your answer is correct.'));
-
-				button.components[options.indexOf(selected)]?.setStyle(ButtonStyle.Success);
+				for (const [index, button] of row.components.entries()) {
+					if (allAnswers[index] === selected) button.setStyle(ButtonStyle.Success);
+					button.setDisabled(true);
+				}
 			} else {
-				content.setContent(subtext(`Unfortunately, the correct answer was ${bold(answer)}.`));
+				const result = new TextDisplayBuilder().setContent(subtext('Close, but not correct.'));
+				container.spliceComponents(2, 1, result);
 
-				button.components[options.indexOf(selected!)]?.setStyle(ButtonStyle.Danger);
-				button.components[options.indexOf(answer)]?.setStyle(ButtonStyle.Success);
+				for (const [index, button] of row.components.entries()) {
+					if (allAnswers[index] === selected!) button.setStyle(ButtonStyle.Danger);
+					if (allAnswers[index] === correct) button.setStyle(ButtonStyle.Success);
+					button.setDisabled(true);
+				}
 			}
 
-			container.spliceComponents(1, 1, content);
+			return await clicked.update({ components: [container] });
+		} catch (error) {
+			if (error instanceof Error && error.name === 'Error [InteractionCollectorError]') {
+				const result = new TextDisplayBuilder().setContent(subtext("Time's up! You ran out of time."));
+				container.spliceComponents(2, 1, result);
 
-			await i.update({ components: [container], flags: MessageFlags.IsComponentsV2 });
-		});
+				for (const button of row.components) button.setDisabled(true);
 
-		collector.once('end', async (collected, reason) => {
-			if (!collected.size && reason === 'time') {
-				const content = new TextDisplayBuilder().setContent(subtext("Guess you didn't wanna play trivia after all?"));
-				container.spliceComponents(1, 1, content);
+				return interaction.editReply({ components: [container] });
 			}
 
-			button.components.forEach((btn) => btn.setDisabled(true));
+			throw error;
+		}
+	}
 
-			await interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
-		});
+	public override async autocomplete(interaction: AutocompleteInteraction<'cached' | 'raw'>) {
+		const focused = interaction.options.getFocused();
+
+		const respond = await fetcher('https://opentdb.com/api_category.php', {
+			method: 'GET'
+		}).then((data) => data.trivia_categories);
+
+		if (!respond.length) return interaction.respond([]);
+
+		const options = respond
+			.filter((data: any) => data.name.toLowerCase().includes(focused.toLowerCase()))
+			.map((data: any) => ({
+				name: data.name,
+				value: data.id
+			}));
+
+		return interaction.respond(options.slice(0, 25));
 	}
 }
