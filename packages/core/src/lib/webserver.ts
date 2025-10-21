@@ -83,6 +83,6 @@ export class CoreWebserver {
 			reply.status(404).send({ message });
 		});
 
-		await this.app.listen({ port });
+		await this.app.listen({ port, host: '0.0.0.0' });
 	}
 }
