@@ -16,7 +16,7 @@ export class CoreSettings {
 	}
 
 	public get token() {
-		this.data.token ??= process.env.DISCORD_TOKEN;
+		this.data.token ??= process.env.BOT_TOKEN || process.env.DISCORD_TOKEN;
 		return this.data.token;
 	}
 
