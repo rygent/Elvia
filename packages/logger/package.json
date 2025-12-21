@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.7.2",
-    "eslint": "^9.37.0",
+    "eslint": "^9.39.2",
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
