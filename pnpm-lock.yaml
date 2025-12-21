@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^20.1.0
-        version: 20.1.0(@types/node@24.7.2)(typescript@5.9.3)
+        version: 20.1.0(@types/node@24.10.4)(typescript@5.9.3)
       '@commitlint/config-angular':
         specifier: ^20.0.0
         version: 20.0.0
@@ -18,8 +18,8 @@ importers:
         specifier: ^4.6.9
         version: 4.6.9
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -127,8 +127,8 @@ importers:
         specifier: ^2.2.7
         version: 2.2.7
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -213,8 +213,8 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       '@types/react':
         specifier: ^19.2.7
         version: 19.2.7
@@ -281,8 +281,8 @@ importers:
         version: 2.8.1
     devDependencies:
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -306,8 +306,8 @@ importers:
         version: 6.17.1(prisma@6.17.1(typescript@5.9.3))(typescript@5.9.3)
     devDependencies:
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -358,8 +358,8 @@ importers:
         version: 4.9.0
     devDependencies:
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -459,8 +459,8 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       '@types/react':
         specifier: ^19.2.7
         version: 19.2.7
@@ -496,8 +496,8 @@ importers:
         version: 3.3.1
     devDependencies:
       '@types/node':
-        specifier: ^24.7.2
-        version: 24.7.2
+        specifier: ^24.10.4
+        version: 24.10.4
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -2320,8 +2320,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.7.2':
-    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
+  '@types/node@24.10.4':
+    resolution: {integrity: sha512-vnDVpYPMzs4wunl27jHrfmwojOGKya0xyM3sH+UE5iv5uPS6vX7UIoh6m+vQc5LGBq52HBKPIn/zcSZVzeDEZg==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -5395,8 +5395,8 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
-  undici-types@7.14.0:
-    resolution: {integrity: sha512-QQiYxHuyZ9gQUIrmPo3IA+hUl4KYk8uSA7cHrcKd/l3p1OTpZcM0Tbp9x7FAtXdAYhlasd60ncPpgu6ihG6TOA==}
+  undici-types@7.16.0:
+    resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
@@ -5651,11 +5651,11 @@ snapshots:
 
   '@colors/colors@1.6.0': {}
 
-  '@commitlint/cli@20.1.0(@types/node@24.7.2)(typescript@5.9.3)':
+  '@commitlint/cli@20.1.0(@types/node@24.10.4)(typescript@5.9.3)':
     dependencies:
       '@commitlint/format': 20.0.0
       '@commitlint/lint': 20.0.0
-      '@commitlint/load': 20.1.0(@types/node@24.7.2)(typescript@5.9.3)
+      '@commitlint/load': 20.1.0(@types/node@24.10.4)(typescript@5.9.3)
       '@commitlint/read': 20.0.0
       '@commitlint/types': 20.0.0
       tinyexec: 1.0.1
@@ -5703,7 +5703,7 @@ snapshots:
       '@commitlint/rules': 20.0.0
       '@commitlint/types': 20.0.0
 
-  '@commitlint/load@20.1.0(@types/node@24.7.2)(typescript@5.9.3)':
+  '@commitlint/load@20.1.0(@types/node@24.10.4)(typescript@5.9.3)':
     dependencies:
       '@commitlint/config-validator': 20.0.0
       '@commitlint/execute-rule': 20.0.0
@@ -5711,7 +5711,7 @@ snapshots:
       '@commitlint/types': 20.0.0
       chalk: 5.6.2
       cosmiconfig: 9.0.0(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.2.0(@types/node@24.7.2)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig-typescript-loader: 6.2.0(@types/node@24.10.4)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -7206,7 +7206,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.10.4
 
   '@types/debug@4.1.12':
     dependencies:
@@ -7247,9 +7247,9 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.7.2':
+  '@types/node@24.10.4':
     dependencies:
-      undici-types: 7.14.0
+      undici-types: 7.16.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.7)':
     dependencies:
@@ -7267,7 +7267,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.10.4
 
   '@typescript-eslint/eslint-plugin@8.50.0(@typescript-eslint/parser@8.50.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -7776,9 +7776,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@6.2.0(@types/node@24.7.2)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.2.0(@types/node@24.10.4)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.10.4
       cosmiconfig: 9.0.0(typescript@5.9.3)
       jiti: 2.6.1
       typescript: 5.9.3
@@ -10873,7 +10873,7 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
-  undici-types@7.14.0: {}
+  undici-types@7.16.0: {}
 
   undici@5.29.0:
     dependencies:
