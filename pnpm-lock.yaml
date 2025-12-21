@@ -124,8 +124,8 @@ importers:
         specifier: ^1.15.7
         version: 1.15.7
       '@types/moment-duration-format':
-        specifier: ^2.2.6
-        version: 2.2.6
+        specifier: ^2.2.7
+        version: 2.2.7
       '@types/node':
         specifier: ^24.7.2
         version: 24.7.2
@@ -2150,8 +2150,8 @@ packages:
   '@types/mdx@2.0.13':
     resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
 
-  '@types/moment-duration-format@2.2.6':
-    resolution: {integrity: sha512-Qw+6ys3sQCatqukjoIBsL1UJq6S7ep4ixrNvDkdViSgzw2ZG3neArXNu3ww7mEG8kwP32ZDoON/esWb7OUckRQ==}
+  '@types/moment-duration-format@2.2.7':
+    resolution: {integrity: sha512-BSxkbKI8ucqqxi4ZCfmFPilUDPoL85YVrOvn/AhCQoeqNfnRsRLGkk68TpoC7L6GwU27RltYiQV5dtfPTv/RHw==}
 
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
@@ -7008,7 +7008,7 @@ snapshots:
 
   '@types/mdx@2.0.13': {}
 
-  '@types/moment-duration-format@2.2.6':
+  '@types/moment-duration-format@2.2.7':
     dependencies:
       moment: 2.30.1
 
