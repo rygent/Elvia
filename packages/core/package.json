@@ -36,7 +36,7 @@
     "fastify": "^5.6.1",
     "globby": "^15.0.0",
     "jiti": "^2.6.1",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
