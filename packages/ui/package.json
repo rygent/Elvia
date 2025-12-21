@@ -63,7 +63,7 @@
     "eslint": "^9.37.0",
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3"
   },
