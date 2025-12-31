@@ -16,11 +16,10 @@ import {
 import { type Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
-export interface ContextMenuOptions
-	extends Omit<
-		RESTPostAPIContextMenuApplicationCommandsJSONBody,
-		'default_permission' | 'description_localizations' | 'dm_permission' | 'handler'
-	> {
+export interface ContextMenuOptions extends Omit<
+	RESTPostAPIContextMenuApplicationCommandsJSONBody,
+	'default_permission' | 'description_localizations' | 'dm_permission' | 'handler'
+> {
 	enabled?: boolean;
 	cooldown?: number;
 	client_permissions?: (typeof PermissionFlagsBits)[PermissionsString][];
