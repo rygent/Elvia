@@ -5650,9 +5650,6 @@ packages:
   zod@4.3.3:
     resolution: {integrity: sha512-bQ7Rxwfn04DCrTjjRfD9SavY2vWdmf3REjs/mkc1LdwI1KkcHClBRJmnvmA/6epGeqlHePtIRF1J4SrMMlW7IA==}
 
-  zod@4.3.3:
-    resolution: {integrity: sha512-bQ7Rxwfn04DCrTjjRfD9SavY2vWdmf3REjs/mkc1LdwI1KkcHClBRJmnvmA/6epGeqlHePtIRF1J4SrMMlW7IA==}
-
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -11253,8 +11250,5 @@ snapshots:
   yoctocolors@2.1.2: {}
 
   zod@4.3.3: {}
-
-  zod@4.3.3:
-    optional: true
 
   zwitch@2.0.4: {}
