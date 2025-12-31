@@ -18,8 +18,10 @@ import {
 import { type Awaitable } from '@discordjs/util';
 import { EventEmitter } from 'node:events';
 
-export interface ChatInputOptions
-	extends Omit<RESTPostAPIChatInputApplicationCommandsJSONBody, 'default_permission' | 'dm_permission' | 'handler'> {
+export interface ChatInputOptions extends Omit<
+	RESTPostAPIChatInputApplicationCommandsJSONBody,
+	'default_permission' | 'dm_permission' | 'handler'
+> {
 	category?: string;
 	enabled?: boolean;
 	cooldown?: number;
