@@ -1,4 +1,4 @@
-import { fastify, type FastifyInstance, type FastifyPluginAsync } from 'fastify';
+import { fastify, type FastifyError, type FastifyInstance, type FastifyPluginAsync } from 'fastify';
 import { type CoreShardingManager } from '@/lib/sharding.js';
 import compression from '@fastify/compress';
 import cors from '@fastify/cors';
@@ -67,7 +67,8 @@ export class CoreWebserver {
 		});
 
 		// eslint-disable-next-line promise/prefer-await-to-callbacks
-		this.app.setErrorHandler((error, request, reply) => {
+		this.app.setErrorHandler((error: FastifyError, request, reply) => {
+			// Note: If @fastify/error use version 4.2.0 or higher, change with instanceof FastifyError
 			request.log.error(error);
 
 			const status = error.statusCode ?? 500;
