@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsup",
     "db:generate": "prisma generate --no-hints",
-    "db:push": "prisma db push --skip-generate",
+    "db:push": "prisma db push",
     "db:format": "prisma format",
     "lint": "eslint \"src/**/*.ts\" --format=pretty",
     "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
@@ -31,7 +31,9 @@
     "directory": "packages/database"
   },
   "dependencies": {
-    "@prisma/client": "^7.2.0"
+    "@prisma/adapter-neon": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
