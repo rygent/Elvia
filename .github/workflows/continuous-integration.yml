@@ -34,9 +34,13 @@ jobs:
       - name: Build packages (PR)
         if: ${{ github.event_name != 'push' }}
         run: pnpm exec turbo run build --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Build packages (Push)
         if: ${{ github.event_name == 'push' }}
         run: pnpm exec turbo run build --filter="...[HEAD^1]" --concurrency=4
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: ESLint (PR)
         if: ${{ github.event_name != 'push' }}
         run: pnpm exec turbo run lint --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
@@ -52,5 +56,4 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       SKIP_ENV_VALIDATION: true
