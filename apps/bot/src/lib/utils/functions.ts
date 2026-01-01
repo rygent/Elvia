@@ -2,6 +2,11 @@ import { ButtonStyle, ChannelType } from 'discord-api-types/v10';
 import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import type { Channel, GuildChannel, Message, StageChannel, ThreadChannel, VoiceChannel } from 'discord.js';
 import { isNullish, type Nullish } from '@sapphire/utilities';
+import { setTimeout } from 'node:timers/promises';
+
+export function delay(duration: number) {
+	return setTimeout(duration);
+}
 
 export function disableAllButtons(row: ActionRowBuilder<ButtonBuilder>): ActionRowBuilder<ButtonBuilder> {
 	for (const button of row.components) {
