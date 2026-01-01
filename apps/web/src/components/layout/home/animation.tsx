@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Card, CardDescription, CardHeader, CardTitle } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'motion/react';
 
 export function Animation() {
 	const [selectedTab, setSelectedTab] = React.useState(0);
