@@ -26,7 +26,7 @@ import { nanoid } from 'nanoid';
 import moment from 'moment';
 import 'moment-duration-format';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

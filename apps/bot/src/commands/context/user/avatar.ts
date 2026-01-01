@@ -1,4 +1,4 @@
-import { CoreContext, type CoreClient } from '@elvia/core';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -15,7 +15,7 @@ import {
 import { type UserContextMenuCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext } from '@discordjs/formatters';
 
-export default class extends CoreContext {
+export default class extends CoreCommand<ApplicationCommandType.User> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.User,

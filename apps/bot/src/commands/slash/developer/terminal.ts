@@ -10,7 +10,7 @@ import { AttachmentBuilder, type ChatInputCommandInteraction } from 'discord.js'
 import { codeBlock } from '@discordjs/formatters';
 import { exec } from 'node:child_process';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

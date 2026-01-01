@@ -8,7 +8,7 @@ import {
 } from 'discord-api-types/v10';
 import { AttachmentBuilder, parseEmoji, type ChatInputCommandInteraction } from 'discord.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

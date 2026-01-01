@@ -5,18 +5,15 @@ import {
 	type APIApplicationCommandBasicOption,
 	type RESTPostAPIApplicationCommandsJSONBody
 } from 'discord-api-types/v10';
-import { CoreCommand, CoreContext } from '@elvia/core';
+import { CoreCommand } from '@elvia/core';
 import { REST } from '@discordjs/rest';
 import { titleCase } from '@elvia/utils';
 import { logger } from '@elvia/logger';
+import { isClass } from '@sapphire/utilities';
 import { globby } from 'globby';
 import { createJiti } from 'jiti';
 import { env } from '@/env.js';
 import path from 'node:path';
-import dotenv from 'dotenv';
-
-// eslint-disable-next-line import-x/no-named-as-default-member
-dotenv.config({ override: true, quiet: true });
 
 const jiti = createJiti(import.meta.url);
 
@@ -28,17 +25,17 @@ async function loadCommands(patterns: string | readonly string[]) {
 
 	const commandFiles = await globby(patterns);
 	for (const commandFile of commandFiles) {
-		const Command = await jiti.import<any>(commandFile, { default: true });
+		const Command = await jiti.import<
+			CoreCommand<Exclude<ApplicationCommandType, ApplicationCommandType.PrimaryEntryPoint>>
+		>(commandFile, { default: true });
+		if (!isClass(Command)) continue;
 		const command = new Command();
-
-		if (command instanceof CoreContext) {
+		if (!(command instanceof CoreCommand)) continue;
+		if (command.data.type !== ApplicationCommandType.ChatInput) {
 			commandData.push(command.toJSON());
 			continue;
 		}
-
-		if (command instanceof CoreCommand) {
-			mergeCommands(commandData, command, commandFile);
-		}
+		mergeCommands(commandData, command, commandFile);
 	}
 
 	return commandData;
@@ -46,7 +43,7 @@ async function loadCommands(patterns: string | readonly string[]) {
 
 function mergeCommands(
 	commandData: RESTPostAPIApplicationCommandsJSONBody[],
-	command: CoreCommand,
+	command: CoreCommand<ApplicationCommandType.ChatInput>,
 	commandFile: string
 ) {
 	const relativePath = path.relative(`${directory}commands/slash`, path.dirname(commandFile));
@@ -67,6 +64,7 @@ function mergeCommands(
 		}
 
 		const subData = command.toJSON();
+		if (subData.type !== ApplicationCommandType.ChatInput) return;
 
 		if (subGroup) {
 			let groupCommand = parentCommand.options?.find((opt) => opt.name === subGroup);

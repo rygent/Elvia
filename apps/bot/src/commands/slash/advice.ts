@@ -3,7 +3,7 @@ import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextT
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { fetcher } from '@/lib/fetcher.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

@@ -15,7 +15,7 @@ import { sentenceCase, shuffleArray } from '@/lib/utils/functions.js';
 import { fetcher } from '@/lib/fetcher.js';
 import { nanoid } from 'nanoid';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

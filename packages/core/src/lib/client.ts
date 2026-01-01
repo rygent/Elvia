@@ -1,7 +1,7 @@
+import { ApplicationCommandType } from 'discord-api-types/v10';
 import { BitField, Client, PermissionsBitField, type ClientOptions, type PermissionsString } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import { CoreCommand } from '@/lib/command.js';
-import { CoreContext } from '@/lib/context.js';
 import { CoreEvent } from '@/lib/event.js';
 import { CoreSettings } from '@/lib/settings.js';
 import { isClass } from '@sapphire/utilities';
@@ -19,8 +19,11 @@ export interface CoreClientOptions extends ClientOptions {
 export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 	public settings: CoreSettings;
 
-	public commands: Collection<string, CoreCommand>;
-	public contexts: Collection<string, CoreContext>;
+	public commands: Collection<
+		string,
+		CoreCommand<Exclude<ApplicationCommandType, ApplicationCommandType.PrimaryEntryPoint>>
+	>;
+
 	public events: Collection<string, CoreEvent>;
 
 	public cooldowns: Collection<string, Collection<string, number>>;
@@ -34,7 +37,6 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 		this.validate();
 
 		this.commands = new Collection();
-		this.contexts = new Collection();
 		this.events = new Collection();
 
 		this.cooldowns = new Collection();
@@ -67,16 +69,17 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 		for (const file of commandFiles) {
 			const { name } = path.parse(file);
-			const Command = await jiti.import<CoreCommand>(file, { default: true });
+			const Command = await jiti.import<CoreCommand<ApplicationCommandType.ChatInput>>(file, { default: true });
 			if (!isClass(Command)) throw new TypeError(`Command ${name} doesn't export a class.`);
 			const command = new Command(this);
 			if (!(command instanceof CoreCommand)) {
 				throw new TypeError(`Command ${name} doesn't belong in commands directory.`);
 			}
+			if (command.data.type !== ApplicationCommandType.ChatInput) continue;
 			const relativePaths = path.relative(`${this.directory}commands/slash`, path.dirname(file));
-			const [commandName, subCommandGroup] = relativePaths.split(path.sep);
-			command.unique = [commandName, subCommandGroup, command.name].filter(Boolean).join(' ');
-			this.commands.set(command.unique, command);
+			const [topLevelName, groupName] = relativePaths.split(path.sep);
+			const commandName = [topLevelName, groupName, command.data.name].filter(Boolean).join(' ');
+			this.commands.set(commandName, command);
 		}
 	}
 
@@ -85,13 +88,16 @@ export class CoreClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 		for (const file of contextFiles) {
 			const { name } = path.parse(file);
-			const Context = await jiti.import<CoreContext>(file, { default: true });
+			const Context = await jiti.import<
+				CoreCommand<Extract<ApplicationCommandType, ApplicationCommandType.User | ApplicationCommandType.Message>>
+			>(file, { default: true });
 			if (!isClass(Context)) throw new TypeError(`Context ${name} doesn't export a class.`);
 			const context = new Context(this);
-			if (!(context instanceof CoreContext)) {
+			if (!(context instanceof CoreCommand)) {
 				throw new TypeError(`Context ${name} doesn't belong in commands directory.`);
 			}
-			this.contexts.set(context.name, context);
+			if (context.data.type === ApplicationCommandType.ChatInput) continue;
+			this.commands.set(context.data.name, context);
 		}
 	}
 

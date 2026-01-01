@@ -1,4 +1,4 @@
-import { CoreContext, type CoreClient } from '@elvia/core';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -20,7 +20,7 @@ import { Languages } from '@/lib/utils/autocomplete.js';
 import { nanoid } from 'nanoid';
 import translate from '@iamtraction/google-translate';
 
-export default class extends CoreContext {
+export default class extends CoreCommand<ApplicationCommandType.Message> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.Message,

@@ -12,7 +12,7 @@ import { bold, hideLinkEmbed, hyperlink, italic, subtext } from '@discordjs/form
 import { Languages } from '@/lib/utils/autocomplete.js';
 import translate from '@iamtraction/google-translate';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

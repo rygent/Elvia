@@ -13,7 +13,7 @@ import { ActionRowBuilder, ButtonBuilder } from '@discordjs/builders';
 import { parseEmoji, type ChatInputCommandInteraction } from 'discord.js';
 import { Emojis } from '@/lib/utils/constants.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

@@ -1,4 +1,4 @@
-import { CoreContext, type CoreClient } from '@elvia/core';
+import { CoreCommand, type CoreClient } from '@elvia/core';
 import {
 	ApplicationCommandType,
 	ApplicationIntegrationType,
@@ -24,7 +24,7 @@ import { bold, inlineCode, subtext, time } from '@discordjs/formatters';
 import { formatArray, formatPermissions, trimArray } from '@/lib/utils/functions.js';
 import { Badges } from '@/lib/utils/emojis.js';
 
-export default class extends CoreContext {
+export default class extends CoreCommand<ApplicationCommandType.User> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.User,

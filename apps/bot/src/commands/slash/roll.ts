@@ -13,7 +13,7 @@ import { formatNumber } from '@/lib/utils/functions.js';
 const kDice20RegExp = /^(\d+)?\s*d\s*(\d+)\s*(.*?)$/;
 const kDice20TrailRegExp = /([+-x*])\s*(\d+)/g;
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

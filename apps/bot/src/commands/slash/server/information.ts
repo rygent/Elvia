@@ -18,7 +18,7 @@ import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, inlineCode, subtext, time, userMention } from '@discordjs/formatters';
 import { formatArray, formatNumber, trimArray } from '@/lib/utils/functions.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

@@ -18,7 +18,7 @@ import { pickRandom } from '@sapphire/utilities';
 import { isNsfwChannel } from '@/lib/utils/functions.js';
 import { fetcher } from '@/lib/fetcher.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

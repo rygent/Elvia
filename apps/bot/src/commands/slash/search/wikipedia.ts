@@ -11,7 +11,7 @@ import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold, heading, hyperlink, subtext } from '@discordjs/formatters';
 import { UndiciError, fetcher } from '@/lib/fetcher.js';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

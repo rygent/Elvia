@@ -8,7 +8,7 @@ import {
 import { type ChatInputCommandInteraction } from 'discord.js';
 import { bold } from '@discordjs/formatters';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

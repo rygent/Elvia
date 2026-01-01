@@ -26,7 +26,7 @@ import { prisma } from '@elvia/database';
 import { pickRandom } from '@sapphire/utilities';
 import { nanoid } from 'nanoid';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,

@@ -30,19 +30,16 @@ export default class extends CoreEvent {
 			}
 
 			const command = this.client.commands.get(commandName);
-			const context = this.client.contexts.get(commandName);
 
-			const commandOrContext = command ?? context;
-
-			if (commandOrContext) {
-				if (!commandOrContext.enabled) {
+			if (command) {
+				if (!command.enabled) {
 					return interaction.reply({
 						content: 'This command is currently inaccessible.',
 						flags: MessageFlags.Ephemeral
 					});
 				}
 
-				if (commandOrContext.guildOnly && !interaction.inCachedGuild()) {
+				if (command.guild_only && !interaction.inCachedGuild()) {
 					return interaction.reply({
 						content: 'This command cannot be used out of a server.',
 						flags: MessageFlags.Ephemeral
@@ -51,8 +48,8 @@ export default class extends CoreEvent {
 
 				if (interaction.inGuild()) {
 					if (interaction.inCachedGuild()) {
-						const memberPermsCheck = commandOrContext.memberPermissions
-							? this.client.defaultPermissions.add(commandOrContext.memberPermissions)
+						const memberPermsCheck = command.member_permissions
+							? this.client.defaultPermissions.add(command.member_permissions)
 							: this.client.defaultPermissions;
 
 						if (memberPermsCheck) {
@@ -68,8 +65,8 @@ export default class extends CoreEvent {
 							}
 						}
 
-						const clientPermsCheck = commandOrContext.clientPermissions
-							? this.client.defaultPermissions.add(commandOrContext.clientPermissions)
+						const clientPermsCheck = command.client_permissions
+							? this.client.defaultPermissions.add(command.client_permissions)
 							: this.client.defaultPermissions;
 
 						if (clientPermsCheck) {
@@ -88,14 +85,14 @@ export default class extends CoreEvent {
 						}
 					}
 
-					if (commandOrContext.nsfw && !isNsfwChannel(interaction.channel)) {
+					if (command.data.nsfw && !isNsfwChannel(interaction.channel)) {
 						const replies = `This command is only accessible on ${bold('Age-Restricted')} channels.`;
 
 						return interaction.reply({ content: replies, flags: MessageFlags.Ephemeral });
 					}
 				}
 
-				if (commandOrContext.ownerOnly && !this.client.settings.owners?.includes(interaction.user.id)) {
+				if (command.owner_only && !this.client.settings.owners?.includes(interaction.user.id)) {
 					return interaction.reply({
 						content: 'This command is only accessible for developers.',
 						flags: MessageFlags.Ephemeral
@@ -110,7 +107,7 @@ export default class extends CoreEvent {
 				const cooldown = this.client.cooldowns.get(commandName);
 
 				if (cooldown?.has(interaction.user.id) && !this.client.settings.owners?.includes(interaction.user.id)) {
-					const expired = (cooldown.get(interaction.user.id) as number) + commandOrContext.cooldown;
+					const expired = (cooldown.get(interaction.user.id) as number) + command.cooldown;
 
 					if (now < expired) {
 						const duration = (expired - now) / 1e3;
@@ -124,14 +121,10 @@ export default class extends CoreEvent {
 				}
 
 				cooldown?.set(interaction.user.id, now);
-				setTimeout(() => cooldown?.delete(interaction.user.id), commandOrContext.cooldown);
+				setTimeout(() => cooldown?.delete(interaction.user.id), command.cooldown);
 
 				try {
-					if (command && interaction.isChatInputCommand()) {
-						await command.execute(interaction);
-					} else if (context && interaction.isContextMenuCommand()) {
-						await context.execute(interaction);
-					}
+					await command.execute(interaction);
 				} catch (error: unknown) {
 					if (error instanceof Error) {
 						if (error.name === 'DiscordAPIError[10062]') return;
@@ -160,8 +153,8 @@ export default class extends CoreEvent {
 
 			if (command) {
 				if (!command.enabled) return interaction.respond([]);
-				if (command.guildOnly && !interaction.inCachedGuild()) return interaction.respond([]);
-				if (command.ownerOnly && !this.client.settings.owners?.includes(interaction.user.id)) {
+				if (command.guild_only && !interaction.inCachedGuild()) return interaction.respond([]);
+				if (command.owner_only && !this.client.settings.owners?.includes(interaction.user.id)) {
 					return interaction.respond([]);
 				}
 

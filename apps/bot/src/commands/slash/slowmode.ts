@@ -12,7 +12,7 @@ import { type ChatInputCommandInteraction, type ForumChannel, type TextChannel, 
 import { bold, channelMention, italic } from '@discordjs/formatters';
 import { Duration, DurationFormatter } from '@sapphire/time-utilities';
 
-export default class extends CoreCommand {
+export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 	public constructor(client: CoreClient<true>) {
 		super(client, {
 			type: ApplicationCommandType.ChatInput,
