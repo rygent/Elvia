@@ -117,8 +117,8 @@ importers:
         specifier: ^7.16.0
         version: 7.16.0
       zod:
-        specifier: ^4.3.3
-        version: 4.3.3
+        specifier: ^4.3.4
+        version: 4.3.4
     devDependencies:
       '@swc/core':
         specifier: ^1.15.8
@@ -162,7 +162,7 @@ importers:
         version: link:../../packages/utils
       '@t3-oss/env-nextjs':
         specifier: ^0.13.10
-        version: 0.13.10(typescript@5.9.3)(zod@4.3.3)
+        version: 0.13.10(typescript@5.9.3)(zod@4.3.4)
       '@vercel/analytics':
         specifier: ^1.6.1
         version: 1.6.1(next@15.5.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -203,8 +203,8 @@ importers:
         specifier: ^2.3.8
         version: 2.3.8(react@19.2.3)
       zod:
-        specifier: ^4.3.3
-        version: 4.3.3
+        specifier: ^4.3.4
+        version: 4.3.4
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.0
@@ -452,8 +452,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       zod:
-        specifier: ^4.3.3
-        version: 4.3.3
+        specifier: ^4.3.4
+        version: 4.3.4
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.1.18
@@ -5564,8 +5564,8 @@ packages:
     resolution: {integrity: sha512-CzhO+pFNo8ajLM2d2IW/R93ipy99LWjtwblvC1RsoSUMZgyLbYFr221TnSNT7GjGdYui6P459mw9JH/g/zW2ug==}
     engines: {node: '>=18'}
 
-  zod@4.3.3:
-    resolution: {integrity: sha512-bQ7Rxwfn04DCrTjjRfD9SavY2vWdmf3REjs/mkc1LdwI1KkcHClBRJmnvmA/6epGeqlHePtIRF1J4SrMMlW7IA==}
+  zod@4.3.4:
+    resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -6106,7 +6106,7 @@ snapshots:
       fumadocs-core: 15.8.5(@types/react@19.2.7)(lucide-react@0.562.0(react@19.2.3))(next@15.5.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       gray-matter: 4.0.3
       react: 19.2.3
-      zod: 4.3.3
+      zod: 4.3.4
     optionalDependencies:
       '@types/react': 19.2.7
     transitivePeerDependencies:
@@ -7098,17 +7098,17 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@t3-oss/env-core@0.13.10(typescript@5.9.3)(zod@4.3.3)':
+  '@t3-oss/env-core@0.13.10(typescript@5.9.3)(zod@4.3.4)':
     optionalDependencies:
       typescript: 5.9.3
-      zod: 4.3.3
+      zod: 4.3.4
 
-  '@t3-oss/env-nextjs@0.13.10(typescript@5.9.3)(zod@4.3.3)':
+  '@t3-oss/env-nextjs@0.13.10(typescript@5.9.3)(zod@4.3.4)':
     dependencies:
-      '@t3-oss/env-core': 0.13.10(typescript@5.9.3)(zod@4.3.3)
+      '@t3-oss/env-core': 0.13.10(typescript@5.9.3)(zod@4.3.4)
     optionalDependencies:
       typescript: 5.9.3
-      zod: 4.3.3
+      zod: 4.3.4
 
   '@tailwindcss/node@4.1.18':
     dependencies:
@@ -8583,7 +8583,7 @@ snapshots:
       tinyglobby: 0.2.15
       unified: 11.0.5
       unist-util-visit: 5.0.0
-      zod: 4.3.3
+      zod: 4.3.4
     optionalDependencies:
       '@fumadocs/mdx-remote': 1.4.4(@types/react@19.2.7)(fumadocs-core@15.8.5(@types/react@19.2.7)(lucide-react@0.562.0(react@19.2.3))(next@15.5.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       next: 15.5.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -11051,6 +11051,6 @@ snapshots:
 
   yoctocolors@2.1.2: {}
 
-  zod@4.3.3: {}
+  zod@4.3.4: {}
 
   zwitch@2.0.4: {}
