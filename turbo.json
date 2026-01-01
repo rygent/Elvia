@@ -35,7 +35,6 @@
     },
     "@elvia/database#db:generate": {
       "cache": false,
-      "env": ["DATABASE_URL"],
       "outputs": ["generated/prisma/**"],
       "outputLogs": "full"
     },
