@@ -29,7 +29,7 @@
     "@iamtraction/google-translate": "^2.0.1",
     "@rygent/anilist": "^1.5.0",
     "@rygent/spotify": "^1.2.1",
-    "@sapphire/discord-utilities": "^3.5.0",
+    "@sapphire/discord-utilities": "^4.0.0",
     "@sapphire/time-utilities": "^1.7.14",
     "@sapphire/type": "^2.6.0",
     "@sapphire/utilities": "^3.18.2",
@@ -37,14 +37,14 @@
     "discord-api-types": "^0.38.37",
     "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
-    "globby": "^15.0.0",
+    "globby": "^16.1.0",
     "jiti": "^2.6.1",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.1.6",
     "systeminformation": "^5.28.7",
     "undici": "^7.16.0",
-    "zod": "^4.3.3"
+    "zod": "^4.3.4"
   },
   "devDependencies": {
     "@swc/core": "^1.15.8",

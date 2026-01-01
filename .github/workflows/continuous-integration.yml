@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Install pnpm
@@ -21,7 +21,7 @@ jobs:
         with:
           run_install: false
       - name: Install node.js v24
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: pnpm
@@ -34,9 +34,13 @@ jobs:
       - name: Build packages (PR)
         if: ${{ github.event_name != 'push' }}
         run: pnpm exec turbo run build --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Build packages (Push)
         if: ${{ github.event_name == 'push' }}
         run: pnpm exec turbo run build --filter="...[HEAD^1]" --concurrency=4
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: ESLint (PR)
         if: ${{ github.event_name != 'push' }}
         run: pnpm exec turbo run lint --filter="...[origin/${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'main' }}]" --concurrency=4

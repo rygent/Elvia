@@ -21,6 +21,7 @@
     },
     "@elvia/database#build": {
       "dependsOn": ["@elvia/database#db:generate"],
+      "env": ["DATABASE_URL"],
       "outputs": ["dist/**"],
       "outputLogs": "full"
     },

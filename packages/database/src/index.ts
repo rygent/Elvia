@@ -1,12 +1,13 @@
 import { PrismaClient } from '../generated/prisma/client.js';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import 'dotenv/config';
 
-declare global {
-	// eslint-disable-next-line no-var
-	var prisma: PrismaClient | undefined;
-}
+const global = globalThis as unknown as {
+	prisma?: PrismaClient;
+};
 
-// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-export const prisma = global.prisma || new PrismaClient();
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+export const prisma = global.prisma ?? new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;
 
