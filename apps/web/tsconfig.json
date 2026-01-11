@@ -8,8 +8,8 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
+      "fumadocs-mdx:collections/*": ["./.source/*"],
       "@elvia/ui/*": ["../../packages/ui/src/*"],
-      "content/source": ["./.source"],
       "@/*": ["./src/*"]
     },
     "allowJs": true,

@@ -34,6 +34,7 @@ export default async function LegalPage({ params }: PageProps<'/legal/[slug]'>) 
 					<article className="flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 pt-12 pb-8 max-md:pb-16 md:px-6 md:pt-8 xl:mx-auto">
 						<div className="space-y-2">
 							<h1 className="font-cal text-3xl font-bold tracking-wide">{doc.title}</h1>
+							{/* eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion */}
 							<LastUpdated date={lastModified!} className="text-balance" />
 						</div>
 						<div className="prose text-justify text-foreground/80">
