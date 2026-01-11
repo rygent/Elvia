@@ -49,7 +49,7 @@
   "devDependencies": {
     "@swc/core": "^1.15.8",
     "@types/moment-duration-format": "^2.2.7",
-    "@types/node": "^24.10.4",
+    "@types/node": "^24.10.7",
     "eslint": "^9.39.2",
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.7.4",
