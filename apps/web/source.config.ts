@@ -1,4 +1,5 @@
 import { defineCollections, defineConfig } from 'fumadocs-mdx/config';
+import lastModified from 'fumadocs-mdx/plugins/last-modified';
 import { z } from 'zod';
 
 export const legal = defineCollections({
@@ -12,10 +13,10 @@ export const legal = defineCollections({
 });
 
 export default defineConfig({
-	lastModifiedTime: 'git',
 	mdxOptions: {
 		remarkImageOptions: {
 			useImport: false
 		}
-	}
+	},
+	plugins: [lastModified({ versionControl: 'git' })]
 });

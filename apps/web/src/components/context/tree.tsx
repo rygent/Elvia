@@ -2,17 +2,18 @@
 
 import * as React from 'react';
 import { searchPath } from 'fumadocs-core/breadcrumb';
-import { createContext, usePathname } from 'fumadocs-core/framework';
+import { usePathname } from 'fumadocs-core/framework';
 import { type Folder, type Node, type Root } from 'fumadocs-core/page-tree';
 
 type MakeRequired<O, K extends keyof O> = Omit<O, K> & Pick<Required<O>, K>;
 
 interface TreeContextType {
 	root: MakeRequired<Root | Folder, '$id'>;
+	full: Root;
 }
 
-const TreeContext = createContext<TreeContextType>('TreeContext');
-const PathContext = createContext<Node[]>('PathContext', []);
+const TreeContext = React.createContext<TreeContextType | null>(null);
+const PathContext = React.createContext<Node[]>([]);
 
 interface TreeContextProviderProps extends React.PropsWithChildren {
 	tree: Root;
@@ -27,27 +28,28 @@ export function TreeContextProvider({ children, ...props }: TreeContextProviderP
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const tree = React.useMemo(() => props.tree, [props.tree.$id ?? props.tree]);
 	const path = React.useMemo(() => {
-		let result = searchPath(tree.children, pathname);
-		if (result) return result;
-
-		if (tree.fallback) result = searchPath(tree.fallback.children, pathname);
-		return result ?? [];
+		return (
+			searchPath(tree.children, pathname) ?? (tree.fallback ? searchPath(tree.fallback.children, pathname) : null) ?? []
+		);
 	}, [tree, pathname]);
 
 	const root = path.findLast((item) => item.type === 'folder' && item.root) ?? tree;
 	root.$id ??= String(nextIdRef.current++);
 
 	return (
-		<TreeContext.Provider value={React.useMemo(() => ({ root }) as TreeContextType, [root])}>
-			<PathContext.Provider value={path}>{children}</PathContext.Provider>
-		</TreeContext.Provider>
+		<TreeContext value={React.useMemo(() => ({ root, full: tree }) as TreeContextType, [root, tree])}>
+			<PathContext value={path}>{children}</PathContext>
+		</TreeContext>
 	);
 }
 
 export function useTreePath(): Node[] {
-	return PathContext.use();
+	return React.use(PathContext);
 }
 
 export function useTreeContext(): TreeContextType {
-	return TreeContext.use('You must wrap this component under <DocsLayout />');
+	const ctx = React.use(TreeContext);
+
+	if (!ctx) throw new Error('You must wrap this component under <DocsLayout />');
+	return ctx;
 }

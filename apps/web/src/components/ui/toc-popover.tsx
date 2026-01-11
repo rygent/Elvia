@@ -5,7 +5,6 @@ import { useTreePath } from '@/components/context/tree';
 import { useTocItems } from '@/components/ui/toc';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-import { createContext } from 'fumadocs-core/framework';
 import { useActiveAnchor } from 'fumadocs-core/toc';
 import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
 import { ChevronDown } from 'lucide-react';
@@ -67,10 +66,10 @@ function ProgressCircle({
 	);
 }
 
-const TocPopoverContext = createContext<{
+const TocPopoverContext = React.createContext<{
 	open: boolean;
 	setOpen: (open: boolean) => void;
-}>('TocPopoverContext');
+} | null>(null);
 
 function TocPopover({ className, children, ...props }: React.ComponentProps<'div'>) {
 	const ref = React.useRef<HTMLElement>(null);
@@ -88,10 +87,10 @@ function TocPopover({ className, children, ...props }: React.ComponentProps<'div
 		return () => {
 			window.removeEventListener('click', onClick);
 		};
-	}, [onClick]);
+	}, []);
 
 	return (
-		<TocPopoverContext.Provider
+		<TocPopoverContext
 			value={React.useMemo(
 				() => ({
 					open,
@@ -113,7 +112,7 @@ function TocPopover({ className, children, ...props }: React.ComponentProps<'div
 					{children}
 				</header>
 			</Collapsible>
-		</TocPopoverContext.Provider>
+		</TocPopoverContext>
 	);
 }
 
@@ -122,7 +121,7 @@ function TocPopoverContent({ className, ...props }: React.ComponentProps<'div'>)
 }
 
 function TocPopoverTrigger({ className, ...props }: React.ComponentProps<'button'>) {
-	const { open } = TocPopoverContext.use();
+	const { open } = React.use(TocPopoverContext)!;
 	const items = useTocItems();
 	const active = useActiveAnchor();
 	const selected = React.useMemo(() => items.findIndex((item) => active === item.url.slice(1)), [items, active]);
