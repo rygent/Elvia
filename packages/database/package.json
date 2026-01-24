@@ -39,7 +39,7 @@
     "@types/node": "^24.10.9",
     "eslint": "^9.39.2",
     "eslint-formatter-pretty": "^7.0.0",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^7.2.0",
     "tsup": "^8.5.1",
