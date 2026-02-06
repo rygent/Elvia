@@ -31,7 +31,7 @@
     "@fastify/compress": "^8.3.1",
     "@fastify/cors": "^11.2.0",
     "@sapphire/utilities": "^3.18.2",
-    "discord-api-types": "^0.38.37",
+    "discord-api-types": "^0.38.38",
     "discord.js": "^14.25.1",
     "fastify": "^5.7.1",
     "globby": "^16.1.0",
