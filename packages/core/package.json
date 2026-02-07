@@ -33,7 +33,7 @@
     "@sapphire/utilities": "^3.18.2",
     "discord-api-types": "^0.38.38",
     "discord.js": "^14.25.1",
-    "fastify": "^5.7.1",
+    "fastify": "^5.7.4",
     "globby": "^16.1.0",
     "jiti": "^2.6.1",
     "yaml": "^2.8.2"
