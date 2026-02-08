@@ -6,7 +6,6 @@ import { useTocItems } from '@/components/ui/toc';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@elvia/ui';
 import { cn } from '@elvia/utils';
 import { useActiveAnchor } from 'fumadocs-core/toc';
-import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
 import { ChevronDown } from 'lucide-react';
 
 interface ProgressCircleProps extends Omit<React.ComponentProps<'svg'>, 'strokeWidth'> {
@@ -75,7 +74,7 @@ function TocPopover({ className, children, ...props }: React.ComponentProps<'div
 	const ref = React.useRef<HTMLElement>(null);
 	const [open, setOpen] = React.useState<boolean>(false);
 
-	const onClick = useEffectEvent((e: Event) => {
+	const onClick = React.useEffectEvent((e: Event) => {
 		if (!open) return;
 
 		if (ref.current && !ref.current.contains(e.target as HTMLElement)) setOpen(false);
