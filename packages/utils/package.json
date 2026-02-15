@@ -43,5 +43,5 @@
   "files": [
     "./dist/"
   ],
-  "packageManager": "pnpm@10.29.1"
+  "packageManager": "pnpm@10.29.3"
 }
