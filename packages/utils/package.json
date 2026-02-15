@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.1"
   },
   "devDependencies": {
     "@types/node": "^24.10.13",
