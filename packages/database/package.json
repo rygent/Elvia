@@ -31,8 +31,8 @@
     "directory": "packages/database"
   },
   "dependencies": {
-    "@prisma/adapter-neon": "^7.3.0",
-    "@prisma/client": "^7.3.0",
+    "@prisma/adapter-neon": "^7.4.0",
+    "@prisma/client": "^7.4.0",
     "dotenv": "^17.3.1"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "eslint-formatter-pretty": "^7.0.0",
     "prettier": "^3.8.1",
     "prettier-plugin-prisma": "^5.0.0",
-    "prisma": "^7.3.0",
+    "prisma": "^7.4.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
