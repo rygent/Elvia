@@ -72,7 +72,7 @@ const TocPopoverContext = React.createContext<{
 
 function TocPopover({ className, children, ...props }: React.ComponentProps<'div'>) {
 	const ref = React.useRef<HTMLElement>(null);
-	const [open, setOpen] = React.useState<boolean>(false);
+	const [open, setOpen] = React.useState(false);
 
 	const onClick = React.useEffectEvent((e: Event) => {
 		if (!open) return;

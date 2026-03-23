@@ -14,7 +14,7 @@ import {
 import { cn } from '@elvia/utils';
 
 function NavbarMenu({ className, children, ...props }: React.ComponentProps<'div'>) {
-	const [value, setValue] = React.useState<string>('');
+	const [value, setValue] = React.useState('');
 
 	return (
 		<NavigationMenu value={value} onValueChange={setValue} asChild>
