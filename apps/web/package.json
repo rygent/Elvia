@@ -26,7 +26,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
-    "fumadocs-core": "^16.6.17",
+    "fumadocs-core": "^16.7.5",
     "fumadocs-mdx": "^14.2.11",
     "geist": "^1.7.0",
     "lucide-react": "^0.577.0",
