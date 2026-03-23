@@ -23,7 +23,7 @@ const legal = [
 ];
 
 export function Footer() {
-	const [year, setYear] = React.useState<number>(new Date().getFullYear());
+	const [year, setYear] = React.useState(new Date().getFullYear());
 
 	React.useEffect(() => {
 		setYear(new Date().getFullYear());
@@ -71,7 +71,7 @@ export function Footer() {
 }
 
 function Legal() {
-	const [open, setOpen] = React.useState<boolean>(false);
+	const [open, setOpen] = React.useState(false);
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>

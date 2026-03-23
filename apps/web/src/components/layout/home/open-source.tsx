@@ -13,7 +13,7 @@ export function OpenSource({ className, ...props }: React.ComponentProps<'sectio
 		fetcher(url, { headers: { Accept: 'application/vnd.github+json' } })
 	);
 
-	const [stars, setStars] = React.useState<number>(0);
+	const [stars, setStars] = React.useState(0);
 
 	React.useEffect(() => {
 		if (!data) return;
