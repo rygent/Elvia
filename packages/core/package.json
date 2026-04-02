@@ -32,7 +32,7 @@
     "@fastify/cors": "^11.2.0",
     "@sapphire/utilities": "^3.18.2",
     "discord-api-types": "^0.38.43",
-    "discord.js": "^14.25.1",
+    "discord.js": "^14.26.0",
     "fastify": "^5.8.4",
     "globby": "^16.2.0",
     "jiti": "^2.6.1",
