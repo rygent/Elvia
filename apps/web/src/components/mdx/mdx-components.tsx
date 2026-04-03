@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Link } from '@/components/link';
 import { Heading } from '@/components/mdx/heading';
 import { cn } from '@elvia/utils';
-import { type MDXComponents } from 'mdx/types';
+import type { MDXComponents } from 'mdx/types';
 
 const defaultComponents: MDXComponents = {
 	h1: ({ className, ...props }: React.ComponentProps<'h1'>) => (
