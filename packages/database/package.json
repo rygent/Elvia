@@ -33,7 +33,7 @@
   "dependencies": {
     "@prisma/adapter-neon": "^7.6.0",
     "@prisma/client": "^7.6.0",
-    "dotenv": "^17.4.0"
+    "dotenv": "^17.4.1"
   },
   "devDependencies": {
     "@types/node": "^24.12.2",
