@@ -36,7 +36,7 @@
     "colorette": "^2.0.20",
     "discord-api-types": "^0.38.44",
     "discord.js": "^14.26.2",
-    "dotenv": "^17.4.0",
+    "dotenv": "^17.4.1",
     "globby": "^16.2.0",
     "jiti": "^2.6.1",
     "moment": "^2.30.1",
