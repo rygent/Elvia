@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "colorette": "^2.0.20",
-    "discord-api-types": "^0.38.45",
+    "discord-api-types": "^0.38.47",
     "moment": "^2.30.1",
     "moment-timezone": "^0.6.1",
     "undici": "^7.25.0",
