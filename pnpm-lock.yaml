@@ -133,8 +133,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -228,8 +228,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -290,8 +290,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -321,8 +321,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -373,8 +373,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -480,8 +480,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -511,8 +511,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-formatter-pretty:
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.0
+        version: 7.1.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -3292,8 +3292,8 @@ packages:
       typescript:
         optional: true
 
-  eslint-formatter-pretty@7.0.0:
-    resolution: {integrity: sha512-1CaE7Pnce8Csy+tlTEbFC2q5qgT5cJo2a0UkEOds+Y5+mI1nX3DApIhcBP8EPwV8TgTpLlzOfw8mcBJBAs3Y9Q==}
+  eslint-formatter-pretty@7.1.0:
+    resolution: {integrity: sha512-iyPrgpwKC3MMM75Wxn0VouD89HolpG+BL95NOxgwOWO0R+Omapo7gFX2xcGVsUDS7KiXLtDuynLbNbOARSE7YA==}
     engines: {node: '>=18'}
 
   eslint-import-context@0.1.9:
@@ -8536,7 +8536,7 @@ snapshots:
       - prettier
       - supports-color
 
-  eslint-formatter-pretty@7.0.0:
+  eslint-formatter-pretty@7.1.0:
     dependencies:
       '@types/eslint': 9.6.1
       ansi-escapes: 7.3.0
