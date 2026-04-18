@@ -271,7 +271,7 @@ importers:
         specifier: ^14.26.2
         version: 14.26.2(bufferutil@4.1.0)
       fastify:
-        specifier: ^5.8.4
+        specifier: ^5.8.5
         version: 5.8.5
       globby:
         specifier: ^16.2.0
