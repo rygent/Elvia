@@ -47,7 +47,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@swc/core": "^1.15.24",
+    "@swc/core": "^1.15.26",
     "@types/moment-duration-format": "^2.2.7",
     "@types/node": "^24.12.2",
     "eslint": "^9.39.4",
