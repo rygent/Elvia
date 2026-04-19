@@ -24,8 +24,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-config-terrax:
-        specifier: ^0.5.0
-        version: 0.5.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.3)(typescript@5.9.3)
+        specifier: ^0.6.0
+        version: 0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.3)(typescript@5.9.3)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -1100,6 +1100,15 @@ packages:
     resolution: {integrity: sha512-4IlJx0X0qftVsN5E+/vGujTRIFtwuLbNsVUe7TO6zYPDR1O6nFwvwhIKEKSrl6dZchmYBITazxKoUYOjdtjlRg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@eslint/js@10.0.1':
+    resolution: {integrity: sha512-zeR9k5pd4gxjZ0abRoIaxdc7I3nDktoXZk2qOv9gCNWx3mVwEn32VRhyLaRsDiJjTs0xq/T8mfPtyuXu7GWBcA==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+    peerDependencies:
+      eslint: ^10.0.0
+    peerDependenciesMeta:
+      eslint:
+        optional: true
+
   '@eslint/js@9.39.4':
     resolution: {integrity: sha512-nE7DEIchvtiFTwBw4Lfbu59PG+kCofhjsKaCWzxTpt4lfRjRMqG6uMBzKXuEcyXhOHoUp9riAm7/aWYGhXZ9cw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1404,8 +1413,8 @@ packages:
   '@next/env@16.2.4':
     resolution: {integrity: sha512-dKkkOzOSwFYe5RX6y26fZgkSpVAlIOJKQHIiydQcrWH6y/97+RceSOAdjZ14Qa3zLduVUy0TXcn+EiM6t4rPgw==}
 
-  '@next/eslint-plugin-next@15.5.15':
-    resolution: {integrity: sha512-ExQoBfyKMjAUQ2nuF39ryQsG26H374ZfH13dlOZqf6TaE9ycRbIm+qUbUFCliU4BtQhiqtS7cnGA1yWfPMQ+jA==}
+  '@next/eslint-plugin-next@16.2.4':
+    resolution: {integrity: sha512-tOX826JJ96gYK/go18sPUgMq9FK1tqxBFfUCEufJb5XIkWFFmpgU7mahJANKGkHs7F41ir3tReJ3Lv5La0RvhA==}
 
   '@next/swc-darwin-arm64@16.2.4':
     resolution: {integrity: sha512-OXTFFox5EKN1Ym08vfrz+OXxmCcEjT4SFMbNRsWZE99dMqt2Kcusl5MqPXcW232RYkMLQTy0hqgAMEsfEd/l2A==}
@@ -3430,11 +3439,11 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-terrax@0.5.0:
-    resolution: {integrity: sha512-dJN/E7UkpZ/TgyEDkzTzwSLIDhASIUhmk2zmEiXyLLbcwtcyUV2Kv3dhLFqBj4wslgtIET0QpeniOLINHOstxg==}
+  eslint-config-terrax@0.6.0:
+    resolution: {integrity: sha512-fCOySCAH2gWpgbGbxMoDcEtOXYMnU9jeLpfVCWcD9RxqiWWYK7AKhlcgQOMan8anJrOyaC+kThZP+zN1zN5ooQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     peerDependencies:
-      eslint: ^8.57.0 || ^9.0.0
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=5.0.0'
     peerDependenciesMeta:
       typescript:
@@ -3932,8 +3941,8 @@ packages:
     resolution: {integrity: sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==}
     engines: {node: '>=18'}
 
-  globals@16.5.0:
-    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
+  globals@17.5.0:
+    resolution: {integrity: sha512-qoV+HK2yFl/366t2/Cb3+xxPUo5BuMynomoDmiaZBIdbs+0pYbjfZU+twLhGKp4uCZ/+NbtpVepH5bGCxRyy2g==}
     engines: {node: '>=18'}
 
   globalthis@1.0.4:
@@ -6482,6 +6491,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@eslint/js@10.0.1(eslint@9.39.4(jiti@2.6.1))':
+    optionalDependencies:
+      eslint: 9.39.4(jiti@2.6.1)
+
   '@eslint/js@9.39.4': {}
 
   '@eslint/object-schema@2.1.7': {}
@@ -6761,7 +6774,7 @@ snapshots:
 
   '@next/env@16.2.4': {}
 
-  '@next/eslint-plugin-next@15.5.15':
+  '@next/eslint-plugin-next@16.2.4':
     dependencies:
       fast-glob: 3.3.1
 
@@ -8697,11 +8710,11 @@ snapshots:
     dependencies:
       eslint: 9.39.4(jiti@2.6.1)
 
-  eslint-config-terrax@0.5.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.3)(typescript@5.9.3):
+  eslint-config-terrax@0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.3)(typescript@5.9.3):
     dependencies:
       '@eslint/compat': 2.0.5(eslint@9.39.4(jiti@2.6.1))
-      '@eslint/js': 9.39.4
-      '@next/eslint-plugin-next': 15.5.15
+      '@eslint/js': 10.0.1(eslint@9.39.4(jiti@2.6.1))
+      '@next/eslint-plugin-next': 16.2.4
       '@stylistic/eslint-plugin': 5.10.0(eslint@9.39.4(jiti@2.6.1))
       '@types/lodash.merge': 4.6.9
       eslint: 9.39.4(jiti@2.6.1)
@@ -8714,7 +8727,7 @@ snapshots:
       eslint-plugin-promise: 7.2.1(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks: 7.1.1(eslint@9.39.4(jiti@2.6.1))
-      globals: 16.5.0
+      globals: 17.5.0
       lodash.merge: 4.6.2
       typescript-eslint: 8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
     optionalDependencies:
@@ -9312,7 +9325,7 @@ snapshots:
 
   globals@15.15.0: {}
 
-  globals@16.5.0: {}
+  globals@17.5.0: {}
 
   globalthis@1.0.4:
     dependencies:
