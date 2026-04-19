@@ -22,18 +22,8 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 		},
 		rules: {
 			'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
-			'@typescript-eslint/naming-convention': [
-				'warn',
-				{
-					selector: 'typeParameter',
-					format: ['PascalCase'],
-					custom: {
-						regex: '^\\w{3,}',
-						match: true
-					}
-				}
-			],
 			'@typescript-eslint/non-nullable-type-assertion-style': 'off',
+			'no-useless-assignment': 'off',
 			'no-restricted-globals': 'off'
 		},
 		settings: {
@@ -46,17 +36,11 @@ const mainRulesets = [...common, ...node, ...typescript].map((config) =>
 	})
 );
 
-const reactRuleset = merge(...react, {
+const nextRuleset = merge(...react, ...next, {
 	files: [`apps/web/**/*${commonFiles}`, `packages/ui/**/*${commonFiles}`],
 	rules: {
-		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }]
-	}
-});
-
-const nextRuleset = merge(...next, {
-	files: [`apps/web/**/*${commonFiles}`],
-	rules: {
-		'@next/next/no-html-link-for-pages': 'off'
+		'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
+		'react-hooks/set-state-in-effect': 'off'
 	}
 });
 
@@ -73,7 +57,6 @@ export default defineConfig(
 		},
 		ignores: ['**/.source/', '.git/', '**/.next/', '**/dist/', '**/node_modules/']
 	},
-	reactRuleset,
 	nextRuleset,
 	{
 		files: [`**/*${commonFiles}`],
