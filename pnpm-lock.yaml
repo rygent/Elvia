@@ -250,8 +250,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@fumadocs/mdx-remote':
-        specifier: ^1.4.9
-        version: 1.4.9(@types/mdx@2.0.13)(@types/react@19.2.14)(fumadocs-core@16.8.4(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.14.0(react@19.2.5))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.1))(react@19.2.5)
+        specifier: ^1.4.10
+        version: 1.4.10(@types/mdx@2.0.13)(@types/react@19.2.14)(fumadocs-core@16.8.4(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.14.0(react@19.2.5))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.1))(react@19.2.5)
 
   packages/core:
     dependencies:
@@ -1155,8 +1155,8 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
-  '@fumadocs/mdx-remote@1.4.9':
-    resolution: {integrity: sha512-Dgkf3JuycFiDmaUQ0ZvLSHxA4IPwwhdOzw+enPbv3b468pShbfHguhqt3LUOy5MIlrCbYWx2r+qGuruI5CZPsw==}
+  '@fumadocs/mdx-remote@1.4.10':
+    resolution: {integrity: sha512-bJZ9LAgKMPjwZdxNa7+paMbF5Xc4kSQxWZ5Z0gmnC6QvQPZCJr/hg8WbhxXDeBMl6s+rUiedFSSRQyUHlLOq5Q==}
     peerDependencies:
       '@types/mdx': '*'
       '@types/react': '*'
@@ -6446,7 +6446,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@fumadocs/mdx-remote@1.4.9(@types/mdx@2.0.13)(@types/react@19.2.14)(fumadocs-core@16.8.4(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.14.0(react@19.2.5))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.1))(react@19.2.5)':
+  '@fumadocs/mdx-remote@1.4.10(@types/mdx@2.0.13)(@types/react@19.2.14)(fumadocs-core@16.8.4(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.14.0(react@19.2.5))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.1))(react@19.2.5)':
     dependencies:
       '@mdx-js/mdx': 3.1.1
       fumadocs-core: 16.8.4(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.14.0(react@19.2.5))(next@16.2.4(@babel/core@7.29.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.1)
@@ -6454,7 +6454,6 @@ snapshots:
       react: 19.2.5
       unified: 11.0.5
       vfile: 6.0.3
-      zod: 4.4.1
     optionalDependencies:
       '@types/mdx': 2.0.13
       '@types/react': 19.2.14
