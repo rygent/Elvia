@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^20.5.3
-        version: 20.5.3(@types/node@24.12.2)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
+        version: 20.5.3(@types/node@24.13.2)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
       '@commitlint/config-angular':
         specifier: ^20.5.3
         version: 20.5.3
@@ -18,8 +18,8 @@ importers:
         specifier: ^4.6.9
         version: 4.6.9
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -127,8 +127,8 @@ importers:
         specifier: ^2.2.7
         version: 2.2.7
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -216,8 +216,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
@@ -284,8 +284,8 @@ importers:
         version: 2.9.0
     devDependencies:
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -315,8 +315,8 @@ importers:
         version: 17.4.2
     devDependencies:
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -367,8 +367,8 @@ importers:
         version: 4.9.0
     devDependencies:
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -468,8 +468,8 @@ importers:
         specifier: ^4.2.4
         version: 4.2.4
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
@@ -505,8 +505,8 @@ importers:
         version: 3.5.0
     devDependencies:
       '@types/node':
-        specifier: ^24.12.2
-        version: 24.12.2
+        specifier: ^24.13.2
+        version: 24.13.2
       eslint:
         specifier: ^10.3.0
         version: 10.3.0(jiti@2.6.1)
@@ -2568,8 +2568,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.12.2':
-    resolution: {integrity: sha512-A1sre26ke7HDIuY/M23nd9gfB+nrmhtYyMINbjI1zHJxYteKR6qSMX56FsmjMcDb3SMcjJg5BiRRgOCC/yBD0g==}
+  '@types/node@24.13.2':
+    resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -5655,8 +5655,8 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
-  undici-types@7.16.0:
-    resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
@@ -5981,11 +5981,11 @@ snapshots:
 
   '@colors/colors@1.6.0': {}
 
-  '@commitlint/cli@20.5.3(@types/node@24.12.2)(conventional-commits-parser@6.4.0)(typescript@5.9.3)':
+  '@commitlint/cli@20.5.3(@types/node@24.13.2)(conventional-commits-parser@6.4.0)(typescript@5.9.3)':
     dependencies:
       '@commitlint/format': 20.5.0
       '@commitlint/lint': 20.5.3
-      '@commitlint/load': 20.5.3(@types/node@24.12.2)(typescript@5.9.3)
+      '@commitlint/load': 20.5.3(@types/node@24.13.2)(typescript@5.9.3)
       '@commitlint/read': 20.5.0(conventional-commits-parser@6.4.0)
       '@commitlint/types': 20.5.0
       tinyexec: 1.1.1
@@ -6031,14 +6031,14 @@ snapshots:
       '@commitlint/rules': 20.5.3
       '@commitlint/types': 20.5.0
 
-  '@commitlint/load@20.5.3(@types/node@24.12.2)(typescript@5.9.3)':
+  '@commitlint/load@20.5.3(@types/node@24.13.2)(typescript@5.9.3)':
     dependencies:
       '@commitlint/config-validator': 20.5.0
       '@commitlint/execute-rule': 20.0.0
       '@commitlint/resolve-extends': 20.5.3
       '@commitlint/types': 20.5.0
       cosmiconfig: 9.0.1(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.3.0(@types/node@24.12.2)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig-typescript-loader: 6.3.0(@types/node@24.13.2)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
       es-toolkit: 1.46.1
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
@@ -7700,9 +7700,9 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.12.2':
+  '@types/node@24.13.2':
     dependencies:
-      undici-types: 7.16.0
+      undici-types: 7.18.2
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -7720,7 +7720,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.13.2
 
   '@typescript-eslint/eslint-plugin@8.59.1(@typescript-eslint/parser@8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@5.9.3))(eslint@10.3.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -8232,9 +8232,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@6.3.0(@types/node@24.12.2)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.3.0(@types/node@24.13.2)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.13.2
       cosmiconfig: 9.0.1(typescript@5.9.3)
       jiti: 2.6.1
       typescript: 5.9.3
@@ -11293,7 +11293,7 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
-  undici-types@7.16.0: {}
+  undici-types@7.18.2: {}
 
   undici@5.29.0:
     dependencies:
