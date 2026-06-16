@@ -55,7 +55,7 @@
   },
   "optionalDependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
-    "@fumadocs/mdx-remote": "^1.4.9"
+    "@fumadocs/mdx-remote": "^1.4.10"
   },
   "packageManager": "pnpm@10.33.2"
 }
