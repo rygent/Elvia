@@ -39,7 +39,7 @@ function TocScrollArea({ ref, className, children, ...props }: React.ComponentPr
 		<div
 			ref={mergeRefs(viewRef, ref)}
 			className={cn(
-				'relative ms-px min-h-0 overflow-auto [mask-image:linear-gradient(to_bottom,transparent,white_16px,white_calc(100%-16px),transparent)] py-3 text-sm [scrollbar-width:none]',
+				'relative ms-px min-h-0 scrollbar-none overflow-auto mask-[linear-gradient(to_bottom,transparent,white_16px,white_calc(100%-16px),transparent)] py-3 text-sm',
 				className
 			)}
 			{...props}
@@ -107,7 +107,7 @@ function TocItems({ ref, className, ...props }: React.ComponentProps<'div'>) {
 		<TocScrollArea>
 			{svg ? (
 				<div
-					className="absolute start-0 top-0 rtl:-scale-x-100"
+					className="absolute inset-s-0 top-0 rtl:-scale-x-100"
 					style={{
 						width: svg.width,
 						height: svg.height,
@@ -163,13 +163,13 @@ function TocItem({
 			style={{
 				paddingInlineStart: getItemOffset(item.depth)
 			}}
-			className="relative prose py-1.5 text-sm [overflow-wrap:anywhere] text-muted-foreground transition-colors first:pt-0 last:pb-0 hover:text-accent-foreground data-[active=true]:text-primary"
+			className="relative prose py-1.5 text-sm wrap-anywhere text-muted-foreground transition-colors first:pt-0 last:pb-0 hover:text-accent-foreground data-[active=true]:text-primary"
 		>
 			{offset !== upperOffset ? (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 16 16"
-					className="absolute start-0 -top-1.5 size-4 rtl:-scale-x-100"
+					className="absolute inset-s-0 -top-1.5 size-4 rtl:-scale-x-100"
 				>
 					<line x1={upperOffset} y1="0" x2={offset} y2="12" className="stroke-foreground/10" strokeWidth="1" />
 				</svg>
