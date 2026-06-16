@@ -43,7 +43,7 @@
     "moment-duration-format": "^2.3.2",
     "nanoid": "^5.1.11",
     "systeminformation": "^5.31.5",
-    "undici": "^7.25.0",
+    "undici": "^7.28.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
