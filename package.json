@@ -44,5 +44,5 @@
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma"
   },
-  "packageManager": "pnpm@10.34.3"
+  "packageManager": "pnpm@11.7.0"
 }
