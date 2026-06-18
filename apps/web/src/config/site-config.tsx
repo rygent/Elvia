@@ -15,7 +15,7 @@ export const api = {
 
 export const siteConfig = {
 	global: {
-		url: 'https://elvia.vercel.app',
+		url: 'https://elvia.web.id',
 		name: 'Elvia',
 		title: 'Elvia - The most powerful multipurpose Discord app.',
 		description: 'The most powerful multipurpose Discord app.',

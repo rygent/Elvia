@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
+import { siteConfig } from '@/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const routes = ['', '/legal/privacy', '/legal/terms'].map((route) => ({
-		url: `https://elvia.web.id${route}`,
-		lastModified: new Date().toISOString().split('T')[0]
+	const routes = ['/', '/legal/privacy', '/legal/terms'].map((route) => ({
+		url: `${siteConfig.global.url}${route}`,
+		lastModified: new Date()
 	}));
 
 	return [...routes];

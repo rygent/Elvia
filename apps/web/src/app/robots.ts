@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { siteConfig } from '@/config';
 
 export default function robots(): MetadataRoute.Robots {
 	return {
@@ -9,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
 				disallow: ['/api/']
 			}
 		],
-		sitemap: 'https://elvia.web.id/sitemap.xml',
-		host: 'https://elvia.web.id'
+		sitemap: `${siteConfig.global.url}/sitemap.xml`,
+		host: siteConfig.global.url
 	};
 }

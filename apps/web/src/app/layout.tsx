@@ -9,6 +9,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
+	metadataBase: new URL(siteConfig.global.url),
 	title: {
 		default: siteConfig.global.name,
 		template: `%s | ${siteConfig.global.name}`
