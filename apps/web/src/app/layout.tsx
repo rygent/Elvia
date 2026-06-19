@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 		default: siteConfig.global.name,
 		template: `%s | ${siteConfig.global.name}`
 	},
+	alternates: {
+		canonical: '/'
+	},
 	description: siteConfig.global.description,
 	keywords: siteConfig.global.keywords,
 	authors: siteConfig.global.authors,
