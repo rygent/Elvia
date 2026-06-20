@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "db:generate": "prisma generate --no-hints",
     "db:push": "prisma db push",
     "db:format": "prisma format",
@@ -42,7 +42,7 @@
     "prettier": "^3.8.4",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^7.8.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.22.3",
     "typescript": "^5.9.3"
   },
   "files": [

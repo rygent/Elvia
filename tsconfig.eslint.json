@@ -11,7 +11,6 @@
     "commitlint.config.js",
     "ecosystem.config.cjs",
     "eslint.config.js",
-    "prettier.config.js",
-    "tsup.config.ts"
+    "prettier.config.js"
   ]
 }
