@@ -2,15 +2,13 @@
   "$schema": "https://json.schemastore.org/tsconfig.json",
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "baseUrl": "./",
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./*"]
     },
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
-  "include": ["./scripts/**/*.ts", "./src/**/*.ts", "./src/**/*.json"],
-  "exclude": ["./dist/**/*", "node_modules"]
+  "include": ["scripts/**/*.ts", "src/**/*.ts", "src/**/*.json"],
+  "exclude": ["dist/**/*", "node_modules"]
 }
