@@ -19,8 +19,6 @@ const envSchema = z.object({
 
 	IMGUR_CLIENT_ID: z.string(),
 	OPEN_WEATHER_API_KEY: z.string(),
-	SPOTIFY_CLIENT_ID: z.string(),
-	SPOTIFY_CLIENT_SECRET: z.string(),
 	TMDB_API_KEY: z.string()
 });
 
@@ -44,7 +42,5 @@ export const env = envSchema.parse({
 
 	IMGUR_CLIENT_ID: process.env.IMGUR_CLIENT_ID,
 	OPEN_WEATHER_API_KEY: process.env.OPEN_WEATHER_API_KEY,
-	SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
-	SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
 	TMDB_API_KEY: process.env.TMDB_API_KEY
 });

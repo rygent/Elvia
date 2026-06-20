@@ -25,7 +25,7 @@ We'll be very glad if you give this repository a star, so that we grow much fast
 -   Powerful Message Pruning.
 -   Easy Moderation `ban`, `kick`, `timeout`, etc.
 -   Fun commands `choose`, `lovecalc`, `roulette`, etc.
--   Search commands `anime`, `manga`, `spotify`, etc.
+-   Search commands `anime`, `manga`, `movie`, etc.
 -   Interact commands `kiss`, `hug`, `cuddle`, etc.
 -   Translate message to user setting language in context menu.
 
