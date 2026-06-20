@@ -8,13 +8,7 @@ import {
 	PermissionFlagsBits,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import {
-	LabelBuilder,
-	ModalBuilder,
-	StringSelectMenuBuilder,
-	StringSelectMenuOptionBuilder,
-	TextInputBuilder
-} from '@discordjs/builders';
+import { CheckboxBuilder, LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import {
 	type AutocompleteInteraction,
 	type ChatInputCommandInteraction,
@@ -109,13 +103,7 @@ export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 				new LabelBuilder()
 					.setLabel('Pinned')
 					.setDescription('Mark this tag in autocomplete suggestions.')
-					.setStringSelectMenuComponent(
-						new StringSelectMenuBuilder()
-							.setCustomId(`pinned:${modalId}`)
-							.addOptions(new StringSelectMenuOptionBuilder().setLabel('True').setValue('1').setDefault(tag.hoisted!))
-							.addOptions(new StringSelectMenuOptionBuilder().setLabel('False').setValue('0').setDefault(!tag.hoisted))
-							.setRequired(false)
-					)
+					.setCheckboxComponent(new CheckboxBuilder().setCustomId(`pinned:${modalId}`).setDefault(tag.hoisted!))
 			);
 
 		await interaction.showModal(modal);
@@ -128,7 +116,7 @@ export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 
 		const editedName = submitted.fields.getTextInputValue(`name:${modalId}`);
 		const editedContent = submitted.fields.getTextInputValue(`content:${modalId}`);
-		const [editedPinned] = submitted.fields.getStringSelectValues(`pinned:${modalId}`);
+		const editedPinned = submitted.fields.getStringSelectValues(`pinned:${modalId}`);
 		const isPinned = Boolean(Number(editedPinned));
 
 		const isPresent = database?.tags.some(({ slug }) => slug === slugify(editedName));

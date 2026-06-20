@@ -7,13 +7,7 @@ import {
 	MessageFlags,
 	TextInputStyle
 } from 'discord-api-types/v10';
-import {
-	LabelBuilder,
-	ModalBuilder,
-	StringSelectMenuBuilder,
-	StringSelectMenuOptionBuilder,
-	TextInputBuilder
-} from '@discordjs/builders';
+import { CheckboxBuilder, LabelBuilder, ModalBuilder, TextInputBuilder } from '@discordjs/builders';
 import { AttachmentBuilder, type ChatInputCommandInteraction, type ModalSubmitInteraction } from 'discord.js';
 import { codeBlock, inlineCode } from '@discordjs/formatters';
 import { Emojis } from '@/lib/utils/constants.js';
@@ -73,14 +67,8 @@ export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 			.addLabelComponents(
 				new LabelBuilder()
 					.setLabel('Asynchronous')
-					.setDescription('Choose whether to run the code asynchronously.')
-					.setStringSelectMenuComponent(
-						new StringSelectMenuBuilder()
-							.setCustomId(`async:${modalId}`)
-							.addOptions(new StringSelectMenuOptionBuilder().setLabel('True').setValue('1'))
-							.addOptions(new StringSelectMenuOptionBuilder().setLabel('False').setValue('0').setDefault())
-							.setRequired(false)
-					)
+					.setDescription('Whether to run the code asynchronously.')
+					.setCheckboxComponent(new CheckboxBuilder().setCustomId(`async:${modalId}`))
 			);
 
 		await interaction.showModal(modal);
@@ -91,7 +79,7 @@ export default class extends CoreCommand<ApplicationCommandType.ChatInput> {
 
 		let evaled;
 		let code = submitted.fields.getTextInputValue(`code:${modalId}`).replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
-		const [async] = submitted.fields.getStringSelectValues(`async:${modalId}`);
+		const async = submitted.fields.getCheckbox(`async:${modalId}`);
 		const isAsync = Boolean(Number(async));
 
 		await submitted.deferReply({ flags: !visible ? MessageFlags.Ephemeral : undefined });
