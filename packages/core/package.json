@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "lint": "eslint \"src/**/*.ts\" --format=pretty",
     "lint:fix": "eslint \"src/**/*.ts\" --fix --format=pretty",
     "format": "prettier . --write",
@@ -43,7 +43,7 @@
     "eslint": "^10.5.0",
     "eslint-formatter-pretty": "^7.1.0",
     "prettier": "^3.8.4",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.22.3",
     "typescript": "^5.9.3"
   },
   "files": [

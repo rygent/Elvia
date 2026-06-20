@@ -1,7 +1,6 @@
 allowBuilds:
   '@prisma/engines': true
   '@sapphire/type': true
-  '@swc/core': true
   bufferutil: true
   esbuild: true
   prisma: true
