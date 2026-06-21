@@ -22,8 +22,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	return [
 		{
-			url: url('/'),
-			changeFrequency: 'monthly',
+			url: siteConfig.global.url,
+			changeFrequency: 'yearly',
 			priority: 1
 		},
 		...legals.filter((v) => v !== undefined)

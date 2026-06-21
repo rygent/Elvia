@@ -66,9 +66,16 @@ export async function generateMetadata({ params }: PageProps<'/legal/[slug]'>): 
 	return {
 		title: doc.title,
 		description: doc.description,
+		alternates: {
+			canonical: `/legal/${slug}`
+		},
 		openGraph: {
 			title: doc.title,
 			description: doc.description
+		},
+		robots: {
+			index: false,
+			follow: false
 		}
 	};
 }
