@@ -5,7 +5,8 @@ import { externalLink } from '@/config';
 import { env } from '@/env';
 import { badgeVariants, Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight02Icon, SparklesIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 export function Hero({ className, ...props }: React.ComponentProps<'section'>) {
 	return (
@@ -16,21 +17,26 @@ export function Hero({ className, ...props }: React.ComponentProps<'section'>) {
 					target="_blank"
 					className={cn(
 						badgeVariants({ variant: 'outline' }),
-						'cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary [&>svg]:size-[15px]'
+						'cursor-pointer gap-x-2 rounded-full font-mono delay-75 duration-200 hover:bg-secondary [&>svg]:size-3.75!'
 					)}
 				>
-					<Sparkles className="scale-x-[-1]" />
+					<HugeiconsIcon icon={SparklesIcon} strokeWidth={2} className="scale-x-[-1]" />
 					<span>Star us on GitHub</span>
-					<ArrowRight />
+					<HugeiconsIcon icon={ArrowRight02Icon} strokeWidth={2} />
 				</Link>
-				<h1 className="mt-4 font-cal text-4xl text-balance md:text-5xl lg:text-6xl">
+				<h1 className="mt-4 font-heading text-4xl text-balance md:text-5xl lg:text-6xl">
 					Everything you need to manage Discord server
 				</h1>
 				<h2 className="mt-2 text-base text-balance text-muted-foreground md:text-lg lg:text-xl">
 					The most powerful multipurpose Discord app.
 				</h2>
 				<div className="mt-5 flex flex-col gap-4 sm:flex-row">
-					<Button size="lg" variant="default" className="text-base shadow-none" asChild>
+					<Button
+						size="lg"
+						variant="default"
+						className="bg-foreground text-base text-background shadow-none hover:bg-foreground/80"
+						asChild
+					>
 						<Link href={externalLink.invite.replace('{{client_id}}', env.DISCORD_APPLICATION_ID)} external>
 							Invite App
 						</Link>

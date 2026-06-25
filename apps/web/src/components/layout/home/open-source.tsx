@@ -1,11 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import { Github } from '@/components/icons';
 import { Link } from '@/components/link';
 import { fetcher } from '@/lib/fetcher';
 import { api, externalLink } from '@/config';
 import { cn } from '@elvia/utils';
+import { GithubIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import useSWR from 'swr';
 
 export function OpenSource({ className, ...props }: React.ComponentProps<'section'>) {
@@ -25,14 +26,14 @@ export function OpenSource({ className, ...props }: React.ComponentProps<'sectio
 
 	return (
 		<section className={cn('mx-auto max-w-7xl text-center', className)} {...props}>
-			<h2 className="mx-auto mt-8 max-w-2xl font-cal text-3xl font-bold lg:text-5xl">Proudly open-source</h2>
+			<h2 className="mx-auto mt-8 max-w-2xl font-heading text-3xl font-bold lg:text-5xl">Proudly open-source</h2>
 			<p className="mx-auto mt-2 max-w-2xl px-6 text-lg text-muted-foreground">
 				Our source code is available on GitHub - feel free to read, review, or contribute to it however you want!
 			</p>
 			<div className="mt-5 flex justify-center gap-x-2">
 				<Link href={externalLink.github} className="group flex" external>
 					<div className="flex h-10 items-center justify-center space-x-2 rounded-md bg-secondary px-4 text-secondary-foreground group-hover:bg-secondary/80 [&_svg]:size-5">
-						<Github />
+						<HugeiconsIcon icon={GithubIcon} strokeWidth={2} />
 						<span>Star us on GitHub</span>
 					</div>
 					<div className="flex items-center">

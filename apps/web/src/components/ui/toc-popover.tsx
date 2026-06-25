@@ -5,8 +5,9 @@ import { useTreePath } from '@/components/context/tree';
 import { useTocItems } from '@/components/ui/toc';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@elvia/ui';
 import { cn } from '@elvia/utils';
+import { ChevronDownIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { useActiveAnchor } from 'fumadocs-core/toc';
-import { ChevronDown } from 'lucide-react';
 
 interface ProgressCircleProps extends Omit<React.ComponentProps<'svg'>, 'strokeWidth'> {
 	value: number;
@@ -154,7 +155,11 @@ function TocPopoverTrigger({ className, ...props }: React.ComponentProps<'button
 					{items[selected]?.title}
 				</span>
 			</span>
-			<ChevronDown className={cn('mx-0.5 shrink-0 transition-transform', open && 'rotate-180')} />
+			<HugeiconsIcon
+				icon={ChevronDownIcon}
+				strokeWidth={2}
+				className={cn('mx-0.5 shrink-0 transition-transform', open && 'rotate-180')}
+			/>
 		</CollapsibleTrigger>
 	);
 }

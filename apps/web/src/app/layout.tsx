@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { type Metadata, type Viewport } from 'next';
-import { calSans, geistMono, geistSans } from '@/lib/fonts';
+import { fontHeading, fontMono, fontSans } from '@/lib/fonts';
 import { Provider } from '@/app/provider';
 import { siteConfig } from '@/config';
 import { cn } from '@elvia/utils';
@@ -65,7 +65,7 @@ export default function RootLayout({ children }: Readonly<React.PropsWithChildre
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body
-				className={cn(`font-sans antialiased`, geistSans.variable, geistMono.variable, calSans.variable)}
+				className={cn(`font-sans antialiased`, fontSans.variable, fontMono.variable, fontHeading.variable)}
 				suppressHydrationWarning
 			>
 				<Provider>{children}</Provider>

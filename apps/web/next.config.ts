@@ -6,9 +6,6 @@ const nextConfig = {
 	pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
 	reactStrictMode: false,
 	poweredByHeader: false,
-	experimental: {
-		optimizePackageImports: ['@elvia/ui']
-	},
 	transpilePackages: ['@elvia/ui', '@elvia/utils']
 } satisfies NextConfig;
 
