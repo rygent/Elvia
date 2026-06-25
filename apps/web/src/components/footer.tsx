@@ -7,7 +7,8 @@ import { Link } from '@/components/link';
 import { type ThemeSwitcherProps } from '@/components/theme-switcher';
 import { siteConfig } from '@/config';
 import { Button, Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@elvia/ui';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 const StatusBadge = dynamic(() => import('@/components/status').then((mod) => mod.StatusBadge), { ssr: false });
 const ThemeSwitcher = dynamic<ThemeSwitcherProps>(
@@ -78,10 +79,10 @@ function Legal() {
 			<PopoverTrigger asChild>
 				<Button
 					variant="link"
-					className="h-fit cursor-pointer justify-start gap-[2px] !p-0 text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
+					className="h-fit cursor-pointer justify-start gap-0.5 p-0! text-sm font-normal text-muted-foreground transition-colors duration-100 ease-ease hover:text-foreground hover:no-underline"
 				>
 					Legal
-					<ChevronDown size={16} />
+					<HugeiconsIcon icon={ChevronDown} size={16} strokeWidth={2} />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent

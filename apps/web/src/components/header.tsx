@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Elvia, Github } from '@/components/icons';
+import { Elvia } from '@/components/icons';
 import { Link } from '@/components/link';
 import { MobileMenu } from '@/components/mobile-menu';
 import {
@@ -12,14 +12,15 @@ import {
 import { externalLink, siteConfig } from '@/config';
 import { Button } from '@elvia/ui';
 import { cn } from '@elvia/utils';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight01Icon, GithubIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<NavbarMenu className={className} {...props}>
 			<Link href="/" className="inline-flex items-center gap-x-2.5">
 				<Elvia size={20} />
-				<span className="inline-block font-cal text-xl leading-5 font-bold tracking-wide whitespace-nowrap">
+				<span className="inline-block font-heading text-xl leading-5 font-bold tracking-wide whitespace-nowrap">
 					{siteConfig.global.name}
 				</span>
 			</Link>
@@ -31,9 +32,13 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 							<NavbarMenuLink
 								key={index}
 								href={item.url}
-								className="rounded-lg border bg-card p-3 duration-100 ease-ease hover:bg-accent/80 hover:text-accent-foreground [&_svg]:!size-7"
+								className="rounded-lg border bg-card p-3 duration-100 ease-ease hover:bg-accent/80 hover:text-accent-foreground [&_svg]:size-7!"
 							>
-								<item.icon className="mb-2 rounded-md border bg-secondary p-1 text-secondary-foreground" />
+								<HugeiconsIcon
+									icon={item.icon}
+									strokeWidth={2}
+									className="mb-2 rounded-md border bg-secondary p-1 text-secondary-foreground"
+								/>
 								<p className="font-medium">{item.name}</p>
 								<p className="text-sm text-muted-foreground">{item.description}</p>
 							</NavbarMenuLink>
@@ -52,7 +57,9 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 							rel={item.external ? 'noreferrer' : undefined}
 						>
 							<p className="text-sm">{item.label}</p>
-							{item.external && <ArrowUpRight size={10} className="top-0.5 text-current" />}
+							{item.external && (
+								<HugeiconsIcon icon={ArrowUpRight01Icon} size={10} strokeWidth={2} className="top-0.5" />
+							)}
 						</NavbarMenuLink>
 					</NavbarMenuItem>
 				))}
@@ -62,11 +69,11 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 					<Button
 						variant="ghost"
 						size="icon"
-						className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+						className="h-8 w-8 rounded-full border border-border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 						asChild
 					>
 						<Link href={externalLink.github} external>
-							<Github />
+							<HugeiconsIcon icon={GithubIcon} strokeWidth={2} />
 							<span className="sr-only">GitHub</span>
 						</Link>
 					</Button>
@@ -76,11 +83,11 @@ export function Header({ className, ...props }: React.ComponentProps<'div'>) {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="h-8 w-8 rounded-full border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+					className="h-8 w-8 rounded-full border border-border focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
 					asChild
 				>
 					<Link href={externalLink.github} external>
-						<Github />
+						<HugeiconsIcon icon={GithubIcon} strokeWidth={2} />
 						<span className="sr-only">GitHub</span>
 					</Link>
 				</Button>

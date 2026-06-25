@@ -1,5 +1,6 @@
 import { cn } from '@elvia/utils';
-import { Link } from 'lucide-react';
+import { Link04Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 type HeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type HeadingProps<T extends HeadingTypes> = Omit<React.ComponentPropsWithoutRef<T>, 'as'> & {
@@ -21,9 +22,11 @@ export function Heading<T extends HeadingTypes>({
 			<a data-card="" href={`#${props.id}`} className="peer">
 				{children}
 			</a>
-			<Link
-				aria-label="Link to section"
+			<HugeiconsIcon
+				icon={Link04Icon}
 				size={14}
+				strokeWidth={2}
+				aria-label="Link to section"
 				className="shrink-0 text-muted-foreground opacity-0 transition-opacity peer-hover:opacity-100"
 			/>
 		</As>

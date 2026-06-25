@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
+import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
 
 import { cn } from '@elvia/utils';
 
-function NavigationMenu({ className, children, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root>) {
+function NavigationMenu({ children, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root>) {
 	return (
 		<NavigationMenuPrimitive.Root data-slot="navigation-menu" {...props}>
 			{children}
@@ -23,7 +23,7 @@ function NavigationMenuItem({ className, ...props }: React.ComponentProps<typeof
 }
 
 const navigationMenuTriggerStyle = cva(
-	'inline-flex items-center justify-center rounded-md p-2 text-sm text-muted-foreground transition-colors hover:text-accent-foreground data-[active=true]:text-primary data-[state=open]:bg-accent/50 data-[state=open]:text-accent-foreground'
+	'inline-flex items-center justify-center rounded-2xl p-2 text-sm text-muted-foreground transition-colors hover:text-accent-foreground data-active:text-primary data-open:text-accent-foreground'
 );
 
 function NavigationMenuTrigger({
@@ -64,7 +64,7 @@ function NavigationMenuViewport({
 			<NavigationMenuPrimitive.Viewport
 				data-slot="navigation-menu-viewport"
 				className={cn(
-					'relative h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden transition-[width,height] duration-300 data-[state=closed]:animate-menu-out data-[state=open]:animate-menu-in',
+					'origin-top-center relative h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden transition-[width,height] duration-300 data-open:animate-menu-in data-closed:animate-menu-out',
 					className
 				)}
 				{...props}
@@ -94,7 +94,7 @@ function NavigationMenuIndicator({
 		<NavigationMenuPrimitive.Indicator
 			data-slot="navigation-menu-indicator"
 			className={cn(
-				'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:animate-in data-[state=visible]:fade-in',
+				'top-full z-1 flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:animate-in data-[state=visible]:fade-in',
 				className
 			)}
 			{...props}

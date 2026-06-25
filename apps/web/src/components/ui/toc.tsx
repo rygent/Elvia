@@ -4,8 +4,9 @@ import * as React from 'react';
 import { TocThumb } from '@/components/ui/toc-thumb';
 import { mergeRefs } from '@/lib/merge-refs';
 import { cn } from '@elvia/utils';
+import { TextAlignLeft01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import * as Primitive from 'fumadocs-core/toc';
-import { Text } from 'lucide-react';
 
 const TocContext = React.createContext<Primitive.TOCItemType[]>([]);
 
@@ -26,7 +27,7 @@ function TocProvider({ children, toc, ...props }: React.ComponentProps<typeof Pr
 function TocTitle({ className, ...props }: React.ComponentProps<'h3'>) {
 	return (
 		<h3 className={cn('inline-flex items-center gap-1.5 text-muted-foreground', className)} {...props}>
-			<Text className="size-4" />
+			<HugeiconsIcon icon={TextAlignLeft01Icon} size={16} strokeWidth={2} />
 			<span className="text-sm">On this page</span>
 		</h3>
 	);

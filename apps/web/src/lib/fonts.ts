@@ -1,13 +1,12 @@
-/* eslint-disable import-x/named */
+import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
-import { GeistMono } from 'geist/font/mono';
-import { GeistSans } from 'geist/font/sans';
 
-export const calSans = localFont({
+export const fontSans = Geist({ subsets: ['latin'], variable: '--font-sans' });
+
+export const fontMono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono' });
+
+export const fontHeading = localFont({
 	src: '../fonts/CalSans-SemiBold.woff2',
-	variable: '--font-cal-sans',
+	variable: '--font-heading',
 	weight: '600'
 });
-
-export const geistSans = GeistSans;
-export const geistMono = GeistMono;

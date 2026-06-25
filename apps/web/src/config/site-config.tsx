@@ -1,4 +1,4 @@
-import { BookMarked, Newspaper, SquareSlash } from 'lucide-react';
+import { BookBookmark02Icon, CommandIcon, Newspaper } from '@hugeicons/core-free-icons';
 
 export const externalLink = {
 	github: 'https://github.com/Rygent/Elvia',
@@ -39,13 +39,13 @@ export const siteConfig = {
 					url: '/',
 					name: 'Getting started',
 					description: 'Learn to use Elvia on your discord server.',
-					icon: BookMarked
+					icon: BookBookmark02Icon
 				},
 				{
 					url: '/',
 					name: 'Commands',
 					description: 'Learn to use commands.',
-					icon: SquareSlash
+					icon: CommandIcon
 				}
 			]
 		},

@@ -43,7 +43,7 @@ export function Animation() {
 							{['/8ball', '/rps', '/trivia'].map((hookName, i) => (
 								<Card key={i} className="py-4">
 									<CardHeader className="px-4">
-										<CardTitle className="text-xl">{hookName}</CardTitle>
+										<CardTitle className="font-sans text-xl">{hookName}</CardTitle>
 										<CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</CardDescription>
 									</CardHeader>
 								</Card>
@@ -58,7 +58,7 @@ export function Animation() {
 							{['/purge messages', '/ban', '/timeout'].map((hookName, i) => (
 								<Card key={i} className="py-4">
 									<CardHeader className="px-4">
-										<CardTitle className="text-xl">{hookName}</CardTitle>
+										<CardTitle className="font-sans text-xl">{hookName}</CardTitle>
 										<CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</CardDescription>
 									</CardHeader>
 								</Card>
@@ -73,7 +73,7 @@ export function Animation() {
 							{['/image cuddle', '/image kiss', '/image hug'].map((hookName, i) => (
 								<Card key={i} className="py-4">
 									<CardHeader className="px-4">
-										<CardTitle className="text-xl">{hookName}</CardTitle>
+										<CardTitle className="font-sans text-xl">{hookName}</CardTitle>
 										<CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</CardDescription>
 									</CardHeader>
 								</Card>
@@ -88,7 +88,7 @@ export function Animation() {
 							{['/search anime', '/search manga', '/translate'].map((hookName, i) => (
 								<Card key={i} className="py-4">
 									<CardHeader className="px-4">
-										<CardTitle className="text-xl">{hookName}</CardTitle>
+										<CardTitle className="font-sans text-xl">{hookName}</CardTitle>
 										<CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</CardDescription>
 									</CardHeader>
 								</Card>
