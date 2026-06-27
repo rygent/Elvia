@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@elvia/utils": "workspace:^",
-    "@hugeicons/core-free-icons": "^4.2.1",
+    "@hugeicons/core-free-icons": "^4.2.2",
     "@hugeicons/react": "^1.1.7",
     "class-variance-authority": "^0.7.1",
     "fumadocs-core": "^16.10.5",
