@@ -48,7 +48,7 @@
     "eslint": "^10.5.0",
     "eslint-formatter-pretty": "^7.1.0",
     "prettier": "^3.8.4",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "shiki": "^4.2.0",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"
