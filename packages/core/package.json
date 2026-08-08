@@ -34,7 +34,7 @@
     "discord-api-types": "^0.38.49",
     "discord.js": "^14.26.4",
     "fastify": "^5.8.5",
-    "globby": "^16.2.0",
+    "globby": "^16.2.3",
     "jiti": "^2.7.0",
     "yaml": "^2.9.0"
   },
