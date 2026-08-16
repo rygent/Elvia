@@ -25,7 +25,7 @@ importers:
         version: 10.5.0(jiti@2.7.0)
       eslint-config-terrax:
         specifier: ^0.6.0
-        version: 0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.61.1(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.5.0(jiti@2.7.0))(prettier@3.8.4)(typescript@6.0.3)
+        version: 0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.61.1(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.5.0(jiti@2.7.0))(prettier@3.9.6)(typescript@6.0.3)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -33,8 +33,8 @@ importers:
         specifier: ^4.6.2
         version: 4.6.2
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       turbo:
         specifier: ^2.9.18
         version: 2.9.18
@@ -121,8 +121,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       tsdown:
         specifier: ^0.22.14
         version: 0.22.14(tsx@4.22.4)(typescript@6.0.3)
@@ -193,7 +193,7 @@ importers:
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.1
-        version: 4.7.1(prettier@3.8.4)
+        version: 4.7.1(prettier@3.9.6)
       '@tailwindcss/postcss':
         specifier: ^4.3.1
         version: 4.3.1
@@ -216,11 +216,11 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       prettier-plugin-tailwindcss:
         specifier: ^0.8.1
-        version: 0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.8.4))(prettier@3.8.4)
+        version: 0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier@3.9.6)
       shiki:
         specifier: ^4.2.0
         version: 4.2.0
@@ -278,8 +278,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       tsdown:
         specifier: ^0.22.14
         version: 0.22.14(tsx@4.22.4)(typescript@6.0.3)
@@ -309,11 +309,11 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       prettier-plugin-prisma:
         specifier: ^5.0.0
-        version: 5.0.0(prettier@3.8.4)
+        version: 5.0.0(prettier@3.9.6)
       prisma:
         specifier: ^7.8.0
         version: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
@@ -361,8 +361,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       tsdown:
         specifier: ^0.22.14
         version: 0.22.14(tsx@4.22.4)(typescript@6.0.3)
@@ -435,11 +435,11 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       prettier-plugin-tailwindcss:
         specifier: ^0.8.1
-        version: 0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.8.4))(prettier@3.8.4)
+        version: 0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier@3.9.6)
       tailwindcss:
         specifier: ^4.3.1
         version: 4.3.1
@@ -466,8 +466,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
+        specifier: ^3.9.6
+        version: 3.9.6
       tsdown:
         specifier: ^0.22.14
         version: 0.22.14(tsx@4.22.4)(typescript@6.0.3)
@@ -5089,8 +5089,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.8.4:
-    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
+  prettier@3.9.6:
+    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -6546,13 +6546,13 @@ snapshots:
     dependencies:
       undici: 5.29.0
 
-  '@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.8.4)':
+  '@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6)':
     dependencies:
       '@babel/generator': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/traverse': 7.29.7
       '@babel/types': 7.29.7
-      prettier: 3.8.4
+      prettier: 3.9.6
       semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
@@ -8918,7 +8918,7 @@ snapshots:
     dependencies:
       eslint: 10.5.0(jiti@2.7.0)
 
-  eslint-config-terrax@0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.61.1(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.5.0(jiti@2.7.0))(prettier@3.8.4)(typescript@6.0.3):
+  eslint-config-terrax@0.6.0(@types/eslint@9.6.1)(@typescript-eslint/utils@8.61.1(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.5.0(jiti@2.7.0))(prettier@3.9.6)(typescript@6.0.3):
     dependencies:
       '@eslint/compat': 2.1.0(eslint@10.5.0(jiti@2.7.0))
       '@eslint/js': 10.0.1(eslint@10.5.0(jiti@2.7.0))
@@ -8931,7 +8931,7 @@ snapshots:
       eslint-plugin-import-x: 4.16.2(@typescript-eslint/utils@8.61.1(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.5.0(jiti@2.7.0))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@10.5.0(jiti@2.7.0))
       eslint-plugin-n: 17.24.0(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3)
-      eslint-plugin-prettier: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@10.5.0(jiti@2.7.0)))(eslint@10.5.0(jiti@2.7.0))(prettier@3.8.4)
+      eslint-plugin-prettier: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@10.5.0(jiti@2.7.0)))(eslint@10.5.0(jiti@2.7.0))(prettier@3.9.6)
       eslint-plugin-promise: 7.3.0(eslint@10.5.0(jiti@2.7.0))
       eslint-plugin-react: 7.37.5(eslint@10.5.0(jiti@2.7.0))
       eslint-plugin-react-hooks: 7.1.1(eslint@10.5.0(jiti@2.7.0))
@@ -9040,10 +9040,10 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  eslint-plugin-prettier@5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@10.5.0(jiti@2.7.0)))(eslint@10.5.0(jiti@2.7.0))(prettier@3.8.4):
+  eslint-plugin-prettier@5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@10.5.0(jiti@2.7.0)))(eslint@10.5.0(jiti@2.7.0))(prettier@3.9.6):
     dependencies:
       eslint: 10.5.0(jiti@2.7.0)
-      prettier: 3.8.4
+      prettier: 3.9.6
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.13
     optionalDependencies:
@@ -10771,18 +10771,18 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-prisma@5.0.0(prettier@3.8.4):
+  prettier-plugin-prisma@5.0.0(prettier@3.9.6):
     dependencies:
       '@prisma/prisma-schema-wasm': 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
-      prettier: 3.8.4
+      prettier: 3.9.6
 
-  prettier-plugin-tailwindcss@0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.8.4))(prettier@3.8.4):
+  prettier-plugin-tailwindcss@0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier@3.9.6):
     dependencies:
-      prettier: 3.8.4
+      prettier: 3.9.6
     optionalDependencies:
-      '@ianvs/prettier-plugin-sort-imports': 4.7.1(prettier@3.8.4)
+      '@ianvs/prettier-plugin-sort-imports': 4.7.1(prettier@3.9.6)
 
-  prettier@3.8.4: {}
+  prettier@3.9.6: {}
 
   prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3):
     dependencies:
