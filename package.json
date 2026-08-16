@@ -36,7 +36,7 @@
     "husky": "^9.1.7",
     "lodash.merge": "^4.6.2",
     "prettier": "^3.9.6",
-    "turbo": "^2.9.18",
+    "turbo": "^2.10.10",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1"
   },
