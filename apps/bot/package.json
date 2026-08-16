@@ -26,7 +26,7 @@
     "@elvia/database": "workspace:^",
     "@elvia/logger": "workspace:^",
     "@elvia/utils": "workspace:^",
-    "@iamtraction/google-translate": "^2.0.1",
+    "@iamtraction/google-translate": "^3.0.0",
     "@rygent/anilist": "^1.5.0",
     "@sapphire/discord-utilities": "^4.0.0",
     "@sapphire/time-utilities": "^1.7.14",
