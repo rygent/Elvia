@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
-    "@tailwindcss/postcss": "^4.3.1",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.14",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
@@ -50,7 +50,7 @@
     "prettier": "^3.8.4",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "shiki": "^4.2.0",
-    "tailwindcss": "^4.3.1",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },
   "optionalDependencies": {
