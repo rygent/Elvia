@@ -51,7 +51,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "shiki": "^4.4.3",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "optionalDependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
