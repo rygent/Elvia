@@ -256,8 +256,8 @@ importers:
         specifier: ^14.27.0
         version: 14.27.0(bufferutil@4.1.0)
       fastify:
-        specifier: ^5.12.0
-        version: 5.12.0
+        specifier: ^5.12.1
+        version: 5.12.1
       globby:
         specifier: ^16.2.3
         version: 16.2.3
@@ -3921,8 +3921,8 @@ packages:
   fastify-plugin@6.0.0:
     resolution: {integrity: sha512-fZOty7z3O7vOliF6d8bHE3wiEh1KcNnKEQensSgTk9C1DvN6nRLS++XVd86v33Hw/8u9Un8A1zDrQ8ujcQDHEg==}
 
-  fastify@5.12.0:
-    resolution: {integrity: sha512-A3RNEaDIHWaxFW8n8rNJaW1wQ+XAXuoU71llfUQJjuh5WaYLmKfRhhanaJBOx8m2EBPQkR6sDBovYdHNe9F6rA==}
+  fastify@5.12.1:
+    resolution: {integrity: sha512-FWi+tQvwxR/PeRX7Z2mhfEF5ozJ3jn9asiiclzKXNSzJRHAYcU924aIOKAdHFJ+YIKieh3cqr1IwCOvTr41B3Q==}
 
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
@@ -9565,7 +9565,7 @@ snapshots:
 
   fastify-plugin@6.0.0: {}
 
-  fastify@5.12.0:
+  fastify@5.12.1:
     dependencies:
       '@fastify/ajv-compiler': 4.0.6
       '@fastify/error': 4.2.0
