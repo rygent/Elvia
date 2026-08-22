@@ -45,7 +45,7 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "eslint": "^10.8.1",
+    "eslint": "^10.9.0",
     "eslint-formatter-pretty": "^7.1.0",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
