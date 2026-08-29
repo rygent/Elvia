@@ -31,7 +31,7 @@
     "@commitlint/config-angular": "^21.2.2",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^24.13.3",
-    "eslint": "^10.9.0",
+    "eslint": "^10.9.1",
     "eslint-config-terrax": "^0.6.0",
     "husky": "^9.1.7",
     "lodash.merge": "^4.6.2",
