@@ -42,7 +42,7 @@
     "nanoid": "^6.0.1",
     "systeminformation": "^5.33.6",
     "undici": "^8.10.0",
-    "zod": "^4.4.3"
+    "zod": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
