@@ -97,7 +97,7 @@ importers:
         version: 2.7.0
       moment:
         specifier: ^2.30.1
-        version: 2.30.1
+        version: 2.31.0
       nanoid:
         specifier: ^6.0.1
         version: 6.0.1
@@ -334,7 +334,7 @@ importers:
         version: 0.38.54
       moment:
         specifier: ^2.30.1
-        version: 2.30.1
+        version: 2.31.0
       moment-timezone:
         specifier: ^0.6.3
         version: 0.6.3
@@ -4906,8 +4906,8 @@ packages:
   moment-timezone@0.6.3:
     resolution: {integrity: sha512-pVEPA/HCFHHbwJ130ywnzYuZpkEGcP6Daa/OwNebpA18MybeFHmQilAGGovXgWijQ8vQtmud9jZrziUBgsykfg==}
 
-  moment@2.30.1:
-    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+  moment@2.31.0:
+    resolution: {integrity: sha512-0acOTfMiWOheYS4eoWb80yYMb/JLvVv9SHbs2PehaDzfUG0Bw855SKyk0IKTnPGa5+U2bmi3W68l1+sGLX/pvw==}
 
   motion-dom@13.1.1:
     resolution: {integrity: sha512-XSf8VYWSB6G/0IY3rWVbyLcxWXtAVHkN1PQE2agTaCv3u8RGvbwu56TyyR/MNzBqqNavEBTZzErcxI1TxBrjcA==}
@@ -9623,7 +9623,7 @@ snapshots:
 
   file-stream-rotator@0.6.1:
     dependencies:
-      moment: 2.30.1
+      moment: 2.31.0
 
   fill-range@7.1.1:
     dependencies:
@@ -10806,9 +10806,9 @@ snapshots:
 
   moment-timezone@0.6.3:
     dependencies:
-      moment: 2.30.1
+      moment: 2.31.0
 
-  moment@2.30.1: {}
+  moment@2.31.0: {}
 
   motion-dom@13.1.1:
     dependencies:
